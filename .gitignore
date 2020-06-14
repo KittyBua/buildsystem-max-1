@@ -1,0 +1,24 @@
+#
+# exclude directories explicitly
+#
+/build_source
+/build_tmp
+/cross
+helpers/*-local*
+/host
+/own-files
+/release
+/release_image
+/root
+/.deps
+#
+# exclude files explicitly
+#
+.config
+config.local
+Makefile.local
+#
+# exclude filemasks
+#
+*~
+.ignore

@@ -1,0 +1,63 @@
+#
+# avahi
+#
+AVAHI_VER    = 0.7
+AVAHI_DIR    = avahi-$(AVAHI_VER)
+AVAHI_SOURCE = avahi-$(AVAHI_VER).tar.gz
+AVAHI_URL    = https://github.com/lathiat/avahi/releases/download/v$(AVAHI_VER)
+
+$(D)/avahi: bootstrap expat libdaemon dbus
+	$(START_BUILD)
+	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(REMOVE)/$(PKG_DIR)
+	$(UNTAR)/$(PKG_SOURCE)
+	$(CHDIR)/$(PKG_DIR); \
+		$(CONFIGURE) \
+			--target=$(TARGET) \
+			--prefix=/usr \
+			--mandir=/.remove \
+			--localedir=/.remove/locale \
+			--sysconfdir=/etc \
+			--localstatedir=/var \
+			--with-distro=none \
+			--with-avahi-user=nobody \
+			--with-avahi-group=nogroup \
+			--with-autoipd-user=nobody \
+			--with-autoipd-group=nogroup \
+			--with-xml=expat \
+			--enable-libdaemon \
+			--disable-nls \
+			--disable-glib \
+			--disable-gobject \
+			--disable-qt3 \
+			--disable-qt4 \
+			--disable-gtk \
+			--disable-gtk3 \
+			--disable-dbm \
+			--disable-gdbm \
+			--disable-python \
+			--disable-python-dbus \
+			--disable-mono \
+			--disable-monodoc \
+			--disable-autoipd \
+			--disable-doxygen-doc \
+			--disable-doxygen-dot \
+			--disable-doxygen-man \
+			--disable-doxygen-rtf \
+			--disable-doxygen-xml \
+			--disable-doxygen-chm \
+			--disable-doxygen-chi \
+			--disable-doxygen-html \
+			--disable-doxygen-ps \
+			--disable-doxygen-pdf \
+			--disable-core-docs \
+			--disable-manpages \
+			--disable-xmltoman \
+			--disable-tests \
+			; \
+		$(MAKE) all; \
+		$(MAKE) install DESTDIR=$(TARGET_DIR)
+	cp $(BUILD_DIR)/$(AVAHI_DIR)/avahi-daemon/avahi-daemon $(TARGET_DIR)/etc/init.d
+	$(REWRITE_LIBTOOL_LA)
+	$(REMOVE)/$(PKG_DIR)
+	$(TOUCH)
