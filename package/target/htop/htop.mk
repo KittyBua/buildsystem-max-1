@@ -8,8 +8,9 @@ HTOP_URL    = http://hisham.hm/htop/releases/$(HTOP_VER)
 
 HTOP_PATCH  = \
 	0001-Use-pkg-config.patch \
-	0002-htop-sysmacros.patch
-
+	0002-htop-sysmacros.patch \
+	0003-Ask-for-python3-specifically.patch
+	
 $(D)/htop: bootstrap ncurses
 	$(START_BUILD)
 	$(call DOWNLOAD,$(PKG_SOURCE))
