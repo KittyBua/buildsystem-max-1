@@ -4,9 +4,10 @@
 /build_source
 /build_tmp
 /cross
-helpers/*-local*
+/helpers/*-local*
 /host
 /own-files
+/package/extras
 /release
 /release_image
 /root
