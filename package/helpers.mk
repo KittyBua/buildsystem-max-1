@@ -211,7 +211,7 @@ archives-list:
 
 DOCLEANUP  ?= no
 GETMISSING ?= no
-archives-info: archives-list
+archives-info: directories archives-list
 	@grep --only-matching '^\$$(DL_DIR).*:' make/bootstrap.mk | sed "s|:||g" | \
 	while read target; do \
 		found=false; \
