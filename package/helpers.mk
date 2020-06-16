@@ -38,7 +38,6 @@ switch-url:
 
 # apply patch sets
 define apply_patches
-	if [ -d $(PKG_PATCHES_DIR) ]; then \
 	l=$(strip $(2)); test -z $$l && l=1; \
 	for i in $(1); do \
 		if [ -d $$i ]; then \
@@ -58,8 +57,7 @@ define apply_patches
 				patch -p$$l $(SILENT_PATCH) -i $(PKG_PATCHES_DIR)/$$i; \
 			fi; \
 		fi; \
-	done; \
-	fi
+	done
 endef
 
 # apply patch sets automatically
