@@ -1,7 +1,7 @@
 #
 # alsa-lib
 #
-ALSA_LIB_VER    = 1.2.2
+ALSA_LIB_VER    = 1.2.3
 ALSA_LIB_DIR    = alsa-lib-$(ALSA_LIB_VER)
 ALSA_LIB_SOURCE = alsa-lib-$(ALSA_LIB_VER).tar.bz2
 ALSA_LIB_URL    = https://www.alsa-project.org/files/pub/lib
@@ -33,6 +33,7 @@ $(D)/alsa-lib: bootstrap
 			--disable-resmgr \
 			--disable-old-symbols \
 			--disable-alisp \
+			--disable-ucm \
 			--disable-hwdep \
 			--disable-python \
 			--disable-topology \
