@@ -10,13 +10,13 @@ HAT_LIBSELINUX_SOURCE = hat-libselinux-$(HAT_LIBSELINUX_REV).tar.bz2
 HAT_MIRROR_SITE       = https://android.googlesource.com/platform
 
 $(DL_DIR)/$(HAT_CORE_SOURCE):
-	$(GET-GIT-ARCHIVE) $(HAT_MIRROR_URL)/system/core $(HAT_CORE_REV) $(notdir $@) $(DL_DIR)
+	$(GET-GIT-ARCHIVE) $(HAT_MIRROR_SITE)/system/core $(HAT_CORE_REV) $(notdir $@) $(DL_DIR)
 
 $(DL_DIR)/$(HAT_EXTRAS_SOURCE):
-	$(GET-GIT-ARCHIVE) $(HAT_MIRROR_URL)/system/extras $(HAT_EXTRAS_REV) $(notdir $@) $(DL_DIR)
+	$(GET-GIT-ARCHIVE) $(HAT_MIRROR_SITE)/system/extras $(HAT_EXTRAS_REV) $(notdir $@) $(DL_DIR)
 
 $(DL_DIR)/$(HAT_LIBSELINUX_SOURCE):
-	$(GET-GIT-ARCHIVE) $(HAT_MIRROR_URL)/external/libselinux $(HAT_LIBSELINUX_REV) $(notdir $@) $(DL_DIR)
+	$(GET-GIT-ARCHIVE) $(HAT_MIRROR_SITE)/external/libselinux $(HAT_LIBSELINUX_REV) $(notdir $@) $(DL_DIR)
 
 $(D)/atools: $(DL_DIR)/$(HAT_CORE_SOURCE) $(DL_DIR)/$(HAT_EXTRAS_SOURCE) $(DL_DIR)/$(HAT_LIBHARDWARE_SOURCE) $(DL_DIR)/$(HAT_LIBSELINUX_SOURCE) $(DL_DIR)/$(HAT_BUILD_SOURCE)
 	$(START_BUILD)
