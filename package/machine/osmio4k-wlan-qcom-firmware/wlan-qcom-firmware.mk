@@ -4,7 +4,7 @@
 OSMIO4K_WLAN_QCOM_FIRMWARE_VER    = qca6174
 OSMIO4K_WLAN_QCOM_FIRMWARE_DIR    = firmware-$(OSMIO4K_WLAN_QCOM_FIRMWARE_VER)
 OSMIO4K_WLAN_QCOM_FIRMWARE_SOURCE = firmware-$(OSMIO4K_WLAN_QCOM_FIRMWARE_VER).zip
-OSMIO4K_WLAN_QCOM_FIRMWARE_URL    = http://source.mynonpublic.com/edision
+OSMIO4K_WLAN_QCOM_FIRMWARE_SITE   = http://source.mynonpublic.com/edision
 
 $(D)/osmio4k-wlan-qcom-firmware: bootstrap
 	$(START_BUILD)

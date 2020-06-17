@@ -4,7 +4,7 @@
 CAIRO_VER    = 1.16.0
 CAIRO_DIR    = cairo-$(CAIRO_VER)
 CAIRO_SOURCE = cairo-$(CAIRO_VER).tar.xz
-CAIRO_URL    = https://www.cairographics.org/releases
+CAIRO_SITE   = https://www.cairographics.org/releases
 
 CAIRO_PATCH  = \
 	0001-get_bitmap_surface.patch

@@ -4,7 +4,7 @@
 RPCBIND_VER    = 1.2.5
 RPCBIND_DIR    = rpcbind-$(RPCBIND_VER)
 RPCBIND_SOURCE = rpcbind-$(RPCBIND_VER).tar.bz2
-RPCBIND_URL    = https://sourceforge.net/projects/rpcbind/files/rpcbind/$(RPCBIND_VER)
+RPCBIND_SITE   = https://sourceforge.net/projects/rpcbind/files/rpcbind/$(RPCBIND_VER)
 
 RPCBIND_PATCH  = \
 	0001-Remove-yellow-pages-support.patch

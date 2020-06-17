@@ -4,7 +4,7 @@
 OPENTHREADS_VER    = 3.2
 OPENTHREADS_DIR    = OpenThreads-$(OPENTHREADS_VER)
 OPENTHREADS_SOURCE = OpenThreads-$(OPENTHREADS_VER).tar.gz
-OPENTHREADS_URL    = https://sourceforge.net/projects/mxedeps/files
+OPENTHREADS_SITE   = https://sourceforge.net/projects/mxedeps/files
 
 $(D)/openthreads: bootstrap
 	$(START_BUILD)

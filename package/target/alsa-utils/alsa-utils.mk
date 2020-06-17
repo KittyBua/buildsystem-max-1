@@ -4,7 +4,7 @@
 ALSA_UTILS_VER    = 1.2.3
 ALSA_UTILS_DIR    = alsa-utils-$(ALSA_UTILS_VER)
 ALSA_UTILS_SOURCE = alsa-utils-$(ALSA_UTILS_VER).tar.bz2
-ALSA_UTILS_URL    = https://www.alsa-project.org/files/pub/utils
+ALSA_UTILS_SITE   = https://www.alsa-project.org/files/pub/utils
 
 ALSA_UTILS_PATCH  = \
 	0001-alsa-utils.patch

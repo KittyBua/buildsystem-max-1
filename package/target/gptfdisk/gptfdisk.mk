@@ -4,7 +4,7 @@
 GPTFDISK_VER    = 1.0.5
 GPTFDISK_DIR    = gptfdisk-$(GPTFDISK_VER)
 GPTFDISK_SOURCE = gptfdisk-$(GPTFDISK_VER).tar.gz
-GPTFDISK_URL    = https://sourceforge.net/projects/gptfdisk/files/gptfdisk/$(GPTFDISK_VER)
+GPTFDISK_SITE   = https://sourceforge.net/projects/gptfdisk/files/gptfdisk/$(GPTFDISK_VER)
 
 $(D)/gptfdisk: bootstrap e2fsprogs ncurses popt
 	$(START_BUILD)

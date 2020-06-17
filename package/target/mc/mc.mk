@@ -4,7 +4,7 @@
 MC_VER    = 4.8.24
 MC_DIR    = mc-$(MC_VER)
 MC_SOURCE = mc-$(MC_VER).tar.xz
-MC_URL    = ftp.midnight-commander.org
+MC_SITE   = ftp.midnight-commander.org
 
 MC_PATCH  = \
 	0001-mc-replace-perl-w-with-use-warnings.patch \

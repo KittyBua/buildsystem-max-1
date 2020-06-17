@@ -106,10 +106,10 @@ REWRITE_CONFIG = \
 # download archives into archives directory
 define DOWNLOAD
 	@if [ $(PKG_VER) == "git" ]; then \
-		$(GET-GIT-SOURCE) $(PKG_URL)/$(PKG_SOURCE) $(DL_DIR)/$(PKG_SOURCE); \
+		$(GET-GIT-SOURCE) $(PKG_SITE)/$(PKG_SOURCE) $(DL_DIR)/$(PKG_SOURCE); \
 	else \
 		if [ ! -f $(DL_DIR)/$(PKG_SOURCE) ]; then \
-			wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P $(DL_DIR) $(PKG_URL)/$(1); \
+			wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P $(DL_DIR) $(PKG_SITE)/$(1); \
 		fi; \
 	fi
 endef

@@ -4,7 +4,7 @@
 VALGRIND_VER    = 3.13.0
 VALGRIND_DIR    = valgrind-$(VALGRIND_VER)
 VALGRIND_SOURCE = valgrind-$(VALGRIND_VER).tar.bz2
-VALGRIND_URL    = ftp://sourceware.org/pub/valgrind
+VALGRIND_SITE   = ftp://sourceware.org/pub/valgrind
 
 $(D)/valgrind: bootstrap
 	$(START_BUILD)

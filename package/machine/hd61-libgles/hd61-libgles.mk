@@ -4,7 +4,7 @@
 HD61_LIBGLES_DATE   = 20181201
 HD61_LIBGLES_VER    = $(HD61_LIBGLES_DATE)
 HD61_LIBGLES_SOURCE = hd61-mali-$(HD61_LIBGLES_VER).zip
-HD61_LIBGLES_URL    = http://downloads.mutant-digital.net/hd61
+HD61_LIBGLES_SITE   = http://downloads.mutant-digital.net/hd61
 
 $(D)/hd61-libgles: bootstrap
 	$(START_BUILD)

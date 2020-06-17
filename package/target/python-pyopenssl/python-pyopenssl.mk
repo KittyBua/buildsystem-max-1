@@ -4,7 +4,7 @@
 PYTHON_PYOPENSSL_VER    = 19.1.0
 PYTHON_PYOPENSSL_DIR    = pyOpenSSL-$(PYTHON_PYOPENSSL_VER)
 PYTHON_PYOPENSSL_SOURCE = pyOpenSSL-$(PYTHON_PYOPENSSL_VER).tar.gz
-PYTHON_PYOPENSSL_URL    = https://pypi.python.org/packages/source/p/pyOpenSSL
+PYTHON_PYOPENSSL_SITE   = https://pypi.python.org/packages/source/p/pyOpenSSL
 
 $(D)/python-pyopenssl: bootstrap python python-setuptools
 	$(START_BUILD)

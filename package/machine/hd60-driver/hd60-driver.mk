@@ -4,7 +4,7 @@
 HD60_DRIVER_DATE   = 20190319
 HD60_DRIVER_VER    = 4.4.35
 HD60_DRIVER_SOURCE = hd60-drivers-$(HD60_DRIVER_VER)-$(HD60_DRIVER_DATE).zip
-HD60_DRIVER_URL    = http://downloads.mutant-digital.net/hd60
+HD60_DRIVER_SITE   = http://downloads.mutant-digital.net/hd60
 
 $(D)/hd60-driver: bootstrap
 	$(START_BUILD)

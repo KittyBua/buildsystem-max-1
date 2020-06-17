@@ -4,7 +4,7 @@
 HDPARM_VER    = 9.58
 HDPARM_DIR    = hdparm-$(HDPARM_VER)
 HDPARM_SOURCE = hdparm-$(HDPARM_VER).tar.gz
-HDPARM_URL    = https://sourceforge.net/projects/hdparm/files/hdparm
+HDPARM_SITE   = https://sourceforge.net/projects/hdparm/files/hdparm
 
 $(D)/hdparm: bootstrap
 	$(START_BUILD)

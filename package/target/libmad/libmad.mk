@@ -4,7 +4,7 @@
 LIBMAD_VER    = 0.15.1b
 LIBMAD_DIR    = libmad-$(LIBMAD_VER)
 LIBMAD_SOURCE = libmad-$(LIBMAD_VER).tar.gz
-LIBMAD_URL    = https://sourceforge.net/projects/mad/files/libmad/$(LIBMAD_VER)
+LIBMAD_SITE   = https://sourceforge.net/projects/mad/files/libmad/$(LIBMAD_VER)
 
 LIBMAD_PATCH  = \
 	0001-libmad-pc.patch \

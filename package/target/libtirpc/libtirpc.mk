@@ -4,7 +4,7 @@
 LIBTIRPC_VER    = 1.2.6
 LIBTIRPC_DIR    = libtirpc-$(LIBTIRPC_VER)
 LIBTIRPC_SOURCE = libtirpc-$(LIBTIRPC_VER).tar.bz2
-LIBTIRPC_URL    = https://sourceforge.net/projects/libtirpc/files/libtirpc/$(LIBTIRPC_VER)
+LIBTIRPC_SITE   = https://sourceforge.net/projects/libtirpc/files/libtirpc/$(LIBTIRPC_VER)
 
 LIBTIRPC_PATCH  = \
 	0001-Disable-parts-of-TIRPC-requiring-NIS-support.patch \

@@ -4,7 +4,7 @@
 READLINE_VER    = 6.2
 READLINE_DIR    = readline-$(READLINE_VER)
 READLINE_SOURCE = readline-$(READLINE_VER).tar.gz
-READLINE_URL    = https://ftp.gnu.org/gnu/readline
+READLINE_SITE   = https://ftp.gnu.org/gnu/readline
 
 $(D)/readline: bootstrap
 	$(START_BUILD)

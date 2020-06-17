@@ -4,7 +4,7 @@
 LIBID3TAG_VER    = 0.15.1b
 LIBID3TAG_DIR    = libid3tag-$(LIBID3TAG_VER)
 LIBID3TAG_SOURCE = libid3tag-$(LIBID3TAG_VER).tar.gz
-LIBID3TAG_URL    = https://sourceforge.net/projects/mad/files/libid3tag/$(LIBID3TAG_VER)
+LIBID3TAG_SITE   = https://sourceforge.net/projects/mad/files/libid3tag/$(LIBID3TAG_VER)
 
 LIBID3TAG_PATCH  = \
 	0001-addpkgconfig.patch \

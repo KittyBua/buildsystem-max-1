@@ -4,7 +4,7 @@
 HOWL_VER    = 1.0.0
 HOWL_DIR    = howl-$(HOWL_VER)
 HOWL_SOURCE = howl-$(HOWL_VER).tar.gz
-HOWL_URL    = https://sourceforge.net/projects/howl/files/howl/$(HOWL_VER)
+HOWL_SITE   = https://sourceforge.net/projects/howl/files/howl/$(HOWL_VER)
 
 HOWL_PATCH  = \
 	0001-ipv4-mapped-ipv6.patch

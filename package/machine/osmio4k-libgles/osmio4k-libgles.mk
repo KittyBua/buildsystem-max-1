@@ -4,7 +4,7 @@
 OSMIO4K_LIBGLES_VER    = 1.0
 OSMIO4K_LIBGLES_DIR    = libv3d-osmio4k-$(OSMIO4K_LIBGLES_VER)
 OSMIO4K_LIBGLES_SOURCE = libv3d-osmio4k-$(OSMIO4K_LIBGLES_VER).tar.xz
-OSMIO4K_LIBGLES_URL    = http://source.mynonpublic.com/edision
+OSMIO4K_LIBGLES_SITE   = http://source.mynonpublic.com/edision
 
 $(D)/osmio4k-libgles: bootstrap
 	$(START_BUILD)

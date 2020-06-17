@@ -4,7 +4,7 @@
 LIBICONV_VER    = 1.13.1
 LIBICONV_DIR    = libiconv-$(LIBICONV_VER)
 LIBICONV_SOURCE = libiconv-$(LIBICONV_VER).tar.gz
-LIBICONV_URL    = https://ftp.gnu.org/gnu/libiconv
+LIBICONV_SITE   = https://ftp.gnu.org/gnu/libiconv
 
 LIBICONV_PATCH  = \
 	0001-disable_transliterations.patch \

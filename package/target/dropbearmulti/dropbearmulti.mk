@@ -4,7 +4,7 @@
 DROPBEARMULTI_VER      = git
 DROPBEARMULTI_DIR      = dropbear.git
 DROPBEARMULTI_SOURCE   = dropbear.git
-DROPBEARMULTI_URL      = https://github.com/mkj
+DROPBEARMULTI_SITE     = https://github.com/mkj
 DROPBEARMULTI_CHECKOUT = c8d852c
 
 $(D)/dropbearmulti: bootstrap

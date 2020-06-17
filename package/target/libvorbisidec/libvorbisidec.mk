@@ -4,7 +4,7 @@
 LIBVORBISIDEC_VER    = 1.2.1+git20180316
 LIBVORBISIDEC_DIR    = libvorbisidec-$(LIBVORBISIDEC_VER)
 LIBVORBISIDEC_SOURCE = libvorbisidec_$(LIBVORBISIDEC_VER).orig.tar.gz
-LIBVORBISIDEC_URL    = https://ftp.de.debian.org/debian/pool/main/libv/libvorbisidec
+LIBVORBISIDEC_SITE   = https://ftp.de.debian.org/debian/pool/main/libv/libvorbisidec
 
 $(D)/libvorbisidec: bootstrap libogg
 	$(START_BUILD)

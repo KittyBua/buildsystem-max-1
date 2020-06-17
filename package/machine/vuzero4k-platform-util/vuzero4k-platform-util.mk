@@ -5,7 +5,7 @@ VUZERO4K_PLATFORM_UTIL_DATE   = $(VUZERO4K_DRIVER_DATE)
 VUZERO4K_PLATFORM_UTIL_REV    = r0
 VUZERO4K_PLATFORM_UTIL_VER    = 17.1-$(VUZERO4K_PLATFORM_UTIL_DATE).$(VUZERO4K_PLATFORM_UTIL_REV)
 VUZERO4K_PLATFORM_UTIL_SOURCE = platform-util-vuzero4k-$(VUZERO4K_PLATFORM_UTIL_VER).tar.gz
-VUZERO4K_PLATFORM_UTIL_URL    = http://archive.vuplus.com/download/build_support/vuplus
+VUZERO4K_PLATFORM_UTIL_SITE   = http://archive.vuplus.com/download/build_support/vuplus
 
 $(D)/vuzero4k-platform-util: bootstrap
 	$(START_BUILD)

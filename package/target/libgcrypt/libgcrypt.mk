@@ -4,7 +4,7 @@
 LIBGCRYPT_VER    = 1.8.5
 LIBGCRYPT_DIR    = libgcrypt-$(LIBGCRYPT_VER)
 LIBGCRYPT_SOURCE = libgcrypt-$(LIBGCRYPT_VER).tar.bz2
-LIBGCRYPT_URL    = https://gnupg.org/ftp/gcrypt/libgcrypt
+LIBGCRYPT_SITE   = https://gnupg.org/ftp/gcrypt/libgcrypt
 
 $(D)/libgcrypt: bootstrap libgpg-error
 	$(START_BUILD)

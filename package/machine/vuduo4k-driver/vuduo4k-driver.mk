@@ -5,7 +5,7 @@ VUDUO4K_DRIVER_DATE   = 20190212
 VUDUO4K_DRIVER_REV    = r0
 VUDUO4K_DRIVER_VER    = 4.1.45-$(VUDUO4K_DRIVER_DATE).$(VUDUO4K_DRIVER_REV)
 VUDUO4K_DRIVER_SOURCE = vuplus-dvb-proxy-vuduo4k-$(VUDUO4K_DRIVER_VER).tar.gz
-VUDUO4K_DRIVER_URL    = http://archive.vuplus.com/download/build_support/vuplus
+VUDUO4K_DRIVER_SITE   = http://archive.vuplus.com/download/build_support/vuplus
 
 $(D)/vuduo4k-driver: bootstrap
 	$(START_BUILD)

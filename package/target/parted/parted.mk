@@ -4,7 +4,7 @@
 PARTED_VER    = 3.3
 PARTED_DIR    = parted-$(PARTED_VER)
 PARTED_SOURCE = parted-$(PARTED_VER).tar.xz
-PARTED_URL    = https://ftp.gnu.org/gnu/parted
+PARTED_SITE   = https://ftp.gnu.org/gnu/parted
 
 PARTED_PATCH  = \
 	0001-fix-end_input-usage-in-do_resizepart.patch \

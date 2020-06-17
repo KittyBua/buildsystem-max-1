@@ -4,7 +4,7 @@
 DBUS_VER    = 1.12.6
 DBUS_DIR    = dbus-$(DBUS_VER)
 DBUS_SOURCE = dbus-$(DBUS_VER).tar.gz
-DBUS_URL    = https://dbus.freedesktop.org/releases/dbus
+DBUS_SITE   = https://dbus.freedesktop.org/releases/dbus
 
 $(D)/dbus: bootstrap expat
 	$(START_BUILD)

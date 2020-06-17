@@ -5,7 +5,7 @@ PORTMAP_VER    = 6.0.0
 PORTMAP_DIR    = portmap-$(PORTMAP_VER)
 PORTMAP_SOURCE = portmap_$(PORTMAP_VER).orig.tar.gz
 PORTMAP_DIFF   = portmap_$(PORTMAP_VER)-3.diff.gz
-PORTMAP_URL    = https://merges.ubuntu.com/p/portmap
+PORTMAP_SITE   = https://merges.ubuntu.com/p/portmap
 
 PORTMAP_PATCH  = \
 	0001-portmap.patch

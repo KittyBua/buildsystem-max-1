@@ -4,7 +4,7 @@
 SAMBA_VER    = 3.6.25
 SAMBA_DIR    = samba-$(SAMBA_VER)
 SAMBA_SOURCE = samba-$(SAMBA_VER).tar.gz
-SAMBA_URL    = https://ftp.samba.org/pub/samba/stable
+SAMBA_SITE   = https://ftp.samba.org/pub/samba/stable
 
 SAMBA_PATCH = \
 	010-patch-cve-2015-5252.patch \

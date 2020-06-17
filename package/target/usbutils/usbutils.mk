@@ -4,7 +4,7 @@
 USBUTILS_VER    = 007
 USBUTILS_DIR    = usbutils-$(USBUTILS_VER)
 USBUTILS_SOURCE = usbutils-$(USBUTILS_VER).tar.xz
-USBUTILS_URL    = https://www.kernel.org/pub/linux/utils/usb/usbutils
+USBUTILS_SITE   = https://www.kernel.org/pub/linux/utils/usb/usbutils
 
 USBUTILS_PATCH  = \
 	0001-avoid-dependency-on-bash.patch \

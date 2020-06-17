@@ -4,7 +4,7 @@
 LIBCURL_VER    = 7.70.0
 LIBCURL_DIR    = curl-$(LIBCURL_VER)
 LIBCURL_SOURCE = curl-$(LIBCURL_VER).tar.bz2
-LIBCURL_URL    = https://curl.haxx.se/download
+LIBCURL_SITE   = https://curl.haxx.se/download
 
 LIBCURL_PATCH  = \
 	0001-no_docs_tests.patch

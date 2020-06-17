@@ -4,7 +4,7 @@
 NANO_VER    = 2.2.6
 NANO_DIR    = nano-$(NANO_VER)
 NANO_SOURCE = nano-$(NANO_VER).tar.gz
-NANO_URL    = https://www.nano-editor.org/dist/v$(basename $(NANO_VER))
+NANO_SITE   = https://www.nano-editor.org/dist/v$(basename $(NANO_VER))
 
 $(D)/nano: bootstrap
 	$(START_BUILD)

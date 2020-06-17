@@ -4,7 +4,7 @@
 OFGWRITE_VER    = git
 OFGWRITE_DIR    = ofgwrite-max.git
 OFGWRITE_SOURCE = ofgwrite-max.git
-OFGWRITE_URL    = $(MAX-GIT-GITHUB)
+OFGWRITE_SITE   = $(MAX-GIT-GITHUB)
 
 $(D)/ofgwrite: bootstrap
 	$(START_BUILD)

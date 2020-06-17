@@ -4,7 +4,7 @@
 OPENRESOLV_VER    = 3.9.2
 OPENRESOLV_DIR    = openresolv-$(OPENRESOLV_VER)
 OPENRESOLV_SOURCE = openresolv-$(OPENRESOLV_VER).tar.xz
-OPENRESOLV_URL    = https://roy.marples.name/downloads/openresolv
+OPENRESOLV_SITE   = https://roy.marples.name/downloads/openresolv
 
 $(D)/openresolv: bootstrap
 	$(START_BUILD)

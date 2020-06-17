@@ -4,7 +4,7 @@
 LUACURL_VER    = git
 LUACURL_DIR    = lua-curlv3.git
 LUACURL_SOURCE = lua-curlv3.git
-LUACURL_URL    = git://github.com/Lua-cURL
+LUACURL_SITE   = git://github.com/Lua-cURL
 
 $(D)/luacurl: bootstrap libcurl lua
 	$(START_BUILD)

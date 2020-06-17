@@ -5,7 +5,7 @@ LUAEXPAT_VER    = 1.3.3
 LUAEXPAT_DIR    = luaexpat-$(LUAEXPAT_VER)
 LUAEXPAT_SOURCE = luaexpat-$(LUAEXPAT_VER).tar.gz
 LUAEXPAT_GIT    = v$(LUAEXPAT_VER).tar.gz -O $(DL_DIR)/$(LUAEXPAT_SOURCE)
-LUAEXPAT_URL    = https://github.com/tomasguisasola/luaexpat/archive
+LUAEXPAT_SITE   = https://github.com/tomasguisasola/luaexpat/archive
 
 $(D)/luaexpat: bootstrap lua expat
 	$(START_BUILD)

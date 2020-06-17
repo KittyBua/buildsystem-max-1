@@ -1,7 +1,7 @@
 USHARE_VER    = 1.1a
 USHARE_DIR    = ushare-uShare_v$(USHARE_VER)
 USHARE_SOURCE = uShare_v$(USHARE_VER).tar.gz
-USHARE_URL    = https://github.com/GeeXboX/ushare/archive
+USHARE_SITE   = https://github.com/GeeXboX/ushare/archive
 
 USHARE_PATCH  = \
 	0001-ushare.patch \

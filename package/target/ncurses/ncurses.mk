@@ -4,7 +4,7 @@
 NCURSES_VER    = 6.0
 NCURSES_DIR    = ncurses-$(NCURSES_VER)
 NCURSES_SOURCE = ncurses-$(NCURSES_VER).tar.gz
-NCURSES_URL    = https://ftp.gnu.org/pub/gnu/ncurses
+NCURSES_SITE   = https://ftp.gnu.org/pub/gnu/ncurses
 
 NCURSES_PATCH  = \
 	0001-gcc-5.x-MKlib_gen.patch

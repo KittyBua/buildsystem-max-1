@@ -4,7 +4,7 @@
 OPKG_VER    = 0.3.3
 OPKG_DIR    = opkg-$(OPKG_VER)
 OPKG_SOURCE = opkg-$(OPKG_VER).tar.gz
-OPKG_URL    = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
+OPKG_SITE   = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
 
 OPKG_PATCH = \
 	0001-opkg.patch

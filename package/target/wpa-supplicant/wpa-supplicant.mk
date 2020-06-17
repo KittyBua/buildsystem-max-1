@@ -4,7 +4,7 @@
 WPA_SUPPLICANT_VER    = 2.7
 WPA_SUPPLICANT_DIR    = wpa_supplicant-$(WPA_SUPPLICANT_VER)
 WPA_SUPPLICANT_SOURCE = wpa_supplicant-$(WPA_SUPPLICANT_VER).tar.gz
-WPA_SUPPLICANT_URL    = https://w1.fi/releases
+WPA_SUPPLICANT_SITE   = https://w1.fi/releases
 
 $(D)/wpa-supplicant: bootstrap libnl openssl wireless-tools
 	$(START_BUILD)

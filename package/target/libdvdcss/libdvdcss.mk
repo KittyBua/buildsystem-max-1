@@ -4,7 +4,7 @@
 LIBDVDCSS_VER    = 1.2.13
 LIBDVDCSS_DIR    = libdvdcss-$(LIBDVDCSS_VER)
 LIBDVDCSS_SOURCE = libdvdcss-$(LIBDVDCSS_VER).tar.bz2
-LIBDVDCSS_URL    = https://download.videolan.org/pub/libdvdcss/$(LIBDVDCSS_VER)
+LIBDVDCSS_SITE   = https://download.videolan.org/pub/libdvdcss/$(LIBDVDCSS_VER)
 
 $(D)/libdvdcss: bootstrap
 	$(START_BUILD)

@@ -5,7 +5,7 @@ LUAPOSIX_VER    = 31
 LUAPOSIX_DIR    = luaposix-$(LUAPOSIX_VER)
 LUAPOSIX_SOURCE = luaposix-$(LUAPOSIX_VER).tar.gz
 LUAPOSIX_GIT    = v$(LUAPOSIX_VER).tar.gz -O $(DL_DIR)/$(LUAPOSIX_SOURCE)
-LUAPOSIX_URL    = https://github.com/luaposix/luaposix/archive
+LUAPOSIX_SITE   = https://github.com/luaposix/luaposix/archive
 
 LUAPOSIX_PATCH   = \
 	0001-fix-docdir-build.patch

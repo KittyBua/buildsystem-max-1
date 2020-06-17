@@ -4,7 +4,7 @@
 TZDATA_VER    = 2020a
 TZDATA_DIR    = timezone
 TZDATA_SOURCE = tzdata$(TZDATA_VER).tar.gz
-TZDATA_URL    = https://ftp.iana.org/tz/releases
+TZDATA_SITE   = https://ftp.iana.org/tz/releases
 
 $(D)/tzdata: bootstrap host-tzcode
 	$(START_BUILD)

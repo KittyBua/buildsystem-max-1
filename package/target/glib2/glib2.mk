@@ -4,7 +4,7 @@
 GLIB2_VER    = 2.56.3
 GLIB2_DIR    = glib-$(GLIB2_VER)
 GLIB2_SOURCE = glib-$(GLIB2_VER).tar.xz
-GLIB2_URL    = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(GLIB2_VER))
+GLIB2_SITE   = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(GLIB2_VER))
 
 GLIB2_PATCH  = \
 	0001-glib2-disable-tests.patch \

@@ -4,7 +4,7 @@
 ETHTOOL_VER    = 5.7
 ETHTOOL_DIR    = ethtool-$(ETHTOOL_VER)
 ETHTOOL_SOURCE = ethtool-$(ETHTOOL_VER).tar.xz
-ETHTOOL_URL    = https://www.kernel.org/pub/software/network/ethtool
+ETHTOOL_SITE   = https://www.kernel.org/pub/software/network/ethtool
 
 ETHTOOL_PATCH  = \
 	0001-netlink-fix-build-warnings.patch

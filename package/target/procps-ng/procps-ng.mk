@@ -4,7 +4,7 @@
 PROCPS_NG_VER    = 3.3.16
 PROCPS_NG_DIR    = procps-ng-$(PROCPS_NG_VER)
 PROCPS_NG_SOURCE = procps-ng-$(PROCPS_NG_VER).tar.xz
-PROCPS_NG_URL    = http://sourceforge.net/projects/procps-ng/files/Production
+PROCPS_NG_SITE   = http://sourceforge.net/projects/procps-ng/files/Production
 
 PROCPS_NG_PATCH  = \
 	0001-no-tests-docs.patch

@@ -2,7 +2,7 @@
 # luajson
 #
 LUAJSON_SOURCE = json.lua
-LUAJSON_URL    = https://github.com/swiboe/swiboe/raw/master/term_gui
+LUAJSON_SITE   = https://github.com/swiboe/swiboe/raw/master/term_gui
 
 $(D)/luajson: bootstrap lua
 	$(START_BUILD)

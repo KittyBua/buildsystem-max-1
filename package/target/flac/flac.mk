@@ -4,7 +4,7 @@
 FLAC_VER    = 1.3.3
 FLAC_DIR    = flac-$(FLAC_VER)
 FLAC_SOURCE = flac-$(FLAC_VER).tar.xz
-FLAC_URL    = https://ftp.osuosl.org/pub/xiph/releases/flac
+FLAC_SITE   = https://ftp.osuosl.org/pub/xiph/releases/flac
 
 FLAC_PATCH  = \
 	0001-no-docs-and-examples.patch \

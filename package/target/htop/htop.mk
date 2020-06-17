@@ -4,7 +4,7 @@
 HTOP_VER    = 2.2.0
 HTOP_DIR    = htop-$(HTOP_VER)
 HTOP_SOURCE = htop-$(HTOP_VER).tar.gz
-HTOP_URL    = http://hisham.hm/htop/releases/$(HTOP_VER)
+HTOP_SITE   = http://hisham.hm/htop/releases/$(HTOP_VER)
 
 HTOP_PATCH  = \
 	0001-Use-pkg-config.patch \

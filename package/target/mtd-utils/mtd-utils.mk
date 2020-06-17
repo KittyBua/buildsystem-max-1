@@ -4,7 +4,7 @@
 MTD_UTILS_VER    = 1.5.2
 MTD_UTILS_DIR    = mtd-utils-$(MTD_UTILS_VER)
 MTD_UTILS_SOURCE = mtd-utils-$(MTD_UTILS_VER).tar.bz2
-MTD_UTILS_URL    = ftp://ftp.infradead.org/pub/mtd-utils
+MTD_UTILS_SITE   = ftp://ftp.infradead.org/pub/mtd-utils
 
 MTD_UTILS_PATCH  = \
 	0002-mtd-utils-sysmacros.patch

@@ -4,7 +4,7 @@
 GIFLIB_VER    = 5.1.4
 GIFLIB_DIR    = giflib-$(GIFLIB_VER)
 GIFLIB_SOURCE = giflib-$(GIFLIB_VER).tar.bz2
-GIFLIB_URL    = https://sourceforge.net/projects/giflib/files
+GIFLIB_SITE   = https://sourceforge.net/projects/giflib/files
 
 $(D)/giflib: bootstrap
 	$(START_BUILD)

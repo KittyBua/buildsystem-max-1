@@ -4,7 +4,7 @@
 LSB_VER    = 3.2-20
 LSB_DIR    = lsb-3.2
 LSB_SOURCE = lsb_$(LSB_VER).tar.gz
-LSB_URL    = https://debian.sdinet.de/etch/sdinet/lsb
+LSB_SITE   = https://debian.sdinet.de/etch/sdinet/lsb
 
 $(D)/lsb: bootstrap
 	$(START_BUILD)

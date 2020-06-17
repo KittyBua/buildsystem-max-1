@@ -4,7 +4,7 @@
 LIBFUSE_VER    = 2.9.9
 LIBFUSE_DIR    = fuse-$(LIBFUSE_VER)
 LIBFUSE_SOURCE = fuse-$(LIBFUSE_VER).tar.gz
-LIBFUSE_URL    = https://github.com/libfuse/libfuse/releases/download/fuse-$(LIBFUSE_VER)
+LIBFUSE_SITE   = https://github.com/libfuse/libfuse/releases/download/fuse-$(LIBFUSE_VER)
 
 LIBFUSE_PATCH = \
 	0001-fix-aarch64-build.patch

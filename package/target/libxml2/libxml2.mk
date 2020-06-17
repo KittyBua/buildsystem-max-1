@@ -4,7 +4,7 @@
 LIBXML2_VER    = 2.9.10
 LIBXML2_DIR    = libxml2-$(LIBXML2_VER)
 LIBXML2_SOURCE = libxml2-$(LIBXML2_VER).tar.gz
-LIBXML2_URL    = http://xmlsoft.org/sources
+LIBXML2_SITE   = http://xmlsoft.org/sources
 
 LIBXML2_PATCH  = \
 	0001-libxml2.patch \

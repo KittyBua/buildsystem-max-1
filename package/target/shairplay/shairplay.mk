@@ -4,7 +4,7 @@
 SHAIRPLAY_VER      = git
 SHAIRPLAY_DIR      = shairplay.git
 SHAIRPLAY_SOURCE   = shairplay.git
-SHAIRPLAY_URL      = https://github.com/juhovh
+SHAIRPLAY_SITE     = https://github.com/juhovh
 SHAIRPLAY_CHECKOUT = 193138f3
 
 SHAIRPLAY_PATCH  = \

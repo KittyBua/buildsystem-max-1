@@ -4,7 +4,7 @@
 LIBUSB_VER    = 1.0.23
 LIBUSB_DIR    = libusb-$(LIBUSB_VER)
 LIBUSB_SOURCE = libusb-$(LIBUSB_VER).tar.bz2
-LIBUSB_URL    = https://github.com/libusb/libusb/releases/download/v$(LIBUSB_VER)
+LIBUSB_SITE   = https://github.com/libusb/libusb/releases/download/v$(LIBUSB_VER)
 
 LIBUSB_PATCH  = \
 	0001-libusb.patch

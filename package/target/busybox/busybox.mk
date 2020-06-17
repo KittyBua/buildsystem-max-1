@@ -4,7 +4,7 @@
 BUSYBOX_VER    = 1.31.1
 BUSYBOX_DIR    = busybox-$(BUSYBOX_VER)
 BUSYBOX_SOURCE = busybox-$(BUSYBOX_VER).tar.bz2
-BUSYBOX_URL    = https://busybox.net/downloads
+BUSYBOX_SITE   = https://busybox.net/downloads
 
 BUSYBOX_PATCH  = \
 	0001-Prevent-telnet-connections-from-the-internet-to-the.patch \

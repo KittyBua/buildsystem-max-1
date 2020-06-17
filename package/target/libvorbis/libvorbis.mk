@@ -4,7 +4,7 @@
 LIBVORBIS_VER    = 1.3.6
 LIBVORBIS_DIR    = libvorbis-$(LIBVORBIS_VER)
 LIBVORBIS_SOURCE = libvorbis-$(LIBVORBIS_VER).tar.xz
-LIBVORBIS_URL    = https://ftp.osuosl.org/pub/xiph/releases/vorbis
+LIBVORBIS_SITE   = https://ftp.osuosl.org/pub/xiph/releases/vorbis
 
 LIBVORBIS_PATCH = \
 	0001-configure-Check-for-clang.patch \

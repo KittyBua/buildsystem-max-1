@@ -4,7 +4,7 @@
 MINIDLNA_VER    = 1.2.1
 MINIDLNA_DIR    = minidlna-$(MINIDLNA_VER)
 MINIDLNA_SOURCE = minidlna-$(MINIDLNA_VER).tar.gz
-MINIDLNA_URL    = https://sourceforge.net/projects/minidlna/files/minidlna/$(MINIDLNA_VER)
+MINIDLNA_SITE   = https://sourceforge.net/projects/minidlna/files/minidlna/$(MINIDLNA_VER)
 
 MINIDLNA_PATCH  = \
 	0001-minidlna.patch

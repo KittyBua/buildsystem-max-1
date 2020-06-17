@@ -4,7 +4,7 @@
 SYSSTAT_VER    = 12.3.3
 SYSSTAT_DIR    = sysstat-$(SYSSTAT_VER)
 SYSSTAT_SOURCE = sysstat-$(SYSSTAT_VER).tar.xz
-SYSSTAT_URL    = http://pagesperso-orange.fr/sebastien.godard
+SYSSTAT_SITE   = http://pagesperso-orange.fr/sebastien.godard
 
 $(D)/sysstat: bootstrap
 	$(START_BUILD)

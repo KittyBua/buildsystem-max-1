@@ -4,7 +4,7 @@
 LIBDVDNAV_VER    = 4.2.1
 LIBDVDNAV_DIR    = libdvdnav-$(LIBDVDNAV_VER)
 LIBDVDNAV_SOURCE = libdvdnav-$(LIBDVDNAV_VER).tar.xz
-LIBDVDNAV_URL    = http://dvdnav.mplayerhq.hu/releases
+LIBDVDNAV_SITE   = http://dvdnav.mplayerhq.hu/releases
 
 LIBDVDNAV_PATCH  = \
 	0001-libdvdnav.patch

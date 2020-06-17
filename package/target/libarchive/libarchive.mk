@@ -4,7 +4,7 @@
 LIBARCHIVE_VER    = 3.4.0
 LIBARCHIVE_DIR    = libarchive-$(LIBARCHIVE_VER)
 LIBARCHIVE_SOURCE = libarchive-$(LIBARCHIVE_VER).tar.gz
-LIBARCHIVE_URL    = https://www.libarchive.org/downloads
+LIBARCHIVE_SITE   = https://www.libarchive.org/downloads
 
 $(D)/libarchive: bootstrap
 	$(START_BUILD)

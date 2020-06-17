@@ -4,7 +4,7 @@
 LIBDPF_VER    = git
 LIBDPF_DIR    = dpf-ax.git
 LIBDPF_SOURCE = dpf-ax.git
-LIBDPF_URL    = $(MAX-GIT-GITHUB)
+LIBDPF_SITE   = $(MAX-GIT-GITHUB)
 
 LIBDPF_PATCH  = \
 	0001-crossbuild.patch

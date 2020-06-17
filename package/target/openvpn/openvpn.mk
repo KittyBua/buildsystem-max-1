@@ -4,7 +4,7 @@
 OPENVPN_VER    = 2.4.9
 OPENVPN_DIR    = openvpn-$(OPENVPN_VER)
 OPENVPN_SOURCE = openvpn-$(OPENVPN_VER).tar.xz
-OPENVPN_URL    = http://build.openvpn.net/downloads/releases
+OPENVPN_SITE   = http://build.openvpn.net/downloads/releases
 
 $(D)/openvpn: bootstrap openssl lzo 
 	$(START_BUILD)

@@ -4,7 +4,7 @@
 LIBUSB_COMPAT_VER    = 0.1.7
 LIBUSB_COMPAT_DIR    = libusb-compat-$(LIBUSB_COMPAT_VER)
 LIBUSB_COMPAT_SOURCE = libusb-compat-$(LIBUSB_COMPAT_VER).tar.bz2
-LIBUSB_COMPAT_URL    = https://github.com/libusb/libusb-compat-0.1/releases/download/v$(LIBUSB_COMPAT_VER)
+LIBUSB_COMPAT_SITE   = https://github.com/libusb/libusb-compat-0.1/releases/download/v$(LIBUSB_COMPAT_VER)
 
 LIBUSB_COMPAT_PATCH  = \
 	0001-fix-a-build-issue-on-linux.patch \

@@ -4,7 +4,7 @@
 LIBDVBSI_VER    = git
 LIBDVBSI_DIR    = libdvbsi.git
 LIBDVBSI_SOURCE = libdvbsi.git
-LIBDVBSI_URL    = https://github.com/OpenVisionE2
+LIBDVBSI_SITE   = https://github.com/OpenVisionE2
 
 LIBDVBSI_PATCH  = \
 	0001-content_identifier_descriptor.patch

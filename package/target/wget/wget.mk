@@ -4,7 +4,7 @@
 WGET_VER    = 1.20.3
 WGET_DIR    = wget-$(WGET_VER)
 WGET_SOURCE = wget-$(WGET_VER).tar.gz
-WGET_URL    = https://ftp.gnu.org/gnu/wget
+WGET_SITE   = https://ftp.gnu.org/gnu/wget
 
 WGET_PATCH  = \
 	0001-change_DEFAULT_LOGFILE.patch \

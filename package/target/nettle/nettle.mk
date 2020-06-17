@@ -4,7 +4,7 @@
 NETTLE_VER    = 3.5.1
 NETTLE_DIR    = nettle-$(NETTLE_VER)
 NETTLE_SOURCE = nettle-$(NETTLE_VER).tar.gz
-NETTLE_URL    = https://ftp.gnu.org/gnu/nettle
+NETTLE_SITE   = https://ftp.gnu.org/gnu/nettle
 
 $(D)/nettle: bootstrap gmp
 	$(START_BUILD)

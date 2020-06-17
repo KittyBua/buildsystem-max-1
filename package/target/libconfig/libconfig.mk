@@ -4,7 +4,7 @@
 LIBCONFIG_VER    = 1.4.10
 LIBCONFIG_DIR    = libconfig-$(LIBCONFIG_VER)
 LIBCONFIG_SOURCE = libconfig-$(LIBCONFIG_VER).tar.gz
-LIBCONFIG_URL    = http://www.hyperrealm.com/packages
+LIBCONFIG_SITE   = http://www.hyperrealm.com/packages
 
 $(D)/libconfig: bootstrap
 	$(START_BUILD)

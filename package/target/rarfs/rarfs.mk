@@ -4,7 +4,7 @@
 RARFS_VER    = 0.1.1
 RARFS_DIR    = rarfs-$(RARFS_VER)
 RARFS_SOURCE = rarfs-$(RARFS_VER).tar.gz
-RARFS_URL    = https://sourceforge.net/projects/rarfs/files/rarfs/$(RARFS_VER)
+RARFS_SITE   = https://sourceforge.net/projects/rarfs/files/rarfs/$(RARFS_VER)
 
 $(D)/rarfs: bootstrap libfuse
 	$(START_BUILD)

@@ -4,7 +4,7 @@
 GRAPHLCD_BASE_VER    = git
 GRAPHLCD_BASE_DIR    = graphlcd-base.git
 GRAPHLCD_BASE_SOURCE = graphlcd-base.git
-GRAPHLCD_BASE_URL    = git://projects.vdr-developer.org
+GRAPHLCD_BASE_SITE   = git://projects.vdr-developer.org
 
 GRAPHLCD_BASE_PATCH  = \
 	0001-graphlcd.patch \

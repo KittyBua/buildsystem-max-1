@@ -4,7 +4,7 @@
 DROPBEAR_VER    = 2018.76
 DROPBEAR_DIR    = dropbear-$(DROPBEAR_VER)
 DROPBEAR_SOURCE = dropbear-$(DROPBEAR_VER).tar.bz2
-DROPBEAR_URL    = http://matt.ucc.asn.au/dropbear/releases
+DROPBEAR_SITE   = http://matt.ucc.asn.au/dropbear/releases
 
 $(D)/dropbear: bootstrap zlib
 	$(START_BUILD)

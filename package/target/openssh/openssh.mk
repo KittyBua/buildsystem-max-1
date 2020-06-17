@@ -4,7 +4,7 @@
 OPENSSH_VER    = 8.2p1
 OPENSSH_DIR    = openssh-$(OPENSSH_VER)
 OPENSSH_SOURCE = openssh-$(OPENSSH_VER).tar.gz
-OPENSSH_URL    = https://artfiles.org/openbsd/OpenSSH/portable
+OPENSSH_SITE   = https://artfiles.org/openbsd/OpenSSH/portable
 
 $(D)/openssh: bootstrap zlib openssl
 	$(START_BUILD)

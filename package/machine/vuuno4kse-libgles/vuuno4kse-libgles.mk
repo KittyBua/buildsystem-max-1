@@ -5,7 +5,7 @@ VUUNO4KSE_LIBGLES_DATE   = $(VUUNO4KSE_DRIVER_DATE)
 VUUNO4KSE_LIBGLES_REV    = r0
 VUUNO4KSE_LIBGLES_VER    = 17.1-$(VUUNO4KSE_LIBGLES_DATE).$(VUUNO4KSE_LIBGLES_REV)
 VUUNO4KSE_LIBGLES_SOURCE = libgles-vuuno4kse-$(VUUNO4KSE_LIBGLES_VER).tar.gz
-VUUNO4KSE_LIBGLES_URL    = http://archive.vuplus.com/download/build_support/vuplus
+VUUNO4KSE_LIBGLES_SITE   = http://archive.vuplus.com/download/build_support/vuplus
 
 $(D)/vuuno4kse-libgles: bootstrap
 	$(START_BUILD)

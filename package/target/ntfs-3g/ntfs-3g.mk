@@ -4,7 +4,7 @@
 NTFS_3G_VER    = 2017.3.23
 NTFS_3G_DIR    = ntfs-3g_ntfsprogs-$(NTFS_3G_VER)
 NTFS_3G_SOURCE = ntfs-3g_ntfsprogs-$(NTFS_3G_VER).tgz
-NTFS_3G_URL    = https://tuxera.com/opensource
+NTFS_3G_SITE   = https://tuxera.com/opensource
 
 NTFS_3G_PATCH  = \
 	0001-fuseint-fix-path-mounted-on-musl.patch \

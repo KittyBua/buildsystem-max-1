@@ -4,7 +4,7 @@
 DJMOUNT_VER    = 0.71
 DJMOUNT_DIR    = djmount-$(DJMOUNT_VER)
 DJMOUNT_SOURCE = djmount-$(DJMOUNT_VER).tar.gz
-DJMOUNT_URL    = https://sourceforge.net/projects/djmount/files/djmount/$(DJMOUNT_VER)
+DJMOUNT_SITE   = https://sourceforge.net/projects/djmount/files/djmount/$(DJMOUNT_VER)
 
 DJMOUNT_PATCH  = \
 	0001-fix-newer-gcc.patch \

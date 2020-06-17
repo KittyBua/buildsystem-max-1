@@ -5,7 +5,7 @@ LIBPNG_VER    = 1.6.37
 LIBPNG_VER_X  = 16
 LIBPNG_DIR    = libpng-$(LIBPNG_VER)
 LIBPNG_SOURCE = libpng-$(LIBPNG_VER).tar.xz
-LIBPNG_URL    = https://sourceforge.net/projects/libpng/files/libpng$(LIBPNG_VER_X)/$(LIBPNG_VER)
+LIBPNG_SITE   = https://sourceforge.net/projects/libpng/files/libpng$(LIBPNG_VER_X)/$(LIBPNG_VER)
 
 LIBPNG_PATCH  = \
 	0001-disable-pngfix-and-png-fix-itxt.patch

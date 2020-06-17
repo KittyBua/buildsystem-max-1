@@ -4,7 +4,7 @@
 AVAHI_VER    = 0.7
 AVAHI_DIR    = avahi-$(AVAHI_VER)
 AVAHI_SOURCE = avahi-$(AVAHI_VER).tar.gz
-AVAHI_URL    = https://github.com/lathiat/avahi/releases/download/v$(AVAHI_VER)
+AVAHI_SITE   = https://github.com/lathiat/avahi/releases/download/v$(AVAHI_VER)
 
 $(D)/avahi: bootstrap expat libdaemon dbus
 	$(START_BUILD)

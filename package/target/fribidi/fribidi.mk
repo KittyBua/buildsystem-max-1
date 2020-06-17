@@ -4,7 +4,7 @@
 FRIBIDI_VER    = 1.0.9
 FRIBIDI_DIR    = fribidi-$(FRIBIDI_VER)
 FRIBIDI_SOURCE = fribidi-$(FRIBIDI_VER).tar.xz
-FRIBIDI_URL    = https://github.com/fribidi/fribidi/releases/download/v$(FRIBIDI_VER)
+FRIBIDI_SITE   = https://github.com/fribidi/fribidi/releases/download/v$(FRIBIDI_VER)
 
 FRIBIDI_PATCH  = \
 	0001-fribidi.patch

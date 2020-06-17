@@ -4,7 +4,7 @@
 VSFTPD_VER    = 3.0.3
 VSFTPD_DIR    = vsftpd-$(VSFTPD_VER)
 VSFTPD_SOURCE = vsftpd-$(VSFTPD_VER).tar.gz
-VSFTPD_URL    = https://security.appspot.com/downloads
+VSFTPD_SITE   = https://security.appspot.com/downloads
 
 VSFTPD_PATCH  = \
 	0001-vsftpd.patch \

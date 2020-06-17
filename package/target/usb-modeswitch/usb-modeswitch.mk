@@ -4,7 +4,7 @@
 USB_MODESWITCH_VER    = 2.5.2
 USB_MODESWITCH_DIR    = usb-modeswitch-$(USB_MODESWITCH_VER)
 USB_MODESWITCH_SOURCE = usb-modeswitch-$(USB_MODESWITCH_VER).tar.bz2
-USB_MODESWITCH_URL    = http://www.draisberghof.de/usb_modeswitch
+USB_MODESWITCH_SITE   = http://www.draisberghof.de/usb_modeswitch
 
 USB_MODESWITCH_PATCH  = \
 	0001-usb-modeswitch.patch

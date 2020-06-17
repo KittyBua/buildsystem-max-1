@@ -4,7 +4,7 @@
 LUASOCKET_VER    = git
 LUASOCKET_DIR    = luasocket.git
 LUASOCKET_SOURCE = luasocket.git
-LUASOCKET_URL    = git://github.com/diegonehab
+LUASOCKET_SITE   = git://github.com/diegonehab
 
 $(D)/luasocket: bootstrap lua
 	$(START_BUILD)

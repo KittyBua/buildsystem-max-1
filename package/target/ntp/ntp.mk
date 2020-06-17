@@ -4,7 +4,7 @@
 NTP_VER    = 4.2.8p14
 NTP_DIR    = ntp-$(NTP_VER)
 NTP_SOURCE = ntp-$(NTP_VER).tar.gz
-NTP_URL    = https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-$(basename $(NTP_VER))
+NTP_SITE   = https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-$(basename $(NTP_VER))
 
 NTP_PATCH  = \
 	0001-ntp.patch

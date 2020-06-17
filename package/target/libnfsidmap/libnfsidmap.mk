@@ -4,7 +4,7 @@
 LIBNFSIDMAP_VER    = 0.25
 LIBNFSIDMAP_DIR    = libnfsidmap-$(LIBNFSIDMAP_VER)
 LIBNFSIDMAP_SOURCE = libnfsidmap-$(LIBNFSIDMAP_VER).tar.gz
-LIBNFSIDMAP_URL    = http://www.citi.umich.edu/projects/nfsv4/linux/libnfsidmap
+LIBNFSIDMAP_SITE   = http://www.citi.umich.edu/projects/nfsv4/linux/libnfsidmap
 
 $(D)/libnfsidmap: bootstrap
 	$(START_BUILD)

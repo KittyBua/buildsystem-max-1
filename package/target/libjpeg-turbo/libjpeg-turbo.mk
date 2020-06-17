@@ -4,7 +4,7 @@
 LIBJPEG_TURBO_VER    = 2.0.4
 LIBJPEG_TURBO_DIR    = libjpeg-turbo-$(LIBJPEG_TURBO_VER)
 LIBJPEG_TURBO_SOURCE = libjpeg-turbo-$(LIBJPEG_TURBO_VER).tar.gz
-LIBJPEG_TURBO_URL    = https://sourceforge.net/projects/libjpeg-turbo/files/$(LIBJPEG_TURBO_VER)
+LIBJPEG_TURBO_SITE   = https://sourceforge.net/projects/libjpeg-turbo/files/$(LIBJPEG_TURBO_VER)
 
 LIBJPEG_TURBO_PATCH  = \
 	0001-tiff-ojpeg.patch

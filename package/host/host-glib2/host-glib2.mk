@@ -4,7 +4,7 @@
 HOST_GLIB2_VER    = 2.56.3
 HOST_GLIB2_DIR    = glib-$(HOST_GLIB2_VER)
 HOST_GLIB2_SOURCE = glib-$(HOST_GLIB2_VER).tar.xz
-HOST_GLIB2_URL    = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(HOST_GLIB2_VER))
+HOST_GLIB2_SITE   = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(HOST_GLIB2_VER))
 
 HOST_GLIB2_PATCH  = \
 	0004-gdbus-Avoid-printing-null-strings.patch

@@ -4,7 +4,7 @@
 ALSA_LIB_VER    = 1.2.3
 ALSA_LIB_DIR    = alsa-lib-$(ALSA_LIB_VER)
 ALSA_LIB_SOURCE = alsa-lib-$(ALSA_LIB_VER).tar.bz2
-ALSA_LIB_URL    = https://www.alsa-project.org/files/pub/lib
+ALSA_LIB_SITE   = https://www.alsa-project.org/files/pub/lib
 
 ALSA_LIB_PATCH  = \
 	0001-Don-t-use-fork-on-noMMU-platforms.patch \

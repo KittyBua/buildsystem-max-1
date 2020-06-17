@@ -4,7 +4,7 @@
 CURLFTPFS_VER    = 0.9.2
 CURLFTPFS_DIR    = curlftpfs-$(CURLFTPFS_VER)
 CURLFTPFS_SOURCE = curlftpfs-$(CURLFTPFS_VER).tar.gz
-CURLFTPFS_URL    = https://sourceforge.net/projects/curlftpfs/files/latest/download
+CURLFTPFS_SITE   = https://sourceforge.net/projects/curlftpfs/files/latest/download
 
 CURLFTPFS_PATCH  = \
 	0001-curlftpfs.patch

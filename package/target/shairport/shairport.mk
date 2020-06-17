@@ -4,7 +4,7 @@
 SHAIRPORT_VER      = git
 SHAIRPORT_DIR      = shairport.git
 SHAIRPORT_SOURCE   = shairport.git
-SHAIRPORT_URL      = https://github.com/abrasive
+SHAIRPORT_SITE     = https://github.com/abrasive
 SHAIRPORT_CHECKOUT = 1.0-dev
 
 $(D)/shairport: bootstrap openssl howl alsa-lib

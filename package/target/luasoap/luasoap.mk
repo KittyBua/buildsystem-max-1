@@ -4,7 +4,7 @@
 LUASOAP_VER    = 3.0
 LUASOAP_DIR    = luasoap-$(LUASOAP_VER)
 LUASOAP_SOURCE = luasoap-$(LUASOAP_VER).tar.gz
-LUASOAP_URL    = https://github.com/downloads/tomasguisasola/luasoap
+LUASOAP_SITE   = https://github.com/downloads/tomasguisasola/luasoap
 
 LUASOAP_PATCH  = \
 	0001-luasoap.patch

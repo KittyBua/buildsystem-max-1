@@ -4,7 +4,7 @@
 OPENSSL_VER    = 1.1.1g
 OPENSSL_DIR    = openssl-$(OPENSSL_VER)
 OPENSSL_SOURCE = openssl-$(OPENSSL_VER).tar.gz
-OPENSSL_URL    = https://www.openssl.org/source
+OPENSSL_SITE   = https://www.openssl.org/source
 
 OPENSSL_PATCH  = \
 	0001-Dont-waste-time-building-manpages-if-we-re-not-going.patch \

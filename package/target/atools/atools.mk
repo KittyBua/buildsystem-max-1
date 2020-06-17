@@ -7,7 +7,7 @@ HAT_EXTRAS_REV        = 3ecbe8d
 HAT_EXTRAS_SOURCE     = hat-extras-$(HAT_EXTRAS_REV).tar.bz2
 HAT_LIBSELINUX_REV    = 07e9e13
 HAT_LIBSELINUX_SOURCE = hat-libselinux-$(HAT_LIBSELINUX_REV).tar.bz2
-HAT_MIRROR_URL        = https://android.googlesource.com/platform
+HAT_MIRROR_SITE       = https://android.googlesource.com/platform
 
 $(DL_DIR)/$(HAT_CORE_SOURCE):
 	$(GET-GIT-ARCHIVE) $(HAT_MIRROR_URL)/system/core $(HAT_CORE_REV) $(notdir $@) $(DL_DIR)

@@ -4,7 +4,7 @@
 VUDUO_DRIVER_DATE   = 20151124
 VUDUO_DRIVER_VER    = 3.9.6-$(VUDUO_DRIVER_DATE)
 VUDUO_DRIVER_SOURCE = vuplus-dvb-modules-bm750-$(VUDUO_DRIVER_VER).tar.gz
-VUDUO_DRIVER_URL    = http://archive.vuplus.com/download/drivers
+VUDUO_DRIVER_SITE   = http://archive.vuplus.com/download/drivers
 
 $(D)/vuduo-driver: bootstrap
 	$(START_BUILD)

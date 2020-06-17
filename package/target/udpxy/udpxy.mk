@@ -4,7 +4,7 @@
 UDPXY_VER    = git
 UDPXY_DIR    = udpxy.git
 UDPXY_SOURCE = udpxy.git
-UDPXY_URL    = https://github.com/pcherenkov
+UDPXY_SITE   = https://github.com/pcherenkov
 
 UDPXY_PATCH  = \
 	0001-udpxy.patch \

@@ -4,7 +4,7 @@
 HD60_MALI_MODULE_VER    = DX910-SW-99002-r7p0-00rel0
 HD60_MALI_MODULE        = $(HD60_MALI_MODULE_VER)
 HD60_MALI_MODULE_SOURCE = $(HD60_MALI_MODULE_VER).tgz
-HD60_MALI_MODULE_URL    = https://developer.arm.com/-/media/Files/downloads/mali-drivers/kernel/mali-utgard-gpu
+HD60_MALI_MODULE_SITE   = https://developer.arm.com/-/media/Files/downloads/mali-drivers/kernel/mali-utgard-gpu
 
 HD60_MALI_MODULE_PATCH = \
 	hi3798mv200-support.patch

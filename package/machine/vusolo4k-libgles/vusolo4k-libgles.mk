@@ -5,7 +5,7 @@ VUSOLO4K_LIBGLES_DATE   = $(VUSOLO4K_DRIVER_DATE)
 VUSOLO4K_LIBGLES_REV    = r0
 VUSOLO4K_LIBGLES_VER    = 17.1-$(VUSOLO4K_LIBGLES_DATE).$(VUSOLO4K_LIBGLES_REV)
 VUSOLO4K_LIBGLES_SOURCE = libgles-vusolo4k-$(VUSOLO4K_LIBGLES_VER).tar.gz
-VUSOLO4K_LIBGLES_URL    = http://archive.vuplus.com/download/build_support/vuplus
+VUSOLO4K_LIBGLES_SITE   = http://archive.vuplus.com/download/build_support/vuplus
 
 $(D)/vusolo4k-libgles: bootstrap
 	$(START_BUILD)

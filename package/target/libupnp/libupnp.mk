@@ -1,7 +1,7 @@
 LIBUPNP_VER    = 1.6.25
 LIBUPNP_DIR    = libupnp-$(LIBUPNP_VER)
 LIBUPNP_SOURCE = libupnp-$(LIBUPNP_VER).tar.bz2
-LIBUPNP_URL    = http://sourceforge.net/projects/pupnp/files/pupnp/libUPnP%20$(LIBUPNP_VER)
+LIBUPNP_SITE   = http://sourceforge.net/projects/pupnp/files/pupnp/libUPnP%20$(LIBUPNP_VER)
 
 $(D)/libupnp: bootstrap
 	$(START_BUILD)

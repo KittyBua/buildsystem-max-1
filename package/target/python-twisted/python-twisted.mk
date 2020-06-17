@@ -4,7 +4,7 @@
 PYTHON_TWISTED_VER    = 18.4.0
 PYTHON_TWISTED_DIR    = Twisted-$(PYTHON_TWISTED_VER)
 PYTHON_TWISTED_SOURCE = Twisted-$(PYTHON_TWISTED_VER).tar.bz2
-PYTHON_TWISTED_URL    = https://pypi.python.org/packages/source/T/Twisted
+PYTHON_TWISTED_SITE   = https://pypi.python.org/packages/source/T/Twisted
 
 PYTHON_TWISTED_PATCH  = \
 	0001-fix-writing-after-channel-is-closed.patch

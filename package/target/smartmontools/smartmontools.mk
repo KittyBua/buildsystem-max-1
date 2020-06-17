@@ -4,7 +4,7 @@
 SMARTMONTOOLS_VER    = 7.1
 SMARTMONTOOLS_DIR    = smartmontools-$(SMARTMONTOOLS_VER)
 SMARTMONTOOLS_SOURCE = smartmontools-$(SMARTMONTOOLS_VER).tar.gz
-SMARTMONTOOLS_URL    = https://sourceforge.net/projects/smartmontools/files/smartmontools/$(SMARTMONTOOLS_VER)
+SMARTMONTOOLS_SITE   = https://sourceforge.net/projects/smartmontools/files/smartmontools/$(SMARTMONTOOLS_VER)
 
 $(D)/smartmontools: bootstrap
 	$(START_BUILD)

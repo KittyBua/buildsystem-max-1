@@ -4,7 +4,7 @@
 JFSUTILS_VER    = 1.1.15
 JFSUTILS_DIR    = jfsutils-$(JFSUTILS_VER)
 JFSUTILS_SOURCE = jfsutils-$(JFSUTILS_VER).tar.gz
-JFSUTILS_URL    = http://jfs.sourceforge.net/project/pub
+JFSUTILS_SITE   = http://jfs.sourceforge.net/project/pub
 
 JFSUTILS_PATCH  = \
 	0001-jfsutils.patch

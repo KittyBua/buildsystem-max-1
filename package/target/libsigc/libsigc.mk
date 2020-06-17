@@ -4,7 +4,7 @@
 LIBSIGC_VER    = 2.10.2
 LIBSIGC_DIR    = libsigc++-$(LIBSIGC_VER)
 LIBSIGC_SOURCE = libsigc++-$(LIBSIGC_VER).tar.xz
-LIBSIGC_URL    = https://download.gnome.org/sources/libsigc++/$(basename $(LIBSIGC_VER))
+LIBSIGC_SITE   = https://download.gnome.org/sources/libsigc++/$(basename $(LIBSIGC_VER))
 
 $(D)/libsigc: bootstrap
 	$(START_BUILD)

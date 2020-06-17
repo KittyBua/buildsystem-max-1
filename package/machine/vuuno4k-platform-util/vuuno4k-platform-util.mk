@@ -5,7 +5,7 @@ VUUNO4K_PLATFORM_UTIL_DATE   = $(VUUNO4K_DRIVER_DATE)
 VUUNO4K_PLATFORM_UTIL_REV    = r0
 VUUNO4K_PLATFORM_UTIL_VER    = 17.1-$(VUUNO4K_PLATFORM_UTIL_DATE).$(VUUNO4K_PLATFORM_UTIL_REV)
 VUUNO4K_PLATFORM_UTIL_SOURCE = platform-util-vuuno4k-$(VUUNO4K_PLATFORM_UTIL_VER).tar.gz
-VUUNO4K_PLATFORM_UTIL_URL    = http://archive.vuplus.com/download/build_support/vuplus
+VUUNO4K_PLATFORM_UTIL_SITE   = http://archive.vuplus.com/download/build_support/vuplus
 
 $(D)/vuuno4k-platform-util: bootstrap
 	$(START_BUILD)

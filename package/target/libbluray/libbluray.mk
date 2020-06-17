@@ -4,7 +4,7 @@
 LIBBLURAY_VER    = 0.9.3
 LIBBLURAY_DIR    = libbluray-$(LIBBLURAY_VER)
 LIBBLURAY_SOURCE = libbluray-$(LIBBLURAY_VER).tar.bz2
-LIBBLURAY_URL    = ftp.videolan.org/pub/videolan/libbluray/$(LIBBLURAY_VER)
+LIBBLURAY_SITE   = ftp.videolan.org/pub/videolan/libbluray/$(LIBBLURAY_VER)
 
 LIBBLURAY_PATCH  = \
 	0001-libbluray.patch

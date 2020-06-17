@@ -4,7 +4,7 @@
 RSYNC_VER    = 3.1.3
 RSYNC_DIR    = rsync-$(RSYNC_VER)
 RSYNC_SOURCE = rsync-$(RSYNC_VER).tar.gz
-RSYNC_URL    = https://ftp.samba.org/pub/rsync
+RSYNC_SITE   = https://ftp.samba.org/pub/rsync
 
 RSYNC_PATCH  = \
 	001-rsync-sysmacros.patch

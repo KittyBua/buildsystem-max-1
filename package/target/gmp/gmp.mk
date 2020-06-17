@@ -4,7 +4,7 @@
 GMP_VER    = 6.1.2
 GMP_DIR    = gmp-$(GMP_VER)
 GMP_SOURCE = gmp-$(GMP_VER).tar.xz
-GMP_URL    = https://gmplib.org/download/gmp
+GMP_SITE   = https://gmplib.org/download/gmp
 
 $(D)/gmp: bootstrap
 	$(START_BUILD)

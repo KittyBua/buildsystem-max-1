@@ -4,7 +4,7 @@
 KMOD_VER    = 26
 KMOD_DIR    = kmod-$(KMOD_VER)
 KMOD_SOURCE = kmod-$(KMOD_VER).tar.xz
-KMOD_URL    = https://mirrors.edge.kernel.org/pub/linux/utils/kernel/kmod
+KMOD_SITE   = https://mirrors.edge.kernel.org/pub/linux/utils/kernel/kmod
 
 KMOD_PATCH  = \
 	0001-fix-O_CLOEXEC.patch \

@@ -4,7 +4,7 @@
 LIBCAP_VER    = 2.25
 LIBCAP_DIR    = libcap-$(LIBCAP_VER)
 LIBCAP_SOURCE = libcap-$(LIBCAP_VER).tar.xz
-LIBCAP_URL    = https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2
+LIBCAP_SITE   = https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2
 
 LIBCAP_PATCH  = \
 	0001-build-system-fixes-for-cross-compilation.patch \

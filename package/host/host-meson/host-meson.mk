@@ -4,7 +4,7 @@
 HOST_MESON_VER    = 0.54.2
 HOST_MESON_DIR    = meson-$(HOST_MESON_VER)
 HOST_MESON_SOURCE = meson-$(HOST_MESON_VER).tar.gz
-HOST_MESON_URL    = https://github.com/mesonbuild/meson/releases/download/$(HOST_MESON_VER)
+HOST_MESON_SITE   = https://github.com/mesonbuild/meson/releases/download/$(HOST_MESON_VER)
 
 HOST_MESON_PATCH  = \
 	0001-Only-fix-RPATH-if-install_rpath-is-not-empty.patch \

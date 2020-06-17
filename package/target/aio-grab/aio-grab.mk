@@ -4,7 +4,7 @@
 AIO_GRAB_VER    = git
 AIO_GRAB_DIR    = aio-grab.git
 AIO_GRAB_SOURCE = aio-grab.git
-AIO_GRAB_URL    = https://github.com/oe-alliance
+AIO_GRAB_SITE   = https://github.com/oe-alliance
 
 $(D)/aio-grab: bootstrap zlib libpng libjpeg-turbo
 	$(START_BUILD)

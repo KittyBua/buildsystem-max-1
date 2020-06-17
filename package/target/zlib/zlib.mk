@@ -4,7 +4,7 @@
 ZLIB_VER    = 1.2.11
 ZLIB_DIR    = zlib-$(ZLIB_VER)
 ZLIB_SOURCE = zlib-$(ZLIB_VER).tar.xz
-ZLIB_URL    = https://sourceforge.net/projects/libpng/files/zlib/$(ZLIB_VER)
+ZLIB_SITE   = https://sourceforge.net/projects/libpng/files/zlib/$(ZLIB_VER)
 
 ZLIB_PATCH  = \
 	0001-zlib.patch

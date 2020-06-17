@@ -4,7 +4,7 @@
 H7_LIBGLES_DATE   = 20191110
 H7_LIBGLES_VER    = $(H7_LIBGLES_DATE)
 H7_LIBGLES_SOURCE = h7-v3ddriver-$(H7_LIBGLES_VER).zip
-H7_LIBGLES_URL    = http://source.mynonpublic.com/zgemma
+H7_LIBGLES_SITE   = http://source.mynonpublic.com/zgemma
 
 $(D)/h7-libgles: bootstrap
 	$(START_BUILD)

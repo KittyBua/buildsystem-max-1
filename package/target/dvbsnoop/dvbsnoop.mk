@@ -4,7 +4,7 @@
 DVBSNOOP_VER    = git
 DVBSNOOP_DIR    = dvbsnoop.git
 DVBSNOOP_SOURCE = dvbsnoop.git
-DVBSNOOP_URL    = https://github.com/Duckbox-Developers
+DVBSNOOP_SITE   = https://github.com/Duckbox-Developers
 
 $(D)/dvbsnoop: bootstrap kernel
 	$(START_BUILD)

@@ -4,7 +4,7 @@
 LIBAO_VER    = 1.1.0
 LIBAO_DIR    = libao-$(LIBAO_VER)
 LIBAO_SOURCE = libao-$(LIBAO_VER).tar.gz
-LIBAO_URL    = https://ftp.osuosl.org/pub/xiph/releases/ao
+LIBAO_SITE   = https://ftp.osuosl.org/pub/xiph/releases/ao
 
 $(D)/libao: bootstrap alsa-lib
 	$(START_BUILD)

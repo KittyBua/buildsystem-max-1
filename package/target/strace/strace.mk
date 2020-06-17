@@ -4,7 +4,7 @@
 STRACE_VER    = 5.1
 STRACE_DIR    = strace-$(STRACE_VER)
 STRACE_SOURCE = strace-$(STRACE_VER).tar.xz
-STRACE_URL    = https://strace.io/files/$(STRACE_VER)
+STRACE_SITE   = https://strace.io/files/$(STRACE_VER)
 
 $(D)/strace: bootstrap
 	$(START_BUILD)

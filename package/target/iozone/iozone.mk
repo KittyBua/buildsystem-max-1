@@ -4,7 +4,7 @@
 IOZONE_VER    = 3_489
 IOZONE_DIR    = iozone$(IOZONE_VER)
 IOZONE_SOURCE = iozone$(IOZONE_VER).tar
-IOZONE_URL    = http://www.iozone.org/src/current
+IOZONE_SITE   = http://www.iozone.org/src/current
 
 $(D)/iozone: bootstrap
 	$(START_BUILD)

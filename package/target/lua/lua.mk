@@ -5,7 +5,7 @@ LUA_VER    = 5.2.4
 LUA_ABIVER = $(basename $(LUA_VER))
 LUA_DIR    = lua-$(LUA_VER)
 LUA_SOURCE = lua-$(LUA_VER).tar.gz
-LUA_URL    = https://www.lua.org/ftp
+LUA_SITE   = https://www.lua.org/ftp
 
 LUA_PATCH  = \
 	0001-fix-lua-root.patch \

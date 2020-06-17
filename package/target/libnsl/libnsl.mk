@@ -5,7 +5,7 @@ LIBNSL_VER    = 1.2.0
 LIBNSL_DIR    = libnsl-$(LIBNSL_VER)
 LIBNSL_SOURCE = libnsl-$(LIBNSL_VER).tar.gz
 LIBNSL_GIT    = v$(LIBNSL_VER).tar.gz -O $(DL_DIR)/$(LIBNSL_SOURCE)
-LIBNSL_URL    = https://github.com/thkukuk/libnsl/archive
+LIBNSL_SITE   = https://github.com/thkukuk/libnsl/archive
 
 $(D)/libnsl: bootstrap libtirpc
 	$(START_BUILD)

@@ -4,7 +4,7 @@
 HDDTEMP_VER    = 0.3-beta15
 HDDTEMP_DIR    = hddtemp-$(HDDTEMP_VER)
 HDDTEMP_SOURCE = hddtemp-$(HDDTEMP_VER).tar.bz2
-HDDTEMP_URL    = http://savannah.c3sl.ufpr.br/hddtemp
+HDDTEMP_SITE   = http://savannah.c3sl.ufpr.br/hddtemp
 
 $(D)/hddtemp: bootstrap libiconv
 	$(START_BUILD)

@@ -4,7 +4,7 @@
 JPEG_VER    = 8d
 JPEG_DIR    = jpeg-$(JPEG_VER)
 JPEG_SOURCE = jpegsrc.v$(JPEG_VER).tar.gz
-JPEG_URL    = http://www.ijg.org/files
+JPEG_SITE   = http://www.ijg.org/files
 
 JPEG_PATCH  = \
 	0001-jpeg.patch

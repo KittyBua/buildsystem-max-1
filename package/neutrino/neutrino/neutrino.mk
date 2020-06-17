@@ -169,7 +169,7 @@ N_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO)
 LH_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL)
 
 ifeq ($(FLAVOUR), neutrino-max)
-GIT_URL           ?= $(MAX-GIT-GITHUB)
+GIT_SITE          ?= $(MAX-GIT-GITHUB)
 NEUTRINO           = neutrino-max
 LIBSTB_HAL         = libstb-hal-max
 NEUTRINO_BRANCH   ?= master
@@ -177,7 +177,7 @@ LIBSTB_HAL_BRANCH ?= master
 NEUTRINO_PATCH     =
 LIBSTB_HAL_PATCH   =
 else ifeq ($(FLAVOUR), neutrino-ni)
-GIT_URL           ?= https://github.com/neutrino-images
+GIT_SITE          ?= https://github.com/neutrino-images
 NEUTRINO           = ni-neutrino
 LIBSTB_HAL         = ni-libstb-hal
 NEUTRINO_BRANCH   ?= master
@@ -185,7 +185,7 @@ LIBSTB_HAL_BRANCH ?= master
 NEUTRINO_PATCH     =
 LIBSTB_HAL_PATCH   =
 else ifeq ($(FLAVOUR), neutrino-tangos)
-GIT_URL           ?= https://github.com/TangoCash
+GIT_SITE          ?= https://github.com/TangoCash
 NEUTRINO           = neutrino-tangos
 LIBSTB_HAL         = libstb-hal-tangos
 NEUTRINO_BRANCH   ?= master
@@ -193,7 +193,7 @@ LIBSTB_HAL_BRANCH ?= master
 NEUTRINO_PATCH     =
 LIBSTB_HAL_PATCH   =
 else ifeq ($(FLAVOUR), neutrino-ddt)
-GIT_URL           ?= https://github.com/Duckbox-Developers
+GIT_SITE          ?= https://github.com/Duckbox-Developers
 NEUTRINO           = neutrino-ddt
 LIBSTB_HAL         = libstb-hal-ddt
 NEUTRINO_BRANCH   ?= master
@@ -237,7 +237,7 @@ LIBSTB_HAL_DEPS += openthreads
 LIBSTB_HAL_VER    = git
 LIBSTB_HAL_DIR    = $(LIBSTB_HAL).git
 LIBSTB_HAL_SOURCE = $(LIBSTB_HAL).git
-LIBSTB_HAL_URL    = $(GIT_URL)
+LIBSTB_HAL_SITE   = $(GIT_SITE)
 
 $(D)/libstb-hal.do_prepare: | $(LIBSTB_HAL_DEPS)
 	$(START_BUILD)
@@ -311,7 +311,7 @@ libstb-hal-uninstall:
 NEUTRINO_VER    = git
 NEUTRINO_DIR    = $(NEUTRINO).git
 NEUTRINO_SOURCE = $(NEUTRINO).git
-NEUTRINO_URL    = $(GIT_URL)
+NEUTRINO_SITE   = $(GIT_SITE)
 
 $(D)/neutrino.do_prepare: | $(NEUTRINO_DEPS) libstb-hal
 	$(START_BUILD)

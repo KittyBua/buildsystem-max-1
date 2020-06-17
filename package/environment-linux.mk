@@ -48,7 +48,7 @@ else
 KERNEL_DTB         = hi3798mv200.dtb
 endif
 
-KERNEL_URL         = http://downloads.mutant-digital.net
+KERNEL_SITE        = http://downloads.mutant-digital.net
 KERNEL_DIR         = $(BUILD_DIR)/linux-$(KERNEL_VER)
 
 endif
@@ -115,7 +115,7 @@ KERNEL_SOURCE      = stblinux-${KERNEL_SOURCE_VER}.tar.bz2
 endif
 
 KERNEL_DTB         = $(EMPTY)
-KERNEL_URL         = http://archive.vuplus.com/download/kernel
+KERNEL_SITE        = http://archive.vuplus.com/download/kernel
 KERNEL_DIR         = $(BUILD_DIR)/linux
 
 endif
@@ -142,7 +142,7 @@ endif
 KERNEL_IMAGE_TYPE  = Image.gz
 KERNEL_SOURCE      = linux-edision-$(KERNEL_SOURCE_VER).tar.gz
 KERNEL_DTB         = $(EMPTY)
-KERNEL_URL         = http://source.mynonpublic.com/edision
+KERNEL_SITE        = http://source.mynonpublic.com/edision
 KERNEL_DIR         = $(BUILD_DIR)/linux-brcmstb-$(KERNEL_SOURCE_VER)
 
 endif
@@ -157,7 +157,7 @@ MTD_BOOTFS         = mmcblk0p1
 KERNEL_IMAGE_TYPE  = zImage
 KERNEL_SOURCE      = linux-$(KERNEL_VER)-arm.tar.gz
 KERNEL_DTB         = bcm7445-bcm97445svmb.dtb
-KERNEL_URL         = http://www.zgemma.org/downloads/
+KERNEL_SITE        = http://www.zgemma.org/downloads/
 KERNEL_DIR         = $(BUILD_DIR)/linux-$(KERNEL_VER)
 endif
 

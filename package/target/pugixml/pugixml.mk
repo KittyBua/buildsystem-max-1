@@ -4,7 +4,7 @@
 PUGIXML_VER    = 1.10
 PUGIXML_DIR    = pugixml-$(PUGIXML_VER)
 PUGIXML_SOURCE = pugixml-$(PUGIXML_VER).tar.gz
-PUGIXML_URL    = https://github.com/zeux/pugixml/releases/download/v$(PUGIXML_VER)
+PUGIXML_SITE   = https://github.com/zeux/pugixml/releases/download/v$(PUGIXML_VER)
 
 PUGIXML_PATCH  = \
 	0001-pugixml-config.patch

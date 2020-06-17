@@ -4,7 +4,7 @@
 LIBDAEMON_VER    = 0.14
 LIBDAEMON_DIR    = libdaemon-$(LIBDAEMON_VER)
 LIBDAEMON_SOURCE = libdaemon-$(LIBDAEMON_VER).tar.gz
-LIBDAEMON_URL    = http://0pointer.de/lennart/projects/libdaemon
+LIBDAEMON_SITE   = http://0pointer.de/lennart/projects/libdaemon
 
 $(D)/libdaemon: bootstrap
 	$(START_BUILD)

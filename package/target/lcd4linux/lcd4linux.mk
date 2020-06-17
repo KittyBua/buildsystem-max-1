@@ -4,7 +4,7 @@
 LCD4LINUX_VER    = git
 LCD4LINUX_DIR    = lcd4linux.git
 LCD4LINUX_SOURCE = lcd4linux.git
-LCD4LINUX_URL    = https://github.com/TangoCash
+LCD4LINUX_SITE   = https://github.com/TangoCash
 
 $(D)/lcd4linux: bootstrap ncurses libusb-compat libgd libusb libdpf
 	$(START_BUILD)

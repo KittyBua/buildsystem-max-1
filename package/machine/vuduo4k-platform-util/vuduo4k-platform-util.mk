@@ -5,7 +5,7 @@ VUDUO4K_PLATFORM_UTIL_DATE   = 20190212
 VUDUO4K_PLATFORM_UTIL_REV    = r0
 VUDUO4K_PLATFORM_UTIL_VER    = 18.1-$(VUDUO4K_PLATFORM_UTIL_DATE).$(VUDUO4K_PLATFORM_UTIL_REV)
 VUDUO4K_PLATFORM_UTIL_SOURCE = platform-util-vuduo4k-$(VUDUO4K_PLATFORM_UTIL_VER).tar.gz
-VUDUO4K_PLATFORM_UTIL_URL    = http://archive.vuplus.com/download/build_support/vuplus
+VUDUO4K_PLATFORM_UTIL_SITE   = http://archive.vuplus.com/download/build_support/vuplus
 
 $(D)/vuduo4k-platform-util: bootstrap
 	$(START_BUILD)

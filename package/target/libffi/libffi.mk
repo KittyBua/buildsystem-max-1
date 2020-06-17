@@ -4,7 +4,7 @@
 LIBFFI_VER    = 3.2.1
 LIBFFI_DIR    = libffi-$(LIBFFI_VER)
 LIBFFI_SOURCE = libffi-$(LIBFFI_VER).tar.gz
-LIBFFI_URL    = ftp://sourceware.org/pub/libffi
+LIBFFI_SITE   = ftp://sourceware.org/pub/libffi
 
 LIBFFI_PATCH  = \
 	0001-libffi.patch

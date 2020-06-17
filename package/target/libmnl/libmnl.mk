@@ -4,7 +4,7 @@
 LIBMNL_VER    = 1.0.4
 LIBMNL_DIR    = libmnl-$(LIBMNL_VER)
 LIBMNL_SOURCE = libmnl-$(LIBMNL_VER).tar.bz2
-LIBMNL_URL    = http://netfilter.org/projects/libmnl/files
+LIBMNL_SITE   = http://netfilter.org/projects/libmnl/files
 
 $(D)/libmnl: bootstrap
 	$(START_BUILD)

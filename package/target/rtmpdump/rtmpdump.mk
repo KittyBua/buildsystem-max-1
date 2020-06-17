@@ -4,7 +4,7 @@
 RTMPDUMP_VER    = git
 RTMPDUMP_DIR    = rtmpdump.git
 RTMPDUMP_SOURCE = rtmpdump.git
-RTMPDUMP_URL    = git://github.com/oe-alliance
+RTMPDUMP_SITE   = git://github.com/oe-alliance
 
 RTMPDUMP_PATCH  = \
 	0001-rtmpdump.patch \

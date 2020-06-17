@@ -4,7 +4,7 @@
 HOST_OPKG_VER    = 0.3.3
 HOST_OPKG_DIR    = opkg-$(HOST_OPKG_VER)
 HOST_OPKG_SOURCE = opkg-$(HOST_OPKG_VER).tar.gz
-HOST_OPKG_URL    = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
+HOST_OPKG_SITE   = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
 
 HOST_OPKG_PATCH  = \
 	0001-opkg.patch

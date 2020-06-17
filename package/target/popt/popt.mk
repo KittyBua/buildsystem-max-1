@@ -4,7 +4,7 @@
 POPT_VER    = 1.16
 POPT_DIR    = popt-$(POPT_VER)
 POPT_SOURCE = popt-$(POPT_VER).tar.gz
-POPT_URL    = ftp://anduin.linuxfromscratch.org/BLFS/popt
+POPT_SITE   = ftp://anduin.linuxfromscratch.org/BLFS/popt
 
 $(D)/popt: bootstrap
 	$(START_BUILD)

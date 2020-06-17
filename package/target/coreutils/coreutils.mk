@@ -4,7 +4,7 @@
 COREUTILS_VER    = 8.30
 COREUTILS_DIR    = coreutils-$(COREUTILS_VER)
 COREUTILS_SOURCE = coreutils-$(COREUTILS_VER).tar.xz
-COREUTILS_URL    = https://ftp.gnu.org/gnu/coreutils
+COREUTILS_SITE   = https://ftp.gnu.org/gnu/coreutils
 
 $(D)/coreutils: bootstrap openssl
 	$(START_BUILD)

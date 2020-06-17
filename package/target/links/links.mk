@@ -4,7 +4,7 @@
 LINKS_VER    = 2.20.2
 LINKS_DIR    = links-$(LINKS_VER)
 LINKS_SOURCE = links-$(LINKS_VER).tar.bz2
-LINKS_URL    = http://links.twibright.com/download
+LINKS_SITE   = http://links.twibright.com/download
 
 LINKS_PATCH  = \
 	0001-links.patch \

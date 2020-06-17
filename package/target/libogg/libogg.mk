@@ -4,7 +4,7 @@
 LIBOGG_VER    = 1.3.4
 LIBOGG_DIR    = libogg-$(LIBOGG_VER)
 LIBOGG_SOURCE = libogg-$(LIBOGG_VER).tar.gz
-LIBOGG_URL    = https://ftp.osuosl.org/pub/xiph/releases/ogg
+LIBOGG_SITE   = https://ftp.osuosl.org/pub/xiph/releases/ogg
 
 $(D)/libogg: bootstrap
 	$(START_BUILD)

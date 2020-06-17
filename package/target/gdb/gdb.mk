@@ -4,7 +4,7 @@
 GDB_VER    = 8.3
 GDB_DIR    = gdb-$(GDB_VER)
 GDB_SOURCE = gdb-$(GDB_VER).tar.xz
-GDB_URL    = https://sourceware.org/pub/gdb/releases
+GDB_SITE   = https://sourceware.org/pub/gdb/releases
 
 $(D)/gdb: bootstrap zlib ncurses
 	$(START_BUILD)

@@ -4,7 +4,7 @@
 DOSFSTOOLS_VER    = 4.1
 DOSFSTOOLS_DIR    = dosfstools-$(DOSFSTOOLS_VER)
 DOSFSTOOLS_SOURCE = dosfstools-$(DOSFSTOOLS_VER).tar.xz
-DOSFSTOOLS_URL    = https://github.com/dosfstools/dosfstools/releases/download/v$(DOSFSTOOLS_VER)
+DOSFSTOOLS_SITE   = https://github.com/dosfstools/dosfstools/releases/download/v$(DOSFSTOOLS_VER)
 
 DOSFSTOOLS_PATCH  = \
 	0001-switch-to-AC_CHECK_LIB-for-iconv-library-linking.patch

@@ -7,11 +7,11 @@ OSCAM_FLAVOUR_VER    = git
 ifeq ($(OSCAM_FLAVOUR), oscam)
 OSCAM_FLAVOUR_DIR    = oscam.git
 OSCAM_FLAVOUR_SOURCE = oscam.git
-OSCAM_FLAVOUR_URL    = https://repo.or.cz
+OSCAM_FLAVOUR_SITE   = https://repo.or.cz
 else ifeq ($(OSCAM_FLAVOUR), oscam-smod)
 OSCAM_FLAVOUR_DIR    = oscam-smod.git
 OSCAM_FLAVOUR_SOURCE = oscam-smod.git
-OSCAM_FLAVOUR_URL    = https://github.com/Schimmelreiter
+OSCAM_FLAVOUR_SITE   = https://github.com/Schimmelreiter
 endif
 
 OSCAM_FLAVOUR_CONFIG = 

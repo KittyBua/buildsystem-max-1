@@ -4,7 +4,7 @@
 XUPNPD_VER      = git
 XUPNPD_DIR      = xupnpd.git
 XUPNPD_SOURCE   = xupnpd.git
-XUPNPD_URL      = https://github.com/clark15b
+XUPNPD_SITE     = https://github.com/clark15b
 XUPNPD_CHECKOUT = 25d6d44
 
 XUPNPD_PATCH  =  \

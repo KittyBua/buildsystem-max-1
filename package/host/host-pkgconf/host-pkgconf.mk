@@ -4,7 +4,7 @@
 HOST_PKGCONF_VER    = 1.6.3
 HOST_PKGCONF_DIR    = pkgconf-$(HOST_PKGCONF_VER)
 HOST_PKGCONF_SOURCE = pkgconf-$(HOST_PKGCONF_VER).tar.xz
-HOST_PKGCONF_URL    = https://distfiles.dereferenced.org/pkgconf
+HOST_PKGCONF_SITE   = https://distfiles.dereferenced.org/pkgconf
 
 HOST_PKGCONF_PATCH  = \
 	0001-Only-prefix-with-the-sysroot-a-subset-of-variables.patch \

@@ -4,7 +4,7 @@
 PYTHON_VER    = 2.7.18
 PYTHON_DIR    = Python-$(PYTHON_VER)
 PYTHON_SOURCE = Python-$(PYTHON_VER).tar.xz
-PYTHON_URL    = https://www.python.org/ftp/python/$(PYTHON_VER)
+PYTHON_SITE   = https://www.python.org/ftp/python/$(PYTHON_VER)
 
 PYTHON_PATCH  = \
 	0001-python.patch \

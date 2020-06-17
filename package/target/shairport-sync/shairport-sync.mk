@@ -4,7 +4,7 @@
 SHAIRPORT_SYNC_VER    = git
 SHAIRPORT_SYNC_DIR    = shairport-sync.git
 SHAIRPORT_SYNC_SOURCE = shairport-sync.git
-SHAIRPORT_SYNC_URL    = https://github.com/mikebrady
+SHAIRPORT_SYNC_SITE   = https://github.com/mikebrady
 
 $(D)/shairport-sync: bootstrap libdaemon popt libconfig openssl alsa-lib
 	$(START_BUILD)

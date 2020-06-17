@@ -4,7 +4,7 @@
 HOST_LIBFFI_VER    = 3.2.1
 HOST_LIBFFI_DIR    = libffi-$(HOST_LIBFFI_VER)
 HOST_LIBFFI_SOURCE = libffi-$(HOST_LIBFFI_VER).tar.gz
-HOST_LIBFFI_URL    = ftp://sourceware.org/pub/libffi
+HOST_LIBFFI_SITE   = ftp://sourceware.org/pub/libffi
 
 $(D)/host-libffi: bootstrap
 	$(START_BUILD)

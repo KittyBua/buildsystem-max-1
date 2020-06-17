@@ -4,7 +4,7 @@
 HOST_MTD_UTILS_VER    = 1.5.2
 HOST_MTD_UTILS_DIR    = mtd-utils-$(HOST_MTD_UTILS_VER)
 HOST_MTD_UTILS_SOURCE = mtd-utils-$(HOST_MTD_UTILS_VER).tar.bz2
-HOST_MTD_UTILS_URL    = ftp://ftp.infradead.org/pub/mtd-utils
+HOST_MTD_UTILS_SITE   = ftp://ftp.infradead.org/pub/mtd-utils
 
 HOST_MTD_UTILS_PATCH  = \
 	0001-mtd-utils.patch \

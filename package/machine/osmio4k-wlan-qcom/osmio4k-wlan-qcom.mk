@@ -4,7 +4,7 @@
 OSMIO4K_WLAN_QCOM_VER    = 4.5.25.32
 OSMIO4K_WLAN_QCOM_DIR    = qcacld-2.0-$(OSMIO4K_WLAN_QCOM_VER)
 OSMIO4K_WLAN_QCOM_SOURCE = qcacld-2.0-$(OSMIO4K_WLAN_QCOM_VER).tar.gz
-OSMIO4K_WLAN_QCOM_URL    = https://www.codeaurora.org/cgit/external/wlan/qcacld-2.0/snapshot
+OSMIO4K_WLAN_QCOM_SITE   = https://www.codeaurora.org/cgit/external/wlan/qcacld-2.0/snapshot
 
 OSMIO4K_WLAN_QCOM_PATCH  = \
 	0001-qcacld-2.0-support.patch

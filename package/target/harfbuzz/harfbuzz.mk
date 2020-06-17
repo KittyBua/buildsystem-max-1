@@ -4,7 +4,7 @@
 HARFBUZZ_VER    = 1.8.8
 HARFBUZZ_DIR    = harfbuzz-$(HARFBUZZ_VER)
 HARFBUZZ_SOURCE = harfbuzz-$(HARFBUZZ_VER).tar.bz2
-HARFBUZZ_URL    = https://www.freedesktop.org/software/harfbuzz/release
+HARFBUZZ_SITE   = https://www.freedesktop.org/software/harfbuzz/release
 
 HARFBUZZ_PATCH  = \
 	0001-disable-docs.patch

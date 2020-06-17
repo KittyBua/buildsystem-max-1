@@ -6,7 +6,7 @@
 FFMPEG_VER    = 4.2.2
 FFMPEG_DIR    = ffmpeg-$(FFMPEG_VER)
 FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VER).tar.xz
-FFMPEG_URL    = http://www.ffmpeg.org/releases
+FFMPEG_SITE   = http://www.ffmpeg.org/releases
 
 FFMPEG_PATCH  = \
 	4_02_fix_mpegts.patch \

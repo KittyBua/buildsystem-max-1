@@ -4,7 +4,7 @@
 HOST_LUAROCKS_VER    = 3.1.3
 HOST_LUAROCKS_DIR    = luarocks-$(HOST_LUAROCKS_VER)
 HOST_LUAROCKS_SOURCE = luarocks-$(HOST_LUAROCKS_VER).tar.gz
-HOST_LUAROCKS_URL    = https://luarocks.github.io/luarocks/releases
+HOST_LUAROCKS_SITE   = https://luarocks.github.io/luarocks/releases
 HOST_LUAROCKS_CONFIG = $(HOST_DIR)/etc/luarocks/config-$(LUA_ABIVER).lua
 HOST_LUAROCKS_BINARY = $(HOST_DIR)/bin/luarocks
 

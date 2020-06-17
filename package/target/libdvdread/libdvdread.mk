@@ -4,7 +4,7 @@
 LIBDVDREAD_VER    = 4.9.9
 LIBDVDREAD_DIR    = libdvdread-$(LIBDVDREAD_VER)
 LIBDVDREAD_SOURCE = libdvdread-$(LIBDVDREAD_VER).tar.xz
-LIBDVDREAD_URL    = http://dvdnav.mplayerhq.hu/releases
+LIBDVDREAD_SITE   = http://dvdnav.mplayerhq.hu/releases
 
 LIBDVDREAD_PATCH  = \
 	0001-libdvdread.patch

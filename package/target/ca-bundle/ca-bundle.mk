@@ -2,7 +2,7 @@
 # ca-bundle
 #
 CA_BUNDLE_SOURCE = cacert.pem
-CA_BUNDLE_URL    = https://curl.haxx.se/ca
+CA_BUNDLE_SITE   = https://curl.haxx.se/ca
 
 $(D)/ca-bundle:
 	$(START_BUILD)
