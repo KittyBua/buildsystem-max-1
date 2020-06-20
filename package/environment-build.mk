@@ -18,7 +18,7 @@ override MAKE = make $(if $(findstring j,$(filter-out --%,$(MAKEFLAGS))),,-j$(PA
 
 # -----------------------------------------------------------------------------
 
-BASE_DIR    := $(shell pwd)
+BASE_DIR    := ${CURDIR}
 DL_DIR      ?= $(HOME)/Archive
 BUILD_DIR    = $(BASE_DIR)/build_tmp
 ifeq ($(NEWLAYOUT), 1)
@@ -26,7 +26,6 @@ RELEASE_DIR  = $(BASE_DIR)/release/linuxrootfs1
 else
 RELEASE_DIR  = $(BASE_DIR)/release
 endif
-DEPS_DIR     = $(BASE_DIR)/.deps
 D            = $(BASE_DIR)/.deps
 HOST_DIR     = $(BASE_DIR)/host
 TARGET_DIR   = $(BASE_DIR)/root
@@ -187,8 +186,7 @@ TARGET_SHARE_DIR   = $(TARGET_DIR)/usr/share
 TARGET_CFLAGS      = $(TARGET_OPTIMIZATION) $(TARGET_ABI) $(TARGET_EXTRA_CFLAGS) -I$(TARGET_INCLUDE_DIR)
 TARGET_CPPFLAGS    = $(TARGET_CFLAGS)
 TARGET_CXXFLAGS    = $(TARGET_CFLAGS)
-TARGET_LDFLAGS     = -Wl,-rpath -Wl,/usr/lib -Wl,-rpath-link -Wl,$(TARGET_LIB_DIR) -L$(TARGET_LIB_DIR) -L$(TARGET_DIR)/lib $(TARGET_EXTRA_LDFLAGS)
-LD_FLAGS           = $(TARGET_LDFLAGS)
+TARGET_LDFLAGS     = -L$(TARGET_DIR)/lib -L$(TARGET_DIR)/usr/lib -Wl,-O1 -Wl,-rpath -Wl,/usr/lib -Wl,-rpath-link -Wl,${TARGET_DIR}/usr/lib $(TARGET_EXTRA_LDFLAGS)
 
 PKG_CONFIG         = $(HOST_DIR)/bin/$(TARGET)-pkg-config
 PKG_CONFIG_LIBDIR  = $(TARGET_LIB_DIR)/pkgconfig
