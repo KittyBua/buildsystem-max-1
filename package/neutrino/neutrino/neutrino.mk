@@ -168,7 +168,15 @@ LH_CONFIG_OPTS =
 N_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO)
 LH_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL)
 
-ifeq ($(FLAVOUR), neutrino-max)
+ifeq ($(FLAVOUR), neutrino-ddt)
+GIT_SITE          ?= https://github.com/Duckbox-Developers
+NEUTRINO           = neutrino-ddt
+LIBSTB_HAL         = libstb-hal-ddt
+NEUTRINO_BRANCH   ?= master
+LIBSTB_HAL_BRANCH ?= master
+NEUTRINO_PATCH     =
+LIBSTB_HAL_PATCH   =
+else ifeq ($(FLAVOUR), neutrino-max)
 GIT_SITE          ?= $(MAX-GIT-GITHUB)
 NEUTRINO           = neutrino-max
 LIBSTB_HAL         = libstb-hal-max
@@ -192,10 +200,10 @@ NEUTRINO_BRANCH   ?= master
 LIBSTB_HAL_BRANCH ?= master
 NEUTRINO_PATCH     =
 LIBSTB_HAL_PATCH   =
-else ifeq ($(FLAVOUR), neutrino-ddt)
-GIT_SITE          ?= https://github.com/Duckbox-Developers
-NEUTRINO           = neutrino-ddt
-LIBSTB_HAL         = libstb-hal-ddt
+else ifeq ($(FLAVOUR), neutrino-redblue)
+GIT_SITE          ?= https://github.com/redblue-pkt
+NEUTRINO           = neutrino-redblue
+LIBSTB_HAL         = libstb-hal-redblue
 NEUTRINO_BRANCH   ?= master
 LIBSTB_HAL_BRANCH ?= master
 NEUTRINO_PATCH     =
