@@ -8,7 +8,7 @@ LIBARCHIVE_SITE   = https://www.libarchive.org/downloads
 
 $(D)/libarchive: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

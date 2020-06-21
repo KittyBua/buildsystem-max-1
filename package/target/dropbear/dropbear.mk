@@ -8,7 +8,7 @@ DROPBEAR_SITE   = http://matt.ucc.asn.au/dropbear/releases
 
 $(D)/dropbear: bootstrap zlib
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

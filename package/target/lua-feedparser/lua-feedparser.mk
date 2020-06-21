@@ -9,7 +9,7 @@ LUA_FEEDPARSER_SITE   = https://github.com/slact/lua-feedparser/archive
 
 $(D)/lua-feedparser: bootstrap lua luasocket luaexpat
 	$(START_BUILD)
-	$(call DOWNLOAD,$(LUA_FEEDPARSER_GIT))
+	$(call PKG_DOWNLOAD,$(LUA_FEEDPARSER_GIT))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

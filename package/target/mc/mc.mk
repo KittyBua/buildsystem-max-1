@@ -13,7 +13,7 @@ MC_PATCH  = \
 
 $(D)/mc: bootstrap ncurses glib2
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

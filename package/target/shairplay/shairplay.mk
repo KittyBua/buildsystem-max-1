@@ -12,7 +12,7 @@ SHAIRPLAY_PATCH  = \
 
 $(D)/shairplay: bootstrap libao howl
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(CPDIR)/$(PKG_DIR)
 	$(CHDIR)/$(PKG_DIR); \

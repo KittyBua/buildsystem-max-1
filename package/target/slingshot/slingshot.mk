@@ -9,5 +9,5 @@ SLINGSHOT_SITE   = https://github.com/gvvaughan/slingshot/archive
 
 $(D)/slingshot: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(SLINGSHOT_GIT))
+	$(call PKG_DOWNLOAD,$(SLINGSHOT_GIT))
 	$(TOUCH)

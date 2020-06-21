@@ -32,7 +32,7 @@ GRAPHLCD_BASE_MAKE_OPTS = \
 
 $(D)/graphlcd-base: bootstrap freetype libiconv libusb
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(CPDIR)/$(PKG_DIR)
 	$(CHDIR)/$(PKG_DIR); \

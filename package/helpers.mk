@@ -104,7 +104,7 @@ REWRITE_CONFIG = \
 # -----------------------------------------------------------------------------
 
 # download archives into archives directory
-define DOWNLOAD
+define PKG_DOWNLOAD
 	@if [ $(PKG_VER) == "git" ]; then \
 		$(GET-GIT-SOURCE) $(PKG_SITE)/$(PKG_SOURCE) $(DL_DIR)/$(PKG_SOURCE); \
 	else \

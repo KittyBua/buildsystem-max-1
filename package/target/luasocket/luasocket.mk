@@ -8,7 +8,7 @@ LUASOCKET_SITE   = git://github.com/diegonehab
 
 $(D)/luasocket: bootstrap lua
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(CPDIR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

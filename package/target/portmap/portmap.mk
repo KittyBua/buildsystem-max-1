@@ -12,8 +12,8 @@ PORTMAP_PATCH  = \
 
 $(D)/portmap: bootstrap lsb
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PORTMAP_DIFF))
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PORTMAP_DIFF))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

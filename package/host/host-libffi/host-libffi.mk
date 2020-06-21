@@ -8,7 +8,7 @@ HOST_LIBFFI_SITE   = ftp://sourceware.org/pub/libffi
 
 $(D)/host-libffi: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

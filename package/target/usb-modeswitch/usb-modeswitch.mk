@@ -11,7 +11,7 @@ USB_MODESWITCH_PATCH  = \
 
 $(D)/usb-modeswitch: bootstrap libusb usb-modeswitch-data
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

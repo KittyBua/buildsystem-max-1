@@ -8,7 +8,7 @@ HOST_E2FSPROGS_SITE   = https://sourceforge.net/projects/e2fsprogs/files/e2fspro
 
 $(D)/host-e2fsprogs: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

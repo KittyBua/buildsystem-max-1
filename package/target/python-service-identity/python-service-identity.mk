@@ -8,7 +8,7 @@ PYTHON_SERVICE_IDENTITY_SITE   = https://pypi.python.org/packages/source/s/servi
 
 $(D)/python-service-identity: bootstrap python python-setuptools python-attr python-attrs python-pyasn1
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

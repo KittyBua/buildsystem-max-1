@@ -9,7 +9,7 @@ LUAEXPAT_SITE   = https://github.com/tomasguisasola/luaexpat/archive
 
 $(D)/luaexpat: bootstrap lua expat
 	$(START_BUILD)
-	$(call DOWNLOAD,$(LUAEXPAT_GIT))
+	$(call PKG_DOWNLOAD,$(LUAEXPAT_GIT))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

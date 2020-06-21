@@ -9,7 +9,7 @@ VUUNO4K_LIBGLES_SITE   = http://archive.vuplus.com/download/build_support/vuplus
 
 $(D)/vuuno4k-libgles: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/libgles-vuuno4k
 	$(UNTAR)/$(PKG_SOURCE)
 	$(INSTALL_EXEC) $(BUILD_DIR)/libgles-vuuno4k/lib/* $(TARGET_DIR)/usr/lib

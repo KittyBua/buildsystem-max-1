@@ -9,7 +9,7 @@ VUULTIMO4K_LIBGLES_SITE   = http://archive.vuplus.com/download/build_support/vup
 
 $(D)/vuultimo4k-libgles: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/libgles-vuultimo4k
 	$(UNTAR)/$(PKG_SOURCE)
 	$(INSTALL_EXEC) $(BUILD_DIR)/libgles-vuultimo4k/lib/* $(TARGET_DIR)/usr/lib

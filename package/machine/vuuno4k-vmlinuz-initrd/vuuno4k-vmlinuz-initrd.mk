@@ -13,6 +13,6 @@ VUUNO4K_VMLINUZ_INITRD_SOURCE = vmlinuz-initrd_vuuno4k_$(VUUNO4K_VMLINUZ_INITRD_
 
 $(D)/vuuno4k-vmlinuz-initrd: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	tar -xf $(DL_DIR)/$(PKG_SOURCE) -C $(BUILD_DIR)
 	$(TOUCH)

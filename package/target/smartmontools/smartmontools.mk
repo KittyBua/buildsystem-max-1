@@ -8,7 +8,7 @@ SMARTMONTOOLS_SITE   = https://sourceforge.net/projects/smartmontools/files/smar
 
 $(D)/smartmontools: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

@@ -21,7 +21,7 @@ VPNC_PATCH  = \
 
 $(D)/vpnc: bootstrap openssl libgcrypt libgpg-error
 	$(START_BUILD)
-	$(call DOWNLOAD,$(VPNC_GIT))
+	$(call PKG_DOWNLOAD,$(VPNC_GIT))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

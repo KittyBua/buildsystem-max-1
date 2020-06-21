@@ -8,7 +8,7 @@ WPA_SUPPLICANT_SITE   = https://w1.fi/releases
 
 $(D)/wpa-supplicant: bootstrap libnl openssl wireless-tools
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR)/wpa_supplicant; \

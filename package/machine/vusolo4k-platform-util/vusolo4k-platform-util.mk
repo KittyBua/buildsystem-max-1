@@ -9,7 +9,7 @@ VUSOLO4K_PLATFORM_UTIL_SITE   = http://archive.vuplus.com/download/build_support
 
 $(D)/vusolo4k-platform-util: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/platform-util-vusolo4k
 	$(UNTAR)/$(PKG_SOURCE)
 	$(INSTALL_EXEC) $(BUILD_DIR)/platform-util-vusolo4k/* $(TARGET_DIR)/usr/bin

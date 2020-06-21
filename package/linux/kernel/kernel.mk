@@ -197,7 +197,7 @@ H7_PATCH = \
 
 $(D)/kernel.do_prepare:
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	rm -rf $(KERNEL_DIR)
 	$(UNTAR)/$(KERNEL_SOURCE)
 	$(CD) $(KERNEL_DIR); \

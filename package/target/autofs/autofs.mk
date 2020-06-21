@@ -15,7 +15,7 @@ AUTOFS_PATCH  = \
 
 $(D)/autofs: bootstrap libtirpc e2fsprogs openssl libxml2 libnsl
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

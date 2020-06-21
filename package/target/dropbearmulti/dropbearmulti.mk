@@ -9,7 +9,7 @@ DROPBEARMULTI_CHECKOUT = c8d852c
 
 $(D)/dropbearmulti: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(CPDIR)/$(PKG_DIR)
 	$(CHDIR)/$(PKG_DIR); \

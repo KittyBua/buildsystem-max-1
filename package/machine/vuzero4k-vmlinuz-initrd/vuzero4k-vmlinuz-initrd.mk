@@ -13,6 +13,6 @@ VUZERO4K_VMLINUZ_INITRD_SOURCE = vmlinuz-initrd_vuzero4k_$(VUZERO4K_VMLINUZ_INIT
 
 $(D)/vuzero4k-vmlinuz-initrd: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	tar -xf $(DL_DIR)/$(PKG_SOURCE) -C $(BUILD_DIR)
 	$(TOUCH)

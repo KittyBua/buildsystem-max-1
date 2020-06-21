@@ -8,8 +8,8 @@ HOST_TZCODE_SITE   = ftp://ftp.iana.org/tz/releases
 
 $(D)/host-tzcode: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(TZDATA_SOURCE))
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(TZDATA_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(MKDIR)/$(PKG_DIR)
 	$(CHDIR)/$(PKG_DIR); \

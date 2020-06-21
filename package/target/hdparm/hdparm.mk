@@ -8,7 +8,7 @@ HDPARM_SITE   = https://sourceforge.net/projects/hdparm/files/hdparm
 
 $(D)/hdparm: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

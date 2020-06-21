@@ -9,7 +9,7 @@ VUUNO4KSE_PLATFORM_UTIL_SITE   = http://archive.vuplus.com/download/build_suppor
 
 $(D)/vuuno4kse-platform-util: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/platform-util-vuuno4kse
 	$(UNTAR)/$(PKG_SOURCE)
 	$(INSTALL_EXEC) $(BUILD_DIR)/platform-util-vuuno4kse/* $(TARGET_DIR)/usr/bin

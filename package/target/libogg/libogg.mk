@@ -8,7 +8,7 @@ LIBOGG_SITE   = https://ftp.osuosl.org/pub/xiph/releases/ogg
 
 $(D)/libogg: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

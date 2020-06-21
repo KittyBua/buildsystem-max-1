@@ -8,7 +8,7 @@ AVAHI_SITE   = https://github.com/lathiat/avahi/releases/download/v$(AVAHI_VER)
 
 $(D)/avahi: bootstrap expat libdaemon dbus
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

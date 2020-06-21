@@ -8,7 +8,7 @@ OSMIO4KPLUS_DRIVER_SITE   = http://source.mynonpublic.com/edision
 
 $(D)/osmio4kplus-driver: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
 	unzip -o $(SILENT_Q) $(DL_DIR)/$(PKG_SOURCE) -d $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d

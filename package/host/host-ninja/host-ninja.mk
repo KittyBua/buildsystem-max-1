@@ -14,7 +14,7 @@ HOST_NINJA_PATCH = \
 
 $(D)/host-ninja: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(HOST_NINJA_GIT))
+	$(call PKG_DOWNLOAD,$(HOST_NINJA_GIT))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

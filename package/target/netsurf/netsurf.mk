@@ -30,7 +30,7 @@ NETSURF_ENV = \
 
 $(D)/netsurf: bootstrap libpng libjpeg-turbo openssl libiconv freetype expat libcurl
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

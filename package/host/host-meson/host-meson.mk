@@ -14,7 +14,7 @@ HOST_MESON_PATCH  = \
 
 $(D)/host-meson: bootstrap host-ninja host-python3 host-python3-setuptools
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

@@ -8,7 +8,7 @@ HD61_LIBGLES_SITE   = http://downloads.mutant-digital.net/hd61
 
 $(D)/hd61-libgles: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	unzip -o $(SILENT_Q) $(DL_DIR)/$(PKG_SOURCE) -d $(TARGET_DIR)/usr/lib
 	(cd $(TARGET_DIR)/usr/lib && ln -sf libMali.so libmali.so)
 	(cd $(TARGET_DIR)/usr/lib && ln -sf libMali.so libEGL.so.1.4 && ln -sf libEGL.so.1.4 libEGL.so.1 && ln -sf libEGL.so.1 libEGL.so)

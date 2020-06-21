@@ -8,7 +8,7 @@ STREAMRIPPER_SITE   = https://github.com/neutrino-images
 
 $(D)/streamripper: bootstrap libvorbisidec libmad glib2
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(CPDIR)/$(PKG_DIR)
 	$(CHDIR)/$(PKG_DIR); \

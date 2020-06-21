@@ -8,7 +8,7 @@ LIBGPG_ERROR_SITE   = https://www.gnupg.org/ftp/gcrypt/libgpg-error
 
 $(D)/libgpg-error: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

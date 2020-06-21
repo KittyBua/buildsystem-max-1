@@ -8,7 +8,7 @@ VUULTIMO4K_PLATFORM_UTIL_SOURCE = platform-util-vuultimo4k-$(VUULTIMO4K_PLATFORM
 VUULTIMO4K_PLATFORM_UTIL_SITE   = http://archive.vuplus.com/download/build_support/vuplus
 
 $(D)/vuultimo4k-platform-util: bootstrap
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/platform-util-vuultimo4k
 	$(UNTAR)/$(PKG_SOURCE)
 	$(INSTALL_EXEC) $(BUILD_DIR)/platform-util-vuultimo4k/* $(TARGET_DIR)/usr/bin

@@ -8,7 +8,7 @@ OSMIO4K_WLAN_QCOM_FIRMWARE_SITE   = http://source.mynonpublic.com/edision
 
 $(D)/osmio4k-wlan-qcom-firmware: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	unzip -o $(SILENT_Q) $(DL_DIR)/$(PKG_SOURCE) -d $(PKG_BUILD_DIR)
 	$(INSTALL) -d $(TARGET_DIR)/lib/firmware/ath10k/QCA6174/hw3.0

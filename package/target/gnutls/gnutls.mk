@@ -8,7 +8,7 @@ GNUTLS_SITE   = https://www.gnupg.org/ftp/gcrypt/gnutls/v$(basename $(GNUTLS_VER
 
 $(D)/gnutls: bootstrap ca-bundle nettle
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

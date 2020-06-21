@@ -8,7 +8,7 @@ OSMIO4KPLUS_LIBGLES_SITE   = http://source.mynonpublic.com/edision
 
 $(D)/osmio4kplus-libgles: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	cp -a $(subst plus-,-,$(PKG_BUILD_DIR))/* $(TARGET_DIR)/usr/

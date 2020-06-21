@@ -9,7 +9,7 @@ VUDUO4K_PLATFORM_UTIL_SITE   = http://archive.vuplus.com/download/build_support/
 
 $(D)/vuduo4k-platform-util: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/platform-util-vuduo4k
 	$(UNTAR)/$(PKG_SOURCE)
 	$(INSTALL_EXEC) $(BUILD_DIR)/platform-util-vuduo4k/* $(TARGET_DIR)/usr/bin

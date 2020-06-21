@@ -8,7 +8,7 @@ VUDUO_DRIVER_SITE   = http://archive.vuplus.com/download/drivers
 
 $(D)/vuduo-driver: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
 	tar -xf $(DL_DIR)/$(PKG_SOURCE) -C $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d

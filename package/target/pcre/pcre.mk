@@ -8,7 +8,7 @@ PCRE_SITE   = https://sourceforge.net/projects/pcre/files/pcre/$(PCRE_VER)
 
 $(D)/pcre: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

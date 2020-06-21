@@ -17,7 +17,7 @@ PYTHON_INCLUDE_DIR = usr/include/python$(basename $(PYTHON_VER))
 
 $(D)/python: bootstrap host-python ncurses zlib openssl libffi expat bzip2
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

@@ -12,7 +12,7 @@ LUAPOSIX_PATCH   = \
 
 $(D)/luaposix: bootstrap host-lua lua luaexpat slingshot gnulib
 	$(START_BUILD)
-	$(call DOWNLOAD,$(LUAPOSIX_GIT))
+	$(call PKG_DOWNLOAD,$(LUAPOSIX_GIT))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

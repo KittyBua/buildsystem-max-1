@@ -8,5 +8,5 @@ GNULIB_SITE   = http://erislabs.net/ianb/projects/gnulib
 
 $(D)/gnulib: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(TOUCH)

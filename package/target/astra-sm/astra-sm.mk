@@ -11,7 +11,7 @@ ASTRA_SM_PATCH  = \
 
 $(D)/astra-sm: bootstrap openssl
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(ASTRA_SM_DIR)
 	$(CPDIR)/$(ASTRA_SM_DIR)
 	$(CHDIR)/$(ASTRA_SM_DIR); \

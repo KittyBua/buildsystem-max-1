@@ -8,7 +8,7 @@ LCD4LINUX_SITE   = https://github.com/TangoCash
 
 $(D)/lcd4linux: bootstrap ncurses libusb-compat libgd libusb libdpf
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(CPDIR)/$(PKG_DIR)
 	$(CHDIR)/$(PKG_DIR); \

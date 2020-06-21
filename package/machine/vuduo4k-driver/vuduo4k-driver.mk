@@ -9,7 +9,7 @@ VUDUO4K_DRIVER_SITE   = http://archive.vuplus.com/download/build_support/vuplus
 
 $(D)/vuduo4k-driver: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
 	tar -xf $(DL_DIR)/$(PKG_SOURCE) -C $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
 	make depmod

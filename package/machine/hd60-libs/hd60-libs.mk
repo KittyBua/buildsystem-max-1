@@ -8,7 +8,7 @@ HD60_LIBS_SITE   = http://downloads.mutant-digital.net/hd60
 
 $(D)/hd60-libs: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/hiplay
 	mkdir -p $(TARGET_DIR)/usr/lib/hisilicon
 	unzip -o $(SILENT_Q) $(DL_DIR)/$(PKG_SOURCE) -d $(BUILD_DIR)/hiplay

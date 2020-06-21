@@ -9,7 +9,7 @@ NEUTRINO_IPTVPLAYER_SITE   = https://github.com/TangoCash
 $(D)/neutrino-iptvplayer-nightly \
 $(D)/neutrino-iptvplayer: rtmpdump python-twisted | $(SHARE_PLUGINS)
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(CPDIR)/$(PKG_DIR)
 	@if [ "$@" = "$(D)/neutrino-iptvplayer-nightly" ]; then \

@@ -12,7 +12,7 @@ WLAN_RTL8812AU_PATCH  = \
 
 $(D)/wlan-rtl8812au: bootstrap kernel
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	unzip -o $(SILENT_Q) $(DL_DIR)/$(PKG_SOURCE) -d $(BUILD_DIR)
 	$(CHDIR)/$(PKG_DIR); \

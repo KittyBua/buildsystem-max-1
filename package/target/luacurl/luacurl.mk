@@ -8,7 +8,7 @@ LUACURL_SITE   = git://github.com/Lua-cURL
 
 $(D)/luacurl: bootstrap libcurl lua
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(CPDIR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

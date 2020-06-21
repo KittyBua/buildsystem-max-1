@@ -13,7 +13,7 @@ RTMPDUMP_PATCH  = \
 
 $(D)/rtmpdump: bootstrap zlib openssl
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(CPDIR)/$(PKG_DIR)
 	$(CHDIR)/$(PKG_DIR); \

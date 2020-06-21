@@ -11,7 +11,7 @@ OSMIO4K_WLAN_QCOM_PATCH  = \
 
 $(D)/osmio4k-wlan-qcom: bootstrap kernel osmio4k-wlan-qcom-firmware
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(PKG_DIR)
 	$(UNTAR)/$(PKG_SOURCE)
 	$(CHDIR)/$(PKG_DIR); \

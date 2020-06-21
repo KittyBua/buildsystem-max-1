@@ -8,7 +8,7 @@ AIO_GRAB_SITE   = https://github.com/oe-alliance
 
 $(D)/aio-grab: bootstrap zlib libpng libjpeg-turbo
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/$(AIO_GRAB_DIR)
 	$(CPDIR)/$(AIO_GRAB_DIR)
 	$(CHDIR)/$(AIO_GRAB_DIR); \

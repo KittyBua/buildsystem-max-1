@@ -7,7 +7,7 @@ HD61_LIBGLES_HEADER_SITE   = https://github.com/HD-Digital/meta-gfutures/raw/rel
 
 $(D)/hd61-libgles-header: bootstrap
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_DIR)/usr/lib
 	unzip -o $(SILENT_Q) $(DL_DIR)/$(PKG_SOURCE) -d $(TARGET_DIR)/usr/include
 	$(TOUCH)
