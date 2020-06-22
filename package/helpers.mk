@@ -132,7 +132,7 @@ define PKG_UNPACK
 		*) \
 			FULL_DEST_PATH="${BUILD_DIR}/${PKG_NAME}-${PKG_VER}" \
 			mkdir ${FULL_DEST_PATH}; \
-			tar cf - -C ${DL_DIR} ${PKG_TAR_COPY_OPTS} . | \
+			tar cf - -C ${DL_DIR}/${PKG_SOURCE} ${PKG_TAR_COPY_OPTS} . | \
 				tar xf - -C ${FULL_DEST_PATH}; \
 			;; \
 	esac \
