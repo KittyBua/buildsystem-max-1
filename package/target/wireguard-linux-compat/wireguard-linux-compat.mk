@@ -12,9 +12,9 @@ WIREGUARD_LINUX_COMPAT_PATCH = \
 $(D)/wireguard-linux-compat: bootstrap kernel libmnl
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR)/src; \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR)/src; \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(MAKE) all $(KERNEL_MAKEVARS); \
 		$(MAKE) install $(KERNEL_MAKEVARS) INSTALL_MOD_PATH=$(TARGET_DIR)
@@ -23,5 +23,5 @@ $(D)/wireguard-linux-compat: bootstrap kernel libmnl
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/wireguard.conf; \
 	done
 	make depmod
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

@@ -23,9 +23,9 @@ HD60_MALI_MODULE_MAKEVARS = \
 $(D)/hd60-mali-module: bootstrap kernel hd60-libgles-header
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_CPDIR)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(MAKE) -C $(KERNEL_DIR) $(KERNEL_MAKEVARS) \
 		$(HD60_MALI_MODULE_MAKEVARS); \
@@ -37,5 +37,5 @@ $(D)/hd60-mali-module: bootstrap kernel hd60-libgles-header
 	make depmod
 #	mkdir -p ${TARGET_DIR}/etc/modules-load.d
 #	echo mali > ${TARGET_DIR}/etc/modules-load.d/mali.conf
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

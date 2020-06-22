@@ -12,9 +12,9 @@ ALSA_UTILS_PATCH  = \
 $(D)/alsa-utils: bootstrap ncurses alsa-lib
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		sed -ir -r "s/(amidi|aplay|iecset|speaker-test|seq|alsaucm|topology)//g" Makefile.am ;\
 		autoreconf -fi -I $(TARGET_DIR)/usr/share/aclocal $(SILENT_OPT); \
@@ -39,5 +39,5 @@ $(D)/alsa-utils: bootstrap ncurses alsa-lib
 	$(UPDATE-RC.D) alsa-state start 39 S . stop 31 0 6 .
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,aserver)
 	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,alsa-info.sh)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

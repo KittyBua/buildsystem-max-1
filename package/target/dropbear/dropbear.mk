@@ -9,9 +9,9 @@ DROPBEAR_SITE   = http://matt.ucc.asn.au/dropbear/releases
 $(D)/dropbear: bootstrap zlib
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--mandir=/.remove \
@@ -26,5 +26,5 @@ $(D)/dropbear: bootstrap zlib
 		$(MAKE) PROGRAMS="dropbear dbclient dropbearkey scp" install DESTDIR=$(TARGET_DIR)
 	mkdir -p $(TARGET_DIR)/etc/dropbear
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/dropbear $(TARGET_DIR)/etc/init.d/
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

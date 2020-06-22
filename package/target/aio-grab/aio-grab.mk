@@ -9,9 +9,9 @@ AIO_GRAB_SITE   = https://github.com/oe-alliance
 $(D)/aio-grab: bootstrap zlib libpng libjpeg-turbo
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(AIO_GRAB_DIR)
-	$(CPDIR)/$(AIO_GRAB_DIR)
-	$(CHDIR)/$(AIO_GRAB_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_CPDIR)
+	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \
 		automake --foreign --include-deps $(SILENT_OPT); \
 		$(CONFIGURE) \
@@ -21,5 +21,5 @@ $(D)/aio-grab: bootstrap zlib libpng libjpeg-turbo
 			; \
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/$(AIO_GRAB_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

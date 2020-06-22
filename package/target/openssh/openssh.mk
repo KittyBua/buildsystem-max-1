@@ -9,9 +9,9 @@ OPENSSH_SITE   = https://artfiles.org/openbsd/OpenSSH/portable
 $(D)/openssh: bootstrap zlib openssl
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		CC=$(TARGET_CC); \
 		./configure $(SILENT_OPT) \
 			$(CONFIGURE_OPTS) \
@@ -27,5 +27,5 @@ $(D)/openssh: bootstrap zlib openssl
 		$(MAKE) install-nokeys DESTDIR=$(TARGET_DIR)
 	$(INSTALL_EXEC) $(BUILD_DIR)/openssh-$(OPENSSH_VER)/opensshd.init $(TARGET_DIR)/etc/init.d/openssh
 	sed -i 's/^#PermitRootLogin prohibit-password/PermitRootLogin yes/' $(TARGET_DIR)/etc/ssh/sshd_config
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

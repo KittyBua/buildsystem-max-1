@@ -9,9 +9,9 @@ AVAHI_SITE   = https://github.com/lathiat/avahi/releases/download/v$(AVAHI_VER)
 $(D)/avahi: bootstrap expat libdaemon dbus
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--target=$(TARGET) \
 			--prefix=/usr \
@@ -57,7 +57,7 @@ $(D)/avahi: bootstrap expat libdaemon dbus
 			; \
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	cp $(BUILD_DIR)/$(AVAHI_DIR)/avahi-daemon/avahi-daemon $(TARGET_DIR)/etc/init.d
+	cp $(PKG_BUILD_DIR)/avahi-daemon/avahi-daemon $(TARGET_DIR)/etc/init.d
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

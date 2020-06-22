@@ -9,9 +9,9 @@ PCRE_SITE   = https://sourceforge.net/projects/pcre/files/pcre/$(PCRE_VER)
 $(D)/pcre: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--mandir=/.remove \
@@ -24,5 +24,5 @@ $(D)/pcre: bootstrap
 	mv $(TARGET_DIR)/usr/bin/pcre-config $(HOST_DIR)/bin/pcre-config
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/pcre-config
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

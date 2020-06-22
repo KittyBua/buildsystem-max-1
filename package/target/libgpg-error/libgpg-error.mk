@@ -9,9 +9,9 @@ LIBGPG_ERROR_SITE   = https://www.gnupg.org/ftp/gcrypt/libgpg-error
 $(D)/libgpg-error: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE) \
 			--prefix=/usr \
@@ -25,7 +25,7 @@ $(D)/libgpg-error: bootstrap
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_CONFIG) $(TARGET_DIR)/usr/bin/gpg-error-config
-	$(REWRITE_LIBTOOL_LA)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gpg-error gpgrt-config yat2m)
-	$(REMOVE)/$(PKG_DIR)
+	$(REWRITE_LIBTOOL_LA)
+	$(PKG_REMOVE)
 	$(TOUCH)

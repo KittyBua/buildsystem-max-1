@@ -9,9 +9,9 @@ GIFLIB_SITE   = https://sourceforge.net/projects/giflib/files
 $(D)/giflib: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		export ac_cv_prog_have_xmlto=no; \
 		$(CONFIGURE) \
 			--prefix=/usr \
@@ -19,7 +19,7 @@ $(D)/giflib: bootstrap
 			; \
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL_LA)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gif2rgb gifbuild gifclrmp gifecho giffix gifinto giftext giftool)
-	$(REMOVE)/$(PKG_DIR)
+	$(REWRITE_LIBTOOL_LA)
+	$(PKG_REMOVE)
 	$(TOUCH)

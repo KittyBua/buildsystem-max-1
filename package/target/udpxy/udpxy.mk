@@ -13,12 +13,12 @@ UDPXY_PATCH  = \
 $(D)/udpxy: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(CPDIR)/$(PKG_DIR)
-	$(CHDIR)/$(PKG_DIR)/chipmunk; \
+	$(PKG_REMOVE)
+	$(PKG_CPDIR)
+	$(PKG_CHDIR)/chipmunk; \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		$(MAKE) CC=$(TARGET_CC); \
 		$(MAKE) install INSTALLROOT=$(TARGET_DIR)/usr MANPAGE_DIR=$(TARGET_DIR)/.remove
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

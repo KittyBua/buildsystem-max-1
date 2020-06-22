@@ -12,9 +12,9 @@ NCURSES_PATCH  = \
 $(D)/ncurses: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(CONFIGURE) \
 			--target=$(TARGET) \
@@ -46,5 +46,5 @@ $(D)/ncurses: bootstrap
 		$(MAKE) install.libs DESTDIR=$(TARGET_DIR)
 	mv $(TARGET_DIR)/usr/bin/ncurses6-config $(HOST_DIR)/bin
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/ncurses6-config
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

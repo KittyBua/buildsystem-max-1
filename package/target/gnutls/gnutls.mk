@@ -9,9 +9,9 @@ GNUTLS_SITE   = https://www.gnupg.org/ftp/gcrypt/gnutls/v$(basename $(GNUTLS_VER
 $(D)/gnutls: bootstrap ca-bundle nettle
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--mandir=/.remove \
@@ -31,7 +31,7 @@ $(D)/gnutls: bootstrap ca-bundle nettle
 			; \
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL_LA)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,psktool gnutls-cli-debug certtool srptool ocsptool gnutls-serv gnutls-cli)
-	$(REMOVE)/$(PKG_DIR)
+	$(REWRITE_LIBTOOL_LA)
+	$(PKG_REMOVE)
 	$(TOUCH)

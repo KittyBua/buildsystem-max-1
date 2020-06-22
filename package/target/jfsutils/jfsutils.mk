@@ -12,9 +12,9 @@ JFSUTILS_PATCH  = \
 $(D)/jfsutils: bootstrap e2fsprogs
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		sed -i "/unistd.h/a#include <sys/types.h>" fscklog/extract.c; \
 		sed -i "/ioctl.h/a#include <sys/sysmacros.h>" libfs/devices.c; \
@@ -26,5 +26,5 @@ $(D)/jfsutils: bootstrap e2fsprogs
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,jfs_debugfs jfs_fscklog jfs_logdump)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

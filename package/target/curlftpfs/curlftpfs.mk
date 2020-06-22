@@ -12,9 +12,9 @@ CURLFTPFS_PATCH  = \
 $(D)/curlftpfs: bootstrap libcurl libfuse glib2
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		export ac_cv_func_malloc_0_nonnull=yes; \
 		export ac_cv_func_realloc_0_nonnull=yes; \
@@ -25,5 +25,5 @@ $(D)/curlftpfs: bootstrap libcurl libfuse glib2
 			; \
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

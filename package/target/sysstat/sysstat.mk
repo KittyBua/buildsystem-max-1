@@ -9,9 +9,9 @@ SYSSTAT_SITE   = http://pagesperso-orange.fr/sebastien.godard
 $(D)/sysstat: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--mandir=/.remove \
@@ -26,5 +26,5 @@ $(D)/sysstat: bootstrap
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR) NLS_DIR=/.remove/locale
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

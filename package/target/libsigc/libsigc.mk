@@ -9,9 +9,9 @@ LIBSIGC_SITE   = https://download.gnome.org/sources/libsigc++/$(basename $(LIBSI
 $(D)/libsigc: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--enable-shared \
@@ -28,5 +28,5 @@ $(D)/libsigc: bootstrap
 	mv $(TARGET_LIB_DIR)/sigc++-2.0/include/sigc++config.h $(TARGET_INCLUDE_DIR); \
 	rm -fr $(TARGET_LIB_DIR)/sigc++-2.0
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

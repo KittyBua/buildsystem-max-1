@@ -13,12 +13,12 @@ NETBASE_PATCH  = \
 $(D)/netbase: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(INSTALL_DATA) etc/rpc $(TARGET_DIR)/etc/rpc; \
 		$(INSTALL_DATA) etc/protocols $(TARGET_DIR)/etc/protocols; \
 		$(INSTALL_DATA) etc/services $(TARGET_DIR)/etc/services
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

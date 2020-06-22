@@ -17,9 +17,9 @@ WGET_CFLAGS = $(TARGET_CFLAGS) -DOPENSSL_NO_ENGINE
 $(D)/wget: bootstrap openssl
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(CONFIGURE) \
 			--prefix=/usr \
@@ -39,5 +39,5 @@ $(D)/wget: bootstrap openssl
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

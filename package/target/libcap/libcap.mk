@@ -18,12 +18,12 @@ LIBCAP_MAKE_FLAGS = \
 $(D)/libcap: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		sed 's@^BUILD_GPERF@#\0@' -i Make.Rules; \
 		$(BUILD_ENV) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS) lib=usr/lib; \
 		$(BUILD_ENV) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS) DESTDIR=$(TARGET_DIR) prefix=/usr lib=lib install
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

@@ -13,9 +13,9 @@ NTFS_3G_PATCH  = \
 $(D)/ntfs-3g: bootstrap libfuse
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(CONFIGURE) \
 			--prefix=/usr \
@@ -33,5 +33,5 @@ $(D)/ntfs-3g: bootstrap libfuse
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,lowntfs-3g ntfs-3g.probe)
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,mount.lowntfs-3g)
 	ln -sf mount.ntfs-3g $(TARGET_DIR)/sbin/mount.ntfs
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

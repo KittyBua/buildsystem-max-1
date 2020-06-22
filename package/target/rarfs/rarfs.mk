@@ -9,9 +9,9 @@ RARFS_SITE   = https://sourceforge.net/projects/rarfs/files/rarfs/$(RARFS_VER)
 $(D)/rarfs: bootstrap libfuse
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			CFLAGS="$(TARGET_CFLAGS) -D_FILE_OFFSET_BITS=64" \
 			--prefix=/usr \
@@ -20,5 +20,5 @@ $(D)/rarfs: bootstrap libfuse
 			; \
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

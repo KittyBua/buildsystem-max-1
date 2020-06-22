@@ -10,12 +10,12 @@ $(D)/host-tzcode: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(TZDATA_SOURCE))
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(MKDIR)/$(PKG_DIR)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_CHDIR); \
 		tar -xf $(DL_DIR)/$(HOST_TZCODE_SOURCE); \
 		tar -xf $(DL_DIR)/$(TZDATA_SOURCE); \
 		$(MAKE) zic
-	$(INSTALL_EXEC) -D $(BUILD_DIR)/$(PKG_DIR)/zic $(HOST_DIR)/bin/
-	$(REMOVE)/$(PKG_DIR)
+	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/zic $(HOST_DIR)/bin/
+	$(PKG_REMOVE)
 	$(TOUCH)

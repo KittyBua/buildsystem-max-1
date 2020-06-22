@@ -12,13 +12,13 @@ USB_MODESWITCH_PATCH  = \
 $(D)/usb-modeswitch: bootstrap libusb usb-modeswitch-data
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		sed -i -e "s/= gcc/= $(TARGET_CC)/" -e "s/-l usb/-lusb -lusb-1.0 -lpthread -lrt/" -e "s/install -D -s/install -D --strip-program=$(TARGET_STRIP) -s/" Makefile; \
 		sed -i -e "s/@CC@/$(TARGET_CC)/g" jim/Makefile.in; \
 		$(BUILD_ENV) $(MAKE) DESTDIR=$(TARGET_DIR); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

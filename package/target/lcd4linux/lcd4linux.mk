@@ -9,9 +9,9 @@ LCD4LINUX_SITE   = https://github.com/TangoCash
 $(D)/lcd4linux: bootstrap ncurses libusb-compat libgd libusb libdpf
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(CPDIR)/$(PKG_DIR)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_CPDIR)
+	$(PKG_CHDIR); \
 		$(BUILD_ENV) ./bootstrap $(SILENT_OPT); \
 		$(BUILD_ENV) ./configure $(CONFIGURE_OPTS) $(SILENT_OPT) \
 			--prefix=/usr \
@@ -24,5 +24,5 @@ $(D)/lcd4linux: bootstrap ncurses libusb-compat libgd libusb libdpf
 	cp -a $(PKG_FILES_DIR)/lcd4linux/* $(TARGET_DIR)/
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/lcd4linux.init $(TARGET_DIR)/etc/init.d/lcd4linux
 	$(INSTALL_CONF) $(PKG_FILES_DIR)/lcd4linux.conf $(TARGET_DIR)/etc/
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

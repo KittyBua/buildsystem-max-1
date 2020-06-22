@@ -15,9 +15,9 @@ NFS-UTILS_CONF = $(if $(filter $(BOXMODEL), vuduo), --disable-ipv6, --enable-ipv
 $(D)/nfs-utils: bootstrap rpcbind e2fsprogs
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		export knfsd_cv_bsd_signals=no; \
 		autoreconf -fi $(SILENT_OPT); \
@@ -48,5 +48,5 @@ $(D)/nfs-utils: bootstrap rpcbind e2fsprogs
 	chmod 0755 $(TARGET_DIR)/sbin/mount.nfs
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,mount.nfs4 umount.nfs umount.nfs4)
 	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,mountstats nfsiostat)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

@@ -12,9 +12,9 @@ ASTRA_SM_PATCH  = \
 $(D)/astra-sm: bootstrap openssl
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(ASTRA_SM_DIR)
-	$(CPDIR)/$(ASTRA_SM_DIR)
-	$(CHDIR)/$(ASTRA_SM_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_CPDIR)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		sed -i 's:(CFLAGS):(CFLAGS_FOR_BUILD):' tools/Makefile.am; \
@@ -25,5 +25,5 @@ $(D)/astra-sm: bootstrap openssl
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/$(ASTRA_SM_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

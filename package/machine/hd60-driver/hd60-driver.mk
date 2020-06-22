@@ -9,11 +9,11 @@ HD60_DRIVER_SITE   = http://downloads.mutant-digital.net/hd60
 $(D)/hd60-driver: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	mkdir -p $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
-	unzip -o $(SILENT_Q) $(DL_DIR)/$(PKG_SOURCE) -d $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
-	rm -f $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra/hi_play.ko
+	mkdir -p $(TARGET_MODULES_DIR)/extra
+	$(call PKG_UNPACK,$(TARGET_MODULES_DIR)/extra)
+	rm -f $(TARGET_MODULES_DIR)/extra/hi_play.ko
 	mkdir -p $(TARGET_DIR)/bin
-	mv $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra/turnoff_power $(TARGET_DIR)/bin
+	mv $(TARGET_MODULES_DIR)/extra/turnoff_power $(TARGET_DIR)/bin
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d
 	for i in hd60_1 hd60_2 hd60_3 hd60_4; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/_hd60.conf; \

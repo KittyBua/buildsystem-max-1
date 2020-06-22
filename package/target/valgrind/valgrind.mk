@@ -9,9 +9,9 @@ VALGRIND_SITE   = ftp://sourceware.org/pub/valgrind
 $(D)/valgrind: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		sed -i -e "s#armv7#arm#g" configure; \
 		$(CONFIGURE) \
 			--prefix=/usr \
@@ -23,5 +23,5 @@ $(D)/valgrind: bootstrap
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/usr/lib/valgrind/,*.a *.xml)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,cg_* callgrind_* ms_print)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

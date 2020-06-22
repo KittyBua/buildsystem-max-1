@@ -15,14 +15,14 @@ HOST_NINJA_PATCH = \
 $(D)/host-ninja: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(HOST_NINJA_GIT))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		cmake . \
 			-DCMAKE_INSTALL_PREFIX="" \
 		; \
 		$(MAKE)
 		$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/ninja $(HOST_DIR)/bin/ninja
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

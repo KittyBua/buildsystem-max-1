@@ -14,9 +14,9 @@ KMOD_PATCH  = \
 $(D)/kmod: bootstrap zlib
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE) \
@@ -36,5 +36,5 @@ $(D)/kmod: bootstrap zlib
 	mkdir -p $(TARGET_DIR)/lib/{depmod.d,modprobe.d}
 	mkdir -p $(TARGET_DIR)/etc/{depmod.d,modprobe.d}
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

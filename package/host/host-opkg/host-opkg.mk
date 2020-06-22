@@ -12,9 +12,9 @@ HOST_OPKG_PATCH  = \
 $(D)/host-opkg: bootstrap host-libarchive
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		./autogen.sh $(SILENT_OPT); \
 		CFLAGS="-I$(HOST_DIR)/include" \
@@ -27,5 +27,5 @@ $(D)/host-opkg: bootstrap host-libarchive
 			; \
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(HOST_DIR)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

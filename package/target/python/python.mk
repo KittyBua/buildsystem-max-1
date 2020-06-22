@@ -18,9 +18,9 @@ PYTHON_INCLUDE_DIR = usr/include/python$(basename $(PYTHON_VER))
 $(D)/python: bootstrap host-python ncurses zlib openssl libffi expat bzip2
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		CONFIG_SITE= \
 		$(BUILD_ENV) \
@@ -73,5 +73,5 @@ $(D)/python: bootstrap host-python ncurses zlib openssl libffi expat bzip2
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	ln -sf ../../libpython$(PYTHON_VER_MAJOR).so.1.0 $(TARGET_DIR)/$(PYTHON_BASE_DIR)/config/libpython$(basename $(PYTHON_VER)).so; \
 	ln -sf $(TARGET_DIR)/$(PYTHON_INCLUDE_DIR) $(TARGET_DIR)/usr/include/python
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

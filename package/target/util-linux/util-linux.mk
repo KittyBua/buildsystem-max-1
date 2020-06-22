@@ -10,9 +10,9 @@ UTIL_LINUX_SITE   = https://www.kernel.org/pub/linux/utils/util-linux/v$(UTIL_LI
 $(D)/util-linux: bootstrap ncurses zlib 
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--libdir=/usr/lib \
@@ -104,12 +104,12 @@ $(D)/util-linux: bootstrap ncurses zlib
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL_LA)
 	rm -f $(addprefix $(TARGET_DIR)/bin/,findmnt)
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,blkdiscard blkzone blockdev cfdisk chcpu ctrlaltdel fsfreeze fstrim mkfs wipefs)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,choom col colcrt colrm column fincore flock getopt ipcmk isosize linux32 linux64 look lscpu lsipc lslocks lsns mcookie namei prlimit renice rev script scriptreplay setarch setsid uname26 uuidgen uuidparse whereis)
 	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,ldattach readprofile rtcwake)
 	$(INSTALL) -d $(TARGET_DIR)/etc/default/
 	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"' > $(TARGET_DIR)/etc/default/mountall
-	$(REMOVE)/$(PKG_DIR)
+	$(REWRITE_LIBTOOL_LA)
+	$(PKG_REMOVE)
 	$(TOUCH)

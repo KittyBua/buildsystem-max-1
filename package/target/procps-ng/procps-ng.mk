@@ -14,9 +14,9 @@ BINDIR_PROGS = free pgrep pkill pmap pwdx slabtop skill snice tload top uptime v
 $(D)/procps-ng: bootstrap ncurses
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		export ac_cv_func_malloc_0_nonnull=yes; \
 		export ac_cv_func_realloc_0_nonnull=yes; \
@@ -39,5 +39,5 @@ $(D)/procps-ng: bootstrap ncurses
 		done
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/sysctl.conf $(TARGET_DIR)/etc/sysctl.conf
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

@@ -14,9 +14,9 @@ WIREGUARD_MAKE_OPTS = WITH_SYSTEMDUNITS=no WITH_BASHCOMPLETION=yes WITH_WGQUICK=
 $(D)/wireguard: bootstrap kernel libmnl openresolv
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR)/src; \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR)/src; \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		$(MAKE) all     $(KERNEL_MAKEVARS) $(WIREGUARD_MAKE_OPTS) PREFIX=/usr; \
@@ -26,5 +26,5 @@ $(D)/wireguard: bootstrap kernel libmnl openresolv
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/wireguard.conf; \
 	done
 	make depmod
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

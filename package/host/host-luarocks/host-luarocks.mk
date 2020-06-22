@@ -22,9 +22,9 @@ HOST_LUAROCKS_BUILD_ENV = \
 $(D)/host-luarocks: bootstrap host-lua
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		./configure $(SILENT_OPT) \
 			--prefix=$(HOST_DIR) \
@@ -34,5 +34,5 @@ $(D)/host-luarocks: bootstrap host-lua
 		$(MAKE); \
 		$(MAKE) install
 	cat $(PKG_FILES_DIR)/luarocks-config.lua >> $(HOST_LUAROCKS_CONFIG)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

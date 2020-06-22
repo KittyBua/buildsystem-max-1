@@ -14,9 +14,9 @@ LIBXML2_PATCH  = \
 $(D)/libxml2: bootstrap zlib
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE) \
@@ -41,9 +41,9 @@ $(D)/libxml2: bootstrap zlib
 		fi;
 	mv $(TARGET_DIR)/usr/bin/xml2-config $(HOST_DIR)/bin
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/xml2-config
-	$(REWRITE_LIBTOOL_LA)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,xmlcatalog xmllint)
 	rm -rf $(TARGET_LIB_DIR)/xml2Conf.sh
 	rm -rf $(TARGET_LIB_DIR)/cmake
-	$(REMOVE)/$(PKG_DIR)
+	$(REWRITE_LIBTOOL_LA)
+	$(PKG_REMOVE)
 	$(TOUCH)

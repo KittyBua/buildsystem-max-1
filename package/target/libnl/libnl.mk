@@ -9,9 +9,9 @@ LIBNL_SITE   = https://github.com/thom311/libnl/releases/download/libnl3_5_0
 $(D)/libnl: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--target=$(TARGET) \
 			--prefix=/usr \
@@ -24,5 +24,5 @@ $(D)/libnl: bootstrap
 		make; \
 		make install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

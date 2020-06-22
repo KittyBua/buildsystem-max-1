@@ -9,10 +9,10 @@ PYTHON_ZOPE_INTERFACE_SITE   = https://pypi.python.org/packages/source/z/zope.in
 $(D)/python-zope-interface: bootstrap python python-setuptools
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(PYTHON_BUILD); \
 		$(PYTHON_INSTALL)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

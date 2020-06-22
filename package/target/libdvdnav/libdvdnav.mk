@@ -12,9 +12,9 @@ LIBDVDNAV_PATCH  = \
 $(D)/libdvdnav: bootstrap libdvdread
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		libtoolize --copy --force --quiet --ltdl; \
@@ -28,5 +28,5 @@ $(D)/libdvdnav: bootstrap libdvdread
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

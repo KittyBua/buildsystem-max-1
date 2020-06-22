@@ -12,11 +12,11 @@ HOST_PYTHON3_SETUPTOOLS_PATCH = \
 $(D)/host-python3-setuptools: bootstrap host-python3
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	unzip -o $(SILENT_Q) $(DL_DIR)/$(PKG_SOURCE) -d $(BUILD_DIR)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(HOST_PYTHON_BUILD); \
 		$(HOST_PYTHON_INSTALL)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

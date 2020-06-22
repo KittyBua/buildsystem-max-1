@@ -13,9 +13,9 @@ LIBICONV_PATCH  = \
 $(D)/libiconv: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(CONFIGURE) CPPFLAGS="$(TARGET_CPPFLAGS) -fPIC" \
 			--target=$(TARGET) \
@@ -27,7 +27,7 @@ $(D)/libiconv: bootstrap
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL_LA)
 	rm -f $(addprefix $(TARGET_LIB_DIR)/,preloadable_libiconv.so)
-	$(REMOVE)/$(PKG_DIR)
+	$(REWRITE_LIBTOOL_LA)
+	$(PKG_REMOVE)
 	$(TOUCH)

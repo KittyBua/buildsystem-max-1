@@ -9,13 +9,13 @@ SMARTMONTOOLS_SITE   = https://sourceforge.net/projects/smartmontools/files/smar
 $(D)/smartmontools: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			; \
 		$(MAKE); \
 		$(INSTALL_EXEC) smartctl $(TARGET_DIR)/usr/sbin/smartctl
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

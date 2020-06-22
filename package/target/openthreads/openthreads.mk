@@ -9,9 +9,9 @@ OPENTHREADS_SITE   = https://sourceforge.net/projects/mxedeps/files
 $(D)/openthreads: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		echo "# dummy file to prevent warning message" > examples/CMakeLists.txt; \
 		$(CMAKE) \
 			-DCMAKE_SUPPRESS_DEVELOPER_WARNINGS="1" \
@@ -21,5 +21,5 @@ $(D)/openthreads: bootstrap
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

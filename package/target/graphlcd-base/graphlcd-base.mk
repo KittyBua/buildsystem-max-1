@@ -33,14 +33,14 @@ GRAPHLCD_BASE_MAKE_OPTS = \
 $(D)/graphlcd-base: bootstrap freetype libiconv libusb
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(CPDIR)/$(PKG_DIR)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_CPDIR)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(MAKE) $(GRAPHLCD_BASE_MAKE_OPTS) -C glcdgraphics all; \
 		$(MAKE) $(GRAPHLCD_BASE_MAKE_OPTS) -C glcddrivers all; \
 		$(MAKE) $(GRAPHLCD_BASE_MAKE_OPTS) -C glcdgraphics install; \
 		$(MAKE) $(GRAPHLCD_BASE_MAKE_OPTS) -C glcddrivers install; \
 		$(INSTALL_DATA) -D graphlcd.conf $(TARGET_DIR)/etc/graphlcd.conf
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

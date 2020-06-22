@@ -10,9 +10,9 @@ DROPBEARMULTI_CHECKOUT = c8d852c
 $(D)/dropbearmulti: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(CPDIR)/$(PKG_DIR)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_CPDIR)
+	$(PKG_CHDIR); \
 		git checkout -q $(DROPBEARMULTI_CHECKOUT); \
 		$(BUILD_ENV) \
 		autoreconf -fi $(SILENT_OPT); \
@@ -43,5 +43,5 @@ $(D)/dropbearmulti: bootstrap
 	cd $(TARGET_DIR)/usr/bin && ln -sf /usr/bin/dropbearmulti dropbear
 	mkdir -p $(TARGET_DIR)/etc/dropbear
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/dropbear $(TARGET_DIR)/etc/init.d/
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

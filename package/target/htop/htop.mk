@@ -14,9 +14,9 @@ HTOP_PATCH  = \
 $(D)/htop: bootstrap ncurses
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE) \
@@ -32,5 +32,5 @@ $(D)/htop: bootstrap ncurses
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,pixmaps applications)
 	ln -sf htop $(TARGET_DIR)/usr/bin/top
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

@@ -12,9 +12,9 @@ ZLIB_PATCH  = \
 $(D)/zlib: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		mandir=/.remove \
@@ -26,5 +26,5 @@ $(D)/zlib: bootstrap
 		$(MAKE); \
 		ln -sf /bin/true ldconfig; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

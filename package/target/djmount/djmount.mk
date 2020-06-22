@@ -19,9 +19,9 @@ DJMOUNT_PATCH  = \
 $(D)/djmount: bootstrap libfuse
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		touch libupnp/config.aux/config.rpath; \
 		autoreconf -fi $(SILENT_OPT); \
@@ -31,5 +31,5 @@ $(D)/djmount: bootstrap libfuse
 			; \
 		make; \
 		make install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

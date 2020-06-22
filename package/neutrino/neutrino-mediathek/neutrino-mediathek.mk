@@ -12,12 +12,11 @@ NEUTRINO_MEDIATHEK_PATCH  = \
 $(D)/neutrino-mediathek: bootstrap | $(SHARE_PLUGINS)
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(CPDIR)/$(PKG_DIR)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_CPDIR)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
-	$(CHDIR)/$(PKG_DIR); \
 		cp -a plugins/* $(SHARE_PLUGINS); \
 		cp -a share $(TARGET_DIR)/usr/
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

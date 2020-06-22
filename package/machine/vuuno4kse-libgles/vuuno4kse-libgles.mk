@@ -11,10 +11,10 @@ $(D)/vuuno4kse-libgles: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(REMOVE)/libgles-vuuno4kse
-	$(UNTAR)/$(PKG_SOURCE)
-	$(INSTALL_EXEC) $(BUILD_DIR)/libgles-vuuno4kse/lib/* $(TARGET_DIR)/usr/lib
-	ln -sf libv3ddriver.so $(TARGET_DIR)/usr/lib/libEGL.so
-	ln -sf libv3ddriver.so $(TARGET_DIR)/usr/lib/libGLESv2.so
-	cp -a $(BUILD_DIR)/libgles-vuuno4kse/include/* $(TARGET_DIR)/usr/include
+	$(PKG_UNPACK)
+	$(INSTALL_EXEC) $(BUILD_DIR)/libgles-vuuno4kse/lib/* $(TARGET_LIB_DIR)
+	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libEGL.so
+	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libGLESv2.so
+	cp -a $(BUILD_DIR)/libgles-vuuno4kse/include/* $(TARGET_INCLUDE_DIR)
 	$(REMOVE)/libgles-vuuno4kse
 	$(TOUCH)

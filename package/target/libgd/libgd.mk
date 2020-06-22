@@ -9,9 +9,9 @@ LIBGD_SITE   = https://github.com/libgd/libgd/releases/download/gd-$(LIBGD_VER)
 $(D)/libgd: bootstrap libpng libjpeg-turbo freetype
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--bindir=/.remove \
@@ -22,5 +22,5 @@ $(D)/libgd: bootstrap libpng libjpeg-turbo freetype
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

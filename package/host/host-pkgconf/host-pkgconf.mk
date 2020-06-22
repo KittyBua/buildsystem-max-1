@@ -13,9 +13,9 @@ HOST_PKGCONF_PATCH  = \
 $(D)/host-pkgconf: directories
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		./configure $(SILENT_OPT) \
 			--prefix=$(HOST_DIR) \
@@ -24,5 +24,5 @@ $(D)/host-pkgconf: directories
 		$(MAKE) install
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/pkgconf-pkg-config $(HOST_DIR)/bin/pkg-config
 	ln -sf pkg-config $(HOST_DIR)/bin/$(TARGET)-pkg-config
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

@@ -12,9 +12,9 @@ HOST_PYTHON_PATCH  = \
 $(D)/host-python: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		autoconf; \
 		CONFIG_SITE= \
@@ -36,5 +36,5 @@ $(D)/host-python: bootstrap
 			; \
 		$(MAKE) all install; \
 		cp ./hostpgen $(HOST_DIR)/bin/pgen
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

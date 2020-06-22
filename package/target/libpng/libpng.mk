@@ -13,9 +13,9 @@ LIBPNG_PATCH  = \
 $(D)/libpng: bootstrap zlib
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(CONFIGURE) \
 			--prefix=/usr \
@@ -28,5 +28,5 @@ $(D)/libpng: bootstrap zlib
 	mv $(TARGET_DIR)/usr/bin/libpng*-config $(HOST_DIR)/bin/
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/libpng$(LIBPNG_VER_X)-config
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

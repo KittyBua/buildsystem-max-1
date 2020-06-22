@@ -9,13 +9,13 @@ OSMIO4KPLUS_DRIVER_SITE   = http://source.mynonpublic.com/edision
 $(D)/osmio4kplus-driver: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	mkdir -p $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
-	unzip -o $(SILENT_Q) $(DL_DIR)/$(PKG_SOURCE) -d $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
+	mkdir -p $(TARGET_MODULES_DIR)/extra
+	$(call PKG_UNPACK,$(TARGET_MODULES_DIR)/extra)
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d
 	for i in brcmstb-osmio4kplus ci si2183 avl6862 avl6261; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/_osmio4kplus.conf; \
 	done
 	make depmod
-	$(TOUCH)
 	make osmio4kplus-libgles
 	make osmio4k-wlan-qcom
+	$(TOUCH)

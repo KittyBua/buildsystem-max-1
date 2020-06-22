@@ -12,9 +12,9 @@ PUGIXML_PATCH  = \
 $(D)/pugixml: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(CMAKE) \
 			| tail -n +90 \
@@ -22,5 +22,5 @@ $(D)/pugixml: bootstrap
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	cd $(TARGET_DIR) && rm -rf usr/lib/cmake
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

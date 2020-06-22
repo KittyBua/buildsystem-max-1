@@ -9,9 +9,9 @@ WPA_SUPPLICANT_SITE   = https://w1.fi/releases
 $(D)/wpa-supplicant: bootstrap libnl openssl wireless-tools
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR)/wpa_supplicant; \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR)/wpa_supplicant; \
 		cp -f defconfig .config; \
 		sed -i 's/#CONFIG_DRIVER_RALINK=y/CONFIG_DRIVER_RALINK=y/' .config; \
 		sed -i 's/#CONFIG_IEEE80211W=y/CONFIG_IEEE80211W=y/' .config; \
@@ -35,5 +35,5 @@ $(D)/wpa-supplicant: bootstrap libnl openssl wireless-tools
 	ln -sf ../../wpa_supplicant/ifupdown.sh $(TARGET_DIR)/etc/network/if-post-down.d/wpa-supplicant
 	ln -sf ../../wpa_supplicant/ifupdown.sh $(TARGET_DIR)/etc/network/if-pre-up.d/wpa-supplicant
 	ln -sf ../../wpa_supplicant/ifupdown.sh $(TARGET_DIR)/etc/network/if-up.d/wpa-supplicant
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

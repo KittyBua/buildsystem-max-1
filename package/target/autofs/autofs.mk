@@ -16,9 +16,9 @@ AUTOFS_PATCH  = \
 $(D)/autofs: bootstrap libtirpc e2fsprogs openssl libxml2 libnsl
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		export ac_cv_path_KRB5_CONFIG=no; \
 		export ac_cv_linux_procfs=yes; \
@@ -50,5 +50,5 @@ $(D)/autofs: bootstrap libtirpc e2fsprogs openssl libxml2 libnsl
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/volatiles.99_autofs $(TARGET_DIR)/etc/default/volatiles/99_autofs
 	$(UPDATE-RC.D) autofs defaults 17
 	rm -f $(addprefix $(TARGET_DIR)/etc/,autofs_ldap_auth.conf)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

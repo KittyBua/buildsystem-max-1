@@ -9,9 +9,9 @@ STREAMRIPPER_SITE   = https://github.com/neutrino-images
 $(D)/streamripper: bootstrap libvorbisidec libmad glib2
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(CPDIR)/$(PKG_DIR)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_CPDIR)
+	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE) \
 			--prefix= \
@@ -23,5 +23,5 @@ $(D)/streamripper: bootstrap libvorbisidec libmad glib2
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/streamripper.sh $(TARGET_DIR)/bin/
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

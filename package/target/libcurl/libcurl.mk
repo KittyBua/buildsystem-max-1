@@ -12,9 +12,9 @@ LIBCURL_PATCH  = \
 $(D)/libcurl: bootstrap zlib openssl ca-bundle
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE) \
@@ -48,5 +48,5 @@ $(D)/libcurl: bootstrap zlib openssl ca-bundle
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(TARGET_DIR)/usr/bin/curl-config
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

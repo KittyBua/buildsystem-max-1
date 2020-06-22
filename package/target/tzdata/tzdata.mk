@@ -9,10 +9,10 @@ TZDATA_SITE   = https://ftp.iana.org/tz/releases
 $(D)/tzdata: bootstrap host-tzcode
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	mkdir $(BUILD_DIR)/$(TZDATA_DIR) $(BUILD_DIR)/timezone/zoneinfo
-	tar -C $(BUILD_DIR)/$(TZDATA_DIR) -xf $(DL_DIR)/$(TZDATA_SOURCE)
-	$(CHDIR)/$(TZDATA_DIR); \
+	$(PKG_REMOVE)
+	mkdir $(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/zoneinfo
+	tar -C $(PKG_BUILD_DIR) -xf $(DL_DIR)/$(TZDATA_SOURCE)
+	$(PKG_CHDIR); \
 		unset ${!LC_*}; LANG=POSIX; LC_ALL=POSIX; export LANG LC_ALL; \
 		$(HOST_DIR)/bin/zic -d zoneinfo.tmp \
 			africa antarctica asia australasia \
@@ -30,5 +30,5 @@ $(D)/tzdata: bootstrap host-tzcode
 		cp -a zoneinfo/* $(TARGET_SHARE_DIR)/zoneinfo/
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/timezone.xml $(TARGET_DIR)/etc/
 	ln -sf /usr/share/zoneinfo/CET $(TARGET_DIR)/etc/localtime
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

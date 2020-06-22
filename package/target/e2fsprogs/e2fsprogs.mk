@@ -18,9 +18,9 @@ E2FSPROGS_PATCH  = \
 $(D)/e2fsprogs: bootstrap util-linux
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		PATH=$(BUILD_DIR)/e2fsprogs-$(E2FSPROGS_VER):$(PATH) \
 		autoreconf -fi $(SILENT_OPT); \
@@ -62,5 +62,5 @@ $(D)/e2fsprogs: bootstrap util-linux
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,badblocks dumpe2fs e2mmpstatus e2undo logsave)
 	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,filefrag e2freefrag mk_cmds mklost+found uuidd e4crypt)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,chattr compile_et mk_cmds lsattr uuidgen)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

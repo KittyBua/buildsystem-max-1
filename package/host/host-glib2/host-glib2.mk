@@ -12,9 +12,9 @@ HOST_GLIB2_PATCH  = \
 $(D)/host-glib2: bootstrap host-libffi
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		export PKG_CONFIG=/usr/bin/pkg-config; \
 		export PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig; \
 		$(call apply_patches, $(PKG_PATCH)); \
@@ -28,5 +28,5 @@ $(D)/host-glib2: bootstrap host-libffi
 			; \
 		$(MAKE) install; \
 		cp -a out/bin/glib-* $(HOST_DIR)/bin
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

@@ -9,23 +9,23 @@ HOST_E2FSPROGS_SITE   = https://sourceforge.net/projects/e2fsprogs/files/e2fspro
 $(D)/host-e2fsprogs: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		export PKG_CONFIG=/usr/bin/pkg-config; \
 		export PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig; \
 		./configure $(SILENT_OPT); \
 		$(MAKE)
-	$(INSTALL_EXEC) -D $(BUILD_DIR)/$(HOST_E2FSPROGS_DIR)/resize/resize2fs $(HOST_DIR)/bin/
-	$(INSTALL_EXEC) -D $(BUILD_DIR)/$(HOST_E2FSPROGS_DIR)/misc/mke2fs $(HOST_DIR)/bin/
+	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/resize/resize2fs $(HOST_DIR)/bin/
+	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/misc/mke2fs $(HOST_DIR)/bin/
 	ln -sf mke2fs $(HOST_DIR)/bin/mkfs.ext2
 	ln -sf mke2fs $(HOST_DIR)/bin/mkfs.ext3
 	ln -sf mke2fs $(HOST_DIR)/bin/mkfs.ext4
 	ln -sf mke2fs $(HOST_DIR)/bin/mkfs.ext4dev
-	$(INSTALL_EXEC) -D $(BUILD_DIR)/$(HOST_E2FSPROGS_DIR)/e2fsck/e2fsck $(HOST_DIR)/bin/
+	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/e2fsck/e2fsck $(HOST_DIR)/bin/
 	ln -sf e2fsck $(HOST_DIR)/bin/fsck.ext2
 	ln -sf e2fsck $(HOST_DIR)/bin/fsck.ext3
 	ln -sf e2fsck $(HOST_DIR)/bin/fsck.ext4
 	ln -sf e2fsck $(HOST_DIR)/bin/fsck.ext4dev
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

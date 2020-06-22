@@ -9,9 +9,9 @@ LIBDAEMON_SITE   = http://0pointer.de/lennart/projects/libdaemon
 $(D)/libdaemon: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			ac_cv_func_setpgrp_void=yes \
 			--prefix=/usr \
@@ -22,5 +22,5 @@ $(D)/libdaemon: bootstrap
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

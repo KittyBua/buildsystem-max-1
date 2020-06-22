@@ -9,14 +9,14 @@ LIBEXIF_SITE   = https://github.com/libexif/libexif/releases/download/libexif-$(
 $(D)/libexif: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			; \
 		$(MAKE); \
 		$(MAKE) install prefix=/usr DESTDIR=$(TARGET_DIR) datadir=/.remove docdir=/.remove
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

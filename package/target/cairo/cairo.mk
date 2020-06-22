@@ -12,9 +12,9 @@ CAIRO_PATCH  = \
 $(D)/cairo: bootstrap fontconfig glib2 libpng pixman zlib
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		ax_cv_c_float_words_bigendian="no" \
@@ -37,5 +37,5 @@ $(D)/cairo: bootstrap fontconfig glib2 libpng pixman zlib
 	rm -rf $(TARGET_LIB_DIR)/cairo/.debug/cairo-fdr*
 	rm -rf $(TARGET_LIB_DIR)/cairo/.debug/cairo-sphinx*
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

@@ -116,15 +116,42 @@ endef
 
 # -----------------------------------------------------------------------------
 
-START_BUILD = \
+# unpack archives into build directory
+PKG_TAR_COPY_OPTS = "--exclude=.git --exclude=.svn"
+
+define PKG_UNPACK
+	@( \
+	case ${PKG_SOURCE} in \
+		*.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.xz | *.txz) \
+			mkdir -p "${BUILD_DIR}"; \
+			tar -xf ${DL_DIR}/${PKG_SOURCE} ${TAR_OPTS} -C "${BUILD_DIR}"; \
+			;; \
+		*.zip) \
+			unzip -o -q ${DL_DIR}/${PKG_SOURCE} -d ${1}; \
+			;; \
+		*) \
+			FULL_DEST_PATH="${BUILD_DIR}/${PKG_NAME}-${PKG_VER}" \
+			mkdir ${FULL_DEST_PATH}; \
+			tar cf - -C ${DL_DIR} ${PKG_TAR_COPY_OPTS} . | \
+				tar xf - -C ${FULL_DEST_PATH}; \
+			;; \
+	esac \
+	)
+endef
+
+# -----------------------------------------------------------------------------
+
+define START_BUILD
 	@echo ""; \
 	echo -e "$(TERM_GREEN)Start building$(TERM_NORMAL) \nName    : $(PKG_NAME) \nVersion : $(PKG_VER) \nSource  : $(PKG_SOURCE)"; \
 	echo ""
+endef
 
-TOUCH = \
+define TOUCH
 	@touch $@; echo -e "$(TERM_GREEN)completed$(TERM_NORMAL)"; \
 	echo ""; \
 	$(call draw_line);
+endef
 
 # -----------------------------------------------------------------------------
 

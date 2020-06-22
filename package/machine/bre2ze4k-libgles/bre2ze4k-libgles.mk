@@ -9,7 +9,7 @@ BRE2ZE4K_LIBGLES_SITE   = http://downloads.mutant-digital.net/v3ddriver
 $(D)/bre2ze4k-libgles: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	unzip -o $(SILENT_Q) $(DL_DIR)/$(PKG_SOURCE) -d $(TARGET_DIR)/usr/lib/
-	ln -sf libv3ddriver.so $(TARGET_DIR)/usr/lib/libEGL.so
-	ln -sf libv3ddriver.so $(TARGET_DIR)/usr/lib/libGLESv2.so
+	$(call PKG_UNPACK,$(TARGET_LIB_DIR))
+	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libEGL.so
+	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libGLESv2.so
 	$(TOUCH)

@@ -9,9 +9,9 @@ DVBSNOOP_SITE   = https://github.com/Duckbox-Developers
 $(D)/dvbsnoop: bootstrap kernel
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(CPDIR)/$(PKG_DIR)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_CPDIR)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--enable-silent-rules \
 			--prefix=/usr \
@@ -19,5 +19,5 @@ $(D)/dvbsnoop: bootstrap kernel
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

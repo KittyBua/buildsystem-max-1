@@ -22,9 +22,9 @@ VPNC_PATCH  = \
 $(D)/vpnc: bootstrap openssl libgcrypt libgpg-error
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(VPNC_GIT))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		$(MAKE); \
@@ -33,5 +33,5 @@ $(D)/vpnc: bootstrap openssl libgcrypt libgpg-error
 			PREFIX=/usr \
 			MANDIR=/.remove \
 			DOCDIR=/.remove
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

@@ -9,9 +9,9 @@ LIBGCRYPT_SITE   = https://gnupg.org/ftp/gcrypt/libgcrypt
 $(D)/libgcrypt: bootstrap libgpg-error
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--enable-shared \
@@ -26,5 +26,5 @@ $(D)/libgcrypt: bootstrap libgpg-error
 	mv $(TARGET_DIR)/usr/bin/libgcrypt-config $(HOST_DIR)/bin
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/libgcrypt-config
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

@@ -9,9 +9,9 @@ OPENVPN_SITE   = http://build.openvpn.net/downloads/releases
 $(D)/openvpn: bootstrap openssl lzo 
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--target=$(TARGET) \
 			--prefix=/usr \
@@ -34,5 +34,5 @@ $(D)/openvpn: bootstrap openssl lzo
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/openvpn $(TARGET_DIR)/etc/init.d/
 	mkdir -p $(TARGET_DIR)/etc/openvpn
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

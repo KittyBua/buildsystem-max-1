@@ -9,9 +9,9 @@ COREUTILS_SITE   = https://ftp.gnu.org/gnu/coreutils
 $(D)/coreutils: bootstrap openssl
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		export fu_cv_sys_stat_statfs2_bsize=yes; \
 		$(CONFIGURE) \
 			--prefix=/usr \
@@ -29,5 +29,5 @@ $(D)/coreutils: bootstrap openssl
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

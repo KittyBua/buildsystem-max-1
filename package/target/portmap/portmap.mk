@@ -14,9 +14,9 @@ $(D)/portmap: bootstrap lsb
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PORTMAP_DIFF))
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		gunzip -cd $(DL_DIR)/$(PORTMAP_DIFF) | cat > debian.patch; \
 		patch -p1 $(SILENT_PATCH) <debian.patch && \
 		sed -e 's/### BEGIN INIT INFO/# chkconfig: S 41 10\n### BEGIN INIT INFO/g' -i debian/init.d; \
@@ -27,5 +27,5 @@ $(D)/portmap: bootstrap lsb
 		$(INSTALL_EXEC) pmap_set $(TARGET_DIR)/sbin; \
 		$(INSTALL_EXEC) debian/init.d $(TARGET_DIR)/etc/init.d/portmap
 	$(UPDATE-RC.D) portmap start 12 2 3 4 5 . stop 60 0 1 6 .
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

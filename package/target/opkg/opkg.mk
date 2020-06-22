@@ -12,9 +12,9 @@ OPKG_PATCH = \
 $(D)/opkg: bootstrap host-opkg libarchive
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		LIBARCHIVE_LIBS="-L$(TARGET_DIR)/usr/lib -larchive" \
 		LIBARCHIVE_CFLAGS="-I$(TARGET_DIR)/usr/include" \
@@ -30,5 +30,5 @@ $(D)/opkg: bootstrap host-opkg libarchive
 	mkdir -p $(TARGET_DIR)/etc/opkg
 	ln -sf opkg $(TARGET_DIR)/usr/bin/opkg-cl
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

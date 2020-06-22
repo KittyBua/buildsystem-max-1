@@ -9,9 +9,9 @@ STRACE_SITE   = https://strace.io/files/$(STRACE_VER)
 $(D)/strace: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--mandir=/.remove \
@@ -20,5 +20,5 @@ $(D)/strace: bootstrap
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,strace-graph strace-log-merge)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

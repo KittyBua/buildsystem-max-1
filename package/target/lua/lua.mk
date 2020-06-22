@@ -17,9 +17,9 @@ LUA_PATCH  = \
 $(D)/lua: bootstrap host-lua ncurses
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(MAKE) linux \
 			PKG_VERSION=$(LUA_VER) \
@@ -33,5 +33,5 @@ $(D)/lua: bootstrap host-lua ncurses
 			TO_LIB="liblua.so liblua.so.$(LUA_ABIVER) liblua.so.$(LUA_VER)"
 	$(INSTALL_DATA) -D $(BUILD_DIR)/lua-$(LUA_VER)/etc/lua.pc $(PKG_CONFIG_PATH)/lua.pc
 	rm -rf $(addprefix $(TARGET_DIR)/bin/,luac)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

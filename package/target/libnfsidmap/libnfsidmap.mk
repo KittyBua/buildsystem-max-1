@@ -9,9 +9,9 @@ LIBNFSIDMAP_SITE   = http://www.citi.umich.edu/projects/nfsv4/linux/libnfsidmap
 $(D)/libnfsidmap: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 		ac_cv_func_malloc_0_nonnull=yes \
 			--prefix=/usr \
@@ -20,5 +20,5 @@ $(D)/libnfsidmap: bootstrap
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

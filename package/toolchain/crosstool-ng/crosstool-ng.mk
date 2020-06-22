@@ -24,11 +24,11 @@ crosstool:
 
 crosstool-ng: directories kernel.do_prepare $(CROSSTOOL_NG_ARCHIVE) $(DL_DIR)/$(KERNEL_SOURCE)
 	$(START_BUILD)
-	$(REMOVE)/$(CROSSTOOL_NG_DIR)
+	$(PKG_REMOVE)
 	$(GET-GIT-SOURCE) $(CROSSTOOL_NG_SITE)/$(CROSSTOOL_NG_SOURCE) $(CROSSTOOL_NG_ARCHIVE)/$(CROSSTOOL_NG_SOURCE)
 	$(CPDIR)/archive-crosstool-ng/$(CROSSTOOL_NG_DIR)
 	unset CONFIG_SITE LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE; \
-	$(CHDIR)/$(CROSSTOOL_NG_DIR); \
+	$(PKG_CHDIR); \
 		git checkout -q $(CROSSTOOL_NG_VER); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/$(CROSSTOOL_NG_CONFIG).config .config; \
 		NUM_CPUS=$$(expr `getconf _NPROCESSORS_ONLN` \* 2); \
@@ -48,7 +48,7 @@ crosstool-ng: directories kernel.do_prepare $(CROSSTOOL_NG_ARCHIVE) $(DL_DIR)/$(
 		./ct-ng build
 	test -e $(CROSS_DIR)/$(TARGET)/lib || ln -sf sys-root/lib $(CROSS_DIR)/$(TARGET)/
 	rm -f $(CROSS_DIR)/$(TARGET)/sys-root/lib/libstdc++.so.6.0.*-gdb.py
-	$(REMOVE)/$(CROSSTOOL_NG_DIR)
+	$(PKG_REMOVE)
 endif
 
 # -----------------------------------------------------------------------------
@@ -57,11 +57,11 @@ crosstool-config:
 	make MAKEFLAGS=--no-print-directory crosstool-ng-config
 
 crosstool-ng-config: directories
-	$(REMOVE)/$(CROSSTOOL_NG_DIR)
+	$(PKG_REMOVE)
 	$(GET-GIT-SOURCE) $(CROSSTOOL_NG_SITE) $(CROSSTOOL_NG_ARCHIVE)/$(CROSSTOOL_NG_SOURCE)
 	$(CPDIR)/archive-crosstool-ng/$(CROSSTOOL_NG_DIR)
 	unset CONFIG_SITE; \
-	$(CHDIR)/$(CROSSTOOL_NG_DIR); \
+	$(PKG_CHDIR); \
 		git checkout -q $(CROSSTOOL_NG_VER); \
 		$(INSTALL_DATA) $(subst -config,,$(PKG_FILES_DIR))/$(CROSSTOOL_NG_CONFIG).config .config; \
 		test -f ./configure || ./bootstrap && \
@@ -76,11 +76,11 @@ crosstool-upgradeconfig:
 	make MAKEFLAGS=--no-print-directory crosstool-ng-upgradeconfig
 
 crosstool-ng-upgradeconfig: directories
-	$(REMOVE)/$(CROSSTOOL_NG_DIR)
+	$(PKG_REMOVE)
 	$(GET-GIT-SOURCE) $(CROSSTOOL_NG_SITE) $(CROSSTOOL_NG_ARCHIVE)/$(CROSSTOOL_NG_SOURCE)
 	$(CPDIR)/archive-crosstool-ng/$(CROSSTOOL_NG_DIR)
 	unset CONFIG_SITE; \
-	$(CHDIR)/$(CROSSTOOL_NG_DIR); \
+	$(PKG_CHDIR); \
 		git checkout -q $(CROSSTOOL_NG_VER); \
 		$(INSTALL_DATA) $(subst -upgradeconfig,,$(PKG_FILES_DIR))/$(CROSSTOOL_NG_CONFIG).config .config; \
 		test -f ./configure || ./bootstrap && \

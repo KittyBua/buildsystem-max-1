@@ -15,9 +15,9 @@ GLIB2_PATCH  = \
 $(D)/glib2: bootstrap host-glib2 libffi util-linux zlib libiconv
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		echo "glib_cv_va_copy=no" > config.cache; \
 		echo "glib_cv___va_copy=yes" >> config.cache; \
@@ -44,8 +44,8 @@ $(D)/glib2: bootstrap host-glib2 libffi util-linux zlib libiconv
 			; \
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR) localedir=/.remove/locale gnulocaledir=/.remove/locale
-	$(REWRITE_LIBTOOL_LA)
 	rm -rf $(addprefix $(TARGET_DIR)/usr/share/,gettext gdb glib-2.0)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gdbus-codegen glib-compile-schemas glib-compile-resources glib-genmarshal glib-gettextize glib-mkenums gobject-query gtester gtester-report)
-	$(REMOVE)/$(PKG_DIR)
+	$(REWRITE_LIBTOOL_LA)
+	$(PKG_REMOVE)
 	$(TOUCH)

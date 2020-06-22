@@ -10,9 +10,9 @@ LUAEXPAT_SITE   = https://github.com/tomasguisasola/luaexpat/archive
 $(D)/luaexpat: bootstrap lua expat
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(LUAEXPAT_GIT))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		sed -i 's|^EXPAT_INC=.*|EXPAT_INC= $(TARGET_INCLUDE_DIR)|' makefile; \
 		sed -i 's|^CFLAGS =.*|& -L$(TARGET_LIB_DIR)|' makefile; \
 		sed -i 's|^CC =.*|CC = $(TARGET_CC)|' makefile; \
@@ -23,5 +23,5 @@ $(D)/luaexpat: bootstrap lua expat
 		$(MAKE) install \
 			PREFIX=$(TARGET_DIR)/usr \
 			LUA_SYS_VER=$(LUA_ABIVER)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

@@ -9,9 +9,9 @@ GDB_SITE   = https://sourceware.org/pub/gdb/releases
 $(D)/gdb: bootstrap zlib ncurses
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--mandir=/.remove \
@@ -33,5 +33,5 @@ $(D)/gdb: bootstrap zlib ncurses
 		$(MAKE) install-gdb DESTDIR=$(TARGET_DIR)
 	rm -rf $(addprefix $(TARGET_DIR)/usr/share/,system-gdbinit)
 	find $(TARGET_SHARE_DIR)/gdb/syscalls -type f -not -name 'arm-linux.xml' -not -name 'gdb-syscalls.dtd' -print0 | xargs -0 rm --
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

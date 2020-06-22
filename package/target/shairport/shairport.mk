@@ -10,12 +10,12 @@ SHAIRPORT_CHECKOUT = 1.0-dev
 $(D)/shairport: bootstrap openssl howl alsa-lib
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(CPDIR)/$(PKG_DIR)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_CPDIR)
+	$(PKG_CHDIR); \
 		git checkout -q $(SHAIRPORT_CHECKOUT); \
 		$(BUILD_ENV) \
 		$(MAKE); \
 		$(MAKE) install PREFIX=$(TARGET_DIR)/usr
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

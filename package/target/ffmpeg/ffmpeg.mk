@@ -38,9 +38,9 @@ endif
 $(D)/ffmpeg: bootstrap openssl zlib bzip2 freetype rtmpdump libass libxml2 alsa-lib
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		./configure $(SILENT_OPT) \
 			--disable-ffplay \
@@ -357,5 +357,5 @@ $(D)/ffmpeg: bootstrap openssl zlib bzip2 freetype rtmpdump libass libxml2 alsa-
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

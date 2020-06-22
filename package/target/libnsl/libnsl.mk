@@ -10,9 +10,9 @@ LIBNSL_SITE   = https://github.com/thkukuk/libnsl/archive
 $(D)/libnsl: bootstrap libtirpc
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(LIBNSL_GIT))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE) \
 			--prefix=/usr \
@@ -20,8 +20,8 @@ $(D)/libnsl: bootstrap libtirpc
 		; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL_LA)
 	mv $(TARGET_DIR)/usr/lib/libnsl.so.2* $(TARGET_DIR)/lib; \
 	ln -sfv ../../lib/libnsl.so.2.0.0 $(TARGET_DIR)/usr/lib/libnsl.so
-	$(REMOVE)/$(PKG_DIR)
+	$(REWRITE_LIBTOOL_LA)
+	$(PKG_REMOVE)
 	$(TOUCH)

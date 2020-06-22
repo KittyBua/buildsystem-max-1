@@ -13,9 +13,9 @@ SHAIRPLAY_PATCH  = \
 $(D)/shairplay: bootstrap libao howl
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(CPDIR)/$(PKG_DIR)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_CPDIR)
+	$(PKG_CHDIR); \
 		git checkout -q $(SHAIRPLAY_CHECKOUT); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		for A in src/test/example.c src/test/main.c src/shairplay.c ; do sed -i "s#airport.key#/usr/share/shairplay/airport.key#" $$A ; done && \
@@ -30,5 +30,5 @@ $(D)/shairplay: bootstrap libao howl
 		mkdir -p $(TARGET_SHARE_DIR)/shairplay; \
 		$(INSTALL_DATA) airport.key $(TARGET_SHARE_DIR)/shairplay
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

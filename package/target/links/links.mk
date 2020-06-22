@@ -20,9 +20,9 @@ endif
 $(D)/links: bootstrap freetype libpng libjpeg-turbo openssl
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR)/intl; \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR)/intl; \
 		sed -i -e 's|^T_SAVE_HTML_OPTIONS,.*|T_SAVE_HTML_OPTIONS, "HTML-Optionen speichern",|' german.lng; \
 		echo "english" > index.txt; \
 		echo "german" >> index.txt; \
@@ -47,15 +47,15 @@ $(D)/links: bootstrap freetype libpng libjpeg-turbo openssl
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	mkdir -p $(TARGET_DIR)/usr/share/tuxbox/neutrino/plugins $(TARGET_DIR)/var/tuxbox/config/links
-	mv $(TARGET_DIR)/usr/bin/links $(TARGET_DIR)/usr/share/tuxbox/neutrino/plugins/links.so
-	echo 'name=Links Web Browser'	 > $(TARGET_DIR)/usr/share/tuxbox/neutrino/plugins/links.cfg
-	echo 'desc=Web Browser'		>> $(TARGET_DIR)/usr/share/tuxbox/neutrino/plugins/links.cfg
-	echo 'type=2'			>> $(TARGET_DIR)/usr/share/tuxbox/neutrino/plugins/links.cfg
+	mkdir -p $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins $(TARGET_DIR)/var/tuxbox/config/links
+	mv $(TARGET_DIR)/usr/bin/links $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/links.so
+	echo 'name=Links Web Browser'	 > $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/links.cfg
+	echo 'desc=Web Browser'		>> $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/links.cfg
+	echo 'type=2'			>> $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/links.cfg
 	echo 'language "German"' 	 > $(TARGET_DIR)/var/tuxbox/config/links/links.cfg
 	echo 'bookmarkcount=0'		 > $(TARGET_DIR)/var/tuxbox/config/bookmarks
 	touch $(TARGET_DIR)/var/tuxbox/config/links/links.his
-	$(INSTALL_DATA) -D $(PKG_FILES_DIR)/bookmarks.html  $(TARGET_DIR)//var/tuxbox/config/links/bookmarks.html
-	$(INSTALL_DATA) -D $(PKG_FILES_DIR)/tables.tar.gz  $(TARGET_DIR)//var/tuxbox/config/links/tables.tar.gz
-	$(REMOVE)/$(PKG_DIR)
+	$(INSTALL_DATA) -D $(PKG_FILES_DIR)/bookmarks.html  $(TARGET_DIR)/var/tuxbox/config/links/bookmarks.html
+	$(INSTALL_DATA) -D $(PKG_FILES_DIR)/tables.tar.gz  $(TARGET_DIR)/var/tuxbox/config/links/tables.tar.gz
+	$(PKG_REMOVE)
 	$(TOUCH)

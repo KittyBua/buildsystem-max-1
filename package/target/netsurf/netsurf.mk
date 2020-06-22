@@ -31,9 +31,9 @@ NETSURF_ENV = \
 $(D)/netsurf: bootstrap libpng libjpeg-turbo openssl libiconv freetype expat libcurl
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		CFLAGS="$(TARGET_CFLAGS) -I$(BUILD_DIR)/netsurf-all-$(NETSURF_VER)/tmpusr/include" \
@@ -41,10 +41,10 @@ $(D)/netsurf: bootstrap libpng libjpeg-turbo openssl libiconv freetype expat lib
 		PKG_CONFIG="$(PKG_CONFIG)" \
 		$(MAKE) $(NETSURF_ENV); \
 		$(MAKE) $(NETSURF_ENV) install DESTDIR=$(TARGET_DIR)
-	mkdir -p $(TARGET_DIR)/usr/share/tuxbox/neutrino/plugins
-	mv $(TARGET_DIR)/usr/bin/netsurf-fb $(TARGET_DIR)/usr/share/tuxbox/neutrino/plugins/netsurf-fb.so
-	echo "name=Netsurf Web Browser"	 > $(TARGET_DIR)/usr/share/tuxbox/neutrino/plugins/netsurf-fb.cfg
-	echo "desc=Web Browser"		>> $(TARGET_DIR)/usr/share/tuxbox/neutrino/plugins/netsurf-fb.cfg
-	echo "type=2"			>> $(TARGET_DIR)/usr/share/tuxbox/neutrino/plugins/netsurf-fb.cfg
-	$(REMOVE)/$(PKG_DIR)
+	mkdir -p $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins
+	mv $(TARGET_DIR)/usr/bin/netsurf-fb $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/netsurf-fb.so
+	echo "name=Netsurf Web Browser"	 > $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/netsurf-fb.cfg
+	echo "desc=Web Browser"		>> $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/netsurf-fb.cfg
+	echo "type=2"			>> $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/netsurf-fb.cfg
+	$(PKG_REMOVE)
 	$(TOUCH)

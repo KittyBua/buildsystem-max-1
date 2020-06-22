@@ -9,9 +9,9 @@ LIBVORBISIDEC_SITE   = https://ftp.de.debian.org/debian/pool/main/libv/libvorbis
 $(D)/libvorbisidec: bootstrap libogg
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		ACLOCAL_FLAGS="-I . -I $(TARGET_DIR)/usr/share/aclocal" \
 		$(BUILD_ENV) \
 		./autogen.sh $(SILENT_OPT) \
@@ -22,5 +22,5 @@ $(D)/libvorbisidec: bootstrap libogg
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

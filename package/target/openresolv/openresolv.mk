@@ -9,9 +9,9 @@ OPENRESOLV_SITE   = https://roy.marples.name/downloads/openresolv
 $(D)/openresolv: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		echo "SYSCONFDIR=/etc" > config.mk; \
 		echo "SBINDIR=/sbin" >> config.mk; \
 		echo "LIBEXECDIR=/lib/resolvconf" >> config.mk; \
@@ -19,5 +19,5 @@ $(D)/openresolv: bootstrap
 		echo "MANDIR=/.remove" >> config.mk; \
 		echo "RCDIR=etc/init.d" >> config.mk; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

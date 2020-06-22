@@ -14,9 +14,9 @@ MC_PATCH  = \
 $(D)/mc: bootstrap ncurses glib2
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE) \
@@ -37,5 +37,5 @@ $(D)/mc: bootstrap ncurses glib2
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -rf $(TARGET_SHARE_DIR)/mc/examples
 	find $(TARGET_SHARE_DIR)/mc/skins -type f ! -name default.ini | xargs --no-run-if-empty rm
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

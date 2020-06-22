@@ -24,9 +24,9 @@ endif
 $(D)/openssl: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		./Configure $(SILENT_OPT) \
 			$(OPENSSL_TARGET_ARCH) \
@@ -51,5 +51,5 @@ $(D)/openssl: bootstrap
 	rm -f $(addprefix $(TARGET_DIR)/etc/ssl/misc/,CA.pl tsget)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,openssl c_rehash)
 	rm -rf $(addprefix $(TARGET_DIR)/usr/lib/,engines-1.1)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

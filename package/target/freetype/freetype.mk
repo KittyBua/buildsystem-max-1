@@ -14,16 +14,16 @@ FREETYPE_PATCH  = \
 $(D)/freetype: bootstrap zlib libpng
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		sed -i '/^FONT_MODULES += \(type1\|cid\|pfr\|type42\|pcf\|bdf\|winfonts\|cff\)/d' modules.cfg
-	$(CHDIR)/$(PKG_DIR)/builds/unix; \
+	$(PKG_CHDIR)/builds/unix; \
 		libtoolize --force --copy $(SILENT_OPT); \
 		aclocal -I .; \
 		autoconf
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--mandir=/.remove \
@@ -41,5 +41,5 @@ $(D)/freetype: bootstrap zlib libpng
 	mv $(TARGET_DIR)/usr/bin/freetype-config $(HOST_DIR)/bin
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/freetype-config
 	$(REWRITE_LIBTOOL_LA)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

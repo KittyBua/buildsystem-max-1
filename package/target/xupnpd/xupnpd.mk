@@ -13,12 +13,12 @@ XUPNPD_PATCH  =  \
 $(D)/xupnpd: bootstrap lua openssl neutrino-plugins
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(CPDIR)/$(PKG_DIR)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_CPDIR)
+	$(PKG_CHDIR); \
 		git checkout -q $(XUPNPD_CHECKOUT); \
 		$(call apply_patches, $(PKG_PATCH)); \
-	$(CHDIR)/$(PKG_DIR)/src; \
+	$(PKG_CHDIR)/src; \
 		$(BUILD_ENV) \
 		$(MAKE) embedded TARGET=$(TARGET) PKG_CONFIG=$(PKG_CONFIG) LUAFLAGS="$(TARGET_LDFLAGS) -I$(TARGET_INCLUDE_DIR)"; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
@@ -30,5 +30,5 @@ $(D)/xupnpd: bootstrap lua openssl neutrino-plugins
 	: $(INSTALL_DATA) $(DL_DIR)/$(NEUTRINO_PLUGINS_DIR)/scripts-lua/xupnpd/xupnpd_coolstream.lua ${TARGET_DIR}/usr/share/xupnpd/plugins/
 	$(INSTALL_DATA) $(DL_DIR)/$(NEUTRINO_PLUGINS_DIR)/scripts-lua/xupnpd/xupnpd_cczwei.lua ${TARGET_DIR}/usr/share/xupnpd/plugins/
 	$(UPDATE-RC.D) xupnpd defaults 50
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

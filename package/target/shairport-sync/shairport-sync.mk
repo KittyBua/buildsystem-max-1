@@ -9,9 +9,9 @@ SHAIRPORT_SYNC_SITE   = https://github.com/mikebrady
 $(D)/shairport-sync: bootstrap libdaemon popt libconfig openssl alsa-lib
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(CPDIR)/$(PKG_DIR)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_CPDIR)
+	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(BUILD_ENV) \
 		$(CONFIGURE) \
@@ -26,5 +26,5 @@ $(D)/shairport-sync: bootstrap libdaemon popt libconfig openssl alsa-lib
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

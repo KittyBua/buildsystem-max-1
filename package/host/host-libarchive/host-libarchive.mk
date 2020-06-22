@@ -9,9 +9,9 @@ HOST_LIBARCHIVE_SITE   = https://www.libarchive.org/downloads
 $(D)/host-libarchive: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		./configure $(SILENT_OPT) \
 			--build=$(BUILD) \
 			--host=$(BUILD) \
@@ -20,5 +20,5 @@ $(D)/host-libarchive: bootstrap
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(HOST_DIR)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

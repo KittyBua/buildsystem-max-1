@@ -15,9 +15,9 @@ SYSVINIT_PATCH  = \
 $(D)/sysvinit: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		$(MAKE) SULOGINLIBS=-lcrypt; \
@@ -35,5 +35,5 @@ $(D)/sysvinit: bootstrap
 #	$(UPDATE-RC.D) stop-bootlogd start 99 2 3 4 5 .
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,fstab-decode runlevel telinit)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,lastb)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

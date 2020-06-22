@@ -51,9 +51,14 @@ PKG_DIR         = $($(PKG_UPPER)_DIR)
 PKG_SOURCE      = $($(PKG_UPPER)_SOURCE)
 PKG_SITE        = $($(PKG_UPPER)_SITE)
 PKG_PATCH       = $($(PKG_UPPER)_PATCH)
+
 PKG_BUILD_DIR   = $(BUILD_DIR)/$(PKG_DIR)
 PKG_FILES_DIR   = $(BASE_DIR)/package/*/$(PKG_NAME)/files
 PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(PKG_NAME)/patches
+
+PKG_CHDIR       = $(CD) $(PKG_BUILD_DIR)
+PKG_CPDIR       = cp -a -t $(BUILD_DIR) $(DL_DIR)/$(PKG_SOURCE)
+PKG_REMOVE      = $(SILENT)rm -rf $(PKG_BUILD_DIR)
 
 # -----------------------------------------------------------------------------
 
@@ -119,13 +124,13 @@ endif
 
 # -----------------------------------------------------------------------------
 
-TERM_RED           = \033[40;0;31m
-TERM_RED_BOLD      = \033[40;1;31m
-TERM_GREEN         = \033[40;0;32m
-TERM_GREEN_BOLD    = \033[40;1;32m
-TERM_YELLOW        = \033[40;0;33m
-TERM_YELLOW_BOLD   = \033[40;1;33m
-TERM_NORMAL        = \033[0m
+TERM_RED         = \033[40;0;31m
+TERM_RED_BOLD    = \033[40;1;31m
+TERM_GREEN       = \033[40;0;32m
+TERM_GREEN_BOLD  = \033[40;1;32m
+TERM_YELLOW      = \033[40;0;33m
+TERM_YELLOW_BOLD = \033[40;1;33m
+TERM_NORMAL      = \033[0m
 
 # -----------------------------------------------------------------------------
 
@@ -147,16 +152,16 @@ INSTALL_CONF    = $(INSTALL) -m 0600
 INSTALL_DATA    = $(INSTALL) -m 0644
 INSTALL_EXEC    = $(INSTALL) -m 0755
 
+GET-GIT-ARCHIVE = $(HELPERS_DIR)/get-git-archive.sh
+GET-GIT-SOURCE  = $(HELPERS_DIR)/get-git-source.sh
+GET-SVN-SOURCE  = $(HELPERS_DIR)/get-svn-source.sh
+UPDATE-RC.D     = $(HELPERS_DIR)/update-rc.d -r $(TARGET_DIR)
+
 DATE            = $(shell date '+%Y-%m-%d_%H.%M')
 TINKER_OPTION  ?= 0
 
 # empty variable EMPTY for smoother comparisons
 EMPTY =
-
-GET-GIT-ARCHIVE = $(HELPERS_DIR)/get-git-archive.sh
-GET-GIT-SOURCE  = $(HELPERS_DIR)/get-git-source.sh
-GET-SVN-SOURCE  = $(HELPERS_DIR)/get-svn-source.sh
-UPDATE-RC.D     = $(HELPERS_DIR)/update-rc.d -r $(TARGET_DIR)
 
 # -----------------------------------------------------------------------------
 
@@ -179,18 +184,19 @@ TARGET_RANLIB   = $(TARGET_CROSS)ranlib
 TARGET_READELF  = $(TARGET_CROSS)readelf
 TARGET_STRIP    = $(TARGET_CROSS)strip
 
-TARGET_LIB_DIR     = $(TARGET_DIR)/usr/lib
-TARGET_INCLUDE_DIR = $(TARGET_DIR)/usr/include
-TARGET_SHARE_DIR   = $(TARGET_DIR)/usr/share
+TARGET_CFLAGS   = $(TARGET_OPTIMIZATION) $(TARGET_ABI) $(TARGET_EXTRA_CFLAGS) -I$(TARGET_INCLUDE_DIR)
+TARGET_CPPFLAGS = $(TARGET_CFLAGS)
+TARGET_CXXFLAGS = $(TARGET_CFLAGS)
+TARGET_LDFLAGS  = -L$(TARGET_DIR)/lib -L$(TARGET_DIR)/usr/lib -Wl,-O1 -Wl,-rpath -Wl,/usr/lib -Wl,-rpath-link -Wl,${TARGET_DIR}/usr/lib $(TARGET_EXTRA_LDFLAGS)
 
-TARGET_CFLAGS      = $(TARGET_OPTIMIZATION) $(TARGET_ABI) $(TARGET_EXTRA_CFLAGS) -I$(TARGET_INCLUDE_DIR)
-TARGET_CPPFLAGS    = $(TARGET_CFLAGS)
-TARGET_CXXFLAGS    = $(TARGET_CFLAGS)
-TARGET_LDFLAGS     = -L$(TARGET_DIR)/lib -L$(TARGET_DIR)/usr/lib -Wl,-O1 -Wl,-rpath -Wl,/usr/lib -Wl,-rpath-link -Wl,${TARGET_DIR}/usr/lib $(TARGET_EXTRA_LDFLAGS)
+TARGET_LIB_DIR      = $(TARGET_DIR)/usr/lib
+TARGET_INCLUDE_DIR  = $(TARGET_DIR)/usr/include
+TARGET_FIRMWARE_DIR = $(TARGET_DIR)/lib/firmware
+TARGET_SHARE_DIR    = $(TARGET_DIR)/usr/share
 
-PKG_CONFIG         = $(HOST_DIR)/bin/$(TARGET)-pkg-config
-PKG_CONFIG_LIBDIR  = $(TARGET_LIB_DIR)/pkgconfig
-PKG_CONFIG_PATH    = $(TARGET_LIB_DIR)/pkgconfig
+PKG_CONFIG          = $(HOST_DIR)/bin/$(TARGET)-pkg-config
+PKG_CONFIG_LIBDIR   = $(TARGET_LIB_DIR)/pkgconfig
+PKG_CONFIG_PATH     = $(TARGET_LIB_DIR)/pkgconfig
 
 # -----------------------------------------------------------------------------
 

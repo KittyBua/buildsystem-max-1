@@ -9,10 +9,10 @@ PYTHON_ATTRS_SITE   = https://pypi.io/packages/source/a/attrs
 $(D)/python-attrs: bootstrap python python-setuptools
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(PYTHON_BUILD); \
 		$(PYTHON_INSTALL)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

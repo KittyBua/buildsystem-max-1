@@ -12,11 +12,11 @@ PYTHON_TWISTED_PATCH  = \
 $(D)/python-twisted: bootstrap python python-setuptools python-zope-interface python-constantly python-incremental python-pyopenssl python-service-identity
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(PYTHON_BUILD); \
 		$(PYTHON_INSTALL)
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)

@@ -12,9 +12,9 @@ OSMIO4K_WLAN_QCOM_PATCH  = \
 $(D)/osmio4k-wlan-qcom: bootstrap kernel osmio4k-wlan-qcom-firmware
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(REMOVE)/$(PKG_DIR)
-	$(UNTAR)/$(PKG_SOURCE)
-	$(CHDIR)/$(PKG_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(MAKE) $(KERNEL_MAKEVARS); \
 	$(INSTALL_DATA) wlan.ko $(TARGET_MODULES_DIR)/extra
@@ -23,5 +23,5 @@ $(D)/osmio4k-wlan-qcom: bootstrap kernel osmio4k-wlan-qcom-firmware
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/wlan.conf; \
 	done
 	make depmod
-	$(REMOVE)/$(PKG_DIR)
+	$(PKG_REMOVE)
 	$(TOUCH)
