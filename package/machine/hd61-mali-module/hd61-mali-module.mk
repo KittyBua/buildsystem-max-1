@@ -27,9 +27,9 @@ $(D)/hd61-mali-module: bootstrap kernel hd61-libgles-header
 	$(PKG_UNPACK)
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
-		$(MAKE) -C $(KERNEL_DIR) $(KERNEL_MAKEVARS) \
+		$(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKEVARS) \
 		$(HD61_MALI_MODULE_MAKEVARS); \
-		$(MAKE) -C $(KERNEL_DIR) $(KERNEL_MAKEVARS) \
+		$(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKEVARS) \
 		M=$(PKG_BUILD_DIR)/driver/src/devicedrv/mali \
 		$(HD61_MALI_MODULE_MAKEVARS) \
 		INSTALL_MOD_PATH=$(TARGET_DIR) \

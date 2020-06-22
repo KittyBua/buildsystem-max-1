@@ -49,7 +49,7 @@ KERNEL_DTB         = hi3798mv200.dtb
 endif
 
 KERNEL_SITE        = http://downloads.mutant-digital.net
-KERNEL_DIR         = $(BUILD_DIR)/linux-$(KERNEL_VER)
+KERNEL_DIR         = linux-$(KERNEL_VER)
 
 endif
 
@@ -116,7 +116,7 @@ endif
 
 KERNEL_DTB         = $(EMPTY)
 KERNEL_SITE        = http://archive.vuplus.com/download/kernel
-KERNEL_DIR         = $(BUILD_DIR)/linux
+KERNEL_DIR         = linux
 
 endif
 
@@ -143,7 +143,7 @@ KERNEL_IMAGE_TYPE  = Image.gz
 KERNEL_SOURCE      = linux-edision-$(KERNEL_SOURCE_VER).tar.gz
 KERNEL_DTB         = $(EMPTY)
 KERNEL_SITE        = http://source.mynonpublic.com/edision
-KERNEL_DIR         = $(BUILD_DIR)/linux-brcmstb-$(KERNEL_SOURCE_VER)
+KERNEL_DIR         = linux-brcmstb-$(KERNEL_SOURCE_VER)
 
 endif
 
@@ -158,7 +158,7 @@ KERNEL_IMAGE_TYPE  = zImage
 KERNEL_SOURCE      = linux-$(KERNEL_VER)-arm.tar.gz
 KERNEL_DTB         = bcm7445-bcm97445svmb.dtb
 KERNEL_SITE        = http://www.zgemma.org/downloads/
-KERNEL_DIR         = $(BUILD_DIR)/linux-$(KERNEL_VER)
+KERNEL_DIR         = linux-$(KERNEL_VER)
 endif
 
 # -----------------------------------------------------------------------------
@@ -179,6 +179,8 @@ else
 KERNEL_CONFIG      = $(BOXMODEL)_defconfig
 endif
 KERNEL_PATCH       = $($(call UPPERCASE,$(BOXMODEL))_PATCH)
+
+LINUX_DIR          = $(BUILD_DIR)/$(KERNEL_DIR)
 
 # -----------------------------------------------------------------------------
 
@@ -201,16 +203,16 @@ KERNEL_MAKEVARS = \
 
 # Compatibility variables
 KERNEL_MAKEVARS += \
-	KDIR=$(KERNEL_DIR) \
-	KSRC=$(KERNEL_DIR) \
-	SRC=$(KERNEL_DIR) \
-	KERNDIR=$(KERNEL_DIR) \
-	KERNELDIR=$(KERNEL_DIR) \
-	KERNEL_SRC=$(KERNEL_DIR) \
-	KERNEL_SOURCE=${KERNEL_DIR} \
-	LINUX_SRC=$(KERNEL_DIR) \
-	KVER=$(KERNEL_VER) \
-	KERNEL_VERSION=$(KERNEL_VER)
+	KDIR=$(LINUX_DIR) \
+	KSRC=$(LINUX_DIR) \
+	SRC=$(LINUX_DIR) \
+	KERNDIR=$(LINUX_DIR) \
+	KERNELDIR=$(LINUX_DIR) \
+	KERNEL_SRC=$(LINUX_DIR) \
+	KERNEL_SOURCE=${LINUX_DIR} \
+	LINUX_SRC=$(LINUX_DIR) \
+	KVER=$(LINUX_DIR) \
+	KERNEL_VERSION=$(LINUX_DIR)
 
 # -----------------------------------------------------------------------------
 

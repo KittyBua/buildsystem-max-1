@@ -198,9 +198,9 @@ H7_PATCH = \
 $(D)/kernel.do_prepare:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	rm -rf $(KERNEL_DIR)
-	$(UNTAR)/$(KERNEL_SOURCE)
-	$(CD) $(KERNEL_DIR); \
+	$(PKG_REMOVE)
+	$(PKG_UNPACK)
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(KERNEL_PATCH))
 	@touch $@
 
@@ -213,7 +213,7 @@ $(D)/kernel.do_compile: kernel.do_prepare
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL),bre2ze4k hd51 hd60 HD61 h7))
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/initramfs-subdirboot.cpio.gz $(KERNEL_OBJ_DIR)
 endif
-	$(CD) $(KERNEL_DIR); \
+	$(PKG_CHDIR); \
 		$(MAKE) $(KERNEL_MAKEVARS) oldconfig; \
 		$(MAKE) $(KERNEL_MAKEVARS) modules $(KERNEL_DTB) $(KERNEL_IMAGE_TYPE); \
 		$(MAKE) $(KERNEL_MAKEVARS) modules_install
@@ -236,7 +236,7 @@ $(D)/kernel: bootstrap kernel.do_compile
 # -----------------------------------------------------------------------------
 
 kernel-config: bootstrap kernel.do_compile
-	$(CD) $(KERNEL_DIR); \
+	$(PKG_CHDIR); \
 		make $(KERNEL_MAKEVARS) menuconfig
 	@echo ""
 	@echo -e "You have to edit $(KERNEL_CONFIG) $(TERM_YELLOW)m a n u a l l y$(TERM_NORMAL) to make changes permanent !!!"

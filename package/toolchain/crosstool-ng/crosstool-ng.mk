@@ -39,7 +39,7 @@ crosstool-ng: directories kernel.do_prepare $(CROSSTOOL_NG_ARCHIVE) $(DL_DIR)/$(
 		\
 		export CT_NG_ARCHIVE=$(CROSSTOOL_NG_ARCHIVE); \
 		export CT_NG_BASE_DIR=$(CROSS_DIR); \
-		export CT_NG_CUSTOM_KERNEL=$(KERNEL_DIR); \
+		export CT_NG_CUSTOM_KERNEL=$(LINUX_DIR); \
 		test -f ./configure || ./bootstrap && \
 		./configure --enable-local; \
 		MAKELEVEL=0 make; \
