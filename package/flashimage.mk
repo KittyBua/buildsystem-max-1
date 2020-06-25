@@ -247,7 +247,7 @@ $(DL_DIR)/$(HD60_PARTITONS_SRC):
 $(DL_DIR)/$(HD60_RECOVERY_SRC):
 	$(DOWNLOAD) http://downloads.mutant-digital.net/hd60/$(HD60_RECOVERY_SRC)
 
-flash-image-hd60-multi-disk: atools $(DL_DIR)/$(HD60_BOOTARGS_SRC) $(DL_DIR)/$(HD60_PARTITONS_SRC) $(DL_DIR)/$(HD60_RECOVERY_SRC)
+flash-image-hd60-multi-disk: host-atools $(DL_DIR)/$(HD60_BOOTARGS_SRC) $(DL_DIR)/$(HD60_PARTITONS_SRC) $(DL_DIR)/$(HD60_RECOVERY_SRC)
 	# Create image
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
@@ -368,7 +368,7 @@ $(DL_DIR)/$(HD61_PARTITONS_SRC):
 $(DL_DIR)/$(HD61_RECOVERY_SRC):
 	$(DOWNLOAD) http://downloads.mutant-digital.net/hd61/$(HD61_RECOVERY_SRC)
 
-flash-image-hd61-multi-disk: atools $(DL_DIR)/$(HD61_BOOTARGS_SRC) $(DL_DIR)/$(HD61_PARTITONS_SRC) $(DL_DIR)/$(HD61_RECOVERY_SRC)
+flash-image-hd61-multi-disk: host-atools $(DL_DIR)/$(HD61_BOOTARGS_SRC) $(DL_DIR)/$(HD61_PARTITONS_SRC) $(DL_DIR)/$(HD61_RECOVERY_SRC)
 	# Create image
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
