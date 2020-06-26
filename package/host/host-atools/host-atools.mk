@@ -1,6 +1,8 @@
 #
-# atools
+# host-atools
 #
+HOST_ATOOLS_VER = 1.0
+
 HOST_HAT_CORE_REV          = 2314b11
 HOST_HAT_CORE_SOURCE       = hat-core-$(HOST_HAT_CORE_REV).tar.bz2
 
