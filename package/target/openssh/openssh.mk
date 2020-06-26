@@ -10,7 +10,7 @@ $(D)/openssh: bootstrap zlib openssl
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		CC=$(TARGET_CC); \
 		./configure $(SILENT_OPT) \

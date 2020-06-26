@@ -10,7 +10,7 @@ $(D)/osmio4kplus-libgles: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	cp -a $(subst plus-,-,$(PKG_BUILD_DIR))/* $(TARGET_DIR)/usr/
 	ln -sf libv3ddriver.so.1.0 $(TARGET_LIB_DIR)/libEGL.so
 	ln -sf libv3ddriver.so.1.0 $(TARGET_LIB_DIR)/libGLESv2.so

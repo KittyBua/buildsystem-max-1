@@ -14,7 +14,7 @@ $(D)/netbase: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(INSTALL_DATA) etc/rpc $(TARGET_DIR)/etc/rpc; \

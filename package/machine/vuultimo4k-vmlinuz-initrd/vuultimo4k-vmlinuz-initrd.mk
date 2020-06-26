@@ -14,5 +14,5 @@ VUULTIMO4K_VMLINUZ_INITRD_SOURCE = vmlinuz-initrd_vuultimo4k_$(VUULTIMO4K_VMLINU
 $(D)/vuultimo4k-vmlinuz-initrd: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	tar -xf $(DL_DIR)/$(PKG_SOURCE) -C $(BUILD_DIR)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(TOUCH)

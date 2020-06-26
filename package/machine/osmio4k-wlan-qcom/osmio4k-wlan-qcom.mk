@@ -13,7 +13,7 @@ $(D)/osmio4k-wlan-qcom: bootstrap kernel osmio4k-wlan-qcom-firmware
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(MAKE) $(KERNEL_MAKEVARS); \
@@ -22,6 +22,5 @@ $(D)/osmio4k-wlan-qcom: bootstrap kernel osmio4k-wlan-qcom-firmware
 	for i in wlan; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/wlan.conf; \
 	done
-	make depmod
 	$(PKG_REMOVE)
 	$(TOUCH)

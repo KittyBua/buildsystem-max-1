@@ -15,5 +15,4 @@ $(D)/h7-driver: bootstrap
 	for i in h7_1 h7_2 h7_3 h7_4; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/_zgemmah7.conf; \
 	done
-	make depmod
 	$(TOUCH)

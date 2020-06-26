@@ -10,7 +10,7 @@ $(D)/libplist: bootstrap libxml2
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \

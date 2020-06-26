@@ -10,7 +10,7 @@ $(D)/libvorbisidec: bootstrap libogg
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		ACLOCAL_FLAGS="-I . -I $(TARGET_DIR)/usr/share/aclocal" \
 		$(BUILD_ENV) \

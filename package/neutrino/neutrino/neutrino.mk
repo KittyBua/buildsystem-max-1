@@ -6,7 +6,7 @@
 AUDIODEC = ffmpeg
 
 NEUTRINO_DEPS  = bootstrap
-NEUTRINO_DEPS += kernel
+NEUTRINO_DEPS += machine-deps
 NEUTRINO_DEPS += system-tools
 NEUTRINO_DEPS += ncurses
 NEUTRINO_DEPS += libcurl

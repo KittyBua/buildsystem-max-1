@@ -10,7 +10,7 @@ $(D)/python-service-identity: bootstrap python python-setuptools python-attr pyt
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(PYTHON_BUILD); \
 		$(PYTHON_INSTALL)

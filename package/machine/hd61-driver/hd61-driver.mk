@@ -18,8 +18,4 @@ $(D)/hd61-driver: bootstrap
 	for i in hd61_1 hd61_2 hd61_3 hd61_4; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/_hd61.conf; \
 	done
-	make depmod
 	$(TOUCH)
-	make hd61-libs
-	make hd61-libgles
-	make hd61-mali-module

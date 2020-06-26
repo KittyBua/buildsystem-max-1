@@ -15,7 +15,7 @@ $(D)/flac: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		touch NEWS AUTHORS ChangeLog; \

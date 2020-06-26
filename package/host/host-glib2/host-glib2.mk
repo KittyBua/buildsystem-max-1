@@ -13,7 +13,7 @@ $(D)/host-glib2: bootstrap host-libffi
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		export PKG_CONFIG=/usr/bin/pkg-config; \
 		export PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig; \

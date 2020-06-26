@@ -10,7 +10,7 @@ $(D)/pngpp: bootstrap libpng
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(MAKE) install-headers PREFIX=$(TARGET_DIR)/usr
 	$(PKG_REMOVE)

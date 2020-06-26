@@ -10,7 +10,7 @@ $(D)/rarfs: bootstrap libfuse
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 			CFLAGS="$(TARGET_CFLAGS) -D_FILE_OFFSET_BITS=64" \

@@ -11,7 +11,7 @@ $(D)/libnsl: bootstrap libtirpc
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(LIBNSL_GIT))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE) \

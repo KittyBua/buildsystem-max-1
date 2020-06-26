@@ -10,10 +10,6 @@ VUUNO4KSE_DRIVER_SITE   = http://archive.vuplus.com/download/build_support/vuplu
 $(D)/vuuno4kse-driver: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	mkdir -p $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
-	tar -xf $(DL_DIR)/$(PKG_SOURCE) -C $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
-	make depmod
+	mkdir -p $(TARGET_MODULES_DIR)/extra
+	$(call PKG_UNPACK,$(TARGET_MODULES_DIR)/extra)
 	$(TOUCH)
-	make vuuno4kse-platform-util
-	make vuuno4kse-libgles
-	make vuuno4kse-vmlinuz-initrd

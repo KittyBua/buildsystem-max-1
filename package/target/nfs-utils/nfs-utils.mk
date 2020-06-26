@@ -16,7 +16,7 @@ $(D)/nfs-utils: bootstrap rpcbind e2fsprogs
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		export knfsd_cv_bsd_signals=no; \

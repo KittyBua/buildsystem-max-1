@@ -10,7 +10,7 @@ $(D)/wpa-supplicant: bootstrap libnl openssl wireless-tools
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR)/wpa_supplicant; \
 		cp -f defconfig .config; \
 		sed -i 's/#CONFIG_DRIVER_RALINK=y/CONFIG_DRIVER_RALINK=y/' .config; \

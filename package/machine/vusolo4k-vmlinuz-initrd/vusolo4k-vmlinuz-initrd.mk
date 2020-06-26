@@ -14,5 +14,5 @@ VUSOLO4K_VMLINUZ_INITRD_SOURCE = vmlinuz-initrd_vusolo4k_$(VUSOLO4K_VMLINUZ_INIT
 $(D)/vusolo4k-vmlinuz-initrd: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	tar -xf $(DL_DIR)/$(PKG_SOURCE) -C $(BUILD_DIR)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(TOUCH)

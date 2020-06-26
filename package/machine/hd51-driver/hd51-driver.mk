@@ -15,5 +15,4 @@ $(D)/hd51-driver: bootstrap
 	for i in hd51_1 hd51_2 hd51_3 hd51_4; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/_hd51.conf; \
 	done
-	make depmod
 	$(TOUCH)

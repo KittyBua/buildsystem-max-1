@@ -15,5 +15,4 @@ $(D)/bre2ze4k-driver: bootstrap
 	for i in bre2ze4k_1 bre2ze4k_2 bre2ze4k_3 bre2ze4k_4; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/_bre2ze4k.conf; \
 	done
-	make depmod
 	$(TOUCH)

@@ -10,7 +10,7 @@ $(D)/libnfsidmap: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(CONFIGURE) \
 		ac_cv_func_malloc_0_nonnull=yes \

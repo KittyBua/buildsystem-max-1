@@ -107,3 +107,28 @@ SYSTEM_TOOLS += busybox
 
 $(D)/system-tools: $(SYSTEM_TOOLS)
 	@touch $@
+
+#
+# machine-deps
+#
+MACHINE_DEPS  = kernel
+MACHINE_DEPS += kernel-modules-clean
+MACHINE_DEPS += $(BOXMODEL)-driver
+ifneq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k h7 hd51 vuduo))
+MACHINE_DEPS += $(BOXMODEL)-libgles
+endif
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+MACHINE_DEPS += $(BOXMODEL)-platform-util
+MACHINE_DEPS += $(BOXMODEL)-vmlinuz-initrd
+endif
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd60 hd61))
+MACHINE_DEPS += $(BOXMODEL)-libs
+MACHINE_DEPS += $(BOXMODEL)-mali-module
+endif
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
+MACHINE_DEPS += osmio4k-wlan-qcom
+endif
+MACHINE_DEPS += depmod
+
+$(D)/machine-deps: $(MACHINE_DEPS)
+	@touch $@

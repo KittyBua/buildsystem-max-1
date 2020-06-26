@@ -10,7 +10,7 @@ $(D)/coreutils: bootstrap openssl
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		export fu_cv_sys_stat_statfs2_bsize=yes; \
 		$(CONFIGURE) \

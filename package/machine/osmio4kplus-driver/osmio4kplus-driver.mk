@@ -15,7 +15,4 @@ $(D)/osmio4kplus-driver: bootstrap
 	for i in brcmstb-osmio4kplus ci si2183 avl6862 avl6261; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/_osmio4kplus.conf; \
 	done
-	make depmod
-	make osmio4kplus-libgles
-	make osmio4k-wlan-qcom
 	$(TOUCH)

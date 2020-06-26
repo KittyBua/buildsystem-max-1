@@ -16,7 +16,7 @@ $(D)/host-ninja: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(HOST_NINJA_GIT))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		cmake . \

@@ -199,7 +199,7 @@ $(D)/kernel.do_prepare:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(KERNEL_PATCH))
 	@touch $@
@@ -228,10 +228,7 @@ $(D)/kernel: bootstrap kernel.do_compile
 	cp -a $(KERNEL_MODULES_DIR)/modules.builtin $(TARGET_MODULES_DIR)
 	cp -a $(KERNEL_MODULES_DIR)/modules.order $(TARGET_MODULES_DIR)
 	cp -aR $(PKG_FILES_DIR)/firmware/* $(TARGET_DIR)/
-	make kernel-modules-clean
 	$(TOUCH)
-	make $(BOXMODEL)-driver
-	make depmod
 
 # -----------------------------------------------------------------------------
 

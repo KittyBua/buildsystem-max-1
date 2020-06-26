@@ -10,10 +10,6 @@ VUSOLO4K_DRIVER_SITE   = http://archive.vuplus.com/download/build_support/vuplus
 $(D)/vusolo4k-driver: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	mkdir -p $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
-	tar -xf $(DL_DIR)/$(PKG_SOURCE) -C $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra
-	make depmod
+	mkdir -p $(TARGET_MODULES_DIR)/extra
+	$(call PKG_UNPACK,$(TARGET_MODULES_DIR)/extra)
 	$(TOUCH)
-	make vusolo4k-platform-util
-	make vusolo4k-libgles
-	make vusolo4k-vmlinuz-initrd

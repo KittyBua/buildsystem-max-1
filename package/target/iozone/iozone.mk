@@ -10,7 +10,7 @@ $(D)/iozone: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		sed -i -e "s/= gcc/= $(TARGET_CC)/" src/current/makefile; \
 		sed -i -e "s/= cc/= $(TARGET_CC)/" src/current/makefile; \

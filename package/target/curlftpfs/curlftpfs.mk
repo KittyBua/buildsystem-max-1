@@ -13,7 +13,7 @@ $(D)/curlftpfs: bootstrap libcurl libfuse glib2
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		export ac_cv_func_malloc_0_nonnull=yes; \

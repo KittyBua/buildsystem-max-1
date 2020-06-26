@@ -14,7 +14,7 @@ $(D)/luaposix: bootstrap host-lua lua luaexpat slingshot gnulib
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(LUAPOSIX_GIT))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		tar -C gnulib --strip=1 -xf $(DL_DIR)/$(GNULIB_SOURCE); \
 		tar -C slingshot --strip=1 -xf $(DL_DIR)/$(SLINGSHOT_SOURCE); \

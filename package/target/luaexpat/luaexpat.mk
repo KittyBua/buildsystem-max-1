@@ -11,7 +11,7 @@ $(D)/luaexpat: bootstrap lua expat
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(LUAEXPAT_GIT))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		sed -i 's|^EXPAT_INC=.*|EXPAT_INC= $(TARGET_INCLUDE_DIR)|' makefile; \
 		sed -i 's|^CFLAGS =.*|& -L$(TARGET_LIB_DIR)|' makefile; \

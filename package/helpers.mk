@@ -123,8 +123,7 @@ define PKG_UNPACK
 	@( \
 	case ${PKG_SOURCE} in \
 		*.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.xz | *.txz) \
-			mkdir -p "${BUILD_DIR}"; \
-			tar -xf ${DL_DIR}/${PKG_SOURCE} ${TAR_OPTS} -C "${BUILD_DIR}"; \
+			tar -xf ${DL_DIR}/${PKG_SOURCE} ${TAR_OPTS} -C ${1}; \
 			;; \
 		*.zip) \
 			unzip -o -q ${DL_DIR}/${PKG_SOURCE} -d ${1}; \

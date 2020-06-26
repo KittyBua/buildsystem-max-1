@@ -16,7 +16,7 @@ $(D)/glib2: bootstrap host-glib2 libffi util-linux zlib libiconv
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		echo "glib_cv_va_copy=no" > config.cache; \

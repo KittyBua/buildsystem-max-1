@@ -13,7 +13,7 @@ $(D)/wireguard-linux-compat: bootstrap kernel libmnl
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR)/src; \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(MAKE) all $(KERNEL_MAKEVARS); \
