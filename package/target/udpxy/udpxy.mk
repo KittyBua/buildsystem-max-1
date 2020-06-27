@@ -15,10 +15,10 @@ $(D)/udpxy: bootstrap
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
 	$(call PKG_UNPACK,$(BUILD_DIR))
-	$(PKG_CHDIR)/chipmunk; \
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
-		$(MAKE) CC=$(TARGET_CC); \
-		$(MAKE) install INSTALLROOT=$(TARGET_DIR)/usr MANPAGE_DIR=$(TARGET_DIR)/.remove
+		$(MAKE) -C chipmunk; \
+		$(MAKE) -C chipmunk install INSTALLROOT=$(TARGET_DIR)/usr MANPAGE_DIR=$(TARGET_DIR)/.remove
 	$(PKG_REMOVE)
 	$(TOUCH)

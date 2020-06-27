@@ -1,7 +1,7 @@
 diff --git a/udpxrec.c b/udpxrec.c
 index c58ceb5..eb186f3 100644
---- a/udpxrec.c
-+++ b/udpxrec.c
+--- a/chipmunk/udpxrec.c
++++ b/chipmunk/udpxrec.c
 @@ -557,9 +557,9 @@ int udpxrec_main( int argc, char* const argv[] )
                          }
                          else {

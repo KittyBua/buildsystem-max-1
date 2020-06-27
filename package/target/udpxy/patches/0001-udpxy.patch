@@ -1,5 +1,5 @@
---- a/netop.c
-+++ b/netop.c
+--- a/chipmunk/netop.c
++++ b/chipmunk/netop.c
 @@ -53,16 +53,24 @@
  
      extern const char IPv4_ALL[];
@@ -45,8 +45,8 @@
  
          rc = listen (lsock, (bklog > 0 ? bklog : 1));
          if( 0 != rc ) break;
---- a/udpxy.c
-+++ b/udpxy.c
+--- a/chipmunk/udpxy.c
++++ b/chipmunk/udpxy.c
 @@ -1380,7 +1380,12 @@
      openlog( g_udpxy_app, LOG_CONS | LOG_PID, LOG_LOCAL0 );
  
