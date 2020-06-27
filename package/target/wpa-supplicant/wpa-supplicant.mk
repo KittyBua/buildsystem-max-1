@@ -11,19 +11,11 @@ $(D)/wpa-supplicant: bootstrap libnl openssl wireless-tools
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
 	$(call PKG_UNPACK,$(BUILD_DIR))
-	$(PKG_CHDIR)/wpa_supplicant; \
-		cp -f defconfig .config; \
-		sed -i 's/#CONFIG_DRIVER_RALINK=y/CONFIG_DRIVER_RALINK=y/' .config; \
-		sed -i 's/#CONFIG_IEEE80211W=y/CONFIG_IEEE80211W=y/' .config; \
-		sed -i 's/#CONFIG_OS=unix/CONFIG_OS=unix/' .config; \
-		sed -i 's/#CONFIG_TLS=openssl/CONFIG_TLS=openssl/' .config; \
-		export CFLAGS="-pipe -Os -Wall -g0 -I$(TARGET_INCLUDE_DIR) -I$(TARGET_INCLUDE_DIR)/libnl3/"; \
-		export CPPFLAGS="-I$(TARGET_INCLUDE_DIR)"; \
-		export LIBS="-L$(TARGET_LIB_DIR) -Wl,-rpath-link,$(TARGET_LIB_DIR)"; \
-		export LDFLAGS="-L$(TARGET_LIB_DIR)"; \
-		export DESTDIR=$(TARGET_DIR); \
-		$(MAKE) CC=$(TARGET_CC); \
-		$(MAKE) install LIBDIR=/usr/lib BINDIR=/usr/sbin DESTDIR=$(TARGET_DIR)
+	$(PKG_CHDIR); \
+		$(INSTALL_DATA) $(PKG_FILES_DIR)/wpa_supplicant.config wpa_supplicant/.config; \
+		$(BUILD_ENV) \
+		$(MAKE) -C wpa_supplicant; \
+		$(MAKE) -C wpa_supplicant install LIBDIR=/usr/lib BINDIR=/usr/sbin DESTDIR=$(TARGET_DIR)
 	mkdir -p $(TARGET_DIR)/etc/{network,wpa_supplicant}
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/post-wlan0.sh $(TARGET_DIR)/etc/network
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/pre-wlan0.sh $(TARGET_DIR)/etc/network
