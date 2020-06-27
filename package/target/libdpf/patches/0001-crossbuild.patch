@@ -1,5 +1,5 @@
---- a/Makefile
-+++ b/Makefile
+--- a/dpflib/Makefile
++++ b/dpflib/Makefile
 @@ -10,7 +10,7 @@
  LIBS=-lusb -lsgutils2
  endif
