@@ -13,9 +13,9 @@ $(D)/wireguard-tools: bootstrap kernel libmnl openresolv
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
 	$(call PKG_UNPACK,$(BUILD_DIR))
-	$(PKG_CHDIR)/src; \
+	$(PKG_CHDIR); \
 		$(BUILD_ENV) \
-		$(MAKE) all     $(WIREGUARD_TOOLS_MAKE_OPTS) PREFIX=/usr; \
-		$(MAKE) install $(WIREGUARD_TOOLS_MAKE_OPTS) DESTDIR=$(TARGET_DIR) MANDIR=/.remove
+		$(MAKE) -C src all     $(WIREGUARD_TOOLS_MAKE_OPTS) PREFIX=/usr; \
+		$(MAKE) -C src install $(WIREGUARD_TOOLS_MAKE_OPTS) DESTDIR=$(TARGET_DIR) MANDIR=/.remove
 	$(PKG_REMOVE)
 	$(TOUCH)
