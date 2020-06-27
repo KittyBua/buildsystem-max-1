@@ -18,10 +18,9 @@ $(D)/xupnpd: bootstrap lua openssl neutrino-plugins
 	$(PKG_CHDIR); \
 		git checkout -q $(XUPNPD_CHECKOUT); \
 		$(call apply_patches, $(PKG_PATCH)); \
-	$(PKG_CHDIR)/src; \
 		$(BUILD_ENV) \
-		$(MAKE) embedded TARGET=$(TARGET) PKG_CONFIG=$(PKG_CONFIG) LUAFLAGS="$(TARGET_LDFLAGS) -I$(TARGET_INCLUDE_DIR)"; \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
+		$(MAKE) -C src embedded TARGET=$(TARGET) PKG_CONFIG=$(PKG_CONFIG) LUAFLAGS="$(TARGET_LDFLAGS) -I$(TARGET_INCLUDE_DIR)"; \
+		$(MAKE) -C src install DESTDIR=$(TARGET_DIR)
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/xupnpd.init $(TARGET_DIR)/etc/init.d/xupnpd
 	mkdir -p $(TARGET_DIR)/usr/share/xupnpd/{config,playlists}
 	rm $(TARGET_DIR)/usr/share/xupnpd/plugins/staff/xupnpd_18plus.lua
