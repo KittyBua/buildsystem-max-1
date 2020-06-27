@@ -13,7 +13,7 @@ $(D)/libdpf: bootstrap libusb-compat
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_CPDIR)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR)/dpflib; \
 		$(call apply_patches, $(PKG_PATCH)); \
 		make libdpf.a CC=$(TARGET_CC) PREFIX=$(TARGET_DIR)/usr; \

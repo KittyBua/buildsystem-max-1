@@ -10,7 +10,7 @@ $(D)/streamripper: bootstrap libvorbisidec libmad glib2
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_CPDIR)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE) \

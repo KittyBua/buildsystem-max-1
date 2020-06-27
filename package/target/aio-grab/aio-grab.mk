@@ -10,7 +10,7 @@ $(D)/aio-grab: bootstrap zlib libpng libjpeg-turbo
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_CPDIR)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \
 		automake --foreign --include-deps $(SILENT_OPT); \

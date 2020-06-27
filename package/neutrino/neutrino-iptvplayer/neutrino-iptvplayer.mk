@@ -11,7 +11,7 @@ $(D)/neutrino-iptvplayer: rtmpdump python-twisted | $(SHARE_PLUGINS)
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_CPDIR)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	@if [ "$@" = "$(D)/neutrino-iptvplayer-nightly" ]; then \
 		$(BUILD_DIR)/iptvplayer/SyncWithGitLab.sh $(BUILD_DIR)/iptvplayer; \
 	fi

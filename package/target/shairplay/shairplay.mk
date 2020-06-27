@@ -14,7 +14,7 @@ $(D)/shairplay: bootstrap libao howl
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_CPDIR)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		git checkout -q $(SHAIRPLAY_CHECKOUT); \
 		$(call apply_patches, $(PKG_PATCH)); \

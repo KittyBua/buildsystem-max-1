@@ -45,7 +45,7 @@ $(D)/neutrino-plugins.do_prepare: | bootstrap ffmpeg libcurl libpng libjpeg-turb
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)
-	cp -ra $(DL_DIR)/$(NEUTRINO_PLUGINS_DIR) $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)
+	$(call PKG_UNPACK,$(SOURCE_DIR))
 	@touch $@
 
 $(D)/neutrino-plugins.config.status:
@@ -77,7 +77,7 @@ $(D)/neutrino-plugins.do_compile: neutrino-plugins.config.status
 	@touch $@
 
 $(D)/neutrino-plugins: neutrino-plugins.do_prepare neutrino-plugins.do_compile
-	mkdir -p $(TARGET_DIR)/usr/share/tuxbox/neutrino/icons
+	mkdir -p $(SHARE_ICONS)
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 	$(NP_RUNLEVEL_INSTALL)
 	$(TOUCH)

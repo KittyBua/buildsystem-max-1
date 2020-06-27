@@ -254,7 +254,7 @@ $(D)/libstb-hal.do_prepare: | $(LIBSTB_HAL_DEPS)
 	rm -rf $(LH_OBJ_DIR)
 	test -d $(SOURCE_DIR) || mkdir -p $(SOURCE_DIR)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	cp -ra $(DL_DIR)/$(LIBSTB_HAL_SOURCE) $(SOURCE_DIR)/$(LIBSTB_HAL)
+	$(call PKG_UNPACK,$(SOURCE_DIR))
 	(cd $(SOURCE_DIR)/$(LIBSTB_HAL); git checkout -q $(LIBSTB_HAL_BRANCH);)
 	cp -ra $(SOURCE_DIR)/$(LIBSTB_HAL) $(SOURCE_DIR)/$(LIBSTB_HAL).org
 	$(CD) $(SOURCE_DIR)/$(LIBSTB_HAL); \
@@ -327,7 +327,7 @@ $(D)/neutrino.do_prepare: | $(NEUTRINO_DEPS) libstb-hal
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO).org
 	rm -rf $(N_OBJ_DIR)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	cp -ra $(DL_DIR)/$(NEUTRINO_SOURCE) $(SOURCE_DIR)/$(NEUTRINO)
+	$(call PKG_UNPACK,$(SOURCE_DIR))
 	(cd $(SOURCE_DIR)/$(NEUTRINO); git checkout -q $(NEUTRINO_BRANCH);)
 	cp -ra $(SOURCE_DIR)/$(NEUTRINO) $(SOURCE_DIR)/$(NEUTRINO).org
 	$(CD) $(SOURCE_DIR)/$(NEUTRINO); \

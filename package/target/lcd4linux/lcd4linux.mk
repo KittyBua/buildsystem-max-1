@@ -10,7 +10,7 @@ $(D)/lcd4linux: bootstrap ncurses libusb-compat libgd libusb libdpf
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_CPDIR)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(BUILD_ENV) ./bootstrap $(SILENT_OPT); \
 		$(BUILD_ENV) ./configure $(CONFIGURE_OPTS) $(SILENT_OPT) \

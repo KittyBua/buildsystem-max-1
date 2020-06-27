@@ -11,7 +11,7 @@ $(D)/shairport: bootstrap openssl howl alsa-lib
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_CPDIR)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		git checkout -q $(SHAIRPORT_CHECKOUT); \
 		$(BUILD_ENV) \

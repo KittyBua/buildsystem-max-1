@@ -12,31 +12,9 @@ HAL_REV=$(shell cd $(SOURCE_DIR)/$(LIBSTB_HAL); git log | grep "^commit" | wc -l
 
 # -----------------------------------------------------------------------------
 
-ifeq ($(GITSSH), 1)
-MAX-GIT-GITHUB         = git@github.com:MaxWiesel
-URL_1                  = https://github.com/MaxWiesel
-URL_2                  = $(MAX-GIT-GITHUB)
-else
-MAX-GIT-GITHUB         = https://github.com/MaxWiesel
-URL_1                  = git@github.com:MaxWiesel
-URL_2                  = $(MAX-GIT-GITHUB)
-endif
-
-REPOSITORIES = \
-	. \
-	$(DL_DIR)/libstb-hal-max.git \
-	$(DL_DIR)/neutrino-mp-max.git \
-	$(DL_DIR)/neutrino-plugins.git \
-	$(DL_DIR)/ofgwrite-nmp.git
-
-switch-url:
-	for repo in $(REPOSITORIES); do \
-		sed -i -e 's|url = $(URL_1)|url = $(URL_2)|' $$repo/.git/config; \
-	done
-
-# -----------------------------------------------------------------------------
-
+#
 # apply patch sets
+#
 define apply_patches
 	l=$(strip $(2)); test -z $$l && l=1; \
 	for i in $(1); do \
@@ -65,45 +43,9 @@ APPLY_PATCHES = $(call apply_patches, $(PKG_PATCHES_DIR))
 
 # -----------------------------------------------------------------------------
 
-# rewrite libtool libraries
-REWRITE_LIBTOOL_RULES = \
-	sed -i \
-	-e "s,^libdir=.*,libdir='$(TARGET_LIB_DIR)'," \
-	-e "s,\(^dependency_libs='\| \|-L\|^dependency_libs='\)/usr/lib,\ $(TARGET_LIB_DIR),g"
-
-REWRITE_LIBTOOL = \
-	$(REWRITE_LIBTOOL_RULES) $(TARGET_LIB_DIR)
-
-define rewrite_libtool
-	@cd $(TARGET_LIB_DIR); \
-	for la in *.la; do \
-		if ! grep -q "rewritten=1" $${la}; then \
-			echo -e "$(TERM_YELLOW)Rewriting $${la}$(TERM_NORMAL)"; \
-			$(REWRITE_LIBTOOL)/$${la}; \
-			echo -e "\n# adapted to buildsystem\nrewritten=1" >> $${la}; \
-		fi; \
-	done
-endef
-
-# rewrite libtool libraries automatically
-REWRITE_LIBTOOL_LA = $(call rewrite_libtool, $(TARGET_LIB_DIR))
-
-# -----------------------------------------------------------------------------
-
-# rewrite pkg-config files
-REWRITE_CONFIG_RULES = \
-	sed -i \
-	-e "s,^prefix=.*,prefix='$(TARGET_DIR)/usr'," \
-	-e "s,^exec_prefix=.*,exec_prefix='$(TARGET_DIR)/usr'," \
-	-e "s,^libdir=.*,libdir='$(TARGET_LIB_DIR)'," \
-	-e "s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
-
-REWRITE_CONFIG = \
-	$(REWRITE_CONFIG_RULES)
-
-# -----------------------------------------------------------------------------
-
+#
 # download archives into archives directory
+#
 define PKG_DOWNLOAD
 	@if [ $(PKG_VER) == "git" ]; then \
 		$(GET-GIT-SOURCE) $(PKG_SITE)/$(PKG_SOURCE) $(DL_DIR)/$(PKG_SOURCE); \
@@ -116,24 +58,24 @@ endef
 
 # -----------------------------------------------------------------------------
 
+#
 # unpack archives into build directory
-PKG_TAR_COPY_OPTS = "--exclude=.git --exclude=.svn"
-
+#
 define PKG_UNPACK
 	@( \
 	case ${PKG_SOURCE} in \
 		*.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.xz | *.txz) \
-			tar -xf ${DL_DIR}/${PKG_SOURCE} ${TAR_OPTS} -C ${1}; \
+			tar -xf ${DL_DIR}/${PKG_SOURCE} -C ${1}; \
 			;; \
 		*.zip) \
 			unzip -o -q ${DL_DIR}/${PKG_SOURCE} -d ${1}; \
 			;; \
-		*) \
-			FULL_DEST_PATH="${BUILD_DIR}/${PKG_NAME}-${PKG_VER}" \
-			mkdir ${FULL_DEST_PATH}; \
-			tar cf - -C ${DL_DIR}/${PKG_SOURCE} ${PKG_TAR_COPY_OPTS} . | \
-				tar xf - -C ${FULL_DEST_PATH}; \
+		*.git) \
+			cp -a -t ${1} $(DL_DIR)/$(PKG_SOURCE); \
 			;; \
+		*) \
+			printf "$(TERM_RED)Cannot extract ${PKG_SOURCE}$(TERM_NORMAL) \n"; \
+			false ;; \
 	esac \
 	)
 endef
@@ -151,6 +93,48 @@ define TOUCH
 	echo ""; \
 	$(call draw_line);
 endef
+
+# -----------------------------------------------------------------------------
+
+#
+# rewrite libtool libraries
+#
+REWRITE_LIBTOOL_RULES = \
+	sed -i \
+	-e "s,^libdir=.*,libdir='$(TARGET_LIB_DIR)'," \
+	-e "s,\(^dependency_libs='\| \|-L\|^dependency_libs='\)/usr/lib,\ $(TARGET_LIB_DIR),g"
+
+REWRITE_LIBTOOL = \
+	$(REWRITE_LIBTOOL_RULES) $(TARGET_LIB_DIR)
+
+define rewrite_libtool
+	@cd $(TARGET_LIB_DIR); \
+	for la in *.la; do \
+		if ! grep -q "rewritten=1" $${la}; then \
+			echo -e "$(TERM_YELLOW)Rewriting $${la}$(TERM_NORMAL)"; \
+			$(REWRITE_LIBTOOL)/$${la}; \
+			echo -e "\n# Adapted to buildsystem\nrewritten=1" >> $${la}; \
+		fi; \
+	done
+endef
+
+# rewrite libtool libraries automatically
+REWRITE_LIBTOOL_LA = $(call rewrite_libtool, $(TARGET_LIB_DIR))
+
+# -----------------------------------------------------------------------------
+
+#
+# rewrite pkg-config files
+#
+REWRITE_CONFIG_RULES = \
+	sed -i \
+	-e "s,^prefix=.*,prefix='$(TARGET_DIR)/usr'," \
+	-e "s,^exec_prefix=.*,exec_prefix='$(TARGET_DIR)/usr'," \
+	-e "s,^libdir=.*,libdir='$(TARGET_LIB_DIR)'," \
+	-e "s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
+
+REWRITE_CONFIG = \
+	$(REWRITE_CONFIG_RULES)
 
 # -----------------------------------------------------------------------------
 
@@ -236,10 +220,10 @@ archives-list:
 DOCLEANUP  ?= no
 GETMISSING ?= no
 archives-info: directories archives-list
-	@grep --only-matching '^\$$(DL_DIR).*:' make/bootstrap.mk | sed "s|:||g" | \
+	@grep --only-matching '^\$$(DL_DIR).*:' package/bootstrap.mk | sed "s|:||g" | \
 	while read target; do \
 		found=false; \
-		for makefile in package/*/*.mk; do \
+		for makefile in package/*/*/*.mk; do \
 			if grep -q "$$target" $$makefile; then \
 				found=true; \
 			fi; \
@@ -278,7 +262,9 @@ archives-info: directories archives-list
 
 # -----------------------------------------------------------------------------
 
+#
 # FIXME - how to resolve variables while grepping makefiles?
+#
 patches-info:
 	@echo "[ ** ] Unused patches"
 	@for patch in package/*/*/patches/*; do \
@@ -341,12 +327,17 @@ PYTHON_INSTALL = \
 
 # -----------------------------------------------------------------------------
 
+#
 # target for testing only. not useful otherwise
-everything: $(shell sed -n 's/^\$$.D.\/\(.*\):.*/\1/p' package/target/*/*.mk)
+#
+everything:
+	@make $(shell sed -n 's/^\$$.D.\/\(.*\):.*/\1/p' package/target/*/*.mk)
 
 # -----------------------------------------------------------------------------
 
+#
 # print all present targets...
+#
 print-targets:
 	@sed -n 's/^\$$.D.\/\(.*\):.*/\1/p; s/^\([a-z].*\):\( \|$$\).*/\1/p;' \
 		`ls -1 package/*/*/*.mk` | \
@@ -354,6 +345,36 @@ print-targets:
 
 # -----------------------------------------------------------------------------
 
+#
+#
+#
+ifeq ($(GITSSH), 1)
+MAX-GIT-GITHUB = git@github.com:MaxWiesel
+URL_1          = https://github.com/MaxWiesel
+URL_2          = $(MAX-GIT-GITHUB)
+else
+MAX-GIT-GITHUB = https://github.com/MaxWiesel
+URL_1          = git@github.com:MaxWiesel
+URL_2          = $(MAX-GIT-GITHUB)
+endif
+
+REPOSITORIES = \
+	. \
+	$(DL_DIR)/libstb-hal-max.git \
+	$(DL_DIR)/neutrino-mp-max.git \
+	$(DL_DIR)/neutrino-plugins.git \
+	$(DL_DIR)/ofgwrite-nmp.git
+
+switch-url:
+	for repo in $(REPOSITORIES); do \
+		sed -i -e 's|url = $(URL_1)|url = $(URL_2)|' $$repo/.git/config; \
+	done
+
+# -----------------------------------------------------------------------------
+
+#
+#
+#
 rewrite-test:
 	@printf "$(TERM_YELLOW)---> create rewrite-libdir.txt ... "
 	$(shell grep ^libdir $(TARGET_DIR)/usr/lib/*.la > $(BUILD_DIR)/rewrite-libdir.txt)
@@ -367,6 +388,9 @@ rewrite-test:
 
 # -----------------------------------------------------------------------------
 
+#
+#
+#
 neutrino-patch:
 	@printf "$(TERM_YELLOW)---> create $(NEUTRINO) patch ... $(TERM_NORMAL)"
 	$(shell cd $(SOURCE_DIR) && diff -Nur --exclude-from=$(HELPERS_DIR)/diff-exclude $(NEUTRINO).org $(NEUTRINO) > $(BUILD_DIR)/$(NEUTRINO)-$(DATE).patch)

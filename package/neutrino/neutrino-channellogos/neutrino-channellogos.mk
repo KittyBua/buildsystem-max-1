@@ -10,14 +10,14 @@ $(D)/neutrino-channellogos: bootstrap | $(SHARE_ICONS) $(SHARE_PLUGINS)
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_CPDIR)
-	rm -rf $(SHARE_ICONS)/logo
-	mkdir -p $(SHARE_ICONS)/logo
-	$(INSTALL_DATA) $(PKG_BUILD_DIR)/logos/* $(SHARE_ICONS)/logo
-	mkdir -p $(SHARE_ICONS)/logo/events
-	$(INSTALL_DATA) $(PKG_BUILD_DIR)/logos-events/* $(SHARE_ICONS)/logo/events
+	$(call PKG_UNPACK,$(BUILD_DIR))
+	rm -rf $(SHARE_LOGOS)
+	mkdir -p $(SHARE_LOGOS)
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/logos/* $(SHARE_LOGOS)
+	mkdir -p $(SHARE_LOGOS)/events
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/logos-events/* $(SHARE_LOGOS)/events
 	$(PKG_CHDIR)/logo-links && \
-		./logo-linker.sh logo-links.db $(SHARE_ICONS)/logo
+		./logo-linker.sh logo-links.db $(SHARE_LOGOS)
 	cp -a $(PKG_BUILD_DIR)/logo-addon/* $(SHARE_PLUGINS)
 	$(PKG_REMOVE)
 	$(TOUCH)

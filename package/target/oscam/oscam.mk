@@ -24,7 +24,7 @@ $(D)/oscam.do_prepare:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_CPDIR)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(OSCAM_PATCH)); \
 		$(SHELL) ./config.sh --disable all \
