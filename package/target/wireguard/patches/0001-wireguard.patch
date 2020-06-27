@@ -1,5 +1,5 @@
---- a/Makefile
-+++ b/Makefile
+--- a/src/Makefile
++++ b/src/Makefile
 @@ -46,7 +46,6 @@
  
  module-install:

@@ -16,11 +16,11 @@ $(D)/wireguard: bootstrap kernel libmnl openresolv
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
 	$(call PKG_UNPACK,$(BUILD_DIR))
-	$(PKG_CHDIR)/src; \
+	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
-		$(MAKE) all     $(KERNEL_MAKEVARS) $(WIREGUARD_MAKE_OPTS) PREFIX=/usr; \
-		$(MAKE) install $(KERNEL_MAKEVARS) $(WIREGUARD_MAKE_OPTS) INSTALL_MOD_PATH=$(TARGET_DIR) DESTDIR=$(TARGET_DIR) MANDIR=/.remove
+		$(MAKE) -C src all     $(KERNEL_MAKEVARS) $(WIREGUARD_MAKE_OPTS) PREFIX=/usr; \
+		$(MAKE) -C src install $(KERNEL_MAKEVARS) $(WIREGUARD_MAKE_OPTS) INSTALL_MOD_PATH=$(TARGET_DIR) DESTDIR=$(TARGET_DIR) MANDIR=/.remove
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d
 	for i in wireguard; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/wireguard.conf; \
