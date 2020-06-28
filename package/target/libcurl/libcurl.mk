@@ -38,7 +38,7 @@ $(D)/libcurl: bootstrap zlib openssl ca-bundle
 			--without-libidn2 \
 			--without-winidn \
 			--without-libpsl \
-			--with-ca-bundle=$(CA_BUNDLE_DIR)/$(CA_BUNDLE) \
+			--with-ca-bundle=$(CA_BUNDLE_DIR)/$(CA_BUNDLE_CRT) \
 			--with-random=/dev/urandom \
 			--with-ssl=$(TARGET_DIR)/usr \
 			; \

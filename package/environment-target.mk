@@ -93,9 +93,3 @@ remove-localedir       = $(remove-datarootdir)/locale
 remove-mandir          = $(remove-datarootdir)/man
 remove-man1dir         = $(remove-mandir)/man1
 remove-man2dir         = $(remove-mandir)/man2
-
-# -----------------------------------------------------------------------------
-
-# ca-certificates
-CA_BUNDLE              = ca-certificates.crt
-CA_BUNDLE_DIR          = /etc/ssl/certs

@@ -20,7 +20,7 @@ $(D)/gnutls: bootstrap ca-bundle nettle
 			--with-included-libtasn1 \
 			--with-libpthread-prefix=$(TARGET_DIR)/usr \
 			--with-included-unistring \
-			--with-default-trust-store-dir=$(CA_BUNDLE_DIR)/ca-certificates.crt \
+			--with-default-trust-store-dir=$(CA_BUNDLE_DIR)/$(CA_BUNDLE_CRT) \
 			--without-p11-kit \
 			--without-idn \
 			--without-tpm \
