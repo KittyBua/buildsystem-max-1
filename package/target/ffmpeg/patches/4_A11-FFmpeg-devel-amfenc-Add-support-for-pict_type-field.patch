@@ -23,10 +23,10 @@ diff --git a/libavcodec/amfenc.c b/libavcodec/amfenc.c
 index 384d8efc92..eb4b65e4f2 100644
 --- a/libavcodec/amfenc.c
 +++ b/libavcodec/amfenc.c
-@@ -680,6 +680,52 @@ int ff_amf_send_frame(AVCodecContext *avctx, const AVFrame *frame)
+@@ -693,6 +693,52 @@ int ff_amf_send_frame(AVCodecContext *avctx, const AVFrame *frame)
              break;
          }
- 
+
 +        // Override Picture Type for Frame
 +        if (avctx->codec->id == AV_CODEC_ID_H264) {
 +            switch (frame->pict_type) {
@@ -73,6 +73,6 @@ index 384d8efc92..eb4b65e4f2 100644
 +                AMF_ASSIGN_PROPERTY_INT64(res, surface, AMF_VIDEO_ENCODER_HEVC_FORCE_PICTURE_TYPE, AMF_VIDEO_ENCODER_HEVC_PICTURE_TYPE_IDR);
 +            }
 +        }
- 
+
          // submit surface
          res = ctx->encoder->pVtbl->SubmitInput(ctx->encoder, (AMFData*)surface);

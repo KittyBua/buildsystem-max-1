@@ -1,6 +1,6 @@
 --- a/libavformat/rtsp.c
 +++ b/libavformat/rtsp.c
-@@ -2334,7 +2334,9 @@
+@@ -2338,7 +2338,9 @@
      RTSPStream *rtsp_st;
      int size, i, err;
      char *content;
@@ -10,7 +10,7 @@
  
      if (!ff_network_init())
          return AVERROR(EIO);
-@@ -2360,6 +2362,16 @@
+@@ -2364,6 +2366,16 @@
      av_freep(&content);
      if (err) goto fail;
  
@@ -27,7 +27,7 @@
      /* open each RTP stream */
      for (i = 0; i < rt->nb_rtsp_streams; i++) {
          char namebuf[50];
-@@ -2377,12 +2389,22 @@
+@@ -2381,12 +2393,22 @@
                  av_dict_free(&opts);
                  goto fail;
              }
@@ -52,4 +52,3 @@
  
              append_source_addrs(url, sizeof(url), "sources",
                                  rtsp_st->nb_include_source_addrs,
-

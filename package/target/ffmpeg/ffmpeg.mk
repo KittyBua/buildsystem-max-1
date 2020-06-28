@@ -3,7 +3,7 @@
 #
 # -----------------------------------------------------------------------------
 
-FFMPEG_VER    = 4.2.2
+FFMPEG_VER    = 4.3
 FFMPEG_DIR    = ffmpeg-$(FFMPEG_VER)
 FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VER).tar.xz
 FFMPEG_SITE   = http://www.ffmpeg.org/releases
@@ -18,14 +18,8 @@ FFMPEG_PATCH  = \
 	4_09_ffmpeg_fix_edit_list_parsing.patch \
 	4_10_rtsp_patch \
 	4_11_dxva2_patch \
-	4_A00-amf-h264-loop.patch \
 	4_A02-corrupt-h264-frames.patch \
-	4_A05-mov-read-name-track-tag-written-by-movenc.patch \
-	4_A06-movenc-write-3gpp-track-titl-tag.patch \
-	4_A07-mov-read-3gpp-udta-tags.patch \
-	4_A08-movenc-write-3gpp-track-names-tags-for-all-available.patch \
 	4_A11-FFmpeg-devel-amfenc-Add-support-for-pict_type-field.patch \
-	4_A13-qsv-dx11.patch \
 	4_mips64_cpu_detection.patch
 
 ifeq ($(TARGET_ARCH), arm)

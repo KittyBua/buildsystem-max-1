@@ -40,9 +40,9 @@
      ret = ff_dxva2_common_end_frame(avctx, h->cur_pic_ptr->f,
                                      &ctx_pic->pp, sizeof(ctx_pic->pp),
                                      &ctx_pic->qm, sizeof(ctx_pic->qm),
---- a/h264_slice.c
+--- a/libavcodec/h264_slice.c
 +++ b/libavcodec/h264_slice.c
-@@ -936,6 +936,7 @@
+@@ -928,6 +928,7 @@
  
      h->first_field           = 0;
      h->prev_interlaced_frame = 1;
@@ -52,7 +52,7 @@
      ret = ff_h264_alloc_tables(h);
 --- a/libavcodec/h264dec.c
 +++ b/libavcodec/h264dec.c
-@@ -486,6 +486,7 @@
+@@ -467,6 +467,7 @@
  
      h->next_outputed_poc = INT_MIN;
      h->prev_interlaced_frame = 1;
@@ -62,7 +62,7 @@
      h->poc.prev_frame_num = -1;
 --- a/libavcodec/h264dec.h
 +++ b/libavcodec/h264dec.h
-@@ -533,6 +533,8 @@
+@@ -539,6 +539,8 @@
       * slices) anymore */
      int setup_finished;
  
@@ -85,3 +85,24 @@
      ret = ff_vaapi_decode_issue(avctx, pic);
      if (ret < 0)
          goto finish;
+--- a/libavformat/bintext.c
++++ b/libavformat/bintext.c
+@@ -149,7 +149,7 @@
+             return AVPROBE_SCORE_EXTENSION + 1;
+ 
+         predict_width(&par, p->buf_size, got_width);
+-        if (par.width < 8)
++        if (par.width <= 0)
+             return 0;
+         calculate_height(&par, p->buf_size);
+         if (par.height <= 0)
+@@ -195,8 +195,6 @@
+             next_tag_read(s, &bin->fsize);
+         if (!bin->width) {
+             predict_width(st->codecpar, bin->fsize, got_width);
+-            if (st->codecpar->width < 8)
+-                return AVERROR_INVALIDDATA;
+             calculate_height(st->codecpar, bin->fsize);
+         }
+         avio_seek(pb, 0, SEEK_SET);
+

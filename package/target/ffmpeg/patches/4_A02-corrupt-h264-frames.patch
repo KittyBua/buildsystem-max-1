@@ -1,15 +1,12 @@
-diff --git a/libavcodec/h264_slice.c b/libavcodec/h264_slice.c
-index d71ddbe9ba..215a6d3c65 100644
 --- a/libavcodec/h264_slice.c
 +++ b/libavcodec/h264_slice.c
-@@ -1464,6 +1464,12 @@
+@@ -1460,6 +1460,11 @@
          h->avctx->has_b_frames = sps->num_reorder_frames;
      }
  
 +    if (sps && sps->bitstream_restriction_flag &&
 +        h->avctx->has_b_frames < sps->num_reorder_frames) {
-+        h->avctx->has_b_frames = FFMAX(h->avctx->has_b_frames,
-+                                       sps->num_reorder_frames);
++        h->avctx->has_b_frames = FFMAX(h->avctx->has_b_frames, sps->num_reorder_frames);
 +    }
 +
      last_pic_droppable   = h->droppable;
