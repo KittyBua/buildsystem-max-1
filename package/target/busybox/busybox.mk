@@ -82,7 +82,7 @@ busybox-config: bootstrap
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(PKG_UNPACK)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(INSTALL_DATA) $(subst -config,,$(PKG_FILES_DIR))/busybox.config .config; \
 		make menuconfig
