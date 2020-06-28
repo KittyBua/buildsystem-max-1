@@ -165,8 +165,8 @@ LH_CONFIG_OPTS =
 
 # -----------------------------------------------------------------------------
 
-N_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO)
-LH_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL)
+N_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_DIR)
+LH_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)
 
 ifeq ($(FLAVOUR), neutrino-ddt)
 GIT_SITE          ?= https://github.com/Duckbox-Developers
@@ -223,11 +223,11 @@ e2-multiboot:
 
 # -----------------------------------------------------------------------------
 
-version.h: $(SOURCE_DIR)/$(NEUTRINO)/src/gui/version.h
-$(SOURCE_DIR)/$(NEUTRINO)/src/gui/version.h:
+version.h: $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
+$(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h:
 	@rm -f $@
 	echo '#define BUILT_DATE "'`date`'"' > $@
-	@if test -d $(SOURCE_DIR)/$(LIBSTB_HAL); then \
+	@if test -d $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); then \
 		echo '#define VCS "BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"' >> $@; \
 	fi
 
@@ -249,15 +249,15 @@ LIBSTB_HAL_SITE   = $(GIT_SITE)
 
 $(D)/libstb-hal.do_prepare: | $(LIBSTB_HAL_DEPS)
 	$(START_BUILD)
-	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL)
-	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL).org
+	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR)
+	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR).org
 	rm -rf $(LH_OBJ_DIR)
 	test -d $(SOURCE_DIR) || mkdir -p $(SOURCE_DIR)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(SOURCE_DIR))
-	(cd $(SOURCE_DIR)/$(LIBSTB_HAL); git checkout -q $(LIBSTB_HAL_BRANCH);)
-	cp -ra $(SOURCE_DIR)/$(LIBSTB_HAL) $(SOURCE_DIR)/$(LIBSTB_HAL).org
-	$(CD) $(SOURCE_DIR)/$(LIBSTB_HAL); \
+	(cd $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); git checkout -q $(LIBSTB_HAL_BRANCH);)
+	cp -ra $(SOURCE_DIR)/$(LIBSTB_HAL_DIR) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR).org
+	$(CD) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); \
 		$(call apply_patches, $(LIBSTB_HAL_PATCH))
 	@touch $@
 
@@ -265,9 +265,9 @@ $(D)/libstb-hal.config.status:
 	rm -rf $(LH_OBJ_DIR)
 	test -d $(LH_OBJ_DIR) || mkdir -p $(LH_OBJ_DIR)
 	cd $(LH_OBJ_DIR); \
-		$(SOURCE_DIR)/$(LIBSTB_HAL)/autogen.sh $(SILENT_OPT); \
+		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh $(SILENT_OPT); \
 		$(BUILD_ENV) \
-		$(SOURCE_DIR)/$(LIBSTB_HAL)/configure $(SILENT_OPT) \
+		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/configure $(SILENT_OPT) \
 			--host=$(TARGET) \
 			--build=$(BUILD) \
 			--prefix=/usr \
@@ -323,14 +323,14 @@ NEUTRINO_SITE   = $(GIT_SITE)
 
 $(D)/neutrino.do_prepare: | $(NEUTRINO_DEPS) libstb-hal
 	$(START_BUILD)
-	rm -rf $(SOURCE_DIR)/$(NEUTRINO)
-	rm -rf $(SOURCE_DIR)/$(NEUTRINO).org
+	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR)
+	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR).org
 	rm -rf $(N_OBJ_DIR)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(SOURCE_DIR))
-	(cd $(SOURCE_DIR)/$(NEUTRINO); git checkout -q $(NEUTRINO_BRANCH);)
-	cp -ra $(SOURCE_DIR)/$(NEUTRINO) $(SOURCE_DIR)/$(NEUTRINO).org
-	$(CD) $(SOURCE_DIR)/$(NEUTRINO); \
+	(cd $(SOURCE_DIR)/$(NEUTRINO_DIR); git checkout -q $(NEUTRINO_BRANCH);)
+	cp -ra $(SOURCE_DIR)/$(NEUTRINO_DIR) $(SOURCE_DIR)/$(NEUTRINO_DIR).org
+	$(CD) $(SOURCE_DIR)/$(NEUTRINO_DIR); \
 		$(call apply_patches, $(NEUTRINO_PATCH))
 	@touch $@
 
@@ -338,9 +338,9 @@ $(D)/neutrino.config.status:
 	rm -rf $(N_OBJ_DIR)
 	test -d $(N_OBJ_DIR) || mkdir -p $(N_OBJ_DIR)
 	cd $(N_OBJ_DIR); \
-		$(SOURCE_DIR)/$(NEUTRINO)/autogen.sh $(SILENT_OPT); \
+		$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh $(SILENT_OPT); \
 		$(BUILD_ENV) \
-		$(SOURCE_DIR)/$(NEUTRINO)/configure $(SILENT_OPT) \
+		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure $(SILENT_OPT) \
 			--host=$(TARGET) \
 			--build=$(BUILD) \
 			--prefix=/usr \
@@ -361,10 +361,10 @@ $(D)/neutrino.config.status:
 			--with-tremor \
 			--with-boxtype=$(BOXTYPE) \
 			--with-boxmodel=$(BOXMODEL) \
-			--with-stb-hal-includes=$(SOURCE_DIR)/$(LIBSTB_HAL)/include \
+			--with-stb-hal-includes=$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/include \
 			--with-stb-hal-build=$(LH_OBJ_DIR) \
 			CFLAGS="$(N_CFLAGS)" CXXFLAGS="$(N_CFLAGS) -std=c++11" CPPFLAGS="$(N_CPPFLAGS)"
-		+make $(SOURCE_DIR)/$(NEUTRINO)/src/gui/version.h
+		+make $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
 ifeq ($(TINKER_OPTION), 0)
 	@touch $@
 endif
@@ -403,7 +403,7 @@ endif
 neutrino-clean:
 	rm -f $(D)/neutrino
 	rm -f $(D)/neutrino.config.status
-	rm -f $(SOURCE_DIR)/$(NEUTRINO)/src/gui/version.h
+	rm -f $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
 	cd $(N_OBJ_DIR); \
 		$(MAKE) -C $(N_OBJ_DIR) distclean
 
@@ -420,4 +420,4 @@ neutrino-uninstall:
 # -----------------------------------------------------------------------------
 
 PHONY += $(TARGET_DIR)/.version
-PHONY += $(SOURCE_DIR)/$(NEUTRINO)/src/gui/version.h
+PHONY += $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
