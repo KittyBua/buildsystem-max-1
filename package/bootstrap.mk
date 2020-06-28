@@ -128,7 +128,7 @@ endif
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
 MACHINE_DEPS += osmio4k-wlan-qcom
 endif
-MACHINE_DEPS += depmod
 
 $(D)/machine-deps: $(MACHINE_DEPS)
+	make depmod
 	@touch $@
