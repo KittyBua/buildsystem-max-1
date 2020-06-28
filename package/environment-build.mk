@@ -57,7 +57,6 @@ PKG_FILES_DIR   = $(BASE_DIR)/package/*/$(PKG_NAME)/files
 PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(PKG_NAME)/patches
 
 PKG_CHDIR       = $(CD) $(PKG_BUILD_DIR)
-PKG_CPDIR       = cp -a -t $(BUILD_DIR) $(DL_DIR)/$(PKG_SOURCE)
 PKG_REMOVE      = $(SILENT)rm -rf $(PKG_BUILD_DIR)
 
 # -----------------------------------------------------------------------------

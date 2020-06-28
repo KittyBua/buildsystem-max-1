@@ -1,35 +1,32 @@
 #
 # crosstool-ng
 #
-CROSSTOOL_NG_VER     = 5659366b
-CROSSTOOL_NG_DIR     = crosstool-ng.git
-CROSSTOOL_NG_SOURCE  = crosstool-ng.git
-CROSSTOOL_NG_SITE    = https://github.com/crosstool-ng
-CROSSTOOL_NG_ARCHIVE = $(DL_DIR)/archive-crosstool-ng
-CROSSTOOL_NG_CONFIG  = crosstool-ng-$(TARGET_ARCH)-$(CROSSTOOL_GCC_VER)
-CROSSTOOL_NG_BACKUP  = $(CROSSTOOL_NG_ARCHIVE)/$(CROSSTOOL_NG_CONFIG)-kernel-$(KERNEL_VER)-backup.tar.gz
-
-$(CROSSTOOL_NG_ARCHIVE):
-	mkdir -p $@
+CROSSTOOL_NG_VER      = git
+CROSSTOOL_NG_DIR      = crosstool-ng.git
+CROSSTOOL_NG_SOURCE   = crosstool-ng.git
+CROSSTOOL_NG_SITE     = https://github.com/crosstool-ng
+CROSSTOOL_NG_CHECKOUT = 5659366b
+CROSSTOOL_NG_CONFIG   = crosstool-ng-$(TARGET_ARCH)-$(CROSSTOOL_GCC_VER)
+CROSSTOOL_NG_BACKUP   = $(DL_DIR)/$(CROSSTOOL_NG_CONFIG)-kernel-$(KERNEL_VER)-backup.tar.gz
 
 # -----------------------------------------------------------------------------
 
 ifeq ($(wildcard $(CROSS_DIR)/build.log.bz2),)
 CROSSTOOL = crosstool
 crosstool:
-	make MAKEFLAGS=--no-print-directory crosstool-ng
+	@make MAKEFLAGS=--no-print-directory crosstool-ng
 	if [ ! -e $(CROSSTOOL_NG_BACKUP) ]; then \
 		make crosstool-backup; \
 	fi;
 
-crosstool-ng: directories kernel.do_prepare $(CROSSTOOL_NG_ARCHIVE) $(DL_DIR)/$(KERNEL_SOURCE)
+crosstool-ng: directories kernel.do_prepare
 	$(START_BUILD)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(GET-GIT-SOURCE) $(CROSSTOOL_NG_SITE)/$(CROSSTOOL_NG_SOURCE) $(CROSSTOOL_NG_ARCHIVE)/$(CROSSTOOL_NG_SOURCE)
-	$(CPDIR)/archive-crosstool-ng/$(CROSSTOOL_NG_DIR)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	unset CONFIG_SITE LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE; \
 	$(PKG_CHDIR); \
-		git checkout -q $(CROSSTOOL_NG_VER); \
+		git checkout -q $(CROSSTOOL_NG_CHECKOUT); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/$(CROSSTOOL_NG_CONFIG).config .config; \
 		NUM_CPUS=$$(expr `getconf _NPROCESSORS_ONLN` \* 2); \
 		MEM_512M=$$(awk '/MemTotal/ {M=int($$2/1024/512); print M==0?1:M}' /proc/meminfo); \
@@ -37,7 +34,7 @@ crosstool-ng: directories kernel.do_prepare $(CROSSTOOL_NG_ARCHIVE) $(DL_DIR)/$(
 		test $$NUM_CPUS = 0 && NUM_CPUS=1; \
 		sed -i "s@^CT_PARALLEL_JOBS=.*@CT_PARALLEL_JOBS=$$NUM_CPUS@" .config; \
 		\
-		export CT_NG_ARCHIVE=$(CROSSTOOL_NG_ARCHIVE); \
+		export CT_NG_ARCHIVE=$(DL_DIR); \
 		export CT_NG_BASE_DIR=$(CROSS_DIR); \
 		export CT_NG_CUSTOM_KERNEL=$(LINUX_DIR); \
 		test -f ./configure || ./bootstrap && \
@@ -54,39 +51,22 @@ endif
 # -----------------------------------------------------------------------------
 
 crosstool-config:
-	make MAKEFLAGS=--no-print-directory crosstool-ng-config
+	@make MAKEFLAGS=--no-print-directory crosstool-ng-config
 
 crosstool-ng-config: directories
+	$(START_BUILD)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
-	$(GET-GIT-SOURCE) $(CROSSTOOL_NG_SITE) $(CROSSTOOL_NG_ARCHIVE)/$(CROSSTOOL_NG_SOURCE)
-	$(CPDIR)/archive-crosstool-ng/$(CROSSTOOL_NG_DIR)
+	$(call PKG_UNPACK,$(BUILD_DIR))
 	unset CONFIG_SITE; \
 	$(PKG_CHDIR); \
-		git checkout -q $(CROSSTOOL_NG_VER); \
+		git checkout -q $(CROSSTOOL_NG_CHECKOUT); \
 		$(INSTALL_DATA) $(subst -config,,$(PKG_FILES_DIR))/$(CROSSTOOL_NG_CONFIG).config .config; \
 		test -f ./configure || ./bootstrap && \
 		./configure --enable-local; \
 		MAKELEVEL=0 make; \
 		chmod 0755 ct-ng; \
 		./ct-ng menuconfig
-
-# -----------------------------------------------------------------------------
-
-crosstool-upgradeconfig:
-	make MAKEFLAGS=--no-print-directory crosstool-ng-upgradeconfig
-
-crosstool-ng-upgradeconfig: directories
-	$(PKG_REMOVE)
-	$(GET-GIT-SOURCE) $(CROSSTOOL_NG_SITE) $(CROSSTOOL_NG_ARCHIVE)/$(CROSSTOOL_NG_SOURCE)
-	$(CPDIR)/archive-crosstool-ng/$(CROSSTOOL_NG_DIR)
-	unset CONFIG_SITE; \
-	$(PKG_CHDIR); \
-		git checkout -q $(CROSSTOOL_NG_VER); \
-		$(INSTALL_DATA) $(subst -upgradeconfig,,$(PKG_FILES_DIR))/$(CROSSTOOL_NG_CONFIG).config .config; \
-		test -f ./configure || ./bootstrap && \
-		./configure --enable-local; \
-		MAKELEVEL=0 make; \
-		./ct-ng upgradeconfig
 
 # -----------------------------------------------------------------------------
 
