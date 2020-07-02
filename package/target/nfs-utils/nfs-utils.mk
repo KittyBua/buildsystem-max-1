@@ -1,14 +1,14 @@
 #
 # nfs-utils
 #
-NFS_UTILS_VER    = 2.4.3
+NFS_UTILS_VER    = 2.5.1
 NFS_UTILS_DIR    = nfs-utils-$(NFS_UTILS_VER)
 NFS_UTILS_SOURCE = nfs-utils-$(NFS_UTILS_VER).tar.bz2
 NFS_UTILS_SITE   = https://sourceforge.net/projects/nfs/files/nfs-utils/$(NFS_UTILS_VER)
 
 NFS_UTILS_PATCH  = \
-	0001-nfs-utils-print-time-in-64-bit.patch \
-	0002-disabled-ip6-support.patch
+	0001-disabled-ip6-support.patch \
+	0002-Makefile.am-fix-undefined-function-for-libnsm.a.patch
 
 NFS-UTILS_CONF = $(if $(filter $(BOXMODEL), vuduo), --disable-ipv6, --enable-ipv6)
 
