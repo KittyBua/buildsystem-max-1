@@ -13,7 +13,7 @@ AUTOFS_PATCH  = \
 	0004-force-STRIP-to-emtpy.patch \
 	0005-pkgconfig-libnsl.patch
 
-$(D)/autofs: bootstrap libtirpc e2fsprogs openssl libxml2 libnsl
+$(D)/autofs: bootstrap libtirpc e2fsprogs openssl libxml2
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
