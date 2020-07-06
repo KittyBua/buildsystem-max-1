@@ -59,7 +59,6 @@ endif
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/rc.local $(TARGET_DIR)/etc/rc.local
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/etc/shells $(TARGET_DIR)/etc/shells
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/etc/network/interfaces $(TARGET_DIR)/etc/network/interfaces
-	$(INSTALL_DATA) $(PKG_FILES_DIR)/etc/network/options $(TARGET_DIR)/etc/network/options
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/etc/default/volatiles/00_core $(TARGET_DIR)/etc/default/volatiles/00_core
 	#
 	# Create runlevel links
