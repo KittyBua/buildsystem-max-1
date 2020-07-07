@@ -191,7 +191,6 @@ ifeq ($(KBUILD_VERBOSE), 0)
 SILENT              = @
 SILENT_CONFIGURE    = >/dev/null 2>&1
 SILENT_OPT          = >/dev/null 2>&1
-SILENT_PATCH        =
 SILENT_Q            = -q
 $(VERBOSE).SILENT:
 endif
@@ -199,14 +198,12 @@ ifeq ($(KBUILD_VERBOSE), 1)
 SILENT              =
 SILENT_CONFIGURE    =
 SILENT_OPT          =
-SILENT_PATCH        =
 SILENT_Q            = -q
 endif
 ifeq ($(KBUILD_VERBOSE), 2)
 SILENT              = @
 SILENT_CONFIGURE    = -q
 SILENT_OPT          =
-SILENT_PATCH        =
 SILENT_Q            = -q
 endif
 

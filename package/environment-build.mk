@@ -84,7 +84,7 @@ endif
 
 # -----------------------------------------------------------------------------
 
-OPTIMIZATIONS         ?= size
+OPTIMIZATIONS ?= size
 ifeq ($(OPTIMIZATIONS), size)
 TARGET_OPTIMIZATION  = -pipe -Os
 TARGET_EXTRA_CFLAGS  = -ffunction-sections -fdata-sections

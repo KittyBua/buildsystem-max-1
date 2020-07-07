@@ -178,7 +178,6 @@ KERNEL_CONFIG      = $(BOXMODEL)_defconfig_multi
 else
 KERNEL_CONFIG      = $(BOXMODEL)_defconfig
 endif
-KERNEL_PATCH       = $($(call UPPERCASE,$(BOXMODEL))_PATCH)
 
 LINUX_DIR          = $(BUILD_DIR)/$(KERNEL_DIR)
 

@@ -20,19 +20,19 @@ define apply_patches
 	for i in $(1); do \
 		if [ -d $$i ]; then \
 			for p in $$i/*; do \
-				echo -e "$(TERM_YELLOW)Applying patch $(PKG_NAME):$(TERM_NORMAL) `basename $$p`"; \
+				echo -e "$(TERM_YELLOW)Applying patch $(PKG_NAME):$(TERM_NORMAL) $${p#$(PKG_PATCHES_DIR)/}"; \
 				if [ $${p:0:1} == "/" ]; then \
-					patch -p$$l $(SILENT_PATCH) -i $$p; \
+					patch -p$$l -i $$p; \
 				else \
-					patch -p$$l $(SILENT_PATCH) -i $(PKG_PATCHES_DIR)/$$p; \
+					patch -p$$l -i $(PKG_PATCHES_DIR)/$$p; \
 				fi; \
 			done; \
 		else \
-			echo -e "$(TERM_YELLOW)Applying patch $(PKG_NAME)$(TERM_NORMAL): `basename $$i`"; \
+			echo -e "$(TERM_YELLOW)Applying patch $(PKG_NAME):$(TERM_NORMAL) $${i#$(PKG_PATCHES_DIR)/}"; \
 			if [ $${i:0:1} == "/" ]; then \
-				patch -p$$l $(SILENT_PATCH) -i $$i; \
+				patch -p$$l -i $$i; \
 			else \
-				patch -p$$l $(SILENT_PATCH) -i $(PKG_PATCHES_DIR)/$$i; \
+				patch -p$$l -i $(PKG_PATCHES_DIR)/$$i; \
 			fi; \
 		fi; \
 	done
@@ -40,7 +40,7 @@ endef
 
 # apply patch sets automatically
 APPLY_PATCHES = $(call apply_patches, $(PKG_PATCHES_DIR))
-
+PATCH = patch -p1 -s
 # -----------------------------------------------------------------------------
 
 #

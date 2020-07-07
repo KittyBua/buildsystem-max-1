@@ -201,7 +201,7 @@ $(D)/kernel.do_prepare:
 	$(PKG_REMOVE)
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(KERNEL_PATCH))
+		$(call apply_patches, $($(call UPPERCASE, $(BOXMODEL))_PATCH))
 	@touch $@
 
 $(D)/kernel.do_compile: kernel.do_prepare
