@@ -43,7 +43,7 @@ VPATH        = $(D)
 
 # -----------------------------------------------------------------------------
 
-PKG_NAME        = $(subst -config,,$(subst -upgradeconfig,,$(@F)))
+PKG_NAME        = $(subst -config,,$(subst -upgradeconfig,,$(basename $(@F))))
 PKG_UPPER       = $(call UPPERCASE,$(PKG_NAME))
 PKG_LOWER       = $(call LOWERCASE,$(PKG_NAME))
 PKG_VER         = $($(PKG_UPPER)_VER)
