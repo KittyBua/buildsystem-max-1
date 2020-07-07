@@ -70,18 +70,37 @@ crosstool-ng-config: directories
 
 # -----------------------------------------------------------------------------
 
+crosstool-upgradeconfig:
+	@make MAKEFLAGS=--no-print-directory crosstool-ng-upgradeconfig
+
+crosstool-ng-upgradeconfig: directories
+	$(START_BUILD)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(PKG_REMOVE)
+	$(call PKG_UNPACK,$(BUILD_DIR))
+	unset CONFIG_SITE; \
+	$(PKG_CHDIR); \
+		git checkout -q $(CROSSTOOL_NG_CHECKOUT); \
+		$(INSTALL_DATA) $(subst -upgradeconfig,,$(PKG_FILES_DIR))/$(CROSSTOOL_NG_CONFIG).config .config; \
+		test -f ./configure || ./bootstrap && \
+		./configure --enable-local; \
+		MAKELEVEL=0 make; \
+		./ct-ng upgradeconfig
+
+# -----------------------------------------------------------------------------
+
 crosstool-backup:
 	if [ -e $(CROSSTOOL_NG_BACKUP) ]; then \
 		mv $(CROSSTOOL_NG_BACKUP) $(CROSSTOOL_NG_BACKUP).old; \
 	fi; \
 	cd $(CROSS_DIR); \
-	tar czvf $(CROSSTOOL_NG_BACKUP) *
+		tar czvf $(CROSSTOOL_NG_BACKUP) *
 
 crosstool-restore: $(CROSSTOOL_NG_BACKUP)
 	rm -rf $(CROSS_DIR) ; \
 	if [ ! -e $(CROSS_DIR) ]; then \
 		mkdir -p $(CROSS_DIR); \
-	fi;
+	fi; \
 	tar xzvf $(CROSSTOOL_NG_BACKUP) -C $(CROSS_DIR)
 
 crosstool-renew:
