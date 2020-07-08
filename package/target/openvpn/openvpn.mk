@@ -8,8 +8,8 @@ OPENVPN_SITE   = http://build.openvpn.net/downloads/releases
 
 $(D)/openvpn: bootstrap openssl lzo 
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(CONFIGURE) \

@@ -11,8 +11,8 @@ BZIP2_PATCH  = \
 
 $(D)/bzip2: bootstrap
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \

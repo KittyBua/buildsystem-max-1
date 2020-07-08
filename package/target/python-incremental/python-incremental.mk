@@ -8,8 +8,8 @@ PYTHON_INCREMENTAL_SITE   = https://files.pythonhosted.org/packages/source/i/inc
 
 $(D)/python-incremental: bootstrap python python-setuptools
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(PYTHON_BUILD); \

@@ -8,8 +8,8 @@ PYTHON_ZOPE_INTERFACE_SITE   = https://pypi.python.org/packages/source/z/zope.in
 
 $(D)/python-zope-interface: bootstrap python python-setuptools
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(PYTHON_BUILD); \

@@ -8,8 +8,8 @@ TZDATA_SITE   = https://ftp.iana.org/tz/releases
 
 $(D)/tzdata: bootstrap host-tzcode
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	mkdir $(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/zoneinfo
 	$(call PKG_UNPACK,$(PKG_BUILD_DIR))
 	$(PKG_CHDIR); \

@@ -9,8 +9,8 @@ LUA_FEEDPARSER_SITE   = https://github.com/slact/lua-feedparser/archive
 
 $(D)/lua-feedparser: bootstrap lua luasocket luaexpat
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(LUA_FEEDPARSER_GIT))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(LUA_FEEDPARSER_GIT))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		sed -i -e "s/^PREFIX.*//" -e "s/^LUA_DIR.*//" Makefile ; \

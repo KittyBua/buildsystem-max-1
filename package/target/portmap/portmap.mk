@@ -12,9 +12,9 @@ PORTMAP_PATCH  = \
 
 $(D)/portmap: bootstrap lsb
 	$(START_BUILD)
+	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PORTMAP_DIFF))
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(PKG_REMOVE)
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		gunzip -cd $(DL_DIR)/$(PORTMAP_DIFF) | cat > debian.patch; \

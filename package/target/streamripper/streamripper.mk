@@ -8,8 +8,8 @@ STREAMRIPPER_SITE   = https://github.com/neutrino-images
 
 $(D)/streamripper: bootstrap libvorbisidec libmad glib2
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \

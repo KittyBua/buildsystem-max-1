@@ -8,8 +8,8 @@ POPT_SITE   = ftp://anduin.linuxfromscratch.org/BLFS/popt
 
 $(D)/popt: bootstrap
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(CONFIGURE) \

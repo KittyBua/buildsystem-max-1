@@ -8,8 +8,8 @@ LIBGCRYPT_SITE   = https://gnupg.org/ftp/gcrypt/libgcrypt
 
 $(D)/libgcrypt: bootstrap libgpg-error
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(CONFIGURE) \

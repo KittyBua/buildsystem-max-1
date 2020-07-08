@@ -8,8 +8,8 @@ SHAIRPORT_SYNC_SITE   = https://github.com/mikebrady
 
 $(D)/shairport-sync: bootstrap libdaemon popt libconfig openssl alsa-lib
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \

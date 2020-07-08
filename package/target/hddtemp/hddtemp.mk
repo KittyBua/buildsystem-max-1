@@ -8,8 +8,8 @@ HDDTEMP_SITE   = http://savannah.c3sl.ufpr.br/hddtemp
 
 $(D)/hddtemp: bootstrap libiconv
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(CONFIGURE) LIBS="-liconv" \

@@ -8,8 +8,8 @@ PYTHON_PYASN1_MODULES_SITE   = https://pypi.python.org/packages/source/p/pyasn1-
 
 $(D)/python-pyasn1-modules: bootstrap python python-setuptools
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(PYTHON_BUILD); \

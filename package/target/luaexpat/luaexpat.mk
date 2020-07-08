@@ -9,8 +9,8 @@ LUAEXPAT_SITE   = https://github.com/tomasguisasola/luaexpat/archive
 
 $(D)/luaexpat: bootstrap lua expat
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(LUAEXPAT_GIT))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(LUAEXPAT_GIT))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		sed -i 's|^EXPAT_INC=.*|EXPAT_INC= $(TARGET_INCLUDE_DIR)|' makefile; \

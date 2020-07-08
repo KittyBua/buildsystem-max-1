@@ -197,8 +197,8 @@ H7_PATCH = \
 
 $(D)/kernel.do_prepare:
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $($(call UPPERCASE, $(BOXMODEL))_PATCH))

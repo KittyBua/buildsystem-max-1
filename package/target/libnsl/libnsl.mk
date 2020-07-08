@@ -9,8 +9,8 @@ LIBNSL_SITE   = https://github.com/thkukuk/libnsl/archive
 
 $(D)/libnsl: bootstrap libtirpc
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(LIBNSL_GIT))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(LIBNSL_GIT))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \

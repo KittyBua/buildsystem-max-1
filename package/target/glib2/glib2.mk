@@ -14,8 +14,8 @@ GLIB2_PATCH  = \
 
 $(D)/glib2: bootstrap host-glib2 libffi util-linux zlib libiconv
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \

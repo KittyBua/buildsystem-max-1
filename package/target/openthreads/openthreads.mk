@@ -8,8 +8,8 @@ OPENTHREADS_SITE   = https://sourceforge.net/projects/mxedeps/files
 
 $(D)/openthreads: bootstrap
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		echo "# dummy file to prevent warning message" > examples/CMakeLists.txt; \

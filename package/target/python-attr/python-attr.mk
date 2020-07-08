@@ -8,8 +8,8 @@ PYTHON_ATTR_SITE   = https://pypi.python.org/packages/source/a/attr
 
 $(D)/python-attr: bootstrap python python-setuptools
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(PYTHON_BUILD); \

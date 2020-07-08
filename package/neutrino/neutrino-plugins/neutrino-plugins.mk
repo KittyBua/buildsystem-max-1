@@ -43,8 +43,8 @@ endef
 
 $(D)/neutrino-plugins.do_prepare: | bootstrap ffmpeg libcurl libpng libjpeg-turbo giflib freetype
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(SOURCE_DIR))
 	@touch $@
 

@@ -8,8 +8,8 @@ NEUTRINO_CHANNELLOGOS_SITE   = https://github.com/neutrino-images
 
 $(D)/neutrino-channellogos: bootstrap | $(SHARE_ICONS) $(SHARE_PLUGINS)
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	rm -rf $(SHARE_LOGOS)
 	mkdir -p $(SHARE_LOGOS)

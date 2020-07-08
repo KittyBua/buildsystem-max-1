@@ -8,8 +8,8 @@ LIBNL_SITE   = https://github.com/thom311/libnl/releases/download/libnl3_5_0
 
 $(D)/libnl: bootstrap
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(CONFIGURE) \

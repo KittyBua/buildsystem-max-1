@@ -8,8 +8,8 @@ OSMIO4KPLUS_LIBGLES_SITE   = http://source.mynonpublic.com/edision
 
 $(D)/osmio4kplus-libgles: bootstrap
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	cp -a $(subst plus-,-,$(PKG_BUILD_DIR))/* $(TARGET_DIR)/usr/
 	ln -sf libv3ddriver.so.1.0 $(TARGET_LIB_DIR)/libEGL.so

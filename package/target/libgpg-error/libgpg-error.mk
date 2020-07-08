@@ -8,8 +8,8 @@ LIBGPG_ERROR_SITE   = https://www.gnupg.org/ftp/gcrypt/libgpg-error
 
 $(D)/libgpg-error: bootstrap
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \

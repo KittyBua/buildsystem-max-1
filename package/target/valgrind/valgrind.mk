@@ -8,8 +8,8 @@ VALGRIND_SITE   = ftp://sourceware.org/pub/valgrind
 
 $(D)/valgrind: bootstrap
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		sed -i -e "s#armv7#arm#g" configure; \

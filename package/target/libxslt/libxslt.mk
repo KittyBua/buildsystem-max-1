@@ -8,8 +8,8 @@ LIBXSLT_SITE   = ftp://xmlsoft.org/libxml2
 
 $(D)/libxslt: bootstrap libxml2
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(CONFIGURE) \

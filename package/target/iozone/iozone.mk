@@ -8,8 +8,8 @@ IOZONE_SITE   = http://www.iozone.org/src/current
 
 $(D)/iozone: bootstrap
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		sed -i -e "s/= gcc/= $(TARGET_CC)/" src/current/makefile; \

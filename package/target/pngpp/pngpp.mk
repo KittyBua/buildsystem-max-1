@@ -8,8 +8,8 @@ PNGPP_SITE   = https://download.savannah.gnu.org/releases/pngpp
 
 $(D)/pngpp: bootstrap libpng
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(MAKE) install-headers PREFIX=$(TARGET_DIR)/usr

@@ -8,8 +8,8 @@ GIFLIB_SITE   = https://sourceforge.net/projects/giflib/files
 
 $(D)/giflib: bootstrap
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		export ac_cv_prog_have_xmlto=no; \

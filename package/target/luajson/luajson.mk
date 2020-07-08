@@ -1,6 +1,7 @@
 #
 # luajson
 #
+LUAJSON_VER    = 1.0
 LUAJSON_SOURCE = json.lua
 LUAJSON_SITE   = https://github.com/swiboe/swiboe/raw/master/term_gui
 

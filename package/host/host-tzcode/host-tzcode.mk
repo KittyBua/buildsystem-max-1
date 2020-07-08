@@ -8,9 +8,9 @@ HOST_TZCODE_SITE   = ftp://ftp.iana.org/tz/releases
 
 $(D)/host-tzcode: bootstrap
 	$(START_BUILD)
+	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(TZDATA_SOURCE))
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(PKG_REMOVE)
 	$(MKDIR)/$(PKG_DIR)
 	$(PKG_CHDIR); \
 		tar -xf $(DL_DIR)/$(HOST_TZCODE_SOURCE); \

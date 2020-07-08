@@ -8,8 +8,8 @@ NANO_SITE   = https://www.nano-editor.org/dist/v$(basename $(NANO_VER))
 
 $(D)/nano: bootstrap
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(CONFIGURE) \

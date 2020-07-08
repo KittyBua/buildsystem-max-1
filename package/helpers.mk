@@ -41,13 +41,14 @@ endef
 # apply patch sets automatically
 APPLY_PATCHES = $(call apply_patches, $(PKG_PATCHES_DIR))
 PATCH = patch -p1 -s
+
 # -----------------------------------------------------------------------------
 
 #
 # download archives into archives directory
 #
 define PKG_DOWNLOAD
-	@if [ $(PKG_VER) == "git" ]; then \
+	$(SILENT)if [ $(PKG_VER) == "git" ]; then \
 		$(GET-GIT-SOURCE) $(PKG_SITE)/$(PKG_SOURCE) $(DL_DIR)/$(PKG_SOURCE); \
 	else \
 		if [ ! -f $(DL_DIR)/$(PKG_SOURCE) ]; then \
@@ -62,7 +63,7 @@ endef
 # unpack archives into build directory
 #
 define PKG_UNPACK
-	@( \
+	$(SILENT)( \
 	case ${PKG_SOURCE} in \
 		*.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.xz | *.txz) \
 			tar -xf ${DL_DIR}/${PKG_SOURCE} -C ${1}; \
@@ -83,13 +84,13 @@ endef
 # -----------------------------------------------------------------------------
 
 define START_BUILD
-	@echo ""; \
+	$(SILENT)echo ""; \
 	echo -e "$(TERM_GREEN)Start building$(TERM_NORMAL) \nName    : $(PKG_NAME) \nVersion : $(PKG_VER) \nSource  : $(PKG_SOURCE)"; \
 	echo ""
 endef
 
 define TOUCH
-	@touch $@; echo -e "$(TERM_GREEN)completed$(TERM_NORMAL)"; \
+	$(SILENT)touch $@; echo -e "$(TERM_GREEN)completed$(TERM_NORMAL)"; \
 	echo ""; \
 	$(call draw_line);
 endef
@@ -108,7 +109,7 @@ REWRITE_LIBTOOL = \
 	$(REWRITE_LIBTOOL_RULES) $(TARGET_LIB_DIR)
 
 define rewrite_libtool
-	@cd $(TARGET_LIB_DIR); \
+	$(SILENT)cd $(TARGET_LIB_DIR); \
 	for la in *.la; do \
 		if ! grep -q "rewritten=1" $${la}; then \
 			echo -e "$(TERM_YELLOW)Rewriting $${la}$(TERM_NORMAL)"; \

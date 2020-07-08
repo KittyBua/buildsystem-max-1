@@ -12,8 +12,8 @@ XUPNPD_PATCH =  \
 
 $(D)/xupnpd: bootstrap lua openssl neutrino-plugins
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		git checkout -q $(XUPNPD_CHECKOUT); \

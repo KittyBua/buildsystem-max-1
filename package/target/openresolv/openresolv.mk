@@ -8,8 +8,8 @@ OPENRESOLV_SITE   = https://roy.marples.name/downloads/openresolv
 
 $(D)/openresolv: bootstrap
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		echo "SYSCONFDIR=/etc" > config.mk; \

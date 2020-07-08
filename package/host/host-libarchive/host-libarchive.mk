@@ -8,8 +8,8 @@ HOST_LIBARCHIVE_SITE   = https://www.libarchive.org/downloads
 
 $(D)/host-libarchive: bootstrap
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		./configure $(SILENT_OPT) \

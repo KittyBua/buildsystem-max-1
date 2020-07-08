@@ -8,8 +8,8 @@ AIO_GRAB_SITE   = https://github.com/oe-alliance
 
 $(D)/aio-grab: bootstrap zlib libpng libjpeg-turbo
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \

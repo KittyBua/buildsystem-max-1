@@ -9,8 +9,8 @@ UTIL_LINUX_SITE   = https://www.kernel.org/pub/linux/utils/util-linux/v$(UTIL_LI
 
 $(D)/util-linux: bootstrap ncurses zlib 
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(PKG_REMOVE)
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(CONFIGURE) \
