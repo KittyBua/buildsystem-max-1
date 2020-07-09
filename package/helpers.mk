@@ -57,6 +57,11 @@ define PKG_DOWNLOAD
 	fi
 endef
 
+#
+# github(user,package,version): returns site of GitHub repository
+#
+github = https://github.com/$(1)/$(2)/archive/$(3)
+
 # -----------------------------------------------------------------------------
 
 #
