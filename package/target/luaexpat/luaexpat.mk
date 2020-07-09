@@ -4,13 +4,12 @@
 LUAEXPAT_VER    = 1.3.3
 LUAEXPAT_DIR    = luaexpat-$(LUAEXPAT_VER)
 LUAEXPAT_SOURCE = luaexpat-$(LUAEXPAT_VER).tar.gz
-LUAEXPAT_GIT    = v$(LUAEXPAT_VER).tar.gz -O $(DL_DIR)/$(LUAEXPAT_SOURCE)
-LUAEXPAT_SITE   = https://github.com/tomasguisasola/luaexpat/archive
+LUAEXPAT_SITE   = $(call github,tomasguisasola,luaexpat,v$(LUAEXPAT_VER))
 
 $(D)/luaexpat: bootstrap lua expat
 	$(START_BUILD)
 	$(PKG_REMOVE)
-	$(call PKG_DOWNLOAD,$(LUAEXPAT_GIT))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		sed -i 's|^EXPAT_INC=.*|EXPAT_INC= $(TARGET_INCLUDE_DIR)|' makefile; \
