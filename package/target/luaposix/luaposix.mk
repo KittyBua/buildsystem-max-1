@@ -4,8 +4,7 @@
 LUAPOSIX_VER    = 31
 LUAPOSIX_DIR    = luaposix-$(LUAPOSIX_VER)
 LUAPOSIX_SOURCE = luaposix-$(LUAPOSIX_VER).tar.gz
-LUAPOSIX_GIT    = v$(LUAPOSIX_VER).tar.gz -O $(DL_DIR)/$(LUAPOSIX_SOURCE)
-LUAPOSIX_SITE   = https://github.com/luaposix/luaposix/archive
+LUAPOSIX_SITE   = $(call github,luaposix,luaposix,v$(LUAPOSIX_VER))
 
 LUAPOSIX_PATCH   = \
 	0001-fix-docdir-build.patch
@@ -13,7 +12,7 @@ LUAPOSIX_PATCH   = \
 $(D)/luaposix: bootstrap host-lua lua luaexpat slingshot gnulib
 	$(START_BUILD)
 	$(PKG_REMOVE)
-	$(call PKG_DOWNLOAD,$(LUAPOSIX_GIT))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		tar -C gnulib --strip=1 -xf $(DL_DIR)/$(GNULIB_SOURCE); \
