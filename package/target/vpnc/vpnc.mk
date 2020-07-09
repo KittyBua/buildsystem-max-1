@@ -4,8 +4,7 @@
 VPNC_VER    = 0.5.3r550-2jnpr1
 VPNC_DIR    = vpnc-$(VPNC_VER)
 VPNC_SOURCE = vpnc-$(VPNC_VER).tar.gz
-VPNC_GIT    = $(VPNC_VER).tar.gz -O $(DL_DIR)/$(VPNC_SOURCE)
-VPNC_SITE   = https://github.com/ndpgroup/vpnc/archive
+VPNC_SITE   = $(call github,ndpgroup,vpnc,$(VPNC_VER))
 
 VPNC_PATCH  = \
 	0001-Makefile-allow-to-override-the-PREFIX-variable.patch \
@@ -22,7 +21,7 @@ VPNC_PATCH  = \
 $(D)/vpnc: bootstrap openssl libgcrypt libgpg-error
 	$(START_BUILD)
 	$(PKG_REMOVE)
-	$(call PKG_DOWNLOAD,$(VPNC_GIT))
+	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
