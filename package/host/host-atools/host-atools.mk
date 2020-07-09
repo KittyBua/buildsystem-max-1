@@ -2,6 +2,7 @@
 # host-atools
 #
 HOST_ATOOLS_VER = 1.0
+HOST_ATOOLS_DIR = hat
 
 HOST_HAT_CORE_REV          = 2314b11
 HOST_HAT_CORE_SOURCE       = hat-core-$(HOST_HAT_CORE_REV).tar.bz2
@@ -25,7 +26,7 @@ $(DL_DIR)/$(HOST_HAT_LIBSELINUX_SOURCE):
 
 $(D)/host-atools: $(DL_DIR)/$(HOST_HAT_CORE_SOURCE) $(DL_DIR)/$(HOST_HAT_EXTRAS_SOURCE) $(DL_DIR)/$(HOST_HAT_LIBSELINUX_SOURCE)
 	$(START_BUILD)
-	$(REMOVE)/hat
+	$(PKG_REMOVE)
 	$(MKDIR)/hat/system/core
 	$(SILENT)tar --strip 1 -C $(BUILD_DIR)/hat/system/core -xf $(DL_DIR)/$(HOST_HAT_CORE_SOURCE)
 	$(MKDIR)/hat/system/extras
@@ -33,7 +34,7 @@ $(D)/host-atools: $(DL_DIR)/$(HOST_HAT_CORE_SOURCE) $(DL_DIR)/$(HOST_HAT_EXTRAS_
 	$(MKDIR)/hat/external/libselinux
 	$(SILENT)tar --strip 1 -C $(BUILD_DIR)/hat/external/libselinux -xf $(DL_DIR)/$(HOST_HAT_LIBSELINUX_SOURCE)
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/ext4_utils.helper $(BUILD_DIR)/hat/ext4_utils.mk
-	$(CHDIR)/hat; \
+	$(PKG_CHDIR); \
 		$(MAKE) --file=ext4_utils.mk SRCDIR=$(BUILD_DIR)/hat
 		$(INSTALL_EXEC) -D $(BUILD_DIR)/hat/ext2simg $(HOST_DIR)/bin/
 		$(INSTALL_EXEC) -D $(BUILD_DIR)/hat/ext4fixup $(HOST_DIR)/bin/
@@ -41,5 +42,5 @@ $(D)/host-atools: $(DL_DIR)/$(HOST_HAT_CORE_SOURCE) $(DL_DIR)/$(HOST_HAT_EXTRAS_
 		$(INSTALL_EXEC) -D $(BUILD_DIR)/hat/make_ext4fs $(HOST_DIR)/bin/
 		$(INSTALL_EXEC) -D $(BUILD_DIR)/hat/simg2img $(HOST_DIR)/bin/
 		$(INSTALL_EXEC) -D $(BUILD_DIR)/hat/simg2simg $(HOST_DIR)/bin/
-	$(REMOVE)/hat
+	$(PKG_REMOVE)
 	$(TOUCH)
