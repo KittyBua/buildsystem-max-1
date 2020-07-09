@@ -1,10 +1,10 @@
 #
 # libplist
 #
-LIBPLIST_VER    = 2.0.0
+LIBPLIST_VER    = 2.1.0
 LIBPLIST_DIR    = libplist-$(LIBPLIST_VER)
-LIBPLIST_SOURCE = libplist-$(LIBPLIST_VER).tar.bz2
-LIBPLIST_SITE   = http://www.libimobiledevice.org/downloads
+LIBPLIST_SOURCE = libplist-$(LIBPLIST_VER).tar.gz
+LIBPLIST_SITE   = $(call github,libimobiledevice,libplist,$(LIBPLIST_VER))
 
 $(D)/libplist: bootstrap libxml2
 	$(START_BUILD)
