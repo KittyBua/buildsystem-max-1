@@ -19,7 +19,12 @@ export CONFIG_SITE
 # -----------------------------------------------------------------------------
 
 # set up default parallelism
+BS_JLEVEL ?= 0
+ifeq ($(BS_JLEVEL),0)
 PARALLEL_JOBS := $(shell echo $$((1 + `getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1`)))
+else
+PARALLEL_JOBS := $(BS_JLEVEL)
+endif
 override MAKE = make $(if $(findstring j,$(filter-out --%,$(MAKEFLAGS))),,-j$(PARALLEL_JOBS)) $(SILENT_OPT)
 
 MAKEFLAGS   += --no-print-directory
