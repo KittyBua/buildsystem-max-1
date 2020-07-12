@@ -1,83 +1,72 @@
 #
-# makefile to build libstb-hal and neutrino
+# makefile to build neutrino
 #
 # -----------------------------------------------------------------------------
 
-AUDIODEC = ffmpeg
+ifeq ($(FLAVOUR), neutrino-ddt)
+GIT_SITE          ?= https://github.com/Duckbox-Developers
+NEUTRINO           = neutrino-ddt
+LIBSTB_HAL         = libstb-hal-ddt
+NEUTRINO_BRANCH   ?= master
+LIBSTB_HAL_BRANCH ?= master
+NEUTRINO_PATCH     =
+LIBSTB_HAL_PATCH   =
+else ifeq ($(FLAVOUR), neutrino-max)
+GIT_SITE          ?= $(MAX-GIT-GITHUB)
+NEUTRINO           = neutrino-max
+LIBSTB_HAL         = libstb-hal-max
+NEUTRINO_BRANCH   ?= master
+LIBSTB_HAL_BRANCH ?= master
+NEUTRINO_PATCH     =
+LIBSTB_HAL_PATCH   =
+else ifeq ($(FLAVOUR), neutrino-ni)
+GIT_SITE          ?= https://github.com/neutrino-images
+NEUTRINO           = ni-neutrino
+LIBSTB_HAL         = ni-libstb-hal
+NEUTRINO_BRANCH   ?= master
+LIBSTB_HAL_BRANCH ?= master
+NEUTRINO_PATCH     =
+LIBSTB_HAL_PATCH   =
+else ifeq ($(FLAVOUR), neutrino-tangos)
+GIT_SITE          ?= https://github.com/TangoCash
+NEUTRINO           = neutrino-tangos
+LIBSTB_HAL         = libstb-hal-tangos
+NEUTRINO_BRANCH   ?= master
+LIBSTB_HAL_BRANCH ?= master
+NEUTRINO_PATCH     =
+LIBSTB_HAL_PATCH   =
+else ifeq ($(FLAVOUR), neutrino-redblue)
+GIT_SITE          ?= https://github.com/redblue-pkt
+NEUTRINO           = neutrino-redblue
+LIBSTB_HAL         = libstb-hal-redblue
+NEUTRINO_BRANCH   ?= master
+LIBSTB_HAL_BRANCH ?= master
+NEUTRINO_PATCH     =
+LIBSTB_HAL_PATCH   =
+endif
 
-NEUTRINO_DEPS  = bootstrap
-NEUTRINO_DEPS += machine-deps
-NEUTRINO_DEPS += system-tools
-NEUTRINO_DEPS += ncurses
-NEUTRINO_DEPS += libcurl
-NEUTRINO_DEPS += libpng
-NEUTRINO_DEPS += libjpeg-turbo
-NEUTRINO_DEPS += giflib
-NEUTRINO_DEPS += freetype
-NEUTRINO_DEPS += alsa-utils
-NEUTRINO_DEPS += ffmpeg
-NEUTRINO_DEPS += fbshot
-NEUTRINO_DEPS += aio-grab
-NEUTRINO_DEPS += libsigc
-NEUTRINO_DEPS += libdvbsi
-NEUTRINO_DEPS += dvbsnoop
-NEUTRINO_DEPS += libusb
-NEUTRINO_DEPS += pugixml
-NEUTRINO_DEPS += openthreads
-NEUTRINO_DEPS += lua
-NEUTRINO_DEPS += luaposix
-NEUTRINO_DEPS += luaexpat
-NEUTRINO_DEPS += luacurl
-NEUTRINO_DEPS += luasocket
-NEUTRINO_DEPS += lua-feedparser
-NEUTRINO_DEPS += luasoap
-NEUTRINO_DEPS += luajson
-NEUTRINO_DEPS += wpa-supplicant
-NEUTRINO_DEPS += wireless-tools
-NEUTRINO_DEPS += hd-idle
-NEUTRINO_DEPS += ntfs-3g
-#NEUTRINO_DEPS += jfsutils
-NEUTRINO_DEPS += dosfstools
-NEUTRINO_DEPS += parted
-NEUTRINO_DEPS += gptfdisk
-NEUTRINO_DEPS += udpxy
-NEUTRINO_DEPS += mc
-NEUTRINO_DEPS += $(LOCAL_NEUTRINO_DEPS)
-N_CONFIG_OPTS  = $(LOCAL_NEUTRINO_BUILD_OPTIONS)
-ifeq ($(BOXMODEL), hd60)
-NEUTRINO_DEPS += harfbuzz
-endif
-ifeq ($(EXTERNAL_LCD), graphlcd)
-N_CONFIG_OPTS += --enable-graphlcd
-NEUTRINO_DEPS += graphlcd-base
-endif
-ifeq ($(EXTERNAL_LCD), lcd4linux)
-N_CONFIG_OPTS += --enable-lcd4linux
-NEUTRINO_DEPS += lcd4linux
-endif
-ifeq ($(EXTERNAL_LCD), both)
-N_CONFIG_OPTS += --enable-graphlcd
-NEUTRINO_DEPS += graphlcd-base
-N_CONFIG_OPTS += --enable-lcd4linux
-NEUTRINO_DEPS += lcd4linux
-endif
-ifeq ($(AUDIODEC), ffmpeg)
-# enable ffmpeg audio decoder in neutrino
-N_CONFIG_OPTS += --enable-ffmpegdec
-else
-NEUTRINO_DEPS += libid3tag
-NEUTRINO_DEPS += libmad
+NEUTRINO_OBJ_DIR   = $(BUILD_DIR)/$(NEUTRINO_DIR)
 
-N_CONFIG_OPTS += --with-tremor
-NEUTRINO_DEPS += libvorbisidec
+# -----------------------------------------------------------------------------
 
-N_CONFIG_OPTS += --enable-flac
-NEUTRINO_DEPS += flac
-endif
-NEUTRINO_DEPS += neutrino-channellogos
-NEUTRINO_DEPS += neutrino-mediathek
-NEUTRINO_DEPS += neutrino-plugins
-NEUTRINO_DEPS += xupnpd
+e2-multiboot:
+	touch $(TARGET_DIR)/usr/bin/enigma2
+	#
+	echo -e "$(FLAVOUR) `sed -n 's/\#define PACKAGE_VERSION "//p' $(NEUTRINO_OBJ_DIR)/config.h | sed 's/"//'` \\\n \\\l\n" > $(TARGET_DIR)/etc/issue
+	#
+	touch $(TARGET_DIR)/var/lib/opkg/status
+	#
+	cp -a $(TARGET_DIR)/.version $(TARGET_DIR)/etc/image-version
+
+# -----------------------------------------------------------------------------
+
+version.h: $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
+$(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h:
+	@rm -f $@
+	echo '#define BUILT_DATE "'`date`'"' > $@
+	@if test -d $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); then \
+		echo '#define VCS "BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"' >> $@; \
+	fi
 
 # -----------------------------------------------------------------------------
 
@@ -147,6 +136,95 @@ N_CONFIG_OPTS += \
 
 # -----------------------------------------------------------------------------
 
+NEUTRINO_DEPS  = bootstrap
+NEUTRINO_DEPS += machine-deps
+NEUTRINO_DEPS += system-tools
+NEUTRINO_DEPS += ncurses
+NEUTRINO_DEPS += libcurl
+NEUTRINO_DEPS += libpng
+NEUTRINO_DEPS += libjpeg-turbo
+NEUTRINO_DEPS += giflib
+NEUTRINO_DEPS += freetype
+NEUTRINO_DEPS += alsa-utils
+NEUTRINO_DEPS += ffmpeg
+NEUTRINO_DEPS += fbshot
+NEUTRINO_DEPS += aio-grab
+NEUTRINO_DEPS += libsigc
+NEUTRINO_DEPS += libdvbsi
+NEUTRINO_DEPS += dvbsnoop
+NEUTRINO_DEPS += libusb
+NEUTRINO_DEPS += pugixml
+NEUTRINO_DEPS += openthreads
+NEUTRINO_DEPS += lua
+NEUTRINO_DEPS += luaposix
+NEUTRINO_DEPS += luaexpat
+NEUTRINO_DEPS += luacurl
+NEUTRINO_DEPS += luasocket
+NEUTRINO_DEPS += lua-feedparser
+NEUTRINO_DEPS += luasoap
+NEUTRINO_DEPS += luajson
+NEUTRINO_DEPS += wpa-supplicant
+NEUTRINO_DEPS += wireless-tools
+NEUTRINO_DEPS += hd-idle
+NEUTRINO_DEPS += ntfs-3g
+#NEUTRINO_DEPS += jfsutils
+NEUTRINO_DEPS += dosfstools
+NEUTRINO_DEPS += parted
+NEUTRINO_DEPS += gptfdisk
+NEUTRINO_DEPS += udpxy
+NEUTRINO_DEPS += mc
+ifeq ($(BOXMODEL), hd60)
+NEUTRINO_DEPS += harfbuzz
+endif
+NEUTRINO_DEPS += $(LOCAL_NEUTRINO_DEPS)
+N_CONFIG_OPTS  = $(LOCAL_NEUTRINO_BUILD_OPTIONS)
+
+ifeq ($(BOXTYPE), armbox)
+N_CONFIG_OPTS += --disable-arm-acc
+endif
+ifeq ($(BOXTYPE), mipsbox)
+N_CONFIG_OPTS += --disable-mips-acc
+endif
+
+
+ifeq ($(EXTERNAL_LCD), graphlcd)
+N_CONFIG_OPTS += --enable-graphlcd
+NEUTRINO_DEPS += graphlcd-base
+endif
+ifeq ($(EXTERNAL_LCD), lcd4linux)
+N_CONFIG_OPTS += --enable-lcd4linux
+NEUTRINO_DEPS += lcd4linux
+endif
+ifeq ($(EXTERNAL_LCD), both)
+N_CONFIG_OPTS += --enable-graphlcd
+NEUTRINO_DEPS += graphlcd-base
+N_CONFIG_OPTS += --enable-lcd4linux
+NEUTRINO_DEPS += lcd4linux
+endif
+
+# enable ffmpeg audio decoder in neutrino
+AUDIODEC = ffmpeg
+
+ifeq ($(AUDIODEC), ffmpeg)
+N_CONFIG_OPTS += --enable-ffmpegdec
+else
+NEUTRINO_DEPS += libid3tag
+NEUTRINO_DEPS += libmad
+
+N_CONFIG_OPTS += --with-tremor
+NEUTRINO_DEPS += libvorbisidec
+
+N_CONFIG_OPTS += --enable-flac
+NEUTRINO_DEPS += flac
+endif
+
+NEUTRINO_DEPS += neutrino-channellogos
+NEUTRINO_DEPS += neutrino-mediathek
+NEUTRINO_DEPS += neutrino-plugins
+NEUTRINO_DEPS += xupnpd
+
+# -----------------------------------------------------------------------------
+
 N_CFLAGS       = -Wall -W -Wshadow -pipe -Os -Wno-psabi
 N_CFLAGS      += -D__STDC_FORMAT_MACROS
 N_CFLAGS      += -D__STDC_CONSTANT_MACROS
@@ -159,157 +237,6 @@ N_CFLAGS      += $(LOCAL_NEUTRINO_CFLAGS)
 
 N_CPPFLAGS     = -I$(TARGET_DIR)/usr/include
 N_CPPFLAGS    += -ffunction-sections -fdata-sections
-
-LH_CONFIG_OPTS =
-#LH_CONFIG_OPTS += --enable-flv2mpeg4
-
-# -----------------------------------------------------------------------------
-
-N_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_DIR)
-LH_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)
-
-ifeq ($(FLAVOUR), neutrino-ddt)
-GIT_SITE          ?= https://github.com/Duckbox-Developers
-NEUTRINO           = neutrino-ddt
-LIBSTB_HAL         = libstb-hal-ddt
-NEUTRINO_BRANCH   ?= master
-LIBSTB_HAL_BRANCH ?= master
-NEUTRINO_PATCH     =
-LIBSTB_HAL_PATCH   =
-else ifeq ($(FLAVOUR), neutrino-max)
-GIT_SITE          ?= $(MAX-GIT-GITHUB)
-NEUTRINO           = neutrino-max
-LIBSTB_HAL         = libstb-hal-max
-NEUTRINO_BRANCH   ?= master
-LIBSTB_HAL_BRANCH ?= master
-NEUTRINO_PATCH     =
-LIBSTB_HAL_PATCH   =
-else ifeq ($(FLAVOUR), neutrino-ni)
-GIT_SITE          ?= https://github.com/neutrino-images
-NEUTRINO           = ni-neutrino
-LIBSTB_HAL         = ni-libstb-hal
-NEUTRINO_BRANCH   ?= master
-LIBSTB_HAL_BRANCH ?= master
-NEUTRINO_PATCH     =
-LIBSTB_HAL_PATCH   =
-else ifeq ($(FLAVOUR), neutrino-tangos)
-GIT_SITE          ?= https://github.com/TangoCash
-NEUTRINO           = neutrino-tangos
-LIBSTB_HAL         = libstb-hal-tangos
-NEUTRINO_BRANCH   ?= master
-LIBSTB_HAL_BRANCH ?= master
-NEUTRINO_PATCH     =
-LIBSTB_HAL_PATCH   =
-else ifeq ($(FLAVOUR), neutrino-redblue)
-GIT_SITE          ?= https://github.com/redblue-pkt
-NEUTRINO           = neutrino-redblue
-LIBSTB_HAL         = libstb-hal-redblue
-NEUTRINO_BRANCH   ?= master
-LIBSTB_HAL_BRANCH ?= master
-NEUTRINO_PATCH     =
-LIBSTB_HAL_PATCH   =
-endif
-
-# -----------------------------------------------------------------------------
-
-e2-multiboot:
-	touch $(TARGET_DIR)/usr/bin/enigma2
-	#
-	echo -e "$(FLAVOUR) `sed -n 's/\#define PACKAGE_VERSION "//p' $(N_OBJ_DIR)/config.h | sed 's/"//'` \\\n \\\l\n" > $(TARGET_DIR)/etc/issue
-	#
-	touch $(TARGET_DIR)/var/lib/opkg/status
-	#
-	cp -a $(TARGET_DIR)/.version $(TARGET_DIR)/etc/image-version
-
-# -----------------------------------------------------------------------------
-
-version.h: $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
-$(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h:
-	@rm -f $@
-	echo '#define BUILT_DATE "'`date`'"' > $@
-	@if test -d $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); then \
-		echo '#define VCS "BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"' >> $@; \
-	fi
-
-# -----------------------------------------------------------------------------
-
-LIBSTB_HAL_DEPS  = bootstrap
-LIBSTB_HAL_DEPS += ffmpeg
-LIBSTB_HAL_DEPS += openthreads
-
-# -----------------------------------------------------------------------------
-
-#
-# libstb-hal
-#
-LIBSTB_HAL_VER    = git
-LIBSTB_HAL_DIR    = $(LIBSTB_HAL).git
-LIBSTB_HAL_SOURCE = $(LIBSTB_HAL).git
-LIBSTB_HAL_SITE   = $(GIT_SITE)
-
-$(D)/libstb-hal.do_prepare: | $(LIBSTB_HAL_DEPS)
-	$(START_BUILD)
-	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR)
-	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR).org
-	rm -rf $(LH_OBJ_DIR)
-	test -d $(SOURCE_DIR) || mkdir -p $(SOURCE_DIR)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(call PKG_UNPACK,$(SOURCE_DIR))
-	(cd $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); git checkout -q $(LIBSTB_HAL_BRANCH);)
-	cp -ra $(SOURCE_DIR)/$(LIBSTB_HAL_DIR) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR).org
-	$(CD) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); \
-		$(call apply_patches, $(LIBSTB_HAL_PATCH))
-	@touch $@
-
-$(D)/libstb-hal.config.status:
-	rm -rf $(LH_OBJ_DIR)
-	test -d $(LH_OBJ_DIR) || mkdir -p $(LH_OBJ_DIR)
-	cd $(LH_OBJ_DIR); \
-		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh $(SILENT_OPT); \
-		$(BUILD_ENV) \
-		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/configure $(SILENT_OPT) \
-			--host=$(TARGET) \
-			--build=$(BUILD) \
-			--prefix=/usr \
-			--enable-maintainer-mode \
-			--enable-silent-rules \
-			--enable-shared=no \
-			\
-			--with-target=cdk \
-			--with-targetprefix=/usr \
-			--with-boxtype=$(BOXTYPE) \
-			--with-boxmodel=$(BOXMODEL) \
-			$(LH_CONFIG_OPTS) \
-			CFLAGS="$(N_CFLAGS)" CXXFLAGS="$(N_CFLAGS) -std=c++11" CPPFLAGS="$(N_CPPFLAGS)"
-ifeq ($(TINKER_OPTION), 0)
-	@touch $@
-endif
-
-$(D)/libstb-hal.do_compile: libstb-hal.config.status
-	$(MAKE) -C $(LH_OBJ_DIR) DESTDIR=$(TARGET_DIR)
-	@touch $@
-
-$(D)/libstb-hal: libstb-hal.do_prepare libstb-hal.do_compile
-	$(MAKE) -C $(LH_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL_LA)
-	$(TOUCH)
-
-# -----------------------------------------------------------------------------
-
-libstb-hal-clean:
-	rm -f $(D)/libstb-hal
-	rm -f $(D)/libstb-hal.config.status
-	rm -f $(D)/neutrino.config.status
-	cd $(LH_OBJ_DIR); \
-		$(MAKE) -C $(LH_OBJ_DIR) distclean
-
-libstb-hal-distclean:
-	rm -rf $(LH_OBJ_DIR)
-	rm -f $(D)/libstb-hal*
-	rm -f $(D)/neutrino.config.status
-
-libstb-hal-uninstall:
-	-make -C $(LH_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
 
 # -----------------------------------------------------------------------------
 
@@ -325,7 +252,7 @@ $(D)/neutrino.do_prepare: | $(NEUTRINO_DEPS) libstb-hal
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR).org
-	rm -rf $(N_OBJ_DIR)
+	rm -rf $(NNEUTRINO_OBJ_DIR)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(SOURCE_DIR))
 	(cd $(SOURCE_DIR)/$(NEUTRINO_DIR); git checkout -q $(NEUTRINO_BRANCH);)
@@ -335,9 +262,9 @@ $(D)/neutrino.do_prepare: | $(NEUTRINO_DEPS) libstb-hal
 	@touch $@
 
 $(D)/neutrino.config.status:
-	rm -rf $(N_OBJ_DIR)
-	test -d $(N_OBJ_DIR) || mkdir -p $(N_OBJ_DIR)
-	cd $(N_OBJ_DIR); \
+	rm -rf $(NNEUTRINO_OBJ_DIR)
+	test -d $(NEUTRINO_OBJ_DIR) || mkdir -p $(NEUTRINO_OBJ_DIR)
+	cd $(NEUTRINO_OBJ_DIR); \
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh $(SILENT_OPT); \
 		$(BUILD_ENV) \
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure $(SILENT_OPT) \
@@ -362,7 +289,7 @@ $(D)/neutrino.config.status:
 			--with-boxtype=$(BOXTYPE) \
 			--with-boxmodel=$(BOXMODEL) \
 			--with-stb-hal-includes=$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/include \
-			--with-stb-hal-build=$(LH_OBJ_DIR) \
+			--with-stb-hal-build=$(LIBSTB_HAL_OBJ_DIR) \
 			CFLAGS="$(N_CFLAGS)" CXXFLAGS="$(N_CFLAGS) -std=c++11" CPPFLAGS="$(N_CPPFLAGS)"
 		+make $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
 ifeq ($(TINKER_OPTION), 0)
@@ -370,15 +297,15 @@ ifeq ($(TINKER_OPTION), 0)
 endif
 
 $(D)/neutrino.do_compile:
-	$(MAKE) -C $(N_OBJ_DIR) all DESTDIR=$(TARGET_DIR)
+	$(MAKE) -C $(NEUTRINO_OBJ_DIR) all DESTDIR=$(TARGET_DIR)
 	@touch $@
 
 $(D)/neutrino: neutrino.do_prepare neutrino.config.status neutrino.do_compile
-	$(MAKE) -C $(N_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
+	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 	( \
 		echo "distro=$(subst neutrino-,,$(FLAVOUR))"; \
 		echo "imagename=Neutrino MP"; \
-		echo "imageversion=`sed -n 's/\#define PACKAGE_VERSION "//p' $(N_OBJ_DIR)/config.h | sed 's/"//'`"; \
+		echo "imageversion=`sed -n 's/\#define PACKAGE_VERSION "//p' $(NEUTRINO_OBJ_DIR)/config.h | sed 's/"//'`"; \
 		echo "homepage=https://github.com/Duckbox-Developers"; \
 		echo "creator=$(MAINTAINER)"; \
 		echo "docs=https://github.com/Duckbox-Developers"; \
@@ -404,18 +331,18 @@ neutrino-clean:
 	rm -f $(D)/neutrino
 	rm -f $(D)/neutrino.config.status
 	rm -f $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
-	cd $(N_OBJ_DIR); \
-		$(MAKE) -C $(N_OBJ_DIR) distclean
+	cd $(NEUTRINO_OBJ_DIR); \
+		$(MAKE) -C $(NEUTRINO_OBJ_DIR) distclean
 
 neutrino-distclean:
-	rm -rf $(N_OBJ_DIR)
+	rm -rf $(NEUTRINO_OBJ_DIR)
 	rm -f $(D)/neutrino
 	rm -f $(D)/neutrino.config.status
 	rm -f $(D)/neutrino.do_compile
 	rm -f $(D)/neutrino.do_prepare
 
 neutrino-uninstall:
-	-make -C $(N_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
+	-make -C $(NEUTRINO_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
 
 # -----------------------------------------------------------------------------
 
