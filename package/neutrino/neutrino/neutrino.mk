@@ -107,35 +107,6 @@ endif
 
 # -----------------------------------------------------------------------------
 
-N_CONFIG_OPTS += \
-	--with-libdir=/usr/lib \
-	--with-datadir=/usr/share/tuxbox \
-	--with-flagdir=/var/etc \
-	--with-fontdir=/usr/share/fonts \
-	--with-fontdir_var=/var/tuxbox/fonts \
-	--with-configdir=/var/tuxbox/config \
-	--with-gamesdir=/var/tuxbox/games \
-	--with-iconsdir=/usr/share/tuxbox/neutrino/icons \
-	--with-iconsdir_var=/var/tuxbox/icons \
-	--with-localedir=/usr/share/tuxbox/neutrino/locale \
-	--with-localedir_var=/var/tuxbox/locale \
-	--with-plugindir=/usr/share/tuxbox/neutrino/plugins \
-	--with-plugindir_var=/var/tuxbox/plugins \
-	--with-luaplugindir=/usr/share/tuxbox/neutrino/luaplugins \
-	--with-luaplugindir_var=/var/tuxbox/luaplugins \
-	--with-private_httpddir=/usr/share/tuxbox/neutrino/httpd \
-	--with-public_httpddir=/var/tuxbox/httpd \
-	--with-themesdir=/usr/share/tuxbox/neutrino/themes \
-	--with-themesdir_var=/var/tuxbox/themes \
-	--with-webtvdir=/usr/share/tuxbox/neutrino/webtv \
-	--with-webtvdir_var=/var/tuxbox/webtv \
-	--with-webradiodir=/usr/share/tuxbox/neutrino/webradio \
-	--with-webradiodir_var=/var/tuxbox/webradio \
-	--with-controldir=/usr/share/tuxbox/neutrino/control \
-	--with-controldir_var=/var/tuxbox/control
-
-# -----------------------------------------------------------------------------
-
 NEUTRINO_DEPS  = bootstrap
 NEUTRINO_DEPS += machine-deps
 NEUTRINO_DEPS += system-tools
@@ -252,7 +223,7 @@ $(D)/neutrino.do_prepare: | $(NEUTRINO_DEPS) libstb-hal
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR).org
-	rm -rf $(NNEUTRINO_OBJ_DIR)
+	rm -rf $(NEUTRINO_OBJ_DIR)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(SOURCE_DIR))
 	(cd $(SOURCE_DIR)/$(NEUTRINO_DIR); git checkout -q $(NEUTRINO_BRANCH);)
@@ -262,7 +233,7 @@ $(D)/neutrino.do_prepare: | $(NEUTRINO_DEPS) libstb-hal
 	@touch $@
 
 $(D)/neutrino.config.status:
-	rm -rf $(NNEUTRINO_OBJ_DIR)
+	rm -rf $(NEUTRINO_OBJ_DIR)
 	test -d $(NEUTRINO_OBJ_DIR) || mkdir -p $(NEUTRINO_OBJ_DIR)
 	cd $(NEUTRINO_OBJ_DIR); \
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh $(SILENT_OPT); \
@@ -286,6 +257,8 @@ $(D)/neutrino.config.status:
 			$(N_CONFIG_OPTS) \
 			\
 			--with-tremor \
+			--with-target=cdk \
+			--with-targetprefix=/usr \
 			--with-boxtype=$(BOXTYPE) \
 			--with-boxmodel=$(BOXMODEL) \
 			--with-stb-hal-includes=$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/include \
