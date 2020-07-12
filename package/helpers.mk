@@ -148,7 +148,6 @@ REWRITE_CONFIG = \
 # Manipulation of .config files based on the Kconfig infrastructure.
 # Used by the BusyBox package, the Linux kernel package, and more.
 #
-
 define KCONFIG_ENABLE_OPT # (option, file)
 	sed -i -e "/\\<$(1)\\>/d" $(2)
 	echo '$(1)=y' >> $(2)
