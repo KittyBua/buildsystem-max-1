@@ -1,16 +1,14 @@
 #
 # mc
 #
-MC_VER    = 4.8.24
+MC_VER    = 4.8.25
 MC_DIR    = mc-$(MC_VER)
 MC_SOURCE = mc-$(MC_VER).tar.xz
 MC_SITE   = ftp.midnight-commander.org
 
 MC_PATCH  = \
 	0001-mc-replace-perl-w-with-use-warnings.patch \
-	0002-nomandate.patch \
-	0003-Ticket-4070-misc-Makefile.am-install-mc.lib-only-onc.patch \
-	0004-fix-mouse-handling-newer-terminfo.patch
+	0002-nomandate.patch
 
 $(D)/mc: bootstrap ncurses glib2
 	$(START_BUILD)
