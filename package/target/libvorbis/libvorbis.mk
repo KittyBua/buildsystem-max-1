@@ -1,15 +1,13 @@
 #
 # libvorbis
 #
-LIBVORBIS_VER    = 1.3.6
+LIBVORBIS_VER    = 1.3.7
 LIBVORBIS_DIR    = libvorbis-$(LIBVORBIS_VER)
 LIBVORBIS_SOURCE = libvorbis-$(LIBVORBIS_VER).tar.xz
 LIBVORBIS_SITE   = https://ftp.osuosl.org/pub/xiph/releases/vorbis
 
 LIBVORBIS_PATCH = \
-	0001-configure-Check-for-clang.patch \
-	0002-CVE-2017-14160.patch \
-	0003-CVE-2018-10392.patch
+	0001-configure-Check-for-clang.patch
 
 $(D)/libvorbis: bootstrap libogg
 	$(START_BUILD)
