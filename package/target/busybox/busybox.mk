@@ -14,7 +14,18 @@ BUSYBOX_PATCH  = \
 	0005-fix-config-header.patch \
 	0006-fix-partition-size.patch \
 	0007-insmod-hack.patch \
-	0008-mount_single_uuid.patch
+	0008-mount_single_uuid.patch \
+	0009-busybox-udhcpc-no_deconfig.patch \
+	0010-recognize_connmand.patch \
+	0011-fail_on_no_media.patch \
+	0012-busybox-cross-menuconfig.patch \
+	0013-makefile-libbb-race.patch \
+	0014-testsuite-check-uudecode-before-using-it.patch \
+	0015-testsuite-use-www.example.org-for-wget-test-cases.patch \
+	0016-du-l-works-fix-to-use-145-instead-of-144.patch \
+	0017-Use-CC-when-linking-instead-of-LD-and-use-CFLAGS-and.patch \
+	0018-sysctl-ignore-EIO-of-stable_secret-below-proc-sys-ne.patch \
+	0019-hwclock-make-glibc-2.31-compatible.patch
 
 # Link busybox against libtirpc so that we can leverage its RPC support for NFS
 # mounting with BusyBox
@@ -32,7 +43,7 @@ BUSYBOX_MAKE_ENV = \
 
 BUSYBOX_MAKE_OPTS = \
 	$(MAKE_OPTS) \
-	CFLAGS_EXTRA="$(TARGET_CFLAGS)" \
+	EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 	EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 	CONFIG_PREFIX="$(TARGET_DIR)"
 
