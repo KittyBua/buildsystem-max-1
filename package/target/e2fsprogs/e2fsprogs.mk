@@ -13,7 +13,9 @@ E2FSPROGS_PATCH  = \
 	0004-overridable-pc-exec-prefix.patch \
 	0005-Revert-mke2fs-enable-the-metadata_csum-and-64bit-fea.patch \
 	0006-mkdir_p.patch \
-	0007-no-crond.patch
+	0007-no-crond.patch \
+	0008-fix-up-check-for-hardlinks-always-false-if-inode-0xF.patch \
+	0009-e2fsprogs-fix-missing-check-for-permission-denied.patch
 
 $(D)/e2fsprogs: bootstrap util-linux
 	$(START_BUILD)
