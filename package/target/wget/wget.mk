@@ -23,6 +23,7 @@ $(D)/wget: bootstrap openssl
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(CONFIGURE) \
 			--prefix=/usr \
+			--sysconfdir=/etc \
 			--mandir=/.remove \
 			--infodir=/.remove \
 			--with-ssl=openssl \
