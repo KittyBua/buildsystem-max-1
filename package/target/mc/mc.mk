@@ -8,7 +8,9 @@ MC_SITE   = ftp.midnight-commander.org
 
 MC_PATCH  = \
 	0001-mc-replace-perl-w-with-use-warnings.patch \
-	0002-nomandate.patch
+	0002-nomandate.patch \
+	0003-subshell.patch \
+	0004-fix-mouse-handling-newer-terminfo.patch
 
 $(D)/mc: bootstrap ncurses glib2
 	$(START_BUILD)
