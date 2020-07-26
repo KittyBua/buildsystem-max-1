@@ -19,7 +19,8 @@ NP_CONFIGURE_ADDITIONS += \
 	--disable-mountpointmanagement \
 	--disable-oscammon \
 	--disable-stbup \
-	--disable-vinfo
+	--disable-vinfo \
+	--enable-wortraten
 
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo vuduo4k vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 NP_CONFIGURE_ADDITIONS += \
