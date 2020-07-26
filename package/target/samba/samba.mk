@@ -81,6 +81,7 @@ $(D)/samba: bootstrap
 			--prefix=/usr \
 			--includedir=/usr/include \
 			--datarootdir=/.remove \
+			--localstatedir=/var \
 			--disable-pie \
 			--disable-avahi \
 			--disable-cups \
