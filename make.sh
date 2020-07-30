@@ -91,8 +91,8 @@ case "$REPLY" in
 	21) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd51";;
 	22) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd60";;
 	23) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd61";;
-	30) TARGET_ARCH="aarch64";BOXTYPE="armbox";BOXMODEL="osmio4k";;
-	31) TARGET_ARCH="aarch64";BOXTYPE="armbox";BOXMODEL="osmio4kplus";;
+	30) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="osmio4k";;
+	31) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="osmio4kplus";;
 	40) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="h7";;
 	 *) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd51";;
 esac

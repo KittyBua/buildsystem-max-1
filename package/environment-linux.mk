@@ -133,13 +133,13 @@ MTD_BOOTFS         = mmcblk1p1
 endif
 
 ifeq ($(BOXMODEL), osmio4kplus)
-KERNEL_VER         = 5.3.0
-KERNEL_SOURCE_VER  = 5.3
+KERNEL_VER         = 5.5.16
+KERNEL_SOURCE_VER  = 5.5.16
 MTD_BLACK          = mmcblk1
 MTD_BOOTFS         = mmcblk1p1
 endif
 
-KERNEL_IMAGE_TYPE  = Image.gz
+KERNEL_IMAGE_TYPE  = zImage
 KERNEL_SOURCE      = linux-edision-$(KERNEL_SOURCE_VER).tar.gz
 KERNEL_DTB         = $(EMPTY)
 KERNEL_SITE        = http://source.mynonpublic.com/edision
