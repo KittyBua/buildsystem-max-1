@@ -48,7 +48,7 @@ diff --git a/src/killall5.c b/src/killall5.c
 index 8b5cb38..a664954 100644
 --- a/src/killall5.c
 +++ b/src/killall5.c
-@@ -126,6 +126,7 @@ typedef struct _s_nfs
+@@ -126,6 +126,7 @@
  
  /* List of processes. */
  PROC *plist;
@@ -56,10 +56,14 @@ index 8b5cb38..a664954 100644
  
  /* List of processes to omit. */
  OMIT *omit;
-@@ -361,6 +362,20 @@ static void clear_mnt(void)
- 	}
- }
- 
+@@ -357,6 +358,20 @@
+ 		}
+ 		if (p->shadow)
+ 			clear_shadow(p->shadow);
++		free(p);
++	}
++}
++
 +static void clear_omit(void)
 +{
 +	OMIT *o;
@@ -70,14 +74,10 @@ index 8b5cb38..a664954 100644
 +	}
 +	for (p = olist; p; p = olist) {
 +		olist = olist->next;
-+		free(p);
-+	}
-+}
-+
- /*
-  *     Check if path is a shadow off a NFS partition.
-  */
-@@ -486,6 +501,7 @@ int readproc(int do_stat)
+ 		free(p);
+ 	}
+ }
+@@ -486,6 +501,7 @@
  	DIR		*dir;
  	FILE		*fp;
  	PROC		*p, *n;
@@ -85,7 +85,7 @@ index 8b5cb38..a664954 100644
  	struct dirent	*d;
  	struct stat	st;
  	char		path[PATH_MAX+1];
-@@ -733,6 +749,17 @@ int readproc(int do_stat)
+@@ -726,6 +742,17 @@
  		p->next = plist;
  		plist = p;
  		p->pid = pid;
@@ -103,7 +103,7 @@ index 8b5cb38..a664954 100644
  	}
  	closedir(dir);
  
-@@ -944,6 +971,26 @@ PIDQ_HEAD *pidof(char *prog)
+@@ -937,6 +964,26 @@
  	return q;
  }
  
@@ -130,7 +130,7 @@ index 8b5cb38..a664954 100644
  /* Give usage message and exit. */
  void usage(void)
  {
-@@ -994,6 +1041,7 @@ void nsyslog(int pri, char *fmt, ...)
+@@ -987,6 +1034,7 @@
  #define PIDOF_OMIT	0x02
  #define PIDOF_NETFS	0x04
  #define PIDOF_QUIET     0x08
@@ -138,7 +138,7 @@ index 8b5cb38..a664954 100644
  
  /*
   *	Pidof functionality.
-@@ -1011,6 +1059,7 @@ int main_pidof(int argc, char **argv)
+@@ -1004,6 +1052,7 @@
  	char		tmp[512];
          char            sep = ' ';
  
@@ -146,7 +146,7 @@ index 8b5cb38..a664954 100644
  	omit = (OMIT*)0;
  	nlist = (NFS*)0;
  	opterr = 0;
-@@ -1018,7 +1067,7 @@ int main_pidof(int argc, char **argv)
+@@ -1011,7 +1060,7 @@
  	if ((token = getenv("PIDOF_NETFS")) && (strcmp(token,"no") != 0))
  		flags |= PIDOF_NETFS;
  
@@ -155,7 +155,7 @@ index 8b5cb38..a664954 100644
  		case '?':
  			nsyslog(LOG_ERR,"invalid options on command line!\n");
  			closelog();
-@@ -1069,6 +1118,9 @@ int main_pidof(int argc, char **argv)
+@@ -1062,6 +1111,9 @@
                  case 'z':
                          list_dz_processes = TRUE;
                          break;
@@ -165,7 +165,7 @@ index 8b5cb38..a664954 100644
  		case 'n':
  			flags |= PIDOF_NETFS;
  			break;
-@@ -1100,10 +1152,13 @@ int main_pidof(int argc, char **argv)
+@@ -1093,10 +1145,13 @@
  			pid_t spid = 0;
  			while ((p = get_next_from_pid_q(q))) {
  				if ((flags & PIDOF_OMIT) && omit) {
@@ -181,7 +181,7 @@ index 8b5cb38..a664954 100644
  					}
  
  					/*
-@@ -1145,6 +1200,7 @@ int main_pidof(int argc, char **argv)
+@@ -1138,6 +1193,7 @@
  		printf("\n");
          }
  
