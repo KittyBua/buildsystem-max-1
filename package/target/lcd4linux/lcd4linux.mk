@@ -6,7 +6,7 @@ LCD4LINUX_DIR    = lcd4linux.git
 LCD4LINUX_SOURCE = lcd4linux.git
 LCD4LINUX_SITE   = https://github.com/TangoCash
 
-$(D)/lcd4linux: bootstrap ncurses libusb-compat libgd libusb libdpf
+$(D)/lcd4linux: bootstrap $(SHARE_LCD4LINUX) ncurses libusb-compat libgd libusb libdpf
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
@@ -21,8 +21,9 @@ $(D)/lcd4linux: bootstrap ncurses libusb-compat libgd libusb libdpf
 			; \
 		$(MAKE) vcs_version all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	cp -a $(PKG_FILES_DIR)/lcd4linux/* $(TARGET_DIR)/
+	cp -a $(PKG_FILES_DIR)/icons/* $(SHARE_LCD4LINUX)
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/lcd4linux.init $(TARGET_DIR)/etc/init.d/lcd4linux
-	$(INSTALL_CONF) $(PKG_FILES_DIR)/lcd4linux.conf $(TARGET_DIR)/etc/
+	$(INSTALL_CONF) $(PKG_FILES_DIR)/lcd4linux.conf $(TARGET_DIR)/etc/lcd4linux.conf
+	$(INSTALL_CONF) $(PKG_FILES_DIR)/lcd4linux-var.conf $(TARGET_DIR)/var/etc/lcd4linux.conf
 	$(PKG_REMOVE)
 	$(TOUCH)
