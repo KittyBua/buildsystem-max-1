@@ -126,7 +126,7 @@ MACHINE_DEPS += $(BOXMODEL)-libs
 MACHINE_DEPS += $(BOXMODEL)-mali-module
 endif
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
-MACHINE_DEPS += osmio4k-wlan-qcom
+MACHINE_DEPS += wlan-qcom
 endif
 
 $(D)/machine-deps: $(MACHINE_DEPS)

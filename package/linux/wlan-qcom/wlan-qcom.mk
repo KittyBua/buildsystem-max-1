@@ -1,15 +1,15 @@
 #
 # wlan-qcom osmio4k | osmio4kplus
 #
-OSMIO4K_WLAN_QCOM_VER    = 4.5.25.38
-OSMIO4K_WLAN_QCOM_DIR    = qcacld-2.0-$(OSMIO4K_WLAN_QCOM_VER)
-OSMIO4K_WLAN_QCOM_SOURCE = qcacld-2.0-$(OSMIO4K_WLAN_QCOM_VER).tar.gz
-OSMIO4K_WLAN_QCOM_SITE   = https://www.codeaurora.org/cgit/external/wlan/qcacld-2.0/snapshot
+WLAN_QCOM_VER    = 4.5.25.38
+WLAN_QCOM_DIR    = qcacld-2.0-$(WLAN_QCOM_VER)
+WLAN_QCOM_SOURCE = qcacld-2.0-$(WLAN_QCOM_VER).tar.gz
+WLAN_QCOM_SITE   = https://www.codeaurora.org/cgit/external/wlan/qcacld-2.0/snapshot
 
-OSMIO4K_WLAN_QCOM_PATCH  = \
+WLAN_QCOM_PATCH  = \
 	0001-qcacld-2.0-support.patch
 
-$(D)/osmio4k-wlan-qcom: bootstrap kernel osmio4k-wlan-qcom-firmware
+$(D)/wlan-qcom: bootstrap kernel wlan-qcom-firmware
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
