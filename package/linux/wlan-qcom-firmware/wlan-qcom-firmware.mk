@@ -1,12 +1,12 @@
 #
-# osmio4k-wlan-qcom-firmware
+# wlan-qcom-firmware osmio4k | osmio4kplus
 #
-OSMIO4K_WLAN_QCOM_FIRMWARE_VER    = qca6174
-OSMIO4K_WLAN_QCOM_FIRMWARE_DIR    = firmware-$(OSMIO4K_WLAN_QCOM_FIRMWARE_VER)
-OSMIO4K_WLAN_QCOM_FIRMWARE_SOURCE = firmware-$(OSMIO4K_WLAN_QCOM_FIRMWARE_VER).zip
-OSMIO4K_WLAN_QCOM_FIRMWARE_SITE   = http://source.mynonpublic.com/edision
+WLAN_QCOM_FIRMWARE_VER    = qca6174
+WLAN_QCOM_FIRMWARE_DIR    = firmware-$(WLAN_QCOM_FIRMWARE_VER)
+WLAN_QCOM_FIRMWARE_SOURCE = firmware-$(WLAN_QCOM_FIRMWARE_VER).zip
+WLAN_QCOM_FIRMWARE_SITE   = http://source.mynonpublic.com/edision
 
-$(D)/osmio4k-wlan-qcom-firmware: bootstrap
+$(D)/wlan-qcom-firmware: bootstrap
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
