@@ -9,7 +9,7 @@ WLAN_QCOM_SITE   = https://www.codeaurora.org/cgit/external/wlan/qcacld-2.0/snap
 WLAN_QCOM_PATCH  = \
 	0001-qcacld-2.0-support.patch
 
-$(D)/wlan-qcom: bootstrap kernel wlan-qcom-firmware
+$(D)/wlan-qcom: bootstrap kernel wlan-qcom-firmware wireless-regdb
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
