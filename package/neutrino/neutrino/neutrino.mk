@@ -60,16 +60,6 @@ e2-multiboot:
 
 # -----------------------------------------------------------------------------
 
-version.h: $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
-$(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h:
-	@rm -f $@
-	echo '#define BUILT_DATE "'`date`'"' > $@
-	@if test -d $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); then \
-		echo '#define VCS "BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"' >> $@; \
-	fi
-
-# -----------------------------------------------------------------------------
-
 OMDB_API_KEY ?=
 ifneq ($(strip $(OMDB_API_KEY)),)
 N_CONFIG_KEYS += \
@@ -297,6 +287,16 @@ endif
 	$(TOUCH)
 	make neutrino-release
 	$(TUXBOX_CUSTOMIZE)
+
+# -----------------------------------------------------------------------------
+
+version.h: $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
+$(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h:
+	@rm -f $@
+	echo '#define BUILT_DATE "'`date`'"' > $@
+	@if test -d $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); then \
+		echo '#define VCS "BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"' >> $@; \
+	fi
 
 # -----------------------------------------------------------------------------
 
