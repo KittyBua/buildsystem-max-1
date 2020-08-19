@@ -23,6 +23,7 @@ $(D)/sysvinit: bootstrap
 		$(BUILD_ENV) \
 		$(MAKE) SULOGINLIBS=-lcrypt; \
 		$(MAKE) install ROOT=$(TARGET_DIR) mandir=/.remove
+	mkdir -p $(TARGET_DIR)/etc/{init.d,rc{{0..6},S}.d}
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/inittab $(TARGET_DIR)/etc/inittab
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/autologin $(TARGET_DIR)/bin/autologin
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/rc $(TARGET_DIR)/etc/init.d

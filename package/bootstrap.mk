@@ -39,9 +39,8 @@ $(D)/directories:
 	mkdir -p $(SOURCE_DIR)
 	mkdir -p $(HOST_DIR)/{bin,lib,share}
 	mkdir -p $(TARGET_DIR)/{bin,boot,etc,lib,sbin,usr,var}
-	mkdir -p $(TARGET_DIR)/etc/{default,init.d,network,ssl,udev}
+	mkdir -p $(TARGET_DIR)/etc/{default,network,ssl,udev}
 	mkdir -p $(TARGET_DIR)/etc/default/volatiles
-	mkdir -p $(TARGET_DIR)/etc/rc{{0..6},S}.d
 	mkdir -p $(TARGET_DIR)/etc/network/if-{post-down,pre-up,up,down}.d
 	mkdir -p $(TARGET_DIR)/lib/firmware
 	mkdir -p $(TARGET_DIR)/usr/{bin,include,lib,sbin,share}
