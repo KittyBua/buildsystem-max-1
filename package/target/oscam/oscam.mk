@@ -89,7 +89,7 @@ $(D)/oscam: bootstrap openssl libusb oscam.do_prepare oscam.do_compile
 oscam-clean:
 	rm -f $(D)/oscam
 	rm -f $(D)/oscam.do_compile
-	$(PKG_CHDIR); \\
+	$(PKG_CHDIR); \
 		$(MAKE) distclean
 
 oscam-distclean:
