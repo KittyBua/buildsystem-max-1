@@ -1,10 +1,13 @@
 #
 # sysstat
 #
-SYSSTAT_VER    = 12.3.3
+SYSSTAT_VER    = 12.4.0
 SYSSTAT_DIR    = sysstat-$(SYSSTAT_VER)
 SYSSTAT_SOURCE = sysstat-$(SYSSTAT_VER).tar.xz
 SYSSTAT_SITE   = http://pagesperso-orange.fr/sebastien.godard
+
+SYSSTAT_PATCH  = \
+	0001-ldflags.patch
 
 $(D)/sysstat: bootstrap
 	$(START_BUILD)
@@ -12,6 +15,7 @@ $(D)/sysstat: bootstrap
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
+		$(call apply_patches, $(PKG_PATCH)); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--mandir=/.remove \

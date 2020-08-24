@@ -4,14 +4,11 @@
 # -----------------------------------------------------------------------------
 
 MAINTAINER := $(shell whoami)
-MAIN_ID := $(shell echo -en "\x74\x68\x6f\x6d\x61\x73")
 UID := $(shell id -u)
+
 ifeq ($(UID), 0)
 warn:
 	@echo "You are running as root. Do not do this, it is dangerous."
-	@echo "Aborting the build. Log in as a regular user and retry."
-else ifeq ($(MAINTAINER), $(MAIN_ID))
-warn:
 	@echo "Aborting the build. Log in as a regular user and retry."
 else
 
@@ -146,6 +143,9 @@ help:
 
 # -----------------------------------------------------------------------------
 
+# for local extensions, e.g. special plugins or similar...
+-include ./Makefile.local
+
 include package/flashimage.mk
 include package/helpers.mk
 include $(sort $(wildcard package/*/*/*.mk))
@@ -195,7 +195,7 @@ SILENT_Q            = -q
 $(VERBOSE).SILENT:
 endif
 ifeq ($(KBUILD_VERBOSE), 1)
-SILENT              =
+SILENT              = @
 SILENT_CONFIGURE    =
 SILENT_OPT          =
 SILENT_Q            = -q
@@ -211,9 +211,6 @@ endif
 
 all:
 	@echo "'make all' is not a valid target. Please execute 'make print-targets' to display the alternatives."
-
-# for local extensions, e.g. special plugins or similar...
--include ./Makefile.local
 
 # debug target, if you need that, you know it. If you don't know if you need
 # that, you don't need it.
