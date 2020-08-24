@@ -1,7 +1,7 @@
 #
 # libcurl
 #
-LIBCURL_VER    = 7.71.1
+LIBCURL_VER    = 7.72.0
 LIBCURL_DIR    = curl-$(LIBCURL_VER)
 LIBCURL_SOURCE = curl-$(LIBCURL_VER).tar.bz2
 LIBCURL_SITE   = https://curl.haxx.se/download
@@ -38,6 +38,7 @@ $(D)/libcurl: bootstrap zlib openssl ca-bundle
 			--without-libidn2 \
 			--without-winidn \
 			--without-libpsl \
+			--without-zstd \
 			--with-ca-bundle=$(CA_BUNDLE_DIR)/$(CA_BUNDLE_CRT) \
 			--with-random=/dev/urandom \
 			--with-ssl=$(TARGET_DIR)/usr \
