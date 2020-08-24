@@ -15,6 +15,7 @@ $(D)/luaexpat: bootstrap lua expat
 		sed -i 's|^EXPAT_INC=.*|EXPAT_INC= $(TARGET_INCLUDE_DIR)|' makefile; \
 		sed -i 's|^CFLAGS =.*|& -L$(TARGET_LIB_DIR)|' makefile; \
 		sed -i 's|^CC =.*|CC = $(TARGET_CC)|' makefile; \
+		$(BUILD_ENV) \
 		$(MAKE) \
 			PREFIX=$(TARGET_DIR)/usr \
 			LUA_SYS_VER=$(LUA_ABIVER) \
