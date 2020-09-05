@@ -1,7 +1,7 @@
 #
 # sqlite
 #
-SQLITE_VER    = 3310100
+SQLITE_VER    = 3330000
 SQLITE_DIR    = sqlite-autoconf-$(SQLITE_VER)
 SQLITE_SOURCE = sqlite-autoconf-$(SQLITE_VER).tar.gz
 SQLITE_SITE   = http://www.sqlite.org/2020
