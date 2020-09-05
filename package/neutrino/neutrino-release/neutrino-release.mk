@@ -105,8 +105,6 @@ neutrino-release-base:
 # IMPORTANT: it is assumed that only one variable is set. Otherwise the target name won't be resolved.
 #
 $(D)/neutrino-release: neutrino-release-base
-	$(TUXBOX_CUSTOMIZE)
-	@touch $@
 #
 # FOR YOUR OWN CHANGES use these folder in own-imagefiles/neutrino-hd
 #
@@ -121,8 +119,10 @@ $(D)/neutrino-release: neutrino-release-base
 ifneq ($(OPTIMIZATIONS), $(filter $(OPTIMIZATIONS), debug normal))
 	find $(RELEASE_DIR)/ -name '*' -exec $(TARGET_STRIP) --strip-unneeded {} &>/dev/null \;
 endif
+	$(TUXBOX_CUSTOMIZE)
 	@echo "***************************************************************"
 	@echo -e "\033[01;32m"
 	@echo " Build of Neutrino for $(BOXMODEL) successfully completed."
 	@echo -e "\033[00m"
 	@echo "***************************************************************"
+	@touch $@

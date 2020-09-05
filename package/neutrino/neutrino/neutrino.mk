@@ -286,7 +286,6 @@ else
 endif
 	$(TOUCH)
 	make neutrino-release
-	$(TUXBOX_CUSTOMIZE)
 
 # -----------------------------------------------------------------------------
 
