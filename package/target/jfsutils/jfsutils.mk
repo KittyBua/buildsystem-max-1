@@ -7,7 +7,8 @@ JFSUTILS_SOURCE = jfsutils-$(JFSUTILS_VER).tar.gz
 JFSUTILS_SITE   = http://jfs.sourceforge.net/project/pub
 
 JFSUTILS_PATCH  = \
-	0001-jfsutils.patch
+	0001-jfsutils.patch \
+	0002-fix-build-with-fno-common.patch
 
 $(D)/jfsutils: bootstrap e2fsprogs
 	$(START_BUILD)
