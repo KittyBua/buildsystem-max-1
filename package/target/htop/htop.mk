@@ -1,16 +1,14 @@
 #
 # htop
 #
-HTOP_VER    = 2.2.0
+HTOP_VER    = 3.0.1
 HTOP_DIR    = htop-$(HTOP_VER)
 HTOP_SOURCE = htop-$(HTOP_VER).tar.gz
-HTOP_SITE   = http://hisham.hm/htop/releases/$(HTOP_VER)
+HTOP_SITE   = $(call github,htop-dev,htop,$(HTOP_VER))
 
 HTOP_PATCH  = \
-	0001-Use-pkg-config.patch \
-	0002-htop-sysmacros.patch \
-	0003-Ask-for-python3-specifically.patch
-	
+	0001-Use-pkg-config.patch
+
 $(D)/htop: bootstrap ncurses
 	$(START_BUILD)
 	$(PKG_REMOVE)
