@@ -7,7 +7,8 @@ MINIDLNA_SOURCE = minidlna-$(MINIDLNA_VER).tar.gz
 MINIDLNA_SITE   = https://sourceforge.net/projects/minidlna/files/minidlna/$(MINIDLNA_VER)
 
 MINIDLNA_PATCH  = \
-	0001-minidlna.patch
+	0001-minidlna.patch \
+	0002-fix-build-with-fno-common.patch
 
 $(D)/minidlna: bootstrap zlib sqlite libexif libjpeg-turbo libid3tag libogg libvorbis flac ffmpeg
 	$(START_BUILD)
