@@ -74,68 +74,6 @@ PKG_REMOVE      = $(SILENT)rm -rf $(PKG_BUILD_DIR)
 
 # -----------------------------------------------------------------------------
 
-ifeq ($(TARGET_ARCH), arm)
-TARGET        ?= arm-cortex-linux-gnueabihf
-TARGET_ARCH   ?= arm
-TARGET_ABI     = -mtune=cortex-a15 -mfloat-abi=hard -mfpu=neon-vfpv4 -march=armv7ve
-TARGET_ENDIAN  = little
-endif
-
-ifeq ($(TARGET_ARCH), aarch64)
-TARGET        ?= aarch64-unknown-linux-gnu
-TARGET_ARCH   ?= aarch64
-TARGET_ABI     =
-TARGET_ENDIAN  = big
-endif
-
-ifeq ($(TARGET_ARCH), mips)
-TARGET        ?= mipsel-unknown-linux-gnu
-TARGET_ARCH   ?= mips
-TARGET_ABI     = -march=mips32 -mtune=mips32
-TARGET_ENDIAN  = little
-endif
-
-# -----------------------------------------------------------------------------
-
-OPTIMIZATIONS ?= size
-ifeq ($(OPTIMIZATIONS), size)
-TARGET_OPTIMIZATION  = -pipe -Os
-TARGET_EXTRA_CFLAGS  = -ffunction-sections -fdata-sections
-TARGET_EXTRA_LDFLAGS = -Wl,--gc-sections
-endif
-
-ifeq ($(OPTIMIZATIONS), normal)
-TARGET_OPTIMIZATION  = -pipe -O2
-TARGET_EXTRA_CFLAGS  =
-TARGET_EXTRA_LDFLAGS =
-endif
-
-ifeq ($(OPTIMIZATIONS), debug)
-TARGET_OPTIMIZATION  = -O0 -g
-TARGET_EXTRA_CFLAGS  =
-TARGET_EXTRA_LDFLAGS =
-endif
-
-# -----------------------------------------------------------------------------
-
-ifeq ($(BS_GCC_VER), 6.5.0)
-CROSSTOOL_GCC_VER = gcc-6.5.0
-endif
-
-ifeq ($(BS_GCC_VER), 7.5.0)
-CROSSTOOL_GCC_VER = gcc-7.5.0
-endif
-
-ifeq ($(BS_GCC_VER), 8.4.0)
-CROSSTOOL_GCC_VER = gcc-8.4.0
-endif
-
-ifeq ($(BS_GCC_VER), 9.2.0)
-CROSSTOOL_GCC_VER = gcc-9.2.0
-endif
-
-# -----------------------------------------------------------------------------
-
 TERM_RED         = \033[40;0;31m
 TERM_RED_BOLD    = \033[40;1;31m
 TERM_GREEN       = \033[40;0;32m
@@ -177,8 +115,74 @@ EMPTY =
 
 # -----------------------------------------------------------------------------
 
-BUILD          ?= $(shell /usr/share/libtool/config.guess 2>/dev/null || /usr/share/libtool/config/config.guess 2>/dev/null || /usr/share/misc/config.guess 2>/dev/null)
-PATH           := $(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
+ifeq ($(BS_GCC_VER), 6.5.0)
+CROSSTOOL_GCC_VER = gcc-6.5.0
+endif
+
+ifeq ($(BS_GCC_VER), 7.5.0)
+CROSSTOOL_GCC_VER = gcc-7.5.0
+endif
+
+ifeq ($(BS_GCC_VER), 8.4.0)
+CROSSTOOL_GCC_VER = gcc-8.4.0
+endif
+
+ifeq ($(BS_GCC_VER), 9.3.0)
+CROSSTOOL_GCC_VER = gcc-9.3.0
+endif
+
+ifeq ($(BS_GCC_VER), 10.2.0)
+CROSSTOOL_GCC_VER = gcc-10.2.0
+endif
+
+# -----------------------------------------------------------------------------
+
+OPTIMIZATIONS ?= size
+ifeq ($(OPTIMIZATIONS), size)
+TARGET_OPTIMIZATION  = -pipe -Os
+TARGET_EXTRA_CFLAGS  = -ffunction-sections -fdata-sections
+TARGET_EXTRA_LDFLAGS = -Wl,--gc-sections
+endif
+
+ifeq ($(OPTIMIZATIONS), normal)
+TARGET_OPTIMIZATION  = -pipe -O2
+TARGET_EXTRA_CFLAGS  =
+TARGET_EXTRA_LDFLAGS =
+endif
+
+ifeq ($(OPTIMIZATIONS), debug)
+TARGET_OPTIMIZATION  = -O0 -g
+TARGET_EXTRA_CFLAGS  =
+TARGET_EXTRA_LDFLAGS =
+endif
+
+ifeq ($(BS_GCC_VER), 10.2.0)
+#TARGET_EXTRA_CFLAGS += -fcommon
+endif
+
+BUILD ?= $(shell /usr/share/libtool/config.guess 2>/dev/null || /usr/share/libtool/config/config.guess 2>/dev/null || /usr/share/misc/config.guess 2>/dev/null)
+PATH  := $(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
+
+ifeq ($(TARGET_ARCH), arm)
+TARGET         ?= arm-cortex-linux-gnueabihf
+TARGET_ARCH    ?= arm
+TARGET_ABI      = -mtune=cortex-a15 -mfloat-abi=hard -mfpu=neon-vfpv4 -march=armv7ve
+TARGET_ENDIAN   = little
+endif
+
+ifeq ($(TARGET_ARCH), aarch64)
+TARGET         ?= aarch64-unknown-linux-gnu
+TARGET_ARCH    ?= aarch64
+TARGET_ABI      =
+TARGET_ENDIAN   = big
+endif
+
+ifeq ($(TARGET_ARCH), mips)
+TARGET         ?= mipsel-unknown-linux-gnu
+TARGET_ARCH    ?= mips
+TARGET_ABI      = -march=mips32 -mtune=mips32
+TARGET_ENDIAN   = little
+endif
 
 # Define TARGET_xx variables for all common binutils/gcc
 TARGET_CROSS    = $(TARGET)-

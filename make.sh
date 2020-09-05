@@ -108,17 +108,19 @@ case $2 in
 		echo "   1) GCC version 6.5.0"
 		echo "   2) GCC version 7.5.0"
 		echo "   3) GCC version 8.4.0"
-		echo "   4) GCC version 9.2.0"
-		read -p "Select toolchain gcc version (1-4)? [1] "
-		REPLY="${REPLY:-1}";;
+		echo "   4) GCC version 9.3.0"
+		echo "   5) GCC version 10.2.0"
+		read -p "Select toolchain gcc version (1-5)? [4] "
+		REPLY="${REPLY:-4}";;
 esac
 
 case "$REPLY" in
 	1) BS_GCC_VER="6.5.0";;
 	2) BS_GCC_VER="7.5.0";;
 	3) BS_GCC_VER="8.4.0";;
-	4) BS_GCC_VER="9.2.0";;
-	*) BS_GCC_VER="6.5.0";;
+	4) BS_GCC_VER="9.3.0";;
+	5) BS_GCC_VER="10.2.0";;
+	*) BS_GCC_VER="8.4.0";;
 esac
 echo "BS_GCC_VER=$BS_GCC_VER" >> .config
 
@@ -229,22 +231,21 @@ if [ $BOXMODEL == 'vuduo4k' -o \
      $BOXMODEL == 'vuzero4k' \
     ]; then
 
-case $6 in
-	[1-2]) REPLY=$6;;
-	*)	echo -e "\nNormal or MultiBoot:"
-		echo "   1)  Normal"
-		echo "   2)  Multiboot"
-		read -p "Select mode (1-2)? [2] ";;
-esac
+	case $6 in
+		[1-2]) REPLY=$6;;
+		*)	echo -e "\nNormal or MultiBoot:"
+			echo "   1)  Normal"
+			echo "   2)  Multiboot"
+			read -p "Select mode (1-2)? [2] ";;
+	esac
 
-case "$REPLY" in
+	case "$REPLY" in
 	1)  VU_MULTIBOOT="0";;
 	2)  VU_MULTIBOOT="1";;
 	*)  VU_MULTIBOOT="1";;
-esac
-echo "NEWLAYOUT=0" >> .config
-echo "VU_MULTIBOOT=$VU_MULTIBOOT" >> .config
-
+	esac
+	echo "NEWLAYOUT=0" >> .config
+	echo "VU_MULTIBOOT=$VU_MULTIBOOT" >> .config
 fi
 
 ##############################################
