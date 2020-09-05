@@ -1,13 +1,13 @@
 #
 # ntp
 #
-NTP_VER    = 4.2.8p14
+NTP_VER    = 4.2.8p15
 NTP_DIR    = ntp-$(NTP_VER)
 NTP_SOURCE = ntp-$(NTP_VER).tar.gz
 NTP_SITE   = https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-$(basename $(NTP_VER))
 
 NTP_PATCH  = \
-	0001-ntp.patch
+	0001-mkver_in.patch
 
 $(D)/ntp: bootstrap
 	$(START_BUILD)
