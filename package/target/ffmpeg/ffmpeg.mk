@@ -23,10 +23,10 @@ FFMPEG_PATCH  = \
 	4_mips64_cpu_detection.patch
 
 ifeq ($(TARGET_ARCH), arm)
-FFMPEG_CONF_OPTS  += --cpu=cortex-a15
+FFMPEG_CONFIG_OPTS  += --cpu=cortex-a15
 endif
 ifeq ($(TARGET_ARCH), mips)
-FFMPEG_CONF_OPTS  += --cpu=generic
+FFMPEG_CONFIG_OPTS  += --cpu=generic
 endif
 
 $(D)/ffmpeg: bootstrap openssl zlib bzip2 freetype rtmpdump libass libxml2 alsa-lib
@@ -334,7 +334,7 @@ $(D)/ffmpeg: bootstrap openssl zlib bzip2 freetype rtmpdump libass libxml2 alsa-
 			--enable-swresample \
 			--enable-hardcoded-tables \
 			\
-			$(FFMPEG_CONF_OPTS) \
+			$(FFMPEG_CONFIG_OPTS) \
 			\
 			--pkg-config="$(PKG_CONFIG)" \
 			--enable-cross-compile \
