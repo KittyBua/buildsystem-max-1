@@ -3,7 +3,7 @@
 #
 # -----------------------------------------------------------------------------
 
-flashimage:
+flashimage: neutrino
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd51 bre2ze4k h7))
 	$(MAKE) flash-image-multi-disk flash-image-multi-rootfs
 else ifeq ($(BOXMODEL), hd60)
@@ -24,10 +24,15 @@ else
 	echo -e "$(TERM_RED_BOLD)unsupported box model$(TERM_NORMAL)"
 endif
 	$(TUXBOX_CUSTOMIZE)
+	@echo "***************************************************************"
+	@echo -e "\033[01;32m"
+	@echo " Build of $@ for $(BOXMODEL) successfully completed."
+	@echo -e "\033[00m"
+	@echo "***************************************************************"
 
 # -----------------------------------------------------------------------------
 
-ofgimage:
+ofgimage: neutrino
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd51 bre2ze4k h7))
 	$(MAKE) ITYPE=ofg flash-image-multi-rootfs
 else ifeq ($(BOXMODEL), hd60)
@@ -40,11 +45,16 @@ else
 	echo -e "$(TERM_RED_BOLD)unsupported box model$(TERM_NORMAL)"
 endif
 	$(TUXBOX_CUSTOMIZE)
+	@echo "***************************************************************"
+	@echo -e "\033[01;32m"
+	@echo " Build of $@ for $(BOXMODEL) successfully completed."
+	@echo -e "\033[00m"
+	@echo "***************************************************************"
 
 # -----------------------------------------------------------------------------
 
 oi \
-online-image:
+online-image: neutrino
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd51 bre2ze4k h7))
 	$(MAKE) ITYPE=online flash-image-online
 else ifeq ($(BOXMODEL), hd60)
@@ -57,6 +67,11 @@ else
 	echo -e "$(TERM_RED_BOLD)unsupported box model$(TERM_NORMAL)"
 endif
 	$(TUXBOX_CUSTOMIZE)
+	@echo "***************************************************************"
+	@echo -e "\033[01;32m"
+	@echo " Build of $@ for $(BOXMODEL) successfully completed."
+	@echo -e "\033[00m"
+	@echo "***************************************************************"
 
 # -----------------------------------------------------------------------------
 
