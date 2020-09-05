@@ -1,7 +1,7 @@
 #
 # util-linux
 #
-UTIL_LINUX_VER    = 2.35
+UTIL_LINUX_VER    = 2.36
 UTIL_LINUX_DIR    = util-linux-$(UTIL_LINUX_VER)
 UTIL_LINUX_SOURCE = util-linux-$(UTIL_LINUX_VER).tar.xz
 UTIL_LINUX_SITE   = https://www.kernel.org/pub/linux/utils/util-linux/v$(UTIL_LINUX_VER)
