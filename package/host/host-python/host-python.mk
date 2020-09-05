@@ -34,7 +34,8 @@ $(D)/host-python: bootstrap
 			--without-cxx-main \
 			--with-threads \
 			; \
-		$(MAKE) all install; \
+		$(MAKE) all; \
+		$(MAKE) install; \
 		cp ./hostpgen $(HOST_DIR)/bin/pgen
 	$(PKG_REMOVE)
 	$(TOUCH)
