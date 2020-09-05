@@ -9,7 +9,7 @@ NEUTRINO           = neutrino-ddt
 LIBSTB_HAL         = libstb-hal-ddt
 NEUTRINO_BRANCH   ?= master
 LIBSTB_HAL_BRANCH ?= master
-NEUTRINO_PATCH     =
+NEUTRINO_PATCH     = neutrino-ddt.patch
 LIBSTB_HAL_PATCH   =
 else ifeq ($(FLAVOUR), neutrino-max)
 GIT_SITE          ?= $(MAX-GIT-GITHUB)
@@ -25,7 +25,7 @@ NEUTRINO           = ni-neutrino
 LIBSTB_HAL         = ni-libstb-hal
 NEUTRINO_BRANCH   ?= master
 LIBSTB_HAL_BRANCH ?= master
-NEUTRINO_PATCH     =
+NEUTRINO_PATCH     = ni-neutrino.patch
 LIBSTB_HAL_PATCH   =
 else ifeq ($(FLAVOUR), neutrino-tangos)
 GIT_SITE          ?= https://github.com/TangoCash

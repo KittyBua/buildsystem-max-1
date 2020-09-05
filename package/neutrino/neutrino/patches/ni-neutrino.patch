@@ -1,0 +1,36 @@
+diff -Nur '--exclude-from=/home/max/0_buildsystem-max/helpers/diff-exclude' ni-neutrino.git.org/acinclude.m4 ni-neutrino.git/acinclude.m4
+--- ni-neutrino.git.org/acinclude.m4	2020-08-26 22:20:15.363810718 +0200
++++ ni-neutrino.git/acinclude.m4	2020-08-26 22:23:19.094844749 +0200
+@@ -239,15 +239,15 @@
+ 
+ if test "$TARGET" = "cdk"; then
+ 	datadir="\${prefix}/share"
+-	sysconfdir="\${prefix}/etc"
+-	localstatedir="\${prefix}/var"
++	sysconfdir="/etc"
++	localstatedir="/var"
+ 	libdir="\${prefix}/lib"
+-	mntdir="\${prefix}/mnt"
++	mntdir="/mnt"
+ 	targetdatadir="\${TARGET_PREFIX}/share"
+-	targetsysconfdir="\${TARGET_PREFIX}/etc"
+-	targetlocalstatedir="\${TARGET_PREFIX}/var"
++	targetsysconfdir="/etc"
++	targetlocalstatedir="/var"
+ 	targetlibdir="\${TARGET_PREFIX}/lib"
+-	targetmntdir="\${TARGET_PREFIX}/mnt"
++	targetmntdir="/mnt"
+ else
+ 	mntdir="/mnt" # hack
+ fi
+diff -Nur '--exclude-from=/home/max/0_buildsystem-max/helpers/diff-exclude' ni-neutrino.git.org/src/Makefile.am ni-neutrino.git/src/Makefile.am
+--- ni-neutrino.git.org/src/Makefile.am	2020-08-26 22:20:15.435811711 +0200
++++ ni-neutrino.git/src/Makefile.am	2020-08-26 22:28:37.239685931 +0200
+@@ -205,6 +205,7 @@
+ 
+ if BOXTYPE_ARMBOX
+ neutrino_LDADD += @SWSCALE_LIBS@
++neutrino_LDADD += -liconv
+ endif
+ 
+ if BOXMODEL_RASPI
