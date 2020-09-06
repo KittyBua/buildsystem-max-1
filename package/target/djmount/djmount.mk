@@ -14,9 +14,12 @@ DJMOUNT_PATCH  = \
 	0005-fixed-crash-when-using-UTF-8-charset.patch \
 	0006-fixed-crash.patch \
 	0007-support-fstab-mounting.patch \
-	0008-support-seeking-in-large-2gb-files.patch
+	0008-support-seeking-in-large-2gb-files.patch \
+	0009-libupnp-1.6.6.patch \
+	0010-libupnp-1.6.13.patch \
+	0011-fix-build-with-gettext-0.20.x.patch
 
-$(D)/djmount: bootstrap libfuse
+$(D)/djmount: bootstrap libupnp libfuse
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
@@ -27,6 +30,8 @@ $(D)/djmount: bootstrap libfuse
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE) -C \
 			--prefix=/usr \
+			--with-external-libupnp \
+			--with-fuse-prefix=$(TARGET_DIR)/usr \
 			--disable-debug \
 			; \
 		make; \
