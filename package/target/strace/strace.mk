@@ -1,7 +1,7 @@
 #
 # strace
 #
-STRACE_VER    = 5.1
+STRACE_VER    = 5.7
 STRACE_DIR    = strace-$(STRACE_VER)
 STRACE_SOURCE = strace-$(STRACE_VER).tar.xz
 STRACE_SITE   = https://strace.io/files/$(STRACE_VER)
