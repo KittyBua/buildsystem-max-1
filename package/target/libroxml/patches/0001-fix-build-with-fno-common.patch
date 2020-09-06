@@ -1,0 +1,22 @@
+--- a/src/roxml_mem.h
++++ b/src/roxml_mem.h
+@@ -14,7 +14,7 @@
+ 
+ #include "roxml_internal.h"
+ 
+-memory_cell_t head_cell;
++static memory_cell_t head_cell;
+ 
+ /** \brief alloc memory function
+  *
+--- a/src/roxml_mem.c
++++ b/src/roxml_mem.c
+@@ -13,7 +13,7 @@
+ #include "roxml_mem.h"
+ 
+ /** \brief head of memory manager */
+-memory_cell_t head_cell = { PTR_NONE, 0, NULL, 0, NULL, NULL };
++static memory_cell_t head_cell = { PTR_NONE, 0, NULL, 0, NULL, NULL };
+ 
+ ROXML_STATIC ROXML_INT inline void roxml_release_last(void *data)
+ {
