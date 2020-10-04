@@ -365,17 +365,18 @@ HD61_IMAGE_LINK = $(HD61_IMAGE_NAME).ext4
 HD61_BOOTOPTIONS_PARTITION_SIZE = 32768
 HD61_IMAGE_ROOTFS_SIZE = 1024M
 
-HD61_BOOTARGS_DATE    = 20190605
+HD61_BOOTARGS_DATE    = 20200504
 HD61_BOOTARGS_SOURCE  = hd61-bootargs-$(HD61_BOOTARGS_DATE).zip
-HD61_PARTITONS_DATE   = 20190719
+HD61_PARTITONS_DATE   = 20200319
 HD61_PARTITONS_SOURCE = hd61-partitions-$(HD61_PARTITONS_DATE).zip
-HD61_RECOVERY_DATE    = 20190719
+HD61_RECOVERY_DATE    = 20200424
 HD61_RECOVERY_SOURCE  = hd61-recovery-$(HD61_RECOVERY_DATE).zip
 
 FLASH_IMAGE_HD61_MULTI_DISK_VER  = 1.0
 FLASH_IMAGE_HD61_MULTI_DISK_SITE = http://downloads.mutant-digital.net/hd61
 
 flash-image-hd61-multi-disk: host-atools
+	# Create image
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
 	$(call PKG_DOWNLOAD,$(HD61_BOOTARGS_SOURCE))
@@ -389,7 +390,7 @@ flash-image-hd61-multi-disk: host-atools
 	if [ -e $(RELEASE_DIR)/boot/logo.img ]; then \
 		cp -rf $(RELEASE_DIR)/boot/logo.img $(IMAGE_BUILD_DIR)/$(BOXMODEL); \
 	fi
-	echo "$(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE)_recovery_emmc" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion
+	echo "$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion
 	$(HOST_DIR)/bin/make_ext4fs -l $(HD61_IMAGE_ROOTFS_SIZE) $(IMAGE_BUILD_DIR)/$(HD61_IMAGE_LINK) $(RELEASE_DIR)/..
 	$(HOST_DIR)/bin/ext2simg -zv $(IMAGE_BUILD_DIR)/$(HD61_IMAGE_LINK) $(IMAGE_BUILD_DIR)/$(BOXMODEL)/rootfs.fastboot.gz
 	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE) bs=1024 count=$(HD61_BOOTOPTIONS_PARTITION_SIZE)
@@ -432,6 +433,7 @@ flash-image-hd61-multi-disk: host-atools
 	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/bootmenu.conf ::
 	mv $(IMAGE_BUILD_DIR)/bootargs-8gb.bin $(IMAGE_BUILD_DIR)/bootargs.bin
 	mv $(IMAGE_BUILD_DIR)/$(BOXMODEL)/bootargs-8gb.bin $(IMAGE_BUILD_DIR)/$(BOXMODEL)/bootargs.bin
+	echo boot-recovery > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/misc-boot.img
 	cp $(KERNEL_OUTPUT) $(IMAGE_BUILD_DIR)/$(BOXMODEL)/uImage
 	rm -rf $(IMAGE_BUILD_DIR)/STARTUP*
 	rm -rf $(IMAGE_BUILD_DIR)/*.txt
@@ -439,7 +441,7 @@ flash-image-hd61-multi-disk: host-atools
 	rm -rf $(IMAGE_BUILD_DIR)/$(HD61_IMAGE_LINK)
 	echo "To access the recovery image press immediately by power-up the frontpanel button or hold down a remote button key untill the display says boot" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/recovery.txt
 	$(CD) $(IMAGE_BUILD_DIR); \
-		zip -r $(IMAGE_DIR)/$$(cat $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion).zip *
+		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)_recovery_emmc.zip *
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
 
@@ -450,12 +452,12 @@ flash-image-hd61-multi-rootfs:
 	$(CD) $(RELEASE_DIR); \
 		tar -cvf $(IMAGE_BUILD_DIR)/$(BOXMODEL)/rootfs.tar . > /dev/null 2>&1; \
 		bzip2 $(IMAGE_BUILD_DIR)/$(BOXMODEL)/rootfs.tar
-	echo "$(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE)_emmc" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion
-	echo "$$(cat $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion).zip" > $(IMAGE_BUILD_DIR)/unforce_$(BOXMODEL).txt; \
+	echo "$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion
+	echo "$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)_emmc.zip" > $(IMAGE_BUILD_DIR)/unforce_$(BOXMODEL).txt; \
 	echo "Rename the unforce_$(BOXMODEL).txt to force_$(BOXMODEL).txt and move it to the root of your usb-stick" > $(IMAGE_BUILD_DIR)/force_$(BOXMODEL)_READ.ME; \
 	echo "When you enter the recovery menu then it will force to install the image $$(cat $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion).zip in the image-slot1" >> $(IMAGE_BUILD_DIR)/force_$(BOXMODEL)_READ.ME; \
 	$(CD) $(IMAGE_BUILD_DIR); \
-		zip -r $(IMAGE_DIR)/$$(cat $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion).zip unforce_$(BOXMODEL).txt force_$(BOXMODEL)_READ.ME $(BOXMODEL)/rootfs.tar.bz2 $(BOXMODEL)/uImage $(BOXMODEL)/imageversion
+		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)_emmc.zip unforce_$(BOXMODEL).txt force_$(BOXMODEL)_READ.ME $(BOXMODEL)/rootfs.tar.bz2 $(BOXMODEL)/uImage $(BOXMODEL)/imageversion
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
 
@@ -468,7 +470,7 @@ flash-image-hd61-online:
 		bzip2 $(IMAGE_BUILD_DIR)/$(BOXMODEL)/rootfs.tar
 	echo $(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE) > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion
 	$(CD) $(IMAGE_BUILD_DIR)/$(BOXMODEL); \
-		tar -cvzf $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE).tgz rootfs.tar.bz2 uImage imageversion
+		tar -cvzf $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE).tgz rootfs.tar.bz2 uImage imageversion
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
 
