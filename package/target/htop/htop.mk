@@ -1,7 +1,7 @@
 #
 # htop
 #
-HTOP_VER    = 3.0.1
+HTOP_VER    = 3.0.2
 HTOP_DIR    = htop-$(HTOP_VER)
 HTOP_SOURCE = htop-$(HTOP_VER).tar.gz
 HTOP_SITE   = $(call github,htop-dev,htop,$(HTOP_VER))
@@ -18,12 +18,14 @@ $(D)/htop: bootstrap ncurses
 		$(call apply_patches, $(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE) \
+			ac_cv_file__proc_stat=yes \
+			ac_cv_file__proc_meminfo=yes \
 			--prefix=/usr \
 			--mandir=/.remove \
 			--sysconfdir=/etc \
 			--disable-unicode \
+			--disable-hwloc \
 			--enable-cgroup \
-			--enable-proc \
 			--enable-taskstats \
 			; \
 		$(MAKE) all; \
