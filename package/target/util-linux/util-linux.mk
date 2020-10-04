@@ -96,6 +96,7 @@ $(D)/util-linux: bootstrap ncurses zlib
 			--without-readline \
 			--without-slang \
 			--without-smack \
+			--without-libmagic \
 			--without-systemd \
 			--without-systemdsystemunitdir \
 			--without-tinfo \
