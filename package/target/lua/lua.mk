@@ -8,7 +8,7 @@ LUA_SOURCE = lua-$(LUA_VER).tar.gz
 LUA_SITE   = https://www.lua.org/ftp
 
 LUA_PATCH  = \
-	0001-fix-lua-root.patch \
+	0001-root-path.patch \
 	0002-remove-readline.patch \
 	0003-shared-libs-for-lua.patch \
 	0004-lua-pc.patch \
