@@ -129,6 +129,7 @@ VUPLUS_PATCH_4_1 = \
 	vuplus/4_1_kernel-add-support-for-gcc7.patch \
 	vuplus/4_1_kernel-add-support-for-gcc8.patch \
 	vuplus/4_1_kernel-add-support-for-gcc9.patch \
+	vuplus/4_1_kernel-add-support-for-gcc10.patch \
 	vuplus/4_1_0001-Support-TBS-USB-drivers-for-4.1-kernel.patch \
 	vuplus/4_1_0001-TBS-fixes-for-4.1-kernel.patch \
 	vuplus/4_1_0001-STV-Add-PLS-support.patch \
