@@ -9,7 +9,7 @@ HARFBUZZ_SITE   = https://www.freedesktop.org/software/harfbuzz/release
 HARFBUZZ_PATCH  = \
 	0001-disable-docs.patch
 
-$(D)/harfbuzz: bootstrap fontconfig glib2 cairo freetype
+$(D)/harfbuzz: bootstrap glib2 cairo freetype
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
@@ -20,8 +20,8 @@ $(D)/harfbuzz: bootstrap fontconfig glib2 cairo freetype
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--with-cairo \
-			--with-fontconfig \
 			--with-freetype \
+			--without-fontconfig \
 			--with-glib \
 			--without-graphite2 \
 			--without-icu \
