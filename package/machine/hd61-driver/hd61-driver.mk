@@ -1,10 +1,10 @@
 #
 # hd61-driver
 #
-HD61_DRIVER_DATE   = 20190711
+HD61_DRIVER_DATE   = 20200731
 HD61_DRIVER_VER    = 4.4.35
 HD61_DRIVER_SOURCE = hd61-drivers-$(HD61_DRIVER_VER)-$(HD61_DRIVER_DATE).zip
-HD61_DRIVER_SITE   = http://downloads.mutant-digital.net/hd61
+HD61_DRIVER_SITE   = http://source.mynonpublic.com/gfutures
 
 $(D)/hd61-driver: bootstrap
 	$(START_BUILD)
