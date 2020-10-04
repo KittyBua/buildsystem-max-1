@@ -39,7 +39,7 @@ endif
 neutrino-release-base:
 	rm -rf $(RELEASE_DIR) || true
 	mkdir -p $(RELEASE_DIR)
-	mkdir -p $(RELEASE_DIR)/{bin,boot,dev,etc,lib,media,proc,sbin,swap,sys,tmp,usr,var}
+	mkdir -p $(RELEASE_DIR)/{bin,boot,dev,etc,lib,media,proc,sbin,storage,sys,tmp,usr,var}
 	mkdir -p $(RELEASE_DIR)/lib/{modules,firmware}
 	mkdir -p $(RELEASE_DIR)/home/root
 	mkdir -p $(RELEASE_DIR)/media/hdd
