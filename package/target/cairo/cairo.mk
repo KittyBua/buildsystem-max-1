@@ -9,7 +9,7 @@ CAIRO_SITE   = https://www.cairographics.org/releases
 CAIRO_PATCH  = \
 	0001-get_bitmap_surface.patch
 
-$(D)/cairo: bootstrap fontconfig glib2 libpng pixman zlib
+$(D)/cairo: bootstrap glib2 libpng pixman zlib
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
