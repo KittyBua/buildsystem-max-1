@@ -23,7 +23,19 @@ GFUTURES_PATCH_4_4 = \
 	gfutures/4_4_0001-remote.patch \
 	gfutures/4_4_0002-log2-give-up-on-gcc-constant-optimizations.patch \
 	gfutures/4_4_0003-dont-mark-register-as-const.patch \
-	gfutures/4_4_ieee80211-increase-scan-result-expire-time.patch
+	gfutures/4_4_0004-linux-fix-buffer-size-warning-error.patch \
+	gfutures/4_4_0005-xbox-one-tuner-4.4.patch \
+	gfutures/4_4_0006-dvb-media-tda18250-support-for-new-silicon-tuner.patch \
+	gfutures/4_4_0007-dvb-mn88472-staging.patch \
+	gfutures/4_4_HauppaugeWinTV-dualHD.patch \
+	gfutures/4_4_dib7000-linux_4.4.179.patch \
+	gfutures/4_4_dvb-usb-linux_4.4.179.patch \
+	gfutures/4_4_wifi-linux_4.4.183.patch \
+	gfutures/4_4_move-default-dialect-to-SMB3.patch \
+	gfutures/4_4_modules_mark__inittest__exittest_as__maybe_unused.patch \
+	gfutures/4_4_includelinuxmodule_h_copy__init__exit_attrs_to_initcleanup_module.patch \
+	gfutures/4_4_Backport_minimal_compiler_attributes_h_to_support_GCC_9.patch \
+	gfutures/4_4_mn88472_reset_stream_ID_reg_if_no_PLP_given.patch
 
 # mips vuduo
 VUPLUS_PATCH_3_9 = \

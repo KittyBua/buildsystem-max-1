@@ -1,7 +1,7 @@
 #
 # hd60-libs
 #
-HD60_LIBS_DATE   = 20190120
+HD60_LIBS_DATE   = 20200622
 HD60_LIBS_VER    = $(HD60_LIBS_DATE)
 HD60_LIBS_SOURCE = hd60-libs-$(HD60_LIBS_VER).zip
 HD60_LIBS_SITE   = http://downloads.mutant-digital.net/hd60
