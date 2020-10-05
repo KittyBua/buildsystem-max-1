@@ -37,6 +37,8 @@ ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd51 bre2ze4k h7))
 	$(MAKE) ITYPE=ofg flash-image-multi-rootfs
 else ifeq ($(BOXMODEL), hd60)
 	$(MAKE) ITYPE=ofg flash-image-hd60-multi-rootfs
+else ifeq ($(BOXMODEL), hd61)
+	$(MAKE) ITYPE=ofg flash-image-hd61-multi-rootfs
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
 	$(MAKE) ITYPE=ofg flash-image-osmio4k-multi-rootfs
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
@@ -59,6 +61,8 @@ ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd51 bre2ze4k h7))
 	$(MAKE) ITYPE=online flash-image-online
 else ifeq ($(BOXMODEL), hd60)
 	$(MAKE) ITYPE=online flash-image-hd60-online
+else ifeq ($(BOXMODEL), hd61)
+	$(MAKE) ITYPE=online flash-image-hd61-online
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
 	$(MAKE) ITYPE=online flash-image-osmio4k-online
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
