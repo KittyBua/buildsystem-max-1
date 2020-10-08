@@ -12,7 +12,7 @@ $(D)/hd60-driver: bootstrap
 	mkdir -p $(TARGET_MODULES_DIR)/extra
 	$(call PKG_UNPACK,$(TARGET_MODULES_DIR)/extra)
 	rm -f $(TARGET_MODULES_DIR)/extra/hi_play.ko
-	mv $(TARGET_MODULES_DIR)/extra/turnoff_power $(TARGET_DIR)/bin
+	mv $(TARGET_MODULES_DIR)/extra/turnoff_power $(TARGET_DIR)/$(bindir)
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d
 	for i in hd60_1 hd60_2 hd60_3 hd60_4; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/_hd60.conf; \

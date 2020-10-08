@@ -26,6 +26,9 @@ endif
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/mountall.sh $(TARGET_DIR)/etc/init.d/mountall.sh
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/mountnfs.sh $(TARGET_DIR)/etc/init.d/mountnfs.sh
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/networking $(TARGET_DIR)/etc/init.d/networking
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd60 hd61))
+	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/suspend.sh $(TARGET_DIR)/etc/init.d/suspend
+endif
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k hd51 hd60 hd61 osmio4k osmio4kplus h7))
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/partitions-by-name $(TARGET_DIR)/etc/init.d/partitions-by-name
 endif
@@ -87,6 +90,9 @@ endif
 	$(UPDATE-RC.D) populate-volatile.sh start 37 S .
 	$(UPDATE-RC.D) volatile-media.sh start 02 S .
 	$(UPDATE-RC.D) urandom start 38 S 0 6 .
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd60 hd61))
+	$(UPDATE-RC.D) suspend start 89 0 .
+endif
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k hd51 hd60 hd61 osmio4k osmio4kplus h7))
 	$(UPDATE-RC.D) resizerootfs start 7 S .
 	$(UPDATE-RC.D) partitions-by-name start 04 S .

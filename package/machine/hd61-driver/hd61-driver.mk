@@ -13,7 +13,7 @@ $(D)/hd61-driver: bootstrap
 	$(call PKG_UNPACK,$(TARGET_MODULES_DIR)/extra)
 	rm -f $(TARGET_MODULES_DIR)/extra/hi_play.ko
 	mkdir -p $(TARGET_DIR)/bin
-	mv $(TARGET_MODULES_DIR)/extra/turnoff_power $(TARGET_DIR)/bin
+	mv $(TARGET_MODULES_DIR)/extra/turnoff_power $(TARGET_DIR)/$(bindir)
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d
 	for i in hd61_1 hd61_2 hd61_3 hd61_4; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/_hd61.conf; \
