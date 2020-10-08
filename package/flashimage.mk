@@ -260,7 +260,7 @@ HD60_RECOVERY_SOURCE  = hd60-recovery-$(HD60_RECOVERY_DATE).zip
 FLASH_IMAGE_HD60_MULTI_DISK_VER  = 1.0
 FLASH_IMAGE_HD60_MULTI_DISK_SITE = http://downloads.mutant-digital.net/hd60
 
-flash-image-hd60-multi-disk: host-atools
+flash-image-hd60-multi-disk:
 	# Create image
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
@@ -275,9 +275,7 @@ flash-image-hd60-multi-disk: host-atools
 	if [ -e $(RELEASE_DIR)/boot/logo.img ]; then \
 		cp -rf $(RELEASE_DIR)/boot/logo.img $(IMAGE_BUILD_DIR)/$(BOXMODEL); \
 	fi
-	echo "$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion
-	$(HOST_DIR)/bin/make_ext4fs -l $(HD60_IMAGE_ROOTFS_SIZE) $(IMAGE_BUILD_DIR)/$(HD60_IMAGE_LINK) $(RELEASE_DIR)/..
-	$(HOST_DIR)/bin/ext2simg -zv $(IMAGE_BUILD_DIR)/$(HD60_IMAGE_LINK) $(IMAGE_BUILD_DIR)/$(BOXMODEL)/rootfs.fastboot.gz
+	echo "$(BOXTYPE)_$(DATE)_RECOVERY" > $(FLASH_BUILD_TMP)/$(BOXTYPE)/recoveryversion
 	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD60_BOOT_IMAGE) bs=1024 count=$(HD60_BOOTOPTIONS_PARTITION_SIZE)
 	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD60_BOOT_IMAGE)
 	echo "bootcmd=setenv bootargs \$$(bootargs) \$$(bootargs_common); mmc read 0 0x1000000 0x3BD000 0x8000; bootm 0x1000000; run bootcmd_fallback" > $(IMAGE_BUILD_DIR)/STARTUP
@@ -342,7 +340,7 @@ flash-image-hd60-multi-rootfs:
 	echo "Rename the unforce_$(BOXMODEL).txt to force_$(BOXMODEL).txt and move it to the root of your usb-stick" > $(IMAGE_BUILD_DIR)/force_$(BOXMODEL)_READ.ME; \
 	echo "When you enter the recovery menu then it will force to install the image $$(cat $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion).zip in the image-slot1" >> $(IMAGE_BUILD_DIR)/force_$(BOXMODEL)_READ.ME; \
 	$(CD) $(IMAGE_BUILD_DIR); \
-		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)_emmc.zip unforce_$(BOXMODEL).txt force_$(BOXMODEL)_READ.ME $(BOXMODEL)/rootfs.tar.bz2 $(BOXMODEL)/uImage $(BOXMODEL)/imageversion
+		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)_mmc.zip unforce_$(BOXMODEL).txt force_$(BOXMODEL)_READ.ME $(BOXMODEL)/rootfs.tar.bz2 $(BOXMODEL)/uImage $(BOXMODEL)/imageversion
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
 
@@ -394,9 +392,7 @@ flash-image-hd61-multi-disk: host-atools
 	if [ -e $(RELEASE_DIR)/boot/logo.img ]; then \
 		cp -rf $(RELEASE_DIR)/boot/logo.img $(IMAGE_BUILD_DIR)/$(BOXMODEL); \
 	fi
-	echo "$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion
-	$(HOST_DIR)/bin/make_ext4fs -l $(HD61_IMAGE_ROOTFS_SIZE) $(IMAGE_BUILD_DIR)/$(HD61_IMAGE_LINK) $(RELEASE_DIR)/..
-	$(HOST_DIR)/bin/ext2simg -zv $(IMAGE_BUILD_DIR)/$(HD61_IMAGE_LINK) $(IMAGE_BUILD_DIR)/$(BOXMODEL)/rootfs.fastboot.gz
+	echo "$(BOXTYPE)_$(DATE)_RECOVERY" > $(FLASH_BUILD_TMP)/$(BOXTYPE)/recoveryversion
 	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE) bs=1024 count=$(HD61_BOOTOPTIONS_PARTITION_SIZE)
 	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE)
 	echo "bootcmd=setenv bootargs \$$(bootargs) \$$(bootargs_common); mmc read 0 0x1000000 0x3BD000 0x8000; bootm 0x1000000; run bootcmd_fallback" > $(IMAGE_BUILD_DIR)/STARTUP
@@ -461,7 +457,7 @@ flash-image-hd61-multi-rootfs:
 	echo "Rename the unforce_$(BOXMODEL).txt to force_$(BOXMODEL).txt and move it to the root of your usb-stick" > $(IMAGE_BUILD_DIR)/force_$(BOXMODEL)_READ.ME; \
 	echo "When you enter the recovery menu then it will force to install the image $$(cat $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion).zip in the image-slot1" >> $(IMAGE_BUILD_DIR)/force_$(BOXMODEL)_READ.ME; \
 	$(CD) $(IMAGE_BUILD_DIR); \
-		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)_emmc.zip unforce_$(BOXMODEL).txt force_$(BOXMODEL)_READ.ME $(BOXMODEL)/rootfs.tar.bz2 $(BOXMODEL)/uImage $(BOXMODEL)/imageversion
+		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)_mmc.zip unforce_$(BOXMODEL).txt force_$(BOXMODEL)_READ.ME $(BOXMODEL)/rootfs.tar.bz2 $(BOXMODEL)/uImage $(BOXMODEL)/imageversion
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
 
