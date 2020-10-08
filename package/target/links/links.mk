@@ -1,7 +1,7 @@
 #
 # links
 #
-LINKS_VER    = 2.20.2
+LINKS_VER    = 2.21
 LINKS_DIR    = links-$(LINKS_VER)
 LINKS_SOURCE = links-$(LINKS_VER).tar.bz2
 LINKS_SITE   = http://links.twibright.com/download
@@ -11,7 +11,7 @@ LINKS_PATCH  = \
 	0002-links-ac-prog-cxx.patch \
 	0003-links-accept_https_play.patch
 
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd51 bre2ze4k))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd51 hd60 hd61 bre2ze4k))
 LINKS_PATCH += 0004-links-input-event1.patch
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), h7))
 LINKS_PATCH += 0005-links-input-event2.patch
