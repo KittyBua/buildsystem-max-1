@@ -22,7 +22,7 @@ NP_CONFIGURE_ADDITIONS += \
 	--disable-vinfo \
 	--enable-wortraten
 
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo vuduo4k vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 NP_CONFIGURE_ADDITIONS += \
 	--disable-rcu_switcher
 endif

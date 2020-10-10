@@ -111,7 +111,7 @@ VUPLUS_PATCH_3_14 = \
 	vuplus/3_14_0006-makefile-disable-warnings.patch \
 	vuplus/3_14_linux_dvb_adapter.patch
 
-# arm vuduo4k/vuuno4kse/vuzero4k
+# arm vuduo4k/vuduo4kse/vuuno4kse/vuzero4k
 VUPLUS_PATCH_4_1 = \
 	vuplus/4_1_linux_dvb_adapter.patch \
 	vuplus/4_1_linux_dvb-core.patch \
@@ -172,6 +172,9 @@ VUDUO_PATCH = \
 	$(VUPLUS_PATCH_3_9)
 
 VUDUO4K_PATCH = \
+	$(VUPLUS_PATCH_4_1)
+
+VUDUO4KSE_PATCH = \
 	$(VUPLUS_PATCH_4_1)
 
 VUSOLO4K_PATCH = \

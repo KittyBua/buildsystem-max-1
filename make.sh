@@ -68,6 +68,7 @@ case $1 in
 		echo "   5)  VU+ Uno 4K"
 		echo "   6)  VU+ Uno 4K SE"
 		echo "   7)  VU+ Zero 4K"
+		echo "   8)  VU+ Duo 4K SE"
 		echo "  11)  WWIO BRE2ZE 4K"
 		echo "  21)  AX/Mut@nt HD51"
 		echo "  22)  AX/Mut@nt HD60"
@@ -87,6 +88,7 @@ case "$REPLY" in
 	 5) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuuno4k";;
 	 6) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuuno4kse";;
 	 7) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuzero4k";;
+	 8) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuduo4kse";;
 	11) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="bre2ze4k";;
 	21) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd51";;
 	22) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd60";;
@@ -110,8 +112,8 @@ case $2 in
 		echo "   3) GCC version 8.4.0"
 		echo "   4) GCC version 9.3.0"
 		echo "   5) GCC version 10.2.0"
-		read -p "Select toolchain gcc version (1-5)? [4] "
-		REPLY="${REPLY:-4}";;
+		read -p "Select toolchain gcc version (1-5)? [3] "
+		REPLY="${REPLY:-3}";;
 esac
 
 case "$REPLY" in
@@ -228,7 +230,8 @@ if [ $BOXMODEL == 'vuduo4k' -o \
      $BOXMODEL == 'vuultimo4k' -o \
      $BOXMODEL == 'vuuno4k' -o \
      $BOXMODEL == 'vuuno4kse' -o \
-     $BOXMODEL == 'vuzero4k' \
+     $BOXMODEL == 'vuzero4k' -o \
+     $BOXMODEL == 'vuduo4kse' \
     ]; then
 
 	case $6 in

@@ -18,7 +18,7 @@ GRAPHLCD_BASE_PATCH += \
 	0003-material-colors.patch
 endif
 
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vusolo4k vuultimo4k vuuno4kse))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4kse))
 GRAPHLCD_BASE_PATCH += \
 	0005-add-vuplus-driver.patch
 endif

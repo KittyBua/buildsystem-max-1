@@ -39,7 +39,7 @@ $(D)/directories:
 	mkdir -p $(SOURCE_DIR)
 	mkdir -p $(HOST_DIR)/{bin,lib,share}
 	mkdir -p $(TARGET_DIR)/{bin,boot,etc,lib,sbin,usr,var}
-	mkdir -p $(TARGET_DIR)/etc/{default,network,ssl,udev}
+	mkdir -p $(TARGET_DIR)/etc/{default,init.d,network,ssl,udev}
 	mkdir -p $(TARGET_DIR)/etc/default/volatiles
 	mkdir -p $(TARGET_DIR)/etc/network/if-{post-down,pre-up,up,down}.d
 	mkdir -p $(TARGET_DIR)/lib/firmware
@@ -116,7 +116,7 @@ MACHINE_DEPS += $(BOXMODEL)-driver
 ifneq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k h7 hd51 hd60 hd61 vuduo))
 MACHINE_DEPS += $(BOXMODEL)-libgles
 endif
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 MACHINE_DEPS += $(BOXMODEL)-platform-util
 MACHINE_DEPS += $(BOXMODEL)-vmlinuz-initrd
 endif

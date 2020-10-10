@@ -12,7 +12,7 @@ else ifeq ($(BOXMODEL), hd61)
 	$(MAKE) flash-image-hd61-multi-disk flash-image-hd61-multi-rootfs
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
 	$(MAKE) flash-image-osmio4k-multi-disk flash-image-osmio4k-multi-rootfs
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 ifeq ($(VU_MULTIBOOT), 1)
 	$(MAKE) flash-image-vu-multi-rootfs
 else
@@ -41,7 +41,7 @@ else ifeq ($(BOXMODEL), hd61)
 	$(MAKE) ITYPE=ofg flash-image-hd61-multi-rootfs
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
 	$(MAKE) ITYPE=ofg flash-image-osmio4k-multi-rootfs
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 	$(MAKE) ITYPE=ofg flash-image-vu-rootfs
 else
 	echo -e "$(TERM_RED_BOLD)unsupported box model$(TERM_NORMAL)"
@@ -65,7 +65,7 @@ else ifeq ($(BOXMODEL), hd61)
 	$(MAKE) ITYPE=online flash-image-hd61-online
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
 	$(MAKE) ITYPE=online flash-image-osmio4k-online
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 	$(MAKE) ITYPE=online flash-image-vu-online
 else
 	echo -e "$(TERM_RED_BOLD)unsupported box model$(TERM_NORMAL)"
@@ -576,6 +576,11 @@ flash-image-osmio4k-online:
 ifeq ($(BOXMODEL), vuduo4k)
 VU_PREFIX = vuplus/duo4k
 VU_INITRD = vmlinuz-initrd-7278b1
+VU_FR     = echo "This file forces a reboot after the update." > $(IMAGE_BUILD_DIR)/$(VU_PREFIX)/reboot.update
+endif
+ifeq ($(BOXMODEL), vuduo4kse)
+VU_PREFIX = vuplus/duo4kse
+VU_INITRD = vmlinuz-initrd-7445d0
 VU_FR     = echo "This file forces a reboot after the update." > $(IMAGE_BUILD_DIR)/$(VU_PREFIX)/reboot.update
 endif
 ifeq ($(BOXMODEL), vusolo4k)

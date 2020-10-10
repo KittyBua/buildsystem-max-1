@@ -56,7 +56,7 @@ endif
 #
 # VU Plus
 #
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo vuduo4k vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 
 ifeq ($(BOXMODEL), vuduo)
 KERNEL_VER         = 3.9.6
@@ -65,6 +65,13 @@ MTD_BOOTFS         = $(EMPTY)
 endif
 
 ifeq ($(BOXMODEL), vuduo4k)
+KERNEL_VER         = 4.1.45-1.17
+KERNEL_SOURCE_VER  = 4.1-1.17
+MTD_BLACK          = mmcblk0
+MTD_BOOTFS         = mmcblk0p6
+endif
+
+ifeq ($(BOXMODEL), vuduo4kse)
 KERNEL_VER         = 4.1.45-1.17
 KERNEL_SOURCE_VER  = 4.1-1.17
 MTD_BLACK          = mmcblk0
