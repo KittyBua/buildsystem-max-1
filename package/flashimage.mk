@@ -4,12 +4,10 @@
 # -----------------------------------------------------------------------------
 
 flashimage: neutrino
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd51 bre2ze4k h7))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k hd51 h7))
 	$(MAKE) flash-image-multi-disk flash-image-multi-rootfs
-else ifeq ($(BOXMODEL), hd60)
-	$(MAKE) flash-image-hd60-multi-disk flash-image-hd60-multi-rootfs
-else ifeq ($(BOXMODEL), hd61)
-	$(MAKE) flash-image-hd61-multi-disk flash-image-hd61-multi-rootfs
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd60 hd61))
+	$(MAKE) flash-image-hisilicon-multi-disk
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
 	$(MAKE) flash-image-osmio4k-multi-disk flash-image-osmio4k-multi-rootfs
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
@@ -33,12 +31,10 @@ endif
 # -----------------------------------------------------------------------------
 
 ofgimage: neutrino
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd51 bre2ze4k h7))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k hd51 h7))
 	$(MAKE) ITYPE=ofg flash-image-multi-rootfs
-else ifeq ($(BOXMODEL), hd60)
-	$(MAKE) ITYPE=ofg flash-image-hd60-multi-rootfs
-else ifeq ($(BOXMODEL), hd61)
-	$(MAKE) ITYPE=ofg flash-image-hd61-multi-rootfs
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd60 hd61))
+	$(MAKE) ITYPE=ofg flash-image-hisilicon-multi-rootfs
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
 	$(MAKE) ITYPE=ofg flash-image-osmio4k-multi-rootfs
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
@@ -57,12 +53,10 @@ endif
 
 oi \
 online-image: neutrino
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd51 bre2ze4k h7))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k hd51 h7))
 	$(MAKE) ITYPE=online flash-image-online
-else ifeq ($(BOXMODEL), hd60)
-	$(MAKE) ITYPE=online flash-image-hd60-online
-else ifeq ($(BOXMODEL), hd61)
-	$(MAKE) ITYPE=online flash-image-hd61-online
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd60 hd61))
+	$(MAKE) ITYPE=online flash-image-hisilicon-online
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
 	$(MAKE) ITYPE=online flash-image-osmio4k-online
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
@@ -84,7 +78,7 @@ ITYPE ?= multi_usb
 
 # -----------------------------------------------------------------------------
 
-# hd51 / bre2ze4k
+# bre2ze4k/hd51/h7
 IMAGE_NAME = disk
 BOOT_IMAGE = boot.img
 IMAGE_LINK = $(IMAGE_NAME).ext4
@@ -242,42 +236,41 @@ flash-image-online:
 
 # -----------------------------------------------------------------------------
 
-# armbox hd60
-HD60_IMAGE_NAME = disk
-HD60_BOOT_IMAGE = bootoptions.img
-HD60_IMAGE_LINK = $(HD60_IMAGE_NAME).ext4
+# armbox hd60/hd61
+HISILICON_IMAGE_NAME = disk
+HISILICON_BOOT_IMAGE = bootoptions.img
+HISILICON_IMAGE_LINK = $(HISILICON_IMAGE_NAME).ext4
 
-HD60_BOOTOPTIONS_PARTITION_SIZE = 32768
-HD60_IMAGE_ROOTFS_SIZE = 1024M
+HISILICON_BOOTOPTIONS_PARTITION_SIZE = 32768
+HISILICON_IMAGE_ROOTFS_SIZE          = 1024M
 
-HD60_BOOTARGS_DATE    = 20200504
-HD60_BOOTARGS_SOURCE  = hd60-bootargs-$(HD60_BOOTARGS_DATE).zip
-HD60_PARTITONS_DATE   = 20200319
-HD60_PARTITONS_SOURCE = hd60-partitions-$(HD60_PARTITONS_DATE).zip
-HD60_RECOVERY_DATE    = 20200424
-HD60_RECOVERY_SOURCE  = hd60-recovery-$(HD60_RECOVERY_DATE).zip
+HISILICON_BOOTARGS_DATE    = 20200504
+HISILICON_BOOTARGS_SOURCE  = $(BOXMODEL)-bootargs-$(HISILICON_BOOTARGS_DATE).zip
+HISILICON_PARTITONS_DATE   = 20200319
+HISILICON_PARTITONS_SOURCE = $(BOXMODEL)-partitions-$(HISILICON_PARTITONS_DATE).zip
+HISILICON_RECOVERY_DATE    = 20200424
+HISILICON_RECOVERY_SOURCE  = $(BOXMODEL)-recovery-$(HISILICON_RECOVERY_DATE).zip
 
-FLASH_IMAGE_HD60_MULTI_DISK_VER  = 1.0
-FLASH_IMAGE_HD60_MULTI_DISK_SITE = http://downloads.mutant-digital.net/hd60
+FLASH_IMAGE_HISILICON_MULTI_DISK_VER  = 1.0
+FLASH_IMAGE_HISILICON_MULTI_DISK_SITE = http://downloads.mutant-digital.net/$(BOXMODEL)
 
-flash-image-hd60-multi-disk:
+flash-image-hisilicon-multi-disk:
 	# Create image
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
-	$(call PKG_DOWNLOAD,$(HD60_BOOTARGS_SOURCE))
-	$(call PKG_DOWNLOAD,$(HD60_PARTITONS_SOURCE))
-	$(call PKG_DOWNLOAD,$(HD60_RECOVERY_SOURCE))
-	unzip -o $(DL_DIR)/$(HD60_BOOTARGS_SOURCE) -d $(IMAGE_BUILD_DIR)
-	unzip -o $(DL_DIR)/$(HD60_PARTITONS_SOURCE) -d $(IMAGE_BUILD_DIR)
-	unzip -o $(DL_DIR)/$(HD60_RECOVERY_SOURCE) -d $(IMAGE_BUILD_DIR)
+	$(call PKG_DOWNLOAD,$(HISILICON_BOOTARGS_SOURCE))
+	$(call PKG_DOWNLOAD,$(HISILICON_PARTITONS_SOURCE))
+	$(call PKG_DOWNLOAD,$(HISILICON_RECOVERY_SOURCE))
+	unzip -o $(DL_DIR)/$(HISILICON_BOOTARGS_SOURCE) -d $(IMAGE_BUILD_DIR)
+	unzip -o $(DL_DIR)/$(HISILICON_PARTITONS_SOURCE) -d $(IMAGE_BUILD_DIR)
+	unzip -o $(DL_DIR)/$(HISILICON_RECOVERY_SOURCE) -d $(IMAGE_BUILD_DIR)
 	$(INSTALL_EXEC) $(IMAGE_BUILD_DIR)/bootargs-8gb.bin $(RELEASE_DIR)/usr/share/bootargs.bin
 	$(INSTALL_EXEC) $(IMAGE_BUILD_DIR)/fastboot.bin $(RELEASE_DIR)/usr/share/fastboot.bin
 	if [ -e $(RELEASE_DIR)/boot/logo.img ]; then \
 		cp -rf $(RELEASE_DIR)/boot/logo.img $(IMAGE_BUILD_DIR)/$(BOXMODEL); \
 	fi
-	echo "$(BOXTYPE)_$(DATE)_RECOVERY" > $(FLASH_BUILD_TMP)/$(BOXTYPE)/recoveryversion
-	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD60_BOOT_IMAGE) bs=1024 count=$(HD60_BOOTOPTIONS_PARTITION_SIZE)
-	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD60_BOOT_IMAGE)
+	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) bs=1024 count=$(HISILICON_BOOTOPTIONS_PARTITION_SIZE)
+	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE)
 	echo "bootcmd=setenv bootargs \$$(bootargs) \$$(bootargs_common); mmc read 0 0x1000000 0x3BD000 0x8000; bootm 0x1000000; run bootcmd_fallback" > $(IMAGE_BUILD_DIR)/STARTUP
 	echo "bootargs=root=/dev/mmcblk0p23 rootsubdir=linuxrootfs1 rootfstype=ext4 kernel=/dev/mmcblk0p19" >> $(IMAGE_BUILD_DIR)/STARTUP
 	echo "bootcmd=setenv vfd_msg andr;setenv bootargs \$$(bootargs) \$$(bootargs_common); run bootcmd_android; run bootcmd_fallback" > $(IMAGE_BUILD_DIR)/STARTUP_ANDROID
@@ -295,6 +288,7 @@ flash-image-hd60-multi-disk:
 	echo "bootcmd=setenv bootargs \$$(bootargs_common); mmc read 0 0x1000000 0x1000 0x9000; bootm 0x1000000" > $(IMAGE_BUILD_DIR)/STARTUP_RECOVERY
 	echo "bootcmd=setenv bootargs \$$(bootargs_common); mmc read 0 0x1000000 0x1000 0x9000; bootm 0x1000000" > $(IMAGE_BUILD_DIR)/STARTUP_ONCE
 	echo "imageurl https://raw.githubusercontent.com/oe-alliance/bootmenu/master/$(BOXMODEL)/images" > $(IMAGE_BUILD_DIR)/bootmenu.conf
+	echo "updateurl http://updateurl.ddns.net/cgi-bin/index.py" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
 	echo "# " >> $(IMAGE_BUILD_DIR)/bootmenu.conf
 	echo "iface eth0" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
 	echo "dhcp yes" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
@@ -305,163 +299,57 @@ flash-image-hd60-multi-disk:
 	echo "#netmask 255.255.255.0" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
 	echo "#gateway 192.168.178.1" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
 	echo "#dns 192.168.178.1" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD60_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD60_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_ANDROID ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD60_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_ANDROID_DISABLE_LINUXSE ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD60_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_1 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD60_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_2 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD60_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_3 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD60_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_4 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD60_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_RECOVERY ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD60_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/bootmenu.conf ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_ANDROID ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_ANDROID_DISABLE_LINUXSE ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_1 ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_2 ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_3 ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_4 ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_RECOVERY ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/bootmenu.conf ::
 	mv $(IMAGE_BUILD_DIR)/bootargs-8gb.bin $(IMAGE_BUILD_DIR)/bootargs.bin
 	mv $(IMAGE_BUILD_DIR)/$(BOXMODEL)/bootargs-8gb.bin $(IMAGE_BUILD_DIR)/$(BOXMODEL)/bootargs.bin
+	mv $(IMAGE_BUILD_DIR)/$(BOXMODEL)/pq_param.bin $(IMAGE_BUILD_DIR)/$(BOXMODEL)/pqparam.bin
 	echo boot-recovery > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/misc-boot.img
-	cp $(KERNEL_OUTPUT) $(IMAGE_BUILD_DIR)/$(BOXMODEL)/uImage
 	rm -rf $(IMAGE_BUILD_DIR)/STARTUP*
+	rm -rf $(IMAGE_BUILD_DIR)/*.conf
 	rm -rf $(IMAGE_BUILD_DIR)/*.txt
 	rm -rf $(IMAGE_BUILD_DIR)/$(BOXMODEL)/*.txt
-	rm -rf $(IMAGE_BUILD_DIR)/$(HD60_IMAGE_LINK)
-	echo "To access the recovery image press immediately by power-up the frontpanel button or hold down a remote button key untill the display says boot" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/recovery.txt
+	rm -rf $(IMAGE_BUILD_DIR)/$(HISILICON_IMAGE_LINK)
+	echo "$(BOXMODEL)_$(DATE)_RECOVERY" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/recoveryversion
+	echo "***** ACHTUNG *****" >$(IMAGE_BUILD_DIR)/recovery_$(BOXMODEL)_lies.mich
+	echo "Das RECOVERY wird nur benöetigt wenn es Probleme gibt beim zugriff auf das MULTIBOOT MENÜ" >> $(IMAGE_BUILD_DIR)/recovery_$(BOXMODEL)_lies.mich
+	echo "Das $(BOXMODEL)_$(FLAVOUR)_multiroot_$(DATE)_recovery_emmc.zip sollte normalerweise einmal installiert werden (oder wenn es ein Update gibt.)" >> $(IMAGE_BUILD_DIR)/recovery_$(BOXMODEL)_lies.mich
+	echo "Dies ist erforderlich, um Probleme mit dem Images zuvermeiden,wenn sich der Aufbau der Partition ändert (bootargs)." >> $(IMAGE_BUILD_DIR)/recovery_$(BOXMODEL)_lies.mich
+	echo "Die Änderungen können alle Daten im Flash Löschen, nur Installieren wenn es notwendig ist." >> $(IMAGE_BUILD_DIR)/recovery_$(BOXMODEL)_lies.mich
+	echo "***** ATTENTION *****" > $(IMAGE_BUILD_DIR)/recovery_$(BOXMODEL)_READ.ME
+	echo "This RECOVERY only need when you have issue access the MULTIBOOT MENU" >> $(IMAGE_BUILD_DIR)/recovery_$(BOXMODEL)_READ.ME
+	echo "The $(BOXMODEL)_$(FLAVOUR)_multiroot_$(DATE)_recovery_emmc.zip should been install normally once (or if there is an update.)" >> $(IMAGE_BUILD_DIR)/recovery_$(BOXMODEL)_READ.ME
+	echo "This is needed for avoid images conflicts as the partition layout (bootargs) is of huge essential." >> $(IMAGE_BUILD_DIR)/recovery_$(BOXMODEL)_READ.ME
+	echo "A small change can destroy all your install images. So we can better leave it and not install it if it's not need." >> $(IMAGE_BUILD_DIR)/recovery_$(BOXMODEL)_READ.ME
 	$(CD) $(IMAGE_BUILD_DIR); \
-		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)_recovery_emmc.zip *
+		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_multiroot_$(DATE)_recovery_emmc.zip *
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
 
-flash-image-hd60-multi-rootfs:
+flash-image-hisilicon-multi-rootfs:
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
 	cp $(KERNEL_OUTPUT) $(IMAGE_BUILD_DIR)/$(BOXMODEL)/uImage
 	$(CD) $(RELEASE_DIR); \
 		tar -cvf $(IMAGE_BUILD_DIR)/$(BOXMODEL)/rootfs.tar . > /dev/null 2>&1; \
 		bzip2 $(IMAGE_BUILD_DIR)/$(BOXMODEL)/rootfs.tar
-	echo "$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion
-	echo "$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)_emmc.zip" > $(IMAGE_BUILD_DIR)/unforce_$(BOXMODEL).txt; \
+	echo "$(BOXMODEL)_$(FLAVOUR)_$(DATE)" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion
+	echo "$(BOXMODEL)_$(FLAVOUR)_$(DATE)_mmc.zip" > $(IMAGE_BUILD_DIR)/unforce_$(BOXMODEL).txt; \
 	echo "Rename the unforce_$(BOXMODEL).txt to force_$(BOXMODEL).txt and move it to the root of your usb-stick" > $(IMAGE_BUILD_DIR)/force_$(BOXMODEL)_READ.ME; \
-	echo "When you enter the recovery menu then it will force to install the image $$(cat $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion).zip in the image-slot1" >> $(IMAGE_BUILD_DIR)/force_$(BOXMODEL)_READ.ME; \
+	echo "When you enter the recovery menu then it will force to install the image $(BOXMODEL)_$(FLAVOUR)_$(DATE)_mmc.zip in the image-slot1" >> $(IMAGE_BUILD_DIR)/force_$(BOXMODEL)_READ.ME; \
 	$(CD) $(IMAGE_BUILD_DIR); \
-		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)_mmc.zip unforce_$(BOXMODEL).txt force_$(BOXMODEL)_READ.ME $(BOXMODEL)/rootfs.tar.bz2 $(BOXMODEL)/uImage $(BOXMODEL)/imageversion
+		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_multiroot_$(DATE)_mmc.zip unforce_$(BOXMODEL).txt force_$(BOXMODEL)_READ.ME $(BOXMODEL)/rootfs.tar.bz2 $(BOXMODEL)/uImage $(BOXMODEL)/imageversion
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
 
-flash-image-hd60-online:
-	rm -rf $(IMAGE_BUILD_DIR) || true
-	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
-	cp $(KERNEL_OUTPUT) $(IMAGE_BUILD_DIR)/$(BOXMODEL)/uImage
-	$(CD) $(RELEASE_DIR); \
-		tar -cvf $(IMAGE_BUILD_DIR)/$(BOXMODEL)/rootfs.tar . > /dev/null 2>&1; \
-		bzip2 $(IMAGE_BUILD_DIR)/$(BOXMODEL)/rootfs.tar
-	echo $(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE) > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion
-	$(CD) $(IMAGE_BUILD_DIR)/$(BOXMODEL); \
-		tar -cvzf $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE).tgz rootfs.tar.bz2 uImage imageversion
-	# cleanup
-	rm -rf $(IMAGE_BUILD_DIR)
-
-# -----------------------------------------------------------------------------
-
-# armbox hd61
-HD61_IMAGE_NAME = disk
-HD61_BOOT_IMAGE = bootoptions.img
-HD61_IMAGE_LINK = $(HD61_IMAGE_NAME).ext4
-
-HD61_BOOTOPTIONS_PARTITION_SIZE = 32768
-HD61_IMAGE_ROOTFS_SIZE = 1024M
-
-HD61_BOOTARGS_DATE    = 20200504
-HD61_BOOTARGS_SOURCE  = hd61-bootargs-$(HD61_BOOTARGS_DATE).zip
-HD61_PARTITONS_DATE   = 20200319
-HD61_PARTITONS_SOURCE = hd61-partitions-$(HD61_PARTITONS_DATE).zip
-HD61_RECOVERY_DATE    = 20200424
-HD61_RECOVERY_SOURCE  = hd61-recovery-$(HD61_RECOVERY_DATE).zip
-
-FLASH_IMAGE_HD61_MULTI_DISK_VER  = 1.0
-FLASH_IMAGE_HD61_MULTI_DISK_SITE = http://downloads.mutant-digital.net/hd61
-
-flash-image-hd61-multi-disk: host-atools
-	# Create image
-	rm -rf $(IMAGE_BUILD_DIR) || true
-	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
-	$(call PKG_DOWNLOAD,$(HD61_BOOTARGS_SOURCE))
-	$(call PKG_DOWNLOAD,$(HD61_PARTITONS_SOURCE))
-	$(call PKG_DOWNLOAD,$(HD61_RECOVERY_SOURCE))
-	unzip -o $(DL_DIR)/$(HD61_BOOTARGS_SRC) -d $(IMAGE_BUILD_DIR)
-	unzip -o $(DL_DIR)/$(HD61_PARTITONS_SRC) -d $(IMAGE_BUILD_DIR)
-	unzip -o $(DL_DIR)/$(HD61_RECOVERY_SRC) -d $(IMAGE_BUILD_DIR)
-	$(INSTALL_EXEC) $(IMAGE_BUILD_DIR)/bootargs-8gb.bin $(RELEASE_DIR)/usr/share/bootargs.bin
-	$(INSTALL_EXEC) $(IMAGE_BUILD_DIR)/fastboot.bin $(RELEASE_DIR)/usr/share/fastboot.bin
-	if [ -e $(RELEASE_DIR)/boot/logo.img ]; then \
-		cp -rf $(RELEASE_DIR)/boot/logo.img $(IMAGE_BUILD_DIR)/$(BOXMODEL); \
-	fi
-	echo "$(BOXTYPE)_$(DATE)_RECOVERY" > $(FLASH_BUILD_TMP)/$(BOXTYPE)/recoveryversion
-	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE) bs=1024 count=$(HD61_BOOTOPTIONS_PARTITION_SIZE)
-	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE)
-	echo "bootcmd=setenv bootargs \$$(bootargs) \$$(bootargs_common); mmc read 0 0x1000000 0x3BD000 0x8000; bootm 0x1000000; run bootcmd_fallback" > $(IMAGE_BUILD_DIR)/STARTUP
-	echo "bootargs=root=/dev/mmcblk0p23 rootsubdir=linuxrootfs1 rootfstype=ext4 kernel=/dev/mmcblk0p19" >> $(IMAGE_BUILD_DIR)/STARTUP
-	echo "bootcmd=setenv vfd_msg andr;setenv bootargs \$$(bootargs) \$$(bootargs_common); run bootcmd_android; run bootcmd_fallback" > $(IMAGE_BUILD_DIR)/STARTUP_ANDROID
-	echo "bootargs=androidboot.selinux=disable androidboot.serialno=0123456789" >> $(IMAGE_BUILD_DIR)/STARTUP_ANDROID
-	echo "bootcmd=setenv vfd_msg andr;setenv bootargs \$$(bootargs) \$$(bootargs_common); run bootcmd_android; run bootcmd_fallback" > $(IMAGE_BUILD_DIR)/STARTUP_ANDROID_DISABLE_LINUXSE
-	echo "bootargs=androidboot.selinux=disable androidboot.serialno=0123456789" >> $(IMAGE_BUILD_DIR)/STARTUP_ANDROID_DISABLE_LINUXSE
-	echo "bootcmd=setenv bootargs \$$(bootargs) \$$(bootargs_common); mmc read 0 0x1000000 0x3BD000 0x8000; bootm 0x1000000; run bootcmd_fallback" > $(IMAGE_BUILD_DIR)/STARTUP_LINUX_1
-	echo "bootargs=root=/dev/mmcblk0p23 rootsubdir=linuxrootfs1 rootfstype=ext4 kernel=/dev/mmcblk0p19" >> $(IMAGE_BUILD_DIR)/STARTUP_LINUX_1
-	echo "bootcmd=setenv bootargs \$$(bootargs) \$$(bootargs_common); mmc read 0 0x1000000 0x3C5000 0x8000; bootm 0x1000000; run bootcmd_fallback" > $(IMAGE_BUILD_DIR)/STARTUP_LINUX_2
-	echo "bootargs=root=/dev/mmcblk0p23 rootsubdir=linuxrootfs2 rootfstype=ext4 kernel=/dev/mmcblk0p20" >> $(IMAGE_BUILD_DIR)/STARTUP_LINUX_2
-	echo "bootcmd=setenv bootargs \$$(bootargs) \$$(bootargs_common); mmc read 0 0x1000000 0x3CD000 0x8000; bootm 0x1000000; run bootcmd_fallback" > $(IMAGE_BUILD_DIR)/STARTUP_LINUX_3
-	echo "bootargs=root=/dev/mmcblk0p23 rootsubdir=linuxrootfs3 rootfstype=ext4 kernel=/dev/mmcblk0p21" >> $(IMAGE_BUILD_DIR)/STARTUP_LINUX_3
-	echo "bootcmd=setenv bootargs \$$(bootargs) \$$(bootargs_common); mmc read 0 0x1000000 0x3D5000 0x8000; bootm 0x1000000; run bootcmd_fallback" > $(IMAGE_BUILD_DIR)/STARTUP_LINUX_4
-	echo "bootargs=root=/dev/mmcblk0p23 rootsubdir=linuxrootfs4 rootfstype=ext4 kernel=/dev/mmcblk0p22" >> $(IMAGE_BUILD_DIR)/STARTUP_LINUX_4
-	echo "bootcmd=setenv bootargs \$$(bootargs_common); mmc read 0 0x1000000 0x1000 0x9000; bootm 0x1000000" > $(IMAGE_BUILD_DIR)/STARTUP_RECOVERY
-	echo "bootcmd=setenv bootargs \$$(bootargs_common); mmc read 0 0x1000000 0x1000 0x9000; bootm 0x1000000" > $(IMAGE_BUILD_DIR)/STARTUP_ONCE
-	echo "imageurl https://raw.githubusercontent.com/oe-alliance/bootmenu/master/$(BOXMODEL)/images" > $(IMAGE_BUILD_DIR)/bootmenu.conf
-	echo "# " >> $(IMAGE_BUILD_DIR)/bootmenu.conf
-	echo "iface eth0" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
-	echo "dhcp yes" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
-	echo "# " >> $(IMAGE_BUILD_DIR)/bootmenu.conf
-	echo "# for static config leave out 'dhcp yes' and add the following settings:" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
-	echo "# " >> $(IMAGE_BUILD_DIR)/bootmenu.conf
-	echo "#ip 192.168.178.10" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
-	echo "#netmask 255.255.255.0" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
-	echo "#gateway 192.168.178.1" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
-	echo "#dns 192.168.178.1" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_ANDROID ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_ANDROID_DISABLE_LINUXSE ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_1 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_2 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_3 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_4 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_RECOVERY ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD61_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/bootmenu.conf ::
-	mv $(IMAGE_BUILD_DIR)/bootargs-8gb.bin $(IMAGE_BUILD_DIR)/bootargs.bin
-	mv $(IMAGE_BUILD_DIR)/$(BOXMODEL)/bootargs-8gb.bin $(IMAGE_BUILD_DIR)/$(BOXMODEL)/bootargs.bin
-	echo boot-recovery > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/misc-boot.img
-	cp $(KERNEL_OUTPUT) $(IMAGE_BUILD_DIR)/$(BOXMODEL)/uImage
-	rm -rf $(IMAGE_BUILD_DIR)/STARTUP*
-	rm -rf $(IMAGE_BUILD_DIR)/*.txt
-	rm -rf $(IMAGE_BUILD_DIR)/$(BOXMODEL)/*.txt
-	rm -rf $(IMAGE_BUILD_DIR)/$(HD61_IMAGE_LINK)
-	echo "To access the recovery image press immediately by power-up the frontpanel button or hold down a remote button key untill the display says boot" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/recovery.txt
-	$(CD) $(IMAGE_BUILD_DIR); \
-		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)_recovery_emmc.zip *
-	# cleanup
-	rm -rf $(IMAGE_BUILD_DIR)
-
-flash-image-hd61-multi-rootfs:
-	rm -rf $(IMAGE_BUILD_DIR) || true
-	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
-	cp $(KERNEL_OUTPUT) $(IMAGE_BUILD_DIR)/$(BOXMODEL)/uImage
-	$(CD) $(RELEASE_DIR); \
-		tar -cvf $(IMAGE_BUILD_DIR)/$(BOXMODEL)/rootfs.tar . > /dev/null 2>&1; \
-		bzip2 $(IMAGE_BUILD_DIR)/$(BOXMODEL)/rootfs.tar
-	echo "$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion
-	echo "$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)_emmc.zip" > $(IMAGE_BUILD_DIR)/unforce_$(BOXMODEL).txt; \
-	echo "Rename the unforce_$(BOXMODEL).txt to force_$(BOXMODEL).txt and move it to the root of your usb-stick" > $(IMAGE_BUILD_DIR)/force_$(BOXMODEL)_READ.ME; \
-	echo "When you enter the recovery menu then it will force to install the image $$(cat $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion).zip in the image-slot1" >> $(IMAGE_BUILD_DIR)/force_$(BOXMODEL)_READ.ME; \
-	$(CD) $(IMAGE_BUILD_DIR); \
-		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_multiroot_$(ITYPE)_$(DATE)_mmc.zip unforce_$(BOXMODEL).txt force_$(BOXMODEL)_READ.ME $(BOXMODEL)/rootfs.tar.bz2 $(BOXMODEL)/uImage $(BOXMODEL)/imageversion
-	# cleanup
-	rm -rf $(IMAGE_BUILD_DIR)
-
-flash-image-hd61-online:
+flash-image-hisilicon-online:
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
 	cp $(KERNEL_OUTPUT) $(IMAGE_BUILD_DIR)/$(BOXMODEL)/uImage

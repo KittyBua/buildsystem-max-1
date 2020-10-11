@@ -2,7 +2,7 @@
 # makefile to build kernel
 #
 
-# arm bre2ze4k/hd51
+# arm bre2ze4k/hd51/h7
 GFUTURES_PATCH_4_10 = \
 	gfutures/4_10_0001-export_pmpoweroffprepare.patch \
 	gfutures/4_10_0002-TBS-fixes-for-4.10-kernel.patch \
@@ -151,7 +151,6 @@ VUPLUS_PATCH_4_1 = \
 	vuplus/4_1_0002-log2-give-up-on-gcc-constant-optimizations.patch \
 	vuplus/4_1_0003-uaccess-dont-mark-register-as-const.patch
 
-# arm zgemma h7
 AIRDIGITAL_PATCH_4_10 = \
 	$(GFUTURES_PATCH_4_10)
 
