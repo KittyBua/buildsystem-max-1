@@ -309,7 +309,7 @@ HOST_PYTHON_INSTALL = \
 	CFLAGS="$(CFLAGS)" \
 	LDFLAGS="$(LDFLAGS)" \
 	LDSHARED="$(HOSTCC) -shared" \
-	PYTHONPATH=$(TARGET_DIR)/$(HOST_PYTHON3_BASE_DIR)/site-packages \
+	PYTHONPATH=$(HOST_DIR)/$(HOST_PYTHON3_BASE_DIR)/site-packages \
 	$(HOST_DIR)/bin/python3 ./setup.py $(SILENT_Q) install --root=$(HOST_DIR) --prefix=
 
 PYTHON_BUILD = \
