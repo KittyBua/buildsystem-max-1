@@ -1,16 +1,16 @@
 #
 # glib2
 #
-GLIB2_VER    = 2.56.3
+GLIB2_VER    = 2.62.4
 GLIB2_DIR    = glib-$(GLIB2_VER)
 GLIB2_SOURCE = glib-$(GLIB2_VER).tar.xz
 GLIB2_SITE   = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(GLIB2_VER))
 
 GLIB2_PATCH  = \
-	0001-glib2-disable-tests.patch \
-	0002-glib2-automake.patch \
-	0003-glib2-fix-gio-linking.patch \
-	0004-gdbus-Avoid-printing-null-strings.patch
+	0001-fix-compile-time-atomic-detection.patch \
+	0002-allow-explicit-disabling-of-tests.patch \
+	0003-remove-cpp-requirement.patch \
+	0004-Add-Wno-format-nonliteral-to-compiler-arguments.patch
 
 $(D)/glib2: bootstrap host-glib2 libffi util-linux zlib libiconv
 	$(START_BUILD)
@@ -19,33 +19,20 @@ $(D)/glib2: bootstrap host-glib2 libffi util-linux zlib libiconv
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
-		echo "glib_cv_va_copy=no" > config.cache; \
-		echo "glib_cv___va_copy=yes" >> config.cache; \
-		echo "glib_cv_va_val_copy=yes" >> config.cache; \
-		echo "ac_cv_func_posix_getpwuid_r=yes" >> config.cache; \
-		echo "ac_cv_func_posix_getgrgid_r=yes" >> config.cache; \
-		echo "glib_cv_stack_grows=no" >> config.cache; \
-		echo "glib_cv_uscore=no" >> config.cache; \
-		echo "ac_cv_path_GLIB_GENMARSHAL=$(HOST_DIR)/bin/glib-genmarshal" >> config.cache; \
-		$(CONFIGURE) \
+		unset CC CXX CPP LD AR NM STRIP; \
+		$(HOST_DIR)/bin/meson builddir/ --buildtype=release --cross-file $(HOST_DIR)/bin/meson-cross.config \
 			--prefix=/usr \
-			--enable-static \
-			--mandir=/.remove \
-			--cache-file=config.cache \
-			--disable-fam \
-			--disable-libmount \
-			--disable-gtk-doc \
-			--disable-gtk-doc-html \
-			--disable-gtk-doc-pdf \
-			--with-threads="posix" \
-			--with-html-dir=/.remove \
-			--with-pcre=internal \
-			--with-libiconv=gnu \
+			-Dman=false \
+			-Dgtk_doc=false \
+			-Dinternal_pcre=false \
+			-Diconv=external \
+			-Dgio_module_dir=/usr/lib/gio/modules \
+			-Dinstalled_tests=false \
+			-Doss_fuzz=disabled \
 			; \
-		$(MAKE) all; \
-		$(MAKE) install DESTDIR=$(TARGET_DIR) localedir=/.remove/locale gnulocaledir=/.remove/locale
-	rm -rf $(addprefix $(TARGET_DIR)/usr/share/,gettext gdb glib-2.0)
+	$(PKG_CHDIR); \
+		DESTDIR=$(TARGET_DIR) $(HOST_DIR)/bin/ninja -C builddir install
+	rm -rf $(addprefix $(TARGET_DIR)/usr/share/,gettext gdb glib-2.0 locale)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gdbus-codegen glib-compile-schemas glib-compile-resources glib-genmarshal glib-gettextize glib-mkenums gobject-query gtester gtester-report)
-	$(REWRITE_LIBTOOL_LA)
 	$(PKG_REMOVE)
 	$(TOUCH)
