@@ -133,15 +133,15 @@ endif
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
 
 ifeq ($(BOXMODEL), osmio4k)
-KERNEL_VER         = 5.3.0
-KERNEL_SOURCE_VER  = 5.3
+KERNEL_VER         = 5.9.0
+KERNEL_SOURCE_VER  = 5.9
 MTD_BLACK          = mmcblk1
 MTD_BOOTFS         = mmcblk1p1
 endif
 
 ifeq ($(BOXMODEL), osmio4kplus)
-KERNEL_VER         = 5.5.16
-KERNEL_SOURCE_VER  = 5.5.16
+KERNEL_VER         = 5.9.0
+KERNEL_SOURCE_VER  = 5.9
 MTD_BLACK          = mmcblk1
 MTD_BOOTFS         = mmcblk1p1
 endif

@@ -214,9 +214,15 @@ VUZERO4K_PATCH = \
 
 # -----------------------------------------------------------------------------
 
-OSMIO4K_PATCH =
+EDISION_PATCH_5_9 = \
+	edision/0001-scripts-Use-fixed-input-and-output-files-instead-of-.patch \
+	edision/0002-kbuild-install_headers.sh-Strip-_UAPI-from-if-define.patch
 
-OSMIO4KPLUS_PATCH =
+OSMIO4K_PATCH = \
+	$(EDISION_PATCH_5_9)
+
+OSMIO4KPLUS_PATCH = \
+	$(EDISION_PATCH_5_9)
 
 # -----------------------------------------------------------------------------
 
