@@ -12,7 +12,7 @@ $(D)/osmio4kplus-driver: bootstrap
 	mkdir -p $(TARGET_MODULES_DIR)/extra
 	$(call PKG_UNPACK,$(TARGET_MODULES_DIR)/extra)
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d
-	for i in brcmstb-osmio4kplus ci si2183 avl6862 avl6261; do \
+	for i in brcmstb-osmio4kplus brcmstb-decoder ci si2183 avl6862 avl6261; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/_osmio4kplus.conf; \
 	done
 	$(TOUCH)
