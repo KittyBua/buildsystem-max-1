@@ -7,7 +7,7 @@ flashimage: neutrino
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k hd51 h7))
 	$(MAKE) flash-image-multi-disk flash-image-multi-rootfs
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd60 hd61))
-	$(MAKE) flash-image-hisilicon-multi-disk
+	$(MAKE) flash-image-hd6x-multi-disk
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
 	$(MAKE) flash-image-osmio4k-multi-disk flash-image-osmio4k-multi-rootfs
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
@@ -34,7 +34,7 @@ ofgimage: neutrino
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k hd51 h7))
 	$(MAKE) ITYPE=ofg flash-image-multi-rootfs
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd60 hd61))
-	$(MAKE) ITYPE=ofg flash-image-hisilicon-multi-rootfs
+	$(MAKE) ITYPE=ofg flash-image-hd6x-multi-rootfs
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
 	$(MAKE) ITYPE=ofg flash-image-osmio4k-multi-rootfs
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
@@ -56,7 +56,7 @@ online-image: neutrino
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k hd51 h7))
 	$(MAKE) ITYPE=online flash-image-online
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd60 hd61))
-	$(MAKE) ITYPE=online flash-image-hisilicon-online
+	$(MAKE) ITYPE=online flash-image-hd6x-online
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
 	$(MAKE) ITYPE=online flash-image-osmio4k-online
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
@@ -237,40 +237,40 @@ flash-image-online:
 # -----------------------------------------------------------------------------
 
 # armbox hd60/hd61
-HISILICON_IMAGE_NAME = disk
-HISILICON_BOOT_IMAGE = bootoptions.img
-HISILICON_IMAGE_LINK = $(HISILICON_IMAGE_NAME).ext4
+HD6X_IMAGE_NAME = disk
+HD6X_BOOT_IMAGE = bootoptions.img
+HD6X_IMAGE_LINK = $(HD6X_IMAGE_NAME).ext4
 
-HISILICON_BOOTOPTIONS_PARTITION_SIZE = 32768
-HISILICON_IMAGE_ROOTFS_SIZE          = 1024M
+HD6X_BOOTOPTIONS_PARTITION_SIZE = 32768
+HD6X_IMAGE_ROOTFS_SIZE          = 1024M
 
-HISILICON_BOOTARGS_DATE    = 20200504
-HISILICON_BOOTARGS_SOURCE  = $(BOXMODEL)-bootargs-$(HISILICON_BOOTARGS_DATE).zip
-HISILICON_PARTITONS_DATE   = 20200319
-HISILICON_PARTITONS_SOURCE = $(BOXMODEL)-partitions-$(HISILICON_PARTITONS_DATE).zip
-HISILICON_RECOVERY_DATE    = 20200424
-HISILICON_RECOVERY_SOURCE  = $(BOXMODEL)-recovery-$(HISILICON_RECOVERY_DATE).zip
+HD6X_BOOTARGS_DATE    = 20200504
+HD6X_BOOTARGS_SOURCE  = $(BOXMODEL)-bootargs-$(HD6X_BOOTARGS_DATE).zip
+HD6X_PARTITONS_DATE   = 20200319
+HD6X_PARTITONS_SOURCE = $(BOXMODEL)-partitions-$(HD6X_PARTITONS_DATE).zip
+HD6X_RECOVERY_DATE    = 20200424
+HD6X_RECOVERY_SOURCE  = $(BOXMODEL)-recovery-$(HD6X_RECOVERY_DATE).zip
 
-FLASH_IMAGE_HISILICON_MULTI_DISK_VER  = 1.0
-FLASH_IMAGE_HISILICON_MULTI_DISK_SITE = http://downloads.mutant-digital.net/$(BOXMODEL)
+FLASH_IMAGE_HD6X_MULTI_DISK_VER  = 1.0
+FLASH_IMAGE_HD6X_MULTI_DISK_SITE = http://downloads.mutant-digital.net/$(BOXMODEL)
 
-flash-image-hisilicon-multi-disk:
+flash-image-hd6x-multi-disk:
 	# Create image
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
-	$(call PKG_DOWNLOAD,$(HISILICON_BOOTARGS_SOURCE))
-	$(call PKG_DOWNLOAD,$(HISILICON_PARTITONS_SOURCE))
-	$(call PKG_DOWNLOAD,$(HISILICON_RECOVERY_SOURCE))
-	unzip -o $(DL_DIR)/$(HISILICON_BOOTARGS_SOURCE) -d $(IMAGE_BUILD_DIR)
-	unzip -o $(DL_DIR)/$(HISILICON_PARTITONS_SOURCE) -d $(IMAGE_BUILD_DIR)
-	unzip -o $(DL_DIR)/$(HISILICON_RECOVERY_SOURCE) -d $(IMAGE_BUILD_DIR)
+	$(call PKG_DOWNLOAD,$(HD6X_BOOTARGS_SOURCE))
+	$(call PKG_DOWNLOAD,$(HD6X_PARTITONS_SOURCE))
+	$(call PKG_DOWNLOAD,$(HD6X_RECOVERY_SOURCE))
+	unzip -o $(DL_DIR)/$(HD6X_BOOTARGS_SOURCE) -d $(IMAGE_BUILD_DIR)
+	unzip -o $(DL_DIR)/$(HD6X_PARTITONS_SOURCE) -d $(IMAGE_BUILD_DIR)
+	unzip -o $(DL_DIR)/$(HD6X_RECOVERY_SOURCE) -d $(IMAGE_BUILD_DIR)
 	$(INSTALL_EXEC) $(IMAGE_BUILD_DIR)/bootargs-8gb.bin $(RELEASE_DIR)/usr/share/bootargs.bin
 	$(INSTALL_EXEC) $(IMAGE_BUILD_DIR)/fastboot.bin $(RELEASE_DIR)/usr/share/fastboot.bin
 	if [ -e $(RELEASE_DIR)/boot/logo.img ]; then \
 		cp -rf $(RELEASE_DIR)/boot/logo.img $(IMAGE_BUILD_DIR)/$(BOXMODEL); \
 	fi
-	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) bs=1024 count=$(HISILICON_BOOTOPTIONS_PARTITION_SIZE)
-	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE)
+	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD6X_BOOT_IMAGE) bs=1024 count=$(HD6X_BOOTOPTIONS_PARTITION_SIZE)
+	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD6X_BOOT_IMAGE)
 	echo "bootcmd=setenv bootargs \$$(bootargs) \$$(bootargs_common); mmc read 0 0x1000000 0x3BD000 0x8000; bootm 0x1000000; run bootcmd_fallback" > $(IMAGE_BUILD_DIR)/STARTUP
 	echo "bootargs=root=/dev/mmcblk0p23 rootsubdir=linuxrootfs1 rootfstype=ext4 kernel=/dev/mmcblk0p19" >> $(IMAGE_BUILD_DIR)/STARTUP
 	echo "bootcmd=setenv vfd_msg andr;setenv bootargs \$$(bootargs) \$$(bootargs_common); run bootcmd_android; run bootcmd_fallback" > $(IMAGE_BUILD_DIR)/STARTUP_ANDROID
@@ -299,15 +299,15 @@ flash-image-hisilicon-multi-disk:
 	echo "#netmask 255.255.255.0" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
 	echo "#gateway 192.168.178.1" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
 	echo "#dns 192.168.178.1" >> $(IMAGE_BUILD_DIR)/bootmenu.conf
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_ANDROID ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_ANDROID_DISABLE_LINUXSE ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_1 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_2 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_3 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_4 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_RECOVERY ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HISILICON_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/bootmenu.conf ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD6X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD6X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_ANDROID ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD6X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_ANDROID_DISABLE_LINUXSE ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD6X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_1 ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD6X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_2 ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD6X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_3 ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD6X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_LINUX_4 ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD6X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_RECOVERY ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(BOXMODEL)/$(HD6X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/bootmenu.conf ::
 	mv $(IMAGE_BUILD_DIR)/bootargs-8gb.bin $(IMAGE_BUILD_DIR)/bootargs.bin
 	mv $(IMAGE_BUILD_DIR)/$(BOXMODEL)/bootargs-8gb.bin $(IMAGE_BUILD_DIR)/$(BOXMODEL)/bootargs.bin
 	mv $(IMAGE_BUILD_DIR)/$(BOXMODEL)/pq_param.bin $(IMAGE_BUILD_DIR)/$(BOXMODEL)/pqparam.bin
@@ -316,7 +316,7 @@ flash-image-hisilicon-multi-disk:
 	rm -rf $(IMAGE_BUILD_DIR)/*.conf
 	rm -rf $(IMAGE_BUILD_DIR)/*.txt
 	rm -rf $(IMAGE_BUILD_DIR)/$(BOXMODEL)/*.txt
-	rm -rf $(IMAGE_BUILD_DIR)/$(HISILICON_IMAGE_LINK)
+	rm -rf $(IMAGE_BUILD_DIR)/$(HD6X_IMAGE_LINK)
 	echo "$(BOXMODEL)_$(DATE)_RECOVERY" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/recoveryversion
 	echo "***** ACHTUNG *****" >$(IMAGE_BUILD_DIR)/recovery_$(BOXMODEL)_lies.mich
 	echo "Das RECOVERY wird nur benöetigt wenn es Probleme gibt beim zugriff auf das MULTIBOOT MENÜ" >> $(IMAGE_BUILD_DIR)/recovery_$(BOXMODEL)_lies.mich
@@ -333,7 +333,7 @@ flash-image-hisilicon-multi-disk:
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
 
-flash-image-hisilicon-multi-rootfs:
+flash-image-hd6x-multi-rootfs:
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
 	cp $(KERNEL_OUTPUT) $(IMAGE_BUILD_DIR)/$(BOXMODEL)/uImage
@@ -349,7 +349,7 @@ flash-image-hisilicon-multi-rootfs:
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
 
-flash-image-hisilicon-online:
+flash-image-hd6x-online:
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
 	cp $(KERNEL_OUTPUT) $(IMAGE_BUILD_DIR)/$(BOXMODEL)/uImage
