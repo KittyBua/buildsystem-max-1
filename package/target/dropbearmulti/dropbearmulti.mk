@@ -38,8 +38,8 @@ $(D)/dropbearmulti: bootstrap
 			--disable-pututline \
 			--disable-pututxline \
 			; \
-		$(MAKE) PROGRAMS="dropbear scp" MULTI=1; \
-		$(MAKE) PROGRAMS="dropbear scp" MULTI=1 install DESTDIR=$(TARGET_DIR)
+		$(MAKE) PROGRAMS="dropbear scp dropbearkey" MULTI=1; \
+		$(MAKE) PROGRAMS="dropbear scp dropbearkey" MULTI=1 install DESTDIR=$(TARGET_DIR)
 	cd $(TARGET_DIR)/usr/bin && ln -sf /usr/bin/dropbearmulti dropbear
 	mkdir -p $(TARGET_DIR)/etc/dropbear
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/dropbear $(TARGET_DIR)/etc/init.d/
