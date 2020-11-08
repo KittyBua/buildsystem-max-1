@@ -32,12 +32,10 @@ diff --git a/src/pcm/pcm_direct.c b/src/pcm/pcm_direct.c
 index 2b07eff9..4dc3ea26 100644
 --- a/src/pcm/pcm_direct.c
 +++ b/src/pcm/pcm_direct.c
-@@ -431,13 +431,21 @@ int snd_pcm_direct_server_create(snd_pcm_direct_t *dmix)
- 		close(dmix->server_fd);
+@@ -438,12 +438,20 @@
  		return ret;
  	}
--	
-+
+ 	
 +#ifdef HAVE_FORK
  	ret = fork();
 +#else
