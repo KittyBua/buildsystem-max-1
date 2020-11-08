@@ -34,6 +34,7 @@ $(D)/freetype: bootstrap zlib libpng
 			--with-zlib \
 			--without-harfbuzz \
 			--without-bzip2 \
+			--without-brotli \
 			; \
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
