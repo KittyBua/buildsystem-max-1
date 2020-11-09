@@ -1,7 +1,7 @@
 #
-# host-tzdata
+# host-tzcode
 #
-HOST_TZCODE_VER    = 2020a
+HOST_TZCODE_VER    = 2020d
 HOST_TZCODE_DIR    = tzcode
 HOST_TZCODE_SOURCE = tzcode$(HOST_TZCODE_VER).tar.gz
 HOST_TZCODE_SITE   = ftp://ftp.iana.org/tz/releases
