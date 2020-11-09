@@ -1,7 +1,7 @@
 #
 # tzdata
 #
-TZDATA_VER    = 2020a
+TZDATA_VER    = 2020d
 TZDATA_DIR    = timezone
 TZDATA_SOURCE = tzdata$(TZDATA_VER).tar.gz
 TZDATA_SITE   = https://ftp.iana.org/tz/releases
@@ -16,8 +16,8 @@ $(D)/tzdata: bootstrap host-tzcode
 		unset ${!LC_*}; LANG=POSIX; LC_ALL=POSIX; export LANG LC_ALL; \
 		$(HOST_DIR)/bin/zic -d zoneinfo.tmp \
 			africa antarctica asia australasia \
-			europe northamerica southamerica pacificnew \
-			etcetera backward; \
+			europe northamerica southamerica \
+			factory etcetera backward; \
 		sed -n '/zone=/{s/.*zone="\(.*\)".*$$/\1/; p}' $(PKG_FILES_DIR)/timezone.xml | sort -u | \
 		while read x; do \
 			find zoneinfo.tmp -type f -name $$x | sort | \
