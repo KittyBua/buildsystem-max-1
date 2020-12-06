@@ -64,5 +64,6 @@ $(D)/e2fsprogs: bootstrap util-linux
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,badblocks dumpe2fs e2mmpstatus e2undo logsave)
 	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,filefrag e2freefrag mk_cmds mklost+found uuidd e4crypt)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,chattr compile_et mk_cmds lsattr uuidgen)
+	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,et ss)
 	$(PKG_REMOVE)
 	$(TOUCH)
