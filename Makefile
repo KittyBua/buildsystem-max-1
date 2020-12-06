@@ -143,14 +143,14 @@ help:
 
 # -----------------------------------------------------------------------------
 
-# for local extensions, e.g. special plugins or similar...
--include ./Makefile.local
-
 include package/flashimage.mk
 include package/helpers.mk
 include $(sort $(wildcard package/*/*/*.mk))
 include package/cleantargets.mk
 include package/bootstrap.mk
+
+# for local extensions, e.g. special plugins or similar...
+-include ./Makefile.local
 
 # -----------------------------------------------------------------------------
 
