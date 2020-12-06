@@ -7,7 +7,8 @@ ASTRA_SM_SOURCE = astra-sm.git
 ASTRA_SM_SITE   = https://gitlab.com/crazycat69
 
 ASTRA_SM_PATCH  = \
-	0001-astra-sm.patch
+	0001-version.patch \
+	0002-undef_dvb_net.patch
 
 $(D)/astra-sm: bootstrap openssl
 	$(START_BUILD)
@@ -25,5 +26,6 @@ $(D)/astra-sm: bootstrap openssl
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
+	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,astra)
 	$(PKG_REMOVE)
 	$(TOUCH)
