@@ -7,7 +7,8 @@ LIBVORBIS_SOURCE = libvorbis-$(LIBVORBIS_VER).tar.xz
 LIBVORBIS_SITE   = https://ftp.osuosl.org/pub/xiph/releases/vorbis
 
 LIBVORBIS_PATCH = \
-	0001-configure-Check-for-clang.patch
+	0001-configure-Check-for-clang.patch \
+	0002-no-docs.patch
 
 $(D)/libvorbis: bootstrap libogg
 	$(START_BUILD)
@@ -16,6 +17,7 @@ $(D)/libvorbis: bootstrap libogg
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
+		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--docdir=/.remove \
@@ -25,7 +27,7 @@ $(D)/libvorbis: bootstrap libogg
 			--disable-oggtest \
 			; \
 		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR) docdir=/.remove
+		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)
 	$(PKG_REMOVE)
 	$(TOUCH)
