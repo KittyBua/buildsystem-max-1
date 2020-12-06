@@ -1,7 +1,7 @@
 #
 # sysvinit
 #
-SYSVINIT_VER    = 2.97
+SYSVINIT_VER    = 2.98
 SYSVINIT_DIR    = sysvinit-$(SYSVINIT_VER)
 SYSVINIT_SOURCE = sysvinit-$(SYSVINIT_VER).tar.xz
 SYSVINIT_SITE   = http://download.savannah.nongnu.org/releases/sysvinit
@@ -35,7 +35,7 @@ $(D)/sysvinit: bootstrap
 #	ln -sf bootlogd $(TARGET_DIR)/etc/init.d/stop-bootlogd
 #	$(UPDATE-RC.D) bootlogd start 07 S .
 #	$(UPDATE-RC.D) stop-bootlogd start 99 2 3 4 5 .
-	rm -f $(addprefix $(TARGET_DIR)/sbin/,fstab-decode logsave runlevel telinit)
+	rm -f $(addprefix $(TARGET_DIR)/sbin/,fstab-decode logsave telinit)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,lastb)
 	$(PKG_REMOVE)
 	$(TOUCH)
