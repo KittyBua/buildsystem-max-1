@@ -13,7 +13,10 @@ NETSURF_PATCH  = \
 	0004-netsurf-gui.patch \
 	0005-netsurf-linux.patch \
 	0006-netsurf-osk.patch \
-	0007-netsurf-text.patch
+	0007-netsurf-text.patch \
+	0008-avoid-system-perl-dependencies.patch \
+	0009-fix-compilation-without-curl.patch \
+	0010-framebuffer-Fix-internal-font-generated-source-for-GCC-10.patch
 
 NETSURF_ENV = \
 	PREFIX=/usr \
