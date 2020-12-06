@@ -1,0 +1,61 @@
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -4,7 +4,7 @@
+ 
+ ACLOCAL_AMFLAGS = -I m4
+ 
+-SUBDIRS = m4 include vq lib test doc
++SUBDIRS = m4 include vq lib test
+ 
+ if BUILD_EXAMPLES 
+ SUBDIRS += examples 
+@@ -28,8 +28,6 @@
+ 	symbian macosx win32 \
+ 	CMakeLists.txt cmake/FindOgg.cmake cmake/VorbisConfig.cmake.in
+ 
+-DISTCHECK_CONFIGURE_FLAGS = --enable-docs
+-
+ dist-hook:
+ 	for item in $(EXTRA_DIST); do \
+ 	  if test -d $$item; then \
+--- a/doc/Makefile.am
++++ b/doc/Makefile.am
+@@ -1,8 +1,6 @@
+ ## Process this with automake to create Makefile.in
+ 
+ SUBDIRS = libvorbis vorbisfile vorbisenc
+-
+-docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
+ 
+ ### all of the static docs, commited to SVN and included as is
+ static_docs = \
+@@ -82,7 +80,7 @@
+ if BUILD_DOCS
+ doc_DATA = $(static_docs) $(SPEC_PNG) $(built_docs) doxygen-build.stamp
+ else
+-doc_DATA = $(static_docs) doxygen-build.stamp
++doc_DATA = doxygen-build.stamp
+ endif
+ 
+ EXTRA_DIST = $(static_docs) $(built_docs) \
+@@ -128,20 +126,6 @@
+ 	touch doxygen-build.stamp
+ endif
+ 
+-install-data-local: doxygen-build.stamp
+-	$(mkinstalldirs) $(DESTDIR)$(docdir)
+-	if test -d vorbis; then \
+-	  for dir in vorbis/*; do \
+-	    if test -d $$dir; then \
+-	      b=`basename $$dir`; \
+-	      $(mkinstalldirs) $(DESTDIR)$(docdir)/$$b; \
+-	      for f in $$dir/*; do \
+-		$(INSTALL_DATA) $$f $(DESTDIR)$(docdir)/$$b; \
+-	      done \
+-	    fi \
+-	  done \
+-	fi
+-
+ uninstall-local:
+ 	rm -rf $(DESTDIR)$(docdir)
+ 
