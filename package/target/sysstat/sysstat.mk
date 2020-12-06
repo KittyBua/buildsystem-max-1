@@ -1,7 +1,7 @@
 #
 # sysstat
 #
-SYSSTAT_VER    = 12.4.0
+SYSSTAT_VER    = 12.5.1
 SYSSTAT_DIR    = sysstat-$(SYSSTAT_VER)
 SYSSTAT_SOURCE = sysstat-$(SYSSTAT_VER).tar.xz
 SYSSTAT_SITE   = http://pagesperso-orange.fr/sebastien.godard

@@ -1,6 +1,6 @@
 --- a/Makefile.in
 +++ b/Makefile.in
-@@ -80,7 +80,7 @@ SYSCONFIG_FILE = @SYSCONFIG_FILE@
+@@ -80,7 +80,7 @@
  # Compiler flags
  CFLAGS = @CFLAGS@ -Wall -Wstrict-prototypes -pipe -O2
  DFLAGS = @DFLAGS@
@@ -9,7 +9,7 @@
  DFLAGS += -DSA_DIR=\"$(SA_DIR)\" -DSADC_PATH=\"$(SADC_PATH)\"
  DFLAGS += $(DFSENSORS)
  DFLAGS += $(DFPCP)
-@@ -117,7 +117,7 @@ ifeq ($(SYSPARAM),y)
+@@ -117,7 +117,7 @@
  	DFLAGS += -DHAVE_SYS_PARAM_H
  endif
  NLS = @NLS@
@@ -18,7 +18,7 @@
  ifeq ($(NLS),y)
  REQUIRE_NLS = -DUSE_NLS -DPACKAGE=\"$(PACKAGE)\" -DLOCALEDIR=\"$(NLS_DIR)\"
  endif
-@@ -195,7 +195,7 @@ NLSPOT= $(NLSPO:.po=.pot)
+@@ -195,7 +195,7 @@
  	$(CC) -o $@ -c $(CFLAGS) $(DFLAGS) $<
  
  % : %.o
@@ -27,16 +27,16 @@
  
  all: sadc sar sadf iostat tapestat mpstat pidstat cifsiostat locales
  
-@@ -283,7 +283,7 @@ librdsensors.a: rd_sensors.o
+@@ -283,7 +283,7 @@
  
  sadc.o: sadc.c sa.h version.h common.h rd_stats.h rd_sensors.h
  
 -sadc: LFLAGS += $(LFSENSORS)
 +sadc: LDFLAGS += $(LFSENSORS)
  
- sadc: sadc.o act_sadc.o sa_wrap.o sa_common_sadc.o common_sadc.o systest.o librdstats.a librdsensors.a
+ sadc: sadc.o act_sadc.o sa_wrap.o sa_common_light.o common_light.o systest.o librdstats.a librdsensors.a
  
-@@ -293,7 +293,7 @@ sar: sar.o act_sar.o format_sar.o sa_common.o pr_stats.o librdstats_light.a libs
+@@ -293,7 +293,7 @@
  
  sadf.o: sadf.c sadf.h version.h sa.h common.h rd_stats.h rd_sensors.h
  
