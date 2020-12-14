@@ -1,7 +1,7 @@
 #
 # htop
 #
-HTOP_VER    = 3.0.2
+HTOP_VER    = 3.0.3
 HTOP_DIR    = htop-$(HTOP_VER)
 HTOP_SOURCE = htop-$(HTOP_VER).tar.gz
 HTOP_SITE   = $(call github,htop-dev,htop,$(HTOP_VER))
@@ -30,7 +30,7 @@ $(D)/htop: bootstrap ncurses
 			; \
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,pixmaps applications)
+	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,applications icons pixmaps)
 	ln -sf htop $(TARGET_DIR)/usr/bin/top
 	$(PKG_REMOVE)
 	$(TOUCH)
