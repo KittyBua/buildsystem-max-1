@@ -6,6 +6,13 @@ TZDATA_DIR    = timezone
 TZDATA_SOURCE = tzdata$(TZDATA_VER).tar.gz
 TZDATA_SITE   = https://ftp.iana.org/tz/releases
 
+TZDATA_ZONELIST = \
+	africa antarctica asia australasia \
+	europe northamerica southamerica \
+	factory etcetera backward
+
+TZDATA_LOCALTIME = CET
+
 $(D)/tzdata: bootstrap host-tzcode
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -14,21 +21,15 @@ $(D)/tzdata: bootstrap host-tzcode
 	$(call PKG_UNPACK,$(PKG_BUILD_DIR))
 	$(PKG_CHDIR); \
 		unset ${!LC_*}; LANG=POSIX; LC_ALL=POSIX; export LANG LC_ALL; \
-		$(HOST_DIR)/bin/zic -d zoneinfo.tmp \
-			africa antarctica asia australasia \
-			europe northamerica southamerica \
-			factory etcetera backward; \
+		$(HOST_DIR)/bin/zic -b fat -d zoneinfo.tmp $(TZDATA_ZONELIST); \
 		sed -n '/zone=/{s/.*zone="\(.*\)".*$$/\1/; p}' $(PKG_FILES_DIR)/timezone.xml | sort -u | \
 		while read x; do \
 			find zoneinfo.tmp -type f -name $$x | sort | \
 			while read y; do \
-				cp -a $$y zoneinfo/$$x; \
+				test -e $$y && $(INSTALL_DATA) -D $$y $(TARGET_SHARE_DIR)/zoneinfo/$$x; \
 			done; \
-			test -e zoneinfo/$$x || echo "WARNING: timezone $$x not found."; \
 		done; \
-		mkdir -p $(TARGET_SHARE_DIR)/zoneinfo $(TARGET_DIR)/etc; \
-		cp -a zoneinfo/* $(TARGET_SHARE_DIR)/zoneinfo/
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/timezone.xml $(TARGET_DIR)/etc/
-	ln -sf /usr/share/zoneinfo/CET $(TARGET_DIR)/etc/localtime
+	ln -sf /usr/share/zoneinfo/$(TZDATA_LOCALTIME) $(TARGET_DIR)/etc/localtime
 	$(PKG_REMOVE)
 	$(TOUCH)
