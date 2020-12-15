@@ -16,7 +16,7 @@ Index: b/etc/lua.pc
 +INSTALL_BIN= ${prefix}/bin
 +INSTALL_INC= ${prefix}/include
 +INSTALL_LIB= ${prefix}/lib
-+INSTALL_MAN= ${prefix}/.remove
++INSTALL_MAN= ${prefix}$(REMOVE_mandir)
 +INSTALL_LMOD= ${prefix}/share/lua/${V}
 +INSTALL_CMOD= ${prefix}/lib/lua/${V}
 +

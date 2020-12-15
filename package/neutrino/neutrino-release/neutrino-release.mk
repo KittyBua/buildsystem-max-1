@@ -89,9 +89,6 @@ neutrino-release-base:
 		-o -name '*.orig' \
 		-o -name '*.-config' \) \
 		-print0 | xargs --no-run-if-empty -0 rm -f
-	rm -rf $(RELEASE_DIR)/usr/share/alsa/{init,topology,ucm}
-	find $(RELEASE_DIR)/usr/share/alsa/cards/ -not -name 'aliases.conf' -name '*.conf' -exec rm -f {} \;
-	find $(RELEASE_DIR)/usr/share/alsa/pcm/ -not -name 'default.conf' -not -name 'dmix.conf' -name '*.conf' -exec rm -f {} \;
 	rm -rf $(RELEASE_DIR)/usr/lib/{gconv,gio,glib-2.0,libxslt-plugins,pkgconfig,sigc++-2.0}
 	rm -rf $(RELEASE_DIR)/usr/share/aclocal
 	rm -f $(RELEASE_DIR)/lib/libstdc++.*-gdb.py

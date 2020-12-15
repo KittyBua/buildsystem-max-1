@@ -6,17 +6,16 @@ LIBCONFIG_DIR    = libconfig-$(LIBCONFIG_VER)
 LIBCONFIG_SOURCE = libconfig-$(LIBCONFIG_VER).tar.gz
 LIBCONFIG_SITE   = http://www.hyperrealm.com/packages
 
+LIBCONFIG_CONF_OPTS = \
+	--disable-static
+
 $(D)/libconfig: bootstrap
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--infodir=/.remove \
-			--disable-static \
-			; \
+		$(CONFIGURE); \
 		$(MAKE) all; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)

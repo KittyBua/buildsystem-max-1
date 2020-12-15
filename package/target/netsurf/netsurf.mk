@@ -6,7 +6,7 @@ NETSURF_DIR    = netsurf-all-$(NETSURF_VER)
 NETSURF_SOURCE = netsurf-all-$(NETSURF_VER).tar.gz
 NETSURF_SITE   = http://download.netsurf-browser.org/netsurf/releases/source-full
 
-NETSURF_PATCH  = \
+NETSURF_PATCH = \
 	0001-netsurf-32bpp-xbgr8888.patch \
 	0002-netsurf-event.patch \
 	0003-netsurf-framebuffer.patch \
@@ -18,7 +18,7 @@ NETSURF_PATCH  = \
 	0009-fix-compilation-without-curl.patch \
 	0010-framebuffer-Fix-internal-font-generated-source-for-GCC-10.patch
 
-NETSURF_ENV = \
+NETSURF_CONF_OPTS = \
 	PREFIX=/usr \
 	TMP_PREFIX=$(BUILD_DIR)/netsurf-all-$(NETSURF_VER)/tmpusr \
 	NETSURF_USE_DUKTAPE=NO \
@@ -42,8 +42,8 @@ $(D)/netsurf: bootstrap libpng libjpeg-turbo openssl libiconv freetype expat lib
 		CFLAGS="$(TARGET_CFLAGS) -I$(BUILD_DIR)/netsurf-all-$(NETSURF_VER)/tmpusr/include" \
 		LDFLAGS="$(TARGET_LDFLAGS) -L$(BUILD_DIR)/netsurf-all-$(NETSURF_VER)/tmpusr/lib" \
 		PKG_CONFIG="$(PKG_CONFIG)" \
-		$(MAKE) $(NETSURF_ENV); \
-		$(MAKE) $(NETSURF_ENV) install DESTDIR=$(TARGET_DIR)
+		$(MAKE) $(NETSURF_CONF_OPTS); \
+		$(MAKE) $(NETSURF_CONF_OPTS) install DESTDIR=$(TARGET_DIR)
 	mkdir -p $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins
 	mv $(TARGET_DIR)/usr/bin/netsurf-fb $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/netsurf-fb.so
 	echo "name=Netsurf Web Browser"	 > $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/netsurf-fb.cfg

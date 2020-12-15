@@ -6,10 +6,20 @@ CAIRO_DIR    = cairo-$(CAIRO_VER)
 CAIRO_SOURCE = cairo-$(CAIRO_VER).tar.xz
 CAIRO_SITE   = https://www.cairographics.org/releases
 
-CAIRO_PATCH  = \
+CAIRO_PATCH = \
 	0001-get_bitmap_surface.patch
 
-$(D)/cairo: bootstrap glib2 libpng pixman zlib
+CAIRO_CONF_OPTS = \
+	--with-html-dir=$(REMOVE_htmldir) \
+	--with-x=no \
+	--disable-xlib \
+	--disable-xcb \
+	--disable-egl \
+	--disable-glesv2 \
+	--disable-gl \
+	--enable-tee
+
+$(D)/cairo: bootstrap glib2 zlib libpng freetype pixman
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
@@ -18,18 +28,8 @@ $(D)/cairo: bootstrap glib2 libpng pixman zlib
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		ax_cv_c_float_words_bigendian="no" \
-		./configure $(SILENT_OPT) $(CONFIGURE_OPTS) \
-			--prefix=/usr \
-			--with-x=no \
-			--datarootdir=/.remove \
-			--disable-xlib \
-			--disable-xcb \
-			--disable-egl \
-			--disable-glesv2 \
-			--disable-gl \
-			--enable-tee \
-			; \
-		$(MAKE) all; \
+		./configure $(SILENT_OPT) $(CONFIGURE_OPTS) $(CONFIGURE_TARGET_OPTS); \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -rf $(TARGET_DIR)/usr/bin/cairo-sphinx
 	rm -rf $(TARGET_LIB_DIR)/cairo/cairo-fdr*

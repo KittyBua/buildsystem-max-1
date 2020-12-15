@@ -6,7 +6,7 @@ VPNC_DIR    = vpnc-$(VPNC_VER)
 VPNC_SOURCE = vpnc-$(VPNC_VER).tar.gz
 VPNC_SITE   = $(call github,ndpgroup,vpnc,$(VPNC_VER))
 
-VPNC_PATCH  = \
+VPNC_PATCH = \
 	0001-Makefile-allow-to-override-the-PREFIX-variable.patch \
 	0002-nomanual.patch \
 	0002-Makefile-allow-to-override-the-version.patch \
@@ -30,7 +30,7 @@ $(D)/vpnc: bootstrap openssl libgcrypt libgpg-error
 		$(MAKE) \
 			install DESTDIR=$(TARGET_DIR) \
 			PREFIX=/usr \
-			MANDIR=/.remove \
-			DOCDIR=/.remove
+			MANDIR=$(REMOVE_mandir) \
+			DOCDIR=$(REMOVE_docdir)
 	$(PKG_REMOVE)
 	$(TOUCH)

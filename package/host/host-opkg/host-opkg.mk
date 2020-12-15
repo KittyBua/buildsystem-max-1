@@ -6,7 +6,7 @@ HOST_OPKG_DIR    = opkg-$(HOST_OPKG_VER)
 HOST_OPKG_SOURCE = opkg-$(HOST_OPKG_VER).tar.gz
 HOST_OPKG_SITE   = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
 
-HOST_OPKG_PATCH  = \
+HOST_OPKG_PATCH = \
 	0001-opkg.patch
 
 $(D)/host-opkg: bootstrap host-libarchive

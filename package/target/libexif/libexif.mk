@@ -6,7 +6,7 @@ LIBEXIF_DIR    = libexif-$(LIBEXIF_VER)
 LIBEXIF_SOURCE = libexif-$(LIBEXIF_VER).tar.xz
 LIBEXIF_SITE   = https://github.com/libexif/libexif/releases/download/libexif-$(subst .,_,$(LIBEXIF_VER))-release
 
-LIBEXIF_PATCH  = \
+LIBEXIF_PATCH = \
 	0001-no_docs.patch
 
 $(D)/libexif: bootstrap

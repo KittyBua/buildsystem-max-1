@@ -6,7 +6,7 @@ SYSVINIT_DIR    = sysvinit-$(SYSVINIT_VER)
 SYSVINIT_SOURCE = sysvinit-$(SYSVINIT_VER).tar.xz
 SYSVINIT_SITE   = http://download.savannah.nongnu.org/releases/sysvinit
 
-SYSVINIT_PATCH  = \
+SYSVINIT_PATCH = \
 	0001-install.patch\
 	0001-crypt-lib.patch \
 	0002-change-INIT_FIFO.patch \
@@ -22,7 +22,7 @@ $(D)/sysvinit: bootstrap
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		$(MAKE) SULOGINLIBS=-lcrypt; \
-		$(MAKE) install ROOT=$(TARGET_DIR) mandir=/.remove
+		$(MAKE) install ROOT=$(TARGET_DIR) mandir=$(REMOVE_mandir)
 	mkdir -p $(TARGET_DIR)/etc/{init.d,rc{{0..6},S}.d}
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/inittab $(TARGET_DIR)/etc/inittab
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/autologin $(TARGET_DIR)/bin/autologin

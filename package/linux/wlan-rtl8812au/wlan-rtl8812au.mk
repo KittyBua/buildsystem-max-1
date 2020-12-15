@@ -6,7 +6,7 @@ WLAN_RTL8812AU_DIR    = rtl8812AU-driver-$(WLAN_RTL8812AU_VER)
 WLAN_RTL8812AU_SOURCE = rtl8812AU-driver-$(WLAN_RTL8812AU_VER).zip
 WLAN_RTL8812AU_SITE   = http://source.mynonpublic.com
 
-WLAN_RTL8812AU_PATCH  = \
+WLAN_RTL8812AU_PATCH = \
 	0001-rt8812au-gcc5.patch \
 	0002-rt8812au-Add-support-for-kernels-4.8.patch
 

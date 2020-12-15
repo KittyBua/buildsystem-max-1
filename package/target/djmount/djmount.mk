@@ -6,7 +6,7 @@ DJMOUNT_DIR    = djmount-$(DJMOUNT_VER)
 DJMOUNT_SOURCE = djmount-$(DJMOUNT_VER).tar.gz
 DJMOUNT_SITE   = https://sourceforge.net/projects/djmount/files/djmount/$(DJMOUNT_VER)
 
-DJMOUNT_PATCH  = \
+DJMOUNT_PATCH = \
 	0001-fix-newer-gcc.patch \
 	0002-fix-hang-with-asset-upnp.patch \
 	0003-fix-incorrect-range-when-retrieving-content-via-HTTP.patch \
@@ -19,6 +19,12 @@ DJMOUNT_PATCH  = \
 	0010-libupnp-1.6.13.patch \
 	0011-fix-build-with-gettext-0.20.x.patch
 
+DJMOUNT_CONF_OPTS = \
+	--with-external-libupnp \
+	--with-fuse-prefix=$(TARGET_DIR)/usr \
+	--with-libupnp-prefix=$(TARGET_DIR)/usr \
+	--disable-debug
+
 $(D)/djmount: bootstrap libupnp libfuse
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -28,13 +34,8 @@ $(D)/djmount: bootstrap libupnp libfuse
 		$(call apply_patches, $(PKG_PATCH)); \
 		touch libupnp/config.aux/config.rpath; \
 		autoreconf -fi $(SILENT_OPT); \
-		$(CONFIGURE) -C \
-			--prefix=/usr \
-			--with-external-libupnp \
-			--with-fuse-prefix=$(TARGET_DIR)/usr \
-			--disable-debug \
-			; \
-		make; \
-		make install DESTDIR=$(TARGET_DIR)
+		$(CONFIGURE); \
+		$(MAKE); \
+		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(PKG_REMOVE)
 	$(TOUCH)

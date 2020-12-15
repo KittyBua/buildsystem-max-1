@@ -9,6 +9,15 @@ LIBFUSE_SITE   = https://github.com/libfuse/libfuse/releases/download/fuse-$(LIB
 LIBFUSE_PATCH = \
 	0001-fix-aarch64-build.patch
 
+LIBFUSE_CONF_OPTS = \
+	--disable-static \
+	--disable-example \
+	--disable-mtab \
+	--with-gnu-ld \
+	--enable-util \
+	--enable-lib \
+	--enable-silent-rules
+
 $(D)/libfuse: bootstrap
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -16,19 +25,8 @@ $(D)/libfuse: bootstrap
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--exec-prefix=/usr \
-			--mandir=/.remove \
-			--disable-static \
-			--disable-example \
-			--disable-mtab \
-			--with-gnu-ld \
-			--enable-util \
-			--enable-lib \
-			--enable-silent-rules \
-			; \
-		$(MAKE) all; \
+		$(CONFIGURE); \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)
 	$(PKG_REMOVE)

@@ -6,8 +6,15 @@ LIBUSB_DIR    = libusb-$(LIBUSB_VER)
 LIBUSB_SOURCE = libusb-$(LIBUSB_VER).tar.bz2
 LIBUSB_SITE   = https://github.com/libusb/libusb/releases/download/v$(LIBUSB_VER)
 
-LIBUSB_PATCH  = \
+LIBUSB_PATCH = \
 	0001-libusb.patch
+
+LIBUSB_CONF_OPTS = \
+	--enable-static \
+	--disable-log \
+	--disable-debug-log \
+	--disable-udev \
+	--disable-examples-build
 
 $(D)/libusb: bootstrap
 	$(START_BUILD)
@@ -16,15 +23,8 @@ $(D)/libusb: bootstrap
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--enable-static \
-			--disable-log \
-			--disable-debug-log \
-			--disable-udev \
-			--disable-examples-build \
-			; \
-		$(MAKE) ; \
+		$(CONFIGURE); \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)
 	$(PKG_REMOVE)

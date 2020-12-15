@@ -10,6 +10,11 @@ LIBVORBIS_PATCH = \
 	0001-configure-Check-for-clang.patch \
 	0002-no-docs.patch
 
+LIBVORBIS_CONF_OPTS = \
+	--disable-docs \
+	--disable-examples \
+	--disable-oggtest
+
 $(D)/libvorbis: bootstrap libogg
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -18,14 +23,7 @@ $(D)/libvorbis: bootstrap libogg
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--docdir=/.remove \
-			--mandir=/.remove \
-			--disable-docs \
-			--disable-examples \
-			--disable-oggtest \
-			; \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)

@@ -6,8 +6,12 @@ RSYNC_DIR    = rsync-$(RSYNC_VER)
 RSYNC_SOURCE = rsync-$(RSYNC_VER).tar.gz
 RSYNC_SITE   = https://download.samba.org/pub/rsync/src
 
-RSYNC_PATCH  = \
+RSYNC_PATCH = \
 	001-rsync-sysmacros.patch
+
+RSYNC_CONF_OPTS = \
+	--disable-debug \
+	--disable-locale
 
 $(D)/rsync: bootstrap
 	$(START_BUILD)
@@ -16,13 +20,7 @@ $(D)/rsync: bootstrap
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--mandir=/.remove \
-			--sysconfdir=/etc \
-			--disable-debug \
-			--disable-locale \
-			; \
+		$(CONFIGURE); \
 		$(MAKE) all; \
 		$(MAKE) install-all DESTDIR=$(TARGET_DIR)
 	$(PKG_REMOVE)

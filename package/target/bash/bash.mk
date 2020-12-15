@@ -35,6 +35,6 @@ $(D)/bash: bootstrap ncurses
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
-		$(INSTALL_EXEC) bash $(TARGET_DIR)/bin
+		$(INSTALL_EXEC) bash $(TARGET_DIR)/$(base_bindir)
 	$(PKG_REMOVE)
 	$(TOUCH)

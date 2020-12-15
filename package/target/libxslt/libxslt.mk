@@ -6,24 +6,24 @@ LIBXSLT_DIR    = libxslt-$(LIBXSLT_VER)
 LIBXSLT_SOURCE = libxslt-$(LIBXSLT_VER).tar.gz
 LIBXSLT_SITE   = ftp://xmlsoft.org/libxml2
 
+LIBXSLT_CONF_OPTS = \
+	CPPFLAGS="$(CPPFLAGS) -I$(TARGET_INCLUDE_DIR)/libxml2" \
+	--with-html-dir=$(REMOVE_htmldir) \
+	--enable-shared \
+	--disable-static \
+	--without-python \
+	--without-crypto \
+	--without-debug \
+	--without-mem-debug
+
 $(D)/libxslt: bootstrap libxml2
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(CONFIGURE) \
-			CPPFLAGS="$(CPPFLAGS) -I$(TARGET_INCLUDE_DIR)/libxml2" \
-			--prefix=/usr \
-			--datarootdir=/.remove \
-			--enable-shared \
-			--disable-static \
-			--without-python \
-			--without-crypto \
-			--without-debug \
-			--without-mem-debug \
-			; \
-		$(MAKE) all; \
+		$(CONFIGURE); \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	mv $(TARGET_DIR)/usr/bin/xslt-config $(HOST_DIR)/bin
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/xslt-config

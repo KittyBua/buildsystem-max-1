@@ -6,7 +6,7 @@ LUAEXPAT_DIR    = luaexpat-$(LUAEXPAT_VER)
 LUAEXPAT_SOURCE = luaexpat-$(LUAEXPAT_VER).tar.gz
 LUAEXPAT_SITE   = $(call github,tomasguisasola,luaexpat,v$(LUAEXPAT_VER))
 
-LUAEXPAT_PATCH  = \
+LUAEXPAT_PATCH = \
 	0001-restore-getcurrentbytecount.patch
 
 $(D)/luaexpat: bootstrap lua expat

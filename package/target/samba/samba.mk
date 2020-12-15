@@ -40,6 +40,62 @@ SAMBA_PATCH = \
 	330-librpc_default_print.patch \
 	samba-3.6.25.patch
 
+SAMBA_CONF_OPTS = \
+	--disable-pie \
+	--disable-avahi \
+	--disable-cups \
+	--disable-relro \
+	--disable-static \
+	--disable-shared-libs \
+	--enable-shared \
+	--disable-swat \
+	--disable-socket-wrapper \
+	--disable-nss-wrapper \
+	--disable-smbtorture4 \
+	--disable-fam \
+	--disable-iprint \
+	--disable-dnssd \
+	--disable-pthreadpool \
+	--disable-dmalloc \
+	--with-configdir=/etc/samba \
+	--with-privatedir=/etc/samba/private \
+	--with-mandir=no \
+	--with-codepagedir=/etc/samba \
+	--with-piddir=/var/run \
+	--with-lockdir=/var/lock \
+	--with-logfilebase=/var/log/samba \
+	--with-swatdir=/usr/share/swat \
+	--with-nmbdsocketdir=/var/run/nmbd \
+	--with-included-iniparser \
+	--with-included-popt \
+	--with-sendfile-support \
+	--without-aio-support \
+	--without-cluster-support \
+	--without-ads \
+	--without-krb5 \
+	--without-dnsupdate \
+	--without-automount \
+	--without-ldap \
+	--without-pam \
+	--without-pam_smbpass \
+	--without-winbind \
+	--without-wbclient \
+	--without-syslog \
+	--without-nisplus-home \
+	--without-quotas \
+	--without-sys-quotas \
+	--without-utmp \
+	--without-acl-support \
+	--disable-cups \
+	--without-winbind \
+	--without-libtdb \
+	--without-libtalloc \
+	--without-libnetapi \
+	--without-libsmbclient \
+	--without-libsmbsharemodes \
+	--without-libtevent \
+	--without-libaddns
+
 $(D)/samba: bootstrap
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -75,71 +131,10 @@ $(D)/samba: bootstrap
 		ac_cv_path_PYTHON_CONFIG="" \
 		libreplace_cv_HAVE_GETADDRINFO=no \
 		libreplace_cv_READDIR_NEEDED=no \
-		./configure $(SILENT_OPT) \
-			--build=$(BUILD) \
-			--host=$(TARGET) \
-			--prefix=/usr \
-			--includedir=/usr/include \
-			--datarootdir=/.remove \
-			--localstatedir=/var \
-			--disable-pie \
-			--disable-avahi \
-			--disable-cups \
-			--disable-relro \
-			--disable-static \
-			--disable-shared-libs \
-			--enable-shared \
-			--disable-swat \
-			--disable-socket-wrapper \
-			--disable-nss-wrapper \
-			--disable-smbtorture4 \
-			--disable-fam \
-			--disable-iprint \
-			--disable-dnssd \
-			--disable-pthreadpool \
-			--disable-dmalloc \
-			--with-configdir=/etc/samba \
-			--with-privatedir=/etc/samba/private \
-			--with-mandir=no \
-			--with-codepagedir=/etc/samba \
-			--with-piddir=/var/run \
-			--with-lockdir=/var/lock \
-			--with-logfilebase=/var/log/samba \
-			--with-swatdir=/usr/share/swat \
-			--with-nmbdsocketdir=/var/run/nmbd \
-			--with-included-iniparser \
-			--with-included-popt \
-			--with-sendfile-support \
-			--without-aio-support \
-			--without-cluster-support \
-			--without-ads \
-			--without-krb5 \
-			--without-dnsupdate \
-			--without-automount \
-			--without-ldap \
-			--without-pam \
-			--without-pam_smbpass \
-			--without-winbind \
-			--without-wbclient \
-			--without-syslog \
-			--without-nisplus-home \
-			--without-quotas \
-			--without-sys-quotas \
-			--without-utmp \
-			--without-acl-support \
-			--disable-cups \
-			--without-winbind \
-			--without-libtdb \
-			--without-libtalloc \
-			--without-libnetapi \
-			--without-libsmbclient \
-			--without-libsmbsharemodes \
-			--without-libtevent \
-			--without-libaddns \
-			; \
+		./configure $(CONFIGURE_OPTS) $(CONFIGURE_TARGET_OPTS); \
 		$(MAKE); \
 		$(MAKE) installservers \
-			SBIN_PROGS="bin/samba_multicall" DESTDIR=$(TARGET_DIR) LOCALEDIR=/.remove
+			SBIN_PROGS="bin/samba_multicall" DESTDIR=$(TARGET_DIR) LOCALEDIR=$(REMOVE_localedir)
 			ln -sf samba_multicall $(TARGET_DIR)/usr/sbin/nmbd
 			ln -sf samba_multicall $(TARGET_DIR)/usr/sbin/smbd
 			ln -sf samba_multicall $(TARGET_DIR)/usr/sbin/smbpasswd

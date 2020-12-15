@@ -6,11 +6,24 @@ NFS_UTILS_DIR    = nfs-utils-$(NFS_UTILS_VER)
 NFS_UTILS_SOURCE = nfs-utils-$(NFS_UTILS_VER).tar.bz2
 NFS_UTILS_SITE   = https://sourceforge.net/projects/nfs/files/nfs-utils/$(NFS_UTILS_VER)
 
-NFS_UTILS_PATCH  = \
+NFS_UTILS_PATCH = \
 	0001-disabled-ip6-support.patch \
 	0002-Makefile.am-fix-undefined-function-for-libnsm.a.patch
 
-NFS-UTILS_CONF = $(if $(filter $(BOXMODEL), vuduo), --disable-ipv6, --enable-ipv6)
+NFS_UTILS_CONF_OPTS = \
+	--disable-gss \
+	--disable-nfsdcltrack \
+	--disable-nfsv4 \
+	--disable-nfsv41 \
+	--enable-mount \
+	--enable-libmount-mount \
+	--without-tcp-wrappers \
+	--without-systemd \
+	--with-statduser=rpcuser \
+	--with-statdpath=/var/lib/nfs/statd
+
+NFS_UTILS_CONF_OPTS += \
+	$(if $(filter $(BOXMODEL), vuduo), --disable-ipv6, --enable-ipv6)
 
 $(D)/nfs-utils: bootstrap rpcbind e2fsprogs
 	$(START_BUILD)
@@ -21,22 +34,7 @@ $(D)/nfs-utils: bootstrap rpcbind e2fsprogs
 		$(call apply_patches, $(PKG_PATCH)); \
 		export knfsd_cv_bsd_signals=no; \
 		autoreconf -fi $(SILENT_OPT); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--sysconfdir=/etc \
-			--mandir=/.remove \
-			--disable-gss \
-			--disable-nfsdcltrack \
-			--disable-nfsv4 \
-			--disable-nfsv41 \
-			$(NFS-UTILS_CONF) \
-			--enable-mount \
-			--enable-libmount-mount \
-			--without-tcp-wrappers \
-			--without-systemd \
-			--with-statduser=rpcuser \
-			--with-statdpath=/var/lib/nfs/statd \
-			; \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/exports $(TARGET_DIR)/etc/exports

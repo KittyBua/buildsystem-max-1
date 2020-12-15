@@ -12,7 +12,7 @@ $(D)/lua-feedparser: bootstrap lua luasocket luaexpat
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		sed -i -e "s/^PREFIX.*//" -e "s/^LUA_DIR.*//" Makefile ; \
+		sed -i -e "s/^PREFIX.*//" -e "s/^LUA_DIR.*//" Makefile; \
 		$(BUILD_ENV) \
 		$(MAKE) install LUA_DIR=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVER)
 	$(PKG_REMOVE)

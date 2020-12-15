@@ -6,6 +6,14 @@ SHAIRPORT_SYNC_DIR    = shairport-sync.git
 SHAIRPORT_SYNC_SOURCE = shairport-sync.git
 SHAIRPORT_SYNC_SITE   = https://github.com/mikebrady
 
+SHAIRPORT_SYNC_CONF_OPTS = \
+	--with-alsa \
+	--with-ssl=openssl \
+	--with-metadata \
+	--with-tinysvcmdns \
+	--with-pipe \
+	--with-stdout
+
 $(D)/shairport-sync: bootstrap libdaemon popt libconfig openssl alsa-lib
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -14,16 +22,7 @@ $(D)/shairport-sync: bootstrap libdaemon popt libconfig openssl alsa-lib
 	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(BUILD_ENV) \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--mandir=/.remove \
-			--with-alsa \
-			--with-ssl=openssl \
-			--with-metadata \
-			--with-tinysvcmdns \
-			--with-pipe \
-			--with-stdout \
-			; \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(PKG_REMOVE)

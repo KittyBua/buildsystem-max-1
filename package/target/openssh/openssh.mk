@@ -6,6 +6,21 @@ OPENSSH_DIR    = openssh-$(OPENSSH_VER)
 OPENSSH_SOURCE = openssh-$(OPENSSH_VER).tar.gz
 OPENSSH_SITE   = https://artfiles.org/openbsd/OpenSSH/portable
 
+OPENSSH_CONF_OPTS = \
+	--sysconfdir=/etc/ssh \
+	--libexecdir=$(base_sbindir) \
+	--with-privsep-path=/var/empty \
+	--with-cppflags="-pipe -Os -I$(TARGET_INCLUDE_DIR)" \
+	--with-ldflags=-"L$(TARGET_LIB_DIR)" \
+	--disable-strip \
+	--disable-lastlog \
+	--disable-utmp \
+	--disable-utmpx \
+	--disable-wtmp \
+	--disable-wtmpx \
+	--disable-pututline \
+	--disable-pututxline
+
 $(D)/openssh: bootstrap zlib openssl
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -15,13 +30,7 @@ $(D)/openssh: bootstrap zlib openssl
 		CC=$(TARGET_CC); \
 		./configure $(SILENT_OPT) \
 			$(CONFIGURE_OPTS) \
-			--prefix=/usr \
-			--mandir=/.remove \
-			--sysconfdir=/etc/ssh \
-			--libexecdir=/sbin \
-			--with-privsep-path=/var/empty \
-			--with-cppflags="-pipe -Os -I$(TARGET_INCLUDE_DIR)" \
-			--with-ldflags=-"L$(TARGET_LIB_DIR)" \
+			$(CONFIGURE_TARGET_OPTS) \
 			; \
 		$(MAKE); \
 		$(MAKE) install-nokeys DESTDIR=$(TARGET_DIR)

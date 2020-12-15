@@ -6,7 +6,7 @@ OPENSSL_DIR    = openssl-$(OPENSSL_VER)
 OPENSSL_SOURCE = openssl-$(OPENSSL_VER).tar.gz
 OPENSSL_SITE   = https://www.openssl.org/source
 
-OPENSSL_PATCH  = \
+OPENSSL_PATCH = \
 	0001-Dont-waste-time-building-manpages-if-we-re-not-going.patch \
 	0002-Reproducible-build-do-not-leak-compiler-path.patch \
 	0003-Introduce-the-OPENSSL_NO_MADVISE-to-disable-call-to-.patch \
@@ -46,7 +46,7 @@ $(D)/openssl: bootstrap
 			--cross-compile-prefix=$(TARGET_CROSS) \
 			; \
 		$(MAKE) depend; \
-		$(MAKE) all; \
+		$(MAKE); \
 		$(MAKE) install_sw install_ssldirs DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/etc/ssl/misc/,CA.pl tsget)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,openssl c_rehash)

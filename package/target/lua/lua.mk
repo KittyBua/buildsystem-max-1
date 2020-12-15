@@ -7,7 +7,7 @@ LUA_DIR    = lua-$(LUA_VER)
 LUA_SOURCE = lua-$(LUA_VER).tar.gz
 LUA_SITE   = https://www.lua.org/ftp
 
-LUA_PATCH  = \
+LUA_PATCH = \
 	0001-root-path.patch \
 	0002-remove-readline.patch \
 	0003-shared-libs-for-lua.patch \
@@ -29,7 +29,7 @@ $(D)/lua: bootstrap host-lua ncurses
 			LDFLAGS="$(TARGET_LDFLAGS)" \
 			; \
 		$(MAKE) INSTALL_TOP=$(TARGET_DIR)/usr \
-			INSTALL_MAN=$(TARGET_DIR)/.remove install \
+			INSTALL_MAN=$(TARGET_DIR)/$(REMOVE_mandir) install \
 			; \
 		$(INSTALL_DATA) -D $(BUILD_DIR)/lua-$(LUA_VER)/etc/lua.pc \
 			$(PKG_CONFIG_PATH)/lua.pc

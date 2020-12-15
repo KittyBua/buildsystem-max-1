@@ -6,6 +6,10 @@ AIO_GRAB_DIR    = aio-grab.git
 AIO_GRAB_SOURCE = aio-grab.git
 AIO_GRAB_SITE   = https://github.com/oe-alliance
 
+AIO_GRAB_CONF_OPTS = \
+	--bindir=$(base_bindir) \
+	--enable-silent-rules
+
 $(D)/aio-grab: bootstrap zlib libpng libjpeg-turbo
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -14,12 +18,8 @@ $(D)/aio-grab: bootstrap zlib libpng libjpeg-turbo
 	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \
 		automake --foreign --include-deps $(SILENT_OPT); \
-		$(CONFIGURE) \
-			--target=$(TARGET) \
-			--prefix= \
-			--enable-silent-rules \
-			; \
-		$(MAKE) all; \
+		$(CONFIGURE); \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(PKG_REMOVE)
 	$(TOUCH)

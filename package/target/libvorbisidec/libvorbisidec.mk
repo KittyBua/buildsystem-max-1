@@ -12,14 +12,14 @@ $(D)/libvorbisidec: bootstrap libogg
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		ACLOCAL_FLAGS="-I . -I $(TARGET_DIR)/usr/share/aclocal" \
+		ACLOCAL_FLAGS="-I . -I $(TARGET_SHARE_DIR)/aclocal" \
 		$(BUILD_ENV) \
 		./autogen.sh $(SILENT_OPT) \
 			--host=$(TARGET) \
 			--build=$(BUILD) \
 			--prefix=/usr \
 			; \
-		$(MAKE) all; \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)
 	$(PKG_REMOVE)

@@ -6,8 +6,32 @@ LIBCURL_DIR    = curl-$(LIBCURL_VER)
 LIBCURL_SOURCE = curl-$(LIBCURL_VER).tar.bz2
 LIBCURL_SITE   = https://curl.haxx.se/download
 
-LIBCURL_PATCH  = \
+LIBCURL_PATCH = \
 	0001-no_docs_tests.patch
+
+LIBCURL_CONF_OPTS = \
+	--enable-silent-rules \
+	--disable-debug \
+	--disable-curldebug \
+	--disable-manual \
+	--disable-file \
+	--disable-rtsp \
+	--disable-dict \
+	--disable-imap \
+	--disable-pop3 \
+	--disable-smtp \
+	--enable-shared \
+	--enable-optimize \
+	--disable-verbose \
+	--disable-ldap \
+	--without-libidn \
+	--without-libidn2 \
+	--without-winidn \
+	--without-libpsl \
+	--without-zstd \
+	--with-ca-bundle=$(CA_BUNDLE_DIR)/$(CA_BUNDLE_CRT) \
+	--with-random=/dev/urandom \
+	--with-ssl=$(TARGET_DIR)/usr
 
 $(D)/libcurl: bootstrap zlib openssl ca-bundle
 	$(START_BUILD)
@@ -17,33 +41,8 @@ $(D)/libcurl: bootstrap zlib openssl ca-bundle
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--mandir=/.remove \
-			--enable-silent-rules \
-			--disable-debug \
-			--disable-curldebug \
-			--disable-manual \
-			--disable-file \
-			--disable-rtsp \
-			--disable-dict \
-			--disable-imap \
-			--disable-pop3 \
-			--disable-smtp \
-			--enable-shared \
-			--enable-optimize \
-			--disable-verbose \
-			--disable-ldap \
-			--without-libidn \
-			--without-libidn2 \
-			--without-winidn \
-			--without-libpsl \
-			--without-zstd \
-			--with-ca-bundle=$(CA_BUNDLE_DIR)/$(CA_BUNDLE_CRT) \
-			--with-random=/dev/urandom \
-			--with-ssl=$(TARGET_DIR)/usr \
-			; \
-		$(MAKE) all; \
+		$(CONFIGURE); \
+		$(MAKE); \
 		sed -e "s,^prefix=,prefix=$(TARGET_DIR)," < curl-config > $(HOST_DIR)/bin/curl-config; \
 		chmod 755 $(HOST_DIR)/bin/curl-config; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

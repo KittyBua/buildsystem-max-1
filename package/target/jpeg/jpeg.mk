@@ -6,7 +6,7 @@ JPEG_DIR    = jpeg-$(JPEG_VER)
 JPEG_SOURCE = jpegsrc.v$(JPEG_VER).tar.gz
 JPEG_SITE   = http://www.ijg.org/files
 
-JPEG_PATCH  = \
+JPEG_PATCH = \
 	0001-jpeg.patch
 
 $(D)/jpeg: bootstrap
@@ -16,10 +16,7 @@ $(D)/jpeg: bootstrap
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--mandir=/.remove \
-			; \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,cjpeg djpeg jpegtran rdjpgcom wrjpgcom)

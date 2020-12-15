@@ -6,7 +6,7 @@ LUASOAP_DIR    = luasoap-$(LUASOAP_VER)
 LUASOAP_SOURCE = luasoap-$(LUASOAP_VER).tar.gz
 LUASOAP_SITE   = https://github.com/downloads/tomasguisasola/luasoap
 
-LUASOAP_PATCH  = \
+LUASOAP_PATCH = \
 	0001-luasoap.patch
 
 $(D)/luasoap: bootstrap lua luasocket luaexpat

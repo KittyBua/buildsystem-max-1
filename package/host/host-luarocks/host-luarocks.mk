@@ -8,7 +8,7 @@ HOST_LUAROCKS_SITE   = https://luarocks.github.io/luarocks/releases
 HOST_LUAROCKS_CONFIG = $(HOST_DIR)/etc/luarocks/config-$(LUA_ABIVER).lua
 HOST_LUAROCKS_BINARY = $(HOST_DIR)/bin/luarocks
 
-HOST_LUAROCKS_PATCH  = \
+HOST_LUAROCKS_PATCH = \
 	0001-allow-libluajit-detection.patch
 
 HOST_LUAROCKS_BUILD_ENV = \

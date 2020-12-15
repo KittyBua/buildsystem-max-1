@@ -6,6 +6,14 @@ STREAMRIPPER_DIR    = ni-streamripper.git
 STREAMRIPPER_SOURCE = ni-streamripper.git
 STREAMRIPPER_SITE   = https://github.com/neutrino-images
 
+STREAMRIPPER_CONF_OPTS = \
+	--with-ogg-includes=${TARGET_INCLUDE_DIR} \
+	--with-ogg-libraries=${TARGET_LIB_DIR} \
+	--with-vorbis-includes=${TARGET_INCLUDE_DIR} \
+	--with-vorbis-libraries=${TARGET_LIB_DIR} \
+	--with-included-argv=yes \
+	--with-included-libmad=no
+
 $(D)/streamripper: bootstrap libvorbisidec libmad glib2
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -13,13 +21,7 @@ $(D)/streamripper: bootstrap libvorbisidec libmad glib2
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		autoreconf -fi $(SILENT_OPT); \
-		$(CONFIGURE) \
-			--prefix= \
-			--includedir=$(TARGET_INCLUDE_DIR) \
-			--datarootdir=/.remove \
-			--with-included-argv=yes \
-			--with-included-libmad=no \
-			; \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/streamripper.sh $(TARGET_DIR)/bin/

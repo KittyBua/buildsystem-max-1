@@ -12,11 +12,8 @@ $(D)/sqlite: bootstrap
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--mandir=/.remove \
-			; \
-		$(MAKE) all; \
+		$(CONFIGURE); \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,sqlite3)
 	$(REWRITE_LIBTOOL_LA)

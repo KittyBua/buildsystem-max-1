@@ -6,7 +6,7 @@ WLAN_RTL8822BU_DIR    = rtl8822bu
 WLAN_RTL8822BU_SOURCE = rtl8822bu-driver-$(WLAN_RTL8822BU_VER).zip
 WLAN_RTL8822BU_SITE   = http://source.mynonpublic.com
 
-WLAN_RTL8822BU_PATCH  = \
+WLAN_RTL8822BU_PATCH = \
 	0001-add-linux-4.19-support.patch \
 	0002-add-linux-4.20-support.patch \
 	0003-add-linux-5.0-support.patch \

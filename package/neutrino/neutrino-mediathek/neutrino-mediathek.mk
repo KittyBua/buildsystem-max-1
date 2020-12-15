@@ -6,7 +6,7 @@ NEUTRINO_MEDIATHEK_DIR    = mediathek.git
 NEUTRINO_MEDIATHEK_SOURCE = mediathek.git
 NEUTRINO_MEDIATHEK_SITE   = https://github.com/neutrino-mediathek
 
-NEUTRINO_MEDIATHEK_PATCH  = \
+NEUTRINO_MEDIATHEK_PATCH = \
 	neutrino-mediathek.patch
 
 $(D)/neutrino-mediathek: bootstrap | $(SHARE_PLUGINS)

@@ -7,6 +7,20 @@ DROPBEARMULTI_SOURCE   = dropbear.git
 DROPBEARMULTI_SITE     = https://github.com/mkj
 DROPBEARMULTI_CHECKOUT = c8d852c
 
+DROPBEARMULTI_CONF_OPTS = \
+	--localedir=$(REMOVE_localedir) \
+	--disable-syslog \
+	--disable-lastlog \
+	--disable-shadow \
+	--disable-zlib \
+	--disable-utmp \
+	--disable-utmpx \
+	--disable-wtmp \
+	--disable-wtmpx \
+	--disable-loginfunc \
+	--disable-pututline \
+	--disable-pututxline
+
 $(D)/dropbearmulti: bootstrap
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -16,28 +30,7 @@ $(D)/dropbearmulti: bootstrap
 		git checkout -q $(DROPBEARMULTI_CHECKOUT); \
 		$(BUILD_ENV) \
 		autoreconf -fi $(SILENT_OPT); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--disable-syslog \
-			--disable-lastlog \
-			--infodir=/.remove \
-			--localedir=/.remove/locale \
-			--mandir=/.remove \
-			--docdir=/.remove \
-			--htmldir=/.remove \
-			--dvidir=/.remove \
-			--pdfdir=/.remove \
-			--psdir=/.remove \
-			--disable-shadow \
-			--disable-zlib \
-			--disable-utmp \
-			--disable-utmpx \
-			--disable-wtmp \
-			--disable-wtmpx \
-			--disable-loginfunc \
-			--disable-pututline \
-			--disable-pututxline \
-			; \
+		$(CONFIGURE); \
 		$(MAKE) PROGRAMS="dropbear scp dropbearkey" MULTI=1; \
 		$(MAKE) PROGRAMS="dropbear scp dropbearkey" MULTI=1 install DESTDIR=$(TARGET_DIR)
 	cd $(TARGET_DIR)/usr/bin && ln -sf /usr/bin/dropbearmulti dropbear

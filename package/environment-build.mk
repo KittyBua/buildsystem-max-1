@@ -249,12 +249,35 @@ BUILD_ENV += \
 CONFIGURE_OPTS = \
 	--build=$(BUILD) \
 	--host=$(TARGET) \
+	--target=$(TARGET) \
 	$(SILENT_CONFIGURE)
+
+CONFIGURE_TARGET_OPTS = \
+	--program-prefix= \
+	--program-suffix= \
+	--prefix=$(prefix) \
+	--exec_prefix=$(exec_prefix) \
+	--bindir=$(bindir) \
+	--datadir=$(datadir) \
+	--includedir=$(includedir) \
+	--infodir=$(REMOVE_infodir) \
+	--libdir=$(libdir) \
+	--libexecdir=$(libexecdir) \
+	--localstatedir=$(localstatedir) \
+	--mandir=$(REMOVE_mandir) \
+	--oldincludedir=$(oldincludedir) \
+	--sbindir=$(sbindir) \
+	--sharedstatedir=$(sharedstatedir) \
+	--sysconfdir=$(sysconfdir) \
+	$($(PKG_UPPER)_CONF_OPTS)
 
 CONFIGURE = \
 	test -f ./configure || ./autogen.sh $(SILENT_OPT) && \
 	$(BUILD_ENV) \
-	./configure $(CONFIGURE_OPTS) $(SILENT_OPT)
+	./configure \
+	$(CONFIGURE_OPTS) \
+	$(CONFIGURE_TARGET_OPTS) \
+	$(SILENT_OPT)
 
 # -----------------------------------------------------------------------------
 
@@ -265,8 +288,8 @@ CMAKE_OPTS = \
 	-DCMAKE_SYSTEM_NAME="Linux" \
 	-DCMAKE_SYSTEM_PROCESSOR="$(TARGET_ARCH)" \
 	-DCMAKE_INSTALL_PREFIX="/usr" \
-	-DCMAKE_INSTALL_DOCDIR="/.remove" \
-	-DCMAKE_INSTALL_MANDIR="/.remove" \
+	-DCMAKE_INSTALL_DOCDIR="$(REMOVE_docdir)" \
+	-DCMAKE_INSTALL_MANDIR="$(REMOVE_mandir)" \
 	-DCMAKE_PREFIX_PATH="$(TARGET_DIR)" \
 	-DCMAKE_INCLUDE_PATH="$(TARGET_INCLUDE_DIR)" \
 	-DCMAKE_C_COMPILER="$(TARGET_CC)" \
@@ -283,7 +306,8 @@ CMAKE_OPTS = \
 	-DCMAKE_OBJDUMP="$(TARGET_OBJDUMP)" \
 	-DCMAKE_RANLIB="$(TARGET_RANLIB)" \
 	-DCMAKE_READELF="$(TARGET_READELF)" \
-	-DCMAKE_STRIP="$(TARGET_STRIP)"
+	-DCMAKE_STRIP="$(TARGET_STRIP)" \
+	$($(PKG_UPPER)_CONF_OPTS)
 
 CMAKE = \
 	rm -f CMakeCache.txt; \

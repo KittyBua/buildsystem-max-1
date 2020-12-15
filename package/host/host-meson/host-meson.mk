@@ -6,7 +6,7 @@ HOST_MESON_DIR    = meson-$(HOST_MESON_VER)
 HOST_MESON_SOURCE = meson-$(HOST_MESON_VER).tar.gz
 HOST_MESON_SITE   = https://github.com/mesonbuild/meson/releases/download/$(HOST_MESON_VER)
 
-HOST_MESON_PATCH  = \
+HOST_MESON_PATCH = \
 	0001-Only-fix-RPATH-if-install_rpath-is-not-empty.patch \
 	0002-Prefer-ext-static-libs-when-default-library-static.patch \
 	0003-Allow-overriding-g-ir-scanner-and-g-ir-compiler-bina.patch \

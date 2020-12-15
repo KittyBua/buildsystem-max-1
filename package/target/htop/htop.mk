@@ -6,8 +6,16 @@ HTOP_DIR    = htop-$(HTOP_VER)
 HTOP_SOURCE = htop-$(HTOP_VER).tar.gz
 HTOP_SITE   = $(call github,htop-dev,htop,$(HTOP_VER))
 
-HTOP_PATCH  = \
+HTOP_PATCH = \
 	0001-Use-pkg-config.patch
+
+HTOP_CONF_OPTS = \
+	ac_cv_file__proc_stat=yes \
+	ac_cv_file__proc_meminfo=yes \
+	--disable-unicode \
+	--disable-hwloc \
+	--enable-cgroup \
+	--enable-taskstats
 
 $(D)/htop: bootstrap ncurses
 	$(START_BUILD)
@@ -17,18 +25,8 @@ $(D)/htop: bootstrap ncurses
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
-		$(CONFIGURE) \
-			ac_cv_file__proc_stat=yes \
-			ac_cv_file__proc_meminfo=yes \
-			--prefix=/usr \
-			--mandir=/.remove \
-			--sysconfdir=/etc \
-			--disable-unicode \
-			--disable-hwloc \
-			--enable-cgroup \
-			--enable-taskstats \
-			; \
-		$(MAKE) all; \
+		$(CONFIGURE); \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,applications icons pixmaps)
 	ln -sf htop $(TARGET_DIR)/usr/bin/top

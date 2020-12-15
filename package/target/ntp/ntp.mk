@@ -6,8 +6,16 @@ NTP_DIR    = ntp-$(NTP_VER)
 NTP_SOURCE = ntp-$(NTP_VER).tar.gz
 NTP_SITE   = https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-$(basename $(NTP_VER))
 
-NTP_PATCH  = \
+NTP_PATCH = \
 	0001-mkver_in.patch
+
+NTP_CONF_OPTS = \
+	--docdir=$(REMOVE_docdir) \
+	--disable-debugging \
+	--with-shared \
+	--with-crypto \
+	--with-yielding-select=yes \
+	--without-ntpsnmpd
 
 $(D)/ntp: bootstrap
 	$(START_BUILD)
@@ -16,17 +24,7 @@ $(D)/ntp: bootstrap
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
-		$(CONFIGURE) \
-			--target=$(TARGET) \
-			--prefix=/usr \
-			--mandir=/.remove \
-			--docdir=/.remove \
-			--disable-tick \
-			--disable-tickadj \
-			--disable-debugging \
-			--with-yielding-select=yes \
-			--without-ntpsnmpd \
-			; \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(PKG_REMOVE)

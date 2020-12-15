@@ -12,11 +12,8 @@ $(D)/sshfs: bootstrap glib2 libfuse
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--mandir=/.remove \
-			; \
-		$(MAKE) all; \
+		$(CONFIGURE); \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(PKG_REMOVE)
 	$(TOUCH)

@@ -6,7 +6,7 @@ CURLFTPFS_DIR    = curlftpfs-$(CURLFTPFS_VER)
 CURLFTPFS_SOURCE = curlftpfs-$(CURLFTPFS_VER).tar.gz
 CURLFTPFS_SITE   = https://sourceforge.net/projects/curlftpfs/files/latest/download
 
-CURLFTPFS_PATCH  = \
+CURLFTPFS_PATCH = \
 	0001-curlftpfs.patch
 
 $(D)/curlftpfs: bootstrap libcurl libfuse glib2
@@ -18,12 +18,8 @@ $(D)/curlftpfs: bootstrap libcurl libfuse glib2
 		$(call apply_patches, $(PKG_PATCH)); \
 		export ac_cv_func_malloc_0_nonnull=yes; \
 		export ac_cv_func_realloc_0_nonnull=yes; \
-		$(CONFIGURE) \
-			--target=$(TARGET) \
-			--prefix=/usr \
-			--mandir=/.remove \
-			; \
-		$(MAKE) all; \
+		$(CONFIGURE); \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(PKG_REMOVE)
 	$(TOUCH)

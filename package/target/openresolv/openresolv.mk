@@ -16,8 +16,9 @@ $(D)/openresolv: bootstrap
 		echo "SBINDIR=/sbin" >> config.mk; \
 		echo "LIBEXECDIR=/lib/resolvconf" >> config.mk; \
 		echo "VARDIR=/var/run/resolvconf" >> config.mk; \
-		echo "MANDIR=/.remove" >> config.mk; \
+		echo "MANDIR=$(REMOVE_mandir)" >> config.mk; \
 		echo "RCDIR=etc/init.d" >> config.mk; \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(PKG_REMOVE)
 	$(TOUCH)

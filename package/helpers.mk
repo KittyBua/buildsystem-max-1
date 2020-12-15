@@ -95,9 +95,9 @@ define START_BUILD
 endef
 
 define TOUCH
-	$(SILENT)touch $@; echo -e "$(TERM_GREEN)completed$(TERM_NORMAL)"; \
+	$(SILENT)touch $@; echo -e "$(TERM_GREEN) $(PKG_NAME) building completed$(TERM_NORMAL)"; \
 	echo ""; \
-	$(call draw_line);
+	$(call draw_line)
 endef
 
 # -----------------------------------------------------------------------------

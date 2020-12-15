@@ -3,12 +3,21 @@ USHARE_DIR    = ushare-uShare_v$(USHARE_VER)
 USHARE_SOURCE = uShare_v$(USHARE_VER).tar.gz
 USHARE_SITE   = https://github.com/GeeXboX/ushare/archive
 
-USHARE_PATCH  = \
+USHARE_PATCH = \
 	0001-ushare.patch \
 	0002-compile-fixes.patch \
 	0003-ushare-fix-building-with-gcc-5.x.patch \
 	0004-ushare-c-include-config-h-before-checking-for-CONFIG-NLS.patch \
 	0005-ushare-disable-iconv-check.patch
+
+USHARE_CONF_OPTS = \
+	--prefix=/usr \
+	--cross-compile \
+	--cross-prefix=$(TARGET_CROSS) \
+	--sysconfdir=/etc \
+	--localedir=$(REMOVE_localedir) \
+	--disable-dlna \
+	--disable-nls
 
 $(D)/ushare: bootstrap libupnp
 	$(START_BUILD)
@@ -18,15 +27,7 @@ $(D)/ushare: bootstrap libupnp
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
-		./configure \
-			--prefix=/usr \
-			--disable-dlna \
-			--disable-nls \
-			--cross-compile \
-			--cross-prefix=$(TARGET_CROSS) \
-			; \
-		sed -i config.h -e 's@SYSCONFDIR.*@SYSCONFDIR "/etc"@'; \
-		sed -i config.h -e 's@LOCALEDIR.*@LOCALEDIR "/share"@'; \
+		./configure $(USHARE_CONF_OPTS); \
 		ln -sf ../config.h src/; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

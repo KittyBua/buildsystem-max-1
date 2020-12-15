@@ -6,7 +6,7 @@ FBSHOT_DIR    = fbshot-$(FBSHOT_VER)
 FBSHOT_SOURCE = fbshot-$(FBSHOT_VER).tar.gz
 FBSHOT_SITE   = http://distro.ibiblio.org/amigolinux/download/Utils/fbshot
 
-FBSHOT_PATCH  = \
+FBSHOT_PATCH = \
 	0001-fbshot.patch
 
 $(D)/fbshot: bootstrap libpng

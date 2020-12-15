@@ -13,11 +13,8 @@ $(D)/giflib: bootstrap
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		export ac_cv_prog_have_xmlto=no; \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--bindir=/.remove \
-			; \
-		$(MAKE) all; \
+		$(CONFIGURE); \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gif2rgb gifbuild gifclrmp gifecho giffix gifinto giftext giftool)
 	$(REWRITE_LIBTOOL_LA)

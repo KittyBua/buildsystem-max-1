@@ -9,6 +9,10 @@ OPKG_SITE   = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
 OPKG_PATCH = \
 	0001-opkg.patch
 
+OPKG_CONF_OPTS = \
+	--disable-curl \
+	--disable-gpg
+
 $(D)/opkg: bootstrap host-opkg libarchive
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -18,13 +22,8 @@ $(D)/opkg: bootstrap host-opkg libarchive
 		$(call apply_patches, $(PKG_PATCH)); \
 		LIBARCHIVE_LIBS="-L$(TARGET_DIR)/usr/lib -larchive" \
 		LIBARCHIVE_CFLAGS="-I$(TARGET_DIR)/usr/include" \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--disable-curl \
-			--disable-gpg \
-			--mandir=/.remove \
-			; \
-		$(MAKE) all ; \
+		$(CONFIGURE); \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	mkdir -p $(TARGET_DIR)/usr/lib/opkg
 	mkdir -p $(TARGET_DIR)/etc/opkg

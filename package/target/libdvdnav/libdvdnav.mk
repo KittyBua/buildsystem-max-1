@@ -6,8 +6,12 @@ LIBDVDNAV_DIR    = libdvdnav-$(LIBDVDNAV_VER)
 LIBDVDNAV_SOURCE = libdvdnav-$(LIBDVDNAV_VER).tar.xz
 LIBDVDNAV_SITE   = http://dvdnav.mplayerhq.hu/releases
 
-LIBDVDNAV_PATCH  = \
+LIBDVDNAV_PATCH = \
 	0001-libdvdnav.patch
+
+LIBDVDNAV_CONF_OPTS = \
+	--enable-static \
+	--enable-shared
 
 $(D)/libdvdnav: bootstrap libdvdread
 	$(START_BUILD)
@@ -18,14 +22,9 @@ $(D)/libdvdnav: bootstrap libdvdread
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		libtoolize --copy --force --quiet --ltdl; \
-		./autogen.sh \
-			--build=$(BUILD) \
-			--host=$(TARGET) \
-			--prefix=/usr \
-			--enable-static \
-			--enable-shared \
-			; \
-		$(MAKE) all; \
+		autoreconf -fi $(SILENT_OPT); \
+		$(CONFIGURE); \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)
 	$(PKG_REMOVE)

@@ -7,8 +7,12 @@ SHAIRPLAY_SOURCE   = shairplay.git
 SHAIRPLAY_SITE     = https://github.com/juhovh
 SHAIRPLAY_CHECKOUT = 193138f3
 
-SHAIRPLAY_PATCH  = \
+SHAIRPLAY_PATCH = \
 	0001-shairplay-howl.patch
+
+SHAIRPLAY_CONF_OPTS = \
+	--enable-shared \
+	--disable-static
 
 $(D)/shairplay: bootstrap libao howl
 	$(START_BUILD)
@@ -20,11 +24,7 @@ $(D)/shairplay: bootstrap libao howl
 		$(call apply_patches, $(PKG_PATCH)); \
 		for A in src/test/example.c src/test/main.c src/shairplay.c ; do sed -i "s#airport.key#/usr/share/shairplay/airport.key#" $$A ; done && \
 		autoreconf -fi $(SILENT_OPT); \
-		$(CONFIGURE) \
-			--enable-shared \
-			--disable-static \
-			--prefix=/usr \
-			; \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR); \
 		mkdir -p $(TARGET_SHARE_DIR)/shairplay; \

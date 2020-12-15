@@ -6,7 +6,7 @@ HOST_MTD_UTILS_DIR    = mtd-utils-$(HOST_MTD_UTILS_VER)
 HOST_MTD_UTILS_SOURCE = mtd-utils-$(HOST_MTD_UTILS_VER).tar.bz2
 HOST_MTD_UTILS_SITE   = ftp://ftp.infradead.org/pub/mtd-utils
 
-HOST_MTD_UTILS_PATCH  = \
+HOST_MTD_UTILS_PATCH = \
 	0001-mtd-utils.patch \
 	0002-mtd-utils-sysmacros.patch
 

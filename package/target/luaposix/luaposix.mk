@@ -6,8 +6,15 @@ LUAPOSIX_DIR    = luaposix-$(LUAPOSIX_VER)
 LUAPOSIX_SOURCE = luaposix-$(LUAPOSIX_VER).tar.gz
 LUAPOSIX_SITE   = $(call github,luaposix,luaposix,v$(LUAPOSIX_VER))
 
-LUAPOSIX_PATCH   = \
+LUAPOSIX_PATCH = \
 	0001-fix-docdir-build.patch
+
+LUAPOSIX_CONF_OPTS = \
+	--libdir=$(TARGET_LIB_DIR)/lua/$(LUA_ABIVER) \
+	--datadir=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVER) \
+	--mandir=$(TARGET_DIR)/$(REMOVE_mandir) \
+	--docdir=$(TARGET_DIR)/$(REMOVE_docdir) \
+	--enable-silent-rules
 
 $(D)/luaposix: bootstrap host-lua lua luaexpat slingshot gnulib
 	$(START_BUILD)
@@ -21,15 +28,7 @@ $(D)/luaposix: bootstrap host-lua lua luaexpat slingshot gnulib
 		export LUA=$(HOST_LUA_BINARY); \
 		./bootstrap $(SILENT_OPT); \
 		autoreconf -fi $(SILENT_OPT); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--exec-prefix=/usr \
-			--libdir=$(TARGET_LIB_DIR)/lua/$(LUA_ABIVER) \
-			--datarootdir=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVER) \
-			--mandir=$(TARGET_DIR)/.remove \
-			--docdir=$(TARGET_DIR)/.remove \
-			--enable-silent-rules \
-			; \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install
 	$(PKG_REMOVE)

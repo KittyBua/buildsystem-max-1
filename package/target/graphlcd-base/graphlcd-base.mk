@@ -6,7 +6,7 @@ GRAPHLCD_BASE_DIR    = graphlcd-base.git
 GRAPHLCD_BASE_SOURCE = graphlcd-base.git
 GRAPHLCD_BASE_SITE   = git://projects.vdr-developer.org
 
-GRAPHLCD_BASE_PATCH  = \
+GRAPHLCD_BASE_PATCH = \
 	0001-graphlcd.patch \
 	0002-strip-graphlcd-conf.patch
 
@@ -23,7 +23,7 @@ GRAPHLCD_BASE_PATCH += \
 	0005-add-vuplus-driver.patch
 endif
 
-GRAPHLCD_BASE_MAKE_OPTS = \
+GRAPHLCD_BASE_CONF_OPTS = \
 	$(BUILD_ENV) \
 	CXXFLAGS+="-fPIC" \
 	TARGET=$(TARGET_CROSS) \
@@ -37,10 +37,10 @@ $(D)/graphlcd-base: bootstrap freetype libiconv libusb
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
-		$(MAKE) $(GRAPHLCD_BASE_MAKE_OPTS) -C glcdgraphics all; \
-		$(MAKE) $(GRAPHLCD_BASE_MAKE_OPTS) -C glcddrivers all; \
-		$(MAKE) $(GRAPHLCD_BASE_MAKE_OPTS) -C glcdgraphics install; \
-		$(MAKE) $(GRAPHLCD_BASE_MAKE_OPTS) -C glcddrivers install; \
+		$(MAKE) $(GRAPHLCD_BASE_CONF_OPTS) -C glcdgraphics all; \
+		$(MAKE) $(GRAPHLCD_BASE_CONF_OPTS) -C glcddrivers all; \
+		$(MAKE) $(GRAPHLCD_BASE_CONF_OPTS) -C glcdgraphics install; \
+		$(MAKE) $(GRAPHLCD_BASE_CONF_OPTS) -C glcddrivers install; \
 		$(INSTALL_DATA) -D graphlcd.conf $(TARGET_DIR)/etc/graphlcd.conf
 	$(PKG_REMOVE)
 	$(TOUCH)

@@ -12,9 +12,7 @@ $(D)/smartmontools: bootstrap
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			; \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(INSTALL_EXEC) smartctl $(TARGET_DIR)/usr/sbin/smartctl
 	$(PKG_REMOVE)

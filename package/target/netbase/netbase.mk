@@ -7,7 +7,7 @@ NETBASE_SOURCE = netbase_$(NETBASE_VER).tar.xz
 NETBASE_SITE   = http://ftp.debian.org/debian/pool/main/n/netbase/
 
 
-NETBASE_PATCH  = \
+NETBASE_PATCH = \
 	0001-netbase-add-rpcbind-as-an-alias-to-sunrpc.patch
 
 $(D)/netbase: bootstrap

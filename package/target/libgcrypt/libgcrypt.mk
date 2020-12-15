@@ -6,21 +6,19 @@ LIBGCRYPT_DIR    = libgcrypt-$(LIBGCRYPT_VER)
 LIBGCRYPT_SOURCE = libgcrypt-$(LIBGCRYPT_VER).tar.bz2
 LIBGCRYPT_SITE   = https://gnupg.org/ftp/gcrypt/libgcrypt
 
+LIBGCRYPT_CONF_OPTS = \
+	--enable-shared \
+	--disable-static \
+	--disable-tests \
+	--with-gpg-error-prefix=$(TARGET_DIR)/usr
+
 $(D)/libgcrypt: bootstrap libgpg-error
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--enable-shared \
-			--disable-static \
-			--disable-tests \
-			--with-gpg-error-prefix=$(TARGET_DIR)/usr \
-			--mandir=/.remove \
-			--infodir=/.remove \
-		; \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	mv $(TARGET_DIR)/usr/bin/libgcrypt-config $(HOST_DIR)/bin

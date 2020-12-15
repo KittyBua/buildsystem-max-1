@@ -6,7 +6,7 @@ BUSYBOX_DIR    = busybox-$(BUSYBOX_VER)
 BUSYBOX_SOURCE = busybox-$(BUSYBOX_VER).tar.bz2
 BUSYBOX_SITE   = https://busybox.net/downloads
 
-BUSYBOX_PATCH  = \
+BUSYBOX_PATCH = \
 	0001-Prevent-telnet-connections-from-the-internet-to-the.patch \
 	0002-Extended-network-interfaces-support.patch \
 	0003-Revert-ip-fix-ip-oneline-a.patch \

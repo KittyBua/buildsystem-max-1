@@ -6,10 +6,20 @@ FREETYPE_DIR    = freetype-$(FREETYPE_VER)
 FREETYPE_SOURCE = freetype-$(FREETYPE_VER).tar.xz
 FREETYPE_SITE   = https://sourceforge.net/projects/freetype/files/freetype2/$(FREETYPE_VER)
 
-FREETYPE_PATCH  = \
+FREETYPE_PATCH = \
 	0001-freetype2-subpixel.patch \
 	0002-freetype2-config.patch \
 	0003-freetype2-pkgconf.patch
+
+FREETYPE_CONF_OPTS = \
+	--enable-shared \
+	--disable-static \
+	--enable-freetype-config \
+	--with-png \
+	--with-zlib \
+	--without-harfbuzz \
+	--without-bzip2 \
+	--without-brotli
 
 $(D)/freetype: bootstrap zlib libpng
 	$(START_BUILD)
@@ -24,19 +34,8 @@ $(D)/freetype: bootstrap zlib libpng
 		aclocal -I .; \
 		autoconf
 	$(PKG_CHDIR); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--mandir=/.remove \
-			--enable-shared \
-			--disable-static \
-			--enable-freetype-config \
-			--with-png \
-			--with-zlib \
-			--without-harfbuzz \
-			--without-bzip2 \
-			--without-brotli \
-			; \
-		$(MAKE) all; \
+		$(CONFIGURE); \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	ln -sf freetype2 $(TARGET_INCLUDE_DIR)/freetype
 	mv $(TARGET_DIR)/usr/bin/freetype-config $(HOST_DIR)/bin

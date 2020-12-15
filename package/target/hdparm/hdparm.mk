@@ -6,7 +6,7 @@ HDPARM_DIR    = hdparm-$(HDPARM_VER)
 HDPARM_SOURCE = hdparm-$(HDPARM_VER).tar.gz
 HDPARM_SITE   = https://sourceforge.net/projects/hdparm/files/hdparm
 
-HDPARM_PATCH  = \
+HDPARM_PATCH = \
 	0001-cflags.patch
 
 $(D)/hdparm: bootstrap
@@ -17,7 +17,7 @@ $(D)/hdparm: bootstrap
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		$(BUILD_ENV) \
-		$(MAKE) CROSS=$(TARGET_CROSS) all; \
-		$(MAKE) install DESTDIR=$(TARGET_DIR) mandir=/.remove
+		$(MAKE) CROSS=$(TARGET_CROSS); \
+		$(MAKE) install DESTDIR=$(TARGET_DIR) mandir=$(REMOVE_mandir)
 	$(PKG_REMOVE)
 	$(TOUCH)

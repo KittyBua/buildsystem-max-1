@@ -6,7 +6,7 @@ WLAN_QCOM_DIR    = qcacld-2.0-$(WLAN_QCOM_VER)
 WLAN_QCOM_SOURCE = qcacld-2.0-$(WLAN_QCOM_VER).tar.gz
 WLAN_QCOM_SITE   = https://www.codeaurora.org/cgit/external/wlan/qcacld-2.0/snapshot
 
-WLAN_QCOM_PATCH  = \
+WLAN_QCOM_PATCH = \
 	0001-qcacld-2.0-support.patch
 
 $(D)/wlan-qcom: bootstrap kernel wlan-qcom-firmware wireless-regdb

@@ -6,7 +6,7 @@ LIBID3TAG_DIR    = libid3tag-$(LIBID3TAG_VER)
 LIBID3TAG_SOURCE = libid3tag-$(LIBID3TAG_VER).tar.gz
 LIBID3TAG_SITE   = https://sourceforge.net/projects/mad/files/libid3tag/$(LIBID3TAG_VER)
 
-LIBID3TAG_PATCH  = \
+LIBID3TAG_PATCH = \
 	0001-addpkgconfig.patch \
 	0002-obsolete_automake_macros.patch \
 	0003-utf16.patch \
@@ -26,7 +26,7 @@ $(D)/libid3tag: bootstrap zlib
 			--prefix=/usr \
 			--enable-shared=yes \
 			; \
-		$(MAKE) all; \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)
 	$(PKG_REMOVE)

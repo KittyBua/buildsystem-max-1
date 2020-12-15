@@ -6,7 +6,7 @@ BZIP2_DIR    = bzip2-$(BZIP2_VER)
 BZIP2_SOURCE = bzip2-$(BZIP2_VER).tar.gz
 BZIP2_SITE   = https://sourceware.org/pub/bzip2
 
-BZIP2_PATCH  = \
+BZIP2_PATCH = \
 	0001-bzip2.patch
 
 $(D)/bzip2: bootstrap

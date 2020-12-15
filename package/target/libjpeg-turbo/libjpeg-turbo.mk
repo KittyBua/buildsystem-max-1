@@ -6,8 +6,13 @@ LIBJPEG_TURBO_DIR    = libjpeg-turbo-$(LIBJPEG_TURBO_VER)
 LIBJPEG_TURBO_SOURCE = libjpeg-turbo-$(LIBJPEG_TURBO_VER).tar.gz
 LIBJPEG_TURBO_SITE   = https://sourceforge.net/projects/libjpeg-turbo/files/$(LIBJPEG_TURBO_VER)
 
-LIBJPEG_TURBO_PATCH  = \
+LIBJPEG_TURBO_PATCH = \
 	0001-tiff-ojpeg.patch
+
+LIBJPEG_TURBO_CONF_OPTS = \
+	-DWITH_SIMD=False \
+	-DWITH_JPEG8=80 \
+	| tail -n +90
 
 $(D)/libjpeg-turbo: bootstrap
 	$(START_BUILD)
@@ -16,11 +21,7 @@ $(D)/libjpeg-turbo: bootstrap
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
-		$(CMAKE) \
-			-DWITH_SIMD=False \
-			-DWITH_JPEG8=80 \
-			| tail -n +90 \
-			; \
+		$(CMAKE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,cjpeg djpeg jpegtran rdjpgcom tjbench wrjpgcom)

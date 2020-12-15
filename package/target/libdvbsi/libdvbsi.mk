@@ -6,7 +6,7 @@ LIBDVBSI_DIR    = libdvbsi.git
 LIBDVBSI_SOURCE = libdvbsi.git
 LIBDVBSI_SITE   = https://github.com/OpenVisionE2
 
-LIBDVBSI_PATCH  = \
+LIBDVBSI_PATCH = \
 	0001-content_identifier_descriptor.patch
 
 $(D)/libdvbsi: bootstrap
@@ -16,9 +16,7 @@ $(D)/libdvbsi: bootstrap
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			; \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)

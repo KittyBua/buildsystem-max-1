@@ -6,18 +6,17 @@ STRACE_DIR    = strace-$(STRACE_VER)
 STRACE_SOURCE = strace-$(STRACE_VER).tar.xz
 STRACE_SITE   = https://strace.io/files/$(STRACE_VER)
 
+STRACE_CONF_OPTS = \
+	--enable-silent-rules
+
 $(D)/strace: bootstrap
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--mandir=/.remove \
-			--enable-silent-rules \
-			; \
-		$(MAKE) all; \
+		$(CONFIGURE); \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,strace-graph strace-log-merge)
 	$(PKG_REMOVE)

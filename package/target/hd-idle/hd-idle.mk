@@ -6,7 +6,7 @@ HD_IDLE_DIR    = hd-idle
 HD_IDLE_SOURCE = hd-idle-$(HD_IDLE_VER).tgz
 HD_IDLE_SITE   = https://sourceforge.net/projects/hd-idle/files
 
-HD_IDLE_PATCH  = \
+HD_IDLE_PATCH = \
 	0001-hd-idle.patch
 
 $(D)/hd-idle: bootstrap

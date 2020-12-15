@@ -6,7 +6,7 @@ JFSUTILS_DIR    = jfsutils-$(JFSUTILS_VER)
 JFSUTILS_SOURCE = jfsutils-$(JFSUTILS_VER).tar.gz
 JFSUTILS_SITE   = http://jfs.sourceforge.net/project/pub
 
-JFSUTILS_PATCH  = \
+JFSUTILS_PATCH = \
 	0001-jfsutils.patch \
 	0002-fix-build-with-fno-common.patch
 
@@ -19,11 +19,7 @@ $(D)/jfsutils: bootstrap e2fsprogs
 		$(call apply_patches, $(PKG_PATCH)); \
 		sed -i "/unistd.h/a#include <sys/types.h>" fscklog/extract.c; \
 		sed -i "/ioctl.h/a#include <sys/sysmacros.h>" libfs/devices.c; \
-		$(CONFIGURE) \
-			--target=$(TARGET) \
-			--prefix= \
-			--mandir=/.remove \
-			; \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,jfs_debugfs jfs_fscklog jfs_logdump)

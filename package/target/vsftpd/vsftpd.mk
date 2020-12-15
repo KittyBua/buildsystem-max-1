@@ -6,7 +6,7 @@ VSFTPD_DIR    = vsftpd-$(VSFTPD_VER)
 VSFTPD_SOURCE = vsftpd-$(VSFTPD_VER).tar.gz
 VSFTPD_SITE   = https://security.appspot.com/downloads
 
-VSFTPD_PATCH  = \
+VSFTPD_PATCH = \
 	0001-vsftpd.patch \
 	0002-vsftpd-makefile-destdir.patch \
 	0003-vsftpd-disable-capabilities.patch \

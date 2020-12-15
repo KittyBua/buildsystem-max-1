@@ -6,7 +6,7 @@ LINKS_DIR    = links-$(LINKS_VER)
 LINKS_SOURCE = links-$(LINKS_VER).tar.bz2
 LINKS_SITE   = http://links.twibright.com/download
 
-LINKS_PATCH  = \
+LINKS_PATCH = \
 	0001-links.patch \
 	0002-links-ac-prog-cxx.patch \
 	0003-links-accept_https_play.patch
@@ -16,6 +16,19 @@ LINKS_PATCH += 0004-links-input-event1.patch
 else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), h7))
 LINKS_PATCH += 0005-links-input-event2.patch
 endif
+
+LINKS_CONF_OPTS = \
+	--with-libjpeg \
+	--without-libtiff \
+	--without-svgalib \
+	--without-lzma \
+	--with-fb \
+	--without-directfb \
+	--without-pmshell \
+	--without-atheos \
+	--enable-graphics \
+	--with-ssl=$(TARGET_DIR)/usr \
+	--without-x
 
 $(D)/links: bootstrap freetype libpng libjpeg-turbo openssl
 	$(START_BUILD)
@@ -30,21 +43,7 @@ $(D)/links: bootstrap freetype libpng libjpeg-turbo openssl
 	$(CHDIR)/$(PKG_DIR); \
 		$(call apply_patches, $(PKG_PATCH)); \
 		autoreconf -vfi $(SILENT_OPT); \
-		$(CONFIGURE) \
-			--prefix=/usr \
-			--mandir=/.remove \
-			--with-libjpeg \
-			--without-libtiff \
-			--without-svgalib \
-			--without-lzma \
-			--with-fb \
-			--without-directfb \
-			--without-pmshell \
-			--without-atheos \
-			--enable-graphics \
-			--with-ssl=$(TARGET_DIR)/usr \
-			--without-x \
-			; \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	mkdir -p $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins $(TARGET_DIR)/var/tuxbox/config/links

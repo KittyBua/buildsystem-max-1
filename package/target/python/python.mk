@@ -6,7 +6,7 @@ PYTHON_DIR    = Python-$(PYTHON_VER)
 PYTHON_SOURCE = Python-$(PYTHON_VER).tar.xz
 PYTHON_SITE   = https://www.python.org/ftp/python/$(PYTHON_VER)
 
-PYTHON_PATCH  = \
+PYTHON_PATCH = \
 	0001-python.patch \
 	0002-python-xcompile.patch \
 	0003-python-revert_use_of_sysconfigdata.patch \
@@ -31,7 +31,7 @@ $(D)/python: bootstrap host-python ncurses zlib openssl libffi expat bzip2
 			--host=$(TARGET) \
 			--target=$(TARGET) \
 			--prefix=/usr \
-			--mandir=/.remove \
+			--mandir=$(REMOVE_mandir) \
 			--sysconfdir=/etc \
 			--enable-shared \
 			--with-lto \
