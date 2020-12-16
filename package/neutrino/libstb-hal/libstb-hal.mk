@@ -33,7 +33,7 @@ $(D)/libstb-hal.do_prepare: | $(LIBSTB_HAL_DEPS)
 	(cd $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); git checkout -q $(LIBSTB_HAL_BRANCH);)
 	cp -ra $(SOURCE_DIR)/$(LIBSTB_HAL_DIR) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR).org
 	$(CD) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); \
-		$(call apply_patches, $(LIBSTB_HAL_PATCH))
+		$(call apply_patches, $(PKG_PATCH))
 	@touch $@
 
 $(D)/libstb-hal.config.status:

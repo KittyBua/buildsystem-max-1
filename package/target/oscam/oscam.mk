@@ -64,7 +64,7 @@ $(D)/oscam.do_prepare:
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(OSCAM_PATCH)); \
+		$(call apply_patches, $(PKG_PATCH)); \
 		$(SHELL) ./config.sh $(PKG_CONF_OPTS)
 	@touch $@
 

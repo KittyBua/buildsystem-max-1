@@ -219,7 +219,7 @@ $(D)/neutrino.do_prepare: | $(NEUTRINO_DEPS) libstb-hal
 	(cd $(SOURCE_DIR)/$(NEUTRINO_DIR); git checkout -q $(NEUTRINO_BRANCH);)
 	cp -ra $(SOURCE_DIR)/$(NEUTRINO_DIR) $(SOURCE_DIR)/$(NEUTRINO_DIR).org
 	$(CD) $(SOURCE_DIR)/$(NEUTRINO_DIR); \
-		$(call apply_patches, $(NEUTRINO_PATCH))
+		$(call apply_patches, $(PKG_PATCH))
 	@touch $@
 
 $(D)/neutrino.config.status:
