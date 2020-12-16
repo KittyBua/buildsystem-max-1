@@ -29,7 +29,7 @@ $(D)/lua: bootstrap host-lua ncurses
 			LDFLAGS="$(TARGET_LDFLAGS)" \
 			; \
 		$(MAKE) INSTALL_TOP=$(TARGET_DIR)/usr \
-			INSTALL_MAN=$(TARGET_DIR)/$(REMOVE_mandir) install \
+			INSTALL_MAN=$(TARGET_DIR)$(REMOVE_mandir) install \
 			; \
 		$(INSTALL_DATA) -D $(BUILD_DIR)/lua-$(LUA_VER)/etc/lua.pc \
 			$(PKG_CONFIG_PATH)/lua.pc
