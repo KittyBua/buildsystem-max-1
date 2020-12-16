@@ -64,7 +64,7 @@ PKG_DIR         = $($(PKG_UPPER)_DIR)
 PKG_SOURCE      = $($(PKG_UPPER)_SOURCE)
 PKG_SITE        = $($(PKG_UPPER)_SITE)
 PKG_PATCH       = $($(PKG_UPPER)_PATCH)
-
+PKG_CONF_OPTS   = $($(PKG_UPPER)_CONF_OPTS)
 PKG_BUILD_DIR   = $(BUILD_DIR)/$(PKG_DIR)
 PKG_FILES_DIR   = $(BASE_DIR)/package/*/$(PKG_NAME)/files
 PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(PKG_NAME)/patches
@@ -269,7 +269,7 @@ CONFIGURE_TARGET_OPTS = \
 	--sbindir=$(sbindir) \
 	--sharedstatedir=$(sharedstatedir) \
 	--sysconfdir=$(sysconfdir) \
-	$($(PKG_UPPER)_CONF_OPTS)
+	$(PKG_CONF_OPTS)
 
 CONFIGURE = \
 	test -f ./configure || ./autogen.sh $(SILENT_OPT) && \
@@ -307,7 +307,7 @@ CMAKE_OPTS = \
 	-DCMAKE_RANLIB="$(TARGET_RANLIB)" \
 	-DCMAKE_READELF="$(TARGET_READELF)" \
 	-DCMAKE_STRIP="$(TARGET_STRIP)" \
-	$($(PKG_UPPER)_CONF_OPTS)
+	$(PKG_CONF_OPTS)
 
 CMAKE = \
 	rm -f CMakeCache.txt; \

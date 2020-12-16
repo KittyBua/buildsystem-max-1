@@ -343,7 +343,7 @@ $(D)/ffmpeg: bootstrap openssl zlib bzip2 freetype rtmpdump libass libxml2 alsa-
 			--pkg-config="$(PKG_CONFIG)" \
 			--extra-cflags="$(TARGET_CFLAGS) -I$(TARGET_INCLUDE_DIR)/libxml2" \
 			--extra-ldflags="$(TARGET_LDFLAGS) -lrt" \
-			$(FFMPEG_CONF_OPTS) \
+			$(PKG_CONF_OPTS) \
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

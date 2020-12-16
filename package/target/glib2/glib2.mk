@@ -34,7 +34,7 @@ $(D)/glib2: bootstrap host-glib2 libffi util-linux zlib libiconv
 		$(call apply_patches, $(PKG_PATCH)); \
 		unset CC CXX CPP LD AR NM STRIP; \
 		$(HOST_DIR)/bin/meson builddir/ --buildtype=release --cross-file $(HOST_DIR)/bin/meson-cross.config \
-		$(GLIB2_CONF_OPTS); \
+		$(PKG_CONF_OPTS); \
 	$(PKG_CHDIR); \
 		DESTDIR=$(TARGET_DIR) $(HOST_DIR)/bin/ninja -C builddir install
 	rm -rf $(addprefix $(TARGET_DIR)/usr/share/,gettext gdb glib-2.0 locale)

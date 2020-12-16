@@ -42,8 +42,8 @@ $(D)/netsurf: bootstrap libpng libjpeg-turbo openssl libiconv freetype expat lib
 		CFLAGS="$(TARGET_CFLAGS) -I$(BUILD_DIR)/netsurf-all-$(NETSURF_VER)/tmpusr/include" \
 		LDFLAGS="$(TARGET_LDFLAGS) -L$(BUILD_DIR)/netsurf-all-$(NETSURF_VER)/tmpusr/lib" \
 		PKG_CONFIG="$(PKG_CONFIG)" \
-		$(MAKE) $(NETSURF_CONF_OPTS); \
-		$(MAKE) $(NETSURF_CONF_OPTS) install DESTDIR=$(TARGET_DIR)
+		$(MAKE) $(PKG_CONF_OPTS); \
+		$(MAKE) $(PKG_CONF_OPTS) install DESTDIR=$(TARGET_DIR)
 	mkdir -p $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins
 	mv $(TARGET_DIR)/usr/bin/netsurf-fb $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/netsurf-fb.so
 	echo "name=Netsurf Web Browser"	 > $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/netsurf-fb.cfg
