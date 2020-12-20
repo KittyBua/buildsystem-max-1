@@ -15,7 +15,7 @@ $(D)/wlan-qcom: bootstrap kernel wlan-qcom-firmware wireless-regdb
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		$(MAKE) $(KERNEL_MAKEVARS); \
 	$(INSTALL_DATA) wlan.ko $(TARGET_MODULES_DIR)/extra
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d

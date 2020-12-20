@@ -19,7 +19,7 @@ $(D)/wlan-rtl8822bu: bootstrap kernel
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		$(MAKE) $(KERNEL_MAKEVARS); \
 	$(INSTALL_DATA) 88x2bu.ko $(TARGET_MODULES_DIR)/kernel/drivers/net/wireless/
 	make depmod
