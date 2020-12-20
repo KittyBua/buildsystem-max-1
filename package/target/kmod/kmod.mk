@@ -24,7 +24,7 @@ $(D)/kmod: bootstrap zlib
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \
 		$(MAKE); \

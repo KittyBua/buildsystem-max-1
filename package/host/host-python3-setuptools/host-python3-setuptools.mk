@@ -16,7 +16,7 @@ $(D)/host-python3-setuptools: bootstrap host-python3
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		$(HOST_PYTHON_BUILD); \
 		$(HOST_PYTHON_INSTALL)
 	$(PKG_REMOVE)

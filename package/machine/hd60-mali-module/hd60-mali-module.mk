@@ -26,7 +26,7 @@ $(D)/hd60-mali-module: bootstrap kernel hd60-libgles-header
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		$(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKEVARS) \
 		$(HD60_MALI_MODULE_MAKEVARS); \
 		$(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKEVARS) \

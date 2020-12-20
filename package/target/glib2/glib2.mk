@@ -31,7 +31,7 @@ $(D)/glib2: bootstrap host-glib2 libffi util-linux zlib libiconv
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		unset CC CXX CPP LD AR NM STRIP; \
 		$(HOST_DIR)/bin/meson builddir/ --buildtype=release --cross-file $(HOST_DIR)/bin/meson-cross.config \
 		$(PKG_CONF_OPTS); \

@@ -21,7 +21,7 @@ $(D)/python: bootstrap host-python ncurses zlib openssl libffi expat bzip2
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		CONFIG_SITE= \
 		$(BUILD_ENV) \
 		autoreconf -vfi Modules/_ctypes/libffi $(SILENT_OPT); \

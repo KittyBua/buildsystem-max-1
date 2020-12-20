@@ -6,7 +6,7 @@
 #
 # gfutures
 #
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k hd51 hd60 hd61))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL),bre2ze4k hd51 hd60 hd61))
 
 ifeq ($(BOXMODEL), bre2ze4k)
 KERNEL_VER         = 4.10.12
@@ -34,7 +34,7 @@ MTD_BLACK          = mmcblk0
 MTD_BOOTFS         = mmcblk0p4
 endif
 
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k hd51))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL),bre2ze4k hd51))
 KERNEL_IMAGE_TYPE  = zImage
 KERNEL_SOURCE      = linux-$(KERNEL_VER)-arm.tar.gz
 else
@@ -42,7 +42,7 @@ KERNEL_IMAGE_TYPE  = uImage
 KERNEL_SOURCE      = linux-$(KERNEL_VER)-$(KERNEL_DATE)-arm.tar.gz
 endif
 
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k hd51))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL),bre2ze4k hd51))
 KERNEL_DTB         = bcm7445-bcm97445svmb.dtb
 else
 KERNEL_DTB         = hi3798mv200.dtb
@@ -76,7 +76,7 @@ endif
 #
 # VU Plus
 #
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL),vuduo vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 
 ifeq ($(BOXMODEL), vuduo)
 KERNEL_VER         = 3.9.6
@@ -152,7 +152,7 @@ endif
 #
 # Edision
 #
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL),osmio4k osmio4kplus))
 
 ifeq ($(BOXMODEL), osmio4k)
 KERNEL_VER         = 5.9.0

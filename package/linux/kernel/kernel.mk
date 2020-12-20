@@ -232,7 +232,7 @@ $(D)/kernel.do_prepare:
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $($(call UPPERCASE, $(BOXMODEL))_PATCH))
+		$(call apply_patches,$($(call UPPERCASE,$(BOXMODEL))_PATCH))
 	@touch $@
 
 $(D)/kernel.do_compile: kernel.do_prepare

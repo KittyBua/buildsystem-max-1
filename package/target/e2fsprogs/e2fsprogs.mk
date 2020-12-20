@@ -53,7 +53,7 @@ $(D)/e2fsprogs: bootstrap util-linux
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		PATH=$(BUILD_DIR)/e2fsprogs-$(E2FSPROGS_VER):$(PATH) \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \

@@ -19,7 +19,7 @@ $(D)/opkg: bootstrap host-opkg libarchive
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		LIBARCHIVE_LIBS="-L$(TARGET_DIR)/usr/lib -larchive" \
 		LIBARCHIVE_CFLAGS="-I$(TARGET_DIR)/usr/include" \
 		$(CONFIGURE); \

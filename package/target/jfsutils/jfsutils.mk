@@ -16,7 +16,7 @@ $(D)/jfsutils: bootstrap e2fsprogs
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		sed -i "/unistd.h/a#include <sys/types.h>" fscklog/extract.c; \
 		sed -i "/ioctl.h/a#include <sys/sysmacros.h>" libfs/devices.c; \
 		$(CONFIGURE); \

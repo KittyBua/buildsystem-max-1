@@ -21,7 +21,7 @@ $(D)/shairplay: bootstrap libao howl
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		git checkout -q $(SHAIRPLAY_CHECKOUT); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		for A in src/test/example.c src/test/main.c src/shairplay.c ; do sed -i "s#airport.key#/usr/share/shairplay/airport.key#" $$A ; done && \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \

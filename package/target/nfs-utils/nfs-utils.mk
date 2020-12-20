@@ -23,7 +23,7 @@ NFS_UTILS_CONF_OPTS = \
 	--with-statdpath=/var/lib/nfs/statd
 
 NFS_UTILS_CONF_OPTS += \
-	$(if $(filter $(BOXMODEL), vuduo), --disable-ipv6, --enable-ipv6)
+	$(if $(filter $(BOXMODEL), vuduo),--disable-ipv6,--enable-ipv6)
 
 $(D)/nfs-utils: bootstrap rpcbind e2fsprogs
 	$(START_BUILD)
@@ -31,7 +31,7 @@ $(D)/nfs-utils: bootstrap rpcbind e2fsprogs
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		export knfsd_cv_bsd_signals=no; \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \

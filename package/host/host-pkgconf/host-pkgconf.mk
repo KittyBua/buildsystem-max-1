@@ -16,7 +16,7 @@ $(D)/host-pkgconf: directories
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		./configure $(SILENT_OPT) \
 			--prefix=$(HOST_DIR) \
 			; \

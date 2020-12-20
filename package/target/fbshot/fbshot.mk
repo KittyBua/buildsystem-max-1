@@ -15,7 +15,7 @@ $(D)/fbshot: bootstrap libpng
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		sed -i s~'gcc'~"$(TARGET_CC) $(TARGET_CFLAGS) $(TARGET_LDFLAGS)"~ Makefile; \
 		sed -i 's/strip fbshot/$(TARGET_STRIP) fbshot/' Makefile; \
 		$(MAKE) all; \

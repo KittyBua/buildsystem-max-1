@@ -113,7 +113,7 @@ $(D)/neutrino-release: neutrino-release-base
 #
 # linux-strip all
 #
-ifneq ($(OPTIMIZATIONS), $(filter $(OPTIMIZATIONS), debug normal))
+ifneq ($(OPTIMIZATIONS), $(filter $(OPTIMIZATIONS),debug normal))
 	find $(RELEASE_DIR)/ -name '*' -exec $(TARGET_STRIP) --strip-unneeded {} &>/dev/null \;
 endif
 	$(TUXBOX_CUSTOMIZE)

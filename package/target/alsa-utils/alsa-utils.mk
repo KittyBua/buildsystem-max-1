@@ -26,7 +26,7 @@ $(D)/alsa-utils: bootstrap ncurses alsa-lib
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		sed -ir -r "s/(amidi|aplay|iecset|speaker-test|seq|alsaucm|topology)//g" Makefile.am ;\
 		autoreconf -fi -I $(TARGET_DIR)/usr/share/aclocal $(SILENT_OPT); \
 		$(CONFIGURE); \

@@ -219,7 +219,7 @@ $(D)/neutrino.do_prepare: | $(NEUTRINO_DEPS) libstb-hal
 	(cd $(SOURCE_DIR)/$(NEUTRINO_DIR); git checkout -q $(NEUTRINO_BRANCH);)
 	cp -ra $(SOURCE_DIR)/$(NEUTRINO_DIR) $(SOURCE_DIR)/$(NEUTRINO_DIR).org
 	$(CD) $(SOURCE_DIR)/$(NEUTRINO_DIR); \
-		$(call apply_patches, $(PKG_PATCH))
+		$(call apply_patches,$(PKG_PATCH))
 	@touch $@
 
 $(D)/neutrino.config.status:
@@ -279,7 +279,7 @@ $(D)/neutrino: neutrino.do_prepare neutrino.config.status neutrino.do_compile
 		echo "imagedir=$(BOXMODEL)" \
 	) > $(TARGET_DIR)/.version
 	make e2-multiboot
-ifeq ($(FLAVOUR), $(filter $(FLAVOUR), neutrino-max neutrino-ni))
+ifeq ($(FLAVOUR), $(filter $(FLAVOUR),neutrino-max neutrino-ni))
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/start_neutrino1 $(TARGET_DIR)/etc/init.d/start_neutrino
 else
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/start_neutrino2 $(TARGET_DIR)/etc/init.d/start_neutrino

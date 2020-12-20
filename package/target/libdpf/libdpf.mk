@@ -15,7 +15,7 @@ $(D)/libdpf: bootstrap libusb-compat
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		make -C dpflib libdpf.a CC=$(TARGET_CC) PREFIX=$(TARGET_DIR)/usr; \
 		mkdir -p $(TARGET_INCLUDE_DIR)/libdpf; \
 		cp dpflib/dpf.h $(TARGET_INCLUDE_DIR)/libdpf/libdpf.h; \

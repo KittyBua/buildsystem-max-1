@@ -20,7 +20,7 @@ $(D)/zlib: bootstrap
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		mandir=$(REMOVE_mandir) \
 		./configure $(SILENT_OPT) $(PKG_CONF_OPTS); \

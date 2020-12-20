@@ -32,7 +32,7 @@ $(D)/autofs: bootstrap libtirpc e2fsprogs openssl libxml2
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		export ac_cv_path_KRB5_CONFIG=no; \
 		export ac_cv_linux_procfs=yes; \
 		export ac_cv_path_RANLIB=$(TARGET_RANLIB); \

@@ -31,7 +31,7 @@ $(D)/djmount: bootstrap libupnp libfuse
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		touch libupnp/config.aux/config.rpath; \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \

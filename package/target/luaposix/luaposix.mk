@@ -24,7 +24,7 @@ $(D)/luaposix: bootstrap host-lua lua luaexpat slingshot gnulib
 	$(PKG_CHDIR); \
 		tar -C gnulib --strip=1 -xf $(DL_DIR)/$(GNULIB_SOURCE); \
 		tar -C slingshot --strip=1 -xf $(DL_DIR)/$(SLINGSHOT_SOURCE); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		export LUA=$(HOST_LUA_BINARY); \
 		./bootstrap $(SILENT_OPT); \
 		autoreconf -fi $(SILENT_OPT); \

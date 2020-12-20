@@ -20,7 +20,7 @@ $(D)/portmap: bootstrap lsb
 		gunzip -cd $(DL_DIR)/$(PORTMAP_DIFF) | cat > debian.patch; \
 		$(PATCH) < debian.patch; \
 		sed -e 's/### BEGIN INIT INFO/# chkconfig: S 41 10\n### BEGIN INIT INFO/g' -i debian/init.d; \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		$(BUILD_ENV) $(MAKE) NO_TCP_WRAPPER=1 DAEMON_UID=65534 DAEMON_GID=65535 CC="$(TARGET_CC)"; \
 		$(INSTALL_EXEC) portmap $(TARGET_DIR)/sbin; \
 		$(INSTALL_EXEC) pmap_dump $(TARGET_DIR)/sbin; \

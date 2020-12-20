@@ -17,7 +17,7 @@ $(D)/xupnpd: bootstrap lua openssl neutrino-plugins
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		git checkout -q $(XUPNPD_CHECKOUT); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		$(MAKE) -C src embedded TARGET=$(TARGET) PKG_CONFIG=$(PKG_CONFIG) LUAFLAGS="$(TARGET_LDFLAGS) -I$(TARGET_INCLUDE_DIR)"; \
 		$(MAKE) -C src install DESTDIR=$(TARGET_DIR)

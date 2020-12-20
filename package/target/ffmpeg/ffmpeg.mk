@@ -328,7 +328,7 @@ $(D)/ffmpeg: bootstrap openssl zlib bzip2 freetype rtmpdump libass libxml2 alsa-
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		./configure $(SILENT_OPT) \
 			--prefix=$(prefix) \
 			--datadir=$(REMOVE_datarootdir) \

@@ -25,7 +25,7 @@ $(D)/ushare: bootstrap libupnp
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		./configure $(PKG_CONF_OPTS); \
 		ln -sf ../config.h src/; \

@@ -15,7 +15,7 @@ $(D)/hdparm: bootstrap
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		$(MAKE) CROSS=$(TARGET_CROSS); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR) mandir=$(REMOVE_mandir)

@@ -15,7 +15,7 @@ $(D)/bzip2: bootstrap
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		mv Makefile-libbz2_so Makefile; \
 		$(MAKE) all CC=$(TARGET_CC) AR=$(TARGET_AR) RANLIB=$(TARGET_RANLIB); \
 		$(MAKE) install PREFIX=$(TARGET_DIR)/usr

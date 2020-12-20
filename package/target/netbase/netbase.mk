@@ -16,7 +16,7 @@ $(D)/netbase: bootstrap
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		$(INSTALL_DATA) etc/rpc $(TARGET_DIR)/etc/rpc; \
 		$(INSTALL_DATA) etc/protocols $(TARGET_DIR)/etc/protocols; \
 		$(INSTALL_DATA) etc/services $(TARGET_DIR)/etc/services

@@ -15,7 +15,7 @@ $(D)/python-twisted: bootstrap python python-setuptools python-zope-interface py
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		$(PYTHON_BUILD); \
 		$(PYTHON_INSTALL)
 	$(PKG_REMOVE)

@@ -26,7 +26,7 @@ $(D)/procps-ng: bootstrap ncurses
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		export ac_cv_func_malloc_0_nonnull=yes; \
 		export ac_cv_func_realloc_0_nonnull=yes; \
 		autoreconf -fi $(SILENT_OPT); \

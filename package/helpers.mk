@@ -39,7 +39,7 @@ define apply_patches
 endef
 
 # apply patch sets automatically
-APPLY_PATCHES = $(call apply_patches, $(PKG_PATCHES_DIR))
+APPLY_PATCHES = $(call apply_patches,$(PKG_PATCHES_DIR))
 PATCH = patch -p1 -s
 
 # -----------------------------------------------------------------------------
@@ -125,7 +125,7 @@ define rewrite_libtool
 endef
 
 # rewrite libtool libraries automatically
-REWRITE_LIBTOOL_LA = $(call rewrite_libtool, $(TARGET_LIB_DIR))
+REWRITE_LIBTOOL_LA = $(call rewrite_libtool,$(TARGET_LIB_DIR))
 
 # -----------------------------------------------------------------------------
 

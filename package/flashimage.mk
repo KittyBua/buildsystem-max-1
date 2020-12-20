@@ -4,13 +4,13 @@
 # -----------------------------------------------------------------------------
 
 flashimage: neutrino
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k hd51 h7))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL),bre2ze4k hd51 h7))
 	$(MAKE) flash-image-multi-disk flash-image-multi-rootfs
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd60 hd61))
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),hd60 hd61))
 	$(MAKE) flash-image-hd6x-multi-disk
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),osmio4k osmio4kplus))
 	$(MAKE) flash-image-osmio4k-multi-disk flash-image-osmio4k-multi-rootfs
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 ifeq ($(VU_MULTIBOOT), 1)
 	$(MAKE) flash-image-vu-multi-rootfs
 else
@@ -31,13 +31,13 @@ endif
 # -----------------------------------------------------------------------------
 
 ofgimage: neutrino
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k hd51 h7))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL),bre2ze4k hd51 h7))
 	$(MAKE) ITYPE=ofg flash-image-multi-rootfs
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd60 hd61))
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),hd60 hd61))
 	$(MAKE) ITYPE=ofg flash-image-hd6x-multi-rootfs
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),osmio4k osmio4kplus))
 	$(MAKE) ITYPE=ofg flash-image-osmio4k-multi-rootfs
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 	$(MAKE) ITYPE=ofg flash-image-vu-rootfs
 else
 	echo -e "$(TERM_RED_BOLD)unsupported box model$(TERM_NORMAL)"
@@ -53,13 +53,13 @@ endif
 
 oi \
 online-image: neutrino
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), bre2ze4k hd51 h7))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL),bre2ze4k hd51 h7))
 	$(MAKE) ITYPE=online flash-image-online
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd60 hd61))
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),hd60 hd61))
 	$(MAKE) ITYPE=online flash-image-hd6x-online
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), osmio4k osmio4kplus))
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),osmio4k osmio4kplus))
 	$(MAKE) ITYPE=online flash-image-osmio4k-online
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 	$(MAKE) ITYPE=online flash-image-vu-online
 else
 	echo -e "$(TERM_RED_BOLD)unsupported box model$(TERM_NORMAL)"
@@ -84,9 +84,9 @@ BOOT_IMAGE = boot.img
 IMAGE_LINK = $(IMAGE_NAME).ext4
 IMAGE_ROOTFS_SIZE = 294912
 
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL), hd51 bre2ze4k))
+ifeq ($(BOXMODEL), $(filter $(BOXMODEL),hd51 bre2ze4k))
 IMAGE_SUBDIR = $(BOXMODEL)
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL), h7))
+else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),h7))
 IMAGE_SUBDIR = zgemma/$(BOXMODEL)
 endif
 

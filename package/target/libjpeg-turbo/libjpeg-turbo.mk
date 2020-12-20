@@ -20,7 +20,7 @@ $(D)/libjpeg-turbo: bootstrap
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		$(CMAKE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

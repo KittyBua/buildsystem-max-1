@@ -25,7 +25,7 @@ $(D)/cairo: bootstrap glib2 zlib libpng freetype pixman
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		$(call apply_patches, $(PKG_PATCH)); \
+		$(call apply_patches,$(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		ax_cv_c_float_words_bigendian="no" \
 		./configure $(SILENT_OPT) $(CONFIGURE_OPTS) $(CONFIGURE_TARGET_OPTS); \
