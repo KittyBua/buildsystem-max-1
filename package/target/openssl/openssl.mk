@@ -13,11 +13,11 @@ OPENSSL_PATCH = \
 	0004-Configure-use-ELFv2-ABI-on-some-ppc64-big-endian-sys.patch \
 	0005-crypto-perlasm-ppc-xlate.pl-add-linux64v2-flavour.patch
 
-ifeq ($(TARGET_ARCH), arm)
+ifeq ($(TARGET_ARCH),arm)
 OPENSSL_TARGET_ARCH = linux-armv4
-else ifeq ($(TARGET_ARCH), aarch64)
+else ifeq ($(TARGET_ARCH),aarch64)
 OPENSSL_TARGET_ARCH = linux-aarch64
-else ifeq ($(TARGET_ARCH), mips)
+else ifeq ($(TARGET_ARCH),mips)
 OPENSSL_TARGET_ARCH = linux-generic32
 endif
 

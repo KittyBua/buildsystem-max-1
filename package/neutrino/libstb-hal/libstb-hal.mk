@@ -56,7 +56,7 @@ $(D)/libstb-hal.config.status:
 			--with-boxmodel=$(BOXMODEL) \
 			$(LH_CONFIG_OPTS) \
 			CFLAGS="$(N_CFLAGS)" CXXFLAGS="$(N_CFLAGS) -std=c++11" CPPFLAGS="$(N_CPPFLAGS)"
-ifeq ($(TINKER_OPTION), 0)
+ifeq ($(TINKER_OPTION),0)
 	@touch $@
 endif
 

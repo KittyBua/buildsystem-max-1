@@ -3,7 +3,7 @@
 #
 # -----------------------------------------------------------------------------
 
-ifeq ($(FLAVOUR), neutrino-ddt)
+ifeq ($(FLAVOUR),neutrino-ddt)
 GIT_SITE          ?= https://github.com/Duckbox-Developers
 NEUTRINO           = neutrino-ddt
 LIBSTB_HAL         = libstb-hal-ddt
@@ -11,7 +11,7 @@ NEUTRINO_BRANCH   ?= master
 LIBSTB_HAL_BRANCH ?= master
 NEUTRINO_PATCH     = neutrino-ddt.patch
 LIBSTB_HAL_PATCH   =
-else ifeq ($(FLAVOUR), neutrino-max)
+else ifeq ($(FLAVOUR),neutrino-max)
 GIT_SITE          ?= $(MAX-GIT-GITHUB)
 NEUTRINO           = neutrino-max
 LIBSTB_HAL         = libstb-hal-max
@@ -19,7 +19,7 @@ NEUTRINO_BRANCH   ?= master
 LIBSTB_HAL_BRANCH ?= master
 NEUTRINO_PATCH     =
 LIBSTB_HAL_PATCH   =
-else ifeq ($(FLAVOUR), neutrino-ni)
+else ifeq ($(FLAVOUR),neutrino-ni)
 GIT_SITE          ?= https://github.com/neutrino-images
 NEUTRINO           = ni-neutrino
 LIBSTB_HAL         = ni-libstb-hal
@@ -27,7 +27,7 @@ NEUTRINO_BRANCH   ?= master
 LIBSTB_HAL_BRANCH ?= master
 NEUTRINO_PATCH     = ni-neutrino.patch
 LIBSTB_HAL_PATCH   =
-else ifeq ($(FLAVOUR), neutrino-tangos)
+else ifeq ($(FLAVOUR),neutrino-tangos)
 GIT_SITE          ?= https://github.com/TangoCash
 NEUTRINO           = neutrino-tangos
 LIBSTB_HAL         = libstb-hal-tangos
@@ -35,7 +35,7 @@ NEUTRINO_BRANCH   ?= master
 LIBSTB_HAL_BRANCH ?= master
 NEUTRINO_PATCH     =
 LIBSTB_HAL_PATCH   =
-else ifeq ($(FLAVOUR), neutrino-redblue)
+else ifeq ($(FLAVOUR),neutrino-redblue)
 GIT_SITE          ?= https://github.com/redblue-pkt
 NEUTRINO           = neutrino-redblue
 LIBSTB_HAL         = libstb-hal-redblue
@@ -134,29 +134,29 @@ NEUTRINO_DEPS += parted
 NEUTRINO_DEPS += gptfdisk
 NEUTRINO_DEPS += udpxy
 NEUTRINO_DEPS += mc
-ifeq ($(BOXMODEL), hd60)
+ifeq ($(BOXMODEL),hd60)
 NEUTRINO_DEPS += harfbuzz
 endif
 NEUTRINO_DEPS += $(LOCAL_NEUTRINO_DEPS)
 N_CONFIG_OPTS  = $(LOCAL_NEUTRINO_BUILD_OPTIONS)
 
-ifeq ($(BOXTYPE), armbox)
+ifeq ($(BOXTYPE),armbox)
 N_CONFIG_OPTS += --disable-arm-acc
 endif
-ifeq ($(BOXTYPE), mipsbox)
+ifeq ($(BOXTYPE),mipsbox)
 N_CONFIG_OPTS += --disable-mips-acc
 endif
 
 
-ifeq ($(EXTERNAL_LCD), graphlcd)
+ifeq ($(EXTERNAL_LCD),graphlcd)
 N_CONFIG_OPTS += --enable-graphlcd
 NEUTRINO_DEPS += graphlcd-base
 endif
-ifeq ($(EXTERNAL_LCD), lcd4linux)
+ifeq ($(EXTERNAL_LCD),lcd4linux)
 N_CONFIG_OPTS += --enable-lcd4linux
 NEUTRINO_DEPS += lcd4linux
 endif
-ifeq ($(EXTERNAL_LCD), both)
+ifeq ($(EXTERNAL_LCD),both)
 N_CONFIG_OPTS += --enable-graphlcd
 NEUTRINO_DEPS += graphlcd-base
 N_CONFIG_OPTS += --enable-lcd4linux
@@ -166,7 +166,7 @@ endif
 # enable ffmpeg audio decoder in neutrino
 AUDIODEC = ffmpeg
 
-ifeq ($(AUDIODEC), ffmpeg)
+ifeq ($(AUDIODEC),ffmpeg)
 N_CONFIG_OPTS += --enable-ffmpegdec
 else
 NEUTRINO_DEPS += libid3tag
@@ -255,7 +255,7 @@ $(D)/neutrino.config.status:
 			--with-stb-hal-build=$(LIBSTB_HAL_OBJ_DIR) \
 			CFLAGS="$(N_CFLAGS)" CXXFLAGS="$(N_CFLAGS) -std=c++11" CPPFLAGS="$(N_CPPFLAGS)"
 		+make $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
-ifeq ($(TINKER_OPTION), 0)
+ifeq ($(TINKER_OPTION),0)
 	@touch $@
 endif
 
@@ -279,7 +279,7 @@ $(D)/neutrino: neutrino.do_prepare neutrino.config.status neutrino.do_compile
 		echo "imagedir=$(BOXMODEL)" \
 	) > $(TARGET_DIR)/.version
 	make e2-multiboot
-ifeq ($(FLAVOUR), $(filter $(FLAVOUR),neutrino-max neutrino-ni))
+ifeq ($(FLAVOUR),$(filter $(FLAVOUR),neutrino-max neutrino-ni))
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/start_neutrino1 $(TARGET_DIR)/etc/init.d/start_neutrino
 else
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/start_neutrino2 $(TARGET_DIR)/etc/init.d/start_neutrino

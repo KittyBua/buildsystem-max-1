@@ -1,7 +1,7 @@
 #
 # vuultimo4k-vmlinuz-initrd 7445d0
 #
-ifeq ($(VU_MULTIBOOT), 1)
+ifeq ($(VU_MULTIBOOT),1)
 VUULTIMO4K_VMLINUZ_INITRD_DATE   = 20190911
 VUULTIMO4K_VMLINUZ_INITRD_SITE   = https://bitbucket.org/max_10/vmlinuz-initrd-vuultimo4k/downloads
 else

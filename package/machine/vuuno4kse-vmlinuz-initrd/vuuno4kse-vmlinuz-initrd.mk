@@ -1,7 +1,7 @@
 #
 # vuuno4kse-vmlinuz-initrd 7439b0
 #
-ifeq ($(VU_MULTIBOOT), 1)
+ifeq ($(VU_MULTIBOOT),1)
 VUUNO4KSE_VMLINUZ_INITRD_DATE   = 20191010
 VUUNO4KSE_VMLINUZ_INITRD_SITE   = https://bitbucket.org/max_10/vmlinuz-initrd-vuuno4kse/downloads
 else

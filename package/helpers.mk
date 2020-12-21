@@ -353,7 +353,7 @@ print-targets:
 #
 #
 #
-ifeq ($(GITSSH), 1)
+ifeq ($(GITSSH),1)
 MAX-GIT-GITHUB = git@github.com:MaxWiesel
 URL_1          = https://github.com/MaxWiesel
 URL_2          = $(MAX-GIT-GITHUB)

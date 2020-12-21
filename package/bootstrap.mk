@@ -113,14 +113,14 @@ $(D)/system-tools: $(SYSTEM_TOOLS)
 MACHINE_DEPS  = kernel
 MACHINE_DEPS += kernel-modules-clean
 MACHINE_DEPS += $(BOXMODEL)-driver
-ifneq ($(BOXMODEL), $(filter $(BOXMODEL),bre2ze4k h7 hd51 hd60 hd61 vuduo))
+ifneq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 hd60 hd61 vuduo))
 MACHINE_DEPS += $(BOXMODEL)-libgles
 endif
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 MACHINE_DEPS += $(BOXMODEL)-platform-util
 MACHINE_DEPS += $(BOXMODEL)-vmlinuz-initrd
 endif
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL),hd60 hd61))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
 MACHINE_DEPS += $(BOXMODEL)-libs
 #MACHINE_DEPS += $(BOXMODEL)-mali-module
 endif

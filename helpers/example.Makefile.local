@@ -3,22 +3,22 @@
 #
 # -----------------------------------------------------------------------------
 
-ifeq ($(FLAVOUR), neutrino-max)
+ifeq ($(FLAVOUR),neutrino-max)
 NEUTRINO_PATCH     +=
 LIBSTB_HAL_PATCH   +=
 #NEUTRINO_BRANCH    =
 #LIBSTB_HAL_BRANCH  =
-else ifeq  ($(FLAVOUR), neutrino-ni)
+else ifeq  ($(FLAVOUR),neutrino-ni)
 NEUTRINO_PATCH     +=
 LIBSTB_HAL_PATCH   +=
 #NEUTRINO_BRANCH    =
 #LIBSTB_HAL_BRANCH  =
-else ifeq  ($(FLAVOUR), neutrino-tangos)
+else ifeq  ($(FLAVOUR),neutrino-tangos)
 NEUTRINO_PATCH     +=
 LIBSTB_HAL_PATCH   +=
 #NEUTRINO_BRANCH    =
 #LIBSTB_HAL_BRANCH  =
-else ifeq  ($(FLAVOUR), neutrino-ddt)
+else ifeq  ($(FLAVOUR),neutrino-ddt)
 NEUTRINO_PATCH     +=
 LIBSTB_HAL_PATCH   +=
 #NEUTRINO_BRANCH    =

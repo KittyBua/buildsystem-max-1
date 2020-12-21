@@ -11,9 +11,9 @@ LINKS_PATCH = \
 	0002-links-ac-prog-cxx.patch \
 	0003-links-accept_https_play.patch
 
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL),hd51 hd60 hd61 bre2ze4k))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd51 hd60 hd61 bre2ze4k))
 LINKS_PATCH += 0004-links-input-event1.patch
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),h7))
+else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),h7))
 LINKS_PATCH += 0005-links-input-event2.patch
 endif
 

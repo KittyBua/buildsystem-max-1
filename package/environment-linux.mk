@@ -6,35 +6,35 @@
 #
 # gfutures
 #
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL),bre2ze4k hd51 hd60 hd61))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 hd60 hd61))
 
-ifeq ($(BOXMODEL), bre2ze4k)
+ifeq ($(BOXMODEL),bre2ze4k)
 KERNEL_VER         = 4.10.12
 MTD_BLACK          = mmcblk0
 MTD_BOOTFS         = mmcblk0p1
 endif
 
-ifeq ($(BOXMODEL), hd51)
+ifeq ($(BOXMODEL),hd51)
 KERNEL_VER         = 4.10.12
 MTD_BLACK          = mmcblk0
 MTD_BOOTFS         = mmcblk0p1
 endif
 
-ifeq ($(BOXMODEL), hd60)
+ifeq ($(BOXMODEL),hd60)
 KERNEL_VER         = 4.4.35
 KERNEL_DATE        = 20181228
 MTD_BLACK          = mmcblk0
 MTD_BOOTFS         = mmcblk0p4
 endif
 
-ifeq ($(BOXMODEL), hd61)
+ifeq ($(BOXMODEL),hd61)
 KERNEL_VER         = 4.4.35
 KERNEL_DATE        = 20181228
 MTD_BLACK          = mmcblk0
 MTD_BOOTFS         = mmcblk0p4
 endif
 
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL),bre2ze4k hd51))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51))
 KERNEL_IMAGE_TYPE  = zImage
 KERNEL_SOURCE      = linux-$(KERNEL_VER)-arm.tar.gz
 else
@@ -42,7 +42,7 @@ KERNEL_IMAGE_TYPE  = uImage
 KERNEL_SOURCE      = linux-$(KERNEL_VER)-$(KERNEL_DATE)-arm.tar.gz
 endif
 
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL),bre2ze4k hd51))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51))
 KERNEL_DTB         = bcm7445-bcm97445svmb.dtb
 else
 KERNEL_DTB         = hi3798mv200.dtb
@@ -58,7 +58,7 @@ endif
 #
 # Air Digital
 #
-ifeq ($(BOXMODEL), h7)
+ifeq ($(BOXMODEL),h7)
 
 KERNEL_VER         = 4.10.12
 MTD_BLACK          = mmcblk0
@@ -76,64 +76,64 @@ endif
 #
 # VU Plus
 #
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL),vuduo vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 
-ifeq ($(BOXMODEL), vuduo)
+ifeq ($(BOXMODEL),vuduo)
 KERNEL_VER         = 3.9.6
 MTD_BLACK          = $(EMPTY)
 MTD_BOOTFS         = $(EMPTY)
 endif
 
-ifeq ($(BOXMODEL), vuduo4k)
+ifeq ($(BOXMODEL),vuduo4k)
 KERNEL_VER         = 4.1.45-1.17
 KERNEL_SOURCE_VER  = 4.1-1.17
 MTD_BLACK          = mmcblk0
 MTD_BOOTFS         = mmcblk0p6
 endif
 
-ifeq ($(BOXMODEL), vuduo4kse)
+ifeq ($(BOXMODEL),vuduo4kse)
 KERNEL_VER         = 4.1.45-1.17
 KERNEL_SOURCE_VER  = 4.1-1.17
 MTD_BLACK          = mmcblk0
 MTD_BOOTFS         = mmcblk0p6
 endif
 
-ifeq ($(BOXMODEL), vusolo4k)
+ifeq ($(BOXMODEL),vusolo4k)
 KERNEL_VER         = 3.14.28-1.8
 KERNEL_SOURCE_VER  = 3.14-1.8
 MTD_BLACK          = mmcblk0
 MTD_BOOTFS         = mmcblk0p1
 endif
 
-ifeq ($(BOXMODEL), vuultimo4k)
+ifeq ($(BOXMODEL),vuultimo4k)
 KERNEL_VER         = 3.14.28-1.12
 KERNEL_SOURCE_VER  = 3.14-1.12
 MTD_BLACK          = mmcblk0
 MTD_BOOTFS         = mmcblk0p1
 endif
 
-ifeq ($(BOXMODEL), vuuno4k)
+ifeq ($(BOXMODEL),vuuno4k)
 KERNEL_VER         = 3.14.28-1.12
 KERNEL_SOURCE_VER  = 3.14-1.12
 MTD_BLACK          = mmcblk0
 MTD_BOOTFS         = mmcblk0p1
 endif
 
-ifeq ($(BOXMODEL), vuuno4kse)
+ifeq ($(BOXMODEL),vuuno4kse)
 KERNEL_VER         = 4.1.20-1.9
 KERNEL_SOURCE_VER  = 4.1-1.9
 MTD_BLACK          = mmcblk0
 MTD_BOOTFS         = mmcblk0p1
 endif
 
-ifeq ($(BOXMODEL), vuzero4k)
+ifeq ($(BOXMODEL),vuzero4k)
 KERNEL_VER         = 4.1.20-1.9
 KERNEL_SOURCE_VER  = 4.1-1.9
 MTD_BLACK          = mmcblk0
 MTD_BOOTFS         = mmcblk0p4
 endif
 
-ifeq ($(BOXMODEL), vuduo)
+ifeq ($(BOXMODEL),vuduo)
 KERNEL_IMAGE_TYPE  = vmlinux
 KERNEL_SOURCE      = stblinux-$(KERNEL_VER).tar.bz2
 else
@@ -152,16 +152,16 @@ endif
 #
 # Edision
 #
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL),osmio4k osmio4kplus))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),osmio4k osmio4kplus))
 
-ifeq ($(BOXMODEL), osmio4k)
+ifeq ($(BOXMODEL),osmio4k)
 KERNEL_VER         = 5.9.0
 KERNEL_SOURCE_VER  = 5.9
 MTD_BLACK          = mmcblk1
 MTD_BOOTFS         = mmcblk1p1
 endif
 
-ifeq ($(BOXMODEL), osmio4kplus)
+ifeq ($(BOXMODEL),osmio4kplus)
 KERNEL_VER         = 5.9.0
 KERNEL_SOURCE_VER  = 5.9
 MTD_BLACK          = mmcblk1
@@ -188,7 +188,7 @@ KERNEL_OUTPUT      = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/$(KERNEL_IMAGE_T
 KERNEL_INPUT_DTB   = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/dts/$(KERNEL_DTB)
 KERNEL_OUTPUT_DTB  = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/zImage_dtb
 
-ifeq ($(VU_MULTIBOOT), 1)
+ifeq ($(VU_MULTIBOOT),1)
 KERNEL_CONFIG      = $(BOXMODEL)_defconfig_multi
 else
 KERNEL_CONFIG      = $(BOXMODEL)_defconfig
@@ -199,11 +199,11 @@ LINUX_DIR          = $(BUILD_DIR)/$(KERNEL_DIR)
 # -----------------------------------------------------------------------------
 
 # translate toolchain arch to kernel arch
-ifeq ($(TARGET_ARCH), arm)
+ifeq ($(TARGET_ARCH),arm)
 KERNEL_ARCH = arm
-else ifeq ($(TARGET_ARCH), aarch64)
+else ifeq ($(TARGET_ARCH),aarch64)
 KERNEL_ARCH = arm64
-else ifeq ($(TARGET_ARCH), mips)
+else ifeq ($(TARGET_ARCH),mips)
 KERNEL_ARCH = mips
 endif
 

@@ -6,7 +6,7 @@
 MAINTAINER := $(shell whoami)
 UID := $(shell id -u)
 
-ifeq ($(UID), 0)
+ifeq ($(UID),0)
 warn:
 	@echo "You are running as root. Do not do this, it is dangerous."
 	@echo "Aborting the build. Log in as a regular user and retry."
@@ -105,7 +105,7 @@ printenv:
 	@echo "OPTIMIZATION      : $(OPTIMIZATIONS)"
 	@echo -e "FLAVOUR           : $(TERM_YELLOW)$(FLAVOUR)$(TERM_NORMAL)"
 	@echo "EXTERNAL_LCD      : $(EXTERNAL_LCD)"
-ifeq ($(NEWLAYOUT), 1)
+ifeq ($(NEWLAYOUT),1)
 	@echo -e "IMAGE TYPE        : $(TERM_YELLOW)1 single + multirootfs$(TERM_NORMAL)"
 endif
 	@$(call draw_line);
@@ -187,20 +187,20 @@ endif
 ifndef KBUILD_VERBOSE
 KBUILD_VERBOSE = 0
 endif
-ifeq ($(KBUILD_VERBOSE), 0)
+ifeq ($(KBUILD_VERBOSE),0)
 SILENT              = @
 SILENT_CONFIGURE    = >/dev/null 2>&1
 SILENT_OPT          = >/dev/null 2>&1
 SILENT_Q            = -q
 $(VERBOSE).SILENT:
 endif
-ifeq ($(KBUILD_VERBOSE), 1)
+ifeq ($(KBUILD_VERBOSE),1)
 SILENT              = @
 SILENT_CONFIGURE    =
 SILENT_OPT          =
 SILENT_Q            = -q
 endif
-ifeq ($(KBUILD_VERBOSE), 2)
+ifeq ($(KBUILD_VERBOSE),2)
 SILENT              = @
 SILENT_CONFIGURE    = -q
 SILENT_OPT          =

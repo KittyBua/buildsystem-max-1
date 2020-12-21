@@ -4,19 +4,19 @@
 # -----------------------------------------------------------------------------
 
 flashimage: neutrino
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL),bre2ze4k hd51 h7))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 h7))
 	$(MAKE) flash-image-multi-disk flash-image-multi-rootfs
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),hd60 hd61))
+else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
 	$(MAKE) flash-image-hd6x-multi-disk
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),osmio4k osmio4kplus))
+else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),osmio4k osmio4kplus))
 	$(MAKE) flash-image-osmio4k-multi-disk flash-image-osmio4k-multi-rootfs
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
-ifeq ($(VU_MULTIBOOT), 1)
+else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+ifeq ($(VU_MULTIBOOT),1)
 	$(MAKE) flash-image-vu-multi-rootfs
 else
 	$(MAKE) flash-image-vu-rootfs
 endif
-else ifeq ($(BOXMODEL), vuduo)
+else ifeq ($(BOXMODEL),vuduo)
 	$(MAKE) flash-image-vuduo
 else
 	echo -e "$(TERM_RED_BOLD)unsupported box model$(TERM_NORMAL)"
@@ -31,13 +31,13 @@ endif
 # -----------------------------------------------------------------------------
 
 ofgimage: neutrino
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL),bre2ze4k hd51 h7))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 h7))
 	$(MAKE) ITYPE=ofg flash-image-multi-rootfs
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),hd60 hd61))
+else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
 	$(MAKE) ITYPE=ofg flash-image-hd6x-multi-rootfs
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),osmio4k osmio4kplus))
+else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),osmio4k osmio4kplus))
 	$(MAKE) ITYPE=ofg flash-image-osmio4k-multi-rootfs
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 	$(MAKE) ITYPE=ofg flash-image-vu-rootfs
 else
 	echo -e "$(TERM_RED_BOLD)unsupported box model$(TERM_NORMAL)"
@@ -53,13 +53,13 @@ endif
 
 oi \
 online-image: neutrino
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL),bre2ze4k hd51 h7))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 h7))
 	$(MAKE) ITYPE=online flash-image-online
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),hd60 hd61))
+else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
 	$(MAKE) ITYPE=online flash-image-hd6x-online
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),osmio4k osmio4kplus))
+else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),osmio4k osmio4kplus))
 	$(MAKE) ITYPE=online flash-image-osmio4k-online
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 	$(MAKE) ITYPE=online flash-image-vu-online
 else
 	echo -e "$(TERM_RED_BOLD)unsupported box model$(TERM_NORMAL)"
@@ -84,9 +84,9 @@ BOOT_IMAGE = boot.img
 IMAGE_LINK = $(IMAGE_NAME).ext4
 IMAGE_ROOTFS_SIZE = 294912
 
-ifeq ($(BOXMODEL), $(filter $(BOXMODEL),hd51 bre2ze4k))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd51 bre2ze4k))
 IMAGE_SUBDIR = $(BOXMODEL)
-else ifeq ($(BOXMODEL), $(filter $(BOXMODEL),h7))
+else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),h7))
 IMAGE_SUBDIR = zgemma/$(BOXMODEL)
 endif
 
@@ -141,7 +141,7 @@ flash-image-multi-disk: host-e2fsprogs
 	mkdir -p $(IMAGE_BUILD_DIR)/$(IMAGE_SUBDIR)
 	# Create a sparse image block
 	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(IMAGE_LINK) seek=$(shell expr $(IMAGE_ROOTFS_SIZE) \* $(BLOCK_SECTOR)) count=0 bs=$(BLOCK_SIZE)
-ifeq ($(NEWLAYOUT), 1)
+ifeq ($(NEWLAYOUT),1)
 	$(HOST_DIR)/bin/mkfs.ext4 -F -m0 $(IMAGE_BUILD_DIR)/$(IMAGE_LINK) -d $(RELEASE_DIR)/..
 else
 	$(HOST_DIR)/bin/mkfs.ext4 -F -m0 $(IMAGE_BUILD_DIR)/$(IMAGE_LINK) -d $(RELEASE_DIR)
@@ -151,13 +151,13 @@ endif
 	dd if=/dev/zero of=$(EMMC_IMAGE) bs=$(BLOCK_SIZE) count=0 seek=$(shell expr $(EMMC_IMAGE_SIZE) \* $(BLOCK_SECTOR))
 	parted -s $(EMMC_IMAGE) mklabel gpt
 	parted -s $(EMMC_IMAGE) unit KiB mkpart boot fat16 $(IMAGE_ROOTFS_ALIGNMENT) $(shell expr $(IMAGE_ROOTFS_ALIGNMENT) \+ $(BOOT_PARTITION_SIZE))
-ifeq ($(NEWLAYOUT), 1)
+ifeq ($(NEWLAYOUT),1)
 	parted -s $(EMMC_IMAGE) unit KiB mkpart linuxkernel $(KERNEL_PARTITION_OFFSET) $(shell expr $(KERNEL_PARTITION_OFFSET) \+ $(KERNEL_PARTITION_SIZE))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart linuxrootfs ext4 $(ROOTFS_PARTITION_OFFSET) $(shell expr $(ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SIZE_NL))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart linuxkernel2 $(SECOND_KERNEL_PARTITION_OFFSET_NL) $(shell expr $(SECOND_KERNEL_PARTITION_OFFSET_NL) \+ $(KERNEL_PARTITION_SIZE))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart linuxkernel3 $(THIRD_KERNEL_PARTITION_OFFSET_NL) $(shell expr $(THIRD_KERNEL_PARTITION_OFFSET_NL) \+ $(KERNEL_PARTITION_SIZE))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart linuxkernel4 $(FOURTH_KERNEL_PARTITION_OFFSET_NL) $(shell expr $(FOURTH_KERNEL_PARTITION_OFFSET_NL) \+ $(KERNEL_PARTITION_SIZE))
-ifeq ($(NEWLAYOUT_SWAP), 1)
+ifeq ($(NEWLAYOUT_SWAP),1)
 	parted -s $(EMMC_IMAGE) unit KiB mkpart userdata ext4 $(MULTI_ROOTFS_PARTITION_OFFSET_NL) $(shell expr $(MULTI_ROOTFS_PARTITION_OFFSET_NL) \+ $(MULTI_ROOTFS_PARTITION_SIZE_NL))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart swap linux-swap $(LINUX_SWAP_PARTITION_OFFSET_NL) $(shell expr $(LINUX_SWAP_PARTITION_OFFSET_NL) \+ $(LINUX_SWAP_PARTITION_SIZE_NL))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart storage ext4 $(STORAGE_PARTITION_OFFSET_NL) 100%
@@ -198,7 +198,7 @@ endif
 	parted -s $(EMMC_IMAGE) unit KiB print
 	dd conv=notrunc if=$(IMAGE_BUILD_DIR)/$(BOOT_IMAGE) of=$(EMMC_IMAGE) bs=$(BLOCK_SIZE) seek=$(shell expr $(IMAGE_ROOTFS_ALIGNMENT) \* $(BLOCK_SECTOR))
 	dd conv=notrunc if=$(KERNEL_OUTPUT_DTB) of=$(EMMC_IMAGE) bs=$(BLOCK_SIZE) seek=$(shell expr $(KERNEL_PARTITION_OFFSET) \* $(BLOCK_SECTOR))
-ifeq ($(NEWLAYOUT), 1)
+ifeq ($(NEWLAYOUT),1)
 	$(HOST_DIR)/bin/resize2fs $(IMAGE_BUILD_DIR)/$(IMAGE_LINK) $(ROOTFS_PARTITION_SIZE_NL)k
 else
 	$(HOST_DIR)/bin/resize2fs $(IMAGE_BUILD_DIR)/$(IMAGE_LINK) $(ROOTFS_PARTITION_SIZE)k
@@ -461,37 +461,37 @@ flash-image-osmio4k-online:
 # -----------------------------------------------------------------------------
 
 # armbox vu+
-ifeq ($(BOXMODEL), vuduo4k)
+ifeq ($(BOXMODEL),vuduo4k)
 VU_PREFIX = vuplus/duo4k
 VU_INITRD = vmlinuz-initrd-7278b1
 VU_FR     = echo "This file forces a reboot after the update." > $(IMAGE_BUILD_DIR)/$(VU_PREFIX)/reboot.update
 endif
-ifeq ($(BOXMODEL), vuduo4kse)
+ifeq ($(BOXMODEL),vuduo4kse)
 VU_PREFIX = vuplus/duo4kse
 VU_INITRD = vmlinuz-initrd-7445d0
 VU_FR     = echo "This file forces a reboot after the update." > $(IMAGE_BUILD_DIR)/$(VU_PREFIX)/reboot.update
 endif
-ifeq ($(BOXMODEL), vusolo4k)
+ifeq ($(BOXMODEL),vusolo4k)
 VU_PREFIX = vuplus/solo4k
 VU_INITRD = vmlinuz-initrd-7366c0
 VU_FR     = echo "This file forces a reboot after the update." > $(IMAGE_BUILD_DIR)/$(VU_PREFIX)/reboot.update
 endif
-ifeq ($(BOXMODEL), vuultimo4k)
+ifeq ($(BOXMODEL),vuultimo4k)
 VU_PREFIX = vuplus/ultimo4k
 VU_INITRD = vmlinuz-initrd-7445d0
 VU_FR     = echo "This file forces a reboot after the update." > $(IMAGE_BUILD_DIR)/$(VU_PREFIX)/reboot.update
 endif
-ifeq ($(BOXMODEL), vuuno4k)
+ifeq ($(BOXMODEL),vuuno4k)
 VU_PREFIX = vuplus/uno4k
 VU_INITRD = vmlinuz-initrd-7439b0
 VU_FR     = echo "This file forces the update." > $(IMAGE_BUILD_DIR)/$(VU_PREFIX)/force.update
 endif
-ifeq ($(BOXMODEL), vuuno4kse)
+ifeq ($(BOXMODEL),vuuno4kse)
 VU_PREFIX = vuplus/uno4kse
 VU_INITRD = vmlinuz-initrd-7439b0
 VU_FR     = echo This file forces a reboot after the update. > $(IMAGE_BUILD_DIR)/$(VU_PREFIX)/reboot.update
 endif
-ifeq ($(BOXMODEL), vuzero4k)
+ifeq ($(BOXMODEL),vuzero4k)
 VU_PREFIX = vuplus/zero4k
 VU_INITRD = vmlinuz-initrd-7260a0
 VU_FR     = echo "This file forces the update." > $(IMAGE_BUILD_DIR)/$(VU_PREFIX)/force.update
