@@ -16,7 +16,7 @@ $(D)/nettle: bootstrap gmp
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(CONFIGURE); \
-		$(MAKE) all; \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(PKG_REMOVE)
 	$(TOUCH)

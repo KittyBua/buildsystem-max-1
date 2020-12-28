@@ -19,7 +19,7 @@ $(D)/lcd4linux: bootstrap $(SHARE_LCD4LINUX) ncurses libusb-compat libgd libusb 
 	$(PKG_CHDIR); \
 		$(BUILD_ENV) ./bootstrap $(SILENT_OPT); \
 		$(BUILD_ENV) ./configure $(CONFIGURE_OPTS) $(CONFIGURE_TARGET_OPTS) $(SILENT_OPT); \
-		$(MAKE) vcs_version all; \
+		$(MAKE) vcs_version; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	cp -a $(PKG_FILES_DIR)/icons/* $(SHARE_LCD4LINUX)
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/lcd4linux.init $(TARGET_DIR)/etc/init.d/lcd4linux

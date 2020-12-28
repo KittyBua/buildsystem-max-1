@@ -16,7 +16,7 @@ $(D)/libconfig: bootstrap
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(CONFIGURE); \
-		$(MAKE) all; \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)
 	$(PKG_REMOVE)

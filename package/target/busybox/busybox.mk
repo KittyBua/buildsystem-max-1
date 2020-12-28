@@ -67,8 +67,11 @@ $(D)/busybox: bootstrap libtirpc
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/inetd.conf $(TARGET_DIR)/etc/inetd.conf; \
 		$(INSTALL_EXEC) $(PKG_FILES_DIR)/inetd.busybox $(TARGET_DIR)/etc/init.d/inetd.busybox; \
 	fi
+#	$(UPDATE-RC.D) inetd.busybox start 20 2 3 4 5 . stop 20 0 1 6 .
 	@if grep -q "CONFIG_MDEV=y" $(BUILD_DIR)/$(BUSYBOX_DIR)/.config; then \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/mdev.conf $(TARGET_DIR)/etc/mdev.conf; \
+		$(INSTALL_EXEC) $(PKG_FILES_DIR)/mdev $(TARGET_DIR)/etc/init.d/mdev; \
+		$(UPDATE-RC.D) mdev start 04 S .; \
 	fi
 	@if grep -q "CONFIG_SYSLOGD=y" $(BUILD_DIR)/$(BUSYBOX_DIR)/.config; then \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/syslog-startup.conf $(TARGET_DIR)/etc/syslog-startup.conf; \
@@ -85,7 +88,6 @@ $(D)/busybox: bootstrap libtirpc
 		$(INSTALL_EXEC) $(PKG_FILES_DIR)/50default $(TARGET_DIR)/etc/udhcpc.d/50default; \
 		$(INSTALL_EXEC) -D $(PKG_FILES_DIR)/default.script $(TARGET_SHARE_DIR)/udhcpc/default.script; \
 	fi
-#	$(UPDATE-RC.D) inetd.busybox start 20 2 3 4 5 . stop 20 0 1 6 .
 	$(PKG_REMOVE)
 	$(TOUCH)
 

@@ -260,7 +260,7 @@ ifeq ($(TINKER_OPTION),0)
 endif
 
 $(D)/neutrino.do_compile:
-	$(MAKE) -C $(NEUTRINO_OBJ_DIR) all DESTDIR=$(TARGET_DIR)
+	$(MAKE) -C $(NEUTRINO_OBJ_DIR) DESTDIR=$(TARGET_DIR)
 	@touch $@
 
 $(D)/neutrino: neutrino.do_prepare neutrino.config.status neutrino.do_compile

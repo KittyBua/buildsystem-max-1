@@ -102,6 +102,15 @@ INSTALL_CONF    = $(INSTALL) -m 0600
 INSTALL_DATA    = $(INSTALL) -m 0644
 INSTALL_EXEC    = $(INSTALL) -m 0755
 
+#  argument 1 source
+#  argument 2 dest
+define INSTALL_EXIST
+	if [ -d $(dir $(1)) ]; then \
+		$(INSTALL) -d $(2); \
+		$(INSTALL_COPY) $(1) $(2); \
+	fi
+endef
+
 GET-GIT-ARCHIVE = $(HELPERS_DIR)/get-git-archive.sh
 GET-GIT-SOURCE  = $(HELPERS_DIR)/get-git-source.sh
 GET-SVN-SOURCE  = $(HELPERS_DIR)/get-svn-source.sh

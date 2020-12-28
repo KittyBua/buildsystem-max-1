@@ -25,7 +25,7 @@ $(D)/host-opkg: bootstrap host-libarchive
 			--disable-curl \
 			--disable-gpg \
 			; \
-		$(MAKE) all; \
+		$(MAKE); \
 		$(MAKE) install DESTDIR=$(HOST_DIR)
 	$(PKG_REMOVE)
 	$(TOUCH)

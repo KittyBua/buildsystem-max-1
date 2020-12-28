@@ -19,7 +19,7 @@ LIBMAD_CONF_OPTS = \
 	--enable-accuracy \
 	--enable-sso \
 	--disable-debugging \
-	$(if $(filter $(TARGET_ARCH), arm mips),--enable-fpm=$(TARGET_ARCH),--enable-fpm=64bit)
+	$(if $(filter $(TARGET_ARCH),arm mips),--enable-fpm=$(TARGET_ARCH),--enable-fpm=64bit)
 
 $(D)/libmad: bootstrap
 	$(START_BUILD)

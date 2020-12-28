@@ -21,7 +21,7 @@ $(D)/rsync: bootstrap
 	$(PKG_CHDIR); \
 		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
-		$(MAKE) all; \
+		$(MAKE); \
 		$(MAKE) install-all DESTDIR=$(TARGET_DIR)
 	$(PKG_REMOVE)
 	$(TOUCH)

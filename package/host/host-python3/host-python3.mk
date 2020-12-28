@@ -69,7 +69,7 @@ $(D)/host-python3: bootstrap
 			--disable-idle3 \
 			--disable-ossaudiodev \
 			; \
-		$(MAKE) all; \
+		$(MAKE); \
 		$(MAKE) install
 	$(PKG_REMOVE)
 	$(TOUCH)

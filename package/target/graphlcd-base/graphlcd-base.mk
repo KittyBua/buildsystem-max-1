@@ -37,8 +37,8 @@ $(D)/graphlcd-base: bootstrap freetype libiconv libusb
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches,$(PKG_PATCH)); \
-		$(MAKE) $(PKG_CONF_OPTS) -C glcdgraphics all; \
-		$(MAKE) $(PKG_CONF_OPTS) -C glcddrivers all; \
+		$(MAKE) $(PKG_CONF_OPTS) -C glcdgraphics; \
+		$(MAKE) $(PKG_CONF_OPTS) -C glcddrivers; \
 		$(MAKE) $(PKG_CONF_OPTS) -C glcdgraphics install; \
 		$(MAKE) $(PKG_CONF_OPTS) -C glcddrivers install; \
 		$(INSTALL_DATA) -D graphlcd.conf $(TARGET_DIR)/etc/graphlcd.conf

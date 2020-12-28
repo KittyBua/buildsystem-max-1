@@ -20,7 +20,6 @@ endif
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/halt $(TARGET_DIR)/etc/init.d/halt
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/hostname.sh $(TARGET_DIR)/etc/init.d/hostname.sh
 #	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/hotplug.sh $(TARGET_DIR)/etc/init.d/hotplug.sh
-	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/mdev $(TARGET_DIR)/etc/init.d/mdev
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/modload.sh $(TARGET_DIR)/etc/init.d/modload.sh
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/modutils.sh $(TARGET_DIR)/etc/init.d/modutils.sh
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/mountall.sh $(TARGET_DIR)/etc/init.d/mountall.sh
@@ -69,7 +68,6 @@ endif
 	$(UPDATE-RC.D) banner.sh start 02 S .
 	$(UPDATE-RC.D) sysfs.sh start 02 S .
 	$(UPDATE-RC.D) mountall.sh start 03 S .
-	$(UPDATE-RC.D) mdev start 04 S .
 	$(UPDATE-RC.D) modutils.sh start 05 S .
 	$(UPDATE-RC.D) alignment.sh start 06 S .
 	$(UPDATE-RC.D) checkroot.sh start 06 S .
