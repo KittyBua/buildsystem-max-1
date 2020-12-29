@@ -21,7 +21,7 @@ $(D)/astra-sm: bootstrap openssl
 	$(PKG_CHDIR); \
 		$(call apply_patches,$(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
-		sed -i 's:(CFLAGS):(CFLAGS_FOR_BUILD):' tools/Makefile.am; \
+		$(SED) 's:(CFLAGS):(CFLAGS_FOR_BUILD):' tools/Makefile.am; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

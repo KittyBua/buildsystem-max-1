@@ -106,9 +106,9 @@ endef
 # rewrite libtool libraries
 #
 REWRITE_LIBTOOL_RULES = \
-	sed -i \
-	-e "s,^libdir=.*,libdir='$(TARGET_LIB_DIR)'," \
-	-e "s,\(^dependency_libs='\| \|-L\|^dependency_libs='\)/usr/lib,\ $(TARGET_LIB_DIR),g"
+	$(SED) \
+	"s,^libdir=.*,libdir='$(TARGET_LIB_DIR)',; \
+	 s,\(^dependency_libs='\| \|-L\|^dependency_libs='\)/usr/lib,\ $(TARGET_LIB_DIR),g"
 
 REWRITE_LIBTOOL = \
 	$(REWRITE_LIBTOOL_RULES) $(TARGET_LIB_DIR)
@@ -133,11 +133,11 @@ REWRITE_LIBTOOL_LA = $(call rewrite_libtool,$(TARGET_LIB_DIR))
 # rewrite pkg-config files
 #
 REWRITE_CONFIG_RULES = \
-	sed -i \
-	-e "s,^prefix=.*,prefix='$(TARGET_DIR)/usr'," \
-	-e "s,^exec_prefix=.*,exec_prefix='$(TARGET_DIR)/usr'," \
-	-e "s,^libdir=.*,libdir='$(TARGET_LIB_DIR)'," \
-	-e "s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
+	$(SED) \
+	"s,^prefix=.*,prefix='$(TARGET_DIR)/usr',; \
+	 s,^exec_prefix=.*,exec_prefix='$(TARGET_DIR)/usr',; \
+	 s,^libdir=.*,libdir='$(TARGET_LIB_DIR)',; \
+	 s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
 
 REWRITE_CONFIG = \
 	$(REWRITE_CONFIG_RULES)
@@ -149,17 +149,17 @@ REWRITE_CONFIG = \
 # Used by the BusyBox package, the Linux kernel package, and more.
 #
 define KCONFIG_ENABLE_OPT # (option, file)
-	sed -i -e "/\\<$(1)\\>/d" $(2)
+	$(SED) "/\\<$(1)\\>/d" $(2)
 	echo '$(1)=y' >> $(2)
 endef
 
 define KCONFIG_SET_OPT # (option, value, file)
-	sed -i -e "/\\<$(1)\\>/d" $(3)
+	$(SED) "/\\<$(1)\\>/d" $(3)
 	echo '$(1)=$(2)' >> $(3)
 endef
 
 define KCONFIG_DISABLE_OPT # (option, file)
-	sed -i -e "/\\<$(1)\\>/d" $(2)
+	$(SED) "/\\<$(1)\\>/d" $(2)
 	echo '# $(1) is not set' >> $(2)
 endef
 
@@ -372,7 +372,7 @@ REPOSITORIES = \
 
 switch-url:
 	for repo in $(REPOSITORIES); do \
-		sed -i -e 's|url = $(URL_1)|url = $(URL_2)|' $$repo/.git/config; \
+		$(SED) 's|url = $(URL_1)|url = $(URL_2)|' $$repo/.git/config; \
 	done
 
 # -----------------------------------------------------------------------------

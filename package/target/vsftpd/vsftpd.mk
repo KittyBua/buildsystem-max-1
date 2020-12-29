@@ -20,8 +20,8 @@ $(D)/vsftpd: bootstrap openssl
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches,$(PKG_PATCH)); \
-		sed -i -e 's/.*VSF_BUILD_PAM/#undef VSF_BUILD_PAM/' builddefs.h; \
-		sed -i -e 's/.*VSF_BUILD_SSL/#define VSF_BUILD_SSL/' builddefs.h; \
+		$(SED) 's/.*VSF_BUILD_PAM/#undef VSF_BUILD_PAM/' builddefs.h; \
+		$(SED) 's/.*VSF_BUILD_SSL/#define VSF_BUILD_SSL/' builddefs.h; \
 		$(MAKE) clean; \
 		$(MAKE) $(BUILD_ENV) LIBS="-lcrypt -lcrypto -lssl"; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

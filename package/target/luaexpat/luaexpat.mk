@@ -16,9 +16,9 @@ $(D)/luaexpat: bootstrap lua expat
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(call apply_patches,$(PKG_PATCH)); \
-		sed -i 's|^EXPAT_INC=.*|EXPAT_INC= $(TARGET_INCLUDE_DIR)|' makefile; \
-		sed -i 's|^CFLAGS =.*|& -L$(TARGET_LIB_DIR)|' makefile; \
-		sed -i 's|^CC =.*|CC = $(TARGET_CC)|' makefile; \
+		$(SED) 's|^EXPAT_INC=.*|EXPAT_INC= $(TARGET_INCLUDE_DIR)|' makefile; \
+		$(SED) 's|^CFLAGS =.*|& -L$(TARGET_LIB_DIR)|' makefile; \
+		$(SED) 's|^CC =.*|CC = $(TARGET_CC)|' makefile; \
 		$(BUILD_ENV) \
 		$(MAKE) \
 			PREFIX=$(TARGET_DIR)/usr \

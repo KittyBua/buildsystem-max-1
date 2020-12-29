@@ -16,7 +16,7 @@ $(D)/valgrind: bootstrap
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		sed -i -e "s#armv7#arm#g" configure; \
+		$(SED) "s#armv7#arm#g" configure; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

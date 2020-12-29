@@ -55,7 +55,7 @@ $(D)/busybox: bootstrap libtirpc
 	$(PKG_CHDIR); \
 		$(call apply_patches,$(PKG_PATCH)); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/busybox.config .config; \
-		sed -i -e 's#^CONFIG_PREFIX.*#CONFIG_PREFIX="$(TARGET_DIR)"#' .config; \
+		$(SED) 's#^CONFIG_PREFIX.*#CONFIG_PREFIX="$(TARGET_DIR)"#' .config; \
 		$(BUSYBOX_MAKE_ENV) $(MAKE) $(BUSYBOX_MAKE_OPTS) busybox; \
 		$(BUSYBOX_MAKE_ENV) $(MAKE) $(BUSYBOX_MAKE_OPTS) install-noclobber
 	@if grep -q "CONFIG_CROND=y" $(BUILD_DIR)/$(BUSYBOX_DIR)/.config; then \
