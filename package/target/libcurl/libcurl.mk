@@ -6,9 +6,6 @@ LIBCURL_DIR    = curl-$(LIBCURL_VER)
 LIBCURL_SOURCE = curl-$(LIBCURL_VER).tar.bz2
 LIBCURL_SITE   = https://curl.haxx.se/download
 
-LIBCURL_PATCH = \
-	0001-no_docs_tests.patch
-
 LIBCURL_CONF_OPTS = \
 	--enable-silent-rules \
 	--disable-debug \
@@ -38,15 +35,14 @@ $(D)/libcurl: bootstrap zlib openssl ca-bundle
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \
 		$(MAKE); \
-		sed -e "s,^prefix=,prefix=$(TARGET_DIR)," < curl-config > $(HOST_DIR)/bin/curl-config; \
-		chmod 755 $(HOST_DIR)/bin/curl-config; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	rm -f $(TARGET_DIR)/usr/bin/curl-config
+	mv $(TARGET_DIR)/usr/bin/curl-config $(HOST_DIR)/bin/
+	$(REWRITE_CONFIG) $(HOST_DIR)/bin/curl-config
 	$(REWRITE_LIBTOOL_LA)
 	$(PKG_REMOVE)
 	$(TOUCH)

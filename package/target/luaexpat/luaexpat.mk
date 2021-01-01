@@ -6,19 +6,20 @@ LUAEXPAT_DIR    = luaexpat-$(LUAEXPAT_VER)
 LUAEXPAT_SOURCE = luaexpat-$(LUAEXPAT_VER).tar.gz
 LUAEXPAT_SITE   = $(call github,tomasguisasola,luaexpat,v$(LUAEXPAT_VER))
 
-LUAEXPAT_PATCH = \
-	0001-restore-getcurrentbytecount.patch
+define LUAEXPAT_POST_PATCH
+	$(SED) 's|^EXPAT_INC=.*|EXPAT_INC= $(TARGET_INCLUDE_DIR)|' $(PKG_BUILD_DIR)/makefile
+	$(SED) 's|^CFLAGS =.*|& -L$(TARGET_LIB_DIR)|' $(PKG_BUILD_DIR)/makefile
+	$(SED) 's|^CC =.*|CC = $(TARGET_CC)|' $(PKG_BUILD_DIR)/makefile
+endef
+LUAEXPAT_POST_PATCH_HOOKS = LUAEXPAT_POST_PATCH
 
 $(D)/luaexpat: bootstrap lua expat
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
-		$(SED) 's|^EXPAT_INC=.*|EXPAT_INC= $(TARGET_INCLUDE_DIR)|' makefile; \
-		$(SED) 's|^CFLAGS =.*|& -L$(TARGET_LIB_DIR)|' makefile; \
-		$(SED) 's|^CC =.*|CC = $(TARGET_CC)|' makefile; \
 		$(BUILD_ENV) \
 		$(MAKE) \
 			PREFIX=$(TARGET_DIR)/usr \

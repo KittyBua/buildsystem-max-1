@@ -3,13 +3,6 @@ USHARE_DIR    = ushare-uShare_v$(USHARE_VER)
 USHARE_SOURCE = uShare_v$(USHARE_VER).tar.gz
 USHARE_SITE   = https://github.com/GeeXboX/ushare/archive
 
-USHARE_PATCH = \
-	0001-ushare.patch \
-	0002-compile-fixes.patch \
-	0003-ushare-fix-building-with-gcc-5.x.patch \
-	0004-ushare-c-include-config-h-before-checking-for-CONFIG-NLS.patch \
-	0005-ushare-disable-iconv-check.patch
-
 USHARE_CONF_OPTS = \
 	--prefix=/usr \
 	--cross-compile \
@@ -24,8 +17,8 @@ $(D)/ushare: bootstrap libupnp
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		./configure $(PKG_CONF_OPTS); \
 		ln -sf ../config.h src/; \

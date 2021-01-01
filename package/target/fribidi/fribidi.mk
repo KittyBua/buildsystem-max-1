@@ -6,9 +6,6 @@ FRIBIDI_DIR    = fribidi-$(FRIBIDI_VER)
 FRIBIDI_SOURCE = fribidi-$(FRIBIDI_VER).tar.xz
 FRIBIDI_SITE   = https://github.com/fribidi/fribidi/releases/download/v$(FRIBIDI_VER)
 
-FRIBIDI_PATCH = \
-	0001-fribidi.patch
-
 FRIBIDI_CONF_OPTS = \
 	--enable-shared \
 	--enable-static \
@@ -20,8 +17,8 @@ $(D)/fribidi: bootstrap
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

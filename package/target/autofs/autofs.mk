@@ -6,13 +6,6 @@ AUTOFS_DIR    = autofs-$(AUTOFS_VER)
 AUTOFS_SOURCE = autofs-$(AUTOFS_VER).tar.xz
 AUTOFS_SITE   = https://www.kernel.org/pub/linux/daemons/autofs/v5
 
-AUTOFS_PATCH = \
-	0001-autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch \
-	0002-cross.patch \
-	0003-fix_disable_ldap.patch \
-	0004-force-STRIP-to-emtpy.patch \
-	0005-pkgconfig-libnsl.patch
-
 AUTOFS_CONF_OPTS = \
 	--disable-mount-locking \
 	--with-openldap=no \
@@ -31,8 +24,8 @@ $(D)/autofs: bootstrap libtirpc e2fsprogs openssl libxml2
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		export ac_cv_path_KRB5_CONFIG=no; \
 		export ac_cv_linux_procfs=yes; \
 		export ac_cv_path_RANLIB=$(TARGET_RANLIB); \

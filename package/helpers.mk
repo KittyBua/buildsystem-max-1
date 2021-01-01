@@ -3,144 +3,180 @@
 #
 # -----------------------------------------------------------------------------
 
-# BS Revision
-BS_REV=$(shell cd $(BASE_DIR); git log | grep "^commit" | wc -l)
-# Neutrino mp Revision
-NMP_REV=$(shell cd $(SOURCE_DIR)/$(NEUTRINO_DIR); git log | grep "^commit" | wc -l)
-# libstb-hal Revision
-HAL_REV=$(shell cd $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); git log | grep "^commit" | wc -l)
+# Strip quotes and then whitespaces
+qstrip = $(strip $(subst ",,$(1)))
 
-# -----------------------------------------------------------------------------
+# Variables for use in Make constructs
+comma := ,
+empty :=
+space := $(empty) $(empty)
 
-#
-# apply patch sets
-#
-define apply_patches
-	l=$(strip $(2)); test -z $$l && l=1; \
-	for i in $(1); do \
-		if [ -d $$i ]; then \
-			for p in $$i/*; do \
-				echo -e "$(TERM_YELLOW)Applying patch $(PKG_NAME):$(TERM_NORMAL) $${p#$(PKG_PATCHES_DIR)/}"; \
-				if [ $${p:0:1} == "/" ]; then \
-					patch -p$$l -i $$p; \
-				else \
-					patch -p$$l -i $(PKG_PATCHES_DIR)/$$p; \
-				fi; \
-			done; \
-		else \
-			echo -e "$(TERM_YELLOW)Applying patch $(PKG_NAME):$(TERM_NORMAL) $${i#$(PKG_PATCHES_DIR)/}"; \
-			if [ $${i:0:1} == "/" ]; then \
-				patch -p$$l -i $$i; \
-			else \
-				patch -p$$l -i $(PKG_PATCHES_DIR)/$$i; \
-			fi; \
-		fi; \
-	done
+# MESSAGE Macro -- display a message in bold type
+MESSAGE = echo "$(TERM_BOLD)>>> $(PKG_NAME) $(PKG_VER) $(call qstrip,$(1))$(TERM_RESET)"
+TERM_BOLD := $(shell tput smso 2>/dev/null)
+TERM_RESET := $(shell tput rmso 2>/dev/null)
+
+# Reverse the orders of words in a list. Again, inspired by the gmsl
+# 'reverse' macro.
+reverse = $(if $(1),$(call reverse,$(wordlist 2,$(words $(1)),$(1))) $(firstword $(1)))
+
+# Sanitize macro cleans up generic strings so it can be used as a filename
+# and in rules. Particularly useful for VCS version strings, that can contain
+# slashes, colons (OK in filenames but not in rules), and spaces.
+sanitize = $(subst $(space),_,$(subst :,_,$(subst /,_,$(strip $(1)))))
+
+# MESSAGE Macro -- display a message in bold type
+MESSAGE = echo "$(TERM_BOLD)>>> $(PKG_NAME) $(PKG_VER) $(call qstrip,$(1))$(TERM_RESET)"
+TERM_BOLD := $(shell tput smso 2>/dev/null)
+TERM_RESET := $(shell tput rmso 2>/dev/null)
+
+# Utility functions for 'find'
+# findfileclauses(filelist) => -name 'X' -o -name 'Y'
+findfileclauses = $(call notfirstword,$(patsubst %,-o -name '%',$(1)))
+# finddirclauses(base, dirlist) => -path 'base/dirX' -o -path 'base/dirY'
+finddirclauses = $(call notfirstword,$(patsubst %,-o -path '$(1)/%',$(2)))
+
+# Miscellaneous utility functions
+# notfirstword(wordlist): returns all but the first word in wordlist
+notfirstword = $(wordlist 2,$(words $(1)),$(1))
+
+# build a comma-separated list of quoted items, from a space-separated
+# list of unquoted items:   a b c d  -->  "a", "b", "c", "d"
+make-comma-list = $(subst $(space),$(comma)$(space),$(patsubst %,"%",$(strip $(1))))
+
+# build a comma-separated list of single quoted items, from a space-separated
+# list of unquoted items:   a b c d  -->  'a', 'b', 'c', 'd'
+make-sq-comma-list = $(subst $(space),$(comma)$(space),$(patsubst %,'%',$(strip $(1))))
+
+# Needed for the foreach loops to loop over the list of hooks, so that
+# each hook call is properly separated by a newline.
+define sep
+
+
 endef
 
-# apply patch sets automatically
-APPLY_PATCHES = $(call apply_patches,$(PKG_PATCHES_DIR))
-PATCH = patch -p1 -s
+PERCENT = %
+QUOTE = '
+
+define PRINTF
+	printf '$(subst $(sep),\n,\
+		$(subst $(PERCENT),$(PERCENT)$(PERCENT),\
+			$(subst $(QUOTE),$(QUOTE)\$(QUOTE)$(QUOTE),\
+				$(subst \,\\,$(1)))))\n'
+endef
 
 # -----------------------------------------------------------------------------
 
-#
 # download archives into archives directory
-#
 define PKG_DOWNLOAD
-	$(SILENT)if [ $(PKG_VER) == "git" ]; then \
-		$(GET-GIT-SOURCE) $(PKG_SITE)/$(PKG_SOURCE) $(DL_DIR)/$(PKG_SOURCE); \
+	$(Q)if [ $(PKG_VER) == "git" ]; then \
+	  $(call MESSAGE,"Downloading") ; \
+	  $(GET-GIT-SOURCE) $(PKG_SITE)/$(PKG_SOURCE) $(DL_DIR)/$(PKG_SOURCE); \
 	else \
-		if [ ! -f $(DL_DIR)/$(PKG_SOURCE) ]; then \
-			wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P $(DL_DIR) $(PKG_SITE)/$(1); \
-		fi; \
+	  if [ ! -f $(DL_DIR)/$(PKG_SOURCE) ]; then \
+	    $(call MESSAGE,"Downloading") ; \
+	    wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P $(DL_DIR) $(PKG_SITE)/$(1); \
+	  fi; \
 	fi
 endef
 
-#
 # github(user,package,version): returns site of GitHub repository
-#
 github = https://github.com/$(1)/$(2)/archive/$(3)
 
 # -----------------------------------------------------------------------------
 
-#
 # unpack archives into build directory
-#
 define PKG_UNPACK
-	$(SILENT)( \
+	@$(call MESSAGE,"Extracting")
+	$(Q)( \
 	case ${PKG_SOURCE} in \
-		*.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.xz | *.txz) \
-			tar -xf ${DL_DIR}/${PKG_SOURCE} -C ${1}; \
-			;; \
-		*.zip) \
-			unzip -o -q ${DL_DIR}/${PKG_SOURCE} -d ${1}; \
-			;; \
-		*.git) \
-			cp -a -t ${1} $(DL_DIR)/$(PKG_SOURCE); \
-			;; \
-		*) \
-			printf "$(TERM_RED)Cannot extract ${PKG_SOURCE}$(TERM_NORMAL) \n"; \
-			false ;; \
+	  *.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.xz | *.txz) \
+	    tar -xf ${DL_DIR}/${PKG_SOURCE} -C ${1}; \
+	    ;; \
+	  *.zip) \
+	    unzip -o -q ${DL_DIR}/${PKG_SOURCE} -d ${1}; \
+	    ;; \
+	  *.git) \
+	    cp -a -t ${1} $(DL_DIR)/$(PKG_SOURCE); \
+	    if test -z $($(PKG)_CHECKOUT); then \
+	      $(call MESSAGE,"use original head"); \
+	    else \
+	      $(call MESSAGE,"git checkout $($(PKG)_CHECKOUT)"); \
+	      $(PKG_CHDIR); git checkout -q $($(PKG)_CHECKOUT); \
+	    fi; \
+	    ;; \
+	  *) \
+	    printf "$(TERM_RED)Cannot extract ${PKG_SOURCE}$(TERM_NORMAL) \n"; \
+	    false ;; \
 	esac \
 	)
 endef
 
 # -----------------------------------------------------------------------------
 
-define START_BUILD
-	$(SILENT)echo ""; \
-	echo -e "$(TERM_GREEN)Start building$(TERM_NORMAL) \nName    : $(PKG_NAME) \nVersion : $(PKG_VER) \nSource  : $(PKG_SOURCE)"; \
-	echo ""
-endef
+APPLY_PATCHES = PATH=$(HOST_DIR)/bin:$$PATH helpers/apply-patches.sh $(if $(QUIET),-s)
 
-define TOUCH
-	$(SILENT)touch $@; echo -e "$(TERM_GREEN) $(PKG_NAME) building completed$(TERM_NORMAL)"; \
-	echo ""; \
-	$(call draw_line)
+# apply patch sets
+define PKG_APPLY_PATCHES
+	$(foreach hook,$($(PKG)_PRE_PATCH_HOOKS),$(call $(hook))$(sep))
+	$(Q)( \
+	for D in $(PKG_PATCHES_DIR); do \
+	  if test -d $${D}; then \
+	    $(call MESSAGE,"Patching"); \
+	    if test -d $${D}/$($(PKG)_VER); then \
+	      $(APPLY_PATCHES) $(PKG_BUILD_DIR) $${D}/$($(PKG)_VER) \*.patch \*.patch.$(TARGET_ARCH) || exit 1; \
+	    else \
+	      $(APPLY_PATCHES) $(PKG_BUILD_DIR) $${D} \*.patch \*.patch.$(TARGET_ARCH) || exit 1; \
+	    fi; \
+	  fi; \
+	done; \
+	)
+	$(foreach hook,$($(PKG)_POST_PATCH_HOOKS),$(call $(hook))$(sep))
 endef
 
 # -----------------------------------------------------------------------------
 
-#
 # rewrite libtool libraries
-#
 REWRITE_LIBTOOL_RULES = \
-	$(SED) \
-	"s,^libdir=.*,libdir='$(TARGET_LIB_DIR)',; \
-	 s,\(^dependency_libs='\| \|-L\|^dependency_libs='\)/usr/lib,\ $(TARGET_LIB_DIR),g"
+	"s,^libdir=.*,libdir='$(1)',; \
+	 s,\(^dependency_libs='\| \|-L\|^dependency_libs='\)/usr/lib,\ $(1),g"
 
-REWRITE_LIBTOOL = \
-	$(REWRITE_LIBTOOL_RULES) $(TARGET_LIB_DIR)
+REWRITE_LIBTOOL_TAG = rewritten=1
 
-define rewrite_libtool
-	$(SILENT)cd $(TARGET_LIB_DIR); \
-	for la in *.la; do \
-		if ! grep -q "rewritten=1" $${la}; then \
-			echo -e "$(TERM_YELLOW)Rewriting $${la}$(TERM_NORMAL)"; \
-			$(REWRITE_LIBTOOL)/$${la}; \
-			echo -e "\n# Adapted to buildsystem\nrewritten=1" >> $${la}; \
-		fi; \
+define REWRITE_LIBTOOL
+	for la in $$(find $(1) -name "*.la" -type f); do \
+	  if ! grep -q "$(REWRITE_LIBTOOL_TAG)" $${la}; then \
+	    echo -e "$(TERM_YELLOW)Rewriting $${la#$(1)/}$(TERM_NORMAL)"; \
+	    $(SED) $(REWRITE_LIBTOOL_RULES) $${la}; \
+	    echo -e "\n# Adapted to buildsystem\n$(REWRITE_LIBTOOL_TAG)" >> $${la}; \
+	  fi; \
 	done
 endef
 
 # rewrite libtool libraries automatically
-REWRITE_LIBTOOL_LA = $(call rewrite_libtool,$(TARGET_LIB_DIR))
+REWRITE_LIBTOOL_LA = $(Q)$(call REWRITE_LIBTOOL,$(TARGET_LIB_DIR))
 
 # -----------------------------------------------------------------------------
 
-#
 # rewrite pkg-config files
-#
 REWRITE_CONFIG_RULES = \
-	$(SED) \
 	"s,^prefix=.*,prefix='$(TARGET_DIR)/usr',; \
 	 s,^exec_prefix=.*,exec_prefix='$(TARGET_DIR)/usr',; \
 	 s,^libdir=.*,libdir='$(TARGET_LIB_DIR)',; \
 	 s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
 
-REWRITE_CONFIG = \
-	$(REWRITE_CONFIG_RULES)
+REWRITE_CONFIG = $(Q)$(SED) $(REWRITE_CONFIG_RULES)
+
+# -----------------------------------------------------------------------------
+
+define START_BUILD
+	@$(call MESSAGE,"Building")
+endef
+
+define TOUCH
+	@$(call MESSAGE,"Building completed")
+	$(Q)touch $@
+endef
 
 # -----------------------------------------------------------------------------
 
@@ -148,6 +184,7 @@ REWRITE_CONFIG = \
 # Manipulation of .config files based on the Kconfig infrastructure.
 # Used by the BusyBox package, the Linux kernel package, and more.
 #
+
 define KCONFIG_ENABLE_OPT # (option, file)
 	$(SED) "/\\<$(1)\\>/d" $(2)
 	echo '$(1)=y' >> $(2)
@@ -185,6 +222,15 @@ $(eval $(call caseconvert-helper,LOWERCASE,$(join $(addsuffix :,$([UPPER])),$([L
 
 # -----------------------------------------------------------------------------
 
+# BS Revision
+BS_REV=$(shell cd $(BASE_DIR); git log | grep "^commit" | wc -l)
+# Neutrino mp Revision
+NMP_REV=$(shell cd $(SOURCE_DIR)/$(NEUTRINO_DIR); git log | grep "^commit" | wc -l)
+# libstb-hal Revision
+HAL_REV=$(shell cd $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); git log | grep "^commit" | wc -l)
+
+# -----------------------------------------------------------------------------
+
 #
 # $(1) = title
 # $(2) = color
@@ -199,6 +245,7 @@ $(eval $(call caseconvert-helper,LOWERCASE,$(join $(addsuffix :,$([UPPER])),$([L
 # $(3) = left|center|right
 #
 define draw_line
+	@\
 	printf '%.0s-' {1..$(shell tput cols)}; \
 	if test "$(1)"; then \
 		cols=$(shell tput cols); \
@@ -267,9 +314,7 @@ archives-info: directories archives-list
 
 # -----------------------------------------------------------------------------
 
-#
 # FIXME - how to resolve variables while grepping makefiles?
-#
 patches-info:
 	@echo "[ ** ] Unused patches"
 	@for patch in package/*/*/patches/*; do \
@@ -293,9 +338,7 @@ patches-info:
 
 # -----------------------------------------------------------------------------
 
-#
 # python helpers
-#
 HOST_PYTHON_BUILD = \
 	CC="$(HOSTCC)" \
 	CFLAGS="$(CFLAGS)" \
@@ -332,17 +375,13 @@ PYTHON_INSTALL = \
 
 # -----------------------------------------------------------------------------
 
-#
 # target for testing only. not useful otherwise
-#
 everything:
 	@make $(shell sed -n 's/^\$$.D.\/\(.*\):.*/\1/p' package/target/*/*.mk)
 
 # -----------------------------------------------------------------------------
 
-#
 # print all present targets...
-#
 print-targets:
 	@sed -n 's/^\$$.D.\/\(.*\):.*/\1/p; s/^\([a-z].*\):\( \|$$\).*/\1/p;' \
 		`ls -1 package/*/*/*.mk` | \
@@ -350,8 +389,6 @@ print-targets:
 
 # -----------------------------------------------------------------------------
 
-#
-#
 #
 ifeq ($(GITSSH),1)
 MAX-GIT-GITHUB = git@github.com:MaxWiesel
@@ -378,8 +415,6 @@ switch-url:
 # -----------------------------------------------------------------------------
 
 #
-#
-#
 rewrite-test:
 	@printf "$(TERM_YELLOW)---> create rewrite-libdir.txt ... "
 	$(shell grep ^libdir $(TARGET_DIR)/usr/lib/*.la > $(BUILD_DIR)/rewrite-libdir.txt)
@@ -393,8 +428,6 @@ rewrite-test:
 
 # -----------------------------------------------------------------------------
 
-#
-#
 #
 neutrino-patch:
 	@printf "$(TERM_YELLOW)---> create $(NEUTRINO) patch ... $(TERM_NORMAL)"

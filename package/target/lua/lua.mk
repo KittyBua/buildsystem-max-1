@@ -7,20 +7,13 @@ LUA_DIR    = lua-$(LUA_VER)
 LUA_SOURCE = lua-$(LUA_VER).tar.gz
 LUA_SITE   = https://www.lua.org/ftp
 
-LUA_PATCH = \
-	0001-root-path.patch \
-	0002-remove-readline.patch \
-	0003-shared-libs-for-lua.patch \
-	0004-lua-pc.patch \
-	0005-crashfix.patch
-
 $(D)/lua: bootstrap host-lua ncurses
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(MAKE) linux \
 			BUILDMODE=dynamic \
 			PKG_VERSION=$(LUA_VER) \

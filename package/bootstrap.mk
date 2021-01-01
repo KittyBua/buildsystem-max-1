@@ -129,5 +129,5 @@ MACHINE_DEPS += wlan-qcom
 endif
 
 $(D)/machine-deps: $(MACHINE_DEPS)
-	make depmod
+	$(LINUX_RUN_DEPMOD)
 	@touch $@

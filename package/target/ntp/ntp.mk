@@ -6,9 +6,6 @@ NTP_DIR    = ntp-$(NTP_VER)
 NTP_SOURCE = ntp-$(NTP_VER).tar.gz
 NTP_SITE   = https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-$(basename $(NTP_VER))
 
-NTP_PATCH = \
-	0001-mkver_in.patch
-
 NTP_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
 	--disable-debugging \
@@ -22,8 +19,8 @@ $(D)/ntp: bootstrap
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

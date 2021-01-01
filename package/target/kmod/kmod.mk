@@ -6,11 +6,6 @@ KMOD_DIR    = kmod-$(KMOD_VER)
 KMOD_SOURCE = kmod-$(KMOD_VER).tar.xz
 KMOD_SITE   = https://mirrors.edge.kernel.org/pub/linux/utils/kernel/kmod
 
-KMOD_PATCH = \
-	0001-fix-O_CLOEXEC.patch \
-	0002-avoid_parallel_tests.patch \
-	0003-libkmod_pc_in.patch
-
 KMOD_CONF_OPTS = \
 	--bindir=$(base_bindir) \
 	--disable-static \
@@ -23,8 +18,8 @@ $(D)/kmod: bootstrap zlib
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \
 		$(MAKE); \

@@ -6,10 +6,6 @@ NTFS_3G_DIR    = ntfs-3g_ntfsprogs-$(NTFS_3G_VER)
 NTFS_3G_SOURCE = ntfs-3g_ntfsprogs-$(NTFS_3G_VER).tgz
 NTFS_3G_SITE   = https://tuxera.com/opensource
 
-NTFS_3G_PATCH = \
-	0001-fuseint-fix-path-mounted-on-musl.patch \
-	0002-ntfs-3g-sysmacros.patch
-
 NTFS_3G_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
 	--disable-ntfsprogs \
@@ -22,8 +18,8 @@ $(D)/ntfs-3g: bootstrap libfuse
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

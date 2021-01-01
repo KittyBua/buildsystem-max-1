@@ -6,9 +6,6 @@ RPCBIND_DIR    = rpcbind-$(RPCBIND_VER)
 RPCBIND_SOURCE = rpcbind-$(RPCBIND_VER).tar.bz2
 RPCBIND_SITE   = https://sourceforge.net/projects/rpcbind/files/rpcbind/$(RPCBIND_VER)
 
-RPCBIND_PATCH = \
-	0001-Remove-yellow-pages-support.patch
-
 RPCBIND_CONF_OPTS = \
 	CFLAGS="$(TARGET_CFLAGS) `$(PKG_CONFIG) --cflags libtirpc`" \
 	--bindir=$(sbindir) \
@@ -21,8 +18,8 @@ $(D)/rpcbind: bootstrap libtirpc
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \
 		$(MAKE); \

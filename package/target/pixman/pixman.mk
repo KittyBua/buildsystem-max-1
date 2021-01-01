@@ -6,11 +6,6 @@ PIXMAN_DIR    = pixman-$(PIXMAN_VER)
 PIXMAN_SOURCE = pixman-$(PIXMAN_VER).tar.gz
 PIXMAN_SITE   = https://www.cairographics.org/releases
 
-PIXMAN_PATCH = \
-	0001-ARM-qemu-related-workarounds-in-cpu-features-detecti.patch \
-	0002-test-utils-Check-for-FE_INVALID-definition-before-us.patch \
-	0003-asm_include.patch
-
 PIXMAN_CONF_OPTS = \
 	--disable-gtk \
 	--disable-arm-simd \
@@ -22,8 +17,8 @@ $(D)/pixman: bootstrap zlib libpng
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

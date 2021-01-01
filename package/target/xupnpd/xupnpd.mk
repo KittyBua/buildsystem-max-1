@@ -7,17 +7,13 @@ XUPNPD_SOURCE   = xupnpd.git
 XUPNPD_SITE     = https://github.com/clark15b
 XUPNPD_CHECKOUT = 25d6d44
 
-XUPNPD_PATCH = \
-	0001-xupnpd.patch
-
 $(D)/xupnpd: bootstrap lua openssl neutrino-plugins
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		git checkout -q $(XUPNPD_CHECKOUT); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		$(MAKE) -C src embedded TARGET=$(TARGET) PKG_CONFIG=$(PKG_CONFIG) LUAFLAGS="$(TARGET_LDFLAGS) -I$(TARGET_INCLUDE_DIR)"; \
 		$(MAKE) -C src install DESTDIR=$(TARGET_DIR)

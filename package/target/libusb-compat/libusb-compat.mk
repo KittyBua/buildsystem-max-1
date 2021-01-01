@@ -6,10 +6,6 @@ LIBUSB_COMPAT_DIR    = libusb-compat-$(LIBUSB_COMPAT_VER)
 LIBUSB_COMPAT_SOURCE = libusb-compat-$(LIBUSB_COMPAT_VER).tar.bz2
 LIBUSB_COMPAT_SITE   = https://github.com/libusb/libusb-compat-0.1/releases/download/v$(LIBUSB_COMPAT_VER)
 
-LIBUSB_COMPAT_PATCH = \
-	0001-fix-a-build-issue-on-linux.patch \
-	0002-fix-deprecated-libusb_set_debug.patch
-
 LIBUSB_CONF_OPTS = \
 	--disable-log \
 	--disable-debug-log \
@@ -20,8 +16,8 @@ $(D)/libusb-compat: bootstrap libusb
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

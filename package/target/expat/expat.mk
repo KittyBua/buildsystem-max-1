@@ -6,9 +6,6 @@ EXPAT_DIR    = expat-$(EXPAT_VER)
 EXPAT_SOURCE = expat-$(EXPAT_VER).tar.xz
 EXPAT_SITE   = https://github.com/libexpat/libexpat/releases/download/R_$(subst .,_,$(EXPAT_VER))
 
-EXPAT_PATCH = \
-	0001-libtool-tag.patch
-
 EXPAT_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
 	--without-xmlwf \
@@ -19,8 +16,8 @@ $(D)/expat: bootstrap
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \
 		$(MAKE); \

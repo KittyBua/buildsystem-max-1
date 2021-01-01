@@ -6,16 +6,21 @@ LINKS_DIR    = links-$(LINKS_VER)
 LINKS_SOURCE = links-$(LINKS_VER).tar.bz2
 LINKS_SITE   = http://links.twibright.com/download
 
-LINKS_PATCH = \
-	0001-links.patch \
-	0002-links-ac-prog-cxx.patch \
-	0003-links-accept_https_play.patch
-
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd51 hd60 hd61 bre2ze4k))
-LINKS_PATCH += 0004-links-input-event1.patch
+LINKS_CUSTOM_PATCH += 0004-links-input-event1.patch
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),h7))
-LINKS_PATCH += 0005-links-input-event2.patch
+LINKS_CUSTOM_PATCH += 0005-links-input-event2.patch
 endif
+
+define LINKS_CUSTOM_PATCHES
+	$(APPLY_PATCHES) $(PKG_BUILD_DIR) $(PKG_PATCHES_DIR)/custom \$(LINKS_CUSTOM_PATCH)
+endef
+LINKS_POST_PATCH_HOOKS += LINKS_CUSTOM_PATCHES
+
+define LINKS_POST_PATCH
+	$(SED) 's|^T_SAVE_HTML_OPTIONS,.*|T_SAVE_HTML_OPTIONS, "HTML-Optionen speichern",|' $(PKG_BUILD_DIR)/intl/german.lng
+endef
+LINKS_POST_PATCH_HOOKS += LINKS_POST_PATCH
 
 LINKS_CONF_OPTS = \
 	--with-libjpeg \
@@ -35,13 +40,12 @@ $(D)/links: bootstrap freetype libpng libjpeg-turbo openssl
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR)/intl; \
-		$(SED) 's|^T_SAVE_HTML_OPTIONS,.*|T_SAVE_HTML_OPTIONS, "HTML-Optionen speichern",|' german.lng; \
 		echo "english" > index.txt; \
 		echo "german" >> index.txt; \
 		./gen-intl
 	$(CHDIR)/$(PKG_DIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		autoreconf -vfi $(SILENT_OPT); \
 		$(CONFIGURE); \
 		$(MAKE); \

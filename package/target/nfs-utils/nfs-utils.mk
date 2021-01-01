@@ -6,10 +6,6 @@ NFS_UTILS_DIR    = nfs-utils-$(NFS_UTILS_VER)
 NFS_UTILS_SOURCE = nfs-utils-$(NFS_UTILS_VER).tar.bz2
 NFS_UTILS_SITE   = https://sourceforge.net/projects/nfs/files/nfs-utils/$(NFS_UTILS_VER)
 
-NFS_UTILS_PATCH = \
-	0001-disabled-ip6-support.patch \
-	0002-Makefile.am-fix-undefined-function-for-libnsm.a.patch
-
 NFS_UTILS_CONF_OPTS = \
 	--disable-gss \
 	--disable-nfsdcltrack \
@@ -30,8 +26,8 @@ $(D)/nfs-utils: bootstrap rpcbind e2fsprogs
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		export knfsd_cv_bsd_signals=no; \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \

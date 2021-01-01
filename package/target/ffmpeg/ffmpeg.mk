@@ -8,20 +8,6 @@ FFMPEG_DIR    = ffmpeg-$(FFMPEG_VER)
 FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VER).tar.xz
 FFMPEG_SITE   = http://www.ffmpeg.org/releases
 
-FFMPEG_PATCH = \
-	4_02_fix_mpegts.patch \
-	4_03_allow_to_choose_rtmp_impl_at_runtime.patch \
-	4_04_hls_replace_key_uri.patch \
-	4_06_optimize_aac.patch \
-	4_07_increase_buffer_size.patch \
-	4_08_recheck_discard_flags.patch \
-	4_09_ffmpeg_fix_edit_list_parsing.patch \
-	4_10_rtsp_patch \
-	4_11_dxva2_patch \
-	4_A02-corrupt-h264-frames.patch \
-	4_A11-FFmpeg-devel-amfenc-Add-support-for-pict_type-field.patch \
-	4_mips64_cpu_detection.patch
-
 FFMPEG_CONF_OPTS = \
 	--disable-ffplay \
 	--disable-ffprobe \
@@ -327,8 +313,8 @@ $(D)/ffmpeg: bootstrap openssl zlib bzip2 freetype rtmpdump libass libxml2 alsa-
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		./configure $(SILENT_OPT) \
 			--prefix=$(prefix) \
 			--datadir=$(REMOVE_datarootdir) \

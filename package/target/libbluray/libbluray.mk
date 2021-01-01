@@ -6,9 +6,6 @@ LIBBLURAY_DIR    = libbluray-$(LIBBLURAY_VER)
 LIBBLURAY_SOURCE = libbluray-$(LIBBLURAY_VER).tar.bz2
 LIBBLURAY_SITE   = ftp.videolan.org/pub/videolan/libbluray/$(LIBBLURAY_VER)
 
-LIBBLURAY_PATCH = \
-	0001-libbluray.patch
-
 LIBBLURAY_CONF_OPTS = \
 	--enable-shared \
 	--disable-static \
@@ -28,8 +25,8 @@ $(D)/libbluray: bootstrap
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

@@ -6,17 +6,6 @@ E2FSPROGS_DIR    = e2fsprogs-$(E2FSPROGS_VER)
 E2FSPROGS_SOURCE = e2fsprogs-$(E2FSPROGS_VER).tar.gz
 E2FSPROGS_SITE   = https://sourceforge.net/projects/e2fsprogs/files/e2fsprogs/v$(E2FSPROGS_VER)
 
-E2FSPROGS_PATCH = \
-	0001-e2fsprogs.patch \
-	0002-exit_0_on_corrected_errors.patch \
-	0003-dont-build-e4defrag.patch \
-	0004-overridable-pc-exec-prefix.patch \
-	0005-Revert-mke2fs-enable-the-metadata_csum-and-64bit-fea.patch \
-	0006-mkdir_p.patch \
-	0007-no-crond.patch \
-	0008-fix-up-check-for-hardlinks-always-false-if-inode-0xF.patch \
-	0009-e2fsprogs-fix-missing-check-for-permission-denied.patch
-
 E2FSPROGS_CONF_OPTS = \
 	LIBS="-luuid -lblkid" \
 	ac_cv_path_LDCONFIG=true \
@@ -52,8 +41,8 @@ $(D)/e2fsprogs: bootstrap util-linux
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		PATH=$(BUILD_DIR)/e2fsprogs-$(E2FSPROGS_VER):$(PATH) \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \

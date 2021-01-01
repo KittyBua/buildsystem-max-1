@@ -6,9 +6,6 @@ OPKG_DIR    = opkg-$(OPKG_VER)
 OPKG_SOURCE = opkg-$(OPKG_VER).tar.gz
 OPKG_SITE   = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
 
-OPKG_PATCH = \
-	0001-opkg.patch
-
 OPKG_CONF_OPTS = \
 	--disable-curl \
 	--disable-gpg
@@ -18,8 +15,8 @@ $(D)/opkg: bootstrap host-opkg libarchive
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		LIBARCHIVE_LIBS="-L$(TARGET_DIR)/usr/lib -larchive" \
 		LIBARCHIVE_CFLAGS="-I$(TARGET_DIR)/usr/include" \
 		$(CONFIGURE); \

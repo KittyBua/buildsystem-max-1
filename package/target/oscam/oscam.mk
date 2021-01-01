@@ -15,8 +15,6 @@ OSCAM_SOURCE = oscam-smod.git
 OSCAM_SITE   = https://github.com/Schimmelreiter
 endif
 
-OSCAM_PATCH =
-
 OSCAM_CONF_OPTS = \
 	--disable all \
 	--enable WEBIF \
@@ -63,8 +61,8 @@ $(D)/oscam.do_prepare:
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(SHELL) ./config.sh $(PKG_CONF_OPTS)
 	@touch $@
 

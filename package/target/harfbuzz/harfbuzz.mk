@@ -6,9 +6,6 @@ HARFBUZZ_DIR    = harfbuzz-$(HARFBUZZ_VER)
 HARFBUZZ_SOURCE = harfbuzz-$(HARFBUZZ_VER).tar.bz2
 HARFBUZZ_SITE   = https://www.freedesktop.org/software/harfbuzz/release
 
-HARFBUZZ_PATCH = \
-	0001-disable-docs.patch
-
 HARFBUZZ_CONF_OPTS = \
 	--with-cairo \
 	--with-freetype \
@@ -22,8 +19,8 @@ $(D)/harfbuzz: bootstrap glib2 cairo freetype
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \
 		$(MAKE); \

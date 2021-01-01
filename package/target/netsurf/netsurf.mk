@@ -6,18 +6,6 @@ NETSURF_DIR    = netsurf-all-$(NETSURF_VER)
 NETSURF_SOURCE = netsurf-all-$(NETSURF_VER).tar.gz
 NETSURF_SITE   = http://download.netsurf-browser.org/netsurf/releases/source-full
 
-NETSURF_PATCH = \
-	0001-netsurf-32bpp-xbgr8888.patch \
-	0002-netsurf-event.patch \
-	0003-netsurf-framebuffer.patch \
-	0004-netsurf-gui.patch \
-	0005-netsurf-linux.patch \
-	0006-netsurf-osk.patch \
-	0007-netsurf-text.patch \
-	0008-avoid-system-perl-dependencies.patch \
-	0009-fix-compilation-without-curl.patch \
-	0010-framebuffer-Fix-internal-font-generated-source-for-GCC-10.patch
-
 NETSURF_CONF_OPTS = \
 	PREFIX=/usr \
 	TMP_PREFIX=$(BUILD_DIR)/netsurf-all-$(NETSURF_VER)/tmpusr \
@@ -36,8 +24,8 @@ $(D)/netsurf: bootstrap libpng libjpeg-turbo openssl libiconv freetype expat lib
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		CFLAGS="$(TARGET_CFLAGS) -I$(BUILD_DIR)/netsurf-all-$(NETSURF_VER)/tmpusr/include" \
 		LDFLAGS="$(TARGET_LDFLAGS) -L$(BUILD_DIR)/netsurf-all-$(NETSURF_VER)/tmpusr/lib" \

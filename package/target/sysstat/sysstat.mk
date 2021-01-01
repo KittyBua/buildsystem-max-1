@@ -6,9 +6,6 @@ SYSSTAT_DIR    = sysstat-$(SYSSTAT_VER)
 SYSSTAT_SOURCE = sysstat-$(SYSSTAT_VER).tar.xz
 SYSSTAT_SITE   = http://pagesperso-orange.fr/sebastien.godard
 
-SYSSTAT_PATCH = \
-	0001-ldflags.patch
-
 SYSSTAT_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
 	--disable-documentation \
@@ -24,8 +21,8 @@ $(D)/sysstat: bootstrap
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

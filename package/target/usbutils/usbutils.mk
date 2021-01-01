@@ -6,12 +6,6 @@ USBUTILS_DIR    = usbutils-$(USBUTILS_VER)
 USBUTILS_SOURCE = usbutils-$(USBUTILS_VER).tar.xz
 USBUTILS_SITE   = https://www.kernel.org/pub/linux/utils/usb/usbutils
 
-USBUTILS_PATCH = \
-	0001-avoid-dependency-on-bash.patch \
-	0002-fix-null-pointer-crash.patch \
-	0003-fix-build.patch \
-	0004-iconv.patch
-
 USBUTILS_CONF_OPTS = \
 	--datadir=/usr/share/hwdata
 
@@ -20,8 +14,8 @@ $(D)/usbutils: libusb
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \
 		$(MAKE); \

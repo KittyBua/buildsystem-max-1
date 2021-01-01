@@ -6,12 +6,6 @@ PYTHON_DIR    = Python-$(PYTHON_VER)
 PYTHON_SOURCE = Python-$(PYTHON_VER).tar.xz
 PYTHON_SITE   = https://www.python.org/ftp/python/$(PYTHON_VER)
 
-PYTHON_PATCH = \
-	0001-python.patch \
-	0002-python-xcompile.patch \
-	0003-python-revert_use_of_sysconfigdata.patch \
-	0004-python-pgettext.patch
-
 PYTHON_BASE_DIR    = usr/lib/python$(basename $(PYTHON_VER))
 PYTHON_INCLUDE_DIR = usr/include/python$(basename $(PYTHON_VER))
 
@@ -20,8 +14,8 @@ $(D)/python: bootstrap host-python ncurses zlib openssl libffi expat bzip2
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		CONFIG_SITE= \
 		$(BUILD_ENV) \
 		autoreconf -vfi Modules/_ctypes/libffi $(SILENT_OPT); \

@@ -6,14 +6,6 @@ LIBMAD_DIR    = libmad-$(LIBMAD_VER)
 LIBMAD_SOURCE = libmad-$(LIBMAD_VER).tar.gz
 LIBMAD_SITE   = https://sourceforge.net/projects/mad/files/libmad/$(LIBMAD_VER)
 
-LIBMAD_PATCH = \
-	0001-libmad-pc.patch \
-	0002-libmad-frame_length.patch \
-	0003-libmad-mips-h-constraint-removal.patch \
-	0004-libmad-remove-deprecated-cflags.patch \
-	0005-libmad-thumb2-fixed-arm.patch \
-	0006-libmad-thumb2-imdct-arm.patch
-
 LIBMAD_CONF_OPTS = \
 	--enable-shared=yes \
 	--enable-accuracy \
@@ -26,8 +18,8 @@ $(D)/libmad: bootstrap
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \
 		$(MAKE); \

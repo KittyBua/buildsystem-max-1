@@ -27,7 +27,6 @@ $(D)/dropbearmulti: bootstrap
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		git checkout -q $(DROPBEARMULTI_CHECKOUT); \
 		$(BUILD_ENV) \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \

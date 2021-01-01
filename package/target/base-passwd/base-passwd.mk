@@ -6,21 +6,13 @@ BASE_PASSWD_DIR    = base-passwd-$(BASE_PASSWD_VER)
 BASE_PASSWD_SOURCE = base-passwd_$(BASE_PASSWD_VER).tar.gz
 BASE_PASSWD_SITE   = https://launchpad.net/debian/+archive/primary/+files
 
-BASE_PASSWD_PATCH = \
-	0001-add_shutdown.patch \
-	0002-nobash.patch \
-	0003-noshadow.patch \
-	0004-input.patch \
-	0005-disable-docs.patch \
-	0006-add_static.patch
-
 $(D)/base-passwd: bootstrap
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR); \

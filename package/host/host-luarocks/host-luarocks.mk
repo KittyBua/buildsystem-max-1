@@ -8,9 +8,6 @@ HOST_LUAROCKS_SITE   = https://luarocks.github.io/luarocks/releases
 HOST_LUAROCKS_CONFIG = $(HOST_DIR)/etc/luarocks/config-$(LUA_ABIVER).lua
 HOST_LUAROCKS_BINARY = $(HOST_DIR)/bin/luarocks
 
-HOST_LUAROCKS_PATCH = \
-	0001-allow-libluajit-detection.patch
-
 HOST_LUAROCKS_BUILD_ENV = \
 	LUA_PATH="$(HOST_DIR)/share/lua/$(HOST_LUA_ABIVER)/?.lua" \
 	TARGET_CC="$(TARGET_CC)" \
@@ -24,8 +21,8 @@ $(D)/host-luarocks: bootstrap host-lua
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		./configure $(SILENT_OPT) \
 			--prefix=$(HOST_DIR) \
 			--sysconfdir=$(HOST_DIR)/etc \

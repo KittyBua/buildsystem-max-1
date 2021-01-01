@@ -6,20 +6,13 @@ SYSVINIT_DIR    = sysvinit-$(SYSVINIT_VER)
 SYSVINIT_SOURCE = sysvinit-$(SYSVINIT_VER).tar.xz
 SYSVINIT_SITE   = http://download.savannah.nongnu.org/releases/sysvinit
 
-SYSVINIT_PATCH = \
-	0001-install.patch\
-	0001-crypt-lib.patch \
-	0002-change-INIT_FIFO.patch \
-	0003-pidof-add-m-option.patch \
-	0004-realpath.patch
-
 $(D)/sysvinit: bootstrap
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		$(MAKE) SULOGINLIBS=-lcrypt; \
 		$(MAKE) install ROOT=$(TARGET_DIR) mandir=$(REMOVE_mandir)

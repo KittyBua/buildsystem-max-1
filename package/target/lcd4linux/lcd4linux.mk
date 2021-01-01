@@ -16,6 +16,7 @@ $(D)/lcd4linux: bootstrap $(SHARE_LCD4LINUX) ncurses libusb-compat libgd libusb 
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(BUILD_ENV) ./bootstrap $(SILENT_OPT); \
 		$(BUILD_ENV) ./configure $(CONFIGURE_OPTS) $(CONFIGURE_TARGET_OPTS) $(SILENT_OPT); \

@@ -5,12 +5,75 @@
 
 MAINTAINER := $(shell whoami)
 UID := $(shell id -u)
-
 ifeq ($(UID),0)
 warn:
 	@echo "You are running as root. Do not do this, it is dangerous."
 	@echo "Aborting the build. Log in as a regular user and retry."
 else
+
+# Delete default rules. We don't use them. This saves a bit of time.
+.SUFFIXES:
+
+# we want bash as shell
+SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
+	 else if [ -x /bin/bash ]; then echo /bin/bash; \
+	 else echo sh; fi; fi)
+
+# Disable top-level parallel build if per-package directories is not
+# used. Indeed, per-package directories is necessary to guarantee
+# determinism and reproducibility with top-level parallel build.
+.NOTPARALLEL:
+
+# To put more focus on warnings, be less verbose as default
+# Use 'make V=1' to see the full commands
+ifeq ("$(origin V)", "command line")
+  KBUILD_VERBOSE = $(V)
+endif
+ifndef KBUILD_VERBOSE
+  KBUILD_VERBOSE = 0
+endif
+
+ifeq ($(KBUILD_VERBOSE),1)
+  Q =
+ifndef VERBOSE
+  VERBOSE = 1
+endif
+export VERBOSE
+else
+  Q = @
+endif
+
+ifeq ("$(origin S)", "command line")
+  KBUILD_VERBOSE = $(S)
+endif
+
+ifeq ($(KBUILD_VERBOSE),0)
+SILENT              = @
+SILENT_CONFIGURE    = >/dev/null 2>&1
+SILENT_OPT          = >/dev/null 2>&1
+SILENT_Q            = -q
+$(VERBOSE).SILENT:
+endif
+ifeq ($(KBUILD_VERBOSE),1)
+SILENT              = @
+SILENT_CONFIGURE    =
+SILENT_OPT          =
+SILENT_Q            = -q
+endif
+ifeq ($(KBUILD_VERBOSE),2)
+SILENT              = @
+SILENT_CONFIGURE    = -q
+SILENT_OPT          =
+SILENT_Q            = -q
+endif
+
+# silent mode requested?
+QUIET := $(if $(findstring s,$(filter-out --%,$(MAKEFLAGS))),-q)
+
+# kconfig uses CONFIG_SHELL
+CONFIG_SHELL := $(SHELL)
+
+export SHELL CONFIG_SHELL Q
 
 ifndef HOSTAR
 HOSTAR := ar
@@ -61,25 +124,18 @@ export HOSTCC_NOCCACHE HOSTCXX_NOCCACHE
 
 # -----------------------------------------------------------------------------
 
+local-files:
+	@test -e config.local || cp $(HELPERS_DIR)/example.config.local config.local
+	@test -e Makefile.local || cp $(HELPERS_DIR)/example.Makefile.local Makefile.local
+
 -include .config
 -include config.local
 include package/environment-linux.mk
 include package/environment-build.mk
 include package/environment-target.mk
 
-# -----------------------------------------------------------------------------
-
-local-files:
-	@test -e config.local || cp $(HELPERS_DIR)/example.config.local config.local
-	@test -e Makefile.local || cp $(HELPERS_DIR)/example.Makefile.local Makefile.local
-
-# -----------------------------------------------------------------------------
-#  A print out of environment variables
-#
-# maybe a help about all supported targets would be nice here, too...
-#
 printenv:
-	@$(call draw_line);
+	$(call draw_line);
 	@echo "Build Environment Variables:"
 	@echo "PATH              : `type -p fmt>/dev/null&&echo $(PATH)|sed 's/:/ /g' |fmt -65|sed 's/ /:/g; 2,$$s/^/                  : /;'||echo $(PATH)`"
 	@echo "ARCHIVE_DIR       : $(DL_DIR)"
@@ -107,7 +163,7 @@ printenv:
 ifeq ($(NEWLAYOUT),1)
 	@echo -e "IMAGE TYPE        : $(TERM_YELLOW)1 single + multirootfs$(TERM_NORMAL)"
 endif
-	@$(call draw_line);
+	$(call draw_line);
 	@echo -e "LOCAL_N_PLUGIN_BUILD_OPTIONS : $(TERM_GREEN)$(LOCAL_N_PLUGIN_BUILD_OPTIONS)$(TERM_NORMAL)"
 	@echo -e "LOCAL_NEUTRINO_BUILD_OPTIONS : $(TERM_GREEN)$(LOCAL_NEUTRINO_BUILD_OPTIONS)$(TERM_NORMAL)"
 	@echo -e "LOCAL_NEUTRINO_CFLAGS        : $(TERM_GREEN)$(LOCAL_NEUTRINO_CFLAGS)$(TERM_NORMAL)"
@@ -122,10 +178,13 @@ ifeq ($(MAINTAINER),)
 	@echo
 endif
 	@if ! test -e $(BASE_DIR)/.config; then \
-		echo;echo "If you want to create or modify the configuration, run './make.sh'"; \
-		echo; fi
+		echo; \
+		echo "If you want to create or modify the configuration, run './make.sh'"; \
+		echo; \
+	fi
 
 help:
+	$(call draw_line);
 	@echo "a few helpful make targets:"
 	@echo "* make crosstool           - build cross toolchain"
 	@echo "* make bootstrap           - prepares for building"
@@ -138,7 +197,8 @@ help:
 	@echo "cleantargets:"
 	@echo "make clean                 - Clears everything except kernel."
 	@echo "make distclean             - Clears the whole construction."
-	@echo
+	@echo ""
+	$(call draw_line);
 
 # -----------------------------------------------------------------------------
 
@@ -174,40 +234,6 @@ update:
 
 # -----------------------------------------------------------------------------
 
-# To put more focus on warnings, be less verbose as default
-# Use 'make V=1' to see the full commands
-ifeq ("$(origin V)", "command line")
-KBUILD_VERBOSE = $(V)
-endif
-ifeq ("$(origin S)", "command line")
-KBUILD_VERBOSE = $(S)
-endif
-# set the default verbosity
-ifndef KBUILD_VERBOSE
-KBUILD_VERBOSE = 0
-endif
-ifeq ($(KBUILD_VERBOSE),0)
-SILENT              = @
-SILENT_CONFIGURE    = >/dev/null 2>&1
-SILENT_OPT          = >/dev/null 2>&1
-SILENT_Q            = -q
-$(VERBOSE).SILENT:
-endif
-ifeq ($(KBUILD_VERBOSE),1)
-SILENT              = @
-SILENT_CONFIGURE    =
-SILENT_OPT          =
-SILENT_Q            = -q
-endif
-ifeq ($(KBUILD_VERBOSE),2)
-SILENT              = @
-SILENT_CONFIGURE    = -q
-SILENT_OPT          =
-SILENT_Q            = -q
-endif
-
-# -----------------------------------------------------------------------------
-
 all:
 	@echo "'make all' is not a valid target. Please execute 'make print-targets' to display the alternatives."
 
@@ -222,14 +248,5 @@ PHONY += printenv help all everything
 PHONY += update update-self
 PHONY += .print-phony
 .PHONY: $(PHONY)
-
-# this makes sure we do not build top-level dependencies in parallel
-# (which would not be too helpful anyway, running many configure and
-# downloads in parallel...), but the sub-targets are still built in
-# parallel, which is useful on multi-processor / multi-core machines
-.NOTPARALLEL:
-
-# We don't use suffixes in the main make, don't waste time searching for files
-.SUFFIXES:
 
 endif

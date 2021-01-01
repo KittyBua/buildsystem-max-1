@@ -230,5 +230,9 @@ KERNEL_MAKEVARS += \
 
 # -----------------------------------------------------------------------------
 
-depmod:
-	PATH=$(PATH):/sbin:/usr/sbin depmod -b $(TARGET_DIR) $(KERNEL_VER)
+define LINUX_RUN_DEPMOD
+	if test -d $(TARGET_DIR)/lib/modules/$(KERNEL_VER) \
+		&& grep -q "CONFIG_MODULES=y" $(LINUX_DIR)/.config; then \
+		PATH=$(PATH):/sbin:/usr/sbin -a -b $(TARGET_DIR) $(KERNEL_VER); \
+	fi
+endef

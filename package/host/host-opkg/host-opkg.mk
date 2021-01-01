@@ -6,16 +6,13 @@ HOST_OPKG_DIR    = opkg-$(HOST_OPKG_VER)
 HOST_OPKG_SOURCE = opkg-$(HOST_OPKG_VER).tar.gz
 HOST_OPKG_SITE   = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
 
-HOST_OPKG_PATCH = \
-	0001-opkg.patch
-
 $(D)/host-opkg: bootstrap host-libarchive
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		./autogen.sh $(SILENT_OPT); \
 		CFLAGS="-I$(HOST_DIR)/include" \
 		LDFLAGS="-L$(HOST_DIR)/lib" \

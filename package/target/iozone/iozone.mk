@@ -6,14 +6,19 @@ IOZONE_DIR    = iozone$(IOZONE_VER)
 IOZONE_SOURCE = iozone$(IOZONE_VER).tar
 IOZONE_SITE   = http://www.iozone.org/src/current
 
+define IOZONE_POST_PATCH
+	$(SED) "s/= gcc/= $(TARGET_CC)/" $(PKG_BUILD_DIR)/src/current/makefile
+	$(SED) "s/= cc/= $(TARGET_CC)/" $(PKG_BUILD_DIR)/src/current/makefile
+endef
+IOZONE_POST_PATCH_HOOKS = IOZONE_POST_PATCH
+
 $(D)/iozone: bootstrap
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(SED) "s/= gcc/= $(TARGET_CC)/" src/current/makefile; \
-		$(SED) "s/= cc/= $(TARGET_CC)/" src/current/makefile; \
 		cd src/current; \
 		$(BUILD_ENV); \
 		$(MAKE) linux-arm

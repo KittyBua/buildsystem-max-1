@@ -6,9 +6,6 @@ ALSA_UTILS_DIR    = alsa-utils-$(ALSA_UTILS_VER)
 ALSA_UTILS_SOURCE = alsa-utils-$(ALSA_UTILS_VER).tar.bz2
 ALSA_UTILS_SITE   = https://www.alsa-project.org/files/pub/utils
 
-ALSA_UTILS_PATCH = \
-	0001-alsa-utils.patch
-
 ALSA_UTILS_CONF_OPTS = \
 	--with-curses=ncurses \
 	--enable-silent-rules \
@@ -25,8 +22,8 @@ $(D)/alsa-utils: bootstrap ncurses alsa-lib
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		sed -ir -r "s/(amidi|aplay|iecset|speaker-test|seq|alsaucm|topology)//g" Makefile.am ;\
 		autoreconf -fi -I $(TARGET_DIR)/usr/share/aclocal $(SILENT_OPT); \
 		$(CONFIGURE); \

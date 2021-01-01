@@ -6,19 +6,19 @@ JFSUTILS_DIR    = jfsutils-$(JFSUTILS_VER)
 JFSUTILS_SOURCE = jfsutils-$(JFSUTILS_VER).tar.gz
 JFSUTILS_SITE   = http://jfs.sourceforge.net/project/pub
 
-JFSUTILS_PATCH = \
-	0001-jfsutils.patch \
-	0002-fix-build-with-fno-common.patch
+define JFSUTILS_POST_PATCH
+	$(SED) '/unistd.h/a#include <sys/types.h>' $(PKG_BUILD_DIR)/fscklog/extract.c
+	$(SED) '/ioctl.h/a#include <sys/sysmacros.h>' $(PKG_BUILD_DIR)/libfs/devices.c
+endef
+JFSUTILS_POST_PATCH_HOOKS = JFSUTILS_POST_PATCH
 
 $(D)/jfsutils: bootstrap e2fsprogs
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
-		$(SED) "/unistd.h/a#include <sys/types.h>" fscklog/extract.c; \
-		$(SED) "/ioctl.h/a#include <sys/sysmacros.h>" libfs/devices.c; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

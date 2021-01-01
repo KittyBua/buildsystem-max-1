@@ -6,9 +6,6 @@ CAIRO_DIR    = cairo-$(CAIRO_VER)
 CAIRO_SOURCE = cairo-$(CAIRO_VER).tar.xz
 CAIRO_SITE   = https://www.cairographics.org/releases
 
-CAIRO_PATCH = \
-	0001-get_bitmap_surface.patch
-
 CAIRO_CONF_OPTS = \
 	--with-html-dir=$(REMOVE_htmldir) \
 	--with-x=no \
@@ -24,8 +21,8 @@ $(D)/cairo: bootstrap glib2 zlib libpng freetype pixman
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		ax_cv_c_float_words_bigendian="no" \
 		./configure $(SILENT_OPT) $(CONFIGURE_OPTS) $(CONFIGURE_TARGET_OPTS); \

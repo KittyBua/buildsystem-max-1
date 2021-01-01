@@ -6,16 +6,13 @@ HD_IDLE_DIR    = hd-idle
 HD_IDLE_SOURCE = hd-idle-$(HD_IDLE_VER).tgz
 HD_IDLE_SITE   = https://sourceforge.net/projects/hd-idle/files
 
-HD_IDLE_PATCH = \
-	0001-hd-idle.patch
-
 $(D)/hd-idle: bootstrap
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(BUILD_ENV) \
 		$(MAKE) CC=$(TARGET_CC); \
 		$(MAKE) install TARGET_DIR=$(TARGET_DIR) install

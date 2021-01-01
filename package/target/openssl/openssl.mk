@@ -6,13 +6,6 @@ OPENSSL_DIR    = openssl-$(OPENSSL_VER)
 OPENSSL_SOURCE = openssl-$(OPENSSL_VER).tar.gz
 OPENSSL_SITE   = https://www.openssl.org/source
 
-OPENSSL_PATCH = \
-	0001-Dont-waste-time-building-manpages-if-we-re-not-going.patch \
-	0002-Reproducible-build-do-not-leak-compiler-path.patch \
-	0003-Introduce-the-OPENSSL_NO_MADVISE-to-disable-call-to-.patch \
-	0004-Configure-use-ELFv2-ABI-on-some-ppc64-big-endian-sys.patch \
-	0005-crypto-perlasm-ppc-xlate.pl-add-linux64v2-flavour.patch
-
 ifeq ($(TARGET_ARCH),arm)
 OPENSSL_TARGET_ARCH = linux-armv4
 else ifeq ($(TARGET_ARCH),aarch64)
@@ -26,8 +19,8 @@ $(D)/openssl: bootstrap
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		./Configure $(SILENT_OPT) \
 			$(OPENSSL_TARGET_ARCH) \
 			--prefix=/usr \

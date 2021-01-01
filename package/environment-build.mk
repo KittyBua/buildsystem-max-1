@@ -3,18 +3,10 @@
 #
 # -----------------------------------------------------------------------------
 
-# we want bash as shell
-SHELL:=$(shell if [ -x "$$BASH" ]; then echo $$BASH; \
-	else if [ -x /bin/bash ]; then echo /bin/bash; \
-	else echo sh; fi; fi)
-
-# kconfig uses CONFIG_SHELL
-CONFIG_SHELL:=$(SHELL)
-
-#SHELL := $(SHELL) -x
-
 CONFIG_SITE =
 export CONFIG_SITE
+
+#SHELL := $(SHELL) -x
 
 # -----------------------------------------------------------------------------
 
@@ -27,100 +19,63 @@ PARALLEL_JOBS := $(BS_JLEVEL)
 endif
 override MAKE = make $(if $(findstring j,$(filter-out --%,$(MAKEFLAGS))),,-j$(PARALLEL_JOBS)) $(SILENT_OPT)
 
-MAKEFLAGS   += --no-print-directory
+MAKEFLAGS += --no-print-directory
 
 # -----------------------------------------------------------------------------
 
-BASE_DIR    := ${CURDIR}
-DL_DIR      ?= $(HOME)/Archive
-BUILD_DIR    = $(BASE_DIR)/build_tmp
+BASE_DIR     := ${CURDIR}
+DL_DIR       ?= $(HOME)/Archive
+BUILD_DIR     = $(BASE_DIR)/build_tmp
 ifeq ($(NEWLAYOUT), 1)
-RELEASE_DIR  = $(BASE_DIR)/release/linuxrootfs1
+RELEASE_DIR   = $(BASE_DIR)/release/linuxrootfs1
 else
-RELEASE_DIR  = $(BASE_DIR)/release
+RELEASE_DIR   = $(BASE_DIR)/release
 endif
-D            = $(BASE_DIR)/.deps
+DEPS_DIR      = $(BASE_DIR)/.deps
+D             = $(DEPS_DIR)
+TARGET_DIR    = $(BASE_DIR)/root
+SOURCE_DIR    = $(BASE_DIR)/build_source
+IMAGE_DIR     = $(BASE_DIR)/release_image
+HELPERS_DIR   = $(BASE_DIR)/helpers
+OWN_FILES    ?= $(BASE_DIR)/own-files
+CROSS_DIR     = $(BASE_DIR)/cross/$(TARGET_ARCH)-$(CROSSTOOL_GCC_VER)-kernel-$(KERNEL_VER)
+
+BUILD        ?= $(shell /usr/share/libtool/config.guess 2>/dev/null || /usr/share/libtool/config/config.guess 2>/dev/null || /usr/share/misc/config.guess 2>/dev/null)
+
+TARGET_LIB_DIR      = $(TARGET_DIR)/usr/lib
+TARGET_INCLUDE_DIR  = $(TARGET_DIR)/usr/include
+TARGET_FIRMWARE_DIR = $(TARGET_DIR)/lib/firmware
+TARGET_SHARE_DIR    = $(TARGET_DIR)/usr/share
+
+# -----------------------------------------------------------------------------
+
 HOST_DIR     = $(BASE_DIR)/host
-TARGET_DIR   = $(BASE_DIR)/root
-SOURCE_DIR   = $(BASE_DIR)/build_source
-IMAGE_DIR    = $(BASE_DIR)/release_image
-HELPERS_DIR  = $(BASE_DIR)/helpers
-OWN_FILES   ?= $(BASE_DIR)/own-files
-CROSS_DIR    = $(BASE_DIR)/cross/$(TARGET_ARCH)-$(CROSSTOOL_GCC_VER)-kernel-$(KERNEL_VER)
-
-CCACHE       = /usr/bin/ccache
-CCACHE_DIR   = $(HOME)/.ccache-bs-$(TARGET_ARCH)-max
-export CCACHE_DIR
-
-VPATH        = $(D)
 
 # -----------------------------------------------------------------------------
 
 PKG_NAME        = $(subst -config,,$(subst -upgradeconfig,,$(basename $(@F))))
+PKG             = $(call UPPERCASE,$(PKG_NAME))
 PKG_UPPER       = $(call UPPERCASE,$(PKG_NAME))
 PKG_LOWER       = $(call LOWERCASE,$(PKG_NAME))
 PKG_VER         = $($(PKG_UPPER)_VER)
 PKG_DIR         = $($(PKG_UPPER)_DIR)
 PKG_SOURCE      = $($(PKG_UPPER)_SOURCE)
 PKG_SITE        = $($(PKG_UPPER)_SITE)
-PKG_PATCH       = $($(PKG_UPPER)_PATCH)
+#PKG_PATCH       = $($(PKG_UPPER)_PATCH)
 PKG_CONF_OPTS   = $($(PKG_UPPER)_CONF_OPTS)
 PKG_BUILD_DIR   = $(BUILD_DIR)/$(PKG_DIR)
-PKG_FILES_DIR   = $(BASE_DIR)/package/*/$(PKG_NAME)/files
-PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(PKG_NAME)/patches
+PKG_PACKAGE_DIR = $(BASE_DIR)/package/*/$(PKG_NAME)
+PKG_FILES_DIR   = $(PKG_PACKAGE_DIR)/files
+PKG_PATCHES_DIR = $(PKG_PACKAGE_DIR)/patches
 
 PKG_CHDIR       = $(CD) $(PKG_BUILD_DIR)
-PKG_REMOVE      = $(SILENT)rm -rf $(PKG_BUILD_DIR)
+PKG_REMOVE      = $(Q)rm -rf $(PKG_BUILD_DIR)
 
 # -----------------------------------------------------------------------------
 
-TERM_RED         = \033[40;0;31m
-TERM_RED_BOLD    = \033[40;1;31m
-TERM_GREEN       = \033[40;0;32m
-TERM_GREEN_BOLD  = \033[40;1;32m
-TERM_YELLOW      = \033[40;0;33m
-TERM_YELLOW_BOLD = \033[40;1;33m
-TERM_NORMAL      = \033[0m
-
-# -----------------------------------------------------------------------------
-
-# unpack archives into build directory
-UNTAR = $(SILENT)tar -C $(BUILD_DIR) -xf $(DL_DIR)
-
-# clean up
-REMOVE          = $(SILENT)rm -rf $(BUILD_DIR)
-
-# build helper variables
-CD              = set -e; cd
-CHDIR           = $(CD) $(BUILD_DIR)
-MKDIR           = mkdir -p $(BUILD_DIR)
-CPDIR           = cp -a -t $(BUILD_DIR) $(DL_DIR)
-STRIP           = $(TARGET)-strip
-
-INSTALL         = install
-INSTALL_CONF    = $(INSTALL) -m 0600
-INSTALL_DATA    = $(INSTALL) -m 0644
-INSTALL_EXEC    = $(INSTALL) -m 0755
-
-#  argument 1 source
-#  argument 2 dest
-define INSTALL_EXIST
-	if [ -d $(dir $(1)) ]; then \
-		$(INSTALL) -d $(2); \
-		$(INSTALL_COPY) $(1) $(2); \
-	fi
-endef
-
-GET-GIT-ARCHIVE = $(HELPERS_DIR)/get-git-archive.sh
-GET-GIT-SOURCE  = $(HELPERS_DIR)/get-git-source.sh
-GET-SVN-SOURCE  = $(HELPERS_DIR)/get-svn-source.sh
-UPDATE-RC.D     = $(HELPERS_DIR)/update-rc.d -r $(TARGET_DIR)
-
-DATE            = $(shell date '+%Y-%m-%d_%H.%M')
-TINKER_OPTION  ?= 0
-
-# empty variable EMPTY for smoother comparisons
-EMPTY =
+CCACHE     = /usr/bin/ccache
+CCACHE_DIR = $(HOME)/.ccache-bs-$(TARGET_ARCH)-max
+export CCACHE_DIR
 
 # -----------------------------------------------------------------------------
 
@@ -169,9 +124,6 @@ ifeq ($(BS_GCC_VER), 10.2.0)
 #TARGET_EXTRA_CFLAGS += -fcommon
 endif
 
-BUILD ?= $(shell /usr/share/libtool/config.guess 2>/dev/null || /usr/share/libtool/config/config.guess 2>/dev/null || /usr/share/misc/config.guess 2>/dev/null)
-PATH  := $(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
-
 ifeq ($(TARGET_ARCH),arm)
 TARGET         ?= arm-cortex-linux-gnueabihf
 TARGET_ARCH    ?= arm
@@ -193,9 +145,14 @@ TARGET_ABI      = -march=mips32 -mtune=mips32
 TARGET_ENDIAN   = little
 endif
 
-# Define TARGET_xx variables for all common binutils/gcc
+TARGET_CFLAGS   = $(TARGET_OPTIMIZATION) $(TARGET_ABI) $(TARGET_EXTRA_CFLAGS) -I$(TARGET_INCLUDE_DIR)
+TARGET_CPPFLAGS = $(TARGET_CFLAGS)
+TARGET_CXXFLAGS = $(TARGET_CFLAGS)
+TARGET_LDFLAGS  = -L$(TARGET_DIR)/lib -L$(TARGET_DIR)/usr/lib -Wl,-O1 -Wl,-rpath -Wl,/usr/lib -Wl,-rpath-link -Wl,${TARGET_DIR}/usr/lib $(TARGET_EXTRA_LDFLAGS)
+
 TARGET_CROSS    = $(TARGET)-
 
+# Define TARGET_xx variables for all common binutils/gcc
 TARGET_AR       = $(TARGET_CROSS)ar
 TARGET_AS       = $(TARGET_CROSS)as
 TARGET_CC       = $(TARGET_CROSS)gcc
@@ -209,19 +166,61 @@ TARGET_RANLIB   = $(TARGET_CROSS)ranlib
 TARGET_READELF  = $(TARGET_CROSS)readelf
 TARGET_STRIP    = $(TARGET_CROSS)strip
 
-TARGET_CFLAGS   = $(TARGET_OPTIMIZATION) $(TARGET_ABI) $(TARGET_EXTRA_CFLAGS) -I$(TARGET_INCLUDE_DIR)
-TARGET_CPPFLAGS = $(TARGET_CFLAGS)
-TARGET_CXXFLAGS = $(TARGET_CFLAGS)
-TARGET_LDFLAGS  = -L$(TARGET_DIR)/lib -L$(TARGET_DIR)/usr/lib -Wl,-O1 -Wl,-rpath -Wl,/usr/lib -Wl,-rpath-link -Wl,${TARGET_DIR}/usr/lib $(TARGET_EXTRA_LDFLAGS)
+# -----------------------------------------------------------------------------
 
-TARGET_LIB_DIR      = $(TARGET_DIR)/usr/lib
-TARGET_INCLUDE_DIR  = $(TARGET_DIR)/usr/include
-TARGET_FIRMWARE_DIR = $(TARGET_DIR)/lib/firmware
-TARGET_SHARE_DIR    = $(TARGET_DIR)/usr/share
+TERM_RED         = \033[40;0;31m
+TERM_RED_BOLD    = \033[40;1;31m
+TERM_GREEN       = \033[40;0;32m
+TERM_GREEN_BOLD  = \033[40;1;32m
+TERM_YELLOW      = \033[40;0;33m
+TERM_YELLOW_BOLD = \033[40;1;33m
+TERM_NORMAL      = \033[0m
 
-PKG_CONFIG          = $(HOST_DIR)/bin/$(TARGET)-pkg-config
-PKG_CONFIG_LIBDIR   = $(TARGET_LIB_DIR)/pkgconfig
-PKG_CONFIG_PATH     = $(TARGET_LIB_DIR)/pkgconfig
+# -----------------------------------------------------------------------------
+
+# search path(s) for all prerequisites
+VPATH = $(DEPS_DIR)
+
+PATH := $(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
+
+# -----------------------------------------------------------------------------
+
+PKG_CONFIG        = $(HOST_DIR)/bin/$(TARGET)-pkg-config
+PKG_CONFIG_LIBDIR = $(TARGET_LIB_DIR)/pkgconfig
+PKG_CONFIG_PATH   = $(TARGET_LIB_DIR)/pkgconfig
+
+# -----------------------------------------------------------------------------
+
+# clean up
+REMOVE = $(Q)rm -rf $(BUILD_DIR)
+
+# build helper variables
+CD    = set -e; cd
+CHDIR = $(CD) $(BUILD_DIR)
+MKDIR = mkdir -p $(BUILD_DIR)
+CPDIR = cp -a -t $(BUILD_DIR) $(DL_DIR)
+STRIP = $(TARGET)-strip
+
+DATE            = $(shell date '+%Y-%m-%d_%H.%M')
+TINKER_OPTION  ?= 0
+
+INSTALL         = install
+INSTALL_CONF    = $(INSTALL) -m 0600
+INSTALL_DATA    = $(INSTALL) -m 0644
+INSTALL_EXEC    = $(INSTALL) -m 0755
+INSTALL_COPY = cp -a
+
+define INSTALL_EXIST # (source, dest)
+	if [ -d $(dir $(1)) ]; then \
+		$(INSTALL) -d $(2); \
+		$(INSTALL_COPY) $(1) $(2); \
+	fi
+endef
+
+GET-GIT-ARCHIVE = $(HELPERS_DIR)/get-git-archive.sh
+GET-GIT-SOURCE  = $(HELPERS_DIR)/get-git-source.sh
+GET-SVN-SOURCE  = $(HELPERS_DIR)/get-svn-source.sh
+UPDATE-RC.D     = $(HELPERS_DIR)/update-rc.d -r $(TARGET_DIR)
 
 # -----------------------------------------------------------------------------
 

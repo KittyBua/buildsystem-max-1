@@ -17,8 +17,8 @@ $(D)/host-meson: bootstrap host-ninja host-python3 host-python3-setuptools
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(HOST_PYTHON_BUILD); \
 		$(HOST_PYTHON_INSTALL)
 	( \
@@ -40,6 +40,6 @@ $(D)/host-meson: bootstrap host-ninja host-python3 host-python3-setuptools
 		echo "cpu_family = '$(TARGET_ARCH)'"; \
 		echo "cpu = '$(TARGET_ARCH)'"; \
 		echo "endian = '$(TARGET_ENDIAN)'" \
-	) > $(HOST_DIR)/bin/meson-cross.config
+	) > $(HOST_DIR)/bin/meson-cross-config
 	$(PKG_REMOVE)
 	$(TOUCH)

@@ -6,27 +6,6 @@ BUSYBOX_DIR    = busybox-$(BUSYBOX_VER)
 BUSYBOX_SOURCE = busybox-$(BUSYBOX_VER).tar.bz2
 BUSYBOX_SITE   = https://busybox.net/downloads
 
-BUSYBOX_PATCH = \
-	0001-Prevent-telnet-connections-from-the-internet-to-the.patch \
-	0002-Extended-network-interfaces-support.patch \
-	0003-Revert-ip-fix-ip-oneline-a.patch \
-	0004-use_ipv6_when_ipv4_unroutable.patch \
-	0005-fix-config-header.patch \
-	0006-fix-partition-size.patch \
-	0007-insmod-hack.patch \
-	0008-mount_single_uuid.patch \
-	0009-busybox-udhcpc-no_deconfig.patch \
-	0010-recognize_connmand.patch \
-	0011-fail_on_no_media.patch \
-	0012-busybox-cross-menuconfig.patch \
-	0013-makefile-libbb-race.patch \
-	0014-testsuite-check-uudecode-before-using-it.patch \
-	0015-testsuite-use-www.example.org-for-wget-test-cases.patch \
-	0016-du-l-works-fix-to-use-145-instead-of-144.patch \
-	0017-Use-CC-when-linking-instead-of-LD-and-use-CFLAGS-and.patch \
-	0018-sysctl-ignore-EIO-of-stable_secret-below-proc-sys-ne.patch \
-	0019-hwclock-make-glibc-2.31-compatible.patch
-
 # Link busybox against libtirpc so that we can leverage its RPC support for NFS
 # mounting with BusyBox
 BUSYBOX_CFLAGS = $(TARGET_CFLAGS)
@@ -52,8 +31,8 @@ $(D)/busybox: bootstrap libtirpc
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/busybox.config .config; \
 		$(SED) 's#^CONFIG_PREFIX.*#CONFIG_PREFIX="$(TARGET_DIR)"#' .config; \
 		$(BUSYBOX_MAKE_ENV) $(MAKE) $(BUSYBOX_MAKE_OPTS) busybox; \

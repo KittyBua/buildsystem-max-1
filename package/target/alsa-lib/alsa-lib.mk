@@ -6,11 +6,6 @@ ALSA_LIB_DIR    = alsa-lib-$(ALSA_LIB_VER)
 ALSA_LIB_SOURCE = alsa-lib-$(ALSA_LIB_VER).tar.bz2
 ALSA_LIB_SITE   = https://www.alsa-project.org/files/pub/lib
 
-ALSA_LIB_PATCH = \
-	0001-Don-t-use-fork-on-noMMU-platforms.patch \
-	0002-alsa-lib.patch \
-	0003-alsa-lib-link_fix.patch
-
 ALSA_LIB_CONF_OPTS = \
 	--with-alsa-devdir=/dev/snd/ \
 	--with-plugindir=/usr/lib/alsa \
@@ -34,8 +29,8 @@ $(D)/alsa-lib: bootstrap
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \
 		$(MAKE); \

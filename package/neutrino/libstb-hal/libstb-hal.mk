@@ -22,6 +22,18 @@ LIBSTB_HAL_DIR    = $(LIBSTB_HAL).git
 LIBSTB_HAL_SOURCE = $(LIBSTB_HAL).git
 LIBSTB_HAL_SITE   = $(GIT_SITE)
 
+ifeq ($(FLAVOUR),neutrino-ddt)
+LIBSTB_HAL_CUSTOM_PATCH =
+else ifeq ($(FLAVOUR),neutrino-max)
+LIBSTB_HAL_CUSTOM_PATCH =
+else ifeq ($(FLAVOUR),neutrino-ni)
+LIBSTB_HAL_CUSTOM_PATCH =
+else ifeq ($(FLAVOUR),neutrino-tangos)
+LIBSTB_HAL_CUSTOM_PATCH =
+else ifeq ($(FLAVOUR),neutrino-redblue)
+LIBSTB_HAL_CUSTOM_PATCH =
+endif
+
 $(D)/libstb-hal.do_prepare: | $(LIBSTB_HAL_DEPS)
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR)
@@ -32,8 +44,7 @@ $(D)/libstb-hal.do_prepare: | $(LIBSTB_HAL_DEPS)
 	$(call PKG_UNPACK,$(SOURCE_DIR))
 	(cd $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); git checkout -q $(LIBSTB_HAL_BRANCH);)
 	cp -ra $(SOURCE_DIR)/$(LIBSTB_HAL_DIR) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR).org
-	$(CD) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); \
-		$(call apply_patches,$(PKG_PATCH))
+	$(APPLY_PATCHES) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR) $(PKG_PATCHES_DIR) \$(LIBSTB_HAL_CUSTOM_PATCH)
 	@touch $@
 
 $(D)/libstb-hal.config.status:

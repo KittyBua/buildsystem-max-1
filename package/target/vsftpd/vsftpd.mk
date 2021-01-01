@@ -6,22 +6,19 @@ VSFTPD_DIR    = vsftpd-$(VSFTPD_VER)
 VSFTPD_SOURCE = vsftpd-$(VSFTPD_VER).tar.gz
 VSFTPD_SITE   = https://security.appspot.com/downloads
 
-VSFTPD_PATCH = \
-	0001-vsftpd.patch \
-	0002-vsftpd-makefile-destdir.patch \
-	0003-vsftpd-disable-capabilities.patch \
-	0004-vsftpd-fixchroot.patch \
-	0005-vsftpd-login-blank-password.patch
+define VSFTPD_POST_PATCH
+	$(SED) 's/.*VSF_BUILD_PAM/#undef VSF_BUILD_PAM/' $(PKG_BUILD_DIR)/builddefs.h
+	$(SED) 's/.*VSF_BUILD_SSL/#define VSF_BUILD_SSL/' $(PKG_BUILD_DIR)/builddefs.h
+endef
+VSFTPD_POST_PATCH_HOOKS = VSFTPD_POST_PATCH
 
 $(D)/vsftpd: bootstrap openssl
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
-		$(SED) 's/.*VSF_BUILD_PAM/#undef VSF_BUILD_PAM/' builddefs.h; \
-		$(SED) 's/.*VSF_BUILD_SSL/#define VSF_BUILD_SSL/' builddefs.h; \
 		$(MAKE) clean; \
 		$(MAKE) $(BUILD_ENV) LIBS="-lcrypt -lcrypto -lssl"; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

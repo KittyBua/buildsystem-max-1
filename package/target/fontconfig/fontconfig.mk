@@ -6,9 +6,6 @@ FONTCONFIG_DIR    = fontconfig-$(FONTCONFIG_VER)
 FONTCONFIG_SOURCE = fontconfig-$(FONTCONFIG_VER).tar.bz2
 FONTCONFIG_SITE   = https://www.freedesktop.org/software/fontconfig/release
 
-FONTCONFIG_PATCH = \
-	0001-fontconfig-glibc.patch
-
 FONTCONFIG_CONF_OPTS = \
 	--with-freetype-config=$(HOST_DIR)/bin/freetype-config \
 	--with-expat-includes=$(TARGET_INCLUDE_DIR) \
@@ -20,8 +17,8 @@ $(D)/fontconfig: bootstrap freetype expat
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

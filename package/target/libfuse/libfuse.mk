@@ -6,9 +6,6 @@ LIBFUSE_DIR    = fuse-$(LIBFUSE_VER)
 LIBFUSE_SOURCE = fuse-$(LIBFUSE_VER).tar.gz
 LIBFUSE_SITE   = https://github.com/libfuse/libfuse/releases/download/fuse-$(LIBFUSE_VER)
 
-LIBFUSE_PATCH = \
-	0001-fix-aarch64-build.patch
-
 LIBFUSE_CONF_OPTS = \
 	--disable-static \
 	--disable-example \
@@ -23,8 +20,8 @@ $(D)/libfuse: bootstrap
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

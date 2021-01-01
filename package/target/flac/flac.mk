@@ -6,11 +6,6 @@ FLAC_DIR    = flac-$(FLAC_VER)
 FLAC_SOURCE = flac-$(FLAC_VER).tar.xz
 FLAC_SITE   = https://ftp.osuosl.org/pub/xiph/releases/flac
 
-FLAC_PATCH = \
-	0001-no-docs-and-examples.patch \
-	0002-no-utility.patch \
-	0003-utime.patch
-
 FLAC_CONF_OPTS = \
 	--disable-cpplibs \
 	--disable-debug \
@@ -33,8 +28,8 @@ $(D)/flac: bootstrap
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		touch NEWS AUTHORS ChangeLog; \
 		autoreconf -fi $(SILENT_OPT); \
 		$(CONFIGURE); \

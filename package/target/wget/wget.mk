@@ -6,12 +6,6 @@ WGET_DIR    = wget-$(WGET_VER)
 WGET_SOURCE = wget-$(WGET_VER).tar.gz
 WGET_SITE   = https://ftp.gnu.org/gnu/wget
 
-WGET_PATCH = \
-	0001-change_DEFAULT_LOGFILE.patch \
-	0002-set-check_cert-false-by-default.patch \
-	0003-wget-improve-reproducibility.patch \
-	0004-wget-Strip-long-version-output.patch
-
 WGET_CFLAGS = $(TARGET_CFLAGS) -DOPENSSL_NO_ENGINE
 
 WGET_CONF_OPTS = \
@@ -33,8 +27,8 @@ $(D)/wget: bootstrap openssl
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

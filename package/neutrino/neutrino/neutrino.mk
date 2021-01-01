@@ -9,40 +9,30 @@ NEUTRINO           = neutrino-ddt
 LIBSTB_HAL         = libstb-hal-ddt
 NEUTRINO_BRANCH   ?= master
 LIBSTB_HAL_BRANCH ?= master
-NEUTRINO_PATCH     = neutrino-ddt.patch
-LIBSTB_HAL_PATCH   =
 else ifeq ($(FLAVOUR),neutrino-max)
 GIT_SITE          ?= $(MAX-GIT-GITHUB)
 NEUTRINO           = neutrino-max
 LIBSTB_HAL         = libstb-hal-max
 NEUTRINO_BRANCH   ?= master
 LIBSTB_HAL_BRANCH ?= master
-NEUTRINO_PATCH     =
-LIBSTB_HAL_PATCH   =
 else ifeq ($(FLAVOUR),neutrino-ni)
 GIT_SITE          ?= https://github.com/neutrino-images
 NEUTRINO           = ni-neutrino
 LIBSTB_HAL         = ni-libstb-hal
 NEUTRINO_BRANCH   ?= master
 LIBSTB_HAL_BRANCH ?= master
-NEUTRINO_PATCH     = ni-neutrino.patch
-LIBSTB_HAL_PATCH   =
 else ifeq ($(FLAVOUR),neutrino-tangos)
 GIT_SITE          ?= https://github.com/TangoCash
 NEUTRINO           = neutrino-tangos
 LIBSTB_HAL         = libstb-hal-tangos
 NEUTRINO_BRANCH   ?= master
 LIBSTB_HAL_BRANCH ?= master
-NEUTRINO_PATCH     =
-LIBSTB_HAL_PATCH   =
 else ifeq ($(FLAVOUR),neutrino-redblue)
 GIT_SITE          ?= https://github.com/redblue-pkt
 NEUTRINO           = neutrino-redblue
 LIBSTB_HAL         = libstb-hal-redblue
 NEUTRINO_BRANCH   ?= master
 LIBSTB_HAL_BRANCH ?= master
-NEUTRINO_PATCH     =
-LIBSTB_HAL_PATCH   =
 endif
 
 NEUTRINO_OBJ_DIR   = $(BUILD_DIR)/$(NEUTRINO_DIR)
@@ -209,6 +199,18 @@ NEUTRINO_DIR    = $(NEUTRINO).git
 NEUTRINO_SOURCE = $(NEUTRINO).git
 NEUTRINO_SITE   = $(GIT_SITE)
 
+ifeq ($(FLAVOUR),neutrino-ddt)
+NEUTRINO_CUSTOM_PATCH = neutrino-ddt.patch
+else ifeq ($(FLAVOUR),neutrino-max)
+NEUTRINO_CUSTOM_PATCH =
+else ifeq ($(FLAVOUR),neutrino-ni)
+NEUTRINO_CUSTOM_PATCH = neutrino-ni.patch
+else ifeq ($(FLAVOUR),neutrino-tangos)
+NEUTRINO_CUSTOM_PATCH =
+else ifeq ($(FLAVOUR),neutrino-redblue)
+NEUTRINO_CUSTOM_PATCH =
+endif
+
 $(D)/neutrino.do_prepare: | $(NEUTRINO_DEPS) libstb-hal
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR)
@@ -218,8 +220,7 @@ $(D)/neutrino.do_prepare: | $(NEUTRINO_DEPS) libstb-hal
 	$(call PKG_UNPACK,$(SOURCE_DIR))
 	(cd $(SOURCE_DIR)/$(NEUTRINO_DIR); git checkout -q $(NEUTRINO_BRANCH);)
 	cp -ra $(SOURCE_DIR)/$(NEUTRINO_DIR) $(SOURCE_DIR)/$(NEUTRINO_DIR).org
-	$(CD) $(SOURCE_DIR)/$(NEUTRINO_DIR); \
-		$(call apply_patches,$(PKG_PATCH))
+	$(APPLY_PATCHES) $(SOURCE_DIR)/$(NEUTRINO_DIR) $(PKG_PATCHES_DIR) \$(NEUTRINO_CUSTOM_PATCH)
 	@touch $@
 
 $(D)/neutrino.config.status:

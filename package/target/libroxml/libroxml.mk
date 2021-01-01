@@ -6,9 +6,6 @@ LIBROXML_DIR    = libroxml-$(LIBROXML_VER)
 LIBROXML_SOURCE = libroxml-$(LIBROXML_VER).tar.gz
 LIBROXML_SITE   = http://download.libroxml.net/pool/v3.x
 
-LIBROXML_PATCH = \
-	0001-fix-build-with-fno-common.patch
-
 LIBROXML_CONF_OPTS = \
 	--enable-shared \
 	--disable-static \
@@ -19,8 +16,8 @@ $(D)/libroxml: bootstrap
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

@@ -7,9 +7,6 @@ LIBPNG_DIR    = libpng-$(LIBPNG_VER)
 LIBPNG_SOURCE = libpng-$(LIBPNG_VER).tar.xz
 LIBPNG_SITE   = https://sourceforge.net/projects/libpng/files/libpng$(LIBPNG_VER_X)/$(LIBPNG_VER)
 
-LIBPNG_PATCH = \
-	0001-disable-pngfix-and-png-fix-itxt.patch
-
 LIBPNG_CONF_OPTS = \
 	--disable-mips-msa \
 	--disable-powerpc-vsx
@@ -19,8 +16,8 @@ $(D)/libpng: bootstrap zlib
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

@@ -6,10 +6,10 @@ FREETYPE_DIR    = freetype-$(FREETYPE_VER)
 FREETYPE_SOURCE = freetype-$(FREETYPE_VER).tar.xz
 FREETYPE_SITE   = https://sourceforge.net/projects/freetype/files/freetype2/$(FREETYPE_VER)
 
-FREETYPE_PATCH = \
-	0001-freetype2-subpixel.patch \
-	0002-freetype2-config.patch \
-	0003-freetype2-pkgconf.patch
+define FREETYPE_POST_PATCH
+	$(SED) '/^FONT_MODULES += \(type1\|cid\|pfr\|type42\|pcf\|bdf\|winfonts\|cff\)/d' $(PKG_BUILD_DIR)/modules.cfg
+endef
+FREETYPE_POST_PATCH_HOOKS = FREETYPE_POST_PATCH
 
 FREETYPE_CONF_OPTS = \
 	--enable-shared \
@@ -26,9 +26,7 @@ $(D)/freetype: bootstrap zlib libpng
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
-	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
-		$(SED) '/^FONT_MODULES += \(type1\|cid\|pfr\|type42\|pcf\|bdf\|winfonts\|cff\)/d' modules.cfg
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR)/builds/unix; \
 		libtoolize --force --copy $(SILENT_OPT); \
 		aclocal -I .; \

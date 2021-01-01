@@ -6,10 +6,6 @@ LIBICONV_DIR    = libiconv-$(LIBICONV_VER)
 LIBICONV_SOURCE = libiconv-$(LIBICONV_VER).tar.gz
 LIBICONV_SITE   = https://ftp.gnu.org/gnu/libiconv
 
-LIBICONV_PATCH = \
-	0001-disable_transliterations.patch \
-	0002-strip_charsets.patch
-
 LIBICONV_CONF_OPTS = \
 	CPPFLAGS="$(TARGET_CPPFLAGS) -fPIC" \
 	--docdir=$(REMOVE_docdir) \
@@ -23,8 +19,8 @@ $(D)/libiconv: bootstrap
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
