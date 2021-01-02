@@ -52,9 +52,9 @@ $(D)/neutrino-plugins.config.status:
 	rm -rf $(NEUTRINO_PLUGINS_OBJ_DIR)
 	test -d $(NEUTRINO_PLUGINS_OBJ_DIR) || mkdir -p $(NEUTRINO_PLUGINS_OBJ_DIR)
 	cd $(NEUTRINO_PLUGINS_OBJ_DIR); \
-		$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/autogen.sh $(SILENT_OPT) && automake --add-missing $(SILENT_OPT); \
+		$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/autogen.sh && automake --add-missing; \
 		$(BUILD_ENV) \
-		$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/configure $(SILENT_OPT) \
+		$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/configure \
 			--host=$(TARGET) \
 			--build=$(BUILD) \
 			--prefix=/usr \

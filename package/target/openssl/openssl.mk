@@ -21,7 +21,7 @@ $(D)/openssl: bootstrap
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		./Configure $(SILENT_OPT) \
+		./Configure \
 			$(OPENSSL_TARGET_ARCH) \
 			--prefix=/usr \
 			--openssldir=/etc/ssl \

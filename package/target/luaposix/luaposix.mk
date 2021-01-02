@@ -23,8 +23,8 @@ $(D)/luaposix: bootstrap host-lua lua luaexpat slingshot gnulib
 		tar -C gnulib --strip=1 -xf $(DL_DIR)/$(GNULIB_SOURCE); \
 		tar -C slingshot --strip=1 -xf $(DL_DIR)/$(SLINGSHOT_SOURCE); \
 		export LUA=$(HOST_LUA_BINARY); \
-		./bootstrap $(SILENT_OPT); \
-		autoreconf -fi $(SILENT_OPT); \
+		./bootstrap; \
+		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install

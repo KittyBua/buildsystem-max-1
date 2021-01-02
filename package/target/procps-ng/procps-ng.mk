@@ -26,7 +26,7 @@ $(D)/procps-ng: bootstrap ncurses
 	$(PKG_CHDIR); \
 		export ac_cv_func_malloc_0_nonnull=yes; \
 		export ac_cv_func_realloc_0_nonnull=yes; \
-		autoreconf -fi $(SILENT_OPT); \
+		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

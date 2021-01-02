@@ -14,7 +14,7 @@ $(D)/libvorbisidec: bootstrap libogg
 	$(PKG_CHDIR); \
 		ACLOCAL_FLAGS="-I . -I $(TARGET_SHARE_DIR)/aclocal" \
 		$(BUILD_ENV) \
-		./autogen.sh $(SILENT_OPT) \
+		./autogen.sh \
 			--host=$(TARGET) \
 			--build=$(BUILD) \
 			--prefix=/usr \

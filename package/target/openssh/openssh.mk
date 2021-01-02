@@ -28,7 +28,7 @@ $(D)/openssh: bootstrap zlib openssl
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		CC=$(TARGET_CC); \
-		./configure $(SILENT_OPT) \
+		./configure \
 			$(CONFIGURE_OPTS) \
 			$(CONFIGURE_TARGET_OPTS) \
 			; \

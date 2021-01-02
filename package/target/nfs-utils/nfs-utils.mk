@@ -29,7 +29,7 @@ $(D)/nfs-utils: bootstrap rpcbind e2fsprogs
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		export knfsd_cv_bsd_signals=no; \
-		autoreconf -fi $(SILENT_OPT); \
+		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

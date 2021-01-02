@@ -25,7 +25,7 @@ $(D)/cairo: bootstrap glib2 zlib libpng freetype pixman
 	$(PKG_CHDIR); \
 		$(BUILD_ENV) \
 		ax_cv_c_float_words_bigendian="no" \
-		./configure $(SILENT_OPT) $(CONFIGURE_OPTS) $(CONFIGURE_TARGET_OPTS); \
+		./configure $(CONFIGURE_OPTS) $(CONFIGURE_TARGET_OPTS); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -rf $(TARGET_DIR)/usr/bin/cairo-sphinx

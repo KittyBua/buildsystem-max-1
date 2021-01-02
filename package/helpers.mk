@@ -69,7 +69,8 @@ endef
 
 # download archives into archives directory
 define PKG_DOWNLOAD
-	$(Q)if [ $(PKG_VER) == "git" ]; then \
+	@( \
+	if [ $(PKG_VER) == "git" ]; then \
 	  $(call MESSAGE,"Downloading") ; \
 	  $(GET-GIT-SOURCE) $(PKG_SITE)/$(PKG_SOURCE) $(DL_DIR)/$(PKG_SOURCE); \
 	else \
@@ -77,7 +78,8 @@ define PKG_DOWNLOAD
 	    $(call MESSAGE,"Downloading") ; \
 	    wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P $(DL_DIR) $(PKG_SITE)/$(1); \
 	  fi; \
-	fi
+	fi; \
+	)
 endef
 
 # github(user,package,version): returns site of GitHub repository
@@ -88,7 +90,7 @@ github = https://github.com/$(1)/$(2)/archive/$(3)
 # unpack archives into build directory
 define PKG_UNPACK
 	@$(call MESSAGE,"Extracting")
-	$(Q)( \
+	@( \
 	case ${PKG_SOURCE} in \
 	  *.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.xz | *.txz) \
 	    tar -xf ${DL_DIR}/${PKG_SOURCE} -C ${1}; \
@@ -119,14 +121,14 @@ APPLY_PATCHES = PATH=$(HOST_DIR)/bin:$$PATH helpers/apply-patches.sh $(if $(QUIE
 # apply patch sets
 define PKG_APPLY_PATCHES
 	$(foreach hook,$($(PKG)_PRE_PATCH_HOOKS),$(call $(hook))$(sep))
-	$(Q)( \
-	for D in $(PKG_PATCHES_DIR); do \
-	  if test -d $${D}; then \
+	@( \
+	for P in $(PKG_PATCHES_DIR); do \
+	  if test -d $${P}; then \
 	    $(call MESSAGE,"Patching"); \
-	    if test -d $${D}/$($(PKG)_VER); then \
-	      $(APPLY_PATCHES) $(PKG_BUILD_DIR) $${D}/$($(PKG)_VER) \*.patch \*.patch.$(TARGET_ARCH) || exit 1; \
+	    if test -d $${P}/$($(PKG)_VER); then \
+	      $(APPLY_PATCHES) $(PKG_BUILD_DIR) $${P}/$($(PKG)_VER) \*.patch \*.patch.$(TARGET_ARCH) || exit 1; \
 	    else \
-	      $(APPLY_PATCHES) $(PKG_BUILD_DIR) $${D} \*.patch \*.patch.$(TARGET_ARCH) || exit 1; \
+	      $(APPLY_PATCHES) $(PKG_BUILD_DIR) $${P} \*.patch \*.patch.$(TARGET_ARCH) || exit 1; \
 	    fi; \
 	  fi; \
 	done; \
@@ -345,7 +347,7 @@ HOST_PYTHON_BUILD = \
 	LDFLAGS="$(LDFLAGS)" \
 	LDSHARED="$(HOSTCC) -shared" \
 	PYTHONPATH=$(HOST_DIR)/$(HOST_PYTHON3_BASE_DIR)/site-packages \
-	$(HOST_DIR)/bin/python3 ./setup.py $(SILENT_Q) build --executable=/usr/python
+	$(HOST_DIR)/bin/python3 ./setup.py -q build --executable=/usr/python
 
 HOST_PYTHON_INSTALL = \
 	CC="$(HOSTCC)" \
@@ -353,7 +355,7 @@ HOST_PYTHON_INSTALL = \
 	LDFLAGS="$(LDFLAGS)" \
 	LDSHARED="$(HOSTCC) -shared" \
 	PYTHONPATH=$(HOST_DIR)/$(HOST_PYTHON3_BASE_DIR)/site-packages \
-	$(HOST_DIR)/bin/python3 ./setup.py $(SILENT_Q) install --root=$(HOST_DIR) --prefix=
+	$(HOST_DIR)/bin/python3 ./setup.py -q install --root=$(HOST_DIR) --prefix=
 
 PYTHON_BUILD = \
 	CC="$(TARGET_CC)" \
@@ -362,7 +364,7 @@ PYTHON_BUILD = \
 	LDSHARED="$(TARGET_CC) -shared" \
 	PYTHONPATH=$(TARGET_DIR)/$(PYTHON_BASE_DIR)/site-packages \
 	CPPFLAGS="$(TARGET_CPPFLAGS) -I$(TARGET_DIR)/$(PYTHON_INCLUDE_DIR)" \
-	$(HOST_DIR)/bin/python ./setup.py $(SILENT_Q) build --executable=/usr/bin/python
+	$(HOST_DIR)/bin/python ./setup.py -q build --executable=/usr/bin/python
 
 PYTHON_INSTALL = \
 	CC="$(TARGET_CC)" \
@@ -371,7 +373,7 @@ PYTHON_INSTALL = \
 	LDSHARED="$(TARGET_CC) -shared" \
 	PYTHONPATH=$(TARGET_DIR)/$(PYTHON_BASE_DIR)/site-packages \
 	CPPFLAGS="$(TARGET_CPPFLAGS) -I$(TARGET_DIR)/$(PYTHON_INCLUDE_DIR)" \
-	$(HOST_DIR)/bin/python ./setup.py $(SILENT_Q) install --root=$(TARGET_DIR) --prefix=/usr
+	$(HOST_DIR)/bin/python ./setup.py -q install --root=$(TARGET_DIR) --prefix=/usr
 
 # -----------------------------------------------------------------------------
 

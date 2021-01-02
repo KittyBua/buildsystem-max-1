@@ -20,7 +20,7 @@ $(D)/zlib: bootstrap
 	$(PKG_CHDIR); \
 		$(BUILD_ENV) \
 		mandir=$(REMOVE_mandir) \
-		./configure $(SILENT_OPT) $(PKG_CONF_OPTS); \
+		./configure $(PKG_CONF_OPTS); \
 		$(MAKE); \
 		ln -sf /bin/true ldconfig; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

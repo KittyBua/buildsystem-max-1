@@ -46,7 +46,7 @@ $(D)/links: bootstrap freetype libpng libjpeg-turbo openssl
 		echo "german" >> index.txt; \
 		./gen-intl
 	$(CHDIR)/$(PKG_DIR); \
-		autoreconf -vfi $(SILENT_OPT); \
+		autoreconf -vfi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

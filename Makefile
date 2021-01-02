@@ -24,56 +24,10 @@ SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 # determinism and reproducibility with top-level parallel build.
 .NOTPARALLEL:
 
-# To put more focus on warnings, be less verbose as default
-# Use 'make V=1' to see the full commands
-ifeq ("$(origin V)", "command line")
-  KBUILD_VERBOSE = $(V)
-endif
-ifndef KBUILD_VERBOSE
-  KBUILD_VERBOSE = 0
-endif
-
-ifeq ($(KBUILD_VERBOSE),1)
-  Q =
-ifndef VERBOSE
-  VERBOSE = 1
-endif
-export VERBOSE
-else
-  Q = @
-endif
-
-ifeq ("$(origin S)", "command line")
-  KBUILD_VERBOSE = $(S)
-endif
-
-ifeq ($(KBUILD_VERBOSE),0)
-SILENT              = @
-SILENT_CONFIGURE    = >/dev/null 2>&1
-SILENT_OPT          = >/dev/null 2>&1
-SILENT_Q            = -q
-$(VERBOSE).SILENT:
-endif
-ifeq ($(KBUILD_VERBOSE),1)
-SILENT              = @
-SILENT_CONFIGURE    =
-SILENT_OPT          =
-SILENT_Q            = -q
-endif
-ifeq ($(KBUILD_VERBOSE),2)
-SILENT              = @
-SILENT_CONFIGURE    = -q
-SILENT_OPT          =
-SILENT_Q            = -q
-endif
-
-# silent mode requested?
-QUIET := $(if $(findstring s,$(filter-out --%,$(MAKEFLAGS))),-q)
-
 # kconfig uses CONFIG_SHELL
 CONFIG_SHELL := $(SHELL)
 
-export SHELL CONFIG_SHELL Q
+export SHELL CONFIG_SHELL
 
 ifndef HOSTAR
 HOSTAR := ar

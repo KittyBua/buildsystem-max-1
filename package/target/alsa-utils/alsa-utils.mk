@@ -25,7 +25,7 @@ $(D)/alsa-utils: bootstrap ncurses alsa-lib
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		sed -ir -r "s/(amidi|aplay|iecset|speaker-test|seq|alsaucm|topology)//g" Makefile.am ;\
-		autoreconf -fi -I $(TARGET_DIR)/usr/share/aclocal $(SILENT_OPT); \
+		autoreconf -fi -I $(TARGET_DIR)/usr/share/aclocal; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

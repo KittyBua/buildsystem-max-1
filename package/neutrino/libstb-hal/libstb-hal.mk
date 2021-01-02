@@ -51,9 +51,9 @@ $(D)/libstb-hal.config.status:
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
 	test -d $(LIBSTB_HAL_OBJ_DIR) || mkdir -p $(LIBSTB_HAL_OBJ_DIR)
 	cd $(LIBSTB_HAL_OBJ_DIR); \
-		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh $(SILENT_OPT); \
+		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh; \
 		$(BUILD_ENV) \
-		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/configure $(SILENT_OPT) \
+		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/configure \
 			--host=$(TARGET) \
 			--build=$(BUILD) \
 			--prefix=/usr \

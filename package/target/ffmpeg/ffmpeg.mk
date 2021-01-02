@@ -315,7 +315,7 @@ $(D)/ffmpeg: bootstrap openssl zlib bzip2 freetype rtmpdump libass libxml2 alsa-
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		./configure $(SILENT_OPT) \
+		./configure \
 			--prefix=$(prefix) \
 			--datadir=$(REMOVE_datarootdir) \
 			--enable-cross-compile \

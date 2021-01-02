@@ -19,7 +19,7 @@ $(D)/libdvdnav: bootstrap libdvdread
 	$(PKG_CHDIR); \
 		$(BUILD_ENV) \
 		libtoolize --copy --force --quiet --ltdl; \
-		autoreconf -fi $(SILENT_OPT); \
+		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

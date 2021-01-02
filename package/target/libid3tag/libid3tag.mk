@@ -14,7 +14,7 @@ $(D)/libid3tag: bootstrap zlib
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		touch NEWS AUTHORS ChangeLog; \
-		autoreconf -fi $(SILENT_OPT); \
+		autoreconf -fi; \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--enable-shared=yes \

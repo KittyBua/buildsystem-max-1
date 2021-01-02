@@ -28,7 +28,7 @@ $(D)/freetype: bootstrap zlib libpng
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR)/builds/unix; \
-		libtoolize --force --copy $(SILENT_OPT); \
+		libtoolize --force --copy; \
 		aclocal -I .; \
 		autoconf
 	$(PKG_CHDIR); \

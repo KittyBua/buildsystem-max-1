@@ -16,7 +16,7 @@ $(D)/host-python: bootstrap
 		autoconf; \
 		CONFIG_SITE= \
 		OPT="$(HOST_CFLAGS)" \
-		./configure $(SILENT_OPT) \
+		./configure \
 			--without-cxx-main \
 			--with-threads \
 			; \
@@ -25,7 +25,7 @@ $(D)/host-python: bootstrap
 		mv Parser/pgen ./hostpgen; \
 		\
 		$(MAKE) distclean; \
-		./configure $(SILENT_OPT) \
+		./configure \
 			--prefix=$(HOST_DIR) \
 			--sysconfdir=$(HOST_DIR)/etc \
 			--without-cxx-main \

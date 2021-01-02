@@ -13,10 +13,10 @@ $(D)/host-opkg: bootstrap host-libarchive
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		./autogen.sh $(SILENT_OPT); \
+		./autogen.sh; \
 		CFLAGS="-I$(HOST_DIR)/include" \
 		LDFLAGS="-L$(HOST_DIR)/lib" \
-		./configure $(SILENT_OPT) \
+		./configure \
 			PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig \
 			--prefix= \
 			--disable-curl \

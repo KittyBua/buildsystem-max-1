@@ -20,7 +20,7 @@ $(D)/djmount: bootstrap libupnp libfuse
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		touch libupnp/config.aux/config.rpath; \
-		autoreconf -fi $(SILENT_OPT); \
+		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

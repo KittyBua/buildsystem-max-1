@@ -16,8 +16,8 @@ $(D)/aio-grab: bootstrap zlib libpng libjpeg-turbo
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
-		autoreconf -fi $(SILENT_OPT); \
-		automake --foreign --include-deps $(SILENT_OPT); \
+		autoreconf -fi; \
+		automake --foreign --include-deps; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

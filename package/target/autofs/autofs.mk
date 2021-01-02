@@ -29,7 +29,7 @@ $(D)/autofs: bootstrap libtirpc e2fsprogs openssl libxml2
 		export ac_cv_path_KRB5_CONFIG=no; \
 		export ac_cv_linux_procfs=yes; \
 		export ac_cv_path_RANLIB=$(TARGET_RANLIB); \
-		autoreconf -fi $(SILENT_OPT); \
+		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE) SUBDIRS="lib daemon modules" DONTSTRIP=1; \
 		$(MAKE) SUBDIRS="lib daemon modules" install DESTDIR=$(TARGET_DIR)

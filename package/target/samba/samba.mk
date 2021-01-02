@@ -70,7 +70,7 @@ $(D)/samba: bootstrap
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		cd source3; \
-		./autogen.sh $(SILENT_OPT); \
+		./autogen.sh; \
 		$(BUILD_ENV) \
 		ac_cv_lib_attr_getxattr=no \
 		ac_cv_search_getxattr=no \

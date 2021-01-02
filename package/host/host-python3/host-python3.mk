@@ -19,7 +19,7 @@ $(D)/host-python3: bootstrap
 		autoconf; \
 		CONFIG_SITE= \
 		OPT="$(HOST_CFLAGS)" \
-		./configure $(SILENT_OPT) \
+		./configure \
 			--prefix=$(HOST_DIR) \
 			--without-ensurepip \
 			--without-cxx-main \

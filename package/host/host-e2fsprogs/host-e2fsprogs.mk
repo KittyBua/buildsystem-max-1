@@ -14,7 +14,7 @@ $(D)/host-e2fsprogs: bootstrap
 	$(PKG_CHDIR); \
 		export PKG_CONFIG=/usr/bin/pkg-config; \
 		export PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig; \
-		./configure $(SILENT_OPT); \
+		./configure; \
 		$(MAKE)
 	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/resize/resize2fs $(HOST_DIR)/bin/
 	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/misc/mke2fs $(HOST_DIR)/bin/

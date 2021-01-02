@@ -44,7 +44,7 @@ $(D)/e2fsprogs: bootstrap util-linux
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		PATH=$(BUILD_DIR)/e2fsprogs-$(E2FSPROGS_VER):$(PATH) \
-		autoreconf -fi $(SILENT_OPT); \
+		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

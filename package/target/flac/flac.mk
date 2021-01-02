@@ -31,7 +31,7 @@ $(D)/flac: bootstrap
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		touch NEWS AUTHORS ChangeLog; \
-		autoreconf -fi $(SILENT_OPT); \
+		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

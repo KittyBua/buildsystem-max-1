@@ -28,7 +28,7 @@ $(D)/dropbearmulti: bootstrap
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_CHDIR); \
 		$(BUILD_ENV) \
-		autoreconf -fi $(SILENT_OPT); \
+		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE) PROGRAMS="dropbear scp dropbearkey" MULTI=1; \
 		$(MAKE) PROGRAMS="dropbear scp dropbearkey" MULTI=1 install DESTDIR=$(TARGET_DIR)

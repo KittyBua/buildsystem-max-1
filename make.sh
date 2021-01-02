@@ -13,10 +13,8 @@ fi
 ##############################################
 
 if [ "$1" == -h ] || [ "$1" == --help ]; then
-	echo "Usage: $0 [-v | --verbose | -q | --quiet] [Parameter1 Parameter2 ... Parameter6]"
+	echo "Usage: $0 [Parameter1 Parameter2 ... Parameter6]"
 	echo
-	echo "-v or --verbose : verbose build (very noisy!)"
-	echo "-q or --quiet   : quiet build, fastest, almost silent"
 	echo "Parameter 1     : target system"
 	echo "Parameter 2     : Toolchain gcc version"
 	echo "Parameter 3     : optimization"
@@ -41,19 +39,6 @@ echo " | |_) | |_| | | | (_| \__ \ |_| \__ \ ||  __/ | | | | | "
 echo " |_.__/\__,_\|_|_|\__,_|___/\__, |___/\__\___|_| |_| |_| "
 echo "                             __/ |                       "
 echo "                            |___/                        "
-
-##############################################
-
-if [ "$1" == -v ] || [ "$1" == --verbose ]; then
-	shift
-	KBUILD_VERBOSE=1
-elif [ "$1" == -q ] || [ "$1" == --quiet ]; then
-	shift
-	KBUILD_VERBOSE=0
-else
-	KBUILD_VERBOSE=1
-fi
-echo "KBUILD_VERBOSE=$KBUILD_VERBOSE" > .config
 
 ##############################################
 

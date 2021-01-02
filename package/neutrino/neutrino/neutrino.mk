@@ -227,9 +227,9 @@ $(D)/neutrino.config.status:
 	rm -rf $(NEUTRINO_OBJ_DIR)
 	test -d $(NEUTRINO_OBJ_DIR) || mkdir -p $(NEUTRINO_OBJ_DIR)
 	cd $(NEUTRINO_OBJ_DIR); \
-		$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh $(SILENT_OPT); \
+		$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh; \
 		$(BUILD_ENV) \
-		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure $(SILENT_OPT) \
+		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure \
 			--host=$(TARGET) \
 			--build=$(BUILD) \
 			--prefix=/usr \

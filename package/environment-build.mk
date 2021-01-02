@@ -17,7 +17,7 @@ PARALLEL_JOBS := $(shell echo $$((1 + `getconf _NPROCESSORS_ONLN 2>/dev/null || 
 else
 PARALLEL_JOBS := $(BS_JLEVEL)
 endif
-override MAKE = make $(if $(findstring j,$(filter-out --%,$(MAKEFLAGS))),,-j$(PARALLEL_JOBS)) $(SILENT_OPT)
+override MAKE = make $(if $(findstring j,$(filter-out --%,$(MAKEFLAGS))),,-j$(PARALLEL_JOBS))
 
 MAKEFLAGS += --no-print-directory
 
@@ -257,8 +257,7 @@ BUILD_ENV += \
 CONFIGURE_OPTS = \
 	--build=$(BUILD) \
 	--host=$(TARGET) \
-	--target=$(TARGET) \
-	$(SILENT_CONFIGURE)
+	--target=$(TARGET)
 
 CONFIGURE_TARGET_OPTS = \
 	--program-prefix= \
@@ -280,12 +279,11 @@ CONFIGURE_TARGET_OPTS = \
 	$(PKG_CONF_OPTS)
 
 CONFIGURE = \
-	test -f ./configure || ./autogen.sh $(SILENT_OPT) && \
+	test -f ./configure || ./autogen.sh && \
 	$(BUILD_ENV) \
 	./configure \
 	$(CONFIGURE_OPTS) \
-	$(CONFIGURE_TARGET_OPTS) \
-	$(SILENT_OPT)
+	$(CONFIGURE_TARGET_OPTS)
 
 # -----------------------------------------------------------------------------
 
