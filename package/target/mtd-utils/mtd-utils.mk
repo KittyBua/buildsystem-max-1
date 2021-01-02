@@ -4,7 +4,7 @@
 MTD_UTILS_VER    = 1.5.2
 MTD_UTILS_DIR    = mtd-utils-$(MTD_UTILS_VER)
 MTD_UTILS_SOURCE = mtd-utils-$(MTD_UTILS_VER).tar.bz2
-MTD_UTILS_SITE   = ftp://ftp.infradead.org/pub/mtd-utils
+MTD_UTILS_SITE   = https://infraroot.at/pub/mtd
 
 $(D)/mtd-utils: bootstrap zlib lzo e2fsprogs
 	$(START_BUILD)
