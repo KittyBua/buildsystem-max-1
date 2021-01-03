@@ -30,7 +30,7 @@ $(D)/openssh: bootstrap zlib openssl
 		CC=$(TARGET_CC); \
 		./configure \
 			$(CONFIGURE_OPTS) \
-			$(CONFIGURE_TARGET_OPTS) \
+			$(TARGET_CONFIGURE_OPTS) \
 			; \
 		$(MAKE); \
 		$(MAKE) install-nokeys DESTDIR=$(TARGET_DIR)

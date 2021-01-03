@@ -186,8 +186,8 @@ PATH := $(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
 # -----------------------------------------------------------------------------
 
 PKG_CONFIG        = $(HOST_DIR)/bin/$(TARGET)-pkg-config
-PKG_CONFIG_LIBDIR = $(TARGET_LIB_DIR)/pkgconfig
 PKG_CONFIG_PATH   = $(TARGET_LIB_DIR)/pkgconfig
+PKG_CONFIG_LIBDIR = $(TARGET_LIB_DIR)/pkgconfig
 
 # -----------------------------------------------------------------------------
 
@@ -259,7 +259,7 @@ CONFIGURE_OPTS = \
 	--host=$(TARGET) \
 	--target=$(TARGET)
 
-CONFIGURE_TARGET_OPTS = \
+TARGET_CONFIGURE_OPTS = \
 	--program-prefix= \
 	--program-suffix= \
 	--prefix=$(prefix) \
@@ -283,7 +283,7 @@ CONFIGURE = \
 	$(BUILD_ENV) \
 	./configure \
 	$(CONFIGURE_OPTS) \
-	$(CONFIGURE_TARGET_OPTS)
+	$(TARGET_CONFIGURE_OPTS)
 
 # -----------------------------------------------------------------------------
 

@@ -97,7 +97,7 @@ $(D)/samba: bootstrap
 		ac_cv_path_PYTHON_CONFIG="" \
 		libreplace_cv_HAVE_GETADDRINFO=no \
 		libreplace_cv_READDIR_NEEDED=no \
-		./configure $(CONFIGURE_OPTS) $(CONFIGURE_TARGET_OPTS); \
+		./configure $(CONFIGURE_OPTS) $(TARGET_CONFIGURE_OPTS); \
 		$(MAKE); \
 		$(MAKE) installservers SBIN_PROGS="bin/samba_multicall" DESTDIR=$(TARGET_DIR) LOCALEDIR=$(REMOVE_localedir)
 	ln -sf samba_multicall $(TARGET_DIR)/usr/sbin/nmbd
