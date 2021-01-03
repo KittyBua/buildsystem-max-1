@@ -156,7 +156,7 @@ define REWRITE_LIBTOOL
 endef
 
 # rewrite libtool libraries automatically
-REWRITE_LIBTOOL_LA = $(Q)$(call REWRITE_LIBTOOL,$(TARGET_LIB_DIR))
+REWRITE_LIBTOOL_LA = @$(call REWRITE_LIBTOOL,$(TARGET_LIB_DIR))
 
 # -----------------------------------------------------------------------------
 
@@ -167,7 +167,7 @@ REWRITE_CONFIG_RULES = \
 	 s,^libdir=.*,libdir='$(TARGET_LIB_DIR)',; \
 	 s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
 
-REWRITE_CONFIG = $(Q)$(SED) $(REWRITE_CONFIG_RULES)
+REWRITE_CONFIG = @$(SED) $(REWRITE_CONFIG_RULES)
 
 # -----------------------------------------------------------------------------
 
@@ -177,7 +177,7 @@ endef
 
 define TOUCH
 	@$(call MESSAGE,"Building completed")
-	$(Q)touch $@
+	@touch $@
 endef
 
 # -----------------------------------------------------------------------------
@@ -264,79 +264,6 @@ define draw_line
 	fi; \
 	echo
 endef
-
-# -----------------------------------------------------------------------------
-
-archives-list:
-	@rm -f $(BUILD_DIR)/$(@)
-	@make -qp | grep --only-matching '^\$(DL_DIR).*:' | sed "s|:||g" > $(BUILD_DIR)/$(@)
-
-DOCLEANUP  ?= no
-GETMISSING ?= no
-archives-info: directories archives-list
-	@grep --only-matching '^\$$(DL_DIR).*:' package/bootstrap.mk | sed "s|:||g" | \
-	while read target; do \
-		found=false; \
-		for makefile in package/*/*/*.mk; do \
-			if grep -q "$$target" $$makefile; then \
-				found=true; \
-			fi; \
-			if [ "$$found" = "true" ]; then \
-				continue; \
-			fi; \
-		done; \
-		if [ "$$found" = "false" ]; then \
-			echo -e "[$(TERM_RED) !! $(TERM_NORMAL)] $$target"; \
-		fi; \
-	done;
-	@echo "[ ** ] Unused archives for this build system"
-	@find $(DL_DIR)/ -maxdepth 1 -type f | \
-	while read archive; do \
-		if ! grep -q $$archive $(BUILD_DIR)/archives-list; then \
-			echo -e "[$(TERM_YELLOW) rm $(TERM_NORMAL)] $$archive"; \
-			if [ "$(DOCLEANUP)" = "yes" ]; then \
-				rm $$archive; \
-			fi; \
-		fi; \
-	done;
-	@echo "[ ** ] Missing archives for this build system"
-	@cat $(BUILD_DIR)/archives-list | \
-	while read archive; do \
-		if [ -e $$archive ]; then \
-			#echo -e "[$(TERM_GREEN) ok $(TERM_NORMAL)] $$archive"; \
-			true; \
-		else \
-			echo -e "[$(TERM_YELLOW) -- $(TERM_NORMAL)] $$archive"; \
-			if [ "$(GETMISSING)" = "yes" ]; then \
-				make $$archive; \
-			fi; \
-		fi; \
-	done;
-	@$(REMOVE)/archives-list
-
-# -----------------------------------------------------------------------------
-
-# FIXME - how to resolve variables while grepping makefiles?
-patches-info:
-	@echo "[ ** ] Unused patches"
-	@for patch in package/*/*/patches/*; do \
-		if [ ! -f $$patch ]; then \
-			continue; \
-		fi; \
-		patch=$${patch##*/}; \
-		found=false; \
-		for makefile in package/*/*/*.mk; do \
-			if grep -q "$$patch" $$makefile; then \
-				found=true; \
-			fi; \
-			if [ "$$found" = "true" ]; then \
-				continue; \
-			fi; \
-		done; \
-		if [ "$$found" = "false" ]; then \
-			echo -e "[$(TERM_RED) !! $(TERM_NORMAL)] $$patch"; \
-		fi; \
-	done;
 
 # -----------------------------------------------------------------------------
 
