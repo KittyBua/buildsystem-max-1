@@ -15,7 +15,7 @@ Index: busybox-1.20.2/util-linux/mount.c
 ===================================================================
 --- busybox-1.20.2.orig/util-linux/mount.c
 +++ busybox-1.20.2/util-linux/mount.c
-@@ -727,7 +727,13 @@ static int mount_it_now(struct mntent *m
+@@ -738,7 +738,13 @@ static int mount_it_now(struct mntent *m
  				break;
  			errno = errno_save;
  		}
