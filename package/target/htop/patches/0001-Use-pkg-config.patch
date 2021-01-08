@@ -11,7 +11,7 @@ diff --git a/configure.ac b/configure.ac
 index 559dc4d..77aea22 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -202,10 +202,10 @@
+@@ -205,10 +205,10 @@
  
  AC_ARG_ENABLE(unicode, [AS_HELP_STRING([--enable-unicode], [enable Unicode support])], ,enable_unicode="yes")
  if test "x$enable_unicode" = xyes; then
@@ -26,9 +26,9 @@ index 559dc4d..77aea22 100644
         HTOP_CHECK_LIB([ncursesw6], [addnwstr], [HAVE_LIBNCURSESW],
          HTOP_CHECK_LIB([ncursesw], [addnwstr], [HAVE_LIBNCURSESW],
           HTOP_CHECK_LIB([ncurses], [addnwstr], [HAVE_LIBNCURSESW],
-@@ -218,8 +218,8 @@
-          [AC_CHECK_HEADERS([ncurses/curses.h],[:],
-             [AC_CHECK_HEADERS([ncurses.h],[:],[missing_headers="$missing_headers $ac_header"])])])])
+@@ -225,8 +225,8 @@
+    # (at this point we already link against a working ncurses library with wide character support)
+    AC_SEARCH_LIBS([keypad], [tinfow tinfo])
  else
 -   HTOP_CHECK_SCRIPT([ncurses6], [refresh], [HAVE_LIBNCURSES], "ncurses6-config",
 -    HTOP_CHECK_SCRIPT([ncurses], [refresh], [HAVE_LIBNCURSES], "ncurses5-config",
