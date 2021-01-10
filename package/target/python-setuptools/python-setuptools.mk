@@ -11,6 +11,7 @@ $(D)/python-setuptools: bootstrap python
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(PYTHON_BUILD); \
 		$(PYTHON_INSTALL)

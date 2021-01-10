@@ -11,6 +11,7 @@ $(D)/host-glib2: bootstrap host-meson host-libffi
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		export PKG_CONFIG=/usr/bin/pkg-config; \
 		export PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig; \

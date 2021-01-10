@@ -15,6 +15,7 @@ $(D)/popt: bootstrap
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(CONFIGURE); \
 		$(MAKE); \

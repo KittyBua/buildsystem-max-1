@@ -19,6 +19,7 @@ $(D)/tzdata: bootstrap host-tzcode
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	mkdir $(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/zoneinfo
 	$(call PKG_UNPACK,$(PKG_BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		unset ${!LC_*}; LANG=POSIX; LC_ALL=POSIX; export LANG LC_ALL; \
 		$(HOST_DIR)/bin/zic -b fat -d zoneinfo.tmp $(TZDATA_ZONELIST); \

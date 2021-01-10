@@ -11,6 +11,7 @@ $(D)/wpa-supplicant: bootstrap libnl openssl wireless-tools
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/wpa_supplicant.config wpa_supplicant/.config; \
 		$(BUILD_ENV) \

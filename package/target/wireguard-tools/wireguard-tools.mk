@@ -13,6 +13,7 @@ $(D)/wireguard-tools: bootstrap kernel libmnl openresolv
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(BUILD_ENV) \
 		$(MAKE) -C src $(WIREGUARD_TOOLS_MAKE_OPTS) PREFIX=/usr; \

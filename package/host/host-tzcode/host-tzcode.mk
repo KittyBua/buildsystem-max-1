@@ -12,6 +12,7 @@ $(D)/host-tzcode: bootstrap
 	$(call PKG_DOWNLOAD,$(TZDATA_SOURCE))
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(MKDIR)/$(PKG_DIR)
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		tar -xf $(DL_DIR)/$(HOST_TZCODE_SOURCE); \
 		tar -xf $(DL_DIR)/$(TZDATA_SOURCE); \
