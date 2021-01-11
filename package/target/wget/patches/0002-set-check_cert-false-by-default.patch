@@ -1,6 +1,6 @@
 --- a/src/init.c
 +++ b/src/init.c
-@@ -445,7 +445,7 @@ defaults (void)
+@@ -449,7 +449,7 @@ defaults (void)
    opt.retr_symlinks = true;
  
  #ifdef HAVE_SSL
