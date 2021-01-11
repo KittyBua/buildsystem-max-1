@@ -6,9 +6,6 @@ HD61_MALI_MODULE_DIR    = $(HD61_MALI_MODULE_VER)
 HD61_MALI_MODULE_SOURCE = $(HD61_MALI_MODULE_VER).tgz
 HD61_MALI_MODULE_SITE   = https://developer.arm.com/-/media/Files/downloads/mali-drivers/kernel/mali-utgard-gpu
 
-HD61_MALI_MODULE_PATCH = \
-	hi3798mv200-support.patch
-
 HD61_MALI_MODULE_MAKEVARS = \
 	M=$(PKG_BUILD_DIR)/driver/src/devicedrv/mali \
 	EXTRA_CFLAGS=" \
@@ -25,8 +22,8 @@ $(D)/hd61-mali-module: bootstrap kernel hd61-libgles-header
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(call apply_patches,$(PKG_PATCH)); \
 		$(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKEVARS) \
 		$(HD61_MALI_MODULE_MAKEVARS); \
 		$(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKEVARS) \
