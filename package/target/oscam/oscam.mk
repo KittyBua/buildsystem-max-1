@@ -63,7 +63,7 @@ $(D)/oscam.do_prepare:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(SHELL) ./config.sh $(PKG_CONF_OPTS)
+		$(SHELL) ./config.sh $($(PKG)_CONF_OPTS)
 	@touch $@
 
 $(D)/oscam.do_compile:

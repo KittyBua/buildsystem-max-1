@@ -12,7 +12,7 @@ empty :=
 space := $(empty) $(empty)
 
 # MESSAGE Macro -- display a message in bold type
-MESSAGE = echo "$(TERM_BOLD)>>> $(PKG_NAME) $(PKG_VER) $(call qstrip,$(1))$(TERM_RESET)"
+MESSAGE = echo "$(TERM_BOLD)>>> $($(PKG)_NAME) $($(PKG)_VER) $(call qstrip,$(1))$(TERM_RESET)"
 TERM_BOLD := $(shell tput smso 2>/dev/null)
 TERM_RESET := $(shell tput rmso 2>/dev/null)
 
@@ -70,13 +70,13 @@ endef
 # download archives into archives directory
 define PKG_DOWNLOAD
 	@( \
-	if [ $(PKG_VER) == "git" ]; then \
+	if [ $($(PKG)_VER) == "git" ]; then \
 	  $(call MESSAGE,"Downloading") ; \
-	  $(GET-GIT-SOURCE) $(PKG_SITE)/$(PKG_SOURCE) $(DL_DIR)/$(PKG_SOURCE); \
+	  $(GET-GIT-SOURCE) $($(PKG)_SITE)/$(PKG_SOURCE) $(DL_DIR)/$(PKG_SOURCE); \
 	else \
 	  if [ ! -f $(DL_DIR)/$(PKG_SOURCE) ]; then \
 	    $(call MESSAGE,"Downloading") ; \
-	    wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P $(DL_DIR) $(PKG_SITE)/$(1); \
+	    wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P $(DL_DIR) $($(PKG)_SITE)/$(1); \
 	  fi; \
 	fi; \
 	)

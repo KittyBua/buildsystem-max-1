@@ -308,6 +308,21 @@ ifeq ($(TARGET_ARCH), mips)
 FFMPEG_CONF_OPTS += --cpu=generic
 endif
 
+FFMPEG_CONF_OPTS += \
+	--prefix=$(prefix) \
+	--datadir=$(REMOVE_datarootdir) \
+	--enable-cross-compile \
+	--cross-prefix=$(TARGET_CROSS) \
+	--arch=$(TARGET_ARCH) \
+	--target-os=linux \
+	--disable-debug \
+	--disable-stripping \
+	--disable-static \
+	--enable-shared \
+	--pkg-config="$(PKG_CONFIG)" \
+	--extra-cflags="$(TARGET_CFLAGS) -I$(TARGET_INCLUDE_DIR)/libxml2" \
+	--extra-ldflags="$(TARGET_LDFLAGS) -lrt"
+
 $(D)/ffmpeg: bootstrap openssl zlib bzip2 freetype rtmpdump libass libxml2 alsa-lib
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -315,22 +330,7 @@ $(D)/ffmpeg: bootstrap openssl zlib bzip2 freetype rtmpdump libass libxml2 alsa-
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		./configure \
-			--prefix=$(prefix) \
-			--datadir=$(REMOVE_datarootdir) \
-			--enable-cross-compile \
-			--cross-prefix=$(TARGET_CROSS) \
-			--arch=$(TARGET_ARCH) \
-			--target-os=linux \
-			--disable-debug \
-			--disable-stripping \
-			--disable-static \
-			--enable-shared \
-			--pkg-config="$(PKG_CONFIG)" \
-			--extra-cflags="$(TARGET_CFLAGS) -I$(TARGET_INCLUDE_DIR)/libxml2" \
-			--extra-ldflags="$(TARGET_LDFLAGS) -lrt" \
-			$(PKG_CONF_OPTS) \
-			; \
+		./configure $($(PKG)_CONF_OPTS); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(PKG_REMOVE)

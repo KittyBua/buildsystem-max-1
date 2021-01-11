@@ -53,20 +53,12 @@ HOST_DIR     = $(BASE_DIR)/host
 
 # -----------------------------------------------------------------------------
 
-PKG_NAME        = $(subst -config,,$(subst -upgradeconfig,,$(basename $(@F))))
-PKG             = $(call UPPERCASE,$(PKG_NAME))
-PKG_UPPER       = $(call UPPERCASE,$(PKG_NAME))
-PKG_LOWER       = $(call LOWERCASE,$(PKG_NAME))
-PKG_VER         = $($(PKG_UPPER)_VER)
-PKG_DIR         = $($(PKG_UPPER)_DIR)
-PKG_SOURCE      = $($(PKG_UPPER)_SOURCE)
-PKG_SITE        = $($(PKG_UPPER)_SITE)
-#PKG_PATCH       = $($(PKG_UPPER)_PATCH)
-PKG_CONF_OPTS   = $($(PKG_UPPER)_CONF_OPTS)
-PKG_BUILD_DIR   = $(BUILD_DIR)/$(PKG_DIR)
-PKG_PACKAGE_DIR = $(BASE_DIR)/package/*/$(PKG_NAME)
-PKG_FILES_DIR   = $(PKG_PACKAGE_DIR)/files
-PKG_PATCHES_DIR = $(PKG_PACKAGE_DIR)/patches
+pkgname         = $(subst -config,,$(subst -upgradeconfig,,$(basename $(@F))))
+PKG             = $(call UPPERCASE,$(pkgname))
+PKG_SOURCE      = $($(PKG)_SOURCE)
+PKG_BUILD_DIR   = $(BUILD_DIR)/$($(PKG)_DIR)
+PKG_FILES_DIR   = $(BASE_DIR)/package/*/$(pkgname)/files
+PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(pkgname)/patches
 
 PKG_CHDIR       = $(CD) $(PKG_BUILD_DIR)
 PKG_REMOVE      = $(Q)rm -rf $(PKG_BUILD_DIR)
@@ -276,7 +268,7 @@ TARGET_CONFIGURE_OPTS = \
 	--sbindir=$(sbindir) \
 	--sharedstatedir=$(sharedstatedir) \
 	--sysconfdir=$(sysconfdir) \
-	$(PKG_CONF_OPTS)
+	$($(PKG)_CONF_OPTS)
 
 CONFIGURE = \
 	test -f ./configure || ./autogen.sh && \
@@ -313,7 +305,7 @@ CMAKE_OPTS = \
 	-DCMAKE_RANLIB="$(TARGET_RANLIB)" \
 	-DCMAKE_READELF="$(TARGET_READELF)" \
 	-DCMAKE_STRIP="$(TARGET_STRIP)" \
-	$(PKG_CONF_OPTS)
+	$($(PKG)_CONF_OPTS)
 
 CMAKE = \
 	rm -f CMakeCache.txt; \

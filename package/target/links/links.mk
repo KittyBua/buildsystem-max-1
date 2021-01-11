@@ -45,7 +45,7 @@ $(D)/links: bootstrap freetype libpng libjpeg-turbo openssl
 		echo "english" > index.txt; \
 		echo "german" >> index.txt; \
 		./gen-intl
-	$(CHDIR)/$(PKG_DIR); \
+	$(CHDIR)/$($(PKG)_DIR); \
 		autoreconf -vfi; \
 		$(CONFIGURE); \
 		$(MAKE); \

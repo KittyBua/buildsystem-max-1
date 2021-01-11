@@ -20,7 +20,7 @@ $(D)/ushare: bootstrap libupnp
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(BUILD_ENV) \
-		./configure $(PKG_CONF_OPTS); \
+		./configure $($(PKG)_CONF_OPTS); \
 		ln -sf ../config.h src/; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

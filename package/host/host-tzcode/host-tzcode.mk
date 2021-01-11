@@ -11,7 +11,7 @@ $(D)/host-tzcode: bootstrap
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(TZDATA_SOURCE))
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(MKDIR)/$(PKG_DIR)
+	$(MKDIR)/$($(PKG)_DIR)
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		tar -xf $(DL_DIR)/$(HOST_TZCODE_SOURCE); \
