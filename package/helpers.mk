@@ -11,11 +11,6 @@ comma := ,
 empty :=
 space := $(empty) $(empty)
 
-# MESSAGE Macro -- display a message in bold type
-MESSAGE = echo "$(TERM_BOLD)>>> $($(PKG)_NAME) $($(PKG)_VER) $(call qstrip,$(1))$(TERM_RESET)"
-TERM_BOLD := $(shell tput smso 2>/dev/null)
-TERM_RESET := $(shell tput rmso 2>/dev/null)
-
 # Reverse the orders of words in a list. Again, inspired by the gmsl
 # 'reverse' macro.
 reverse = $(if $(1),$(call reverse,$(wordlist 2,$(words $(1)),$(1))) $(firstword $(1)))
