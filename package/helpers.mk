@@ -20,11 +20,6 @@ reverse = $(if $(1),$(call reverse,$(wordlist 2,$(words $(1)),$(1))) $(firstword
 # slashes, colons (OK in filenames but not in rules), and spaces.
 sanitize = $(subst $(space),_,$(subst :,_,$(subst /,_,$(strip $(1)))))
 
-# MESSAGE Macro -- display a message in bold type
-MESSAGE = echo "$(TERM_BOLD)>>> $(PKG_NAME) $(PKG_VER) $(call qstrip,$(1))$(TERM_RESET)"
-TERM_BOLD := $(shell tput smso 2>/dev/null)
-TERM_RESET := $(shell tput rmso 2>/dev/null)
-
 # Utility functions for 'find'
 # findfileclauses(filelist) => -name 'X' -o -name 'Y'
 findfileclauses = $(call notfirstword,$(patsubst %,-o -name '%',$(1)))
@@ -141,17 +136,20 @@ REWRITE_LIBTOOL_RULES = \
 REWRITE_LIBTOOL_TAG = rewritten=1
 
 define REWRITE_LIBTOOL
+	@$(call MESSAGE,"Fixing libtool files")
+	@( \
 	for la in $$(find $(1) -name "*.la" -type f); do \
 	  if ! grep -q "$(REWRITE_LIBTOOL_TAG)" $${la}; then \
 	    echo -e "$(TERM_YELLOW)Rewriting $${la#$(1)/}$(TERM_NORMAL)"; \
 	    $(SED) $(REWRITE_LIBTOOL_RULES) $${la}; \
 	    echo -e "\n# Adapted to buildsystem\n$(REWRITE_LIBTOOL_TAG)" >> $${la}; \
 	  fi; \
-	done
+	done; \
+	)
 endef
 
 # rewrite libtool libraries automatically
-REWRITE_LIBTOOL_LA = @$(call REWRITE_LIBTOOL,$(TARGET_LIB_DIR))
+REWRITE_LIBTOOL_LA = $(call REWRITE_LIBTOOL,$(TARGET_LIB_DIR))
 
 # -----------------------------------------------------------------------------
 
@@ -167,13 +165,28 @@ REWRITE_CONFIG = @$(SED) $(REWRITE_CONFIG_RULES)
 # -----------------------------------------------------------------------------
 
 define START_BUILD
+	@make $($(PKG)_DEPS)
 	@$(call MESSAGE,"Building")
 endef
 
 define TOUCH
 	@$(call MESSAGE,"Building completed")
 	@touch $@
+	@echo ""
 endef
+
+# clean up
+define PKG_REMOVE
+	@$(call MESSAGE,"Remove")
+	@( \
+	rm -rf $(PKG_BUILD_DIR); \
+	)
+endef
+
+# MESSAGE Macro -- display a message in bold type
+MESSAGE = echo "$(TERM_BOLD)>>> $(pkgname) $($(PKG)_VER) $(call qstrip,$(1))$(TERM_RESET)"
+TERM_BOLD := $(shell tput smso 2>/dev/null)
+TERM_RESET := $(shell tput rmso 2>/dev/null)
 
 # -----------------------------------------------------------------------------
 

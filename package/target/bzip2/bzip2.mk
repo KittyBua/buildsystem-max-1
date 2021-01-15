@@ -5,8 +5,9 @@ BZIP2_VER    = 1.0.8
 BZIP2_DIR    = bzip2-$(BZIP2_VER)
 BZIP2_SOURCE = bzip2-$(BZIP2_VER).tar.gz
 BZIP2_SITE   = https://sourceware.org/pub/bzip2
+BZIP2_DEPS   = bootstrap
 
-$(D)/bzip2: bootstrap
+$(D)/bzip2:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

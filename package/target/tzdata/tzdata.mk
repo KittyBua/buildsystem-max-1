@@ -5,6 +5,7 @@ TZDATA_VER    = 2020d
 TZDATA_DIR    = timezone
 TZDATA_SOURCE = tzdata$(TZDATA_VER).tar.gz
 TZDATA_SITE   = https://ftp.iana.org/tz/releases
+TZDATA_DEPS   = bootstrap host-tzcode
 
 TZDATA_ZONELIST = \
 	africa antarctica asia australasia \
@@ -13,7 +14,7 @@ TZDATA_ZONELIST = \
 
 TZDATA_LOCALTIME = CET
 
-$(D)/tzdata: bootstrap host-tzcode
+$(D)/tzdata:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

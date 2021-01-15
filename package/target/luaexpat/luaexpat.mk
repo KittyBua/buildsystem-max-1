@@ -5,6 +5,7 @@ LUAEXPAT_VER    = 1.3.3
 LUAEXPAT_DIR    = luaexpat-$(LUAEXPAT_VER)
 LUAEXPAT_SOURCE = luaexpat-$(LUAEXPAT_VER).tar.gz
 LUAEXPAT_SITE   = $(call github,tomasguisasola,luaexpat,v$(LUAEXPAT_VER))
+LUAEXPAT_DEPS   = bootstrap lua expat
 
 define LUAEXPAT_POST_PATCH
 	$(SED) 's|^EXPAT_INC=.*|EXPAT_INC= $(TARGET_INCLUDE_DIR)|' $(PKG_BUILD_DIR)/makefile
@@ -13,7 +14,7 @@ define LUAEXPAT_POST_PATCH
 endef
 LUAEXPAT_POST_PATCH_HOOKS = LUAEXPAT_POST_PATCH
 
-$(D)/luaexpat: bootstrap lua expat
+$(D)/luaexpat:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

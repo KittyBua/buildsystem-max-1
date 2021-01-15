@@ -5,12 +5,13 @@ LIBFFI_VER    = 3.2.1
 LIBFFI_DIR    = libffi-$(LIBFFI_VER)
 LIBFFI_SOURCE = libffi-$(LIBFFI_VER).tar.gz
 LIBFFI_SITE   = ftp://sourceware.org/pub/libffi
+LIBFFI_DEPS   = bootstrap
 
 LIBFFI_CONF_OPTS = \
 	--disable-static \
 	--enable-builddir=libffi
 
-$(D)/libffi: bootstrap
+$(D)/libffi:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

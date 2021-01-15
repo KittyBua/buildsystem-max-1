@@ -5,8 +5,9 @@ SYSVINIT_VER    = 2.98
 SYSVINIT_DIR    = sysvinit-$(SYSVINIT_VER)
 SYSVINIT_SOURCE = sysvinit-$(SYSVINIT_VER).tar.xz
 SYSVINIT_SITE   = http://download.savannah.nongnu.org/releases/sysvinit
+SYSVINIT_DEPS   = bootstrap
 
-$(D)/sysvinit: bootstrap
+$(D)/sysvinit:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

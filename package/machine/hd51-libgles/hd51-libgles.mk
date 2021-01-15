@@ -5,8 +5,9 @@ HD51_LIBGLES_DATE   = 20191101
 HD51_LIBGLES_VER    = $(HD51_LIBGLES_DATE)
 HD51_LIBGLES_SOURCE = hd51-v3ddriver-$(HD51_LIBGLES_VER).zip
 HD51_LIBGLES_SITE   = http://downloads.mutant-digital.net/v3ddriver
+HD51_LIBGLES_DEPS   = bootstrap
 
-$(D)/hd51-libgles: bootstrap
+$(D)/hd51-libgles:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(TARGET_LIB_DIR))

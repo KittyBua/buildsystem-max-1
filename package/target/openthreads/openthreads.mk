@@ -5,6 +5,7 @@ OPENTHREADS_VER    = 3.2
 OPENTHREADS_DIR    = OpenThreads-$(OPENTHREADS_VER)
 OPENTHREADS_SOURCE = OpenThreads-$(OPENTHREADS_VER).tar.gz
 OPENTHREADS_SITE   = https://sourceforge.net/projects/mxedeps/files
+OPENTHREADS_DEPS   = bootstrap
 
 OPENTHREADS_CONF_OPTS = \
 	-DCMAKE_SUPPRESS_DEVELOPER_WARNINGS="1" \
@@ -12,7 +13,7 @@ OPENTHREADS_CONF_OPTS = \
 	-D_OPENTHREADS_ATOMIC_USE_GCC_BUILTINS_EXITCODE__TRYRUN_OUTPUT="1" \
 	| tail -n +90
 
-$(D)/openthreads: bootstrap
+$(D)/openthreads:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

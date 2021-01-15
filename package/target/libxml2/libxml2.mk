@@ -5,6 +5,7 @@ LIBXML2_VER    = 2.9.10
 LIBXML2_DIR    = libxml2-$(LIBXML2_VER)
 LIBXML2_SOURCE = libxml2-$(LIBXML2_VER).tar.gz
 LIBXML2_SITE   = http://xmlsoft.org/sources
+LIBXML2_DEPS   = bootstrap zlib
 
 LIBXML2_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
@@ -19,7 +20,7 @@ LIBXML2_CONF_OPTS = \
 	--without-lzma \
 	--with-zlib=$(TARGET_DIR)/usr
 
-$(D)/libxml2: bootstrap zlib
+$(D)/libxml2:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

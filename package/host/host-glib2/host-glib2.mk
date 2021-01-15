@@ -5,8 +5,9 @@ HOST_GLIB2_VER    = 2.62.4
 HOST_GLIB2_DIR    = glib-$(HOST_GLIB2_VER)
 HOST_GLIB2_SOURCE = glib-$(HOST_GLIB2_VER).tar.xz
 HOST_GLIB2_SITE   = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(HOST_GLIB2_VER))
+HOST_GLIB2_DEPS   = bootstrap host-meson host-libffi
 
-$(D)/host-glib2: bootstrap host-meson host-libffi
+$(D)/host-glib2:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

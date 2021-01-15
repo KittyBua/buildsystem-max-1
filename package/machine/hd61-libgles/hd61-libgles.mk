@@ -5,8 +5,9 @@ HD61_LIBGLES_DATE   = 20181201
 HD61_LIBGLES_VER    = $(HD61_LIBGLES_DATE)
 HD61_LIBGLES_SOURCE = hd61-mali-$(HD61_LIBGLES_VER).zip
 HD61_LIBGLES_SITE   = http://downloads.mutant-digital.net/hd61
+HD61_LIBGLES_DEPS   = bootstrap
 
-$(D)/hd61-libgles: bootstrap
+$(D)/hd61-libgles:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(TARGET_LIB_DIR))

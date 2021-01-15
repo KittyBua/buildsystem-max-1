@@ -5,6 +5,8 @@ HOST_LUAROCKS_VER    = 3.1.3
 HOST_LUAROCKS_DIR    = luarocks-$(HOST_LUAROCKS_VER)
 HOST_LUAROCKS_SOURCE = luarocks-$(HOST_LUAROCKS_VER).tar.gz
 HOST_LUAROCKS_SITE   = https://luarocks.github.io/luarocks/releases
+HOST_LUAROCKS_DEPS   = bootstrap host-lua
+
 HOST_LUAROCKS_CONFIG = $(HOST_DIR)/etc/luarocks/config-$(LUA_ABIVER).lua
 HOST_LUAROCKS_BINARY = $(HOST_DIR)/bin/luarocks
 
@@ -16,7 +18,7 @@ HOST_LUAROCKS_BUILD_ENV = \
 	TARGET_LDFLAGS="-L$(TARGET_LIB_DIR)" \
 	TARGET_DIR="$(TARGET_DIR)"
 
-$(D)/host-luarocks: bootstrap host-lua
+$(D)/host-luarocks:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

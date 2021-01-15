@@ -5,6 +5,7 @@ IOZONE_VER    = 3_490
 IOZONE_DIR    = iozone$(IOZONE_VER)
 IOZONE_SOURCE = iozone$(IOZONE_VER).tar
 IOZONE_SITE   = http://www.iozone.org/src/current
+IOZONEL_DEPS   = bootstrap
 
 define IOZONE_POST_PATCH
 	$(SED) "s/= gcc/= $(TARGET_CC)/" $(PKG_BUILD_DIR)/src/current/makefile
@@ -12,7 +13,7 @@ define IOZONE_POST_PATCH
 endef
 IOZONE_POST_PATCH_HOOKS = IOZONE_POST_PATCH
 
-$(D)/iozone: bootstrap
+$(D)/iozone:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

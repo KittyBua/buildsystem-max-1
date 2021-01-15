@@ -5,8 +5,9 @@ HD61_DRIVER_DATE   = 20200731
 HD61_DRIVER_VER    = 4.4.35
 HD61_DRIVER_SOURCE = hd61-drivers-$(HD61_DRIVER_VER)-$(HD61_DRIVER_DATE).zip
 HD61_DRIVER_SITE   = http://source.mynonpublic.com/gfutures
+HD61_DRIVER_DEPS   = bootstrap
 
-$(D)/hd61-driver: bootstrap
+$(D)/hd61-driver:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

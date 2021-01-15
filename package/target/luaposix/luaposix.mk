@@ -5,6 +5,7 @@ LUAPOSIX_VER    = 31
 LUAPOSIX_DIR    = luaposix-$(LUAPOSIX_VER)
 LUAPOSIX_SOURCE = luaposix-$(LUAPOSIX_VER).tar.gz
 LUAPOSIX_SITE   = $(call github,luaposix,luaposix,v$(LUAPOSIX_VER))
+LUAPOSIX_DEPS   = bootstrap host-lua lua luaexpat slingshot gnulib
 
 LUAPOSIX_CONF_OPTS = \
 	--libdir=$(TARGET_LIB_DIR)/lua/$(LUA_ABIVER) \
@@ -13,7 +14,7 @@ LUAPOSIX_CONF_OPTS = \
 	--docdir=$(TARGET_DIR)/$(REMOVE_docdir) \
 	--enable-silent-rules
 
-$(D)/luaposix: bootstrap host-lua lua luaexpat slingshot gnulib
+$(D)/luaposix:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

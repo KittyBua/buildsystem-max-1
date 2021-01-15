@@ -5,6 +5,7 @@ LIBSIGC_VER    = 2.10.2
 LIBSIGC_DIR    = libsigc++-$(LIBSIGC_VER)
 LIBSIGC_SOURCE = libsigc++-$(LIBSIGC_VER).tar.xz
 LIBSIGC_SITE   = https://download.gnome.org/sources/libsigc++/$(basename $(LIBSIGC_VER))
+LIBSIGC_DEPS   = bootstrap
 
 LIBSIGC_CONF_OPTS = \
 	--enable-shared \
@@ -13,7 +14,7 @@ LIBSIGC_CONF_OPTS = \
 	--disable-warnings \
 	--without-boost
 
-$(D)/libsigc: bootstrap
+$(D)/libsigc:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

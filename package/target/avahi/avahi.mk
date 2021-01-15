@@ -5,6 +5,7 @@ AVAHI_VER    = 0.7
 AVAHI_DIR    = avahi-$(AVAHI_VER)
 AVAHI_SOURCE = avahi-$(AVAHI_VER).tar.gz
 AVAHI_SITE   = https://github.com/lathiat/avahi/releases/download/v$(AVAHI_VER)
+AVAHI_DEPS   = bootstrap expat libdaemon dbus
 
 AVAHI_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
@@ -44,7 +45,7 @@ AVAHI_CONF_OPTS = \
 	--disable-xmltoman \
 	--disable-tests
 
-$(D)/avahi: bootstrap expat libdaemon dbus
+$(D)/avahi:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

@@ -5,6 +5,7 @@ NFS_UTILS_VER    = 2.5.2
 NFS_UTILS_DIR    = nfs-utils-$(NFS_UTILS_VER)
 NFS_UTILS_SOURCE = nfs-utils-$(NFS_UTILS_VER).tar.bz2
 NFS_UTILS_SITE   = https://sourceforge.net/projects/nfs/files/nfs-utils/$(NFS_UTILS_VER)
+NFS_UTILS_DEPS   = bootstrap rpcbind e2fsprogs
 
 NFS_UTILS_CONF_OPTS = \
 	--disable-gss \
@@ -21,7 +22,7 @@ NFS_UTILS_CONF_OPTS = \
 NFS_UTILS_CONF_OPTS += \
 	$(if $(filter $(BOXMODEL),vuduo),--disable-ipv6,--enable-ipv6)
 
-$(D)/nfs-utils: bootstrap rpcbind e2fsprogs
+$(D)/nfs-utils:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

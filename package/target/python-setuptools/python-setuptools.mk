@@ -5,8 +5,9 @@ PYTHON_SETUPTOOLS_VER    = 5.2
 PYTHON_SETUPTOOLS_DIR    = setuptools-$(PYTHON_SETUPTOOLS_VER)
 PYTHON_SETUPTOOLS_SOURCE = setuptools-$(PYTHON_SETUPTOOLS_VER).tar.gz
 PYTHON_SETUPTOOLS_SITE   = https://pypi.python.org/packages/source/s/setuptools
+PYTHON_SETUPTOOLS_DEPS   = bootstrap python
 
-$(D)/python-setuptools: bootstrap python
+$(D)/python-setuptools:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

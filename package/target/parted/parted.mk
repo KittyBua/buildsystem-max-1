@@ -5,6 +5,7 @@ PARTED_VER    = 3.3
 PARTED_DIR    = parted-$(PARTED_VER)
 PARTED_SOURCE = parted-$(PARTED_VER).tar.xz
 PARTED_SITE   = https://ftp.gnu.org/gnu/parted
+PARTED_DEPS   = bootstrap e2fsprogs libiconv
 
 PARTED_CONF_OPTS = \
 	--without-readline \
@@ -14,7 +15,7 @@ PARTED_CONF_OPTS = \
 	--disable-device-mapper \
 	--disable-nls
 
-$(D)/parted: bootstrap e2fsprogs libiconv
+$(D)/parted:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

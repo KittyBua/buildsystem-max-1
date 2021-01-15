@@ -7,8 +7,9 @@ VUZERO4K_LIBGLES_VER    = 17.1-$(VUZERO4K_LIBGLES_DATE).$(VUZERO4K_LIBGLES_REV)
 VUZERO4K_LIBGLES_DIR    = libgles-vuzero4k
 VUZERO4K_LIBGLES_SOURCE = libgles-vuzero4k-$(VUZERO4K_LIBGLES_VER).tar.gz
 VUZERO4K_LIBGLES_SITE   = http://archive.vuplus.com/download/build_support/vuplus
+VUZERO4K_LIBGLES_DEPS   = bootstrap
 
-$(D)/vuzero4k-libgles: bootstrap
+$(D)/vuzero4k-libgles:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

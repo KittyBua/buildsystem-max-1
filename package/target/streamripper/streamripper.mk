@@ -5,6 +5,7 @@ STREAMRIPPER_VER    = git
 STREAMRIPPER_DIR    = ni-streamripper.git
 STREAMRIPPER_SOURCE = ni-streamripper.git
 STREAMRIPPER_SITE   = https://github.com/neutrino-images
+STREAMRIPPER_DEPS   = bootstrap libvorbisidec libmad glib2
 
 STREAMRIPPER_CONF_OPTS = \
 	--with-ogg-includes=${TARGET_INCLUDE_DIR} \
@@ -14,7 +15,7 @@ STREAMRIPPER_CONF_OPTS = \
 	--with-included-argv=yes \
 	--with-included-libmad=no
 
-$(D)/streamripper: bootstrap libvorbisidec libmad glib2
+$(D)/streamripper:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

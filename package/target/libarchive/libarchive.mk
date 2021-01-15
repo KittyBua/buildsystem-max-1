@@ -5,6 +5,7 @@ LIBARCHIVE_VER    = 3.4.0
 LIBARCHIVE_DIR    = libarchive-$(LIBARCHIVE_VER)
 LIBARCHIVE_SOURCE = libarchive-$(LIBARCHIVE_VER).tar.gz
 LIBARCHIVE_SITE   = https://www.libarchive.org/downloads
+LIBARCHIVE_DEPS   = bootstrap
 
 LIBARCHIVE_CONF_OPTS = \
 	--enable-static=no \
@@ -17,7 +18,7 @@ LIBARCHIVE_CONF_OPTS = \
 	--without-xml2 \
 	--without-expat
 
-$(D)/libarchive: bootstrap
+$(D)/libarchive:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

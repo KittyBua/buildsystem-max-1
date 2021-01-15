@@ -5,8 +5,9 @@ LIBNSL_VER    = 1.2.0
 LIBNSL_DIR    = libnsl-$(LIBNSL_VER)
 LIBNSL_SOURCE = libnsl-$(LIBNSL_VER).tar.gz
 LIBNSL_SITE   = $(call github,thkukuk,libnsl,v$(LIBNSL_VER))
+LIBNSL_DEPS   = bootstrap libtirpc
 
-$(D)/libnsl: bootstrap libtirpc
+$(D)/libnsl:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

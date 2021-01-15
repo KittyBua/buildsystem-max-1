@@ -5,6 +5,7 @@ FRIBIDI_VER    = 1.0.10
 FRIBIDI_DIR    = fribidi-$(FRIBIDI_VER)
 FRIBIDI_SOURCE = fribidi-$(FRIBIDI_VER).tar.xz
 FRIBIDI_SITE   = https://github.com/fribidi/fribidi/releases/download/v$(FRIBIDI_VER)
+FRIBIDI_DEPS   = bootstrap
 
 FRIBIDI_CONF_OPTS = \
 	--enable-shared \
@@ -12,7 +13,7 @@ FRIBIDI_CONF_OPTS = \
 	--disable-debug \
 	--disable-deprecated
 
-$(D)/fribidi: bootstrap
+$(D)/fribidi:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

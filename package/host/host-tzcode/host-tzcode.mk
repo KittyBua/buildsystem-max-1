@@ -5,8 +5,9 @@ HOST_TZCODE_VER    = 2020d
 HOST_TZCODE_DIR    = tzcode
 HOST_TZCODE_SOURCE = tzcode$(HOST_TZCODE_VER).tar.gz
 HOST_TZCODE_SITE   = ftp://ftp.iana.org/tz/releases
+HOST_TZCODE_DEPS   = bootstrap
 
-$(D)/host-tzcode: bootstrap
+$(D)/host-tzcode:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(TZDATA_SOURCE))

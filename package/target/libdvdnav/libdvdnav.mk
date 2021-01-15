@@ -5,12 +5,13 @@ LIBDVDNAV_VER    = 4.2.1
 LIBDVDNAV_DIR    = libdvdnav-$(LIBDVDNAV_VER)
 LIBDVDNAV_SOURCE = libdvdnav-$(LIBDVDNAV_VER).tar.xz
 LIBDVDNAV_SITE   = http://dvdnav.mplayerhq.hu/releases
+LIBDVDNAV_DEPS   = bootstrap libdvdread
 
 LIBDVDNAV_CONF_OPTS = \
 	--enable-static \
 	--enable-shared
 
-$(D)/libdvdnav: bootstrap libdvdread
+$(D)/libdvdnav:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

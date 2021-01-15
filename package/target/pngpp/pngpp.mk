@@ -5,8 +5,9 @@ PNGPP_VER    = 0.2.9
 PNGPP_DIR    = png++-$(PNGPP_VER)
 PNGPP_SOURCE = png++-$(PNGPP_VER).tar.gz
 PNGPP_SITE   = https://download.savannah.gnu.org/releases/pngpp
+PNGPP_DEPS   = bootstrap libpng
 
-$(D)/pngpp: bootstrap libpng
+$(D)/pngpp:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

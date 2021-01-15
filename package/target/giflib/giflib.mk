@@ -5,8 +5,9 @@ GIFLIB_VER    = 5.1.4
 GIFLIB_DIR    = giflib-$(GIFLIB_VER)
 GIFLIB_SOURCE = giflib-$(GIFLIB_VER).tar.bz2
 GIFLIB_SITE   = https://downloads.sourceforge.net/project/giflib
+GIFLIB_DEPS   = bootstrap
 
-$(D)/giflib: bootstrap
+$(D)/giflib:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

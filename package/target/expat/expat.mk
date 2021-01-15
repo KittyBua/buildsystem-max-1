@@ -5,13 +5,14 @@ EXPAT_VER    = 2.2.10
 EXPAT_DIR    = expat-$(EXPAT_VER)
 EXPAT_SOURCE = expat-$(EXPAT_VER).tar.xz
 EXPAT_SITE   = https://github.com/libexpat/libexpat/releases/download/R_$(subst .,_,$(EXPAT_VER))
+EXPAT_DEPS   = bootstrap
 
 EXPAT_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
 	--without-xmlwf \
 	--without-docbook
 
-$(D)/expat: bootstrap
+$(D)/expat:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

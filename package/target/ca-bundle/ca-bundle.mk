@@ -5,6 +5,8 @@ CA_BUNDLE_VER    = 1.0
 CA_BUNDLE_DIR    = /etc/ssl/certs
 CA_BUNDLE_SOURCE = cacert.pem
 CA_BUNDLE_SITE   = https://curl.haxx.se/ca
+CA_BUNDLE_DEPS   = bootstrap
+
 CA_BUNDLE_CRT    = ca-certificates.crt
 
 $(D)/ca-bundle:

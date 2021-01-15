@@ -7,8 +7,9 @@ VUUNO4KSE_LIBGLES_VER    = 17.1-$(VUUNO4KSE_LIBGLES_DATE).$(VUUNO4KSE_LIBGLES_RE
 VUUNO4KSE_LIBGLES_VER    = libgles-vuuno4kse
 VUUNO4KSE_LIBGLES_SOURCE = libgles-vuuno4kse-$(VUUNO4KSE_LIBGLES_VER).tar.gz
 VUUNO4KSE_LIBGLES_SITE   = http://archive.vuplus.com/download/build_support/vuplus
+VUUNO4KSE_LIBGLES_DEPS   = bootstrap
 
-$(D)/vuuno4kse-libgles: bootstrap
+$(D)/vuuno4kse-libgles:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

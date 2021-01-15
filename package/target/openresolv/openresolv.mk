@@ -5,8 +5,9 @@ OPENRESOLV_VER    = 3.9.2
 OPENRESOLV_DIR    = openresolv-$(OPENRESOLV_VER)
 OPENRESOLV_SOURCE = openresolv-$(OPENRESOLV_VER).tar.xz
 OPENRESOLV_SITE   = https://roy.marples.name/downloads/openresolv
+OPENRESOLV_DEPS   = bootstrap
 
-$(D)/openresolv: bootstrap
+$(D)/openresolv:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

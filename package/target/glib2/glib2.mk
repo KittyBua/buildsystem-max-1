@@ -5,6 +5,7 @@ GLIB2_VER    = 2.62.4
 GLIB2_DIR    = glib-$(GLIB2_VER)
 GLIB2_SOURCE = glib-$(GLIB2_VER).tar.xz
 GLIB2_SITE   = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(GLIB2_VER))
+GLIB2_DEPS   = bootstrap host-glib2 libffi util-linux zlib libiconv
 
 GLIB2_CONF_OPTS = \
 	--prefix=/usr \
@@ -19,7 +20,7 @@ GLIB2_CONF_OPTS = \
 	-Doss_fuzz=disabled \
 	-Dselinux=disabled
 
-$(D)/glib2: bootstrap host-glib2 libffi util-linux zlib libiconv
+$(D)/glib2:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

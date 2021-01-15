@@ -5,6 +5,7 @@ CAIRO_VER    = 1.16.0
 CAIRO_DIR    = cairo-$(CAIRO_VER)
 CAIRO_SOURCE = cairo-$(CAIRO_VER).tar.xz
 CAIRO_SITE   = https://www.cairographics.org/releases
+CAIRO_DEPS   = bootstrap glib2 zlib libpng freetype pixman
 
 CAIRO_CONF_OPTS = \
 	--with-html-dir=$(REMOVE_htmldir) \
@@ -16,7 +17,7 @@ CAIRO_CONF_OPTS = \
 	--disable-gl \
 	--enable-tee
 
-$(D)/cairo: bootstrap glib2 zlib libpng freetype pixman
+$(D)/cairo:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

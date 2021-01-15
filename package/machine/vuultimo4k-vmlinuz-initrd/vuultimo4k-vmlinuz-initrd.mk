@@ -10,8 +10,9 @@ VUULTIMO4K_VMLINUZ_INITRD_SITE   = http://archive.vuplus.com/download/kernel
 endif
 VUULTIMO4K_VMLINUZ_INITRD_VER    = $(VUULTIMO4K_VMLINUZ_INITRD_DATE)
 VUULTIMO4K_VMLINUZ_INITRD_SOURCE = vmlinuz-initrd_vuultimo4k_$(VUULTIMO4K_VMLINUZ_INITRD_VER).tar.gz
+VUULTIMO4K_VMLINUZ_INITRD_DEPS   = bootstrap
 
-$(D)/vuultimo4k-vmlinuz-initrd: bootstrap
+$(D)/vuultimo4k-vmlinuz-initrd:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))

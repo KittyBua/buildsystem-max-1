@@ -5,6 +5,7 @@ HTOP_VER    = 3.0.4
 HTOP_DIR    = htop-$(HTOP_VER)
 HTOP_SOURCE = htop-$(HTOP_VER).tar.gz
 HTOP_SITE   = $(call github,htop-dev,htop,$(HTOP_VER))
+HTOP_DEPS   = bootstrap ncurses
 
 HTOP_CONF_OPTS = \
 	ac_cv_file__proc_stat=yes \
@@ -14,7 +15,7 @@ HTOP_CONF_OPTS = \
 	--enable-cgroup \
 	--enable-taskstats
 
-$(D)/htop: bootstrap ncurses
+$(D)/htop:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

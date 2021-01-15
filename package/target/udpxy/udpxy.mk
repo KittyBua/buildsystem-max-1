@@ -5,8 +5,9 @@ UDPXY_VER    = git
 UDPXY_DIR    = udpxy.git
 UDPXY_SOURCE = udpxy.git
 UDPXY_SITE   = https://github.com/pcherenkov
+UDPXY_DEPS   = bootstrap
 
-$(D)/udpxy: bootstrap
+$(D)/udpxy:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

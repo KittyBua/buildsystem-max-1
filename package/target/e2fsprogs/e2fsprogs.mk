@@ -5,6 +5,7 @@ E2FSPROGS_VER    = 1.45.6
 E2FSPROGS_DIR    = e2fsprogs-$(E2FSPROGS_VER)
 E2FSPROGS_SOURCE = e2fsprogs-$(E2FSPROGS_VER).tar.gz
 E2FSPROGS_SITE   = https://sourceforge.net/projects/e2fsprogs/files/e2fsprogs/v$(E2FSPROGS_VER)
+E2FSPROGS_DEPS   = bootstrap util-linux
 
 E2FSPROGS_CONF_OPTS = \
 	LIBS="-luuid -lblkid" \
@@ -36,7 +37,7 @@ E2FSPROGS_CONF_OPTS = \
 	--with-root-prefix="" \
 	--with-crond-dir=no
 
-$(D)/e2fsprogs: bootstrap util-linux
+$(D)/e2fsprogs:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

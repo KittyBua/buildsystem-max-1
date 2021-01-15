@@ -5,8 +5,9 @@ WIREGUARD_LINUX_COMPAT_VER    = 1.0.20200908
 WIREGUARD_LINUX_COMPAT_DIR    = wireguard-linux-compat-$(WIREGUARD_LINUX_COMPAT_VER)
 WIREGUARD_LINUX_COMPAT_SOURCE = wireguard-linux-compat-$(WIREGUARD_LINUX_COMPAT_VER).tar.xz
 WIREGUARD_LINUX_COMPAT_SITE   = https://git.zx2c4.com/wireguard-linux-compat/snapshot
+WIREGUARD_LINUX_COMPAT_DEPS   = bootstrap kernel libmnl
 
-$(D)/wireguard-linux-compat: bootstrap kernel libmnl
+$(D)/wireguard-linux-compat:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

@@ -5,6 +5,7 @@ LIBCURL_VER    = 7.74.0
 LIBCURL_DIR    = curl-$(LIBCURL_VER)
 LIBCURL_SOURCE = curl-$(LIBCURL_VER).tar.bz2
 LIBCURL_SITE   = https://curl.haxx.se/download
+LIBCURL_DEPS   = bootstrap zlib openssl ca-bundle
 
 LIBCURL_CONF_OPTS = \
 	--enable-silent-rules \
@@ -30,7 +31,7 @@ LIBCURL_CONF_OPTS = \
 	--with-random=/dev/urandom \
 	--with-ssl=$(TARGET_DIR)/usr
 
-$(D)/libcurl: bootstrap zlib openssl ca-bundle
+$(D)/libcurl:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

@@ -5,6 +5,7 @@ LIBICONV_VER    = 1.13.1
 LIBICONV_DIR    = libiconv-$(LIBICONV_VER)
 LIBICONV_SOURCE = libiconv-$(LIBICONV_VER).tar.gz
 LIBICONV_SITE   = https://ftp.gnu.org/gnu/libiconv
+LIBICONV_DEPS   = bootstrap
 
 LIBICONV_CONF_OPTS = \
 	CPPFLAGS="$(TARGET_CPPFLAGS) -fPIC" \
@@ -14,7 +15,7 @@ LIBICONV_CONF_OPTS = \
 	--disable-shared \
 	--enable-relocatable
 
-$(D)/libiconv: bootstrap
+$(D)/libiconv:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

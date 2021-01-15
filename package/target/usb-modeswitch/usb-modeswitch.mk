@@ -5,8 +5,9 @@ USB_MODESWITCH_VER    = 2.6.0
 USB_MODESWITCH_DIR    = usb-modeswitch-$(USB_MODESWITCH_VER)
 USB_MODESWITCH_SOURCE = usb-modeswitch-$(USB_MODESWITCH_VER).tar.bz2
 USB_MODESWITCH_SITE   = http://www.draisberghof.de/usb_modeswitch
+USB_MODESWITCH_DEPS   = bootstrap libusb usb-modeswitch-data
 
-$(D)/usb-modeswitch: bootstrap libusb usb-modeswitch-data
+$(D)/usb-modeswitch:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

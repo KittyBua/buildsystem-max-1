@@ -5,6 +5,7 @@ GRAPHLCD_BASE_VER    = git
 GRAPHLCD_BASE_DIR    = graphlcd-base.git
 GRAPHLCD_BASE_SOURCE = graphlcd-base.git
 GRAPHLCD_BASE_SITE   = git://projects.vdr-developer.org
+GRAPHLCD_BASE_DEPS   = bootstrap freetype libiconv libusb
 
 ifeq ($(FLAVOUR),$(filter $(FLAVOUR),neutrino-ni))
 GRAPHLCD_BASE_CUSTOM_PATCH += 0004-material-colors.patch
@@ -28,7 +29,7 @@ GRAPHLCD_BASE_CONF_OPTS = \
 	PREFIX=/usr \
 	DESTDIR=$(TARGET_DIR)
 
-$(D)/graphlcd-base: bootstrap freetype libiconv libusb
+$(D)/graphlcd-base:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

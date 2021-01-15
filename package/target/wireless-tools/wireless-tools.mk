@@ -5,8 +5,9 @@ WIRELESS_TOOLS_VER    = 30
 WIRELESS_TOOLS_DIR    = wireless_tools.$(WIRELESS_TOOLS_VER)
 WIRELESS_TOOLS_SOURCE = wireless_tools.$(WIRELESS_TOOLS_VER).pre9.tar.gz
 WIRELESS_TOOLS_SITE   = https://hewlettpackard.github.io/wireless-tools
+WIRELESS_TOOLS_DEPS   = bootstrap
 
-$(D)/wireless-tools: bootstrap
+$(D)/wireless-tools:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

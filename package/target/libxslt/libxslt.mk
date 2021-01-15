@@ -5,6 +5,7 @@ LIBXSLT_VER    = 1.1.34
 LIBXSLT_DIR    = libxslt-$(LIBXSLT_VER)
 LIBXSLT_SOURCE = libxslt-$(LIBXSLT_VER).tar.gz
 LIBXSLT_SITE   = ftp://xmlsoft.org/libxml2
+LIBXSLT_DEPS   = bootstrap libxml2
 
 LIBXSLT_CONF_OPTS = \
 	CPPFLAGS="$(CPPFLAGS) -I$(TARGET_INCLUDE_DIR)/libxml2" \
@@ -16,7 +17,7 @@ LIBXSLT_CONF_OPTS = \
 	--without-debug \
 	--without-mem-debug
 
-$(D)/libxslt: bootstrap libxml2
+$(D)/libxslt:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

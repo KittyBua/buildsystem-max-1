@@ -5,6 +5,7 @@ ALSA_UTILS_VER    = 1.2.4
 ALSA_UTILS_DIR    = alsa-utils-$(ALSA_UTILS_VER)
 ALSA_UTILS_SOURCE = alsa-utils-$(ALSA_UTILS_VER).tar.bz2
 ALSA_UTILS_SITE   = https://www.alsa-project.org/files/pub/utils
+ALSA_UTILS_DEPS   = bootstrap ncurses alsa-lib
 
 ALSA_UTILS_CONF_OPTS = \
 	--with-curses=ncurses \
@@ -17,7 +18,7 @@ ALSA_UTILS_CONF_OPTS = \
 	--disable-xmlto \
 	--disable-rst2man
 
-$(D)/alsa-utils: bootstrap ncurses alsa-lib
+$(D)/alsa-utils:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

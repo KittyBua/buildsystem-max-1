@@ -2,12 +2,13 @@ LIBUPNP_VER    = 1.6.25
 LIBUPNP_DIR    = libupnp-$(LIBUPNP_VER)
 LIBUPNP_SOURCE = libupnp-$(LIBUPNP_VER).tar.bz2
 LIBUPNP_SITE   = http://sourceforge.net/projects/pupnp/files/pupnp/libUPnP%20$(LIBUPNP_VER)
+LIBUPNP_DEPS   = bootstrap
 
 LIBUPNP_CONF_OPTS = \
 	--enable-shared \
 	--disable-static
 
-$(D)/libupnp: bootstrap
+$(D)/libupnp:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

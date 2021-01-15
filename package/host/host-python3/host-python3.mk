@@ -5,11 +5,12 @@ HOST_PYTHON3_VER    = 3.8.2
 HOST_PYTHON3_DIR    = Python-$(HOST_PYTHON3_VER)
 HOST_PYTHON3_SOURCE = Python-$(HOST_PYTHON3_VER).tar.xz
 HOST_PYTHON3_SITE   = https://www.python.org/ftp/python/$(HOST_PYTHON3_VER)
+HOST_PYTHON3_DEPS   = bootstrap
 
 HOST_PYTHON3_BASE_DIR    = lib/python$(basename $(HOST_PYTHON3_VER))
 HOST_PYTHON3_INCLUDE_DIR = include/python$(basename $(HOST_PYTHON3_VER))
 
-$(D)/host-python3: bootstrap
+$(D)/host-python3:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

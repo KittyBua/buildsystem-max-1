@@ -5,6 +5,7 @@ OPENVPN_VER    = 2.5.0
 OPENVPN_DIR    = openvpn-$(OPENVPN_VER)
 OPENVPN_SOURCE = openvpn-$(OPENVPN_VER).tar.xz
 OPENVPN_SITE   = http://build.openvpn.net/downloads/releases
+OPENVPN_DEPS   = bootstrap openssl lzo
 
 OPENVPN_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
@@ -20,7 +21,7 @@ OPENVPN_CONF_OPTS = \
 	IPROUTE="/sbin/ip" \
 	ROUTE="/sbin/route"
 
-$(D)/openvpn: bootstrap openssl lzo
+$(D)/openvpn:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

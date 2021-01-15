@@ -7,8 +7,9 @@ VUUNO4K_PLATFORM_UTIL_VER    = 17.1-$(VUUNO4K_PLATFORM_UTIL_DATE).$(VUUNO4K_PLAT
 VUUNO4K_PLATFORM_UTIL_DIR    = platform-util-vuuno4k
 VUUNO4K_PLATFORM_UTIL_SOURCE = platform-util-vuuno4k-$(VUUNO4K_PLATFORM_UTIL_VER).tar.gz
 VUUNO4K_PLATFORM_UTIL_SITE   = http://archive.vuplus.com/download/build_support/vuplus
+VUUNO4K_PLATFORM_UTIL_DEPS   = bootstrap
 
-$(D)/vuuno4k-platform-util: bootstrap
+$(D)/vuuno4k-platform-util:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

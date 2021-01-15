@@ -5,11 +5,12 @@ SDPARM_VER    = 1.11
 SDPARM_DIR    = sdparm-$(SDPARM_VER)
 SDPARM_SOURCE = sdparm-$(SDPARM_VER).tgz
 SDPARM_SITE   = http://sg.danny.cz/sg/p
+SDPARM_DEPS   = bootstrap
 
 SDPARM_CONF_OPTS = \
 	--bindir=$(base_sbindir)
 
-$(D)/sdparm: bootstrap
+$(D)/sdparm:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

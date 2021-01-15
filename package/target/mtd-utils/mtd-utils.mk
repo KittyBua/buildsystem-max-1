@@ -5,8 +5,9 @@ MTD_UTILS_VER    = 1.5.2
 MTD_UTILS_DIR    = mtd-utils-$(MTD_UTILS_VER)
 MTD_UTILS_SOURCE = mtd-utils-$(MTD_UTILS_VER).tar.bz2
 MTD_UTILS_SITE   = https://infraroot.at/pub/mtd
+MTD_UTILS_DEPS   = bootstrap zlib lzo e2fsprogs
 
-$(D)/mtd-utils: bootstrap zlib lzo e2fsprogs
+$(D)/mtd-utils:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

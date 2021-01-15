@@ -5,13 +5,14 @@ PCRE_VER    = 8.39
 PCRE_DIR    = pcre-$(PCRE_VER)
 PCRE_SOURCE = pcre-$(PCRE_VER).tar.bz2
 PCRE_SITE   = https://sourceforge.net/projects/pcre/files/pcre/$(PCRE_VER)
+PCRE_DEPS   = bootstrap
 
 PCRE_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
 	--enable-utf8 \
 	--enable-unicode-properties
 
-$(D)/pcre: bootstrap
+$(D)/pcre:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

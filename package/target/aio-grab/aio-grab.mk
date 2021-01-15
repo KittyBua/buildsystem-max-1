@@ -5,12 +5,13 @@ AIO_GRAB_VER    = git
 AIO_GRAB_DIR    = aio-grab.git
 AIO_GRAB_SOURCE = aio-grab.git
 AIO_GRAB_SITE   = https://github.com/oe-alliance
+AIO_GRAB_DEPS   = bootstrap zlib libpng libjpeg-turbo
 
 AIO_GRAB_CONF_OPTS = \
 	--bindir=$(base_bindir) \
 	--enable-silent-rules
 
-$(D)/aio-grab: bootstrap zlib libpng libjpeg-turbo
+$(D)/aio-grab:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

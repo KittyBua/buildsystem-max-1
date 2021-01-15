@@ -5,6 +5,7 @@ HD61_MALI_MODULE_VER    = DX910-SW-99002-r7p0-00rel0
 HD61_MALI_MODULE_DIR    = $(HD61_MALI_MODULE_VER)
 HD61_MALI_MODULE_SOURCE = $(HD61_MALI_MODULE_VER).tgz
 HD61_MALI_MODULE_SITE   = https://developer.arm.com/-/media/Files/downloads/mali-drivers/kernel/mali-utgard-gpu
+HD61_MALI_MODULE_DRIVER_DEPS   = bootstrap kernel hd61-libgles-header
 
 HD61_MALI_MODULE_MAKEVARS = \
 	M=$(PKG_BUILD_DIR)/driver/src/devicedrv/mali \
@@ -17,7 +18,7 @@ HD61_MALI_MODULE_MAKEVARS = \
 	CONFIG_MALI_DVFS=y \
 	CONFIG_GPU_AVS_ENABLE=y
 
-$(D)/hd61-mali-module: bootstrap kernel hd61-libgles-header
+$(D)/hd61-mali-module:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

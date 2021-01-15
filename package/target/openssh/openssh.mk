@@ -5,6 +5,7 @@ OPENSSH_VER    = 8.4p1
 OPENSSH_DIR    = openssh-$(OPENSSH_VER)
 OPENSSH_SOURCE = openssh-$(OPENSSH_VER).tar.gz
 OPENSSH_SITE   = https://artfiles.org/openbsd/OpenSSH/portable
+OPENSSH_DEPS   = bootstrap zlib openssl
 
 OPENSSH_CONF_OPTS = \
 	--sysconfdir=/etc/ssh \
@@ -21,7 +22,7 @@ OPENSSH_CONF_OPTS = \
 	--disable-pututline \
 	--disable-pututxline
 
-$(D)/openssh: bootstrap zlib openssl
+$(D)/openssh:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

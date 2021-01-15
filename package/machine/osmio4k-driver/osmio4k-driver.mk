@@ -5,8 +5,9 @@ OSMIO4K_DRIVER_DATE   = 20201013
 OSMIO4K_DRIVER_VER    = 5.9.0-$(OSMIO4K_DRIVER_DATE)
 OSMIO4K_DRIVER_SOURCE = osmio4k-drivers-$(OSMIO4K_DRIVER_VER).zip
 OSMIO4K_DRIVER_SITE   = http://source.mynonpublic.com/edision
+OSMIO4K_DRIVER_DEPS   = bootstrap
 
-$(D)/osmio4k-driver: bootstrap
+$(D)/osmio4k-driver:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

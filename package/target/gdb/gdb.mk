@@ -5,6 +5,7 @@ GDB_VER    = 8.3
 GDB_DIR    = gdb-$(GDB_VER)
 GDB_SOURCE = gdb-$(GDB_VER).tar.xz
 GDB_SITE   = https://sourceware.org/pub/gdb/releases
+GDB_DEPS   = bootstrap zlib ncurses
 
 GDB_CONF_OPTS = \
 	--enable-static \
@@ -20,7 +21,7 @@ GDB_CONF_OPTS = \
 	--without-uiout \
 	--without-x
 
-$(D)/gdb: bootstrap zlib ncurses
+$(D)/gdb:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

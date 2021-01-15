@@ -5,6 +5,7 @@ VSFTPD_VER    = 3.0.3
 VSFTPD_DIR    = vsftpd-$(VSFTPD_VER)
 VSFTPD_SOURCE = vsftpd-$(VSFTPD_VER).tar.gz
 VSFTPD_SITE   = https://security.appspot.com/downloads
+VSFTPD_DEPS   = bootstrap openssl
 
 define VSFTPD_POST_PATCH
 	$(SED) 's/.*VSF_BUILD_PAM/#undef VSF_BUILD_PAM/' $(PKG_BUILD_DIR)/builddefs.h
@@ -12,7 +13,7 @@ define VSFTPD_POST_PATCH
 endef
 VSFTPD_POST_PATCH_HOOKS = VSFTPD_POST_PATCH
 
-$(D)/vsftpd: bootstrap openssl
+$(D)/vsftpd:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

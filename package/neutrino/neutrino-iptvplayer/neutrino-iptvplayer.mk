@@ -5,9 +5,10 @@ NEUTRINO_IPTVPLAYER_VER    = git
 NEUTRINO_IPTVPLAYER_DIR    = iptvplayer.git
 NEUTRINO_IPTVPLAYER_SOURCE = iptvplayer.git
 NEUTRINO_IPTVPLAYER_SITE   = https://github.com/TangoCash
+NEUTRINO_IPTVPLAYER_DEPS   = rtmpdump python-twisted $(SHARE_PLUGINS)
 
 $(D)/neutrino-iptvplayer-nightly \
-$(D)/neutrino-iptvplayer: rtmpdump python-twisted | $(SHARE_PLUGINS)
+$(D)/neutrino-iptvplayer:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

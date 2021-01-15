@@ -10,8 +10,9 @@ VUUNO4KSE_VMLINUZ_INITRD_SITE   = http://archive.vuplus.com/download/kernel
 endif
 VUUNO4KSE_VMLINUZ_INITRD_VER    = $(VUUNO4KSE_VMLINUZ_INITRD_DATE)
 VUUNO4KSE_VMLINUZ_INITRD_SOURCE = vmlinuz-initrd_vuuno4kse_$(VUUNO4KSE_VMLINUZ_INITRD_VER).tar.gz
+VUUNO4KSE_VMLINUZ_INITRD_DEPS   = bootstrap
 
-$(D)/vuuno4kse-vmlinuz-initrd: bootstrap
+$(D)/vuuno4kse-vmlinuz-initrd:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))

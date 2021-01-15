@@ -5,6 +5,7 @@ DJMOUNT_VER    = 0.71
 DJMOUNT_DIR    = djmount-$(DJMOUNT_VER)
 DJMOUNT_SOURCE = djmount-$(DJMOUNT_VER).tar.gz
 DJMOUNT_SITE   = https://sourceforge.net/projects/djmount/files/djmount/$(DJMOUNT_VER)
+DJMOUNT_DEPS   = bootstrap libupnp libfuse
 
 DJMOUNT_CONF_OPTS = \
 	--with-external-libupnp \
@@ -12,7 +13,7 @@ DJMOUNT_CONF_OPTS = \
 	--with-libupnp-prefix=$(TARGET_DIR)/usr \
 	--disable-debug
 
-$(D)/djmount: bootstrap libupnp libfuse
+$(D)/djmount:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

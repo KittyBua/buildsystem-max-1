@@ -5,6 +5,7 @@ NETSURF_VER    = 3.10
 NETSURF_DIR    = netsurf-all-$(NETSURF_VER)
 NETSURF_SOURCE = netsurf-all-$(NETSURF_VER).tar.gz
 NETSURF_SITE   = http://download.netsurf-browser.org/netsurf/releases/source-full
+NETSURF_DEPS   = bootstrap libpng libjpeg-turbo openssl libiconv freetype expat libcurl
 
 NETSURF_CONF_OPTS = \
 	PREFIX=/usr \
@@ -19,7 +20,7 @@ NETSURF_CONF_OPTS = \
 	NETSURF_FB_FONT_SANS_SERIF=neutrino.ttf \
 	TARGET=framebuffer
 
-$(D)/netsurf: bootstrap libpng libjpeg-turbo openssl libiconv freetype expat libcurl
+$(D)/netsurf:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

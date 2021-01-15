@@ -1,8 +1,10 @@
 #
 # base-files
 #
+BASE_FILES_VER  = 2020-05-25
+BASE_FILES_DEPS = directories
 
-$(D)/base-files: directories
+$(D)/base-files:
 	$(START_BUILD)
 	$(INSTALL_EXEC) $(HELPERS_DIR)/update-rc.d $(TARGET_DIR)/usr/sbin/update-rc.d
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/alignment.sh $(TARGET_DIR)/etc/init.d/alignment.sh

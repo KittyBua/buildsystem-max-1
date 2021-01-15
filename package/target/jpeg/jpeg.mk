@@ -5,8 +5,9 @@ JPEG_VER    = 8d
 JPEG_DIR    = jpeg-$(JPEG_VER)
 JPEG_SOURCE = jpegsrc.v$(JPEG_VER).tar.gz
 JPEG_SITE   = http://www.ijg.org/files
+JPEG_DEPS   = bootstrap
 
-$(D)/jpeg: bootstrap
+$(D)/jpeg:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

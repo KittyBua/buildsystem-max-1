@@ -5,8 +5,9 @@ VPNC_VER    = 0.5.3r550-2jnpr1
 VPNC_DIR    = vpnc-$(VPNC_VER)
 VPNC_SOURCE = vpnc-$(VPNC_VER).tar.gz
 VPNC_SITE   = $(call github,ndpgroup,vpnc,$(VPNC_VER))
+VPNC_DEPS   = bootstrap openssl libgcrypt libgpg-error
 
-$(D)/vpnc: bootstrap openssl libgcrypt libgpg-error
+$(D)/vpnc:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

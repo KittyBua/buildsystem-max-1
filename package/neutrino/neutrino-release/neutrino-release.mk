@@ -83,6 +83,7 @@ neutrino-release-base:
 #
 # delete unnecessary files
 #
+	@$(call MESSAGE,"Finalizing target directory")
 	find $(RELEASE_DIR)/lib $(RELEASE_DIR)/usr/lib/ \
 		\( -name '*.a' \
 		-o -name '*.la' \

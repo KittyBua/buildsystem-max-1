@@ -7,6 +7,10 @@ id:3:initdefault:
 # Boot-time system configuration/initialization script.
 # This is run first except when booting in emergency (-b) mode.
 si::sysinit:/etc/init.d/rcS
+si5::sysinit:/bin/ln -sf /proc/self/fd /dev/fd 2>/dev/null
+si6::sysinit:/bin/ln -sf /proc/self/fd/0 /dev/stdin 2>/dev/null
+si7::sysinit:/bin/ln -sf /proc/self/fd/1 /dev/stdout 2>/dev/null
+si8::sysinit:/bin/ln -sf /proc/self/fd/2 /dev/stderr 2>/dev/null
 
 # What to do in single-user mode.
 ~~:S:wait:/sbin/sulogin

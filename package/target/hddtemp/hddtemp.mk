@@ -5,6 +5,7 @@ HDDTEMP_VER    = 0.3-beta15
 HDDTEMP_DIR    = hddtemp-$(HDDTEMP_VER)
 HDDTEMP_SOURCE = hddtemp-$(HDDTEMP_VER).tar.bz2
 HDDTEMP_SITE   = http://savannah.c3sl.ufpr.br/hddtemp
+HDDTEMP_DEPS   = bootstrap libiconv
 
 HDDTEMP_CONF_OPTS = \
 	LIBS="-liconv" \
@@ -12,7 +13,7 @@ HDDTEMP_CONF_OPTS = \
 	--with-db_path=/usr/share/misc/hddtemp.db \
 	--disable-dependency-tracking
 
-$(D)/hddtemp: bootstrap libiconv
+$(D)/hddtemp:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

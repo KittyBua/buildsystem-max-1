@@ -7,6 +7,7 @@ FFMPEG_VER    = 4.3
 FFMPEG_DIR    = ffmpeg-$(FFMPEG_VER)
 FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VER).tar.xz
 FFMPEG_SITE   = http://www.ffmpeg.org/releases
+FFMPEG_DEPS   = bootstrap openssl zlib bzip2 freetype rtmpdump libass libxml2 alsa-lib
 
 FFMPEG_CONF_OPTS = \
 	--disable-ffplay \
@@ -323,7 +324,7 @@ FFMPEG_CONF_OPTS += \
 	--extra-cflags="$(TARGET_CFLAGS) -I$(TARGET_INCLUDE_DIR)/libxml2" \
 	--extra-ldflags="$(TARGET_LDFLAGS) -lrt"
 
-$(D)/ffmpeg: bootstrap openssl zlib bzip2 freetype rtmpdump libass libxml2 alsa-lib
+$(D)/ffmpeg:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

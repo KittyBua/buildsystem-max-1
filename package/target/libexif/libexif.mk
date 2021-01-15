@@ -5,8 +5,9 @@ LIBEXIF_VER    = 0.6.22
 LIBEXIF_DIR    = libexif-$(LIBEXIF_VER)
 LIBEXIF_SOURCE = libexif-$(LIBEXIF_VER).tar.xz
 LIBEXIF_SITE   = https://github.com/libexif/libexif/releases/download/libexif-$(subst .,_,$(LIBEXIF_VER))-release
+LIBEXIF_DEPS   = bootstrap
 
-$(D)/libexif: bootstrap
+$(D)/libexif:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

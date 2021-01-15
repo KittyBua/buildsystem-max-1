@@ -5,8 +5,9 @@ HOST_NINJA_VER    = 1.10.0
 HOST_NINJA_DIR    = ninja-$(HOST_NINJA_VER)
 HOST_NINJA_SOURCE = ninja-$(HOST_NINJA_VER).tar.gz
 HOST_NINJA_SITE   = $(call github,ninja-build,ninja,v$(HOST_NINJA_VER))
+HOST_NINJA_DEPS   = bootstrap
 
-$(D)/host-ninja: bootstrap
+$(D)/host-ninja:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

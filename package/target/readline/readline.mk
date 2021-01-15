@@ -5,6 +5,7 @@ READLINE_VER    = 8.1
 READLINE_DIR    = readline-$(READLINE_VER)
 READLINE_SOURCE = readline-$(READLINE_VER).tar.gz
 READLINE_SITE   = https://ftp.gnu.org/gnu/readline
+READLINE_DEPS   = bootstrap ncurses
 
 READLINE_CONF_OPTS = \
 	--datadir=$(REMOVE_datarootdir) \
@@ -12,7 +13,7 @@ READLINE_CONF_OPTS = \
 	bash_cv_func_sigsetjmp=yes \
 	bash_cv_wcwidth_broken=no
 
-$(D)/readline: bootstrap ncurses
+$(D)/readline:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

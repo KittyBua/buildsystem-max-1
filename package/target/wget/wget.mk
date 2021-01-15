@@ -5,6 +5,7 @@ WGET_VER    = 1.21.1
 WGET_DIR    = wget-$(WGET_VER)
 WGET_SOURCE = wget-$(WGET_VER).tar.gz
 WGET_SITE   = https://ftp.gnu.org/gnu/wget
+WGET_DEPS   = bootstrap openssl
 
 WGET_CFLAGS = $(TARGET_CFLAGS) -DOPENSSL_NO_ENGINE
 
@@ -22,7 +23,7 @@ WGET_CONF_OPTS = \
 	--without-libpsl \
 	CFLAGS="$(WGET_CFLAGS)"
 
-$(D)/wget: bootstrap openssl
+$(D)/wget:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

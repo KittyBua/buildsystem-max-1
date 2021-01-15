@@ -5,8 +5,9 @@ LIBDPF_VER    = git
 LIBDPF_DIR    = dpf-ax.git
 LIBDPF_SOURCE = dpf-ax.git
 LIBDPF_SITE   = $(MAX-GIT-GITHUB)
+LIBDPF_DEPS   = bootstrap libusb-compat
 
-$(D)/libdpf: bootstrap libusb-compat
+$(D)/libdpf:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

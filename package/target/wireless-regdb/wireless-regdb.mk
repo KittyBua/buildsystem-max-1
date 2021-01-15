@@ -5,8 +5,9 @@ WIRELESS_REGDB_VER    = 2020.04.29
 WIRELESS_REGDB_DIR    = wireless-regdb-$(WIRELESS_REGDB_VER)
 WIRELESS_REGDB_SOURCE = wireless-regdb-$(WIRELESS_REGDB_VER).tar.xz
 WIRELESS_REGDB_SITE   = https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb
+WIRELESS_REGDB_DEPS   = bootstrap
 
-$(D)/wireless-regdb: bootstrap
+$(D)/wireless-regdb:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

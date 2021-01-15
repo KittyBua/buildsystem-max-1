@@ -3,17 +3,6 @@
 #
 # -----------------------------------------------------------------------------
 
-LIBSTB_HAL_DEPS  = bootstrap
-LIBSTB_HAL_DEPS += ffmpeg
-LIBSTB_HAL_DEPS += openthreads
-
-LH_CONFIG_OPTS =
-#LH_CONFIG_OPTS += --enable-flv2mpeg4
-
-LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)
-
-# -----------------------------------------------------------------------------
-
 #
 # libstb-hal
 #
@@ -21,6 +10,12 @@ LIBSTB_HAL_VER    = git
 LIBSTB_HAL_DIR    = $(LIBSTB_HAL).git
 LIBSTB_HAL_SOURCE = $(LIBSTB_HAL).git
 LIBSTB_HAL_SITE   = $(GIT_SITE)
+LIBSTB_HAL_DEPS   = bootstrap ffmpeg openthreads
+
+LH_CONFIG_OPTS =
+#LH_CONFIG_OPTS += --enable-flv2mpeg4
+
+LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)
 
 ifeq ($(FLAVOUR),neutrino-ddt)
 LIBSTB_HAL_CUSTOM_PATCH =
@@ -34,7 +29,7 @@ else ifeq ($(FLAVOUR),neutrino-redblue)
 LIBSTB_HAL_CUSTOM_PATCH =
 endif
 
-$(D)/libstb-hal.do_prepare: | $(LIBSTB_HAL_DEPS)
+$(D)/libstb-hal.do_prepare:
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR)
 	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR).org

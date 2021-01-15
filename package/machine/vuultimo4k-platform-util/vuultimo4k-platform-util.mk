@@ -7,8 +7,9 @@ VUULTIMO4K_PLATFORM_UTIL_VER    = 17.1-$(VUULTIMO4K_PLATFORM_UTIL_DATE).$(VUULTI
 VUULTIMO4K_PLATFORM_UTIL_DIR    = platform-util-vuultimo4k
 VUULTIMO4K_PLATFORM_UTIL_SOURCE = platform-util-vuultimo4k-$(VUULTIMO4K_PLATFORM_UTIL_VER).tar.gz
 VUULTIMO4K_PLATFORM_UTIL_SITE   = http://archive.vuplus.com/download/build_support/vuplus
+VUULTIMO4K_PLATFORM_UTIL_DEPS   = bootstrap
 
-$(D)/vuultimo4k-platform-util: bootstrap
+$(D)/vuultimo4k-platform-util:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

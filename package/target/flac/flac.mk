@@ -5,6 +5,7 @@ FLAC_VER    = 1.3.3
 FLAC_DIR    = flac-$(FLAC_VER)
 FLAC_SOURCE = flac-$(FLAC_VER).tar.xz
 FLAC_SITE   = https://ftp.osuosl.org/pub/xiph/releases/flac
+FLAC_DEPS   = bootstrap
 
 FLAC_CONF_OPTS = \
 	--disable-cpplibs \
@@ -23,7 +24,7 @@ FLAC_CONF_OPTS = \
 	--disable-examples \
 	--disable-rpath
 
-$(D)/flac: bootstrap
+$(D)/flac:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

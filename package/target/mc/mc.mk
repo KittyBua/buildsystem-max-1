@@ -5,6 +5,7 @@ MC_VER    = 4.8.25
 MC_DIR    = mc-$(MC_VER)
 MC_SOURCE = mc-$(MC_VER).tar.xz
 MC_SITE   = ftp.midnight-commander.org
+MC_DEPS   = bootstrap ncurses glib2
 
 MC_CONF_OPTS = \
 	--with-homedir=/var/tuxbox/config/mc \
@@ -14,7 +15,7 @@ MC_CONF_OPTS = \
 	--without-gpm-mouse \
 	--without-x
 
-$(D)/mc: bootstrap ncurses glib2
+$(D)/mc:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

@@ -5,11 +5,12 @@ PYTHON_VER    = 2.7.18
 PYTHON_DIR    = Python-$(PYTHON_VER)
 PYTHON_SOURCE = Python-$(PYTHON_VER).tar.xz
 PYTHON_SITE   = https://www.python.org/ftp/python/$(PYTHON_VER)
+PYTHON_DEPS   = bootstrap host-python ncurses zlib openssl libffi expat bzip2
 
 PYTHON_BASE_DIR    = usr/lib/python$(basename $(PYTHON_VER))
 PYTHON_INCLUDE_DIR = usr/include/python$(basename $(PYTHON_VER))
 
-$(D)/python: bootstrap host-python ncurses zlib openssl libffi expat bzip2
+$(D)/python:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

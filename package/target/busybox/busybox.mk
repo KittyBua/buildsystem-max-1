@@ -5,6 +5,7 @@ BUSYBOX_VER    = 1.33.0
 BUSYBOX_DIR    = busybox-$(BUSYBOX_VER)
 BUSYBOX_SOURCE = busybox-$(BUSYBOX_VER).tar.bz2
 BUSYBOX_SITE   = https://busybox.net/downloads
+BUSYBOX_DEPS   = bootstrap libtirpc
 
 # Link busybox against libtirpc so that we can leverage its RPC support for NFS
 # mounting with BusyBox
@@ -26,7 +27,7 @@ BUSYBOX_MAKE_OPTS = \
 	EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 	CONFIG_PREFIX="$(TARGET_DIR)"
 
-$(D)/busybox: bootstrap libtirpc
+$(D)/busybox:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

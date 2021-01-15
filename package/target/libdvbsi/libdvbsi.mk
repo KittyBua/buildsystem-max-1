@@ -5,8 +5,9 @@ LIBDVBSI_VER    = git
 LIBDVBSI_DIR    = libdvbsi.git
 LIBDVBSI_SOURCE = libdvbsi.git
 LIBDVBSI_SITE   = https://github.com/OpenVisionE2
+LIBDVBSI_DEPS   = bootstrap
 
-$(D)/libdvbsi: bootstrap
+$(D)/libdvbsi:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

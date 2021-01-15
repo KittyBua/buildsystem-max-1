@@ -198,6 +198,7 @@ NEUTRINO_VER    = git
 NEUTRINO_DIR    = $(NEUTRINO).git
 NEUTRINO_SOURCE = $(NEUTRINO).git
 NEUTRINO_SITE   = $(GIT_SITE)
+NEUTRINO_DEPS  += libstb-hal
 
 ifeq ($(FLAVOUR),neutrino-ddt)
 NEUTRINO_CUSTOM_PATCH = neutrino-ddt.patch
@@ -211,7 +212,7 @@ else ifeq ($(FLAVOUR),neutrino-redblue)
 NEUTRINO_CUSTOM_PATCH =
 endif
 
-$(D)/neutrino.do_prepare: | $(NEUTRINO_DEPS) libstb-hal
+$(D)/neutrino.do_prepare:
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR).org

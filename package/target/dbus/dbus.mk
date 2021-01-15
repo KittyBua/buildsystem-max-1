@@ -5,6 +5,7 @@ DBUS_VER    = 1.12.6
 DBUS_DIR    = dbus-$(DBUS_VER)
 DBUS_SOURCE = dbus-$(DBUS_VER).tar.gz
 DBUS_SITE   = https://dbus.freedesktop.org/releases/dbus
+DBUS_DEPS   = bootstrap expat
 
 DBUS_CONF_OPTS = \
 	CFLAGS="$(TARGET_CFLAGS) -Wno-cast-align" \
@@ -27,7 +28,7 @@ DBUS_CONF_OPTS += \
 	--without-systemdsystemunitdir
 endif
 
-$(D)/dbus: bootstrap expat
+$(D)/dbus:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

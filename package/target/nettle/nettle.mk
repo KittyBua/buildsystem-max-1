@@ -5,11 +5,12 @@ NETTLE_VER    = 3.5.1
 NETTLE_DIR    = nettle-$(NETTLE_VER)
 NETTLE_SOURCE = nettle-$(NETTLE_VER).tar.gz
 NETTLE_SITE   = https://ftp.gnu.org/gnu/nettle
+NETTLE_DEPS   = bootstrap gmp
 
 NETTLE_CONF_OPTS = \
 	--disable-documentation
 
-$(D)/nettle: bootstrap gmp
+$(D)/nettle:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

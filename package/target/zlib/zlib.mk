@@ -5,13 +5,14 @@ ZLIB_VER    = 1.2.11
 ZLIB_DIR    = zlib-$(ZLIB_VER)
 ZLIB_SOURCE = zlib-$(ZLIB_VER).tar.xz
 ZLIB_SITE   = https://sourceforge.net/projects/libpng/files/zlib/$(ZLIB_VER)
+ZLIB_DEPS   = bootstrap
 
 ZLIB_CONF_OPTS = \
 	--prefix=/usr \
 	--shared \
 	--uname=Linux
 
-$(D)/zlib: bootstrap
+$(D)/zlib:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

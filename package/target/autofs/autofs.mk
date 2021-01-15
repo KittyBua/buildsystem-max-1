@@ -5,6 +5,7 @@ AUTOFS_VER    = 5.1.6
 AUTOFS_DIR    = autofs-$(AUTOFS_VER)
 AUTOFS_SOURCE = autofs-$(AUTOFS_VER).tar.xz
 AUTOFS_SITE   = https://www.kernel.org/pub/linux/daemons/autofs/v5
+AUTOFS_DEPS   = bootstrap libtirpc e2fsprogs openssl libxml2
 
 AUTOFS_CONF_OPTS = \
 	--disable-mount-locking \
@@ -19,7 +20,7 @@ AUTOFS_CONF_OPTS = \
 	--with-fifodir=/var/run \
 	--with-flagdir=/var/run
 
-$(D)/autofs: bootstrap libtirpc e2fsprogs openssl libxml2
+$(D)/autofs:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

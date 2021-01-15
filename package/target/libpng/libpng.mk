@@ -6,12 +6,13 @@ LIBPNG_VER_X  = 16
 LIBPNG_DIR    = libpng-$(LIBPNG_VER)
 LIBPNG_SOURCE = libpng-$(LIBPNG_VER).tar.xz
 LIBPNG_SITE   = https://sourceforge.net/projects/libpng/files/libpng$(LIBPNG_VER_X)/$(LIBPNG_VER)
+LIBPNG_DEPS   = bootstrap zlib
 
 LIBPNG_CONF_OPTS = \
 	--disable-mips-msa \
 	--disable-powerpc-vsx
 
-$(D)/libpng: bootstrap zlib
+$(D)/libpng:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

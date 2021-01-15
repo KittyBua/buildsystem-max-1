@@ -5,13 +5,17 @@ LUASOCKET_VER    = git
 LUASOCKET_DIR    = luasocket.git
 LUASOCKET_SOURCE = luasocket.git
 LUASOCKET_SITE   = git://github.com/diegonehab
+LUASOCKET_DEPS   = bootstrap lua
 
 define LUASOCKET_POST_PATCH
-	$(SED) "s@LD_linux=gcc@LD_LINUX=$(TARGET_CC)@; s@CC_linux=gcc@CC_LINUX=$(TARGET_CC) -L$(TARGET_LIB_DIR)@; s@DESTDIR?=@DESTDIR?=$(TARGET_DIR)/usr@" $(PKG_BUILD_DIR)/src/makefile
+	$(SED) "s@LD_linux=gcc@LD_LINUX=$(TARGET_CC)@; \
+		s@CC_linux=gcc@CC_LINUX=$(TARGET_CC) -L$(TARGET_LIB_DIR)@; \
+		s@DESTDIR?=@DESTDIR?=$(TARGET_DIR)/usr@" \
+		$(PKG_BUILD_DIR)/src/makefile
 endef
 LUASOCKET_POST_PATCH_HOOKS = LUASOCKET_POST_PATCH
 
-$(D)/luasocket: bootstrap lua
+$(D)/luasocket:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

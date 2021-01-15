@@ -5,8 +5,9 @@ WLAN_QCOM_FIRMWARE_VER    = qca6174
 WLAN_QCOM_FIRMWARE_DIR    = firmware-$(WLAN_QCOM_FIRMWARE_VER)
 WLAN_QCOM_FIRMWARE_SOURCE = firmware-$(WLAN_QCOM_FIRMWARE_VER).zip
 WLAN_QCOM_FIRMWARE_SITE   = http://source.mynonpublic.com/edision
+WLAN_QCOM_FIRMWARE_DEPS   = bootstrap
 
-$(D)/wlan-qcom-firmware: bootstrap
+$(D)/wlan-qcom-firmware:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

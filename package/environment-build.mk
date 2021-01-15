@@ -61,7 +61,6 @@ PKG_FILES_DIR   = $(BASE_DIR)/package/*/$(pkgname)/files
 PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(pkgname)/patches
 
 PKG_CHDIR       = $(CD) $(PKG_BUILD_DIR)
-PKG_REMOVE      = $(Q)rm -rf $(PKG_BUILD_DIR)
 
 # -----------------------------------------------------------------------------
 

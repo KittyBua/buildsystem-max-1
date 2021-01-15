@@ -5,6 +5,7 @@ PIXMAN_VER    = 0.34.0
 PIXMAN_DIR    = pixman-$(PIXMAN_VER)
 PIXMAN_SOURCE = pixman-$(PIXMAN_VER).tar.gz
 PIXMAN_SITE   = https://www.cairographics.org/releases
+PIXMAN_DEPS   = bootstrap zlib libpng
 
 PIXMAN_CONF_OPTS = \
 	--disable-gtk \
@@ -12,7 +13,7 @@ PIXMAN_CONF_OPTS = \
 	--disable-loongson-mmi \
 	--disable-docs
 
-$(D)/pixman: bootstrap zlib libpng
+$(D)/pixman:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

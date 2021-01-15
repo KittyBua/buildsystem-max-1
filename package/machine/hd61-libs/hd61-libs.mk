@@ -5,8 +5,9 @@ HD61_LIBS_DATE   = 20200622
 HD61_LIBS_VER    = $(HD61_LIBS_DATE)
 HD61_LIBS_SOURCE = hd61-libs-$(HD61_LIBS_VER).zip
 HD61_LIBS_SITE   = http://downloads.mutant-digital.net/hd61
+HD61_LIBS_DEPS   = bootstrap
 
-$(D)/hd61-libs: bootstrap
+$(D)/hd61-libs:
 	$(START_BUILD)
 	$(REMOVE)/hiplay
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

@@ -5,6 +5,7 @@ NANO_VER    = 2.2.6
 NANO_DIR    = nano-$(NANO_VER)
 NANO_SOURCE = nano-$(NANO_VER).tar.gz
 NANO_SITE   = https://www.nano-editor.org/dist/v$(basename $(NANO_VER))
+NANO_DEPS   = bootstrap
 
 NANO_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
@@ -12,7 +13,7 @@ NANO_CONF_OPTS = \
 	--enable-tiny \
 	--enable-color
 
-$(D)/nano: bootstrap
+$(D)/nano:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

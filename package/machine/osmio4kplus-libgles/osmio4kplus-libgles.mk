@@ -5,8 +5,9 @@ OSMIO4KPLUS_LIBGLES_VER    = 2.0
 OSMIO4KPLUS_LIBGLES_DIR    = edision-libv3d-$(OSMIO4KPLUS_LIBGLES_VER)
 OSMIO4KPLUS_LIBGLES_SOURCE = edision-libv3d-$(OSMIO4KPLUS_LIBGLES_VER).tar.xz
 OSMIO4KPLUS_LIBGLES_SITE   = http://source.mynonpublic.com/edision
+OSMIO4KPLUS_LIBGLES_DEPS   = bootstrap
 
-$(D)/osmio4kplus-libgles: bootstrap
+$(D)/osmio4kplus-libgles:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

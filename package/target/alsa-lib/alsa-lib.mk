@@ -5,6 +5,7 @@ ALSA_LIB_VER    = 1.2.4
 ALSA_LIB_DIR    = alsa-lib-$(ALSA_LIB_VER)
 ALSA_LIB_SOURCE = alsa-lib-$(ALSA_LIB_VER).tar.bz2
 ALSA_LIB_SITE   = https://www.alsa-project.org/files/pub/lib
+ALSA_LIB_DEPS   = bootstrap
 
 ALSA_LIB_CONF_OPTS = \
 	--with-alsa-devdir=/dev/snd/ \
@@ -24,7 +25,7 @@ ALSA_LIB_CONF_OPTS = \
 	--disable-python \
 	--disable-topology
 
-$(D)/alsa-lib: bootstrap
+$(D)/alsa-lib:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

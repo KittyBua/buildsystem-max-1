@@ -5,6 +5,7 @@ RPCBIND_VER    = 1.2.5
 RPCBIND_DIR    = rpcbind-$(RPCBIND_VER)
 RPCBIND_SOURCE = rpcbind-$(RPCBIND_VER).tar.bz2
 RPCBIND_SITE   = https://sourceforge.net/projects/rpcbind/files/rpcbind/$(RPCBIND_VER)
+RPCBIND_DEPS   = bootstrap libtirpc
 
 RPCBIND_CONF_OPTS = \
 	CFLAGS="$(TARGET_CFLAGS) `$(PKG_CONFIG) --cflags libtirpc`" \
@@ -13,7 +14,7 @@ RPCBIND_CONF_OPTS = \
 	--with-rpcuser=root \
 	--with-systemdsystemunitdir=no
 
-$(D)/rpcbind: bootstrap libtirpc
+$(D)/rpcbind:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

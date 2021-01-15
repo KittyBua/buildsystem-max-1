@@ -7,8 +7,9 @@ VUZERO4K_PLATFORM_UTIL_VER    = 17.1-$(VUZERO4K_PLATFORM_UTIL_DATE).$(VUZERO4K_P
 VUZERO4K_PLATFORM_UTIL_DIR    = platform-util-vuzero4k
 VUZERO4K_PLATFORM_UTIL_SOURCE = platform-util-vuzero4k-$(VUZERO4K_PLATFORM_UTIL_VER).tar.gz
 VUZERO4K_PLATFORM_UTIL_SITE   = http://archive.vuplus.com/download/build_support/vuplus
+VUZERO4K_PLATFORM_UTIL_DEPS   = bootstrap
 
-$(D)/vuzero4k-platform-util: bootstrap
+$(D)/vuzero4k-platform-util:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

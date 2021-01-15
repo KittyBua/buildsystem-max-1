@@ -5,8 +5,9 @@ HOST_OPKG_VER    = 0.3.3
 HOST_OPKG_DIR    = opkg-$(HOST_OPKG_VER)
 HOST_OPKG_SOURCE = opkg-$(HOST_OPKG_VER).tar.gz
 HOST_OPKG_SITE   = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
+HOST_OPKG_DEPS   = bootstrap host-libarchive
 
-$(D)/host-opkg: bootstrap host-libarchive
+$(D)/host-opkg:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

@@ -2,6 +2,7 @@ USHARE_VER    = 1.1a
 USHARE_DIR    = ushare-uShare_v$(USHARE_VER)
 USHARE_SOURCE = uShare_v$(USHARE_VER).tar.gz
 USHARE_SITE   = https://github.com/GeeXboX/ushare/archive
+USHARE_DEPS   = bootstrap libupnp
 
 USHARE_CONF_OPTS = \
 	--prefix=/usr \
@@ -12,7 +13,7 @@ USHARE_CONF_OPTS = \
 	--disable-dlna \
 	--disable-nls
 
-$(D)/ushare: bootstrap libupnp
+$(D)/ushare:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

@@ -5,8 +5,9 @@ NETBASE_VER    = 6.2
 NETBASE_DIR    = netbase-$(NETBASE_VER)
 NETBASE_SOURCE = netbase_$(NETBASE_VER).tar.xz
 NETBASE_SITE   = https://ftp.debian.org/debian/pool/main/n/netbase
+NETBASE_DEPS   = bootstrap
 
-$(D)/netbase: bootstrap
+$(D)/netbase:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

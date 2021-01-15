@@ -5,6 +5,7 @@ SYSSTAT_VER    = 12.5.1
 SYSSTAT_DIR    = sysstat-$(SYSSTAT_VER)
 SYSSTAT_SOURCE = sysstat-$(SYSSTAT_VER).tar.xz
 SYSSTAT_SITE   = http://pagesperso-orange.fr/sebastien.godard
+SYSSTAT_DEPS   = bootstrap
 
 SYSSTAT_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
@@ -16,7 +17,7 @@ SYSSTAT_CONF_OPTS = \
 	sa_dir="/var/log/sysstat" \
 	conf_dir="/etc/sysstat"
 
-$(D)/sysstat: bootstrap
+$(D)/sysstat:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

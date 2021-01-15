@@ -5,6 +5,7 @@ LIBBLURAY_VER    = 0.9.3
 LIBBLURAY_DIR    = libbluray-$(LIBBLURAY_VER)
 LIBBLURAY_SOURCE = libbluray-$(LIBBLURAY_VER).tar.bz2
 LIBBLURAY_SITE   = ftp.videolan.org/pub/videolan/libbluray/$(LIBBLURAY_VER)
+LIBBLURAY_DEPS   = bootstrap
 
 LIBBLURAY_CONF_OPTS = \
 	--enable-shared \
@@ -20,7 +21,7 @@ LIBBLURAY_CONF_OPTS = \
 	--without-libxml2 \
 	--without-fontconfig
 
-$(D)/libbluray: bootstrap
+$(D)/libbluray:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

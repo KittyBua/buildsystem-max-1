@@ -7,8 +7,9 @@ VUDUO4KSE_PLATFORM_UTIL_VER    = 17.1-$(VUDUO4KSE_PLATFORM_UTIL_DATE).$(VUDUO4KS
 VUDUO4KSE_PLATFORM_UTIL_DIR    = platform-util-vuduo4kse
 VUDUO4KSE_PLATFORM_UTIL_SOURCE = platform-util-vuduo4kse-$(VUDUO4KSE_PLATFORM_UTIL_VER).tar.gz
 VUDUO4KSE_PLATFORM_UTIL_SITE   = http://archive.vuplus.com/download/build_support/vuplus
+VUDUO4KSE_PLATFORM_UTIL_DEPS   = bootstrap
 
-$(D)/vuduo4kse-platform-util: bootstrap
+$(D)/vuduo4kse-platform-util:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

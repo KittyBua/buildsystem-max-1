@@ -5,15 +5,17 @@ KMOD_VER    = 26
 KMOD_DIR    = kmod-$(KMOD_VER)
 KMOD_SOURCE = kmod-$(KMOD_VER).tar.xz
 KMOD_SITE   = https://mirrors.edge.kernel.org/pub/linux/utils/kernel/kmod
+KMOD_DEPS   = bootstrap zlib
 
 KMOD_CONF_OPTS = \
 	--bindir=$(base_bindir) \
 	--disable-static \
 	--enable-shared \
 	--disable-manpages \
-	--with-zlib
+	--without-zlib \
+	--without-zstd
 
-$(D)/kmod: bootstrap zlib
+$(D)/kmod:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

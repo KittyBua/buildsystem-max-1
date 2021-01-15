@@ -5,11 +5,12 @@ USBUTILS_VER    = 007
 USBUTILS_DIR    = usbutils-$(USBUTILS_VER)
 USBUTILS_SOURCE = usbutils-$(USBUTILS_VER).tar.xz
 USBUTILS_SITE   = https://www.kernel.org/pub/linux/utils/usb/usbutils
+USBUTILS_DEPS   = bootstrap libusb
 
 USBUTILS_CONF_OPTS = \
 	--datadir=/usr/share/hwdata
 
-$(D)/usbutils: libusb
+$(D)/usbutils:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

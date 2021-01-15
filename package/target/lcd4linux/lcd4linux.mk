@@ -5,13 +5,14 @@ LCD4LINUX_VER    = git
 LCD4LINUX_DIR    = lcd4linux.git
 LCD4LINUX_SOURCE = lcd4linux.git
 LCD4LINUX_SITE   = https://github.com/TangoCash
+LCD4LINUX_DEPS   = bootstrap $(SHARE_LCD4LINUX) ncurses libusb-compat libgd libusb libdpf
 
 LCD4LINUX_CONF_OPTS = \
 	--with-drivers='DPF,SamsungSPF,VUPLUS4K,PNG' \
 	--with-plugins='all,!apm,!asterisk,!dbus,!dvb,!gps,!hddtemp,!huawei,!imon,!isdn,!kvv,!mpd,!mpris_dbus,!mysql,!pop3,!ppp,!python,!qnaplog,!raspi,!sample,!seti,!w1retap,!wireless,!xmms' \
 	--with-ncurses=$(TARGET_LIB_DIR)
 
-$(D)/lcd4linux: bootstrap $(SHARE_LCD4LINUX) ncurses libusb-compat libgd libusb libdpf
+$(D)/lcd4linux:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

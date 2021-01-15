@@ -5,6 +5,7 @@ LIBGCRYPT_VER    = 1.8.5
 LIBGCRYPT_DIR    = libgcrypt-$(LIBGCRYPT_VER)
 LIBGCRYPT_SOURCE = libgcrypt-$(LIBGCRYPT_VER).tar.bz2
 LIBGCRYPT_SITE   = https://gnupg.org/ftp/gcrypt/libgcrypt
+LIBGCRYPT_DEPS   = bootstrap libgpg-error
 
 LIBGCRYPT_CONF_OPTS = \
 	--enable-shared \
@@ -12,7 +13,7 @@ LIBGCRYPT_CONF_OPTS = \
 	--disable-tests \
 	--with-gpg-error-prefix=$(TARGET_DIR)/usr
 
-$(D)/libgcrypt: bootstrap libgpg-error
+$(D)/libgcrypt:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

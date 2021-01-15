@@ -1,10 +1,12 @@
 #
 # dropbearmulti
 #
-DROPBEARMULTI_VER      = git
-DROPBEARMULTI_DIR      = dropbear.git
-DROPBEARMULTI_SOURCE   = dropbear.git
-DROPBEARMULTI_SITE     = https://github.com/mkj
+DROPBEARMULTI_VER    = git
+DROPBEARMULTI_DIR    = dropbear.git
+DROPBEARMULTI_SOURCE = dropbear.git
+DROPBEARMULTI_SITE   = https://github.com/mkj
+DROPBEARMULTI_DEPS   = bootstrap
+
 DROPBEARMULTI_CHECKOUT = c8d852c
 
 DROPBEARMULTI_CONF_OPTS = \
@@ -21,7 +23,7 @@ DROPBEARMULTI_CONF_OPTS = \
 	--disable-pututline \
 	--disable-pututxline
 
-$(D)/dropbearmulti: bootstrap
+$(D)/dropbearmulti:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

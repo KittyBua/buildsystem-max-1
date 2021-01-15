@@ -5,6 +5,7 @@ LIBUSB_VER    = 1.0.23
 LIBUSB_DIR    = libusb-$(LIBUSB_VER)
 LIBUSB_SOURCE = libusb-$(LIBUSB_VER).tar.bz2
 LIBUSB_SITE   = https://github.com/libusb/libusb/releases/download/v$(LIBUSB_VER)
+LIBUSB_DEPS   = bootstrap
 
 LIBUSB_CONF_OPTS = \
 	--enable-static \
@@ -13,7 +14,7 @@ LIBUSB_CONF_OPTS = \
 	--disable-udev \
 	--disable-examples-build
 
-$(D)/libusb: bootstrap
+$(D)/libusb:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))

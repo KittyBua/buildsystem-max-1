@@ -6,8 +6,9 @@ LUA_ABIVER = $(basename $(LUA_VER))
 LUA_DIR    = lua-$(LUA_VER)
 LUA_SOURCE = lua-$(LUA_VER).tar.gz
 LUA_SITE   = https://www.lua.org/ftp
+LUA_DEPS   = bootstrap host-lua ncurses
 
-$(D)/lua: bootstrap host-lua ncurses
+$(D)/lua:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
