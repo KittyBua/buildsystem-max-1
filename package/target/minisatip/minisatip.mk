@@ -24,5 +24,6 @@ $(D)/minisatip:
 	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/minisatip $(TARGET_DIR)/usr/bin
 	$(INSTALL) -d $(TARGET_SHARE_DIR)/minisatip
 	$(INSTALL_COPY) $(PKG_BUILD_DIR)/html $(TARGET_SHARE_DIR)/minisatip
+	$(INSTALL_EXEC) $(PKG_FILES_DIR)/minisatip.init $(TARGET_DIR)/etc/init.d/minisatip
 	$(PKG_REMOVE)
 	$(TOUCH)
