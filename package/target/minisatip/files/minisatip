@@ -1,0 +1,1 @@
+MINISATIP_OPTS="-x 9090 -t -o /tmp/camd.socket"
