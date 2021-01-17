@@ -18,5 +18,6 @@ $(D)/libdvbcsa:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
+	$(REWRITE_LIBTOOL_LA)
 	$(PKG_REMOVE)
 	$(TOUCH)
