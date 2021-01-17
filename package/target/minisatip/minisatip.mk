@@ -5,7 +5,7 @@ MINISATIP_VER    = git
 MINISATIP_DIR    = minisatip.git
 MINISATIP_SOURCE = minisatip.git
 MINISATIP_SITE   = https://github.com/catalinii
-MINISATIP_DEPS   = bootstrap libdvbcsa openssl
+MINISATIP_DEPS   = bootstrap libdvbcsa openssl dvb-apps
 
 MINISATIP_CONF_OPTS = \
 	--enable-static \

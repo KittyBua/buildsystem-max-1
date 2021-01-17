@@ -1,0 +1,26 @@
+From c578772d6abc5fdf3ec83f632c371373e5baf9f1 Mon Sep 17 00:00:00 2001
+From: Romain Naour <romain.naour@openwide.fr>
+Date: Fri, 26 Dec 2014 01:04:58 +0100
+Subject: [PATCH] Makefile: remove test
+
+Tests needs static libraries, remove them for shared only build.
+
+Signed-off-by: Romain Naour <romain.naour@openwide.fr>
+---
+ Makefile | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 65a2273..105c460 100644
+@@ -10,8 +10,6 @@
+ 
+ all clean install:
+ 	$(MAKE) -C lib $@
+-	$(MAKE) -C test $@
+-	$(MAKE) -C util $@
+ 
+ update:
+ 	@echo "Pulling changes & updating from master repository"
+-- 
+1.9.3
+
