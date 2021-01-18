@@ -5,7 +5,12 @@ DVB_APPS_VER    = git
 DVB_APPS_DIR    = dvb-apps.git
 DVB_APPS_SOURCE = dvb-apps.git
 DVB_APPS_SITE   = https://github.com/openpli-arm
-DVB_APPS_DEPS   = bootstrap
+DVB_APPS_DEPS   = bootstrap libiconv
+
+DVB_APPS_LDLIBS = -liconv
+
+DVB_APPS_MAKE_OPTS  = PERL5LIB=$(PKG_BUILD_DIR)/util/scan
+DVB_APPS_MAKE_OPTS += enable_shared=no
 
 $(D)/dvb-apps:
 	$(START_BUILD)
@@ -14,10 +19,8 @@ $(D)/dvb-apps:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		export PERL_USE_UNSAFE_INC=1; \
-		export enable_shared="no"; \
-		$(TARGET_CONFIGURE_ENV) \
-		$(MAKE) DESTDIR=$(TARGET_DIR); \
-		$(MAKE) DESTDIR=$(TARGET_DIR) install
+		$(TARGET_CONFIGURE_ENV) LDLIBS="$(DVB_APPS_LDLIBS)" \
+		$(MAKE) CROSS_ROOT=$(STAGING_DIR) $(DVB_APPS_MAKE_OPTS); \
+		$(MAKE) $(DVB_APPS_MAKE_OPTS) DESTDIR=$(TARGET_DIR) install
 	$(PKG_REMOVE)
 	$(TOUCH)

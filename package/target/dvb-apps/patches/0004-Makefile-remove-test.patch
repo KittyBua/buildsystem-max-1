@@ -12,15 +12,16 @@ Signed-off-by: Romain Naour <romain.naour@openwide.fr>
 
 diff --git a/Makefile b/Makefile
 index 65a2273..105c460 100644
-@@ -10,8 +10,6 @@
+--- a/Makefile
++++ b/Makefile
+@@ -10,7 +10,6 @@ DVB_API_MINOR := $(word 3, $(shell grep -m1 "DVB_API_VERSION_MINOR" $(VERSION_FI
  
  all clean install:
  	$(MAKE) -C lib $@
 -	$(MAKE) -C test $@
--	$(MAKE) -C util $@
+ 	$(MAKE) -C util $@
  
  update:
- 	@echo "Pulling changes & updating from master repository"
 -- 
 1.9.3
 
