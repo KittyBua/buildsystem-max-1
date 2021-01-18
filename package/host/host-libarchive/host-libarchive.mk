@@ -15,8 +15,6 @@ $(D)/host-libarchive:
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		./configure \
-			--build=$(BUILD) \
-			--host=$(BUILD) \
 			--prefix= \
 			--without-xml2 \
 			; \
