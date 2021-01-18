@@ -21,7 +21,7 @@ $(D)/iozone:
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		cd src/current; \
-		$(BUILD_ENV); \
+		$(TARGET_CONFIGURE_ENV); \
 		$(MAKE) linux-arm
 		$(INSTALL_EXEC) $(PKG_BUILD_DIR)/src/current/iozone $(TARGET_DIR)/usr/bin
 	$(PKG_REMOVE)

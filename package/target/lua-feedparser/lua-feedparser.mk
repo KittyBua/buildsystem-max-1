@@ -19,7 +19,7 @@ $(D)/lua-feedparser:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) install LUA_DIR=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVER)
 	$(PKG_REMOVE)
 	$(TOUCH)

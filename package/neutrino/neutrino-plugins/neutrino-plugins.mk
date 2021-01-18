@@ -55,7 +55,7 @@ $(D)/neutrino-plugins.config.status:
 	test -d $(NEUTRINO_PLUGINS_OBJ_DIR) || mkdir -p $(NEUTRINO_PLUGINS_OBJ_DIR)
 	cd $(NEUTRINO_PLUGINS_OBJ_DIR); \
 		$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/autogen.sh && automake --add-missing; \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/configure \
 			--host=$(GNU_TARGET_NAME) \
 			--build=$(GNU_HOST_NAME) \

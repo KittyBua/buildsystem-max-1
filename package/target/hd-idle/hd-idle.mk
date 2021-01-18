@@ -14,7 +14,7 @@ $(D)/hd-idle:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) CC=$(TARGET_CC); \
 		$(MAKE) install TARGET_DIR=$(TARGET_DIR) install
 	$(PKG_REMOVE)

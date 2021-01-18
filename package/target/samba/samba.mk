@@ -72,7 +72,7 @@ $(D)/samba:
 	$(PKG_CHDIR); \
 		cd source3; \
 		./autogen.sh; \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		ac_cv_lib_attr_getxattr=no \
 		ac_cv_search_getxattr=no \
 		ac_cv_file__proc_sys_kernel_core_pattern=yes \

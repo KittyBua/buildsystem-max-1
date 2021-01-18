@@ -47,7 +47,7 @@ $(D)/libstb-hal.config.status:
 	test -d $(LIBSTB_HAL_OBJ_DIR) || mkdir -p $(LIBSTB_HAL_OBJ_DIR)
 	cd $(LIBSTB_HAL_OBJ_DIR); \
 		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh; \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/configure \
 			--host=$(GNU_TARGET_NAME) \
 			--build=$(GNU_HOST_NAME) \

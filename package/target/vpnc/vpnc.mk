@@ -14,7 +14,7 @@ $(D)/vpnc:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE); \
 		$(MAKE) \
 			install DESTDIR=$(TARGET_DIR) \

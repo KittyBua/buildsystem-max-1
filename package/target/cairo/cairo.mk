@@ -24,7 +24,7 @@ $(D)/cairo:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		ax_cv_c_float_words_bigendian="no" \
 		./configure $(CONFIGURE_OPTS) $(TARGET_CONFIGURE_OPTS); \
 		$(MAKE); \

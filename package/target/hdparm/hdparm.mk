@@ -14,7 +14,7 @@ $(D)/hdparm:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) CROSS=$(TARGET_CROSS); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR) mandir=$(REMOVE_mandir)
 	$(PKG_REMOVE)

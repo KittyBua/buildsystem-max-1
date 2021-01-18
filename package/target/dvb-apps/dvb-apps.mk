@@ -16,7 +16,7 @@ $(D)/dvb-apps:
 	$(PKG_CHDIR); \
 		export PERL_USE_UNSAFE_INC=1; \
 		export enable_shared="no"; \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) DESTDIR=$(TARGET_DIR); \
 		$(MAKE) DESTDIR=$(TARGET_DIR) install
 	$(PKG_REMOVE)

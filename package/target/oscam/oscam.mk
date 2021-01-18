@@ -69,7 +69,7 @@ $(D)/oscam.do_prepare:
 
 $(D)/oscam.do_compile:
 	$(PKG_CHDIR); \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) CROSS=$(TARGET_CROSS) USE_LIBCRYPTO=1 USE_LIBUSB=1 \
 		PLUS_TARGET="-rezap" \
 		CONF_DIR=/var/keys \

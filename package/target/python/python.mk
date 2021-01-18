@@ -18,7 +18,7 @@ $(D)/python:
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		CONFIG_SITE= \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		autoreconf -vfi Modules/_ctypes/libffi; \
 		autoconf; \
 		./configure \

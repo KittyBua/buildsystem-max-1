@@ -229,7 +229,7 @@ $(D)/neutrino.config.status:
 	test -d $(NEUTRINO_OBJ_DIR) || mkdir -p $(NEUTRINO_OBJ_DIR)
 	cd $(NEUTRINO_OBJ_DIR); \
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh; \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure \
 			--host=$(GNU_TARGET_NAME) \
 			--build=$(GNU_HOST_NAME) \

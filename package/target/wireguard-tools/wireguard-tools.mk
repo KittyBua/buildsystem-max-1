@@ -16,7 +16,7 @@ $(D)/wireguard-tools:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) -C src $(WIREGUARD_TOOLS_MAKE_OPTS) PREFIX=/usr; \
 		$(MAKE) -C src install $(WIREGUARD_TOOLS_MAKE_OPTS) DESTDIR=$(TARGET_DIR) MANDIR=$(REMOVE_mandir)
 	$(PKG_REMOVE)

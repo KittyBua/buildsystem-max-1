@@ -14,7 +14,7 @@ $(D)/sysvinit:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) SULOGINLIBS=-lcrypt; \
 		$(MAKE) install ROOT=$(TARGET_DIR) mandir=$(REMOVE_mandir)
 	mkdir -p $(TARGET_DIR)/etc/{init.d,rc{{0..6},S}.d}

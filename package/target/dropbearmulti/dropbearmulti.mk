@@ -30,7 +30,7 @@ $(D)/dropbearmulti:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(BUILD_ENV) \
+		$(TARGET_CONFIGURE_ENV) \
 		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE) PROGRAMS="dropbear scp dropbearkey" MULTI=1; \
