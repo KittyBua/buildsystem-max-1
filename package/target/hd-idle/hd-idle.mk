@@ -15,7 +15,7 @@ $(D)/hd-idle:
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(TARGET_CONFIGURE_ENV) \
-		$(MAKE) CC=$(TARGET_CC); \
+		$(MAKE); \
 		$(MAKE) install TARGET_DIR=$(TARGET_DIR) install
 	$(PKG_REMOVE)
 	$(TOUCH)
