@@ -94,11 +94,11 @@ define PKG_UNPACK
 	      $(call MESSAGE,"use original head"); \
 	    else \
 	      $(call MESSAGE,"git checkout $($(PKG)_CHECKOUT)"); \
-	      $(PKG_CHDIR); git checkout -q $($(PKG)_CHECKOUT); \
+	      $(CD) ${1}/$($(PKG)_DIR); git checkout -q $($(PKG)_CHECKOUT); \
 	    fi; \
 	    ;; \
 	  *) \
-	    printf "$(TERM_RED)Cannot extract ${PKG_SOURCE}$(TERM_NORMAL) \n"; \
+	    $(call MESSAGE,"Cannot extract (PKG_SOURCE)"); \
 	    false ;; \
 	esac \
 	)

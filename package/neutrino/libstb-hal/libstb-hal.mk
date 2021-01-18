@@ -37,7 +37,6 @@ $(D)/libstb-hal.do_prepare:
 	test -d $(SOURCE_DIR) || mkdir -p $(SOURCE_DIR)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(SOURCE_DIR))
-	(cd $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); git checkout -q $(LIBSTB_HAL_BRANCH);)
 	cp -ra $(SOURCE_DIR)/$(LIBSTB_HAL_DIR) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR).org
 	$(APPLY_PATCHES) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR) $(PKG_PATCHES_DIR) \$(LIBSTB_HAL_CUSTOM_PATCH)
 	@touch $@

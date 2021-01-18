@@ -4,35 +4,35 @@
 # -----------------------------------------------------------------------------
 
 ifeq ($(FLAVOUR),neutrino-ddt)
-GIT_SITE          ?= https://github.com/Duckbox-Developers
-NEUTRINO           = neutrino-ddt
-LIBSTB_HAL         = libstb-hal-ddt
-NEUTRINO_BRANCH   ?= master
-LIBSTB_HAL_BRANCH ?= master
+GIT_SITE            ?= https://github.com/Duckbox-Developers
+NEUTRINO             = neutrino-ddt
+LIBSTB_HAL           = libstb-hal-ddt
+NEUTRINO_CHECKOUT   ?= master
+LIBSTB_HAL_CHECKOUT ?= master
 else ifeq ($(FLAVOUR),neutrino-max)
-GIT_SITE          ?= $(MAX-GIT-GITHUB)
-NEUTRINO           = neutrino-max
-LIBSTB_HAL         = libstb-hal-max
-NEUTRINO_BRANCH   ?= master
-LIBSTB_HAL_BRANCH ?= master
+GIT_SITE            ?= $(MAX-GIT-GITHUB)
+NEUTRINO             = neutrino-max
+LIBSTB_HAL           = libstb-hal-max
+NEUTRINO_CHECKOUT   ?= master
+LIBSTB_HAL_CHECKOUT ?= master
 else ifeq ($(FLAVOUR),neutrino-ni)
-GIT_SITE          ?= https://github.com/neutrino-images
-NEUTRINO           = ni-neutrino
-LIBSTB_HAL         = ni-libstb-hal
-NEUTRINO_BRANCH   ?= master
-LIBSTB_HAL_BRANCH ?= master
+GIT_SITE            ?= https://github.com/neutrino-images
+NEUTRINO             = ni-neutrino
+LIBSTB_HAL           = ni-libstb-hal
+NEUTRINO_CHECKOUT   ?= master
+LIBSTB_HAL_CHECKOUT ?= master
 else ifeq ($(FLAVOUR),neutrino-tangos)
-GIT_SITE          ?= https://github.com/TangoCash
-NEUTRINO           = neutrino-tangos
-LIBSTB_HAL         = libstb-hal-tangos
-NEUTRINO_BRANCH   ?= master
-LIBSTB_HAL_BRANCH ?= master
+GIT_SITE            ?= https://github.com/TangoCash
+NEUTRINO             = neutrino-tangos
+LIBSTB_HAL           = libstb-hal-tangos
+NEUTRINO_CHECKOUT   ?= master
+LIBSTB_HAL_CHECKOUT ?= master
 else ifeq ($(FLAVOUR),neutrino-redblue)
-GIT_SITE          ?= https://github.com/redblue-pkt
-NEUTRINO           = neutrino-redblue
-LIBSTB_HAL         = libstb-hal-redblue
-NEUTRINO_BRANCH   ?= master
-LIBSTB_HAL_BRANCH ?= master
+GIT_SITE            ?= https://github.com/redblue-pkt
+NEUTRINO             = neutrino-redblue
+LIBSTB_HAL           = libstb-hal-redblue
+NEUTRINO_CHECKOUT   ?= master
+LIBSTB_HAL_CHECKOUT ?= master
 endif
 
 NEUTRINO_OBJ_DIR   = $(BUILD_DIR)/$(NEUTRINO_DIR)
@@ -219,7 +219,6 @@ $(D)/neutrino.do_prepare:
 	rm -rf $(NEUTRINO_OBJ_DIR)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(SOURCE_DIR))
-	(cd $(SOURCE_DIR)/$(NEUTRINO_DIR); git checkout -q $(NEUTRINO_BRANCH);)
 	cp -ra $(SOURCE_DIR)/$(NEUTRINO_DIR) $(SOURCE_DIR)/$(NEUTRINO_DIR).org
 	$(APPLY_PATCHES) $(SOURCE_DIR)/$(NEUTRINO_DIR) $(PKG_PATCHES_DIR) \$(NEUTRINO_CUSTOM_PATCH)
 	@touch $@
