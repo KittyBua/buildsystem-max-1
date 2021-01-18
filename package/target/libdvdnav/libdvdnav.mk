@@ -18,7 +18,6 @@ $(D)/libdvdnav:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(BUILD_ENV) \
 		libtoolize --copy --force --quiet --ltdl; \
 		autoreconf -fi; \
 		$(CONFIGURE); \
