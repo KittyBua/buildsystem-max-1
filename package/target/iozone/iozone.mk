@@ -8,8 +8,8 @@ IOZONE_SITE   = http://www.iozone.org/src/current
 IOZONEL_DEPS   = bootstrap
 
 define IOZONE_POST_PATCH
-	$(SED) "s/= gcc/= $(TARGET_CC)/" $(PKG_BUILD_DIR)/src/current/makefile
-	$(SED) "s/= cc/= $(TARGET_CC)/" $(PKG_BUILD_DIR)/src/current/makefile
+	$(SED) s~'gcc'~"$(TARGET_CC)"~ $(PKG_BUILD_DIR)/src/current/makefile
+	$(SED) s~' cc'~"$(TARGET_CC)"~ $(PKG_BUILD_DIR)/src/current/makefile
 endef
 IOZONE_POST_PATCH_HOOKS = IOZONE_POST_PATCH
 
