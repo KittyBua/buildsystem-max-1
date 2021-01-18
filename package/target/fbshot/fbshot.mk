@@ -9,7 +9,7 @@ FBSHOL_DEPS   = bootstrap libpng
 
 define FBSHOT_POST_PATCH
 	$(SED) s~'gcc'~"$(TARGET_CC) $(TARGET_CFLAGS) $(TARGET_LDFLAGS)"~ $(PKG_BUILD_DIR)/Makefile
-	$(SED) 's/strip fbshot/$(TARGET_STRIP) fbshot/' $(PKG_BUILD_DIR)/Makefile
+	$(SED) s~'strip fbshot'~"$(TARGET_STRIP) fbshot"~ $(PKG_BUILD_DIR)/Makefile
 endef
 FBSHOT_POST_PATCH_HOOKS = FBSHOT_POST_PATCH
 
