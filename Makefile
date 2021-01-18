@@ -103,7 +103,7 @@ printenv:
 	@echo "LINUX_DIR         : $(LINUX_DIR)"
 	@echo "MAINTAINER        : $(MAINTAINER)"
 	@echo "BUILD             : $(BUILD)"
-	@echo "TARGET            : $(TARGET)"
+	@echo "GNU_TARGET_NAME   : $(GNU_TARGET_NAME)"
 	@echo "TARGET_ARCH       : $(TARGET_ARCH)"
 	@echo "BOXTYPE           : $(BOXTYPE)"
 	@echo "BOXMODEL          : $(BOXMODEL)"

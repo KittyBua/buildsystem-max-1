@@ -231,7 +231,7 @@ $(D)/neutrino.config.status:
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh; \
 		$(BUILD_ENV) \
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure \
-			--host=$(TARGET) \
+			--host=$(GNU_TARGET_NAME) \
 			--build=$(BUILD) \
 			--prefix=/usr \
 			--enable-maintainer-mode \

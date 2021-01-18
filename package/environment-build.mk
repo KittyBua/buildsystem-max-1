@@ -39,6 +39,7 @@ IMAGE_DIR     = $(BASE_DIR)/release_image
 HELPERS_DIR   = $(BASE_DIR)/helpers
 OWN_FILES    ?= $(BASE_DIR)/own-files
 CROSS_DIR     = $(BASE_DIR)/cross/$(TARGET_ARCH)-$(CROSSTOOL_GCC_VER)-kernel-$(KERNEL_VER)
+STAGING_DIR   = $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root
 
 BUILD        ?= $(shell /usr/share/libtool/config.guess 2>/dev/null || /usr/share/libtool/config/config.guess 2>/dev/null || /usr/share/misc/config.guess 2>/dev/null)
 
@@ -116,24 +117,24 @@ ifeq ($(BS_GCC_VER), 10.2.0)
 endif
 
 ifeq ($(TARGET_ARCH),arm)
-TARGET         ?= arm-cortex-linux-gnueabihf
-TARGET_ARCH    ?= arm
-TARGET_ABI      = -mtune=cortex-a15 -mfloat-abi=hard -mfpu=neon-vfpv4 -march=armv7ve
-TARGET_ENDIAN   = little
+GNU_TARGET_NAME ?= arm-cortex-linux-gnueabihf
+TARGET_ARCH     ?= arm
+TARGET_ABI       = -mtune=cortex-a15 -mfloat-abi=hard -mfpu=neon-vfpv4 -march=armv7ve
+TARGET_ENDIAN    = little
 endif
 
 ifeq ($(TARGET_ARCH),aarch64)
-TARGET         ?= aarch64-unknown-linux-gnu
-TARGET_ARCH    ?= aarch64
-TARGET_ABI      =
-TARGET_ENDIAN   = big
+GNU_TARGET_NAME ?= aarch64-unknown-linux-gnu
+TARGET_ARCH      = aarch64
+TARGET_ABI       =
+TARGET_ENDIAN    = big
 endif
 
 ifeq ($(TARGET_ARCH),mips)
-TARGET         ?= mipsel-unknown-linux-gnu
-TARGET_ARCH    ?= mips
-TARGET_ABI      = -march=mips32 -mtune=mips32
-TARGET_ENDIAN   = little
+GNU_TARGET_NAME ?= mipsel-unknown-linux-gnu
+TARGET_ARCH     ?= mips
+TARGET_ABI       = -march=mips32 -mtune=mips32
+TARGET_ENDIAN    = little
 endif
 
 TARGET_CFLAGS   = $(TARGET_OPTIMIZATION) $(TARGET_ABI) $(TARGET_EXTRA_CFLAGS) -I$(TARGET_INCLUDE_DIR)
@@ -141,7 +142,7 @@ TARGET_CPPFLAGS = $(TARGET_CFLAGS)
 TARGET_CXXFLAGS = $(TARGET_CFLAGS)
 TARGET_LDFLAGS  = -L$(TARGET_DIR)/lib -L$(TARGET_DIR)/usr/lib -Wl,-O1 -Wl,-rpath -Wl,/usr/lib -Wl,-rpath-link -Wl,${TARGET_DIR}/usr/lib $(TARGET_EXTRA_LDFLAGS)
 
-TARGET_CROSS    = $(TARGET)-
+TARGET_CROSS    = $(CROSS_DIR)/bin/$(GNU_TARGET_NAME)-
 
 # Define TARGET_xx variables for all common binutils/gcc
 TARGET_AR       = $(TARGET_CROSS)ar
@@ -176,7 +177,7 @@ PATH := $(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
 
 # -----------------------------------------------------------------------------
 
-PKG_CONFIG        = $(HOST_DIR)/bin/$(TARGET)-pkg-config
+PKG_CONFIG        = $(HOST_DIR)/bin/$(GNU_TARGET_NAME)-pkg-config
 PKG_CONFIG_PATH   = $(TARGET_LIB_DIR)/pkgconfig
 PKG_CONFIG_LIBDIR = $(TARGET_LIB_DIR)/pkgconfig
 
@@ -190,7 +191,7 @@ CD    = set -e; cd
 CHDIR = $(CD) $(BUILD_DIR)
 MKDIR = mkdir -p $(BUILD_DIR)
 CPDIR = cp -a -t $(BUILD_DIR) $(DL_DIR)
-STRIP = $(TARGET)-strip
+STRIP = $(GNU_TARGET_NAME)-strip
 
 DATE            = $(shell date '+%Y-%m-%d_%H.%M')
 TINKER_OPTION  ?= 0
@@ -247,8 +248,8 @@ BUILD_ENV += \
 
 CONFIGURE_OPTS = \
 	--build=$(BUILD) \
-	--host=$(TARGET) \
-	--target=$(TARGET)
+	--host=$(GNU_TARGET_NAME) \
+	--target=$(GNU_TARGET_NAME) \
 
 TARGET_CONFIGURE_OPTS = \
 	--program-prefix= \

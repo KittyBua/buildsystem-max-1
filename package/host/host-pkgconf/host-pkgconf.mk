@@ -20,6 +20,6 @@ $(D)/host-pkgconf:
 		$(MAKE); \
 		$(MAKE) install
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/pkgconf-config $(HOST_DIR)/bin/pkg-config
-	ln -sf pkg-config $(HOST_DIR)/bin/$(TARGET)-pkg-config
+	ln -sf pkg-config $(HOST_DIR)/bin/$(GNU_TARGET_NAME)-pkg-config
 	$(PKG_REMOVE)
 	$(TOUCH)

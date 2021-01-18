@@ -57,7 +57,7 @@ $(D)/neutrino-plugins.config.status:
 		$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/autogen.sh && automake --add-missing; \
 		$(BUILD_ENV) \
 		$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/configure \
-			--host=$(TARGET) \
+			--host=$(GNU_TARGET_NAME) \
 			--build=$(BUILD) \
 			--prefix=/usr \
 			--enable-maintainer-mode \

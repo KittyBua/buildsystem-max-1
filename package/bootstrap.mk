@@ -56,11 +56,11 @@ CROSS_LIBS_VER = 2020-05-25
 
 $(D)/cross-libs: directories $(CROSSTOOL)
 	$(START_BUILD)
-	if test -e $(CROSS_DIR)/$(TARGET)/sys-root/lib; then \
-		cp -a $(CROSS_DIR)/$(TARGET)/sys-root/lib/*so* $(TARGET_DIR)/lib; \
+	if test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/lib; then \
+		cp -a $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/lib/*so* $(TARGET_DIR)/lib; \
 	fi; \
-	if test -e $(CROSS_DIR)/$(TARGET)/sys-root/sbin/ldconfig; then \
-		cp -a $(CROSS_DIR)/$(TARGET)/sys-root/sbin/ldconfig $(TARGET_DIR)/sbin/ldconfig; \
+	if test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/sbin/ldconfig; then \
+		cp -a $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/sbin/ldconfig $(TARGET_DIR)/sbin/ldconfig; \
 		touch $(TARGET_DIR)/etc/ld.so.conf; \
 	fi; \
 	if [ $(TARGET_ARCH) = "aarch64" ]; then \

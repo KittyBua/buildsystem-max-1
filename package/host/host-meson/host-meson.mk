@@ -22,7 +22,7 @@ $(D)/host-meson:
 		echo "cpp = '$(TARGET_CROSS)g++'"; \
 		echo "ar = '$(TARGET_CROSS)ar'"; \
 		echo "strip = '$(TARGET_STRIP)'"; \
-		echo "pkgconfig = '$(HOST_DIR)/bin/$(TARGET)-pkg-config'"; \
+		echo "pkgconfig = '$(HOST_DIR)/bin/$(GNU_TARGET_NAME)-pkg-config'"; \
 		echo ""; \
 		echo "[properties]"; \
 		echo "c_args = '-I$(TARGET_INCLUDE_DIR)'"; \

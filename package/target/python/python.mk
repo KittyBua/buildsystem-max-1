@@ -23,8 +23,8 @@ $(D)/python:
 		autoconf; \
 		./configure \
 			--build=$(BUILD) \
-			--host=$(TARGET) \
-			--target=$(TARGET) \
+			--host=$(GNU_TARGET_NAME) \
+			--target=$(GNU_TARGET_NAME) \
 			--prefix=/usr \
 			--mandir=$(REMOVE_mandir) \
 			--sysconfdir=/etc \
@@ -55,9 +55,9 @@ $(D)/python:
 			PYTHON_MODULES_LIB="$(TARGET_LIB_DIR)" \
 			PYTHON_XCOMPILE_DEPENDENCIES_PREFIX="$(TARGET_DIR)" \
 			CROSS_COMPILE_TARGET=yes \
-			CROSS_COMPILE=$(TARGET) \
+			CROSS_COMPILE=$(GNU_TARGET_NAME) \
 			MACHDEP=linux2 \
-			HOSTARCH=$(TARGET) \
+			HOSTARCH=$(GNU_TARGET_NAME) \
 			CFLAGS="$(TARGET_CFLAGS)" \
 			LDFLAGS="$(TARGET_LDFLAGS)" \
 			LD="$(TARGET_CC)" \

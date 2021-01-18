@@ -49,7 +49,7 @@ $(D)/libstb-hal.config.status:
 		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh; \
 		$(BUILD_ENV) \
 		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/configure \
-			--host=$(TARGET) \
+			--host=$(GNU_TARGET_NAME) \
 			--build=$(BUILD) \
 			--prefix=/usr \
 			--enable-maintainer-mode \
