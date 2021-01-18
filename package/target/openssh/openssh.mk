@@ -30,10 +30,7 @@ $(D)/openssh:
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		CC=$(TARGET_CC); \
-		./configure \
-			$(CONFIGURE_OPTS) \
-			$(TARGET_CONFIGURE_OPTS) \
-			; \
+		./configure $(TARGET_CONFIGURE_OPTS); \
 		$(MAKE); \
 		$(MAKE) install-nokeys DESTDIR=$(TARGET_DIR)
 	$(INSTALL_EXEC) $(BUILD_DIR)/openssh-$(OPENSSH_VER)/opensshd.init $(TARGET_DIR)/etc/init.d/openssh

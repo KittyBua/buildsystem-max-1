@@ -20,7 +20,7 @@ $(D)/lcd4linux:
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(TARGET_CONFIGURE_ENV) ./bootstrap; \
-		$(TARGET_CONFIGURE_ENV) ./configure $(CONFIGURE_OPTS) $(TARGET_CONFIGURE_OPTS); \
+		$(TARGET_CONFIGURE_ENV) ./configure $(TARGET_CONFIGURE_OPTS); \
 		$(MAKE) vcs_version; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	cp -a $(PKG_FILES_DIR)/icons/* $(SHARE_LCD4LINUX)

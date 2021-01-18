@@ -246,12 +246,10 @@ TARGET_CONFIGURE_ENV += \
 	PKG_CONFIG_LIBDIR=$(PKG_CONFIG_LIBDIR) \
 	PKG_CONFIG_SYSROOT_DIR=$(TARGET_DIR)
 
-CONFIGURE_OPTS = \
+TARGET_CONFIGURE_OPTS = \
 	--build=$(GNU_HOST_NAME) \
 	--host=$(GNU_TARGET_NAME) \
 	--target=$(GNU_TARGET_NAME) \
-
-TARGET_CONFIGURE_OPTS = \
 	--program-prefix= \
 	--program-suffix= \
 	--prefix=$(prefix) \
@@ -274,7 +272,6 @@ CONFIGURE = \
 	test -f ./configure || ./autogen.sh && \
 	$(TARGET_CONFIGURE_ENV) \
 	./configure \
-	$(CONFIGURE_OPTS) \
 	$(TARGET_CONFIGURE_OPTS)
 
 # -----------------------------------------------------------------------------

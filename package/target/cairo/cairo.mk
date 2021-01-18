@@ -26,7 +26,7 @@ $(D)/cairo:
 	$(PKG_CHDIR); \
 		$(TARGET_CONFIGURE_ENV) \
 		ax_cv_c_float_words_bigendian="no" \
-		./configure $(CONFIGURE_OPTS) $(TARGET_CONFIGURE_OPTS); \
+		./configure $(TARGET_CONFIGURE_OPTS); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -rf $(TARGET_DIR)/usr/bin/cairo-sphinx
