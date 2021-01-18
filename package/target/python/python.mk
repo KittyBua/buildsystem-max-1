@@ -22,7 +22,7 @@ $(D)/python:
 		autoreconf -vfi Modules/_ctypes/libffi; \
 		autoconf; \
 		./configure \
-			--build=$(BUILD) \
+			--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_TARGET_NAME) \
 			--target=$(GNU_TARGET_NAME) \
 			--prefix=/usr \

@@ -41,8 +41,6 @@ OWN_FILES    ?= $(BASE_DIR)/own-files
 CROSS_DIR     = $(BASE_DIR)/cross/$(TARGET_ARCH)-$(CROSSTOOL_GCC_VER)-kernel-$(KERNEL_VER)
 STAGING_DIR   = $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root
 
-BUILD        ?= $(shell /usr/share/libtool/config.guess 2>/dev/null || /usr/share/libtool/config/config.guess 2>/dev/null || /usr/share/misc/config.guess 2>/dev/null)
-
 TARGET_LIB_DIR      = $(TARGET_DIR)/usr/lib
 TARGET_INCLUDE_DIR  = $(TARGET_DIR)/usr/include
 TARGET_FIRMWARE_DIR = $(TARGET_DIR)/lib/firmware
@@ -158,6 +156,8 @@ TARGET_RANLIB   = $(TARGET_CROSS)ranlib
 TARGET_READELF  = $(TARGET_CROSS)readelf
 TARGET_STRIP    = $(TARGET_CROSS)strip
 
+GNU_HOST_NAME  ?= $(shell /usr/share/libtool/config.guess 2>/dev/null || /usr/share/libtool/config/config.guess 2>/dev/null || /usr/share/misc/config.guess 2>/dev/null)
+
 # -----------------------------------------------------------------------------
 
 TERM_RED         = \033[40;0;31m
@@ -247,7 +247,7 @@ BUILD_ENV += \
 	PKG_CONFIG_SYSROOT_DIR=$(TARGET_DIR)
 
 CONFIGURE_OPTS = \
-	--build=$(BUILD) \
+	--build=$(GNU_HOST_NAME) \
 	--host=$(GNU_TARGET_NAME) \
 	--target=$(GNU_TARGET_NAME) \
 

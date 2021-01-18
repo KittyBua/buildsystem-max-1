@@ -232,7 +232,7 @@ $(D)/neutrino.config.status:
 		$(BUILD_ENV) \
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure \
 			--host=$(GNU_TARGET_NAME) \
-			--build=$(BUILD) \
+			--build=$(GNU_HOST_NAME) \
 			--prefix=/usr \
 			--enable-maintainer-mode \
 			--enable-silent-rules \
