@@ -266,6 +266,7 @@ $(D)/neutrino.do_compile:
 
 $(D)/neutrino: neutrino.do_prepare neutrino.config.status neutrino.do_compile
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
+	$(TOUCH)
 	( \
 		echo "distro=$(subst neutrino-,,$(FLAVOUR))"; \
 		echo "imagename=Neutrino MP"; \
@@ -279,13 +280,12 @@ $(D)/neutrino: neutrino.do_prepare neutrino.config.status neutrino.do_compile
 		echo "git=BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"; \
 		echo "imagedir=$(BOXMODEL)" \
 	) > $(TARGET_DIR)/.version
-	make e2-multiboot
 ifeq ($(FLAVOUR),$(filter $(FLAVOUR),neutrino-max neutrino-ni))
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/start_neutrino1 $(TARGET_DIR)/etc/init.d/start_neutrino
 else
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/start_neutrino2 $(TARGET_DIR)/etc/init.d/start_neutrino
 endif
-	$(TOUCH)
+	make e2-multiboot
 	make neutrino-release
 
 # -----------------------------------------------------------------------------
