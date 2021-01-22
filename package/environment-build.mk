@@ -140,7 +140,8 @@ TARGET_CPPFLAGS = $(TARGET_CFLAGS)
 TARGET_CXXFLAGS = $(TARGET_CFLAGS)
 TARGET_LDFLAGS  = -L$(TARGET_DIR)/lib -L$(TARGET_DIR)/usr/lib -Wl,-O1 -Wl,-rpath -Wl,/usr/lib -Wl,-rpath-link -Wl,${TARGET_DIR}/usr/lib $(TARGET_EXTRA_LDFLAGS)
 
-TARGET_CROSS    = $(CROSS_DIR)/bin/$(GNU_TARGET_NAME)-
+#TARGET_CROSS    = $(CROSS_DIR)/bin/$(GNU_TARGET_NAME)-
+TARGET_CROSS    = $(GNU_TARGET_NAME)-
 
 # Define TARGET_xx variables for all common binutils/gcc
 TARGET_AR       = $(TARGET_CROSS)ar
