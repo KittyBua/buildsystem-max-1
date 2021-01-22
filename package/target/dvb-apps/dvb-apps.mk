@@ -7,6 +7,11 @@ DVB_APPS_SOURCE = dvb-apps.git
 DVB_APPS_SITE   = https://github.com/openpli-arm
 DVB_APPS_DEPS   = bootstrap libiconv
 
+define DVB_APPS_POST_PATCH
+	$(SED) '/$$(MAKE) -C util $$@/d' $(PKG_BUILD_DIR)/Makefile
+endef
+DVB_APPS_POST_PATCH_HOOKS = DVB_APPS_POST_PATCH
+
 DVB_APPS_LDLIBS = -liconv
 
 DVB_APPS_MAKE_OPTS  = PERL5LIB=$(PKG_BUILD_DIR)/util/scan
