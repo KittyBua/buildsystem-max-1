@@ -223,10 +223,10 @@ KERNEL_MAKEVARS += \
 	KERNDIR=$(LINUX_DIR) \
 	KERNELDIR=$(LINUX_DIR) \
 	KERNEL_SRC=$(LINUX_DIR) \
-	KERNEL_SOURCE=${LINUX_DIR} \
+	KERNEL_SOURCE=$(LINUX_DIR) \
 	LINUX_SRC=$(LINUX_DIR) \
-	KVER=$(LINUX_DIR) \
-	KERNEL_VERSION=$(LINUX_DIR)
+	KVER=$(KERNEL_VER) \
+	KERNEL_VERSION=$(KERNEL_VER)
 
 # -----------------------------------------------------------------------------
 
