@@ -1,10 +1,10 @@
 #
 # openresolv
 #
-OPENRESOLV_VER    = 3.9.2
-OPENRESOLV_DIR    = openresolv-$(OPENRESOLV_VER)
-OPENRESOLV_SOURCE = openresolv-$(OPENRESOLV_VER).tar.xz
-OPENRESOLV_SITE   = https://roy.marples.name/downloads/openresolv
+OPENRESOLV_VER    = 3.12.0
+OPENRESOLV_DIR    = openresolv-openresolv-$(OPENRESOLV_VER)
+OPENRESOLV_SOURCE = openresolv-$(OPENRESOLV_VER).tar.gz
+OPENRESOLV_SITE   = https://github.com/rsmarples/openresolv/archive
 OPENRESOLV_DEPS   = bootstrap
 
 $(D)/openresolv:
