@@ -173,7 +173,7 @@ TERM_NORMAL      = \033[0m
 # search path(s) for all prerequisites
 VPATH = $(DEPS_DIR)
 
-PATH := $(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
+PATH := $(HOST_DIR)/ccache-bin:$(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
 
 # -----------------------------------------------------------------------------
 
