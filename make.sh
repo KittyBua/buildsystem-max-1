@@ -83,7 +83,7 @@ case "$REPLY" in
 	40) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="h7";;
 	 *) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd51";;
 esac
-echo "TARGET_ARCH=$TARGET_ARCH" >> .config
+echo "TARGET_ARCH=$TARGET_ARCH" > .config
 echo "BOXTYPE=$BOXTYPE" >> .config
 echo "BOXMODEL=$BOXMODEL" >> .config
 
