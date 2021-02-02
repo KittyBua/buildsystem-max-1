@@ -8,13 +8,13 @@ LINKS_SITE   = http://links.twibright.com/download
 LINKS_DEPS   = bootstrap freetype libpng libjpeg-turbo openssl
 
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd51 hd60 hd61 bre2ze4k))
-LINKS_CUSTOM_PATCH += 0004-links-input-event1.patch
+LINKS_CUSTOM_PATCH += 0004-links-input-event1.patch.custom
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),h7))
-LINKS_CUSTOM_PATCH += 0005-links-input-event2.patch
+LINKS_CUSTOM_PATCH += 0005-links-input-event2.patch.custom
 endif
 
 define LINKS_CUSTOM_PATCHES
-	$(APPLY_PATCHES) $(PKG_BUILD_DIR) $(PKG_PATCHES_DIR)/custom \$(LINKS_CUSTOM_PATCH)
+	$(APPLY_PATCHES) $(PKG_BUILD_DIR) $(PKG_PATCHES_DIR) $(LINKS_CUSTOM_PATCH)
 endef
 LINKS_POST_PATCH_HOOKS += LINKS_CUSTOM_PATCHES
 
