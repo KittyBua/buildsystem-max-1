@@ -106,20 +106,36 @@ endef
 
 # -----------------------------------------------------------------------------
 
-APPLY_PATCHES = PATH=$(HOST_DIR)/bin:$$PATH helpers/apply-patches.sh $(if $(QUIET),-s)
+$(PKG)_PRE_PATCH_HOOKS  ?=
+$(PKG)_POST_PATCH_HOOKS ?=
+
+APPLY_PATCHES = helpers/apply-patches.sh $(if $(QUIET),-s)
 
 # apply patch sets
 define PKG_APPLY_PATCHES
+	@$(call MESSAGE,"Patching")
 	$(foreach hook,$($(PKG)_PRE_PATCH_HOOKS),$(call $(hook))$(sep))
 	@( \
 	for P in $(PKG_PATCHES_DIR); do \
 	  if test -d $${P}; then \
-	    $(call MESSAGE,"Patching"); \
 	    if test -d $${P}/$($(PKG)_VER); then \
 	      $(APPLY_PATCHES) $(PKG_BUILD_DIR) $${P}/$($(PKG)_VER) \*.patch \*.patch.$(TARGET_ARCH) || exit 1; \
 	    else \
-	      $(APPLY_PATCHES) $(PKG_BUILD_DIR) $${P} \*.patch \*.patch.$(TARGET_ARCH) || exit 1; \
+	      $(APPLY_PATCHES) $(PKG_BUILD_DIR) $${P} \*.patch \*.patch.$(TARGET_ARCH) \*.patch.$(FLAVOUR) || exit 1; \
 	    fi; \
+	  fi; \
+	done; \
+	)
+	$(foreach hook,$($(PKG)_POST_PATCH_HOOKS),$(call $(hook))$(sep))
+endef
+
+define PKG_APPLY_PATCHES_S
+	@$(call MESSAGE,"Patching")
+	$(foreach hook,$($(PKG)_PRE_PATCH_HOOKS),$(call $(hook))$(sep))
+	@( \
+	for P in $(PKG_PATCHES_DIR); do \
+	  if test -d $${P}; then \
+	    $(APPLY_PATCHES) $(SOURCE_DIR)/$(1) $${P} \*.patch \*.patch.$(FLAVOUR) || exit 1; \
 	  fi; \
 	done; \
 	)

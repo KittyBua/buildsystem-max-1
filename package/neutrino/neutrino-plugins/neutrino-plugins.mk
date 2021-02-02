@@ -48,6 +48,7 @@ $(D)/neutrino-plugins.do_prepare:
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(SOURCE_DIR))
+	$(call PKG_APPLY_PATCHES_S,$(NEUTRINO_PLUGINS_DIR))
 	@touch $@
 
 $(D)/neutrino-plugins.config.status:

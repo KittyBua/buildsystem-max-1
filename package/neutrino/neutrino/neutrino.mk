@@ -200,18 +200,6 @@ NEUTRINO_SOURCE = $(NEUTRINO).git
 NEUTRINO_SITE   = $(GIT_SITE)
 NEUTRINO_DEPS  += libstb-hal
 
-ifeq ($(FLAVOUR),neutrino-ddt)
-NEUTRINO_CUSTOM_PATCH = neutrino-ddt.patch
-else ifeq ($(FLAVOUR),neutrino-max)
-NEUTRINO_CUSTOM_PATCH =
-else ifeq ($(FLAVOUR),neutrino-ni)
-NEUTRINO_CUSTOM_PATCH = neutrino-ni.patch
-else ifeq ($(FLAVOUR),neutrino-tangos)
-NEUTRINO_CUSTOM_PATCH =
-else ifeq ($(FLAVOUR),neutrino-redblue)
-NEUTRINO_CUSTOM_PATCH =
-endif
-
 $(D)/neutrino.do_prepare:
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR)
@@ -220,7 +208,7 @@ $(D)/neutrino.do_prepare:
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(SOURCE_DIR))
 	cp -ra $(SOURCE_DIR)/$(NEUTRINO_DIR) $(SOURCE_DIR)/$(NEUTRINO_DIR).org
-	$(APPLY_PATCHES) $(SOURCE_DIR)/$(NEUTRINO_DIR) $(PKG_PATCHES_DIR) \$(NEUTRINO_CUSTOM_PATCH)
+	$(call PKG_APPLY_PATCHES_S,$(NEUTRINO_DIR))
 	@touch $@
 
 $(D)/neutrino.config.status:

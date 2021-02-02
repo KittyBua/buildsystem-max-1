@@ -17,18 +17,6 @@ LH_CONFIG_OPTS =
 
 LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)
 
-ifeq ($(FLAVOUR),neutrino-ddt)
-LIBSTB_HAL_CUSTOM_PATCH =
-else ifeq ($(FLAVOUR),neutrino-max)
-LIBSTB_HAL_CUSTOM_PATCH =
-else ifeq ($(FLAVOUR),neutrino-ni)
-LIBSTB_HAL_CUSTOM_PATCH =
-else ifeq ($(FLAVOUR),neutrino-tangos)
-LIBSTB_HAL_CUSTOM_PATCH =
-else ifeq ($(FLAVOUR),neutrino-redblue)
-LIBSTB_HAL_CUSTOM_PATCH =
-endif
-
 $(D)/libstb-hal.do_prepare:
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR)
@@ -38,10 +26,10 @@ $(D)/libstb-hal.do_prepare:
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(SOURCE_DIR))
 	cp -ra $(SOURCE_DIR)/$(LIBSTB_HAL_DIR) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR).org
-	$(APPLY_PATCHES) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR) $(PKG_PATCHES_DIR) \$(LIBSTB_HAL_CUSTOM_PATCH)
+	$(call PKG_APPLY_PATCHES_S,$(LIBSTB_HAL_DIR))
 	@touch $@
 
-$(D)/libstb-hal.config.status:
+$(D)/libstb-hal.config.status: | $(LIBSTB_HAL_DEPS)
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
 	test -d $(LIBSTB_HAL_OBJ_DIR) || mkdir -p $(LIBSTB_HAL_OBJ_DIR)
 	cd $(LIBSTB_HAL_OBJ_DIR); \
