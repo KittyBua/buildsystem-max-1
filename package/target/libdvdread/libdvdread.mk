@@ -1,16 +1,19 @@
 #
 # libdvdread
 #
-LIBDVDREAD_VER    = 4.9.9
+LIBDVDREAD_VER    = 6.1.1
 LIBDVDREAD_DIR    = libdvdread-$(LIBDVDREAD_VER)
-LIBDVDREAD_SOURCE = libdvdread-$(LIBDVDREAD_VER).tar.xz
-LIBDVDREAD_SITE   = http://dvdnav.mplayerhq.hu/releases
-LIBDVDREAD_DEPS   = bootstrap
+LIBDVDREAD_SOURCE = libdvdread-$(LIBDVDREAD_VER).tar.bz2
+LIBDVDREAD_SITE   = http://www.videolan.org/pub/videolan/libdvdread/$(LIBDVDREAD_VER)
+LIBDVDREAD_DEPS   = bootstrap libdvdcss
+
+LIBDVDREAD_CONF_ENV = CFLAGS="$(TARGET_CFLAGS) -std=gnu99"
 
 LIBDVDREAD_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
 	--enable-static \
-	--enable-shared
+	--enable-shared \
+	--with-libdvdcss
 
 $(D)/libdvdread:
 	$(START_BUILD)
