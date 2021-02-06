@@ -1,10 +1,10 @@
 #
 # libdvdnav
 #
-LIBDVDNAV_VER    = 4.2.1
+LIBDVDNAV_VER    = 6.1.0
 LIBDVDNAV_DIR    = libdvdnav-$(LIBDVDNAV_VER)
-LIBDVDNAV_SOURCE = libdvdnav-$(LIBDVDNAV_VER).tar.xz
-LIBDVDNAV_SITE   = http://dvdnav.mplayerhq.hu/releases
+LIBDVDNAV_SOURCE = libdvdnav-$(LIBDVDNAV_VER).tar.bz2
+LIBDVDNAV_SITE   = http://www.videolan.org/pub/videolan/libdvdnav/$(LIBDVDNAV_VER)
 LIBDVDNAV_DEPS   = bootstrap libdvdread
 
 LIBDVDNAV_AUTORECONF = YES
