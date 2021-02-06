@@ -274,7 +274,7 @@ CONFIGURE = \
 	  autoreconf -fi; \
 	fi; \
 	test -f ./configure || ./autogen.sh && \
-	ONFIG_SITE=/dev/null \
+	CONFIG_SITE=/dev/null \
 	$(TARGET_CONFIGURE_ENV) \
 	./configure \
 	$(TARGET_CONFIGURE_OPTS)
