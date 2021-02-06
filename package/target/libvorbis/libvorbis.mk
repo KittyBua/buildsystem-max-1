@@ -7,6 +7,8 @@ LIBVORBIS_SOURCE = libvorbis-$(LIBVORBIS_VER).tar.xz
 LIBVORBIS_SITE   = https://ftp.osuosl.org/pub/xiph/releases/vorbis
 LIBVORBIS_DEPS   = bootstrap libogg
 
+LIBVORBIS_AUTORECONF = YES
+
 LIBVORBIS_CONF_OPTS = \
 	--disable-docs \
 	--disable-examples \
@@ -19,7 +21,6 @@ $(D)/libvorbis:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

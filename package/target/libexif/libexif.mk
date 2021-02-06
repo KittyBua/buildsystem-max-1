@@ -7,6 +7,8 @@ LIBEXIF_SOURCE = libexif-$(LIBEXIF_VER).tar.xz
 LIBEXIF_SITE   = https://github.com/libexif/libexif/releases/download/libexif-$(subst .,_,$(LIBEXIF_VER))-release
 LIBEXIF_DEPS   = bootstrap
 
+LIBEXIF_AUTORECONF = YES
+
 $(D)/libexif:
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -14,7 +16,6 @@ $(D)/libexif:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

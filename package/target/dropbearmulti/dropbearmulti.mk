@@ -9,6 +9,8 @@ DROPBEARMULTI_DEPS   = bootstrap
 
 DROPBEARMULTI_CHECKOUT = c8d852c
 
+DROPBEARMULTI_AUTORECONF = YES
+
 DROPBEARMULTI_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
 	--disable-syslog \
@@ -30,8 +32,6 @@ $(D)/dropbearmulti:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		$(TARGET_CONFIGURE_ENV) \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE) PROGRAMS="dropbear scp dropbearkey" MULTI=1; \
 		$(MAKE) PROGRAMS="dropbear scp dropbearkey" MULTI=1 install DESTDIR=$(TARGET_DIR)

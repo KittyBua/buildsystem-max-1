@@ -7,6 +7,8 @@ LIBNSL_SOURCE = libnsl-$(LIBNSL_VER).tar.gz
 LIBNSL_SITE   = $(call github,thkukuk,libnsl,v$(LIBNSL_VER))
 LIBNSL_DEPS   = bootstrap libtirpc
 
+LIBNSL_AUTORECONF = YES
+
 $(D)/libnsl:
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -14,7 +16,6 @@ $(D)/libnsl:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

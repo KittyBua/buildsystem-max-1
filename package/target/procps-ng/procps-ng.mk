@@ -7,6 +7,12 @@ PROCPS_NG_SOURCE = procps-ng-$(PROCPS_NG_VER).tar.xz
 PROCPS_NG_SITE   = http://sourceforge.net/projects/procps-ng/files/Production
 PROCPS_NG_DEPS   = bootstrap ncurses
 
+PROCPS_NG_AUTORECONF = YES
+
+PROCPS_NG_CONF_ENV = \
+	ac_cv_func_malloc_0_nonnull=yes \
+	ac_cv_func_realloc_0_nonnull=yes
+
 PROCPS_NG_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
 	--bindir=$(base_bindir) \
@@ -25,9 +31,6 @@ $(D)/procps-ng:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		export ac_cv_func_malloc_0_nonnull=yes; \
-		export ac_cv_func_realloc_0_nonnull=yes; \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

@@ -7,6 +7,8 @@ LIBMAD_SOURCE = libmad-$(LIBMAD_VER).tar.gz
 LIBMAD_SITE   = https://sourceforge.net/projects/mad/files/libmad/$(LIBMAD_VER)
 LIBMAD_DEPS   = bootstrap
 
+LIBMAD_AUTORECONF = YES
+
 LIBMAD_CONF_OPTS = \
 	--enable-shared=yes \
 	--enable-accuracy \
@@ -21,7 +23,6 @@ $(D)/libmad:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

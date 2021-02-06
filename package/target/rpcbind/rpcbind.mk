@@ -7,6 +7,8 @@ RPCBIND_SOURCE = rpcbind-$(RPCBIND_VER).tar.bz2
 RPCBIND_SITE   = https://sourceforge.net/projects/rpcbind/files/rpcbind/$(RPCBIND_VER)
 RPCBIND_DEPS   = bootstrap libtirpc
 
+RPCBIND_AUTORECONF = YES
+
 RPCBIND_CONF_OPTS = \
 	CFLAGS="$(TARGET_CFLAGS) `$(PKG_CONFIG) --cflags libtirpc`" \
 	--bindir=$(sbindir) \
@@ -21,7 +23,6 @@ $(D)/rpcbind:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

@@ -7,6 +7,8 @@ LIBGPG_ERROR_SOURCE = libgpg-error-$(LIBGPG_ERROR_VER).tar.bz2
 LIBGPG_ERROR_SITE   = https://www.gnupg.org/ftp/gcrypt/libgpg-error
 LIBGPG_ERROR_DEPS   = bootstrap
 
+LIBGPG_ERROR_AUTORECONF = YES
+
 LIBGPG_ERROR_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
 	--enable-shared \
@@ -22,7 +24,6 @@ $(D)/libgpg-error:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

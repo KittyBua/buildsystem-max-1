@@ -7,6 +7,8 @@ USBUTILS_SOURCE = usbutils-$(USBUTILS_VER).tar.xz
 USBUTILS_SITE   = https://www.kernel.org/pub/linux/utils/usb/usbutils
 USBUTILS_DEPS   = bootstrap libusb
 
+USBUTILS_AUTORECONF = YES
+
 USBUTILS_CONF_OPTS = \
 	--datadir=/usr/share/hwdata
 
@@ -17,7 +19,6 @@ $(D)/usbutils:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

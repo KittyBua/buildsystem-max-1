@@ -7,6 +7,8 @@ LIBXML2_SOURCE = libxml2-$(LIBXML2_VER).tar.gz
 LIBXML2_SITE   = http://xmlsoft.org/sources
 LIBXML2_DEPS   = bootstrap zlib
 
+LIBXML2_AUTORECONF = YES
+
 LIBXML2_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
 	--enable-shared \
@@ -27,7 +29,6 @@ $(D)/libxml2:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

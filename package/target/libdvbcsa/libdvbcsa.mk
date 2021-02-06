@@ -7,6 +7,8 @@ LIBDVBCSA_SOURCE = libdvbcsa.git
 LIBDVBCSA_SITE   = https://code.videolan.org/videolan
 LIBDVBCSA_DEPS   = bootstrap
 
+LIBDVBCSA_AUTORECONF = YES
+
 $(D)/libdvbcsa:
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -14,7 +16,6 @@ $(D)/libdvbcsa:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

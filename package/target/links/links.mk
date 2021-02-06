@@ -7,6 +7,8 @@ LINKS_SOURCE = links-$(LINKS_VER).tar.bz2
 LINKS_SITE   = http://links.twibright.com/download
 LINKS_DEPS   = bootstrap freetype libpng libjpeg-turbo openssl
 
+LINKS_AUTORECONF = YES
+
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd51 hd60 hd61 bre2ze4k))
 LINKS_CUSTOM_PATCH += 0004-links-input-event1.patch.custom
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),h7))
@@ -47,7 +49,6 @@ $(D)/links:
 		echo "german" >> index.txt; \
 		./gen-intl
 	$(CHDIR)/$($(PKG)_DIR); \
-		autoreconf -vfi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

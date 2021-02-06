@@ -7,6 +7,8 @@ LIBID3TAG_SOURCE = libid3tag-$(LIBID3TAG_VER).tar.gz
 LIBID3TAG_SITE   = https://sourceforge.net/projects/mad/files/libid3tag/$(LIBID3TAG_VER)
 LIBID3TAG_DEPS   = bootstrap zlib
 
+LIBID3TAG_AUTORECONF = YES
+
 $(D)/libid3tag:
 	$(START_BUILD)
 	$(PKG_REMOVE)
@@ -14,8 +16,6 @@ $(D)/libid3tag:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		touch NEWS AUTHORS ChangeLog; \
-		autoreconf -fi; \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--enable-shared=yes \

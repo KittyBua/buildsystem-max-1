@@ -7,9 +7,13 @@ HTOP_SOURCE = htop-$(HTOP_VER).tar.gz
 HTOP_SITE   = $(call github,htop-dev,htop,$(HTOP_VER))
 HTOP_DEPS   = bootstrap ncurses
 
-HTOP_CONF_OPTS = \
+HTOP_AUTORECONF = YES
+
+HTOP_CONF_ENV = \
 	ac_cv_file__proc_stat=yes \
-	ac_cv_file__proc_meminfo=yes \
+	ac_cv_file__proc_meminfo=yes
+
+HTOP_CONF_OPTS = \
 	--disable-unicode \
 	--disable-hwloc \
 	--enable-cgroup \
@@ -22,7 +26,6 @@ $(D)/htop:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

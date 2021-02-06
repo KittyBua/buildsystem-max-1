@@ -60,7 +60,7 @@ endef
 # download archives into archives directory
 define PKG_DOWNLOAD
 	@( \
-	if [ $($(PKG)_VER) == "git" ]; then \
+	if [ "$($(PKG)_VER)" == "git" ]; then \
 	  $(call MESSAGE,"Downloading") ; \
 	  $(GET-GIT-SOURCE) $($(PKG)_SITE)/$(PKG_SOURCE) $(DL_DIR)/$(PKG_SOURCE); \
 	else \

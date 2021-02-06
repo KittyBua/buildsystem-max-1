@@ -7,6 +7,8 @@ MC_SOURCE = mc-$(MC_VER).tar.xz
 MC_SITE   = ftp.midnight-commander.org
 MC_DEPS   = bootstrap ncurses glib2
 
+MC_AUTORECONF = YES
+
 MC_CONF_OPTS = \
 	--with-homedir=/var/tuxbox/config/mc \
 	--enable-charset \
@@ -22,7 +24,6 @@ $(D)/mc:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

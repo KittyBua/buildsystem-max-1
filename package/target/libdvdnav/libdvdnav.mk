@@ -7,6 +7,8 @@ LIBDVDNAV_SOURCE = libdvdnav-$(LIBDVDNAV_VER).tar.xz
 LIBDVDNAV_SITE   = http://dvdnav.mplayerhq.hu/releases
 LIBDVDNAV_DEPS   = bootstrap libdvdread
 
+LIBDVDNAV_AUTORECONF = YES
+
 LIBDVDNAV_CONF_OPTS = \
 	--enable-static \
 	--enable-shared
@@ -18,8 +20,6 @@ $(D)/libdvdnav:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		libtoolize --copy --force --quiet --ltdl; \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

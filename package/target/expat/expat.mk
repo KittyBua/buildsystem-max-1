@@ -7,6 +7,8 @@ EXPAT_SOURCE = expat-$(EXPAT_VER).tar.xz
 EXPAT_SITE   = https://github.com/libexpat/libexpat/releases/download/R_$(subst .,_,$(EXPAT_VER))
 EXPAT_DEPS   = bootstrap
 
+EXPAT_AUTORECONF = YES
+
 EXPAT_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
 	--without-xmlwf \
@@ -19,7 +21,6 @@ $(D)/expat:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

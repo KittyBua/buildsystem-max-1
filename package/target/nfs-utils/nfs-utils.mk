@@ -7,6 +7,11 @@ NFS_UTILS_SOURCE = nfs-utils-$(NFS_UTILS_VER).tar.bz2
 NFS_UTILS_SITE   = https://sourceforge.net/projects/nfs/files/nfs-utils/$(NFS_UTILS_VER)
 NFS_UTILS_DEPS   = bootstrap rpcbind e2fsprogs
 
+NFS_UTILS_AUTORECONF = YES
+
+NFS_UTILS_CONF_ENV = \
+	knfsd_cv_bsd_signals=no
+
 NFS_UTILS_CONF_OPTS = \
 	--disable-gss \
 	--disable-nfsdcltrack \
@@ -29,8 +34,6 @@ $(D)/nfs-utils:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		export knfsd_cv_bsd_signals=no; \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

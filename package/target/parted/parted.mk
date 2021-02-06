@@ -7,6 +7,8 @@ PARTED_SOURCE = parted-$(PARTED_VER).tar.xz
 PARTED_SITE   = https://ftp.gnu.org/gnu/parted
 PARTED_DEPS   = bootstrap e2fsprogs libiconv
 
+PARTED_AUTORECONF = YES
+
 PARTED_CONF_OPTS = \
 	--without-readline \
 	--enable-shared \
@@ -22,7 +24,6 @@ $(D)/parted:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

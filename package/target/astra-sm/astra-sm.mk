@@ -7,6 +7,8 @@ ASTRA_SM_SOURCE = astra-sm.git
 ASTRA_SM_SITE   = https://gitlab.com/crazycat69
 ASTRA_SM_DEPS   = bootstrap openssl
 
+ASTRA_SM_AUTORECONF = YES
+
 define ASTRA_SM_POST_PATCH
 	$(SED) 's:(CFLAGS):(CFLAGS_FOR_BUILD):' $(PKG_BUILD_DIR)/tools/Makefile.am
 endef
@@ -22,7 +24,6 @@ $(D)/astra-sm:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

@@ -7,6 +7,8 @@ KMOD_SOURCE = kmod-$(KMOD_VER).tar.xz
 KMOD_SITE   = https://mirrors.edge.kernel.org/pub/linux/utils/kernel/kmod
 KMOD_DEPS   = bootstrap zlib
 
+KMOD_AUTORECONF = YES
+
 KMOD_CONF_OPTS = \
 	--bindir=$(base_bindir) \
 	--disable-static \
@@ -22,7 +24,6 @@ $(D)/kmod:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

@@ -7,6 +7,13 @@ DJMOUNT_SOURCE = djmount-$(DJMOUNT_VER).tar.gz
 DJMOUNT_SITE   = https://sourceforge.net/projects/djmount/files/djmount/$(DJMOUNT_VER)
 DJMOUNT_DEPS   = bootstrap libupnp libfuse
 
+DJMOUNT_AUTORECONF = YES
+
+define DJMOUNT_POST_PATCH
+	touch $(PKG_BUILD_DIR)/libupnp/config.aux/config.rpath
+endef
+DJMOUNT_POST_PATCH_HOOKS += DJMOUNT_POST_PATCH
+
 DJMOUNT_CONF_OPTS = \
 	--with-external-libupnp \
 	--with-fuse-prefix=$(TARGET_DIR)/usr \
@@ -20,8 +27,6 @@ $(D)/djmount:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		touch libupnp/config.aux/config.rpath; \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

@@ -18,8 +18,6 @@ $(D)/opkg:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		LIBARCHIVE_LIBS="-L$(TARGET_DIR)/usr/lib -larchive" \
-		LIBARCHIVE_CFLAGS="-I$(TARGET_DIR)/usr/include" \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

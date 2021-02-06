@@ -7,6 +7,8 @@ LIBPLIST_SOURCE = libplist-$(LIBPLIST_VER).tar.gz
 LIBPLIST_SITE   = $(call github,libimobiledevice,libplist,$(LIBPLIST_VER))
 LIBPLIST_DEPS   = bootstrap libxml2
 
+LIBPLIST_AUTORECONF = YES
+
 LIBPLIST_CONF_OPTS = \
 	--without-cython
 
@@ -17,7 +19,6 @@ $(D)/libplist:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

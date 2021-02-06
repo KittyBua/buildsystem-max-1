@@ -7,6 +7,8 @@ ALSA_LIB_SOURCE = alsa-lib-$(ALSA_LIB_VER).tar.bz2
 ALSA_LIB_SITE   = https://www.alsa-project.org/files/pub/lib
 ALSA_LIB_DEPS   = bootstrap
 
+ALSA_LIB_AUTORECONF = YES
+
 ALSA_LIB_CONF_OPTS = \
 	--with-alsa-devdir=/dev/snd/ \
 	--with-plugindir=/usr/lib/alsa \
@@ -32,7 +34,6 @@ $(D)/alsa-lib:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

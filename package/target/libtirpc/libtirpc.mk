@@ -7,6 +7,8 @@ LIBTIRPC_SOURCE = libtirpc-$(LIBTIRPC_VER).tar.bz2
 LIBTIRPC_SITE   = https://sourceforge.net/projects/libtirpc/files/libtirpc/$(LIBTIRPC_VER)
 LIBTIRPC_DEPS   = bootstrap
 
+LIBTIRPC_AUTORECONF = YES
+
 LIBTIRPC_CONF_OPTS = \
 	CFLAGS="$(TARGET_CFLAGS) -DGQ" \
 	--disable-gssapi
@@ -18,7 +20,6 @@ $(D)/libtirpc:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

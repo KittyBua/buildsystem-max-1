@@ -7,6 +7,8 @@ FLAC_SOURCE = flac-$(FLAC_VER).tar.xz
 FLAC_SITE   = https://ftp.osuosl.org/pub/xiph/releases/flac
 FLAC_DEPS   = bootstrap
 
+FLAC_AUTORECONF = YES
+
 FLAC_CONF_OPTS = \
 	--disable-cpplibs \
 	--disable-debug \
@@ -31,8 +33,6 @@ $(D)/flac:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		touch NEWS AUTHORS ChangeLog; \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

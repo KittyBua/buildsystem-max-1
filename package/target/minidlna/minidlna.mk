@@ -7,6 +7,8 @@ MINIDLNA_SOURCE = minidlna-$(MINIDLNA_VER).tar.gz
 MINIDLNA_SITE   = https://sourceforge.net/projects/minidlna/files/minidlna/$(MINIDLNA_VER)
 MINIDLNA_DEPS   = bootstrap zlib sqlite libexif libjpeg-turbo libid3tag libogg libvorbis flac ffmpeg
 
+MINIDLNA_AUTORECONF = YES
+
 MINIDLNA_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
 	--disable-static
@@ -18,7 +20,6 @@ $(D)/minidlna:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

@@ -7,6 +7,8 @@ LIBVORBISIDEC_SOURCE = libvorbisidec_$(LIBVORBISIDEC_VER).orig.tar.gz
 LIBVORBISIDEC_SITE   = https://ftp.de.debian.org/debian/pool/main/libv/libvorbisidec
 LIBVORBISIDEC_DEPS   = bootstrap libogg
 
+LIBVORBISIDEC_AUTORECONF = YES
+
 define LIBVORBISIDEC_POST_PATCH
 	$(SED) '122 s/^/#/' $(PKG_BUILD_DIR)/configure.in
 endef
@@ -19,7 +21,6 @@ $(D)/libvorbisidec:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE) ; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

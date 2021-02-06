@@ -7,6 +7,8 @@ LIBCURL_SOURCE = curl-$(LIBCURL_VER).tar.bz2
 LIBCURL_SITE   = https://curl.haxx.se/download
 LIBCURL_DEPS   = bootstrap zlib openssl ca-bundle
 
+LIBCURL_AUTORECONF = YES
+
 LIBCURL_CONF_OPTS = \
 	--enable-silent-rules \
 	--disable-debug \
@@ -38,7 +40,6 @@ $(D)/libcurl:
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
-		autoreconf -fi; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
