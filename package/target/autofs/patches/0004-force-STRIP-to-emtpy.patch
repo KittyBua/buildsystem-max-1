@@ -15,7 +15,7 @@ diff --git a/Makefile.rules b/Makefile.rules
 index 709dd04..b1f7e50 100644
 --- a/Makefile.rules
 +++ b/Makefile.rules
-@@ -35,7 +35,7 @@ LDFLAGS   ?= -s
+@@ -36,7 +36,7 @@ LDFLAGS   ?= -s
  endif
  
  ifdef DONTSTRIP

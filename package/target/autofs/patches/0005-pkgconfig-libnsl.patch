@@ -23,7 +23,7 @@ diff --git a/configure.in b/configure.in
 index 76ecb40..493b9f1 100644
 --- a/configure.in
 +++ b/configure.in
-@@ -226,7 +226,7 @@ AC_SUBST(LIBCLOCK_GETTIME)
+@@ -229,7 +229,7 @@
  
  PKG_CHECK_MODULES([NSL],[libnsl],,
  [
