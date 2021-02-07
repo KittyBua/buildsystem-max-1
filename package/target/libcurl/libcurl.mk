@@ -1,7 +1,7 @@
 #
 # libcurl
 #
-LIBCURL_VER    = 7.74.0
+LIBCURL_VER    = 7.75.0
 LIBCURL_DIR    = curl-$(LIBCURL_VER)
 LIBCURL_SOURCE = curl-$(LIBCURL_VER).tar.bz2
 LIBCURL_SITE   = https://curl.haxx.se/download
