@@ -1,23 +1,31 @@
 #
 # set up build environment for other makefiles
 #
-# -----------------------------------------------------------------------------
-
-CONFIG_SITE =
-export CONFIG_SITE
-
 #SHELL := $(SHELL) -x
 
-# -----------------------------------------------------------------------------
+ifndef MAKE
+MAKE := make
+endif
+ifndef HOSTMAKE
+HOSTMAKE = $(MAKE)
+endif
+HOSTMAKE := $(shell which $(HOSTMAKE) || type -p $(HOSTMAKE) || echo make)
 
-# set up default parallelism
+# If BS_JLEVEL is 0, scale the maximum concurrency with the number of
+# CPUs. An additional job is used in order to keep processors busy
+# while waiting on I/O.
+# If the number of processors is not available, assume one.
 BS_JLEVEL ?= 0
 ifeq ($(BS_JLEVEL),0)
-PARALLEL_JOBS := $(shell echo $$((1 + `getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1`)))
+PARALLEL_JOBS := $(shell echo \
+	$$((1 + `getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1`)))
 else
 PARALLEL_JOBS := $(BS_JLEVEL)
 endif
-override MAKE = make $(if $(findstring j,$(filter-out --%,$(MAKEFLAGS))),,-j$(PARALLEL_JOBS))
+
+MAKE1 := $(HOSTMAKE) -j1
+override MAKE = $(HOSTMAKE) \
+	$(if $(findstring j,$(filter-out --%,$(MAKEFLAGS))),,-j$(PARALLEL_JOBS))
 
 MAKEFLAGS += --no-print-directory
 
@@ -110,10 +118,6 @@ TARGET_EXTRA_CFLAGS  =
 TARGET_EXTRA_LDFLAGS =
 endif
 
-ifeq ($(BS_GCC_VER), 10.2.0)
-#TARGET_EXTRA_CFLAGS += -fcommon
-endif
-
 ifeq ($(TARGET_ARCH),arm)
 GNU_TARGET_NAME ?= arm-cortex-linux-gnueabihf
 TARGET_ARCH     ?= arm
@@ -151,10 +155,10 @@ TARGET_CPP      = $(TARGET_CROSS)cpp
 TARGET_CXX      = $(TARGET_CROSS)g++
 TARGET_LD       = $(TARGET_CROSS)ld
 TARGET_NM       = $(TARGET_CROSS)nm
-TARGET_OBJCOPY  = $(TARGET_CROSS)objcopy
-TARGET_OBJDUMP  = $(TARGET_CROSS)objdump
 TARGET_RANLIB   = $(TARGET_CROSS)ranlib
 TARGET_READELF  = $(TARGET_CROSS)readelf
+TARGET_OBJCOPY  = $(TARGET_CROSS)objcopy
+TARGET_OBJDUMP  = $(TARGET_CROSS)objdump
 TARGET_STRIP    = $(TARGET_CROSS)strip
 
 GNU_HOST_NAME  ?= $(shell /usr/share/libtool/config.guess 2>/dev/null || /usr/share/libtool/config/config.guess 2>/dev/null || /usr/share/misc/config.guess 2>/dev/null)
@@ -225,25 +229,25 @@ UPDATE-RC.D     = $(HELPERS_DIR)/update-rc.d -r $(TARGET_DIR)
 
 MAKE_OPTS = \
 	CROSS_COMPILE="$(TARGET_CROSS)" \
+	AR="$(TARGET_AR)" \
+	AS="$(TARGET_AS)" \
+	LD="$(TARGET_LD)" \
+	NM="$(TARGET_NM)" \
 	CC="$(TARGET_CC)" \
 	GCC="$(TARGET_CC)" \
 	CPP="$(TARGET_CPP)" \
 	CXX="$(TARGET_CXX)" \
-	LD="$(TARGET_LD)" \
-	AR="$(TARGET_AR)" \
-	AS="$(TARGET_AS)" \
-	NM="$(TARGET_NM)" \
-	OBJCOPY="$(TARGET_OBJCOPY)" \
-	OBJDUMP="$(TARGET_OBJDUMP)" \
 	RANLIB="$(TARGET_RANLIB)" \
 	READELF="$(TARGET_READELF)" \
 	STRIP="$(TARGET_STRIP)" \
+	OBJCOPY="$(TARGET_OBJCOPY)" \
+	OBJDUMP="$(TARGET_OBJDUMP)" \
 	ARCH=$(TARGET_ARCH)
 
 TARGET_CONFIGURE_ENV = \
 	$(MAKE_OPTS) \
-	CFLAGS="$(TARGET_CFLAGS)" \
 	CPPFLAGS="$(TARGET_CPPFLAGS)" \
+	CFLAGS="$(TARGET_CFLAGS)" \
 	CXXFLAGS="$(TARGET_CXXFLAGS)" \
 	LDFLAGS="$(TARGET_LDFLAGS)"
 
