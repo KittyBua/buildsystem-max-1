@@ -58,6 +58,8 @@ endef
 # -----------------------------------------------------------------------------
 
 # download archives into archives directory
+DOWNLOAD = wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P
+
 define PKG_DOWNLOAD
 	@( \
 	if [ "$($(PKG)_VER)" == "git" ]; then \
@@ -66,11 +68,15 @@ define PKG_DOWNLOAD
 	else \
 	  if [ ! -f $(DL_DIR)/$(PKG_SOURCE) ]; then \
 	    $(call MESSAGE,"Downloading") ; \
-	    wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P $(DL_DIR) $($(PKG)_SITE)/$(1); \
+	    $(DOWNLOAD) $(DL_DIR) $($(PKG)_SITE)/$(1); \
 	  fi; \
 	fi; \
 	)
+	$(foreach p,$(ALL_DOWNLOADS),@$(DOWNLOAD) $(DL_DIR) $(p)$(sep))
 endef
+
+ALL_DOWNLOADS = \
+	$(foreach p,$($(PKG)_PATCH) $($(PKG)_EXTRA_DOWNLOADS),$(if $(findstring ://,$(p)),$(p),$($(PKG)_SITE)/$(p)))
 
 # github(user,package,version): returns site of GitHub repository
 github = https://github.com/$(1)/$(2)/archive/$(3)
@@ -115,6 +121,7 @@ APPLY_PATCHES = helpers/apply-patches.sh $(if $(QUIET),-s)
 define PKG_APPLY_PATCHES
 	@$(call MESSAGE,"Patching")
 	$(foreach hook,$($(PKG)_PRE_PATCH_HOOKS),$(call $(hook))$(sep))
+	$(foreach p,$($(PKG)_PATCH),$(APPLY_PATCHES) $(PKG_BUILD_DIR) $(DL_DIR) $(notdir $(p))$(sep))
 	@( \
 	for P in $(PKG_PATCHES_DIR); do \
 	  if test -d $${P}; then \
