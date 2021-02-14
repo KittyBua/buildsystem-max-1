@@ -301,16 +301,16 @@ endef
 # python helpers
 HOST_PYTHON_BUILD = \
 	CC="$(HOSTCC)" \
-	CFLAGS="$(CFLAGS)" \
-	LDFLAGS="$(LDFLAGS)" \
+	CFLAGS="$(HOST_CFLAGS)" \
+	LDFLAGS="$(HOST_LDFLAGS)" \
 	LDSHARED="$(HOSTCC) -shared" \
 	PYTHONPATH=$(HOST_DIR)/$(HOST_PYTHON3_BASE_DIR)/site-packages \
 	$(HOST_DIR)/bin/python3 ./setup.py -q build --executable=/usr/python
 
 HOST_PYTHON_INSTALL = \
 	CC="$(HOSTCC)" \
-	CFLAGS="$(CFLAGS)" \
-	LDFLAGS="$(LDFLAGS)" \
+	CFLAGS="$(HOST_CFLAGS)" \
+	LDFLAGS="$(HOST_LDFLAGS)" \
 	LDSHARED="$(HOSTCC) -shared" \
 	PYTHONPATH=$(HOST_DIR)/$(HOST_PYTHON3_BASE_DIR)/site-packages \
 	$(HOST_DIR)/bin/python3 ./setup.py -q install --root=$(HOST_DIR) --prefix=
