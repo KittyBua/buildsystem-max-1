@@ -23,7 +23,7 @@ $(SHARE_THEMES) \
 $(SHARE_WEBRADIO) \
 $(SHARE_WEBTV) \
 $(VAR_CONFIG) \
-$(VAR_PLUGINS) : | $(TARGET_DIR)
+$(VAR_PLUGINS): | $(TARGET_DIR)
 	mkdir -p $(@)
 
 # -----------------------------------------------------------------------------

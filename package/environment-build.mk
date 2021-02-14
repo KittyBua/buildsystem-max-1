@@ -159,6 +159,12 @@ TARGET_STRIP    = $(TARGET_CROSS)strip
 
 GNU_HOST_NAME  ?= $(shell /usr/share/libtool/config.guess 2>/dev/null || /usr/share/libtool/config/config.guess 2>/dev/null || /usr/share/misc/config.guess 2>/dev/null)
 
+HOST_CPPFLAGS   = -I$(HOST_DIR)/include
+HOST_CFLAGS    ?= -O2
+HOST_CFLAGS    += $(HOST_CPPFLAGS)
+HOST_CXXFLAGS  += $(HOST_CFLAGS)
+HOST_LDFLAGS   += -L$(HOST_DIR)/lib -Wl,-rpath,$(HOST_DIR)/lib
+
 # -----------------------------------------------------------------------------
 
 TERM_RED         = \033[40;0;31m
