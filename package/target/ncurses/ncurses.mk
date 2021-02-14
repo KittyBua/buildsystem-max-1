@@ -49,7 +49,8 @@ NCURSES_PATCH = \
 NCURSES_CONF_OPTS = \
 	--enable-pc-files \
 	--with-pkg-config \
-	--with-pkg-config-libdir=/usr/lib/pkgconfig \
+	--with-pkg-config-libdir="/usr/lib/pkgconfig" \
+	--with-normal \
 	--with-shared \
 	--with-fallbacks='linux vt100 xterm' \
 	--without-ada \
@@ -65,7 +66,35 @@ NCURSES_CONF_OPTS = \
 	--disable-rpath \
 	--disable-rpath-hack \
 	--enable-const \
+	--enable-widec \
 	--enable-overwrite
+
+NCURSES_CONFIG_SCRIPTS = ncurses$(NCURSES_LIB_SUFFIX)6-config
+NCURSES_LIB_SUFFIX = w
+NCURSES_LIBS = ncurses menu panel form
+
+define NCURSES_LINK_LIBS_STATIC
+	$(foreach lib,$(NCURSES_LIBS:%=lib%), \
+		ln -sf $(lib)$(NCURSES_LIB_SUFFIX).a $(TARGET_DIR)/usr/lib/$(lib).a
+	)
+	ln -sf libncurses$(NCURSES_LIB_SUFFIX).a \
+		$(TARGET_DIR)/usr/lib/libcurses.a
+endef
+
+define NCURSES_LINK_LIBS_SHARED
+	$(foreach lib,$(NCURSES_LIBS:%=lib%), \
+		ln -sf $(lib)$(NCURSES_LIB_SUFFIX).so $(TARGET_DIR)/usr/lib/$(lib).so
+	)
+	ln -sf libncurses$(NCURSES_LIB_SUFFIX).so \
+		$(TARGET_DIR)/usr/lib/libcurses.so
+endef
+
+define NCURSES_LINK_PC
+	$(foreach pc,$(NCURSES_LIBS), \
+		ln -sf $(pc)$(NCURSES_LIB_SUFFIX).pc \
+			$(TARGET_DIR)/usr/lib/pkgconfig/$(pc).pc
+	)
+endef
 
 $(D)/ncurses:
 	$(START_BUILD)
@@ -77,7 +106,10 @@ $(D)/ncurses:
 		$(CONFIGURE); \
 		$(MAKE) libs; \
 		$(MAKE) install.libs DESTDIR=$(TARGET_DIR)
-	mv $(TARGET_DIR)/usr/bin/ncurses6-config $(HOST_DIR)/bin
-	$(REWRITE_CONFIG) $(HOST_DIR)/bin/ncurses6-config
+	mv $(TARGET_DIR)/usr/bin/$(NCURSES_CONFIG_SCRIPTS) $(HOST_DIR)/bin
+	$(REWRITE_CONFIG) $(HOST_DIR)/bin/$(NCURSES_CONFIG_SCRIPTS)
+	$(NCURSES_LINK_LIBS_STATIC)
+	$(NCURSES_LINK_LIBS_SHARED)
+	$(NCURSES_LINK_PC)
 	$(PKG_REMOVE)
 	$(TOUCH)
