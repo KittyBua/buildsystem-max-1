@@ -41,12 +41,8 @@ NEUTRINO_OBJ_DIR   = $(BUILD_DIR)/$(NEUTRINO_DIR)
 
 e2-multiboot:
 	touch $(TARGET_DIR)/usr/bin/enigma2
-	#
-	echo -e "$(FLAVOUR) `sed -n 's/\#define PACKAGE_VERSION "//p' $(NEUTRINO_OBJ_DIR)/config.h | sed 's/"//'` \\\n \\\l\n" > $(TARGET_DIR)/etc/issue
-	#
 	touch $(TARGET_DIR)/var/lib/opkg/status
-	#
-	cp -a $(TARGET_DIR)/.version $(TARGET_DIR)/etc/image-version
+	echo -e "$(FLAVOUR) `sed -n 's/\#define PACKAGE_VERSION "//p' $(NEUTRINO_OBJ_DIR)/config.h | sed 's/"//'` \\\n \\\l\n" > $(TARGET_DIR)/etc/issue
 
 # -----------------------------------------------------------------------------
 
@@ -257,17 +253,23 @@ $(D)/neutrino: neutrino.do_prepare neutrino.config.status neutrino.do_compile
 	$(TOUCH)
 	( \
 		echo "distro=$(subst neutrino-,,$(FLAVOUR))"; \
-		echo "imagename=Neutrino MP"; \
+		echo "imagename=Neutrino MP $(subst neutrino-,,$(FLAVOUR))"; \
 		echo "imageversion=`sed -n 's/\#define PACKAGE_VERSION "//p' $(NEUTRINO_OBJ_DIR)/config.h | sed 's/"//'`"; \
-		echo "homepage=https://github.com/Duckbox-Developers"; \
+		echo "builddate=`date`"; \
 		echo "creator=$(MAINTAINER)"; \
+		echo "homepage=https://github.com/Duckbox-Developers"; \
 		echo "docs=https://github.com/Duckbox-Developers"; \
 		echo "forum=https://github.com/Duckbox-Developers/neutrino-mp-ddt"; \
 		echo "version=0200`date +%Y%m%d%H%M`"; \
-		echo "builddate=`date`"; \
+		echo "box_model=$(BOXMODEL)"; \
+		echo "neutrino_src=$(FLAVOUR)"; \
 		echo "git=BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"; \
 		echo "imagedir=$(BOXMODEL)" \
-	) > $(TARGET_DIR)/.version
+	) > $(TARGET_DIR)/etc/image-version
+	ln -sf /etc/image-version $(TARGET_DIR)/.version
+	( \
+		echo "PRETTY_NAME=$(FLAVOUR) BS-rev$(BS_REV) HAL-rev$(HAL_REV) NMP-rev$(NMP_REV)"; \
+	) > $(TARGET_DIR)/usr/lib/os-release
 ifeq ($(FLAVOUR),$(filter $(FLAVOUR),neutrino-max neutrino-ni))
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/start_neutrino1 $(TARGET_DIR)/etc/init.d/start_neutrino
 else
