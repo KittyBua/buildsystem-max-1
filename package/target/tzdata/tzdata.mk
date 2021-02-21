@@ -5,7 +5,7 @@ TZDATA_VER    = 2020d
 TZDATA_DIR    = timezone
 TZDATA_SOURCE = tzdata$(TZDATA_VER).tar.gz
 TZDATA_SITE   = https://ftp.iana.org/tz/releases
-TZDATA_DEPS   = bootstrap host-tzcode
+TZDATA_DEPS   = bootstrap host-zic
 
 TZDATA_ZONELIST = \
 	africa antarctica asia australasia \
