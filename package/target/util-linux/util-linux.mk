@@ -1,11 +1,11 @@
 #
 # util-linux
 #
-UTIL_LINUX_VER    = 2.36
+UTIL_LINUX_VER    = 2.36.2
 UTIL_LINUX_DIR    = util-linux-$(UTIL_LINUX_VER)
 UTIL_LINUX_SOURCE = util-linux-$(UTIL_LINUX_VER).tar.xz
-UTIL_LINUX_SITE   = https://www.kernel.org/pub/linux/utils/util-linux/v$(UTIL_LINUX_VER)
-#UTIL_LINUX_SITE   = https://www.kernel.org/pub/linux/utils/util-linux/v$(basename $(UTIL_LINUX_VER))
+#UTIL_LINUX_SITE   = https://www.kernel.org/pub/linux/utils/util-linux/v$(UTIL_LINUX_VER)
+UTIL_LINUX_SITE   = https://www.kernel.org/pub/linux/utils/util-linux/v$(basename $(UTIL_LINUX_VER))
 UTIL_LINUX_DEPS   = bootstrap zlib
 
 UTIL_LINUX_CONF_OPTS = \
@@ -41,6 +41,7 @@ UTIL_LINUX_CONF_OPTS = \
 	--disable-losetup \
 	--disable-login-chown-vcs \
 	--disable-login-stat-mail \
+	--disable-lsirq \
 	--disable-lslogins \
 	--disable-lsmem \
 	--disable-makeinstall-chown \
@@ -68,7 +69,7 @@ UTIL_LINUX_CONF_OPTS = \
 	--disable-setpriv \
 	--disable-setterm \
 	--disable-su \
-	--disable-sulogin \
+	--enable-sulogin \
 	--disable-switch_root \
 	--disable-tunelp \
 	--disable-ul \
@@ -107,9 +108,9 @@ $(D)/util-linux:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	rm -f $(addprefix $(TARGET_DIR)/bin/,findmnt)
-	rm -f $(addprefix $(TARGET_DIR)/sbin/,blkdiscard blkzone blockdev cfdisk chcpu ctrlaltdel fsfreeze fstrim mkfs wipefs)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,choom col colcrt colrm column fincore flock getopt ipcmk isosize linux32 linux64 look lscpu lsipc lslocks lsns mcookie namei prlimit renice rev script scriptreplay setarch setsid uname26 uuidgen uuidparse whereis)
+	rm -f $(addprefix $(TARGET_DIR)/bin/,findmnt mount umount)
+	rm -f $(addprefix $(TARGET_DIR)/sbin/,blkdiscard blkzone blockdev cfdisk chcpu ctrlaltdel fsfreeze fstrim mkfs mkswap swaplabel wipefs)
+	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,choom col colcrt colrm column fincore flock getopt ipcmk isosize linux32 linux64 look lscpu lsipc lslocks lsns mcookie namei prlimit renice rev script scriptlive scriptreplay setarch setsid uname26 uuidgen uuidparse whereis)
 	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,ldattach readprofile rtcwake)
 	$(INSTALL) -d $(TARGET_DIR)/etc/default/
 	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"' > $(TARGET_DIR)/etc/default/mountall
