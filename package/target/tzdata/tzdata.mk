@@ -1,10 +1,10 @@
 #
 # tzdata
 #
-TZDATA_VER    = 2020d
+TZDATA_VER    = 2020f
 TZDATA_DIR    = timezone
 TZDATA_SOURCE = tzdata$(TZDATA_VER).tar.gz
-TZDATA_SITE   = https://ftp.iana.org/tz/releases
+TZDATA_SITE   = https://data.iana.org/time-zones/releases
 TZDATA_DEPS   = bootstrap host-zic
 
 TZDATA_ZONELIST = \
@@ -18,7 +18,7 @@ $(D)/tzdata:
 	$(START_BUILD)
 	$(PKG_REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	mkdir $(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/zoneinfo
+	$(MKDIR)/$($(PKG)_DIR)
 	$(call PKG_UNPACK,$(PKG_BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
