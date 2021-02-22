@@ -1,61 +1,6 @@
 #
 # makefile to keep buildsystem helpers
 #
-# -----------------------------------------------------------------------------
-
-# Strip quotes and then whitespaces
-qstrip = $(strip $(subst ",,$(1)))
-
-# Variables for use in Make constructs
-comma := ,
-empty :=
-space := $(empty) $(empty)
-
-# Reverse the orders of words in a list. Again, inspired by the gmsl
-# 'reverse' macro.
-reverse = $(if $(1),$(call reverse,$(wordlist 2,$(words $(1)),$(1))) $(firstword $(1)))
-
-# Sanitize macro cleans up generic strings so it can be used as a filename
-# and in rules. Particularly useful for VCS version strings, that can contain
-# slashes, colons (OK in filenames but not in rules), and spaces.
-sanitize = $(subst $(space),_,$(subst :,_,$(subst /,_,$(strip $(1)))))
-
-# Utility functions for 'find'
-# findfileclauses(filelist) => -name 'X' -o -name 'Y'
-findfileclauses = $(call notfirstword,$(patsubst %,-o -name '%',$(1)))
-# finddirclauses(base, dirlist) => -path 'base/dirX' -o -path 'base/dirY'
-finddirclauses = $(call notfirstword,$(patsubst %,-o -path '$(1)/%',$(2)))
-
-# Miscellaneous utility functions
-# notfirstword(wordlist): returns all but the first word in wordlist
-notfirstword = $(wordlist 2,$(words $(1)),$(1))
-
-# build a comma-separated list of quoted items, from a space-separated
-# list of unquoted items:   a b c d  -->  "a", "b", "c", "d"
-make-comma-list = $(subst $(space),$(comma)$(space),$(patsubst %,"%",$(strip $(1))))
-
-# build a comma-separated list of single quoted items, from a space-separated
-# list of unquoted items:   a b c d  -->  'a', 'b', 'c', 'd'
-make-sq-comma-list = $(subst $(space),$(comma)$(space),$(patsubst %,'%',$(strip $(1))))
-
-# Needed for the foreach loops to loop over the list of hooks, so that
-# each hook call is properly separated by a newline.
-define sep
-
-
-endef
-
-PERCENT = %
-QUOTE = '
-
-define PRINTF
-	printf '$(subst $(sep),\n,\
-		$(subst $(PERCENT),$(PERCENT)$(PERCENT),\
-			$(subst $(QUOTE),$(QUOTE)\$(QUOTE)$(QUOTE),\
-				$(subst \,\\,$(1)))))\n'
-endef
-
-# -----------------------------------------------------------------------------
 
 # download archives into archives directory
 WGET_DOWNLOAD = wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P
@@ -115,7 +60,7 @@ endef
 $(PKG)_PRE_PATCH_HOOKS  ?=
 $(PKG)_POST_PATCH_HOOKS ?=
 
-APPLY_PATCH = helpers/apply-patches.sh $(if $(QUIET),-s)
+APPLY_PATCH = support/scripts/apply-patches.sh $(if $(QUIET),-s)
 
 # apply patch sets
 define APPLY_PATCHES
@@ -235,66 +180,12 @@ endef
 
 # -----------------------------------------------------------------------------
 
-#
-# Case conversion macros.
-#
-
-[LOWER] := a b c d e f g h i j k l m n o p q r s t u v w x y z - .
-[UPPER] := A B C D E F G H I J K L M N O P Q R S T U V W X Y Z _ _
-
-define caseconvert-helper
-$(1) = $$(strip \
-	$$(eval __tmp := $$(1))\
-	$(foreach c, $(2),\
-		$$(eval __tmp := $$(subst $(word 1,$(subst :, ,$c)),$(word 2,$(subst :, ,$c)),$$(__tmp))))\
-	$$(__tmp))
-endef
-
-$(eval $(call caseconvert-helper,UPPERCASE,$(join $(addsuffix :,$([LOWER])),$([UPPER]))))
-$(eval $(call caseconvert-helper,LOWERCASE,$(join $(addsuffix :,$([UPPER])),$([LOWER]))))
-
-# -----------------------------------------------------------------------------
-
 # BS Revision
 BS_REV=$(shell cd $(BASE_DIR); git log | grep "^commit" | wc -l)
 # Neutrino mp Revision
 NMP_REV=$(shell cd $(SOURCE_DIR)/$(NEUTRINO_DIR); git log | grep "^commit" | wc -l)
 # libstb-hal Revision
 HAL_REV=$(shell cd $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); git log | grep "^commit" | wc -l)
-
-# -----------------------------------------------------------------------------
-
-#
-# $(1) = title
-# $(2) = color
-#	0 - Black
-#	1 - Red
-#	2 - Green
-#	3 - Yellow
-#	4 - Blue
-#	5 - Magenta
-#	6 - Cyan
-#	7 - White
-# $(3) = left|center|right
-#
-define draw_line
-	@\
-	printf '%.0s-' {1..$(shell tput cols)}; \
-	if test "$(1)"; then \
-		cols=$(shell tput cols); \
-		length=$(shell echo $(1) | awk '{print length}'); \
-		case "$(3)" in \
-			*right)  let indent="length + 1" ;; \
-			*center) let indent="cols - (cols - length) / 2" ;; \
-			*left|*) let indent="cols" ;; \
-		esac; \
-		tput cub $$indent; \
-		test "$(2)" && printf $$(tput setaf $(2)); \
-		printf '$(1)'; \
-		test "$(2)" && printf $$(tput sgr0); \
-	fi; \
-	echo
-endef
 
 # -----------------------------------------------------------------------------
 
@@ -391,10 +282,10 @@ rewrite-test:
 #
 neutrino-patch:
 	@printf "$(TERM_YELLOW)---> create $(NEUTRINO) patch ... $(TERM_NORMAL)"
-	$(shell cd $(SOURCE_DIR) && diff -Nur --exclude-from=$(HELPERS_DIR)/diff-exclude $(NEUTRINO_DIR).org $(NEUTRINO_DIR) > $(BUILD_DIR)/$(NEUTRINO)-$(DATE).patch)
+	$(shell cd $(SOURCE_DIR) && diff -Nur --exclude-from=../support/misc/diff-exclude $(NEUTRINO_DIR).org $(NEUTRINO_DIR) > $(BUILD_DIR)/$(NEUTRINO)-$(DATE).patch)
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 libstb-hal-patch:
 	@printf "$(TERM_YELLOW)---> create $(LIBSTB_HAL) patch ... $(TERM_NORMAL)"
-	$(shell cd $(SOURCE_DIR) && diff -Nur --exclude-from=$(HELPERS_DIR)/diff-exclude $(LIBSTB_HAL_DIR).org $(LIBSTB_HAL_DIR) > $(BUILD_DIR)/$(LIBSTB_HAL)-$(DATE).patch)
+	$(shell cd $(SOURCE_DIR) && diff -Nur --exclude-from=../support/misc/diff-exclude $(LIBSTB_HAL_DIR).org $(LIBSTB_HAL_DIR) > $(BUILD_DIR)/$(LIBSTB_HAL)-$(DATE).patch)
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"

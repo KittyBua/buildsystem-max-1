@@ -4,7 +4,7 @@
 /build_source
 /build_tmp
 /cross
-/helpers/*-local*
+/support/scripts/*-local*
 /host
 /own-files
 /package/extras

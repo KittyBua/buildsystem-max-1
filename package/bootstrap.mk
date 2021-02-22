@@ -59,10 +59,6 @@ $(D)/cross-libs: directories $(CROSSTOOL)
 	if test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/lib; then \
 		cp -a $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/lib/*so* $(TARGET_DIR)/lib; \
 	fi; \
-	if test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/sbin/ldconfig; then \
-		cp -a $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/sbin/ldconfig $(TARGET_DIR)/sbin/ldconfig; \
-		touch $(TARGET_DIR)/etc/ld.so.conf; \
-	fi; \
 	if [ $(TARGET_ARCH) = "aarch64" ]; then \
 		cd ${TARGET_DIR}; ln -sf lib lib64; \
 		cd ${TARGET_DIR}/usr; ln -sf lib lib64; \

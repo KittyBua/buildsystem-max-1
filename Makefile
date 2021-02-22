@@ -1,7 +1,6 @@
 #
 # Master makefile
 #
-# -----------------------------------------------------------------------------
 
 MAINTAINER := $(shell whoami)
 UID := $(shell id -u)
@@ -19,15 +18,33 @@ SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 	 else if [ -x /bin/bash ]; then echo /bin/bash; \
 	 else echo sh; fi; fi)
 
+# Include some helper macros and variables
+include support/misc/utils.mk
+
+# bash prints the name of the directory on 'cd <dir>' if CDPATH is
+# set, so unset it here to not cause problems. Notice that the export
+# line doesn't affect the environment of $(shell ..) calls.
+export CDPATH :=
+
 # Disable top-level parallel build if per-package directories is not
 # used. Indeed, per-package directories is necessary to guarantee
 # determinism and reproducibility with top-level parallel build.
 .NOTPARALLEL:
 
+ifeq ($(KBUILD_VERBOSE),1)
+  Q =
+ifndef VERBOSE
+  VERBOSE = 1
+endif
+export VERBOSE
+else
+  Q = @
+endif
+
 # kconfig uses CONFIG_SHELL
 CONFIG_SHELL := $(SHELL)
 
-export SHELL CONFIG_SHELL
+export SHELL CONFIG_SHELL Q
 
 ifndef HOSTAR
 HOSTAR := ar
@@ -76,6 +93,9 @@ SED := $(shell which sed || type -p sed) -i -e
 export HOSTAR HOSTAS HOSTCC HOSTCXX HOSTLD
 export HOSTCC_NOCCACHE HOSTCXX_NOCCACHE
 
+# silent mode requested?
+QUIET := $(if $(findstring s,$(filter-out --%,$(MAKEFLAGS))),-q)
+
 # -----------------------------------------------------------------------------
 
 local-files:
@@ -94,7 +114,6 @@ printenv:
 	@echo "PATH              : `type -p fmt>/dev/null&&echo $(PATH)|sed 's/:/ /g' |fmt -65|sed 's/ /:/g; 2,$$s/^/                  : /;'||echo $(PATH)`"
 	@echo "ARCHIVE_DIR       : $(DL_DIR)"
 	@echo "BASE_DIR          : $(BASE_DIR)"
-	@echo "HELPERS_DIR       : $(HELPERS_DIR)"
 	@echo "CROSS_DIR         : $(CROSS_DIR)"
 	@echo "RELEASE_DIR       : $(RELEASE_DIR)"
 	@echo "RELEASE_IMAGE_DIR : $(IMAGE_DIR)"
@@ -109,7 +128,6 @@ printenv:
 	@echo "BOXMODEL          : $(BOXMODEL)"
 	@echo "KERNEL_VER        : $(KERNEL_VER)"
 	@echo "PARALLEL_JOBS     : $(PARALLEL_JOBS)"
-	@echo "VERBOSE_BUILD     : $(KBUILD_VERBOSE)"
 	@echo "CROSS_GCC_VERSION : $(CROSSTOOL_GCC_VER)"
 	@echo "OPTIMIZATION      : $(OPTIMIZATIONS)"
 	@echo -e "FLAVOUR           : $(TERM_YELLOW)$(FLAVOUR)$(TERM_NORMAL)"

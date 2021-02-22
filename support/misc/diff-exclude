@@ -21,6 +21,7 @@
 .libs
 .git
 .svn
+.applied_patches_list
 autom4te.cache
 aclocal.m4
 config.guess

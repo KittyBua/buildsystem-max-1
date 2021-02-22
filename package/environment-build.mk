@@ -44,7 +44,6 @@ D             = $(DEPS_DIR)
 TARGET_DIR    = $(BASE_DIR)/root
 SOURCE_DIR    = $(BASE_DIR)/build_source
 IMAGE_DIR     = $(BASE_DIR)/release_image
-HELPERS_DIR   = $(BASE_DIR)/helpers
 OWN_FILES    ?= $(BASE_DIR)/own-files
 CROSS_DIR     = $(BASE_DIR)/cross/$(TARGET_ARCH)-$(CROSSTOOL_GCC_VER)-kernel-$(KERNEL_VER)
 STAGING_DIR   = $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root
@@ -160,23 +159,13 @@ TARGET_OBJCOPY  = $(TARGET_CROSS)objcopy
 TARGET_OBJDUMP  = $(TARGET_CROSS)objdump
 TARGET_STRIP    = $(TARGET_CROSS)strip
 
-GNU_HOST_NAME  ?= $(shell /usr/share/libtool/config.guess 2>/dev/null || /usr/share/libtool/config/config.guess 2>/dev/null || /usr/share/misc/config.guess 2>/dev/null)
+GNU_HOST_NAME  := $(shell support/gnuconfig/config.guess)
 
 HOST_CPPFLAGS   = -I$(HOST_DIR)/include
 HOST_CFLAGS    ?= -O2
 HOST_CFLAGS    += $(HOST_CPPFLAGS)
 HOST_CXXFLAGS  += $(HOST_CFLAGS)
 HOST_LDFLAGS   += -L$(HOST_DIR)/lib -Wl,-rpath,$(HOST_DIR)/lib
-
-# -----------------------------------------------------------------------------
-
-TERM_RED         = \033[40;0;31m
-TERM_RED_BOLD    = \033[40;1;31m
-TERM_GREEN       = \033[40;0;32m
-TERM_GREEN_BOLD  = \033[40;1;32m
-TERM_YELLOW      = \033[40;0;33m
-TERM_YELLOW_BOLD = \033[40;1;33m
-TERM_NORMAL      = \033[0m
 
 # -----------------------------------------------------------------------------
 
@@ -214,10 +203,10 @@ define INSTALL_EXIST # (source, dest)
 	fi
 endef
 
-GET-GIT-ARCHIVE = $(HELPERS_DIR)/get-git-archive.sh
-GET-GIT-SOURCE  = $(HELPERS_DIR)/get-git-source.sh
-GET-SVN-SOURCE  = $(HELPERS_DIR)/get-svn-source.sh
-UPDATE-RC.D     = $(HELPERS_DIR)/update-rc.d -r $(TARGET_DIR)
+GET-GIT-ARCHIVE = support/scripts/get-git-archive.sh
+GET-GIT-SOURCE  = support/scripts/get-git-source.sh
+GET-SVN-SOURCE  = support/scripts/get-svn-source.sh
+UPDATE-RC.D     = support/scripts/update-rc.d -r $(TARGET_DIR)
 
 # -----------------------------------------------------------------------------
 
@@ -319,8 +308,8 @@ CMAKE = \
 
 # -----------------------------------------------------------------------------
 
-TUXBOX_CUSTOMIZE = [ -x $(HELPERS_DIR)/$(notdir $@)-local.sh ] && \
-	$(HELPERS_DIR)/$(notdir $@)-local.sh \
+TUXBOX_CUSTOMIZE = [ -x support/scripts/$(notdir $@)-local.sh ] && \
+	support/scripts/$(notdir $@)-local.sh \
 	$(RELEASE_DIR) \
 	$(TARGET_DIR) \
 	$(BASE_DIR) \
