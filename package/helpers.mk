@@ -104,7 +104,7 @@ define EXTRACT
 	    fi; \
 	    ;; \
 	  *) \
-	    $(call MESSAGE,"Cannot extract $($(PKG)_SOURCE))"); \
+	    $(call MESSAGE,"Cannot extract $($(PKG)_SOURCE)"); \
 	    false ;; \
 	esac \
 	)
