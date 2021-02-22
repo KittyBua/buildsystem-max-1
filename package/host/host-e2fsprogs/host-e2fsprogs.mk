@@ -9,7 +9,7 @@ HOST_E2FSPROGS_DEPS   = bootstrap
 
 $(D)/host-e2fsprogs:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -29,5 +29,5 @@ $(D)/host-e2fsprogs:
 	ln -sf e2fsck $(HOST_DIR)/bin/fsck.ext3
 	ln -sf e2fsck $(HOST_DIR)/bin/fsck.ext4
 	ln -sf e2fsck $(HOST_DIR)/bin/fsck.ext4dev
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

@@ -12,7 +12,7 @@ HOST_PYTHON3_INCLUDE_DIR = include/python$(basename $(HOST_PYTHON3_VER))
 
 $(D)/host-python3:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -37,5 +37,5 @@ $(D)/host-python3:
 			; \
 		$(MAKE); \
 		$(MAKE) install
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

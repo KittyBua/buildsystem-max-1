@@ -10,7 +10,7 @@ NEUTRINO_IPTVPLAYER_DEPS   = rtmpdump python-twisted $(SHARE_PLUGINS)
 $(D)/neutrino-iptvplayer-nightly \
 $(D)/neutrino-iptvplayer:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	@if [ "$@" = "$(D)/neutrino-iptvplayer-nightly" ]; then \
@@ -27,5 +27,5 @@ $(D)/neutrino-iptvplayer:
 	$(HOST_DIR)/bin/python$(basename $(PYTHON_VER)) -Wi -t -O $(TARGET_DIR)/$(PYTHON_BASE_DIR)/compileall.py -q \
 		-d /usr/share/E2emulator -f -x badsyntax $(TARGET_SHARE_DIR)/E2emulator
 	cp -R $(PKG_BUILD_DIR)/addon4neutrino/neutrinoIPTV/* $(SHARE_PLUGINS)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

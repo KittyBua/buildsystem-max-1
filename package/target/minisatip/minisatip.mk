@@ -14,7 +14,7 @@ MINISATIP_CONF_OPTS = \
 
 $(D)/minisatip:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -26,5 +26,5 @@ $(D)/minisatip:
 	$(INSTALL_COPY) $(PKG_BUILD_DIR)/html $(TARGET_SHARE_DIR)/minisatip
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/minisatip $(TARGET_DIR)/etc/default/minisatip
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/minisatip.init $(TARGET_DIR)/etc/init.d/minisatip
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

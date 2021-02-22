@@ -14,7 +14,7 @@ USBUTILS_CONF_OPTS = \
 
 $(D)/usbutils:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -25,5 +25,5 @@ $(D)/usbutils:
 	rm -rf $(addprefix $(TARGET_DIR)/usr/bin/,lsusb.py usbhid-dump)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,pkgconfig)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/hwdata/,usb.ids.gz)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

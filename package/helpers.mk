@@ -199,7 +199,7 @@ define TOUCH
 endef
 
 # clean up
-define PKG_REMOVE
+define REMOVE
 	@$(call MESSAGE,"Remove")
 	@( \
 	rm -rf $(PKG_BUILD_DIR); \

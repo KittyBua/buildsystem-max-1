@@ -9,7 +9,7 @@ SMARTMONTOOLS_DEPS   = bootstrap
 
 $(D)/smartmontools:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -17,5 +17,5 @@ $(D)/smartmontools:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(INSTALL_EXEC) smartctl $(TARGET_DIR)/usr/sbin/smartctl
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

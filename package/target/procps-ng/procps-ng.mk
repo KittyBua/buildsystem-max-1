@@ -26,7 +26,7 @@ PROCPS_NG_BIN = \
 
 $(D)/procps-ng:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -39,5 +39,5 @@ $(D)/procps-ng:
 	done
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/sysctl.conf $(TARGET_DIR)/etc/sysctl.conf
 	$(REWRITE_LIBTOOL_LA)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

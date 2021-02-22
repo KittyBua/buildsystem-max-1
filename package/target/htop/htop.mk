@@ -21,7 +21,7 @@ HTOP_CONF_OPTS = \
 
 $(D)/htop:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -31,5 +31,5 @@ $(D)/htop:
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,applications icons pixmaps)
 	ln -sf htop $(TARGET_DIR)/usr/bin/top
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

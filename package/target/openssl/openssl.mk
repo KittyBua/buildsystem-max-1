@@ -17,7 +17,7 @@ endif
 
 $(D)/openssl:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -45,5 +45,5 @@ $(D)/openssl:
 	rm -f $(addprefix $(TARGET_DIR)/etc/ssl/misc/,CA.pl tsget)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,openssl c_rehash)
 	rm -rf $(addprefix $(TARGET_DIR)/usr/lib/,engines-1.1)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

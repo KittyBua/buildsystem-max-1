@@ -12,12 +12,12 @@ HOST_LUA_BINARY = $(HOST_DIR)/bin/lua
 
 $(D)/host-lua:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(MAKE) linux; \
 		$(MAKE) install INSTALL_TOP=$(HOST_DIR)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

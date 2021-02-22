@@ -10,12 +10,12 @@ HD61_LIBS_DEPS   = bootstrap
 
 $(D)/hd61-libs:
 	$(START_BUILD)
-	$(REMOVE)/hiplay
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(PKG_BUILD_DIR))
 	mkdir -p $(TARGET_LIB_DIR)/hisilicon
 	$(INSTALL_EXEC) $(BUILD_DIR)/hiplay/hisilicon/* $(TARGET_LIB_DIR)/hisilicon
 	$(INSTALL_EXEC) $(BUILD_DIR)/hiplay/ffmpeg/* $(TARGET_LIB_DIR)/hisilicon
 	ln -sf /lib/ld-linux-armhf.so.3 $(TARGET_LIB_DIR)/hisilicon/ld-linux.so
-	$(REMOVE)/hiplay
+	$(REMOVE)
 	$(TOUCH)

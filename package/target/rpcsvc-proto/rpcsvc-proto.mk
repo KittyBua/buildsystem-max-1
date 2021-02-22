@@ -11,7 +11,7 @@ RPCSVC_PROTO_AUTORECONF = YES
 
 $(D)/rpcsvc-proto:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -19,5 +19,5 @@ $(D)/rpcsvc-proto:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

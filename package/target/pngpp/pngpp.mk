@@ -9,11 +9,11 @@ PNGPP_DEPS   = bootstrap libpng
 
 $(D)/pngpp:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(MAKE) install-headers PREFIX=$(TARGET_DIR)/usr
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

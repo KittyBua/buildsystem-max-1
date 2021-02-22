@@ -15,7 +15,7 @@ FRIBIDI_CONF_OPTS = \
 
 $(D)/fribidi:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -25,5 +25,5 @@ $(D)/fribidi:
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL_LA)
 	cd $(TARGET_DIR) && rm usr/bin/fribidi
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

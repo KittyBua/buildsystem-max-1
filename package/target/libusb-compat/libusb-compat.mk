@@ -14,7 +14,7 @@ LIBUSB_CONF_OPTS = \
 
 $(D)/libusb-compat:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -25,5 +25,5 @@ $(D)/libusb-compat:
 	mv $(TARGET_DIR)/usr/bin/libusb-config $(HOST_DIR)/bin
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/libusb-config
 	$(REWRITE_LIBTOOL_LA)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

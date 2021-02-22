@@ -9,7 +9,7 @@ HOST_GLIB2_DEPS   = bootstrap host-meson host-libffi
 
 $(D)/host-glib2:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -29,5 +29,5 @@ $(D)/host-glib2:
 			; \
 	$(PKG_CHDIR); \
 		DESTDIR=$(HOST_DIR) $(HOST_DIR)/bin/ninja -C builddir install
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

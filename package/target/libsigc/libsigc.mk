@@ -16,7 +16,7 @@ LIBSIGC_CONF_OPTS = \
 
 $(D)/libsigc:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -30,5 +30,5 @@ $(D)/libsigc:
 	mv $(TARGET_LIB_DIR)/sigc++-2.0/include/sigc++config.h $(TARGET_INCLUDE_DIR)
 	rm -fr $(TARGET_LIB_DIR)/sigc++-2.0
 	$(REWRITE_LIBTOOL_LA)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

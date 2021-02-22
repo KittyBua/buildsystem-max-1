@@ -23,7 +23,7 @@ OPENVPN_CONF_OPTS = \
 
 $(D)/openvpn:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -33,5 +33,5 @@ $(D)/openvpn:
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/openvpn $(TARGET_DIR)/etc/init.d/
 	mkdir -p $(TARGET_DIR)/etc/openvpn
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

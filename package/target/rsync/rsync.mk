@@ -13,7 +13,7 @@ RSYNC_CONF_OPTS = \
 
 $(D)/rsync:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -21,5 +21,5 @@ $(D)/rsync:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install-all DESTDIR=$(TARGET_DIR)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

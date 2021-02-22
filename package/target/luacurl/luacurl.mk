@@ -9,7 +9,7 @@ LUACURL_DEPS   = bootstrap libcurl lua
 
 $(D)/luacurl:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -18,5 +18,5 @@ $(D)/luacurl:
 			LIBDIR=$(TARGET_LIB_DIR) \
 			LUA_INC=$(TARGET_INCLUDE_DIR); \
 		$(MAKE) install LUA_CMOD=$(TARGET_LIB_DIR)/lua/$(LUA_ABIVER) LUA_LMOD=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVER)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

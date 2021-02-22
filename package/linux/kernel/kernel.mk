@@ -4,15 +4,15 @@
 
 $(D)/kernel.do_prepare:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	@touch $@
 
 $(D)/kernel.do_compile: kernel.do_prepare
-	$(REMOVE)/$(KERNEL_OBJ)
-	$(REMOVE)/$(KERNEL_MODULES)
+	rm -rf $(BUILD_DIR)/$(KERNEL_OBJ)
+	rm -rf $(BUILD_DIR)/$(KERNEL_MODULES)
 	$(MKDIR)/$(KERNEL_OBJ)
 	$(MKDIR)/$(KERNEL_MODULES)
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/$(KERNEL_CONFIG) $(KERNEL_OBJ_DIR)/.config

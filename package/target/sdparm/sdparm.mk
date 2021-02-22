@@ -12,7 +12,7 @@ SDPARM_CONF_OPTS = \
 
 $(D)/sdparm:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -21,5 +21,5 @@ $(D)/sdparm:
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,sas_disk_blink scsi_ch_swp)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

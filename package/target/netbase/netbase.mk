@@ -9,7 +9,7 @@ NETBASE_DEPS   = bootstrap
 
 $(D)/netbase:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -17,5 +17,5 @@ $(D)/netbase:
 		$(INSTALL_DATA) etc/rpc $(TARGET_DIR)/etc/rpc; \
 		$(INSTALL_DATA) etc/protocols $(TARGET_DIR)/etc/protocols; \
 		$(INSTALL_DATA) etc/services $(TARGET_DIR)/etc/services
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

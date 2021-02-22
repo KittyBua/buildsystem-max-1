@@ -15,7 +15,7 @@ HDDTEMP_CONF_OPTS = \
 
 $(D)/hddtemp:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -25,5 +25,5 @@ $(D)/hddtemp:
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(INSTALL_DATA) -D $(PKG_FILES_DIR)/hddtemp.db $(TARGET_DIR)/usr/share/misc/hddtemp.db
 	ln -sf /usr/share/misc/hddtemp.db $(TARGET_DIR)/etc/hddtemp.db
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

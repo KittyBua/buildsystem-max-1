@@ -16,7 +16,7 @@ LUAPOSIX_CONF_OPTS = \
 
 $(D)/luaposix:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -29,5 +29,5 @@ $(D)/luaposix:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

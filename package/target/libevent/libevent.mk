@@ -9,7 +9,7 @@ LIBEVENT_DEPS   = bootstrap
 
 $(D)/libevent:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -19,5 +19,5 @@ $(D)/libevent:
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,event_rpcgen.py)
 	$(REWRITE_LIBTOOL_LA)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

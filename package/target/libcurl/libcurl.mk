@@ -35,7 +35,7 @@ LIBCURL_CONF_OPTS = \
 
 $(D)/libcurl:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -46,5 +46,5 @@ $(D)/libcurl:
 	mv $(TARGET_DIR)/usr/bin/curl-config $(HOST_DIR)/bin/
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/curl-config
 	$(REWRITE_LIBTOOL_LA)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

@@ -20,7 +20,7 @@ HD61_MALI_MODULE_MAKEVARS = \
 
 $(D)/hd61-mali-module:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -33,5 +33,5 @@ $(D)/hd61-mali-module:
 		modules_install
 #	mkdir -p ${TARGET_DIR}/etc/modules-load.d
 #	echo mali > ${TARGET_DIR}/etc/modules-load.d/mali.conf
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

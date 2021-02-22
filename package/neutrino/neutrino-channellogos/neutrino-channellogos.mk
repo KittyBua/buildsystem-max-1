@@ -9,7 +9,7 @@ NEUTRINO_CHANNELLOGOS_DEPS   = bootstrap $(SHARE_ICONS) $(SHARE_PLUGINS)
 
 $(D)/neutrino-channellogos:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	rm -rf $(SHARE_LOGOS)
@@ -20,5 +20,5 @@ $(D)/neutrino-channellogos:
 	$(PKG_CHDIR)/logo-links && \
 		./logo-linker.sh logo-links.db $(SHARE_LOGOS)
 	cp -a $(PKG_BUILD_DIR)/logo-addon/* $(SHARE_PLUGINS)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

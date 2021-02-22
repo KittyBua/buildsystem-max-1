@@ -15,7 +15,7 @@ MINIDLNA_CONF_OPTS = \
 
 $(D)/minidlna:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -24,5 +24,5 @@ $(D)/minidlna:
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(INSTALL_DATA) -D $(PKG_BUILD_DIR)/minidlna.conf $(TARGET_DIR)/etc/minidlna.conf
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

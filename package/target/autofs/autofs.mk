@@ -36,7 +36,7 @@ AUTOFS_CONF_OPTS = \
 
 $(D)/autofs:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -53,5 +53,5 @@ $(D)/autofs:
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/volatiles.99_autofs $(TARGET_DIR)/etc/default/volatiles/99_autofs
 	$(UPDATE-RC.D) autofs defaults 17
 	rm -f $(addprefix $(TARGET_DIR)/etc/,autofs_ldap_auth.conf)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

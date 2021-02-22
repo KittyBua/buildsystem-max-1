@@ -9,7 +9,7 @@ WIREGUARD_LINUX_COMPAT_DEPS   = bootstrap kernel libmnl
 
 $(D)/wireguard-linux-compat:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -21,5 +21,5 @@ $(D)/wireguard-linux-compat:
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/wireguard.conf; \
 	done
 	$(LINUX_RUN_DEPMOD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

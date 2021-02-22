@@ -9,12 +9,12 @@ HDPARM_DEPS   = bootstrap
 
 $(D)/hdparm:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(MAKE) $(TARGET_CONFIGURE_ENV); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR) mandir=$(REMOVE_mandir)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

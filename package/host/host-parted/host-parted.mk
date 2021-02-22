@@ -9,7 +9,7 @@ HOST_PARTED_DEPS   = bootstrap
 
 $(D)/host-parted:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -23,5 +23,5 @@ $(D)/host-parted:
 			; \
 		$(MAKE); \
 		$(MAKE) install
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

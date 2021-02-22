@@ -12,7 +12,7 @@ PUGIXML_CONF_OPTS = \
 
 $(D)/pugixml:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -21,5 +21,5 @@ $(D)/pugixml:
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	cd $(TARGET_DIR) && rm -rf usr/lib/cmake
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

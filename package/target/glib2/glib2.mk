@@ -22,7 +22,7 @@ GLIB2_CONF_OPTS = \
 
 $(D)/glib2:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -34,5 +34,5 @@ $(D)/glib2:
 		DESTDIR=$(TARGET_DIR) $(HOST_DIR)/bin/ninja -C builddir install
 	rm -rf $(addprefix $(TARGET_DIR)/usr/share/,gettext gdb glib-2.0 locale)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gdbus-codegen glib-compile-schemas glib-compile-resources glib-genmarshal glib-gettextize gio-launch-desktop glib-mkenums gobject-query gtester gtester-report)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

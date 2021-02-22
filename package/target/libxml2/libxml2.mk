@@ -24,7 +24,7 @@ LIBXML2_CONF_OPTS = \
 
 $(D)/libxml2:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -40,5 +40,5 @@ $(D)/libxml2:
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,xmlcatalog xmllint)
 	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake xml2Conf.sh)
 	$(REWRITE_LIBTOOL_LA)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

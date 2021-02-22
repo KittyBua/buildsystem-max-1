@@ -10,7 +10,7 @@ LUA_DEPS   = bootstrap host-lua ncurses
 
 $(D)/lua:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -28,5 +28,5 @@ $(D)/lua:
 		$(INSTALL_DATA) -D $(BUILD_DIR)/lua-$(LUA_VER)/etc/lua.pc \
 			$(PKG_CONFIG_PATH)/lua.pc
 	rm -rf $(addprefix $(TARGET_DIR)/bin/,luac)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

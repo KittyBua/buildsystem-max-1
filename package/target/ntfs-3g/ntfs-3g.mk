@@ -16,7 +16,7 @@ NTFS_3G_CONF_OPTS = \
 
 $(D)/ntfs-3g:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -27,5 +27,5 @@ $(D)/ntfs-3g:
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,lowntfs-3g ntfs-3g.probe)
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,mount.lowntfs-3g)
 	ln -sf mount.ntfs-3g $(TARGET_DIR)/sbin/mount.ntfs
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

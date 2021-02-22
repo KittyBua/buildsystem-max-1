@@ -9,7 +9,7 @@ GPTFDISK_DEPS   = bootstrap e2fsprogs ncurses popt
 
 $(D)/gptfdisk:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -17,5 +17,5 @@ $(D)/gptfdisk:
 		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) sgdisk; \
 		$(INSTALL_EXEC) sgdisk $(TARGET_DIR)/usr/sbin/sgdisk
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

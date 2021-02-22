@@ -9,7 +9,7 @@ HOST_LIBFFI_DEPS   = bootstrap
 
 $(D)/host-libffi:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -20,5 +20,5 @@ $(D)/host-libffi:
 			; \
 		$(MAKE); \
 		$(MAKE) install
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

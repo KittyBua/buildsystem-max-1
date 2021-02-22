@@ -19,7 +19,7 @@ ASTRA_SM_CONF_OPTS = \
 
 $(D)/astra-sm:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -28,5 +28,5 @@ $(D)/astra-sm:
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,astra)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

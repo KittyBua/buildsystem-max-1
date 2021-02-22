@@ -19,7 +19,7 @@ LIBGPG_ERROR_CONF_OPTS = \
 
 $(D)/libgpg-error:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -30,5 +30,5 @@ $(D)/libgpg-error:
 	$(REWRITE_CONFIG) $(TARGET_DIR)/usr/bin/gpg-error-config
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gpg-error gpgrt-config yat2m)
 	$(REWRITE_LIBTOOL_LA)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

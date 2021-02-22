@@ -15,7 +15,7 @@ IOZONE_POST_PATCH_HOOKS = IOZONE_POST_PATCH
 
 $(D)/iozone:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -24,5 +24,5 @@ $(D)/iozone:
 		$(TARGET_CONFIGURE_ENV); \
 		$(MAKE) linux-arm
 		$(INSTALL_EXEC) $(PKG_BUILD_DIR)/src/current/iozone $(TARGET_DIR)/usr/bin
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

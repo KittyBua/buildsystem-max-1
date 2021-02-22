@@ -18,7 +18,7 @@ RPCBIND_CONF_OPTS = \
 
 $(D)/rpcbind:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -35,5 +35,5 @@ else
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/rpcbind.init $(TARGET_DIR)/etc/init.d/rpcbind
 	$(UPDATE-RC.D) rpcbind start 12 2 3 4 5 . stop 60 0 1 6 .
 endif
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

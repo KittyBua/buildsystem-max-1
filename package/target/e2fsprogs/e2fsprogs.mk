@@ -41,7 +41,7 @@ E2FSPROGS_CONF_OPTS = \
 
 $(D)/e2fsprogs:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -53,5 +53,5 @@ $(D)/e2fsprogs:
 	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,mk_cmds uuidd)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,chattr compile_et irqtop mk_cmds lsattr uuidgen)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,et ss)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

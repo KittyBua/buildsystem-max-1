@@ -24,7 +24,7 @@ crosstool:
 
 crosstool-ng:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	unset CONFIG_SITE LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE; \
@@ -47,7 +47,7 @@ crosstool-ng:
 		./ct-ng build
 	test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/lib || ln -sf sys-root/lib $(CROSS_DIR)/$(GNU_TARGET_NAME)/
 	rm -f $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/lib/libstdc++.so.6.0.*-gdb.py
-	$(PKG_REMOVE)
+	$(REMOVE)
 endif
 
 # -----------------------------------------------------------------------------
@@ -57,7 +57,7 @@ crosstool-config:
 
 crosstool-ng-config: directories
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	unset CONFIG_SITE; \
@@ -76,7 +76,7 @@ crosstool-upgradeconfig:
 
 crosstool-ng-upgradeconfig: directories
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	unset CONFIG_SITE; \

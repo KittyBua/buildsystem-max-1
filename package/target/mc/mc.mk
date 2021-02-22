@@ -19,7 +19,7 @@ MC_CONF_OPTS = \
 
 $(D)/mc:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -29,5 +29,5 @@ $(D)/mc:
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -rf $(TARGET_SHARE_DIR)/mc/examples
 	find $(TARGET_SHARE_DIR)/mc/skins -type f ! -name default.ini | xargs --no-run-if-empty rm
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

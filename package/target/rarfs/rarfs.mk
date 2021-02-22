@@ -14,7 +14,7 @@ RARFS_CONF_OPTS = \
 
 $(D)/rarfs:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -22,5 +22,5 @@ $(D)/rarfs:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

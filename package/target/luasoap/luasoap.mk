@@ -9,11 +9,11 @@ LUASOAP_DEPS   = bootstrap lua luasocket luaexpat
 
 $(D)/luasoap:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(MAKE) install LUA_DIR=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVER)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

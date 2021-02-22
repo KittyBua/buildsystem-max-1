@@ -9,7 +9,7 @@ BZIP2_DEPS   = bootstrap
 
 $(D)/bzip2:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -17,5 +17,5 @@ $(D)/bzip2:
 		mv Makefile-libbz2_so Makefile; \
 		$(MAKE) CC=$(TARGET_CC) AR=$(TARGET_AR) RANLIB=$(TARGET_RANLIB); \
 		$(MAKE) install PREFIX=$(TARGET_DIR)/usr
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

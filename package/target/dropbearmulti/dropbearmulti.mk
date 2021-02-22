@@ -27,7 +27,7 @@ DROPBEARMULTI_CONF_OPTS = \
 
 $(D)/dropbearmulti:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -38,5 +38,5 @@ $(D)/dropbearmulti:
 	cd $(TARGET_DIR)/usr/bin && ln -sf /usr/bin/dropbearmulti dropbear
 	mkdir -p $(TARGET_DIR)/etc/dropbear
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/dropbear $(TARGET_DIR)/etc/init.d/
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

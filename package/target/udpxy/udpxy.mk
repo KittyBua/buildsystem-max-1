@@ -9,7 +9,7 @@ UDPXY_DEPS   = bootstrap
 
 $(D)/udpxy:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -17,5 +17,5 @@ $(D)/udpxy:
 		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) -C chipmunk; \
 		$(MAKE) -C chipmunk install INSTALLROOT=$(TARGET_DIR)/usr MANPAGE_DIR=$(TARGET_DIR)$(REMOVE_mandir)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

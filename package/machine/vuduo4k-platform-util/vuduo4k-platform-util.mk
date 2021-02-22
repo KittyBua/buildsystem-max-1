@@ -11,7 +11,7 @@ VUDUO4K_PLATFORM_UTIL_DEPS   = bootstrap
 
 $(D)/vuduo4k-platform-util:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(INSTALL_EXEC) $(BUILD_DIR)/platform-util-vuduo4k/* $(TARGET_DIR)/usr/bin
@@ -20,5 +20,5 @@ $(D)/vuduo4k-platform-util:
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/bp3flash.sh $(TARGET_DIR)/usr/bin/bp3flash.sh
 	$(UPDATE-RC.D) vuplus-platform-util start 65 S . stop 90 0 .
 	$(UPDATE-RC.D) vuplus-shutdown start 89 0 .
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

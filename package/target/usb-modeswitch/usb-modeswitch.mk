@@ -9,12 +9,12 @@ USB_MODESWITCH_DEPS   = bootstrap libusb usb-modeswitch-data
 
 $(D)/usb-modeswitch:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(TARGET_CONFIGURE_ENV) $(MAKE) DESTDIR=$(TARGET_DIR); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR) MANDIR=$(TARGET_DIR)$(REMOVE_mandir)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

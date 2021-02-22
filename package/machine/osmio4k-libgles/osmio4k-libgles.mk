@@ -9,7 +9,7 @@ OSMIO4K_LIBGLES_DEPS   = bootstrap
 
 $(D)/osmio4k-libgles:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	cp -a $(PKG_BUILD_DIR)/lib/* $(TARGET_DIR)/usr/lib
@@ -22,5 +22,5 @@ $(D)/osmio4k-libgles:
 			install -m 0644 $$f $(TARGET_INCLUDE_DIR)/$$d; \
 		done; \
 	done
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

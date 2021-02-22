@@ -16,7 +16,7 @@ TZDATA_LOCALTIME = CET
 
 $(D)/tzdata:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(MKDIR)/$($(PKG)_DIR)
 	$(call PKG_UNPACK,$(PKG_BUILD_DIR))
@@ -33,5 +33,5 @@ $(D)/tzdata:
 		done; \
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/timezone.xml $(TARGET_DIR)/etc/
 	ln -sf /usr/share/zoneinfo/$(TZDATA_LOCALTIME) $(TARGET_DIR)/etc/localtime
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

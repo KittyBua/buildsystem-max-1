@@ -59,7 +59,7 @@ OSCAM_CONF_OPTS = \
 
 $(D)/oscam.do_prepare:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -81,7 +81,7 @@ $(D)/oscam: oscam.do_prepare oscam.do_compile
 	rm -rf $(IMAGE_DIR)/$(OSCAM_FLAVOUR)
 	mkdir $(IMAGE_DIR)/$(OSCAM_FLAVOUR)
 	cp -pR $(PKG_BUILD_DIR)/Distribution/* $(IMAGE_DIR)/$(OSCAM_FLAVOUR)/
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)
 
 oscam-clean:

@@ -9,7 +9,7 @@ WLAN_QCOM_DEPS   = bootstrap kernel wlan-qcom-firmware wireless-regdb
 
 $(D)/wlan-qcom:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -21,5 +21,5 @@ $(D)/wlan-qcom:
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/wlan.conf; \
 	done
 	$(LINUX_RUN_DEPMOD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

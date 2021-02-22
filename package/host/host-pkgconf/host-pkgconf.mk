@@ -9,7 +9,7 @@ HOST_PKGCONF_DEPS   = directories
 
 $(D)/host-pkgconf:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -21,5 +21,5 @@ $(D)/host-pkgconf:
 		$(MAKE) install
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/pkgconf-config $(HOST_DIR)/bin/pkg-config
 	ln -sf pkg-config $(HOST_DIR)/bin/$(GNU_TARGET_NAME)-pkg-config
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

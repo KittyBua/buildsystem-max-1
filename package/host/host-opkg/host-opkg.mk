@@ -9,7 +9,7 @@ HOST_OPKG_DEPS   = bootstrap host-libarchive
 
 $(D)/host-opkg:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -25,5 +25,5 @@ $(D)/host-opkg:
 			; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(HOST_DIR)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

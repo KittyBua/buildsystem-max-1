@@ -9,7 +9,7 @@ HD_IDLE_DEPS   = bootstrap
 
 $(D)/hd-idle:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -17,5 +17,5 @@ $(D)/hd-idle:
 		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE); \
 		$(MAKE) install TARGET_DIR=$(TARGET_DIR) install
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

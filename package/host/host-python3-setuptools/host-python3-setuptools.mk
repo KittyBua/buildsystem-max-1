@@ -9,12 +9,12 @@ HOST_PYTHON3_SETUPTOOLS_DEPS   = bootstrap host-python3
 
 $(D)/host-python3-setuptools:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(HOST_PYTHON_BUILD); \
 		$(HOST_PYTHON_INSTALL)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

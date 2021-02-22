@@ -15,7 +15,7 @@ JFSUTILS_POST_PATCH_HOOKS = JFSUTILS_POST_PATCH
 
 $(D)/jfsutils:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -24,5 +24,5 @@ $(D)/jfsutils:
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,jfs_debugfs jfs_fscklog jfs_logdump)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

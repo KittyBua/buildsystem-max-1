@@ -40,7 +40,7 @@ LINKS_CONF_OPTS = \
 
 $(D)/links:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -62,5 +62,5 @@ $(D)/links:
 	touch $(TARGET_DIR)/var/tuxbox/config/links/links.his
 	$(INSTALL_DATA) -D $(PKG_FILES_DIR)/bookmarks.html  $(TARGET_DIR)/var/tuxbox/config/links/bookmarks.html
 	$(INSTALL_DATA) -D $(PKG_FILES_DIR)/tables.tar.gz  $(TARGET_DIR)/var/tuxbox/config/links/tables.tar.gz
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

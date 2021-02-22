@@ -9,12 +9,12 @@ USB_MODESWITCH_DATA_DEPS   = bootstrap
 
 $(D)/usb-modeswitch-data:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

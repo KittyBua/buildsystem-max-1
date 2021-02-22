@@ -15,7 +15,7 @@ VSFTPD_POST_PATCH_HOOKS = VSFTPD_POST_PATCH
 
 $(D)/vsftpd:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -29,5 +29,5 @@ $(D)/vsftpd:
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/volatiles.99_vsftpd $(TARGET_DIR)/etc/default/volatiles/99_vsftpd
 #	$(UPDATE-RC.D) vsftpd start 80 2 3 4 5 . stop 80 0 1 6 .
 	$(UPDATE-RC.D) vsftpd start 20 2 3 4 5 . stop 20 0 1 6 .
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

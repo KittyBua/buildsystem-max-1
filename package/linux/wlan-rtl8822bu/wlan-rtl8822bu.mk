@@ -9,7 +9,7 @@ WLAN_RTL8822BU_DEPS   = bootstrap kernel
 
 $(D)/wlan-rtl8822bu:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -17,5 +17,5 @@ $(D)/wlan-rtl8822bu:
 		$(MAKE) $(KERNEL_MAKEVARS); \
 	$(INSTALL_DATA) 88x2bu.ko $(TARGET_MODULES_DIR)/kernel/drivers/net/wireless/
 	$(LINUX_RUN_DEPMOD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

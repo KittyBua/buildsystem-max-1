@@ -9,7 +9,7 @@ HOST_ZIC_DEPS   = bootstrap
 
 $(D)/host-zic:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(MKDIR)/$($(PKG)_DIR)
 	$(call PKG_UNPACK,$(PKG_BUILD_DIR))
@@ -17,5 +17,5 @@ $(D)/host-zic:
 	$(PKG_CHDIR); \
 		$(MAKE) zic
 	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/zic $(HOST_DIR)/bin/
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

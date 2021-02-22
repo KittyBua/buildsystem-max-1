@@ -24,7 +24,7 @@ OPENSSH_CONF_OPTS = \
 
 $(D)/openssh:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -35,5 +35,5 @@ $(D)/openssh:
 		$(MAKE) install-nokeys DESTDIR=$(TARGET_DIR)
 	$(INSTALL_EXEC) $(BUILD_DIR)/openssh-$(OPENSSH_VER)/opensshd.init $(TARGET_DIR)/etc/init.d/openssh
 	$(SED) 's/^#PermitRootLogin prohibit-password/PermitRootLogin yes/' $(TARGET_DIR)/etc/ssh/sshd_config
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

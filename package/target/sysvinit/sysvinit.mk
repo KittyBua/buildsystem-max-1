@@ -9,7 +9,7 @@ SYSVINIT_DEPS   = bootstrap
 
 $(D)/sysvinit:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -31,5 +31,5 @@ $(D)/sysvinit:
 #	$(UPDATE-RC.D) stop-bootlogd start 99 2 3 4 5 .
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,fstab-decode logsave telinit)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,lastb)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

@@ -9,7 +9,7 @@ HOST_PYTHON_DEPS   = bootstrap
 
 $(D)/host-python:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -35,5 +35,5 @@ $(D)/host-python:
 		$(MAKE); \
 		$(MAKE) install; \
 		cp ./hostpgen $(HOST_DIR)/bin/pgen
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

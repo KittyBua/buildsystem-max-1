@@ -16,7 +16,7 @@ LUAEXPAT_POST_PATCH_HOOKS = LUAEXPAT_POST_PATCH
 
 $(D)/luaexpat:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -29,5 +29,5 @@ $(D)/luaexpat:
 		$(MAKE) install \
 			PREFIX=$(TARGET_DIR)/usr \
 			LUA_SYS_VER=$(LUA_ABIVER)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

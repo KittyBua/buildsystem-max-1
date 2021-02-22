@@ -19,7 +19,7 @@ KMOD_CONF_OPTS = \
 
 $(D)/kmod:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -33,5 +33,5 @@ $(D)/kmod:
 	mkdir -p $(TARGET_DIR)/lib/{depmod.d,modprobe.d}
 	mkdir -p $(TARGET_DIR)/etc/{depmod.d,modprobe.d}
 	$(REWRITE_LIBTOOL_LA)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

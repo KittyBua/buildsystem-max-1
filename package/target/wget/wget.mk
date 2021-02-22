@@ -25,7 +25,7 @@ WGET_CONF_OPTS = \
 
 $(D)/wget:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -33,5 +33,5 @@ $(D)/wget:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

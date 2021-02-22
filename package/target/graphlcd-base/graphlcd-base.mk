@@ -31,7 +31,7 @@ GRAPHLCD_BASE_CONF_OPTS = \
 
 $(D)/graphlcd-base:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -41,5 +41,5 @@ $(D)/graphlcd-base:
 		$(MAKE) $($(PKG)_CONF_OPTS) -C glcdgraphics install; \
 		$(MAKE) $($(PKG)_CONF_OPTS) -C glcddrivers install; \
 		$(INSTALL_DATA) -D graphlcd.conf $(TARGET_DIR)/etc/graphlcd.conf
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

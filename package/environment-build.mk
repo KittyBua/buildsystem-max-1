@@ -194,9 +194,6 @@ PKG_CONFIG_LIBDIR = $(TARGET_LIB_DIR)/pkgconfig
 
 # -----------------------------------------------------------------------------
 
-# clean up
-REMOVE = $(Q)rm -rf $(BUILD_DIR)
-
 # build helper variables
 CD    = set -e; cd
 CHDIR = $(CD) $(BUILD_DIR)

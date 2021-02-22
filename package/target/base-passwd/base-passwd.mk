@@ -9,7 +9,7 @@ BASE_PASSWD_DEPS   = bootstrap
 
 $(D)/base-passwd:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -19,5 +19,5 @@ $(D)/base-passwd:
 		$(MAKE) install DESTDIR=$(TARGET_DIR); \
 		$(INSTALL_DATA) passwd.master $(TARGET_DIR)/etc/passwd; \
 		$(INSTALL_DATA) group.master $(TARGET_DIR)/etc/group
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

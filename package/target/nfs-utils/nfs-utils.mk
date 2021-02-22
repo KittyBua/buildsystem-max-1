@@ -29,7 +29,7 @@ NFS_UTILS_CONF_OPTS += \
 
 $(D)/nfs-utils:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -46,5 +46,5 @@ $(D)/nfs-utils:
 	chmod 0755 $(TARGET_DIR)/sbin/mount.nfs
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,mount.nfs4 umount.nfs umount.nfs4)
 	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,mountstats nfsiostat)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

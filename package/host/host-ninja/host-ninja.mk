@@ -9,7 +9,7 @@ HOST_NINJA_DEPS   = bootstrap
 
 $(D)/host-ninja:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -19,5 +19,5 @@ $(D)/host-ninja:
 		; \
 		$(MAKE)
 		$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/ninja $(HOST_DIR)/bin/ninja
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

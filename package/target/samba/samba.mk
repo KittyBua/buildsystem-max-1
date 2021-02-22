@@ -65,7 +65,7 @@ SAMBA_CONF_OPTS = \
 
 $(D)/samba:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -109,5 +109,5 @@ $(D)/samba:
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/samba.init $(TARGET_DIR)/etc/init.d/samba
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/volatiles.03_samba $(TARGET_DIR)/etc/default/volatiles/03_samba
 	$(UPDATE-RC.D) samba start 20 2 3 4 5 . stop 20 0 1 6 .
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

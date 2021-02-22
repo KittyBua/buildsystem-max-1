@@ -9,7 +9,7 @@ HOST_MESON_DEPS   = bootstrap host-ninja host-python3 host-python3-setuptools
 
 $(D)/host-meson:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -36,5 +36,5 @@ $(D)/host-meson:
 		echo "cpu = '$(TARGET_ARCH)'"; \
 		echo "endian = '$(TARGET_ENDIAN)'" \
 	) > $(HOST_DIR)/bin/meson-cross-config
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)

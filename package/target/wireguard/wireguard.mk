@@ -11,7 +11,7 @@ WIREGUARD_MAKE_OPTS = WITH_SYSTEMDUNITS=no WITH_BASHCOMPLETION=yes WITH_WGQUICK=
 
 $(D)/wireguard:
 	$(START_BUILD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(call PKG_UNPACK,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
@@ -24,5 +24,5 @@ $(D)/wireguard:
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/wireguard.conf; \
 	done
 	$(LINUX_RUN_DEPMOD)
-	$(PKG_REMOVE)
+	$(REMOVE)
 	$(TOUCH)
