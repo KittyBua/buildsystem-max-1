@@ -30,11 +30,6 @@ UTIL_LINUX_CONF_OPTS = \
 	--disable-ipcs \
 	--disable-kill \
 	--disable-last \
-	--enable-libblkid \
-	--enable-libfdisk \
-	--enable-libmount \
-	--enable-libsmartcols \
-	--enable-libuuid \
 	--disable-line \
 	--disable-logger \
 	--disable-login \
@@ -50,6 +45,7 @@ UTIL_LINUX_CONF_OPTS = \
 	--disable-mesg \
 	--disable-minix \
 	--disable-more \
+	--disable-mount \
 	--disable-mountpoint \
 	--disable-newgrp \
 	--disable-nls \
@@ -79,8 +75,15 @@ UTIL_LINUX_CONF_OPTS = \
 	--disable-vipw \
 	--disable-wall \
 	--disable-wdctl \
+	--disable-wipefs \
 	--disable-write \
 	--disable-zramctl \
+	\
+	--enable-libblkid \
+	--enable-libfdisk \
+	--enable-libmount \
+	--enable-libsmartcols \
+	--enable-libuuid \
 	\
 	--without-audit \
 	--without-cap-ng \
@@ -108,8 +111,8 @@ $(D)/util-linux:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	rm -f $(addprefix $(TARGET_DIR)/bin/,findmnt mount umount)
-	rm -f $(addprefix $(TARGET_DIR)/sbin/,blkdiscard blkzone blockdev cfdisk chcpu ctrlaltdel fsfreeze fstrim mkfs mkswap swaplabel wipefs)
+	rm -f $(addprefix $(TARGET_DIR)/bin/,findmnt)
+	rm -f $(addprefix $(TARGET_DIR)/sbin/,blkdiscard blkzone blockdev cfdisk chcpu ctrlaltdel fsfreeze fstrim mkfs mkswap swaplabel)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,choom col colcrt colrm column fincore flock getopt ipcmk isosize linux32 linux64 look lscpu lsipc lslocks lsns mcookie namei prlimit renice rev script scriptlive scriptreplay setarch setsid uname26 uuidgen uuidparse whereis)
 	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,ldattach readprofile rtcwake)
 	$(INSTALL) -d $(TARGET_DIR)/etc/default/
