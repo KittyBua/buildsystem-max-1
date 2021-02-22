@@ -26,6 +26,6 @@ $(D)/libiconv:
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_LIB_DIR)/,preloadable_libiconv.so)
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

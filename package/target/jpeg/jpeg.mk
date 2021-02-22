@@ -18,6 +18,6 @@ $(D)/jpeg:
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,cjpeg djpeg jpegtran rdjpgcom wrjpgcom)
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

@@ -23,7 +23,7 @@ $(D)/fribidi:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	cd $(TARGET_DIR) && rm usr/bin/fribidi
 	$(REMOVE)
 	$(TOUCH)

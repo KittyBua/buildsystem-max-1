@@ -39,6 +39,6 @@ $(D)/freetype:
 	ln -sf freetype2 $(TARGET_INCLUDE_DIR)/freetype
 	mv $(TARGET_DIR)/usr/bin/freetype-config $(HOST_DIR)/bin
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/freetype-config
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

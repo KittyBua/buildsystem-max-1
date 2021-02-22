@@ -114,6 +114,6 @@ $(D)/util-linux:
 	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,ldattach readprofile rtcwake)
 	$(INSTALL) -d $(TARGET_DIR)/etc/default/
 	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"' > $(TARGET_DIR)/etc/default/mountall
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

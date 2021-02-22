@@ -18,6 +18,6 @@ $(D)/sqlite:
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,sqlite3)
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

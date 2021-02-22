@@ -56,6 +56,6 @@ $(D)/avahi:
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	cp $(PKG_BUILD_DIR)/avahi-daemon/avahi-daemon $(TARGET_DIR)/etc/init.d
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

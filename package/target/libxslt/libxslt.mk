@@ -31,6 +31,6 @@ $(D)/libxslt:
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/xslt-config
 	rm -rf $(TARGETLIB)/xsltConf.sh
 	rm -rf $(TARGETLIB)/libxslt-plugins/
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

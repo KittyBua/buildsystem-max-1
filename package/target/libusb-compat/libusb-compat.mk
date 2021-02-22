@@ -24,6 +24,6 @@ $(D)/libusb-compat:
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	mv $(TARGET_DIR)/usr/bin/libusb-config $(HOST_DIR)/bin
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/libusb-config
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

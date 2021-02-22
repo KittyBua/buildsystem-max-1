@@ -59,7 +59,7 @@ $(D)/libstb-hal.do_compile: libstb-hal.config.status
 
 $(D)/libstb-hal: libstb-hal.do_prepare libstb-hal.do_compile
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(TOUCH)
 
 # -----------------------------------------------------------------------------

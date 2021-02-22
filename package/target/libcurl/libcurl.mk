@@ -45,6 +45,6 @@ $(D)/libcurl:
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	mv $(TARGET_DIR)/usr/bin/curl-config $(HOST_DIR)/bin/
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/curl-config
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

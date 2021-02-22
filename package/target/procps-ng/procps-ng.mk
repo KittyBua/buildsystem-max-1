@@ -38,6 +38,6 @@ $(D)/procps-ng:
 		mv $(TARGET_DIR)/bin/$$i $(TARGET_DIR)/usr/bin/$$i; \
 	done
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/sysctl.conf $(TARGET_DIR)/etc/sysctl.conf
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

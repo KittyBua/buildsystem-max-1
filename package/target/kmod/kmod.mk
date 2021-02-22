@@ -32,6 +32,6 @@ $(D)/kmod:
 	done
 	mkdir -p $(TARGET_DIR)/lib/{depmod.d,modprobe.d}
 	mkdir -p $(TARGET_DIR)/etc/{depmod.d,modprobe.d}
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

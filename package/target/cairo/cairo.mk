@@ -34,6 +34,6 @@ $(D)/cairo:
 	rm -rf $(TARGET_LIB_DIR)/cairo/cairo-sphinx*
 	rm -rf $(TARGET_LIB_DIR)/cairo/.debug/cairo-fdr*
 	rm -rf $(TARGET_LIB_DIR)/cairo/.debug/cairo-sphinx*
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

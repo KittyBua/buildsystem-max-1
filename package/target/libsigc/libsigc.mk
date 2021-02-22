@@ -29,6 +29,6 @@ $(D)/libsigc:
 	fi
 	mv $(TARGET_LIB_DIR)/sigc++-2.0/include/sigc++config.h $(TARGET_INCLUDE_DIR)
 	rm -fr $(TARGET_LIB_DIR)/sigc++-2.0
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

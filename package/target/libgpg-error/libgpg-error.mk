@@ -29,6 +29,6 @@ $(D)/libgpg-error:
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_CONFIG) $(TARGET_DIR)/usr/bin/gpg-error-config
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gpg-error gpgrt-config yat2m)
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

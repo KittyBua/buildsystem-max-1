@@ -39,6 +39,6 @@ $(D)/libxml2:
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/xml2-config
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,xmlcatalog xmllint)
 	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake xml2Conf.sh)
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

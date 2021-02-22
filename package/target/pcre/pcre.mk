@@ -24,6 +24,6 @@ $(D)/pcre:
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	mv $(TARGET_DIR)/usr/bin/pcre-config $(HOST_DIR)/bin/pcre-config
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/pcre-config
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

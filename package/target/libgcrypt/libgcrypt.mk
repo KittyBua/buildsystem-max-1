@@ -25,6 +25,6 @@ $(D)/libgcrypt:
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	mv $(TARGET_DIR)/usr/bin/libgcrypt-config $(HOST_DIR)/bin
 	$(REWRITE_CONFIG) $(HOST_DIR)/bin/libgcrypt-config
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

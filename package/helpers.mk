@@ -158,7 +158,7 @@ REWRITE_LIBTOOL_RULES = \
 
 REWRITE_LIBTOOL_TAG = rewritten=1
 
-define REWRITE_LIBTOOL
+define rewrite_libtool
 	@$(call MESSAGE,"Fixing libtool files")
 	@( \
 	for la in $$(find $(1) -name "*.la" -type f); do \
@@ -172,7 +172,7 @@ define REWRITE_LIBTOOL
 endef
 
 # rewrite libtool libraries automatically
-REWRITE_LIBTOOL_LA = $(call REWRITE_LIBTOOL,$(TARGET_LIB_DIR))
+REWRITE_LIBTOOL = $(call rewrite_libtool,$(TARGET_LIB_DIR))
 
 # -----------------------------------------------------------------------------
 

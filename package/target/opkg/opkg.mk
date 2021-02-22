@@ -24,6 +24,6 @@ $(D)/opkg:
 	mkdir -p $(TARGET_DIR)/usr/lib/opkg
 	mkdir -p $(TARGET_DIR)/etc/opkg
 	ln -sf opkg $(TARGET_DIR)/usr/bin/opkg-cl
-	$(REWRITE_LIBTOOL_LA)
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)
