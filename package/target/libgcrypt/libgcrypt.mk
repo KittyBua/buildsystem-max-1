@@ -17,7 +17,7 @@ $(D)/libgcrypt:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(call EXTRACT,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(CONFIGURE); \

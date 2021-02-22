@@ -12,7 +12,7 @@ $(D)/host-zic:
 	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	$(MKDIR)/$($(PKG)_DIR)
-	$(call PKG_UNPACK,$(PKG_BUILD_DIR))
+	$(call EXTRACT,$(PKG_BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(MAKE) zic

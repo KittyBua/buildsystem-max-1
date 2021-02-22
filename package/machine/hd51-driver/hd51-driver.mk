@@ -11,7 +11,7 @@ $(D)/hd51-driver:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra
-	$(call PKG_UNPACK,$(TARGET_MODULES_DIR)/extra)
+	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d
 	for i in hd51_1 hd51_2 hd51_3 hd51_4; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/_hd51.conf; \

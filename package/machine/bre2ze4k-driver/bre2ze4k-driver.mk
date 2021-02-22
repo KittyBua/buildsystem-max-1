@@ -11,7 +11,7 @@ $(D)/bre2ze4k-driver:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra
-	$(call PKG_UNPACK,$(TARGET_MODULES_DIR)/extra)
+	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d
 	for i in bre2ze4k_1 bre2ze4k_2 bre2ze4k_3 bre2ze4k_4; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/_bre2ze4k.conf; \

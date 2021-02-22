@@ -84,7 +84,7 @@ github = https://github.com/$(1)/$(2)/archive/$(3)
 # -----------------------------------------------------------------------------
 
 # unpack archives into build directory
-define PKG_UNPACK
+define EXTRACT
 	@$(call MESSAGE,"Extracting")
 	@( \
 	case ${PKG_SOURCE} in \

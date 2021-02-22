@@ -12,7 +12,7 @@ $(D)/neutrino-iptvplayer:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(call EXTRACT,$(BUILD_DIR))
 	@if [ "$@" = "$(D)/neutrino-iptvplayer-nightly" ]; then \
 		$(BUILD_DIR)/iptvplayer/SyncWithGitLab.sh $(BUILD_DIR)/iptvplayer; \
 	fi

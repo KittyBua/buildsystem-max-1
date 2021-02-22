@@ -202,7 +202,7 @@ $(D)/neutrino.do_prepare:
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR).org
 	rm -rf $(NEUTRINO_OBJ_DIR)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(call PKG_UNPACK,$(SOURCE_DIR))
+	$(call EXTRACT,$(SOURCE_DIR))
 	cp -ra $(SOURCE_DIR)/$(NEUTRINO_DIR) $(SOURCE_DIR)/$(NEUTRINO_DIR).org
 	$(call PKG_APPLY_PATCHES_S,$(NEUTRINO_DIR))
 	@touch $@

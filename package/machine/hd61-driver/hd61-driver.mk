@@ -11,7 +11,7 @@ $(D)/hd61-driver:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra
-	$(call PKG_UNPACK,$(TARGET_MODULES_DIR)/extra)
+	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	rm -f $(TARGET_MODULES_DIR)/extra/hi_play.ko
 	mkdir -p $(TARGET_DIR)/bin
 	mv $(TARGET_MODULES_DIR)/extra/turnoff_power $(TARGET_DIR)/$(bindir)

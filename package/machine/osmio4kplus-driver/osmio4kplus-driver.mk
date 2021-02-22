@@ -11,7 +11,7 @@ $(D)/osmio4kplus-driver:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra
-	$(call PKG_UNPACK,$(TARGET_MODULES_DIR)/extra)
+	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d
 	for i in brcmstb-osmio4kplus brcmstb-decoder ci si2183 avl6862 avl6261; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/_osmio4kplus.conf; \

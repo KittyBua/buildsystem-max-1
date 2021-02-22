@@ -11,7 +11,7 @@ $(D)/wireless-regdb:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(call EXTRACT,$(BUILD_DIR))
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/regulatory.db $(TARGET_FIRMWARE_DIR)/regulatory.db
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/regulatory.db.p7s $(TARGET_FIRMWARE_DIR)/regulatory.db.p7s
 	$(REMOVE)

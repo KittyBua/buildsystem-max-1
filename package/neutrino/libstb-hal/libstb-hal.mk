@@ -24,7 +24,7 @@ $(D)/libstb-hal.do_prepare:
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
 	test -d $(SOURCE_DIR) || mkdir -p $(SOURCE_DIR)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(call PKG_UNPACK,$(SOURCE_DIR))
+	$(call EXTRACT,$(SOURCE_DIR))
 	cp -ra $(SOURCE_DIR)/$(LIBSTB_HAL_DIR) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR).org
 	$(call PKG_APPLY_PATCHES_S,$(LIBSTB_HAL_DIR))
 	@touch $@

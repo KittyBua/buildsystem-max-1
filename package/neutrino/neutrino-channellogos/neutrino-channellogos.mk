@@ -11,7 +11,7 @@ $(D)/neutrino-channellogos:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(call EXTRACT,$(BUILD_DIR))
 	rm -rf $(SHARE_LOGOS)
 	mkdir -p $(SHARE_LOGOS)
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/logos/* $(SHARE_LOGOS)

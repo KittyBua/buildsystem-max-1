@@ -12,5 +12,5 @@ $(D)/vuuno4kse-driver:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra
-	$(call PKG_UNPACK,$(TARGET_MODULES_DIR)/extra)
+	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	$(TOUCH)

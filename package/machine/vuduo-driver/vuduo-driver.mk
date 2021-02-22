@@ -11,7 +11,7 @@ $(D)/vuduo-driver:
 	$(START_BUILD)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra
-	$(call PKG_UNPACK,$(TARGET_MODULES_DIR)/extra)
+	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d
 	for i in brcmfb dvb-bcm7335 procmk; do \
 		echo $$i >> ${TARGET_DIR}/etc/modules-load.d/_vuduo.conf; \

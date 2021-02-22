@@ -11,7 +11,7 @@ $(D)/osmio4k-libgles:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(call PKG_UNPACK,$(BUILD_DIR))
+	$(call EXTRACT,$(BUILD_DIR))
 	cp -a $(PKG_BUILD_DIR)/lib/* $(TARGET_DIR)/usr/lib
 	ln -sf libv3ddriver.so.$(OSMIO4K_LIBGLES_VER) $(TARGET_LIB_DIR)/libEGL.so
 	ln -sf libv3ddriver.so.$(OSMIO4K_LIBGLES_VER) $(TARGET_LIB_DIR)/libGLESv2.so

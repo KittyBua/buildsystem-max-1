@@ -11,7 +11,7 @@ $(D)/wlan-qcom-firmware:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
-	$(call PKG_UNPACK,$(PKG_BUILD_DIR))
+	$(call EXTRACT,$(PKG_BUILD_DIR))
 	$(INSTALL) -d $(TARGET_FIRMWARE_DIR)/ath10k/QCA6174/hw3.0
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/board.bin $(TARGET_FIRMWARE_DIR)/ath10k/QCA6174/hw3.0/board.bin
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/firmware-4.bin $(TARGET_FIRMWARE_DIR)/ath10k/QCA6174/hw3.0/firmware-4.bin
