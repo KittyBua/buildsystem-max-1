@@ -6,7 +6,7 @@ VUSOLO4K_PLATFORM_UTIL_REV    = r0
 VUSOLO4K_PLATFORM_UTIL_VER    = 17.1-$(VUSOLO4K_PLATFORM_UTIL_DATE).$(VUSOLO4K_PLATFORM_UTIL_REV)
 VUSOLO4K_PLATFORM_UTIL_DIR    = platform-util-vusolo4k
 VUSOLO4K_PLATFORM_UTIL_SOURCE = platform-util-vusolo4k-$(VUSOLO4K_PLATFORM_UTIL_VER).tar.gz
-VUSOLO4K_PLATFORM_UTIL_SITE   = http://archive.vuplus.com/download/build_support/vuplus
+VUSOLO4K_PLATFORM_UTIL_SITE   = http://code.vuplus.com/download/release/platform-util
 VUSOLO4K_PLATFORM_UTIL_DEPS   = bootstrap
 
 $(D)/vusolo4k-platform-util:

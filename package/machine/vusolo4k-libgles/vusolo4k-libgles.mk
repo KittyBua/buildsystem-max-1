@@ -6,7 +6,7 @@ VUSOLO4K_LIBGLES_REV    = r0
 VUSOLO4K_LIBGLES_VER    = 17.1-$(VUSOLO4K_LIBGLES_DATE).$(VUSOLO4K_LIBGLES_REV)
 VUSOLO4K_LIBGLES_DIR    = libgles-vusolo4k
 VUSOLO4K_LIBGLES_SOURCE = libgles-vusolo4k-$(VUSOLO4K_LIBGLES_VER).tar.gz
-VUSOLO4K_LIBGLES_SITE   = http://archive.vuplus.com/download/build_support/vuplus
+VUSOLO4K_LIBGLES_SITE   = http://code.vuplus.com/download/release/libgles
 VUSOLO4K_LIBGLES_DEPS   = bootstrap
 
 $(D)/vusolo4k-libgles:

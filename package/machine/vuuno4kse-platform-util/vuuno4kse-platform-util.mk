@@ -6,7 +6,7 @@ VUUNO4KSE_PLATFORM_UTIL_REV    = r0
 VUUNO4KSE_PLATFORM_UTIL_VER    = 17.1-$(VUUNO4KSE_PLATFORM_UTIL_DATE).$(VUUNO4KSE_PLATFORM_UTIL_REV)
 VUUNO4KSE_PLATFORM_UTIL_DIR    = platform-util-vuuno4kse
 VUUNO4KSE_PLATFORM_UTIL_SOURCE = platform-util-vuuno4kse-$(VUUNO4KSE_PLATFORM_UTIL_VER).tar.gz
-VUUNO4KSE_PLATFORM_UTIL_SITE   = http://archive.vuplus.com/download/build_support/vuplus
+VUUNO4KSE_PLATFORM_UTIL_SITE   = http://code.vuplus.com/download/release/platform-util
 VUUNO4KSE_PLATFORM_UTIL_DEPS   = bootstrap
 
 $(D)/vuuno4kse-platform-util:

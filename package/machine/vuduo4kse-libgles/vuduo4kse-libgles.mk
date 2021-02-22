@@ -6,7 +6,7 @@ VUDUO4KSE_LIBGLES_REV    = r0
 VUDUO4KSE_LIBGLES_VER    = 17.1-$(VUDUO4KSE_LIBGLES_DATE).$(VUDUO4KSE_LIBGLES_REV)
 VUDUO4KSE_LIBGLES_DIR    = libgles-vuduo4kse
 VUDUO4KSE_LIBGLES_SOURCE = libgles-vuduo4kse-$(VUDUO4KSE_LIBGLES_VER).tar.gz
-VUDUO4KSE_LIBGLES_SITE   = http://archive.vuplus.com/download/build_support/vuplus
+VUDUO4KSE_LIBGLES_SITE   = http://code.vuplus.com/download/release/libgles
 VUDUO4KSE_LIBGLES_DEPS   = bootstrap
 
 $(D)/vuduo4kse-libgles:

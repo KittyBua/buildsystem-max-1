@@ -6,7 +6,7 @@ VUDUO4KSE_VMLINUZ_INITRD_DATE   = 20201010
 VUDUO4KSE_VMLINUZ_INITRD_SITE   = https://bitbucket.org/max_10/vmlinuz-initrd-vuduo4kse/downloads
 else
 VUDUO4KSE_VMLINUZ_INITRD_DATE   = 20200326
-VUDUO4KSE_VMLINUZ_INITRD_SITE   = http://archive.vuplus.com/download/kernel
+VUDUO4KSE_VMLINUZ_INITRD_SITE   = http://code.vuplus.com/download/release/kernel
 endif
 VUDUO4KSE_VMLINUZ_INITRD_VER    = $(VUDUO4KSE_VMLINUZ_INITRD_DATE)
 VUDUO4KSE_VMLINUZ_INITRD_SOURCE = vmlinuz-initrd_vuduo4kse_$(VUDUO4KSE_VMLINUZ_INITRD_VER).tar.gz

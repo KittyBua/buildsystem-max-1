@@ -6,7 +6,7 @@ VUUNO4K_LIBGLES_REV    = r0
 VUUNO4K_LIBGLES_VER    = 17.1-$(VUUNO4K_LIBGLES_DATE).$(VUUNO4K_LIBGLES_REV)
 VUUNO4K_LIBGLES_DIR    = libgles-vuuno4k
 VUUNO4K_LIBGLES_SOURCE = libgles-vuuno4k-$(VUUNO4K_LIBGLES_VER).tar.gz
-VUUNO4K_LIBGLES_SITE   = http://archive.vuplus.com/download/build_support/vuplus
+VUUNO4K_LIBGLES_SITE   = http://code.vuplus.com/download/release/libgles
 VUUNO4K_LIBGLES_DEPS   = bootstrap
 
 $(D)/vuuno4k-libgles:
