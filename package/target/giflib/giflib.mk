@@ -12,7 +12,7 @@ $(D)/giflib:
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		export ac_cv_prog_have_xmlto=no; \
 		$(CONFIGURE); \

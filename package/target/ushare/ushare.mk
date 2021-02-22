@@ -18,7 +18,7 @@ $(D)/ushare:
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(TARGET_CONFIGURE_ENV) \
 		./configure $($(PKG)_CONF_OPTS); \

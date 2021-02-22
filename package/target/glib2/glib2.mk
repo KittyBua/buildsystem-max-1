@@ -25,7 +25,7 @@ $(D)/glib2:
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		unset CC CXX CPP LD AR NM STRIP; \
 		$(HOST_DIR)/bin/meson builddir/ --buildtype=release --cross-file $(HOST_DIR)/bin/meson-cross-config \

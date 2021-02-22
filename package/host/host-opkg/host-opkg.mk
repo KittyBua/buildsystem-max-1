@@ -12,7 +12,7 @@ $(D)/host-opkg:
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		./autogen.sh; \
 		CFLAGS="-I$(HOST_DIR)/include" \

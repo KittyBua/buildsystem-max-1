@@ -204,7 +204,7 @@ $(D)/neutrino.do_prepare:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(SOURCE_DIR))
 	cp -ra $(SOURCE_DIR)/$(NEUTRINO_DIR) $(SOURCE_DIR)/$(NEUTRINO_DIR).org
-	$(call PKG_APPLY_PATCHES_S,$(NEUTRINO_DIR))
+	$(call APPLY_PATCHES_S,$(NEUTRINO_DIR))
 	@touch $@
 
 $(D)/neutrino.config.status:

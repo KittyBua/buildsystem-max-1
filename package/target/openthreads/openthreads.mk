@@ -18,7 +18,7 @@ $(D)/openthreads:
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		echo "# dummy file to prevent warning message" > examples/CMakeLists.txt; \
 		$(CMAKE); \

@@ -7,7 +7,7 @@ $(D)/kernel.do_prepare:
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	@touch $@
 
 $(D)/kernel.do_compile: kernel.do_prepare

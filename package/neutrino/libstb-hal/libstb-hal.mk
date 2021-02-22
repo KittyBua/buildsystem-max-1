@@ -26,7 +26,7 @@ $(D)/libstb-hal.do_prepare:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(SOURCE_DIR))
 	cp -ra $(SOURCE_DIR)/$(LIBSTB_HAL_DIR) $(SOURCE_DIR)/$(LIBSTB_HAL_DIR).org
-	$(call PKG_APPLY_PATCHES_S,$(LIBSTB_HAL_DIR))
+	$(call APPLY_PATCHES_S,$(LIBSTB_HAL_DIR))
 	@touch $@
 
 $(D)/libstb-hal.config.status: | $(LIBSTB_HAL_DEPS)

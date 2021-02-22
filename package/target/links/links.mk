@@ -16,7 +16,7 @@ LINKS_CUSTOM_PATCH += 0005-links-input-event2.patch.custom
 endif
 
 define LINKS_CUSTOM_PATCHES
-	$(APPLY_PATCHES) $(PKG_BUILD_DIR) $(PKG_PATCHES_DIR) $(LINKS_CUSTOM_PATCH)
+	$(APPLY_PATCH) $(PKG_BUILD_DIR) $(PKG_PATCHES_DIR) $(LINKS_CUSTOM_PATCH)
 endef
 LINKS_POST_PATCH_HOOKS += LINKS_CUSTOM_PATCHES
 
@@ -43,7 +43,7 @@ $(D)/links:
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	$(PKG_CHDIR)/intl; \
 		echo "english" > index.txt; \
 		echo "german" >> index.txt; \

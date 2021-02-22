@@ -115,20 +115,20 @@ endef
 $(PKG)_PRE_PATCH_HOOKS  ?=
 $(PKG)_POST_PATCH_HOOKS ?=
 
-APPLY_PATCHES = helpers/apply-patches.sh $(if $(QUIET),-s)
+APPLY_PATCH = helpers/apply-patches.sh $(if $(QUIET),-s)
 
 # apply patch sets
-define PKG_APPLY_PATCHES
+define APPLY_PATCHES
 	@$(call MESSAGE,"Patching")
 	$(foreach hook,$($(PKG)_PRE_PATCH_HOOKS),$(call $(hook))$(sep))
-	$(foreach p,$($(PKG)_PATCH),$(APPLY_PATCHES) $(PKG_BUILD_DIR) $(DL_DIR) $(notdir $(p))$(sep))
+	$(foreach p,$($(PKG)_PATCH),$(APPLY_PATCH) $(PKG_BUILD_DIR) $(DL_DIR) $(notdir $(p))$(sep))
 	@( \
 	for P in $(PKG_PATCHES_DIR); do \
 	  if test -d $${P}; then \
 	    if test -d $${P}/$($(PKG)_VER); then \
-	      $(APPLY_PATCHES) $(PKG_BUILD_DIR) $${P}/$($(PKG)_VER) \*.patch \*.patch.$(TARGET_ARCH) || exit 1; \
+	      $(APPLY_PATCH) $(PKG_BUILD_DIR) $${P}/$($(PKG)_VER) \*.patch \*.patch.$(TARGET_ARCH) || exit 1; \
 	    else \
-	      $(APPLY_PATCHES) $(PKG_BUILD_DIR) $${P} \*.patch \*.patch.$(TARGET_ARCH) \*.patch.$(FLAVOUR) || exit 1; \
+	      $(APPLY_PATCH) $(PKG_BUILD_DIR) $${P} \*.patch \*.patch.$(TARGET_ARCH) \*.patch.$(FLAVOUR) || exit 1; \
 	    fi; \
 	  fi; \
 	done; \
@@ -136,13 +136,13 @@ define PKG_APPLY_PATCHES
 	$(foreach hook,$($(PKG)_POST_PATCH_HOOKS),$(call $(hook))$(sep))
 endef
 
-define PKG_APPLY_PATCHES_S
+define APPLY_PATCHES_S
 	@$(call MESSAGE,"Patching")
 	$(foreach hook,$($(PKG)_PRE_PATCH_HOOKS),$(call $(hook))$(sep))
 	@( \
 	for P in $(PKG_PATCHES_DIR); do \
 	  if test -d $${P}; then \
-	    $(APPLY_PATCHES) $(SOURCE_DIR)/$(1) $${P} \*.patch \*.patch.$(FLAVOUR) || exit 1; \
+	    $(APPLY_PATCH) $(SOURCE_DIR)/$(1) $${P} \*.patch \*.patch.$(FLAVOUR) || exit 1; \
 	  fi; \
 	done; \
 	)

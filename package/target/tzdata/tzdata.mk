@@ -20,7 +20,7 @@ $(D)/tzdata:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(MKDIR)/$($(PKG)_DIR)
 	$(call EXTRACT,$(PKG_BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		unset ${!LC_*}; LANG=POSIX; LC_ALL=POSIX; export LANG LC_ALL; \
 		$(HOST_DIR)/bin/zic -b fat -d zoneinfo.tmp $(TZDATA_ZONELIST); \

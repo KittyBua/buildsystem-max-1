@@ -15,7 +15,7 @@ $(D)/host-lua:
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(MAKE) linux; \
 		$(MAKE) install INSTALL_TOP=$(HOST_DIR)

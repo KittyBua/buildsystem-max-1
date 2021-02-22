@@ -12,7 +12,7 @@ $(D)/host-meson:
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(HOST_PYTHON_BUILD); \
 		$(HOST_PYTHON_INSTALL)

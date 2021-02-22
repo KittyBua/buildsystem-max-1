@@ -12,7 +12,7 @@ $(D)/usb-modeswitch-data:
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

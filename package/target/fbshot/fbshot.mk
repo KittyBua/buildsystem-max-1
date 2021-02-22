@@ -18,7 +18,7 @@ $(D)/fbshot:
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(MAKE); \
 		$(INSTALL_EXEC) -D fbshot $(TARGET_DIR)/bin/fbshot

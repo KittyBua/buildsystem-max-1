@@ -30,7 +30,7 @@ endif
 
 NP_INIT_SCRIPTS  = emmrd
 NP_INIT_SCRIPTS += fritzcallmonitor
-#NP_INIT_SCRIPTS += ovpn
+#NP_INIT_SCRIPTS += openvpn
 NP_INIT_SCRIPTS += rcu_switcher
 NP_INIT_SCRIPTS += tuxcald
 NP_INIT_SCRIPTS += tuxmaild
@@ -48,7 +48,7 @@ $(D)/neutrino-plugins.do_prepare:
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(SOURCE_DIR))
-	$(call PKG_APPLY_PATCHES_S,$(NEUTRINO_PLUGINS_DIR))
+	$(call APPLY_PATCHES_S,$(NEUTRINO_PLUGINS_DIR))
 	@touch $@
 
 $(D)/neutrino-plugins.config.status:

@@ -13,7 +13,7 @@ LIBMAD_PATCH = libmad_$(LIBMAD_VER)-10.diff.gz
 
 define LIBMAD_APPLY_DEBIAN_PATCHES
 	if [ -d $(PKG_BUILD_DIR)/debian/patches ]; then \
-		$(APPLY_PATCHES) $(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/debian/patches *.patch; \
+		$(APPLY_PATCH) $(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/debian/patches *.patch; \
 	fi
 endef
 LIBMAD_POST_PATCH_HOOKS += LIBMAD_APPLY_DEBIAN_PATCHES
@@ -30,7 +30,7 @@ $(D)/libmad:
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(CONFIGURE); \
 		$(MAKE); \

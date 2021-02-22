@@ -13,7 +13,7 @@ $(D)/host-zic:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(MKDIR)/$($(PKG)_DIR)
 	$(call EXTRACT,$(PKG_BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(MAKE) zic
 	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/zic $(HOST_DIR)/bin/

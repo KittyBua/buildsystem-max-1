@@ -23,7 +23,7 @@ $(D)/hd60-mali-module:
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(PKG_APPLY_PATCHES)
+	$(APPLY_PATCHES)
 	$(PKG_CHDIR); \
 		$(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKEVARS) \
 		$(HD60_MALI_MODULE_MAKEVARS); \
