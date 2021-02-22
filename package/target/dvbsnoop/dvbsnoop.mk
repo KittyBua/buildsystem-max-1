@@ -13,7 +13,7 @@ DVBSNOOP_CONF_OPTS = \
 $(D)/dvbsnoop:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \

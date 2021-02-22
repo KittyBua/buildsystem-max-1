@@ -58,9 +58,9 @@ endef
 # -----------------------------------------------------------------------------
 
 # download archives into archives directory
-DOWNLOAD = wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P
+WGET_DOWNLOAD = wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P
 
-define PKG_DOWNLOAD
+define DOWNLOAD
 	@( \
 	if [ "$($(PKG)_VER)" == "git" ]; then \
 	  $(call MESSAGE,"Downloading") ; \
@@ -68,11 +68,11 @@ define PKG_DOWNLOAD
 	else \
 	  if [ ! -f $(DL_DIR)/$(PKG_SOURCE) ]; then \
 	    $(call MESSAGE,"Downloading") ; \
-	    $(DOWNLOAD) $(DL_DIR) $($(PKG)_SITE)/$(1); \
+	    $(WGET_DOWNLOAD) $(DL_DIR) $($(PKG)_SITE)/$(1); \
 	  fi; \
 	fi; \
 	)
-	$(foreach p,$(ALL_DOWNLOADS),@$(DOWNLOAD) $(DL_DIR) $(p)$(sep))
+	$(foreach p,$(ALL_DOWNLOADS),@$(WGET_DOWNLOAD) $(DL_DIR) $(p)$(sep))
 endef
 
 ALL_DOWNLOADS = \

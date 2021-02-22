@@ -12,7 +12,7 @@ VUUNO4KSE_LIBGLES_DEPS   = bootstrap
 $(D)/vuuno4kse-libgles:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(INSTALL_EXEC) $(BUILD_DIR)/libgles-vuuno4kse/lib/* $(TARGET_LIB_DIR)
 	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libEGL.so

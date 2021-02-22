@@ -9,7 +9,7 @@ H7_DRIVER_DEPS   = bootstrap
 
 $(D)/h7-driver:
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra
 	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d

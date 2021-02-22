@@ -14,6 +14,6 @@ VUSOLO4K_VMLINUZ_INITRD_DEPS   = bootstrap
 
 $(D)/vusolo4k-vmlinuz-initrd:
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(TOUCH)

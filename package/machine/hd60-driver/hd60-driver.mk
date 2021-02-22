@@ -9,7 +9,7 @@ HD60_DRIVER_DEPS   = bootstrap
 
 $(D)/hd60-driver:
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra
 	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	rm -f $(TARGET_MODULES_DIR)/extra/hi_play.ko

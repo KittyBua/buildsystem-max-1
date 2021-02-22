@@ -9,7 +9,7 @@ HD61_LIBGLES_DEPS   = bootstrap
 
 $(D)/hd61-libgles:
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	$(call EXTRACT,$(TARGET_LIB_DIR))
 	(cd $(TARGET_LIB_DIR) && ln -sf libMali.so libmali.so)
 	(cd $(TARGET_LIB_DIR) && ln -sf libMali.so libEGL.so.1.4 && ln -sf libEGL.so.1.4 libEGL.so.1 && ln -sf libEGL.so.1 libEGL.so)

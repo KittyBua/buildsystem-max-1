@@ -9,7 +9,7 @@ BRE2ZE4K_LIBGLES_DEPS   = bootstrap
 
 $(D)/bre2ze4k-libgles:
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	$(call EXTRACT,$(TARGET_LIB_DIR))
 	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libEGL.so
 	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libGLESv2.so

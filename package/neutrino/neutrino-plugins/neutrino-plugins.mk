@@ -46,7 +46,7 @@ endef
 $(D)/neutrino-plugins.do_prepare:
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	$(call EXTRACT,$(SOURCE_DIR))
 	$(call PKG_APPLY_PATCHES_S,$(NEUTRINO_PLUGINS_DIR))
 	@touch $@

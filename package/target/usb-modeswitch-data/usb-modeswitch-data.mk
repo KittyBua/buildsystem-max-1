@@ -10,7 +10,7 @@ USB_MODESWITCH_DATA_DEPS   = bootstrap
 $(D)/usb-modeswitch-data:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \

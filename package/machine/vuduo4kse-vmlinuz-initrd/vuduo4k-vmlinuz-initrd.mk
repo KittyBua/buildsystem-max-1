@@ -14,6 +14,6 @@ VUDUO4KSE_VMLINUZ_INITRD_DEPS   = bootstrap
 
 $(D)/vuduo4kse-vmlinuz-initrd:
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(TOUCH)

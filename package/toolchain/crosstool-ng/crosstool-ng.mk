@@ -25,7 +25,7 @@ crosstool:
 crosstool-ng:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	unset CONFIG_SITE LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE; \
 	$(PKG_CHDIR); \
@@ -58,7 +58,7 @@ crosstool-config:
 crosstool-ng-config: directories
 	$(START_BUILD)
 	$(REMOVE)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	unset CONFIG_SITE; \
 	$(PKG_CHDIR); \
@@ -77,7 +77,7 @@ crosstool-upgradeconfig:
 crosstool-ng-upgradeconfig: directories
 	$(START_BUILD)
 	$(REMOVE)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	unset CONFIG_SITE; \
 	$(PKG_CHDIR); \

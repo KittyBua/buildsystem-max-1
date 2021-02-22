@@ -10,7 +10,7 @@ HOST_ZIC_DEPS   = bootstrap
 $(D)/host-zic:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	$(MKDIR)/$($(PKG)_DIR)
 	$(call EXTRACT,$(PKG_BUILD_DIR))
 	$(PKG_APPLY_PATCHES)

@@ -9,5 +9,5 @@ SLINGSHOT_DEPS   = bootstrap
 
 $(D)/slingshot:
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	$(TOUCH)

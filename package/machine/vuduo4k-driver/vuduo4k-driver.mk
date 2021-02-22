@@ -10,7 +10,7 @@ VUDUO4K_DRIVER_DEPS   = bootstrap
 
 $(D)/vuduo4k-driver:
 	$(START_BUILD)
-	$(call PKG_DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$(PKG_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra
 	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	$(TOUCH)
