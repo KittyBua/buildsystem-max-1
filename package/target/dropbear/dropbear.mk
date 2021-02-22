@@ -25,7 +25,7 @@ $(D)/dropbear:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(CONFIGURE); \
 		$(MAKE) PROGRAMS="dropbear dbclient dropbearkey scp" SCPPROGRESS=1; \
 		$(MAKE) PROGRAMS="dropbear dbclient dropbearkey scp" install DESTDIR=$(TARGET_DIR)

@@ -19,7 +19,7 @@ $(D)/vsftpd:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(MAKE) clean; \
 		$(MAKE) $(TARGET_CONFIGURE_ENV) LIBS="-lcrypt -lcrypto -lssl"; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

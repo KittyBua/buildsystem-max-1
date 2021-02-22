@@ -13,7 +13,7 @@ $(D)/pngpp:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(MAKE) install-headers PREFIX=$(TARGET_DIR)/usr
 	$(REMOVE)
 	$(TOUCH)

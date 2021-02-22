@@ -13,7 +13,7 @@ $(D)/wpa-supplicant:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/wpa_supplicant.config wpa_supplicant/.config; \
 		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) -C wpa_supplicant; \

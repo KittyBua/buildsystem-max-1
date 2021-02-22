@@ -27,7 +27,7 @@ $(D)/gdb:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(CONFIGURE); \
 		$(MAKE) all-gdb; \
 		$(MAKE) install-gdb DESTDIR=$(TARGET_DIR)

@@ -13,7 +13,7 @@ $(D)/bzip2:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		mv Makefile-libbz2_so Makefile; \
 		$(MAKE) CC=$(TARGET_CC) AR=$(TARGET_AR) RANLIB=$(TARGET_RANLIB); \
 		$(MAKE) install PREFIX=$(TARGET_DIR)/usr

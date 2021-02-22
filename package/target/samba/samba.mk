@@ -69,7 +69,7 @@ $(D)/samba:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		cd source3; \
 		./autogen.sh; \
 		$(TARGET_CONFIGURE_ENV) \

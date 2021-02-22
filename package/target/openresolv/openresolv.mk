@@ -13,7 +13,7 @@ $(D)/openresolv:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		echo "SYSCONFDIR=/etc" > config.mk; \
 		echo "SBINDIR=/sbin" >> config.mk; \
 		echo "LIBEXECDIR=/lib/resolvconf" >> config.mk; \

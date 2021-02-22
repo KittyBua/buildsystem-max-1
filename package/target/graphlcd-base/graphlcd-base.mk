@@ -35,7 +35,7 @@ $(D)/graphlcd-base:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(MAKE) $($(PKG)_CONF_OPTS) -C glcdgraphics; \
 		$(MAKE) $($(PKG)_CONF_OPTS) -C glcddrivers; \
 		$(MAKE) $($(PKG)_CONF_OPTS) -C glcdgraphics install; \

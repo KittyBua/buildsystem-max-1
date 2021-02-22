@@ -23,7 +23,7 @@ $(D)/cairo:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
 		ax_cv_c_float_words_bigendian="no" \
 		./configure $(TARGET_CONFIGURE_OPTS); \

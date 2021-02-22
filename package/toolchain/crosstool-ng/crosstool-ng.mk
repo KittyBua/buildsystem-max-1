@@ -28,7 +28,7 @@ crosstool-ng:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	unset CONFIG_SITE LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE; \
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/$(CROSSTOOL_NG_CONFIG).config .config; \
 		NUM_CPUS=$$(expr `getconf _NPROCESSORS_ONLN` \* 2); \
 		MEM_512M=$$(awk '/MemTotal/ {M=int($$2/1024/512); print M==0?1:M}' /proc/meminfo); \
@@ -61,7 +61,7 @@ crosstool-ng-config: directories
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	unset CONFIG_SITE; \
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(INSTALL_DATA) $(subst -config,,$(PKG_FILES_DIR))/$(CROSSTOOL_NG_CONFIG).config .config; \
 		test -f ./configure || ./bootstrap && \
 		./configure --enable-local; \
@@ -80,7 +80,7 @@ crosstool-ng-upgradeconfig: directories
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	unset CONFIG_SITE; \
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(INSTALL_DATA) $(subst -upgradeconfig,,$(PKG_FILES_DIR))/$(CROSSTOOL_NG_CONFIG).config .config; \
 		test -f ./configure || ./bootstrap && \
 		./configure --enable-local; \

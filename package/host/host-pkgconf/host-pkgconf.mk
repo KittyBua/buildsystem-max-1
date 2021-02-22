@@ -13,7 +13,7 @@ $(D)/host-pkgconf:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		./configure \
 			--prefix=$(HOST_DIR) \
 			; \

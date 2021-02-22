@@ -13,7 +13,7 @@ $(D)/host-ninja:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		cmake . \
 			-DCMAKE_INSTALL_PREFIX="" \
 		; \

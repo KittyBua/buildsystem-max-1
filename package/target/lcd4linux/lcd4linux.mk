@@ -18,7 +18,7 @@ $(D)/lcd4linux:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(TARGET_CONFIGURE_ENV) ./bootstrap; \
 		$(TARGET_CONFIGURE_ENV) ./configure $(TARGET_CONFIGURE_OPTS); \
 		$(MAKE) vcs_version; \

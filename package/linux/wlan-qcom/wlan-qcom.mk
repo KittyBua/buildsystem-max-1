@@ -13,7 +13,7 @@ $(D)/wlan-qcom:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(MAKE) $(KERNEL_MAKEVARS); \
 	$(INSTALL_DATA) wlan.ko $(TARGET_MODULES_DIR)/extra
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d

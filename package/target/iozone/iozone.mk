@@ -19,7 +19,7 @@ $(D)/iozone:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		cd src/current; \
 		$(TARGET_CONFIGURE_ENV); \
 		$(MAKE) linux-arm

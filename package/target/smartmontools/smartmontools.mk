@@ -13,7 +13,7 @@ $(D)/smartmontools:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(INSTALL_EXEC) smartctl $(TARGET_DIR)/usr/sbin/smartctl

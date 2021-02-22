@@ -17,7 +17,7 @@ $(D)/neutrino-channellogos:
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/logos/* $(SHARE_LOGOS)
 	mkdir -p $(SHARE_LOGOS)/events
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/logos-events/* $(SHARE_LOGOS)/events
-	$(PKG_CHDIR)/logo-links && \
+	$(CD_BUILD_DIR)/logo-links && \
 		./logo-linker.sh logo-links.db $(SHARE_LOGOS)
 	cp -a $(PKG_BUILD_DIR)/logo-addon/* $(SHARE_PLUGINS)
 	$(REMOVE)

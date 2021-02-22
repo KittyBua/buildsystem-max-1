@@ -13,7 +13,7 @@ $(D)/bash:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(INSTALL_EXEC) bash $(TARGET_DIR)/$(base_bindir)

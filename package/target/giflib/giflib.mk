@@ -13,7 +13,7 @@ $(D)/giflib:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		export ac_cv_prog_have_xmlto=no; \
 		$(CONFIGURE); \
 		$(MAKE); \

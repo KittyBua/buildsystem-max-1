@@ -19,7 +19,7 @@ $(D)/kernel.do_compile: kernel.do_prepare
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 hd60 hd61 h7))
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/initramfs-subdirboot.cpio.gz $(KERNEL_OBJ_DIR)
 endif
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(MAKE) $(KERNEL_MAKEVARS) oldconfig; \
 		$(MAKE) $(KERNEL_MAKEVARS) modules $(KERNEL_DTB) $(KERNEL_IMAGE_TYPE); \
 		$(MAKE) $(KERNEL_MAKEVARS) modules_install
@@ -39,7 +39,7 @@ $(D)/kernel: bootstrap kernel.do_compile
 # -----------------------------------------------------------------------------
 
 kernel-config: bootstrap kernel.do_compile
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		make $(KERNEL_MAKEVARS) menuconfig
 	@echo ""
 	@echo -e "You have to edit $(KERNEL_CONFIG) $(TERM_YELLOW)m a n u a l l y$(TERM_NORMAL) to make changes permanent !!!"

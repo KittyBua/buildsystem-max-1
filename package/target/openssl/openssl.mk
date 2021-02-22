@@ -21,7 +21,7 @@ $(D)/openssl:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		./Configure \
 			$(OPENSSL_TARGET_ARCH) \
 			--prefix=/usr \

@@ -14,7 +14,7 @@ $(D)/host-zic:
 	$(MKDIR)/$($(PKG)_DIR)
 	$(call EXTRACT,$(PKG_BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(MAKE) zic
 	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/zic $(HOST_DIR)/bin/
 	$(REMOVE)

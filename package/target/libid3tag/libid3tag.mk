@@ -15,7 +15,7 @@ $(D)/libid3tag:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(CONFIGURE) \
 			--prefix=/usr \
 			--enable-shared=yes \

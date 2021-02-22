@@ -19,7 +19,7 @@ $(D)/openthreads:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		echo "# dummy file to prevent warning message" > examples/CMakeLists.txt; \
 		$(CMAKE); \
 		$(MAKE); \

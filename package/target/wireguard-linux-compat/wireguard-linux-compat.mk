@@ -13,7 +13,7 @@ $(D)/wireguard-linux-compat:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(MAKE) -C src $(KERNEL_MAKEVARS); \
 		$(MAKE) -C src install $(KERNEL_MAKEVARS) INSTALL_MOD_PATH=$(TARGET_DIR)
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d

@@ -28,7 +28,7 @@ $(D)/openssh:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		CC=$(TARGET_CC); \
 		./configure $(TARGET_CONFIGURE_OPTS); \
 		$(MAKE); \

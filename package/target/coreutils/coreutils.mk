@@ -23,7 +23,7 @@ $(D)/coreutils:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		export fu_cv_sys_stat_statfs2_bsize=yes; \
 		$(CONFIGURE); \
 		$(MAKE); \

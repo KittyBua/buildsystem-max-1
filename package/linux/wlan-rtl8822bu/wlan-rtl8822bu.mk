@@ -13,7 +13,7 @@ $(D)/wlan-rtl8822bu:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(MAKE) $(KERNEL_MAKEVARS); \
 	$(INSTALL_DATA) 88x2bu.ko $(TARGET_MODULES_DIR)/kernel/drivers/net/wireless/
 	$(LINUX_RUN_DEPMOD)

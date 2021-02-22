@@ -13,7 +13,7 @@ $(D)/host-libarchive:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		./configure \
 			--prefix= \
 			--without-xml2 \

@@ -13,7 +13,7 @@ $(D)/netbase:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(INSTALL_DATA) etc/rpc $(TARGET_DIR)/etc/rpc; \
 		$(INSTALL_DATA) etc/protocols $(TARGET_DIR)/etc/protocols; \
 		$(INSTALL_DATA) etc/services $(TARGET_DIR)/etc/services

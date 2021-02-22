@@ -18,7 +18,7 @@ $(D)/minisatip:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(CONFIGURE); \
 		$(MAKE) EXTRA_CFLAGS="-pipe -Os -Wall -g0 -I$(TARGET_DIR)/usr/include"; \
 	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/minisatip $(TARGET_DIR)/usr/bin

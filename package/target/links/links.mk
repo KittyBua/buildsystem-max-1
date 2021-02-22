@@ -44,11 +44,11 @@ $(D)/links:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR)/intl; \
+	$(CD_BUILD_DIR)/intl; \
 		echo "english" > index.txt; \
 		echo "german" >> index.txt; \
 		./gen-intl
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD_BUILD_DIR); \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)

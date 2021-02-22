@@ -13,7 +13,7 @@ $(D)/neutrino-mediathek:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		cp -a plugins/* $(SHARE_PLUGINS); \
 		cp -a share $(TARGET_DIR)/usr/
 	$(REMOVE)

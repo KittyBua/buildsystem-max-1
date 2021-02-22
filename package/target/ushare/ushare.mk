@@ -19,7 +19,7 @@ $(D)/ushare:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
 		./configure $($(PKG)_CONF_OPTS); \
 		ln -sf ../config.h src/; \

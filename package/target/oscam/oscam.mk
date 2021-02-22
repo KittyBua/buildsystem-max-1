@@ -63,12 +63,12 @@ $(D)/oscam.do_prepare:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(SHELL) ./config.sh $($(PKG)_CONF_OPTS)
 	@touch $@
 
 $(D)/oscam.do_compile:
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) CROSS=$(TARGET_CROSS) USE_LIBCRYPTO=1 USE_LIBUSB=1 \
 		PLUS_TARGET="-rezap" \
@@ -87,7 +87,7 @@ $(D)/oscam: oscam.do_prepare oscam.do_compile
 oscam-clean:
 	rm -f $(D)/oscam
 	rm -f $(D)/oscam.do_compile
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(MAKE) distclean
 
 oscam-distclean:

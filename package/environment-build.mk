@@ -66,7 +66,7 @@ PKG_BUILD_DIR   = $(BUILD_DIR)/$($(PKG)_DIR)
 PKG_FILES_DIR   = $(BASE_DIR)/package/*/$(pkgname)/files
 PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(pkgname)/patches
 
-PKG_CHDIR       = $(CD) $(PKG_BUILD_DIR)
+CD_BUILD_DIR    = $(CD) $(PKG_BUILD_DIR)
 
 # -----------------------------------------------------------------------------
 
@@ -195,18 +195,16 @@ PKG_CONFIG_LIBDIR = $(TARGET_LIB_DIR)/pkgconfig
 
 # build helper variables
 CD    = set -e; cd
-CHDIR = $(CD) $(BUILD_DIR)
 MKDIR = mkdir -p $(BUILD_DIR)
-CPDIR = cp -a -t $(BUILD_DIR) $(DL_DIR)
 STRIP = $(GNU_TARGET_NAME)-strip
 
-DATE            = $(shell date '+%Y-%m-%d_%H.%M')
-TINKER_OPTION  ?= 0
+DATE           = $(shell date '+%Y-%m-%d_%H.%M')
+TINKER_OPTION ?= 0
 
-INSTALL         = install
-INSTALL_CONF    = $(INSTALL) -m 0600
-INSTALL_DATA    = $(INSTALL) -m 0644
-INSTALL_EXEC    = $(INSTALL) -m 0755
+INSTALL      = install
+INSTALL_CONF = $(INSTALL) -m 0600
+INSTALL_DATA = $(INSTALL) -m 0644
+INSTALL_EXEC = $(INSTALL) -m 0755
 INSTALL_COPY = cp -a
 
 define INSTALL_EXIST # (source, dest)

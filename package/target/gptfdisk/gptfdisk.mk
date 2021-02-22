@@ -13,7 +13,7 @@ $(D)/gptfdisk:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) sgdisk; \
 		$(INSTALL_EXEC) sgdisk $(TARGET_DIR)/usr/sbin/sgdisk

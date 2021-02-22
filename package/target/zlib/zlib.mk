@@ -18,7 +18,7 @@ $(D)/zlib:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	$(PKG_CHDIR); \
+	$(CD_BUILD_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
 		mandir=$(REMOVE_mandir) \
 		./configure $($(PKG)_CONF_OPTS); \
