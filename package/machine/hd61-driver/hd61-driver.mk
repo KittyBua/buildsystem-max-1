@@ -9,7 +9,7 @@ HD61_DRIVER_DEPS   = bootstrap
 
 $(D)/hd61-driver:
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra
 	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	rm -f $(TARGET_MODULES_DIR)/extra/hi_play.ko

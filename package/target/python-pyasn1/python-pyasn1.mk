@@ -10,7 +10,7 @@ PYTHON_PYASN1_DEPS   = bootstrap python python-setuptools python-pyasn1-modules
 $(D)/python-pyasn1:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \

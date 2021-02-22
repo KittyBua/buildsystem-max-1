@@ -11,7 +11,7 @@ HD61_LIBS_DEPS   = bootstrap
 $(D)/hd61-libs:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(PKG_BUILD_DIR))
 	mkdir -p $(TARGET_LIB_DIR)/hisilicon
 	$(INSTALL_EXEC) $(BUILD_DIR)/hiplay/hisilicon/* $(TARGET_LIB_DIR)/hisilicon

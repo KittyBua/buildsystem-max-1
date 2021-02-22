@@ -10,7 +10,7 @@ WLAN_QCOM_FIRMWARE_DEPS   = bootstrap
 $(D)/wlan-qcom-firmware:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(PKG_BUILD_DIR))
 	$(INSTALL) -d $(TARGET_FIRMWARE_DIR)/ath10k/QCA6174/hw3.0
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/board.bin $(TARGET_FIRMWARE_DIR)/ath10k/QCA6174/hw3.0/board.bin

@@ -10,7 +10,7 @@ LIBEVENT_DEPS   = bootstrap
 $(D)/libevent:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \

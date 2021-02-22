@@ -13,7 +13,7 @@ HOST_PYTHON3_INCLUDE_DIR = include/python$(basename $(HOST_PYTHON3_VER))
 $(D)/host-python3:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \

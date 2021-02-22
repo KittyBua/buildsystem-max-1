@@ -10,7 +10,7 @@ WPA_SUPPLICANT_DEPS   = bootstrap libnl openssl wireless-tools
 $(D)/wpa-supplicant:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \

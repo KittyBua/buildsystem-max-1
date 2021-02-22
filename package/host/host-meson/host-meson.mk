@@ -10,7 +10,7 @@ HOST_MESON_DEPS   = bootstrap host-ninja host-python3 host-python3-setuptools
 $(D)/host-meson:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \

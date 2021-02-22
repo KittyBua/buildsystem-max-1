@@ -10,7 +10,7 @@ PYTHON_ZOPE_INTERFACE_DEPS   = bootstrap python python-setuptools
 $(D)/python-zope-interface:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(PKG_APPLY_PATCHES)
 	$(PKG_CHDIR); \

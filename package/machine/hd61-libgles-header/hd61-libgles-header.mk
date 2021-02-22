@@ -8,6 +8,6 @@ HD61_LIBGLES_HEADER_DEPS   = bootstrap
 
 $(D)/hd61-libgles-header:
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(TARGET_INCLUDE_DIR))
 	$(TOUCH)

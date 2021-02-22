@@ -12,7 +12,7 @@ VUDUO4K_LIBGLES_DEPS   = bootstrap
 $(D)/vuduo4k-libgles:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(INSTALL_EXEC) $(BUILD_DIR)/libgles-vuduo4k/lib/* $(TARGET_LIB_DIR)
 	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libEGL.so

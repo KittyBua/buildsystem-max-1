@@ -10,7 +10,7 @@ VUSOLO4K_DRIVER_DEPS   = bootstrap
 
 $(D)/vusolo4k-driver:
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra
 	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	$(TOUCH)

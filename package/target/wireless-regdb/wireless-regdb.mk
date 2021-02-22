@@ -10,7 +10,7 @@ WIRELESS_REGDB_DEPS   = bootstrap
 $(D)/wireless-regdb:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/regulatory.db $(TARGET_FIRMWARE_DIR)/regulatory.db
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/regulatory.db.p7s $(TARGET_FIRMWARE_DIR)/regulatory.db.p7s

@@ -8,6 +8,6 @@ LUAJSON_DEPS   = bootstrap lua
 
 $(D)/luajson:
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	cp $(DL_DIR)/json.lua $(TARGET_SHARE_DIR)/lua/$(LUA_ABIVER)/json.lua
 	$(TOUCH)

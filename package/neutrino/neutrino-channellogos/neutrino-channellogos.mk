@@ -10,7 +10,7 @@ NEUTRINO_CHANNELLOGOS_DEPS   = bootstrap $(SHARE_ICONS) $(SHARE_PLUGINS)
 $(D)/neutrino-channellogos:
 	$(START_BUILD)
 	$(REMOVE)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	rm -rf $(SHARE_LOGOS)
 	mkdir -p $(SHARE_LOGOS)

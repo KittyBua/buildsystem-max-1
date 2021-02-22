@@ -9,5 +9,5 @@ GNULIB_DEPS   = bootstrap
 
 $(D)/gnulib:
 	$(START_BUILD)
-	$(call DOWNLOAD,$(PKG_SOURCE))
+	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(TOUCH)

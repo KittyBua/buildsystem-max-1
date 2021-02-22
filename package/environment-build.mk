@@ -62,7 +62,6 @@ HOST_DIR     = $(BASE_DIR)/host
 
 pkgname         = $(subst -config,,$(subst -upgradeconfig,,$(basename $(@F))))
 PKG             = $(call UPPERCASE,$(pkgname))
-PKG_SOURCE      = $($(PKG)_SOURCE)
 PKG_BUILD_DIR   = $(BUILD_DIR)/$($(PKG)_DIR)
 PKG_FILES_DIR   = $(BASE_DIR)/package/*/$(pkgname)/files
 PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(pkgname)/patches

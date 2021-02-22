@@ -64,9 +64,9 @@ define DOWNLOAD
 	@( \
 	if [ "$($(PKG)_VER)" == "git" ]; then \
 	  $(call MESSAGE,"Downloading") ; \
-	  $(GET-GIT-SOURCE) $($(PKG)_SITE)/$(PKG_SOURCE) $(DL_DIR)/$(PKG_SOURCE); \
+	  $(GET-GIT-SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
 	else \
-	  if [ ! -f $(DL_DIR)/$(PKG_SOURCE) ]; then \
+	  if [ ! -f $(DL_DIR)/$($(PKG)_SOURCE) ]; then \
 	    $(call MESSAGE,"Downloading") ; \
 	    $(WGET_DOWNLOAD) $(DL_DIR) $($(PKG)_SITE)/$(1); \
 	  fi; \
@@ -87,15 +87,15 @@ github = https://github.com/$(1)/$(2)/archive/$(3)
 define EXTRACT
 	@$(call MESSAGE,"Extracting")
 	@( \
-	case ${PKG_SOURCE} in \
+	case $($(PKG)_SOURCE) in \
 	  *.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.xz | *.txz) \
-	    tar -xf ${DL_DIR}/${PKG_SOURCE} -C ${1}; \
+	    tar -xf ${DL_DIR}/$($(PKG)_SOURCE) -C ${1}; \
 	    ;; \
 	  *.zip) \
-	    unzip -o -q ${DL_DIR}/${PKG_SOURCE} -d ${1}; \
+	    unzip -o -q ${DL_DIR}/$($(PKG)_SOURCE) -d ${1}; \
 	    ;; \
 	  *.git) \
-	    cp -a -t ${1} $(DL_DIR)/$(PKG_SOURCE); \
+	    cp -a -t ${1} $(DL_DIR)/$($(PKG)_SOURCE); \
 	    if test -z $($(PKG)_CHECKOUT); then \
 	      $(call MESSAGE,"use original head"); \
 	    else \
@@ -104,7 +104,7 @@ define EXTRACT
 	    fi; \
 	    ;; \
 	  *) \
-	    $(call MESSAGE,"Cannot extract (PKG_SOURCE)"); \
+	    $(call MESSAGE,"Cannot extract $($(PKG)_SOURCE))"); \
 	    false ;; \
 	esac \
 	)
