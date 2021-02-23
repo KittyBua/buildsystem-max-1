@@ -78,7 +78,7 @@ TERM_YELLOW_BOLD = \033[40;1;33m
 TERM_NORMAL      = \033[0m
 
 # MESSAGE Macro -- display a message in bold type
-MESSAGE = echo "$(TERM_BOLD)>>> $($(PKG)_NAME) $($(PKG)_VERSION) $(call qstrip,$(1))$(TERM_RESET)"
+MESSAGE = echo "$(TERM_BOLD)>>> $(pkgname) $($(PKG)_VER) $(call qstrip,$(1))$(TERM_RESET)"
 TERM_BOLD := $(shell tput smso 2>/dev/null)
 TERM_RESET := $(shell tput rmso 2>/dev/null)
 
