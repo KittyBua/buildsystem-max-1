@@ -1,11 +1,13 @@
 #
 # libffi
 #
-LIBFFI_VER    = 3.2.1
+LIBFFI_VER    = 3.3
 LIBFFI_DIR    = libffi-$(LIBFFI_VER)
 LIBFFI_SOURCE = libffi-$(LIBFFI_VER).tar.gz
-LIBFFI_SITE   = ftp://sourceware.org/pub/libffi
+LIBFFI_SITE   = https://github.com/libffi/libffi/releases/download/v$(LIBFFI_VER)
 LIBFFI_DEPS   = bootstrap
+
+LIBFFI_AUTORECONF = YES
 
 LIBFFI_CONF_OPTS = \
 	--disable-static \
