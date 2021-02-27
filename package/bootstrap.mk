@@ -59,7 +59,7 @@ $(D)/cross-libs: directories $(CROSSTOOL)
 	if test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/lib; then \
 		cp -a $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/lib/*so* $(TARGET_DIR)/lib; \
 	fi; \
-	if [ $(TARGET_ARCH) = "aarch64" ]; then \
+	if [ "$(TARGET_ARCH)" = "aarch64" ]; then \
 		cd ${TARGET_DIR}; ln -sf lib lib64; \
 		cd ${TARGET_DIR}/usr; ln -sf lib lib64; \
 	fi
@@ -68,9 +68,9 @@ $(D)/cross-libs: directories $(CROSSTOOL)
 #
 # bootstrap
 #
+BOOTSTRAP += $(CROSSTOOL)
 BOOTSTRAP  = directories
 BOOTSTRAP += host-ccache
-BOOTSTRAP += $(CROSSTOOL)
 BOOTSTRAP += cross-libs
 BOOTSTRAP += host-pkgconf
 
