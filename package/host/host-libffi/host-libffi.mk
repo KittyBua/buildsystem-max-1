@@ -1,10 +1,10 @@
 #
 # host-libffi
 #
-HOST_LIBFFI_VER    = 3.2.1
+HOST_LIBFFI_VER    = 3.3
 HOST_LIBFFI_DIR    = libffi-$(HOST_LIBFFI_VER)
 HOST_LIBFFI_SOURCE = libffi-$(HOST_LIBFFI_VER).tar.gz
-HOST_LIBFFI_SITE   = ftp://sourceware.org/pub/libffi
+HOST_LIBFFI_SITE   = https://github.com/libffi/libffi/releases/download/v$(HOST_LIBFFI_VER)
 HOST_LIBFFI_DEPS   = bootstrap
 
 $(D)/host-libffi:
