@@ -5,7 +5,7 @@ FBSHOT_VER    = 0.3
 FBSHOT_DIR    = fbshot-$(FBSHOT_VER)
 FBSHOT_SOURCE = fbshot-$(FBSHOT_VER).tar.gz
 FBSHOT_SITE   = http://distro.ibiblio.org/amigolinux/download/Utils/fbshot
-FBSHOL_DEPS   = bootstrap libpng
+FBSHOT_DEPS   = bootstrap libpng
 
 define FBSHOT_POST_PATCH
 	$(SED) s~'gcc'~"$(TARGET_CC) $(TARGET_CFLAGS) $(TARGET_LDFLAGS)"~ $(PKG_BUILD_DIR)/Makefile
