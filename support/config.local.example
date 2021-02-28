@@ -1,0 +1,11 @@
+#
+# Local config.local file
+#
+# -----------------------------------------------------------------------------
+
+# Neutrino API keys
+#N_OMDB_API_KEY =
+#N_SHOUTCAST_DEV_KEY =
+#N_TMDB_DEV_KEY =
+#N_YOUTUBE_DEV_KEY =
+#N_WEATHER_DEV_KEY =

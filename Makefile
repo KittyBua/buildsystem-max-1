@@ -1,14 +1,21 @@
 #
 # Master makefile
 #
+# -----------------------------------------------------------------------------
 
-MAINTAINER := $(shell whoami)
 UID := $(shell id -u)
 ifeq ($(UID),0)
 warn:
 	@echo "You are running as root. Do not do this, it is dangerous."
 	@echo "Aborting the build. Log in as a regular user and retry."
 else
+
+# This is our default rule, so must come first
+default:
+	@if ! test -e $(BASE_DIR)/.config; then \
+		$(MAKE) config; \
+	fi
+	@true
 
 # Delete default rules. We don't use them. This saves a bit of time.
 .SUFFIXES:
@@ -98,17 +105,129 @@ QUIET := $(if $(findstring s,$(filter-out --%,$(MAKEFLAGS))),-q)
 
 # -----------------------------------------------------------------------------
 
-local-files:
-	@test -e config.local || cp $(HELPERS_DIR)/example.config.local config.local
-	@test -e Makefile.local || cp $(HELPERS_DIR)/example.Makefile.local Makefile.local
+# workaround unset variables at first start
+config:
+	@-rm -rf .config
+	@clear
+	@echo ""
+	@echo "                        ()                               "
+	@echo "  ____ ___   ___  __  __|/___                            "
+	@echo " |  _ \ _ \ / _ \ \ \/ // __|                            "
+	@echo " | | | | | | (_| | >  < \__ \\                           "
+	@echo " |_| |_| |_|\__,_|/_/\_\|___/                            "
+	@echo "  _           _ _     _               _                  "
+	@echo " | |         (_) |   | |             | |                 "
+	@echo " | |__  _   _ _| | __| |___ _   _ ___| |_____  ___ ___   "
+	@echo " |  _ \| | | | | |/ _  / __| | | / __| __/ _ \/ _ v _ \\ "
+	@echo " | |_) | |_| | | | (_| \__ \ |_| \__ \ ||  __/ | | | | | "
+	@echo " |_.__/\__,_\|_|_|\__,_|___/\__, |___/\__\___|_| |_| |_| "
+	@echo "                             __/ |                       "
+	@echo "                            |___/                        "
+	@echo ""
+	@echo "Target receivers:"
+	@echo "   1) AX/Mutant HD51"
+	@echo "   2) AX/Mutant HD60"
+	@echo "   3) AX/Mutant HD61"
+	@echo "  11) WWIO BRE2ZE4K"
+	@echo "  21) Air Digital Zgemma H7S/C"
+	@echo "  31) Edision OS mio 4K"
+	@echo "  32) Edision OS mio+ 4K"
+	@echo "  41) VU+ Solo 4k"
+	@echo "  42) VU+ Duo 4k"
+	@echo "  43) VU+ Duo 4k SE"
+	@echo "  44) VU+ Ultimo 4k"
+	@echo "  45) VU+ Zero 4k"
+	@echo "  46) VU+ Uno 4k"
+	@echo "  47) VU+ Uno 4k SE"
+	@echo "  51) VU+ Duo"
+	@read -p "Select your boxmodel? [default: 1] "; \
+	boxmodel=$${boxmodel:-1}; \
+	case "$$boxmodel" in \
+		 1) boxmodel=hd51;; \
+		 2) boxmodel=hd60;; \
+		 3) boxmodel=hd61;; \
+		11) boxmodel=bre2ze4k;; \
+		21) boxmodel=h7;; \
+		31) boxmodel=osmio4k;; \
+		32) boxmodel=osmio4kplus;; \
+		41) boxmodel=vusolo4k;; \
+		42) boxmodel=vuduo4k;; \
+		43) boxmodel=vuduo4kse;; \
+		44) boxmodel=vuultimo4k;; \
+		45) boxmodel=vuzero4k;; \
+		46) boxmodel=vuuno4k;; \
+		47) boxmodel=vuuno4kse;; \
+		51) boxmodel=vuduo;; \
+		 *) boxmodel=hd51;; \
+	esac; \
+	cp support/config.example .config; \
+	sed -i -e "s|^#BOXMODEL = $$boxmodel|BOXMODEL = $$boxmodel|" .config
+	@echo ""
+	@echo "Toolchain gcc version:"
+	@echo "   1) GCC version 6.5.0"
+	@echo "   2) GCC version 7.5.0"
+	@echo "   3) GCC version 8.4.0"
+	@echo "   4) GCC version 9.3.0"
+	@echo "   5) GCC version 10.2.0"
+	@read -p "Select gcc version? [default: 3] "; \
+	bs_gcc_ver=$${bs_gcc_ver:-3}; \
+	case "$$bs_gcc_ver" in \
+		1) bs_gcc_ver=6.5.0;; \
+		2) bs_gcc_ver=7.5.0;; \
+		3) bs_gcc_ver=8.4.0;; \
+		4) bs_gcc_ver=9.3.0;; \
+		5) bs_gcc_ver=10.2.0;; \
+		*) bs_gcc_ver=8.4.0;; \
+	esac; \
+	sed -i -e "s|^#BS_GCC_VER = $$bs_gcc_ver|BS_GCC_VER = $$bs_gcc_ver|" .config
+	@echo ""
+	@echo "Which Neutrino variant do you want to build:"
+	@echo "   1) neutrino-max"
+	@echo "   2) neutrino-ddt"
+	@echo "   3) neutrino-ni"
+	@echo "   4) neutrino-tangos"
+	@echo "   5) neutrino-redblue"
+	@read -p "Select Image to build? [default: 1] "; \
+	flavour=$${flavour:-1}; \
+	case "$$flavour" in \
+		1) flavour=neutrino-max;; \
+		2) flavour=neutrino-ddt;; \
+		3) flavour=neutrino-ni;; \
+		4) flavour=neutrino-tangos;; \
+		5) flavour=neutrino-redblue;; \
+		*) flavour=neutrino-max;; \
+	esac; \
+	sed -i -e "s|^#FLAVOUR = $$flavour|FLAVOUR = $$flavour|" .config
+	@echo ""
+	@echo "External LCD support:"
+	@echo "   1) No external LCD"
+	@echo "   2) graphlcd for external LCD"
+	@echo "   3) lcd4linux for external LCD"
+	@echo "   4) graphlcd and lcd4linux for external LCD (both)"
+	@read -p "Select Image to build? [default: 4] "; \
+	external_lcd=$${flavour:-4}; \
+	case "$$external_lcd" in \
+		1) external_lcd=none;; \
+		2) external_lcd=graphlcd;; \
+		3) external_lcd=lcd4linux;; \
+		4) external_lcd=both;; \
+		*) external_lcd=both;; \
+	esac; \
+	sed -i -e "s|^#EXTERNAL_LCD = $$external_lcd|EXTERNAL_LCD = $$external_lcd|" .config
+	@echo ""
+	@echo "Your next step could be:"
+	@echo "   make flashimage"
+	@echo "   make ofgimage"
+	@echo ""
 
--include .config
--include config.local
-include package/environment-linux.mk
-include package/environment-build.mk
-include package/environment-target.mk
+config.local:
+	@cp support/config.local.example $@
+
+Makefile.local:
+	@cp support/Makefile.example $@
 
 printenv:
+	@clear
 	$(call draw_line);
 	@echo "Build Environment Variables:"
 	@echo "PATH              : `type -p fmt>/dev/null&&echo $(PATH)|sed 's/:/ /g' |fmt -65|sed 's/ /:/g; 2,$$s/^/                  : /;'||echo $(PATH)`"
@@ -142,46 +261,31 @@ endif
 	@echo -e "LOCAL_NEUTRINO_DEPS          : $(TERM_GREEN)$(LOCAL_NEUTRINO_DEPS)$(TERM_NORMAL)"
 	@$(call draw_line);
 	@make --no-print-directory toolcheck
-ifeq ($(MAINTAINER),)
-	@echo "##########################################################################"
-	@echo "# The MAINTAINER variable is not set. It defaults to your name from the  #"
-	@echo "# passwd entry, but this seems to have failed. Please set it in 'config'.#"
-	@echo "##########################################################################"
-	@echo
-endif
 	@if ! test -e $(BASE_DIR)/.config; then \
-		echo; \
-		echo "If you want to create or modify the configuration, run './make.sh'"; \
+		echo "If you want to create or modify the configuration, run 'make config'"; \
 		echo; \
 	fi
 
 help:
 	$(call draw_line);
 	@echo "a few helpful make targets:"
-	@echo "* make crosstool           - build cross toolchain"
-	@echo "* make bootstrap           - prepares for building"
-	@echo "* make print-targets       - print out all available targets"
+	@echo "* make config         - configuration build system"
+	@echo "* make print-targets  - print out all available targets"
+	@echo "* make crosstool      - builds cross toolchain"
+	@echo "* make bootstrap      - prepares for building"
+	@echo "* make neutrino       - builds Neutrino"
+	@echo "* make flashimage     - builds recovery emmc image"
+	@echo "* make online-image   - builds recovery online update image"
 	@echo ""
 	@echo "later, you might find these useful:"
-	@echo "* make update-self         - update the build system"
-	@echo "* make update              - update the build system including make distclean"
+	@echo "* make update-self    - update the build system"
+	@echo "* make update         - update the build system including make distclean"
 	@echo ""
 	@echo "cleantargets:"
-	@echo "make clean                 - Clears everything except kernel."
-	@echo "make distclean             - Clears the whole construction."
+	@echo "make clean            - Clears everything except kernel."
+	@echo "make distclean        - Clears the whole construction."
 	@echo ""
 	$(call draw_line);
-
-# -----------------------------------------------------------------------------
-
-include package/flashimage.mk
-include package/helpers.mk
-include $(sort $(wildcard package/*/*/*.mk))
-include package/cleantargets.mk
-include package/bootstrap.mk
-
-# for local extensions, e.g. special plugins or similar...
--include ./Makefile.local
 
 # -----------------------------------------------------------------------------
 
@@ -209,15 +313,48 @@ update:
 all:
 	@echo "'make all' is not a valid target. Please execute 'make print-targets' to display the alternatives."
 
+# target for testing only. not useful otherwise
+everything:
+	@make $(shell sed -n 's/^\$$.D.\/\(.*\):.*/\1/p' package/target/*/*.mk)
+
+# print all present targets...
+print-targets:
+	@sed -n 's/^\$$.D.\/\(.*\):.*/\1/p; s/^\([a-z].*\):\( \|$$\).*/\1/p;' \
+		`ls -1 package/*/*/*.mk` | \
+		sort -u | fold -s -w 65
+
+# -----------------------------------------------------------------------------
+
+-include .config
+-include config.local
+
+include package/environment-build.mk
+include package/environment-linux.mk
+include package/environment-target.mk
+include package/flashimage.mk
+include package/helpers.mk
+include $(sort $(wildcard package/*/*/*.mk))
+include package/cleantargets.mk
+include package/bootstrap.mk
+
+PATH := $(HOST_DIR)/ccache-bin:$(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
+
+
+
+# for local extensions, e.g. special plugins or similar...
+-include Makefile.local
+
+# -----------------------------------------------------------------------------
+
 # debug target, if you need that, you know it. If you don't know if you need
 # that, you don't need it.
 .print-phony:
 	@echo $(PHONY)
 
-PHONY += local-files
-PHONY += print-targets
-PHONY += printenv help all everything
+PHONY += config
+PHONY += printenv help
 PHONY += update update-self
+PHONY += all everything print-targets
 PHONY += .print-phony
 .PHONY: $(PHONY)
 

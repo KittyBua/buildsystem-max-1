@@ -46,16 +46,15 @@ SOURCE_DIR    = $(BASE_DIR)/build_source
 IMAGE_DIR     = $(BASE_DIR)/release_image
 OWN_FILES    ?= $(BASE_DIR)/own-files
 CROSS_DIR     = $(BASE_DIR)/cross/$(TARGET_ARCH)-$(CROSSTOOL_GCC_VER)-kernel-$(KERNEL_VER)
+HOST_DIR      = $(BASE_DIR)/host
 STAGING_DIR   = $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root
+
+MAINTAINER   ?= $(shell whoami)
 
 TARGET_LIB_DIR      = $(TARGET_DIR)/usr/lib
 TARGET_INCLUDE_DIR  = $(TARGET_DIR)/usr/include
 TARGET_FIRMWARE_DIR = $(TARGET_DIR)/lib/firmware
 TARGET_SHARE_DIR    = $(TARGET_DIR)/usr/share
-
-# -----------------------------------------------------------------------------
-
-HOST_DIR     = $(BASE_DIR)/host
 
 # -----------------------------------------------------------------------------
 
@@ -75,67 +74,126 @@ export CCACHE_DIR
 
 # -----------------------------------------------------------------------------
 
+BOXMODEL = hd51
+ifeq ($(BOXMODEL),bre2ze4k)
+  BOXNAME     = "WWIO BRE2ZE4K"
+  BOXTYPE     = armbox
+  TARGET_ARCH = arm
+else ifeq ($(BOXMODEL),h7)
+  BOXNAME     = "Air Digital Zgemma H7S/C"
+  BOXTYPE     = armbox
+  TARGET_ARCH = arm
+else ifeq ($(BOXMODEL),hd51)
+  BOXNAME     = "AX/Mut@nt HD51"
+  BOXTYPE     = armbox
+  TARGET_ARCH = arm
+else ifeq ($(BOXMODEL),hd60)
+  BOXNAME     = "AX/Mut@nt HD60"
+  BOXTYPE     = armbox
+  TARGET_ARCH = arm
+else ifeq ($(BOXMODEL),hd61)
+  BOXNAME     = "AX/Mut@nt HD61"
+  BOXTYPE     = armbox
+  TARGET_ARCH = arm
+else ifeq ($(BOXMODEL),osmio4k)
+  BOXNAME     = "Edison Os mio 4k"
+  BOXTYPE     = armbox
+  TARGET_ARCH = arm
+else ifeq ($(BOXMODEL),osmio4kplus)
+  BOXNAME     = "Edison Os mio+ 4K"
+  BOXTYPE     = armbox
+  TARGET_ARCH = arm
+else ifeq ($(BOXMODEL),vusolo4k)
+  BOXNAME     = "VU+ Solo 4K"
+  BOXTYPE     = armbox
+  TARGET_ARCH = arm
+else ifeq ($(BOXMODEL),vuduo4k)
+  BOXNAME     = "VU+ Duo 4K"
+  BOXTYPE     = armbox
+  TARGET_ARCH = arm
+else ifeq ($(BOXMODEL),vuduo4kse)
+  BOXNAME     = "VU+ Duo 4K SE"
+  BOXTYPE     = armbox
+  TARGET_ARCH = arm
+else ifeq ($(BOXMODEL),vuultimo4k)
+  BOXNAME     = "VU+ Ultimo 4K"
+  BOXTYPE     = armbox
+  TARGET_ARCH = arm
+else ifeq ($(BOXMODEL),vuzero4k)
+  BOXNAME     = "VU+ Zero 4K"
+  BOXTYPE     = armbox
+  TARGET_ARCH = arm
+else ifeq ($(BOXMODEL),vuuno4k)
+  BOXNAME     = "VU+ Uno 4K"
+  BOXTYPE     = armbox
+  TARGET_ARCH = arm
+else ifeq ($(BOXMODEL),vuuno4kse)
+  BOXNAME     = "VU+ Uno 4K SE"
+  BOXTYPE     = armbox
+  TARGET_ARCH = arm
+else ifeq ($(BOXMODEL),vuduo)
+  BOXNAME     = "VU+ Duo"
+  BOXTYPE     = mipsbox
+  TARGET_ARCH = mips
+endif
+
+BS_GCC_VER ?= 8.4.0
 ifeq ($(BS_GCC_VER),6.5.0)
-CROSSTOOL_GCC_VER = gcc-6.5.0
-endif
-
-ifeq ($(BS_GCC_VER),7.5.0)
-CROSSTOOL_GCC_VER = gcc-7.5.0
-endif
-
-ifeq ($(BS_GCC_VER),8.4.0)
-CROSSTOOL_GCC_VER = gcc-8.4.0
-endif
-
-ifeq ($(BS_GCC_VER),9.3.0)
-CROSSTOOL_GCC_VER = gcc-9.3.0
-endif
-
-ifeq ($(BS_GCC_VER),10.2.0)
-CROSSTOOL_GCC_VER = gcc-10.2.0
-endif
-
-# -----------------------------------------------------------------------------
-
-OPTIMIZATIONS ?= size
-ifeq ($(OPTIMIZATIONS),size)
-TARGET_OPTIMIZATION  = -pipe -Os
-TARGET_EXTRA_CFLAGS  = -ffunction-sections -fdata-sections
-TARGET_EXTRA_LDFLAGS = -Wl,--gc-sections
-endif
-
-ifeq ($(OPTIMIZATIONS),normal)
-TARGET_OPTIMIZATION  = -pipe -O2
-TARGET_EXTRA_CFLAGS  =
-TARGET_EXTRA_LDFLAGS =
-endif
-
-ifeq ($(OPTIMIZATIONS),debug)
-TARGET_OPTIMIZATION  = -O0 -g
-TARGET_EXTRA_CFLAGS  =
-TARGET_EXTRA_LDFLAGS =
+  CROSSTOOL_GCC_VER = gcc-6.5.0
+else ifeq ($(BS_GCC_VER),7.5.0)
+  CROSSTOOL_GCC_VER = gcc-7.5.0
+else ifeq ($(BS_GCC_VER),8.4.0)
+  CROSSTOOL_GCC_VER = gcc-8.4.0
+else ifeq ($(BS_GCC_VER),9.3.0)
+  CROSSTOOL_GCC_VER = gcc-9.3.0
+else ifeq ($(BS_GCC_VER),10.2.0)
+  CROSSTOOL_GCC_VER = gcc-10.2.0
 endif
 
 ifeq ($(TARGET_ARCH),arm)
-GNU_TARGET_NAME ?= arm-cortex-linux-gnueabihf
-TARGET_ARCH     ?= arm
-TARGET_ABI       = -mtune=cortex-a15 -mfloat-abi=hard -mfpu=neon-vfpv4 -march=armv7ve
-TARGET_ENDIAN    = little
+  GNU_TARGET_NAME = arm-cortex-linux-gnueabihf
+  TARGET_CPU      = armv7ve
+  TARGET_ABI      = -march=$(TARGET_CPU) -mtune=cortex-a15 -mfpu=neon-vfpv4 -mfloat-abi=hard
+  TARGET_ENDIAN   = little
+else ifeq ($(TARGET_ARCH),aarch64)
+  GNU_TARGET_NAME = aarch64-unknown-linux-gnu
+  TARGET_CPU      =
+  TARGET_ABI      =
+  TARGET_ENDIAN   = big
+else ifeq ($(TARGET_ARCH),mips)
+  GNU_TARGET_NAME = mipsel-unknown-linux-gnu
+  TARGET_CPU      = mips32
+  TARGET_ABI      = -march=$(TARGET_CPU) -mtune=mips32
+  TARGET_ENDIAN   = little
 endif
 
-ifeq ($(TARGET_ARCH),aarch64)
-GNU_TARGET_NAME ?= aarch64-unknown-linux-gnu
-TARGET_ARCH      = aarch64
-TARGET_ABI       =
-TARGET_ENDIAN    = big
+OPTIMIZATIONS ?= size
+ifeq ($(OPTIMIZATIONS),size)
+  TARGET_OPTIMIZATION  = -pipe -Os
+  TARGET_EXTRA_CFLAGS  = -ffunction-sections -fdata-sections
+  TARGET_EXTRA_LDFLAGS = -Wl,--gc-sections
+else ifeq ($(OPTIMIZATIONS),normal)
+  TARGET_OPTIMIZATION  = -pipe -O2
+  TARGET_EXTRA_CFLAGS  =
+  TARGET_EXTRA_LDFLAGS =
+else ifeq ($(OPTIMIZATIONS),debug)
+  TARGET_OPTIMIZATION  = -O0 -g
+  TARGET_EXTRA_CFLAGS  =
+  TARGET_EXTRA_LDFLAGS =
 endif
 
-ifeq ($(TARGET_ARCH),mips)
-GNU_TARGET_NAME ?= mipsel-unknown-linux-gnu
-TARGET_ARCH     ?= mips
-TARGET_ABI       = -march=mips32 -mtune=mips32
-TARGET_ENDIAN    = little
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51))
+  LAYOUT      ?= 1
+  LAYOUT_SWAP ?= 1
+else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
+  LAYOUT      ?= 1
+  LAYOUT_SWAP ?= 0
 endif
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vusolo4k vuduo4k vuduo4kse vuultimo4k vuzero4k vuuno4k vuuno4kse))
+  VU_MULTIBOOT ?= 1
+endif
+
+# -----------------------------------------------------------------------------
 
 TARGET_CFLAGS   = $(TARGET_OPTIMIZATION) $(TARGET_ABI) $(TARGET_EXTRA_CFLAGS) -I$(TARGET_INCLUDE_DIR)
 TARGET_CPPFLAGS = $(TARGET_CFLAGS)
@@ -171,8 +229,6 @@ HOST_LDFLAGS   += -L$(HOST_DIR)/lib -Wl,-rpath,$(HOST_DIR)/lib
 
 # search path(s) for all prerequisites
 VPATH = $(DEPS_DIR)
-
-PATH := $(HOST_DIR)/ccache-bin:$(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
 
 # -----------------------------------------------------------------------------
 

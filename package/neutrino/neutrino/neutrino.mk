@@ -3,6 +3,7 @@
 #
 # -----------------------------------------------------------------------------
 
+FLAVOUR ?= neutrino-max
 ifeq ($(FLAVOUR),neutrino-ddt)
 GIT_SITE            ?= https://github.com/Duckbox-Developers
 NEUTRINO             = neutrino-ddt
@@ -46,83 +47,60 @@ e2-multiboot:
 
 # -----------------------------------------------------------------------------
 
-OMDB_API_KEY ?=
+N_OMDB_API_KEY ?=
 ifneq ($(strip $(OMDB_API_KEY)),)
 N_CONFIG_KEYS += \
-	--with-omdb-api-key="$(OMDB_API_KEY)" \
+	--with-omdb-api-key="$(N_OMDB_API_KEY)" \
 	--disable-omdb-key-manage
 endif
 
-TMDB_DEV_KEY ?=
+N_TMDB_DEV_KEY ?=
 ifneq ($(strip $(TMDB_DEV_KEY)),)
 N_CONFIG_KEYS += \
-	--with-tmdb-dev-key="$(TMDB_DEV_KEY)" \
+	--with-tmdb-dev-key="$(N_TMDB_DEV_KEY)" \
 	--disable-tmdb-key-manage
 endif
 
-YOUTUBE_DEV_KEY ?=
+N_YOUTUBE_DEV_KEY ?=
 ifneq ($(strip $(YOUTUBE_DEV_KEY)),)
 N_CONFIG_KEYS += \
-	--with-youtube-dev-key="$(YOUTUBE_DEV_KEY)" \
+	--with-youtube-dev-key="$(N_YOUTUBE_DEV_KEY)" \
 	--disable-youtube-key-manage
 endif
 
-SHOUTCAST_DEV_KEY ?=
+N_SHOUTCAST_DEV_KEY ?=
 ifneq ($(strip $(SHOUTCAST_DEV_KEY)),)
 N_CONFIG_KEYS += \
-	--with-shoutcast-dev-key="$(SHOUTCAST_DEV_KEY)" \
+	--with-shoutcast-dev-key="$(N_SHOUTCAST_DEV_KEY)" \
 	--disable-shoutcast-key-manage
 endif
 
-WEATHER_DEV_KEY ?=
+N_WEATHER_DEV_KEY ?=
 ifneq ($(strip $(WEATHER_DEV_KEY)),)
 N_CONFIG_KEYS += \
-	--with-weather-dev-key="$(WEATHER_DEV_KEY)" \
+	--with-weather-dev-key="$(N_WEATHER_DEV_KEY)" \
 	--disable-weather-key-manage
 endif
 
 # -----------------------------------------------------------------------------
 
 NEUTRINO_DEPS  = bootstrap
-NEUTRINO_DEPS += machine-deps
-NEUTRINO_DEPS += system-tools
-NEUTRINO_DEPS += ncurses
-NEUTRINO_DEPS += libcurl
+NEUTRINO_DEPS += e2fsprogs
 NEUTRINO_DEPS += libpng
-NEUTRINO_DEPS += libjpeg-turbo
-NEUTRINO_DEPS += giflib
-NEUTRINO_DEPS += freetype
 NEUTRINO_DEPS += alsa-utils
 NEUTRINO_DEPS += ffmpeg
-NEUTRINO_DEPS += fbshot
-NEUTRINO_DEPS += aio-grab
-NEUTRINO_DEPS += libsigc
+NEUTRINO_DEPS += freetype
+NEUTRINO_DEPS += giflib
+NEUTRINO_DEPS += libcurl
 NEUTRINO_DEPS += libdvbsi
-NEUTRINO_DEPS += dvbsnoop
-NEUTRINO_DEPS += libusb
-NEUTRINO_DEPS += pugixml
-NEUTRINO_DEPS += openthreads
+NEUTRINO_DEPS += fribidi
+NEUTRINO_DEPS += libjpeg-turbo
+NEUTRINO_DEPS += libsigc
 NEUTRINO_DEPS += lua
-NEUTRINO_DEPS += luaposix
-NEUTRINO_DEPS += luaexpat
-NEUTRINO_DEPS += luacurl
-NEUTRINO_DEPS += luasocket
-NEUTRINO_DEPS += lua-feedparser
-NEUTRINO_DEPS += luasoap
-NEUTRINO_DEPS += luajson
-NEUTRINO_DEPS += wpa-supplicant
-NEUTRINO_DEPS += wireless-tools
-NEUTRINO_DEPS += hd-idle
-NEUTRINO_DEPS += ntfs-3g
-#NEUTRINO_DEPS += jfsutils
-NEUTRINO_DEPS += dosfstools
-NEUTRINO_DEPS += parted
-NEUTRINO_DEPS += gptfdisk
-NEUTRINO_DEPS += udpxy
-NEUTRINO_DEPS += mc
-ifeq ($(BOXMODEL),hd60)
-NEUTRINO_DEPS += harfbuzz
-endif
+NEUTRINO_DEPS += openssl
+NEUTRINO_DEPS += openthreads
+NEUTRINO_DEPS += pugixml
+
 NEUTRINO_DEPS += $(LOCAL_NEUTRINO_DEPS)
 N_CONFIG_OPTS  = $(LOCAL_NEUTRINO_BUILD_OPTIONS)
 
@@ -133,7 +111,7 @@ ifeq ($(BOXTYPE),mipsbox)
 N_CONFIG_OPTS += --disable-mips-acc
 endif
 
-
+EXTERNAL_LCD ?= both
 ifeq ($(EXTERNAL_LCD),graphlcd)
 N_CONFIG_OPTS += --enable-graphlcd
 NEUTRINO_DEPS += graphlcd-base

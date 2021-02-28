@@ -78,29 +78,55 @@ $(D)/bootstrap: $(BOOTSTRAP)
 	@touch $@
 
 #
-# system-tools
+# image-deps
 #
-SYSTEM_TOOLS  =
-SYSTEM_TOOLS += bash
-SYSTEM_TOOLS += procps-ng
-SYSTEM_TOOLS += kmod
-SYSTEM_TOOLS += sysvinit
-SYSTEM_TOOLS += base-files
-SYSTEM_TOOLS += netbase
-SYSTEM_TOOLS += e2fsprogs
-SYSTEM_TOOLS += tzdata
-SYSTEM_TOOLS += openresolv
-SYSTEM_TOOLS += rpcbind
-SYSTEM_TOOLS += nfs-utils
-SYSTEM_TOOLS += htop
-SYSTEM_TOOLS += vsftpd
-SYSTEM_TOOLS += autofs
-SYSTEM_TOOLS += ethtool
-SYSTEM_TOOLS += ofgwrite
-SYSTEM_TOOLS += wget
-SYSTEM_TOOLS += busybox
+IMAGE_DEPS  =
+IMAGE_DEPS += bash
+IMAGE_DEPS += procps-ng
+IMAGE_DEPS += kmod
+IMAGE_DEPS += sysvinit
+IMAGE_DEPS += base-files
+IMAGE_DEPS += netbase
+IMAGE_DEPS += e2fsprogs
+#IMAGE_DEPS += jfsutils
+IMAGE_DEPS += dosfstools
+IMAGE_DEPS += parted
+IMAGE_DEPS += gptfdisk
+IMAGE_DEPS += hd-idle
+IMAGE_DEPS += ntfs-3g
+IMAGE_DEPS += tzdata
+IMAGE_DEPS += openresolv
+IMAGE_DEPS += rpcbind
+IMAGE_DEPS += nfs-utils
+IMAGE_DEPS += htop
+IMAGE_DEPS += vsftpd
+IMAGE_DEPS += autofs
+IMAGE_DEPS += ethtool
+IMAGE_DEPS += ofgwrite
+IMAGE_DEPS += wget
+IMAGE_DEPS += busybox
+IMAGE_DEPS += ncurses
+IMAGE_DEPS += fbshot
+IMAGE_DEPS += aio-grab
+IMAGE_DEPS += dvbsnoop
+IMAGE_DEPS += libusb
+IMAGE_DEPS += lua
+IMAGE_DEPS += luaposix
+IMAGE_DEPS += luaexpat
+IMAGE_DEPS += luacurl
+IMAGE_DEPS += luasocket
+IMAGE_DEPS += lua-feedparser
+IMAGE_DEPS += luasoap
+IMAGE_DEPS += luajson
+IMAGE_DEPS += wpa-supplicant
+IMAGE_DEPS += wireless-tools
+IMAGE_DEPS += udpxy
+IMAGE_DEPS += mc
+ifeq ($(BOXMODEL),hd60)
+IMAGE_DEPS += harfbuzz
+endif
 
-$(D)/system-tools: $(SYSTEM_TOOLS)
+$(D)/image-deps: $(IMAGE_DEPS)
 	@touch $@
 
 #
