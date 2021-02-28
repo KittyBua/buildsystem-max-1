@@ -34,7 +34,7 @@ MAKEFLAGS += --no-print-directory
 BASE_DIR     := ${CURDIR}
 DL_DIR       ?= $(HOME)/Archive
 BUILD_DIR     = $(BASE_DIR)/build_tmp
-ifeq ($(NEWLAYOUT), 1)
+ifeq ($(LAYOUT), 1)
 RELEASE_DIR   = $(BASE_DIR)/release/linuxrootfs1
 else
 RELEASE_DIR   = $(BASE_DIR)/release

@@ -251,7 +251,7 @@ printenv:
 	@echo "OPTIMIZATION      : $(OPTIMIZATIONS)"
 	@echo -e "FLAVOUR           : $(TERM_YELLOW)$(FLAVOUR)$(TERM_NORMAL)"
 	@echo "EXTERNAL_LCD      : $(EXTERNAL_LCD)"
-ifeq ($(NEWLAYOUT),1)
+ifeq ($(LAYOUT),1)
 	@echo -e "IMAGE TYPE        : $(TERM_YELLOW)1 single + multirootfs$(TERM_NORMAL)"
 endif
 	$(call draw_line);
@@ -338,8 +338,6 @@ include package/cleantargets.mk
 include package/bootstrap.mk
 
 PATH := $(HOST_DIR)/ccache-bin:$(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
-
-
 
 # for local extensions, e.g. special plugins or similar...
 -include Makefile.local
