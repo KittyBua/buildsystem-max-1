@@ -226,6 +226,17 @@ config.local:
 Makefile.local:
 	@cp support/Makefile.example $@
 
+# -----------------------------------------------------------------------------
+
+-include .config
+-include config.local
+
+include package/environment-build.mk
+include package/environment-linux.mk
+include package/environment-target.mk
+
+# -----------------------------------------------------------------------------
+
 printenv:
 	@clear
 	$(call draw_line);
@@ -325,12 +336,6 @@ print-targets:
 
 # -----------------------------------------------------------------------------
 
--include .config
--include config.local
-
-include package/environment-build.mk
-include package/environment-linux.mk
-include package/environment-target.mk
 include package/flashimage.mk
 include package/helpers.mk
 include $(sort $(wildcard package/*/*/*.mk))
