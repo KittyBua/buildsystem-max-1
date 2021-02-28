@@ -68,8 +68,8 @@ $(D)/cross-libs: directories $(CROSSTOOL)
 #
 # bootstrap
 #
-BOOTSTRAP += $(CROSSTOOL)
-BOOTSTRAP  = directories
+BOOTSTRAP  = $(CROSSTOOL)
+BOOTSTRAP += directories
 BOOTSTRAP += host-ccache
 BOOTSTRAP += cross-libs
 BOOTSTRAP += host-pkgconf
