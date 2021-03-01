@@ -34,11 +34,7 @@ MAKEFLAGS += --no-print-directory
 BASE_DIR     := ${CURDIR}
 DL_DIR       ?= $(HOME)/Archive
 BUILD_DIR     = $(BASE_DIR)/build_tmp
-ifeq ($(LAYOUT), 1)
-RELEASE_DIR   = $(BASE_DIR)/release/linuxrootfs1
-else
-RELEASE_DIR   = $(BASE_DIR)/release
-endif
+RELEASE_DIR  ?= $(BASE_DIR)/release
 DEPS_DIR      = $(BASE_DIR)/.deps
 D             = $(DEPS_DIR)
 TARGET_DIR    = $(BASE_DIR)/root
@@ -74,7 +70,7 @@ export CCACHE_DIR
 
 # -----------------------------------------------------------------------------
 
-BOXMODEL = hd51
+BOXMODEL ?= hd51
 ifeq ($(BOXMODEL),bre2ze4k)
   BOXNAME     = "WWIO BRE2ZE4K"
   BOXTYPE     = armbox
@@ -185,9 +181,15 @@ endif
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51))
   LAYOUT      ?= 1
   LAYOUT_SWAP ?= 1
+  ifeq ($(LAYOUT), 1)
+    RELEASE_DIR  = $(BASE_DIR)/release/linuxrootfs1
+  endif
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
   LAYOUT      ?= 1
   LAYOUT_SWAP ?= 0
+  ifeq ($(LAYOUT), 1)
+    RELEASE_DIR  = $(BASE_DIR)/release/linuxrootfs1
+  endif
 endif
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vusolo4k vuduo4k vuduo4kse vuultimo4k vuzero4k vuuno4k vuuno4kse))
   VU_MULTIBOOT ?= 1

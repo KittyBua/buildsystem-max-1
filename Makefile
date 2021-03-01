@@ -140,7 +140,7 @@ config:
 	@echo "  46) VU+ Uno 4k"
 	@echo "  47) VU+ Uno 4k SE"
 	@echo "  51) VU+ Duo"
-	@read -p "Select your boxmodel? [default: 1] "; \
+	@read -p "Select your boxmodel? [default: 1] "  boxmodel; \
 	boxmodel=$${boxmodel:-1}; \
 	case "$$boxmodel" in \
 		 1) boxmodel=hd51;; \
@@ -169,7 +169,7 @@ config:
 	@echo "   3) GCC version 8.4.0"
 	@echo "   4) GCC version 9.3.0"
 	@echo "   5) GCC version 10.2.0"
-	@read -p "Select gcc version? [default: 3] "; \
+	@read -p "Select gcc version? [default: 3] " bs_gcc_ver; \
 	bs_gcc_ver=$${bs_gcc_ver:-3}; \
 	case "$$bs_gcc_ver" in \
 		1) bs_gcc_ver=6.5.0;; \
@@ -187,7 +187,7 @@ config:
 	@echo "   3) neutrino-ni"
 	@echo "   4) neutrino-tangos"
 	@echo "   5) neutrino-redblue"
-	@read -p "Select Image to build? [default: 1] "; \
+	@read -p "Select Image to build? [default: 1] " flavour; \
 	flavour=$${flavour:-1}; \
 	case "$$flavour" in \
 		1) flavour=neutrino-max;; \
@@ -204,8 +204,8 @@ config:
 	@echo "   2) graphlcd for external LCD"
 	@echo "   3) lcd4linux for external LCD"
 	@echo "   4) graphlcd and lcd4linux for external LCD (both)"
-	@read -p "Select Image to build? [default: 4] "; \
-	external_lcd=$${flavour:-4}; \
+	@read -p "Select Image to build? [default: 4] " external_lcd; \
+	external_lcd=$${external_lcd:-4}; \
 	case "$$external_lcd" in \
 		1) external_lcd=none;; \
 		2) external_lcd=graphlcd;; \
@@ -234,6 +234,13 @@ Makefile.local:
 include package/environment-build.mk
 include package/environment-linux.mk
 include package/environment-target.mk
+include package/flashimage.mk
+include package/helpers.mk
+include $(sort $(wildcard package/*/*/*.mk))
+include package/cleantargets.mk
+include package/bootstrap.mk
+
+PATH := $(HOST_DIR)/ccache-bin:$(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
 
 # -----------------------------------------------------------------------------
 
@@ -265,12 +272,15 @@ printenv:
 ifeq ($(LAYOUT),1)
 	@echo -e "IMAGE TYPE        : $(TERM_YELLOW)1 single + multirootfs$(TERM_NORMAL)"
 endif
+ifeq ($(VU_MULTIBOOT),1)
+	@echo -e "IMAGE TYPE        : $(TERM_YELLOW)multirootfs$(TERM_NORMAL)"
+endif
 	$(call draw_line);
 	@echo -e "LOCAL_N_PLUGIN_BUILD_OPTIONS : $(TERM_GREEN)$(LOCAL_N_PLUGIN_BUILD_OPTIONS)$(TERM_NORMAL)"
 	@echo -e "LOCAL_NEUTRINO_BUILD_OPTIONS : $(TERM_GREEN)$(LOCAL_NEUTRINO_BUILD_OPTIONS)$(TERM_NORMAL)"
 	@echo -e "LOCAL_NEUTRINO_CFLAGS        : $(TERM_GREEN)$(LOCAL_NEUTRINO_CFLAGS)$(TERM_NORMAL)"
 	@echo -e "LOCAL_NEUTRINO_DEPS          : $(TERM_GREEN)$(LOCAL_NEUTRINO_DEPS)$(TERM_NORMAL)"
-	@$(call draw_line);
+	$(call draw_line);
 	@make --no-print-directory toolcheck
 	@if ! test -e $(BASE_DIR)/.config; then \
 		echo "If you want to create or modify the configuration, run 'make config'"; \
@@ -335,14 +345,6 @@ print-targets:
 		sort -u | fold -s -w 65
 
 # -----------------------------------------------------------------------------
-
-include package/flashimage.mk
-include package/helpers.mk
-include $(sort $(wildcard package/*/*/*.mk))
-include package/cleantargets.mk
-include package/bootstrap.mk
-
-PATH := $(HOST_DIR)/ccache-bin:$(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
 
 # for local extensions, e.g. special plugins or similar...
 -include Makefile.local
