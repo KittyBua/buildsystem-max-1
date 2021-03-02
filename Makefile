@@ -12,9 +12,6 @@ else
 
 # This is our default rule, so must come first
 default:
-	@if ! test -e $(BASE_DIR)/.config; then \
-		$(MAKE) config; \
-	fi
 	@true
 
 # Delete default rules. We don't use them. This saves a bit of time.
@@ -105,9 +102,12 @@ QUIET := $(if $(findstring s,$(filter-out --%,$(MAKEFLAGS))),-q)
 
 # -----------------------------------------------------------------------------
 
-# workaround unset variables at first start
 config:
-	@-rm -rf .config
+	@rm -rf .config
+	@make .config
+
+# workaround unset variables at first start
+.config: $(eval BOXMODEL=hd51)
 	@clear
 	@echo ""
 	@echo "                        ()                               "
@@ -140,7 +140,7 @@ config:
 	@echo "  46) VU+ Uno 4k"
 	@echo "  47) VU+ Uno 4k SE"
 	@echo "  51) VU+ Duo"
-	@read -p "Select your boxmodel? [default: 1] "  boxmodel; \
+	@read -p "Select your boxmodel? [default: 1] " boxmodel; \
 	boxmodel=$${boxmodel:-1}; \
 	case "$$boxmodel" in \
 		 1) boxmodel=hd51;; \
@@ -160,8 +160,8 @@ config:
 		51) boxmodel=vuduo;; \
 		 *) boxmodel=hd51;; \
 	esac; \
-	cp support/config.example .config; \
-	sed -i -e "s|^#BOXMODEL = $$boxmodel|BOXMODEL = $$boxmodel|" .config
+	cp support/config.example $@; \
+	sed -i -e "s|^#BOXMODEL = $$boxmodel|BOXMODEL = $$boxmodel|" $@
 	@echo ""
 	@echo "Toolchain gcc version:"
 	@echo "   1) GCC version 6.5.0"
@@ -179,7 +179,7 @@ config:
 		5) bs_gcc_ver=10.2.0;; \
 		*) bs_gcc_ver=8.4.0;; \
 	esac; \
-	sed -i -e "s|^#BS_GCC_VER = $$bs_gcc_ver|BS_GCC_VER = $$bs_gcc_ver|" .config
+	sed -i -e "s|^#BS_GCC_VER = $$bs_gcc_ver|BS_GCC_VER = $$bs_gcc_ver|" $@
 	@echo ""
 	@echo "Which Neutrino variant do you want to build:"
 	@echo "   1) neutrino-max"
@@ -197,7 +197,7 @@ config:
 		5) flavour=neutrino-redblue;; \
 		*) flavour=neutrino-max;; \
 	esac; \
-	sed -i -e "s|^#FLAVOUR = $$flavour|FLAVOUR = $$flavour|" .config
+	sed -i -e "s|^#FLAVOUR = $$flavour|FLAVOUR = $$flavour|" $@
 	@echo ""
 	@echo "External LCD support:"
 	@echo "   1) No external LCD"
@@ -213,7 +213,7 @@ config:
 		4) external_lcd=both;; \
 		*) external_lcd=both;; \
 	esac; \
-	sed -i -e "s|^#EXTERNAL_LCD = $$external_lcd|EXTERNAL_LCD = $$external_lcd|" .config
+	sed -i -e "s|^#EXTERNAL_LCD = $$external_lcd|EXTERNAL_LCD = $$external_lcd|" $@
 	@echo ""
 	@echo "Your next step could be:"
 	@echo "   make flashimage"
@@ -281,6 +281,9 @@ endif
 	@echo -e "LOCAL_NEUTRINO_CFLAGS        : $(TERM_GREEN)$(LOCAL_NEUTRINO_CFLAGS)$(TERM_NORMAL)"
 	@echo -e "LOCAL_NEUTRINO_DEPS          : $(TERM_GREEN)$(LOCAL_NEUTRINO_DEPS)$(TERM_NORMAL)"
 	$(call draw_line);
+	@echo ""
+	@echo "'make help' lists useful targets."
+	@echo ""
 	@make --no-print-directory toolcheck
 	@if ! test -e $(BASE_DIR)/.config; then \
 		echo "If you want to create or modify the configuration, run 'make config'"; \
