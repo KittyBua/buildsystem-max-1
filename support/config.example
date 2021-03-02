@@ -44,8 +44,8 @@
 
 # -----------------------------------------------------------------------------
 
-#FLAVOUR = neutrino-ddt
 #FLAVOUR = neutrino-max
+#FLAVOUR = neutrino-ddt
 #FLAVOUR = neutrino-ni
 #FLAVOUR = neutrino-tangos
 #FLAVOUR = neutrino-redblue

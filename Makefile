@@ -110,15 +110,14 @@ config:
 .config: $(eval BOXMODEL=hd51)
 	@clear
 	@echo ""
-	@echo "                        ()                               "
-	@echo "  ____ ___   ___  __  __|/___                            "
+	@echo "  ____ ___   ___  __  __ ___                             "
 	@echo " |  _ \ _ \ / _ \ \ \/ // __|                            "
-	@echo " | | | | | | (_| | >  < \__ \\                           "
+	@echo " | | | | | | (_| | >  < \__ \                            "
 	@echo " |_| |_| |_|\__,_|/_/\_\|___/                            "
 	@echo "  _           _ _     _               _                  "
 	@echo " | |         (_) |   | |             | |                 "
 	@echo " | |__  _   _ _| | __| |___ _   _ ___| |_____  ___ ___   "
-	@echo " |  _ \| | | | | |/ _  / __| | | / __| __/ _ \/ _ v _ \\ "
+	@echo " |  _ \| | | | | |/ _  / __| | | / __| __/ _ \/ _ v _ \  "
 	@echo " | |_) | |_| | | | (_| \__ \ |_| \__ \ ||  __/ | | | | | "
 	@echo " |_.__/\__,_\|_|_|\__,_|___/\__, |___/\__\___|_| |_| |_| "
 	@echo "                             __/ |                       "
@@ -181,6 +180,20 @@ config:
 	esac; \
 	sed -i -e "s|^#BS_GCC_VER = $$bs_gcc_ver|BS_GCC_VER = $$bs_gcc_ver|" $@
 	@echo ""
+	@echo "Optimization:"
+	@echo "   1) optimization for size"
+	@echo "   2) optimization normal"
+	@echo "   3) debug"
+	@read -p "Select optimization? [default: 1] " optimization; \
+	optimization=$${optimization:-1}; \
+	case "$$optimization" in \
+		1) optimization=size;; \
+		2) optimization=normal;; \
+		3) optimization=debug;; \
+		*) optimization=size;; \
+	esac; \
+	sed -i -e "s|^#OPTIMIZATIONS = $$optimization|OPTIMIZATIONS = $$optimization|" $@
+	@echo ""
 	@echo "Which Neutrino variant do you want to build:"
 	@echo "   1) neutrino-max"
 	@echo "   2) neutrino-ddt"
@@ -204,7 +217,7 @@ config:
 	@echo "   2) graphlcd for external LCD"
 	@echo "   3) lcd4linux for external LCD"
 	@echo "   4) graphlcd and lcd4linux for external LCD (both)"
-	@read -p "Select Image to build? [default: 4] " external_lcd; \
+	@read -p "Select LCD support? [default: 4] " external_lcd; \
 	external_lcd=$${external_lcd:-4}; \
 	case "$$external_lcd" in \
 		1) external_lcd=none;; \
@@ -359,7 +372,6 @@ print-targets:
 .print-phony:
 	@echo $(PHONY)
 
-PHONY += config
 PHONY += printenv help
 PHONY += update update-self
 PHONY += all everything print-targets
