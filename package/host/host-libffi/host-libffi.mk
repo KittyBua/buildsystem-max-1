@@ -7,6 +7,9 @@ HOST_LIBFFI_SOURCE = libffi-$(HOST_LIBFFI_VER).tar.gz
 HOST_LIBFFI_SITE   = https://github.com/libffi/libffi/releases/download/v$(HOST_LIBFFI_VER)
 HOST_LIBFFI_DEPS   = bootstrap
 
+HOST_LIBFFI_CONF_OPTS = \
+	--disable-static
+
 $(D)/host-libffi:
 	$(START_BUILD)
 	$(REMOVE)
