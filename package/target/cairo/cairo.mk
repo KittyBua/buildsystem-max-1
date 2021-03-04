@@ -7,6 +7,9 @@ CAIRO_SOURCE = cairo-$(CAIRO_VER).tar.xz
 CAIRO_SITE   = https://www.cairographics.org/releases
 CAIRO_DEPS   = bootstrap glib2 zlib libpng freetype pixman
 
+CAIRO_CONF_ENV = \
+	ax_cv_c_float_words_bigendian="no"
+
 CAIRO_CONF_OPTS = \
 	--with-html-dir=$(REMOVE_htmldir) \
 	--with-x=no \
@@ -24,9 +27,7 @@ $(D)/cairo:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
-		ax_cv_c_float_words_bigendian="no" \
-		./configure $(TARGET_CONFIGURE_OPTS); \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -rf $(TARGET_DIR)/usr/bin/cairo-sphinx

@@ -7,6 +7,33 @@ SAMBA_SOURCE = samba-$(SAMBA_VER).tar.gz
 SAMBA_SITE   = https://ftp.samba.org/pub/samba/stable
 SAMBA_DEPS   = bootstrap
 
+SAMBA_CONF_ENV = \
+	ac_cv_lib_attr_getxattr=no \
+	ac_cv_search_getxattr=no \
+	ac_cv_file__proc_sys_kernel_core_pattern=yes \
+	libreplace_cv_HAVE_C99_VSNPRINTF=yes \
+	libreplace_cv_HAVE_GETADDRINFO=yes \
+	libreplace_cv_HAVE_IFACE_IFCONF=yes \
+	LINUX_LFS_SUPPORT=no \
+	samba_cv_CC_NEGATIVE_ENUM_VALUES=yes \
+	samba_cv_HAVE_GETTIMEOFDAY_TZ=yes \
+	samba_cv_HAVE_IFACE_IFCONF=yes \
+	samba_cv_HAVE_KERNEL_OPLOCKS_LINUX=yes \
+	samba_cv_HAVE_SECURE_MKSTEMP=yes \
+	libreplace_cv_HAVE_SECURE_MKSTEMP=yes \
+	samba_cv_HAVE_WRFILE_KEYTAB=no \
+	samba_cv_USE_SETREUID=yes \
+	samba_cv_USE_SETRESUID=yes \
+	samba_cv_have_setreuid=yes \
+	samba_cv_have_setresuid=yes \
+	samba_cv_optimize_out_funcation_calls=no \
+	ac_cv_header_zlib_h=no \
+	samba_cv_zlib_1_2_3=no \
+	ac_cv_path_PYTHON="" \
+	ac_cv_path_PYTHON_CONFIG="" \
+	libreplace_cv_HAVE_GETADDRINFO=no \
+	libreplace_cv_READDIR_NEEDED=no
+
 SAMBA_CONF_OPTS = \
 	--disable-pie \
 	--disable-avahi \
@@ -71,34 +98,7 @@ $(D)/samba:
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
 		cd source3; \
-		./autogen.sh; \
-		$(TARGET_CONFIGURE_ENV) \
-		ac_cv_lib_attr_getxattr=no \
-		ac_cv_search_getxattr=no \
-		ac_cv_file__proc_sys_kernel_core_pattern=yes \
-		libreplace_cv_HAVE_C99_VSNPRINTF=yes \
-		libreplace_cv_HAVE_GETADDRINFO=yes \
-		libreplace_cv_HAVE_IFACE_IFCONF=yes \
-		LINUX_LFS_SUPPORT=no \
-		samba_cv_CC_NEGATIVE_ENUM_VALUES=yes \
-		samba_cv_HAVE_GETTIMEOFDAY_TZ=yes \
-		samba_cv_HAVE_IFACE_IFCONF=yes \
-		samba_cv_HAVE_KERNEL_OPLOCKS_LINUX=yes \
-		samba_cv_HAVE_SECURE_MKSTEMP=yes \
-		libreplace_cv_HAVE_SECURE_MKSTEMP=yes \
-		samba_cv_HAVE_WRFILE_KEYTAB=no \
-		samba_cv_USE_SETREUID=yes \
-		samba_cv_USE_SETRESUID=yes \
-		samba_cv_have_setreuid=yes \
-		samba_cv_have_setresuid=yes \
-		samba_cv_optimize_out_funcation_calls=no \
-		ac_cv_header_zlib_h=no \
-		samba_cv_zlib_1_2_3=no \
-		ac_cv_path_PYTHON="" \
-		ac_cv_path_PYTHON_CONFIG="" \
-		libreplace_cv_HAVE_GETADDRINFO=no \
-		libreplace_cv_READDIR_NEEDED=no \
-		./configure $(TARGET_CONFIGURE_OPTS); \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) installservers SBIN_PROGS="bin/samba_multicall" DESTDIR=$(TARGET_DIR) LOCALEDIR=$(REMOVE_localedir)
 	ln -sf samba_multicall $(TARGET_DIR)/usr/sbin/nmbd

@@ -332,7 +332,7 @@ $(D)/ffmpeg:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
+		./configure $($(PKG)_CONF_OPTS); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REMOVE)

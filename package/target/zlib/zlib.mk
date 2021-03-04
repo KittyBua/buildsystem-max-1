@@ -7,6 +7,9 @@ ZLIB_SOURCE = zlib-$(ZLIB_VER).tar.xz
 ZLIB_SITE   = https://sourceforge.net/projects/libpng/files/zlib/$(ZLIB_VER)
 ZLIB_DEPS   = bootstrap
 
+ZLIB_CONF_ENV = \
+	mandir=$(REMOVE_mandir)
+
 ZLIB_CONF_OPTS = \
 	--prefix=/usr \
 	--shared \
@@ -20,7 +23,6 @@ $(D)/zlib:
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
-		mandir=$(REMOVE_mandir) \
 		./configure $($(PKG)_CONF_OPTS); \
 		$(MAKE); \
 		ln -sf /bin/true ldconfig; \

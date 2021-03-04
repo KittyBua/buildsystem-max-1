@@ -7,6 +7,9 @@ OPENSSH_SOURCE = openssh-$(OPENSSH_VER).tar.gz
 OPENSSH_SITE   = https://artfiles.org/openbsd/OpenSSH/portable
 OPENSSH_DEPS   = bootstrap zlib openssl
 
+OPENSSH_CONF_ENV = \
+	ac_cv_search_dlopen=no
+
 OPENSSH_CONF_OPTS = \
 	--sysconfdir=/etc/ssh \
 	--libexecdir=$(base_sbindir) \
@@ -29,8 +32,7 @@ $(D)/openssh:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		CC=$(TARGET_CC); \
-		./configure $(TARGET_CONFIGURE_OPTS); \
+		$($(PKG)_CONF_ENV) ./configure $(TARGET_CONFIGURE_OPTS); \
 		$(MAKE); \
 		$(MAKE) install-nokeys DESTDIR=$(TARGET_DIR)
 	$(INSTALL_EXEC) $(BUILD_DIR)/openssh-$(OPENSSH_VER)/opensshd.init $(TARGET_DIR)/etc/init.d/openssh
