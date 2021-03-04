@@ -7,6 +7,12 @@ HOST_PYTHON_SOURCE = Python-$(HOST_PYTHON_VER).tar.xz
 HOST_PYTHON_SITE   = https://www.python.org/ftp/python/$(HOST_PYTHON_VER)
 HOST_PYTHON_DEPS   = bootstrap
 
+HOST_PYTHON_AUTORECONF = YES
+
+HOST_PYTHON_CONF_OPTS = \
+	--without-cxx-main \
+	--with-threads
+
 $(D)/host-python:
 	$(START_BUILD)
 	$(REMOVE)
@@ -14,26 +20,14 @@ $(D)/host-python:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		autoconf; \
-		CONFIG_SITE= \
-		OPT="$(HOST_CFLAGS)" \
-		./configure \
-			--without-cxx-main \
-			--with-threads \
-			; \
+		$(HOST_CONFIGURE); \
 		$(MAKE) python Parser/pgen; \
 		mv python ./hostpython; \
 		mv Parser/pgen ./hostpgen; \
-		\
+		cp ./hostpgen $(HOST_DIR)/bin/pgen; \
 		$(MAKE) distclean; \
-		./configure \
-			--prefix=$(HOST_DIR) \
-			--sysconfdir=$(HOST_DIR)/etc \
-			--without-cxx-main \
-			--with-threads \
-			; \
+		$(HOST_CONFIGURE); \
 		$(MAKE); \
-		$(MAKE) install; \
-		cp ./hostpgen $(HOST_DIR)/bin/pgen
+		$(MAKE) install
 	$(REMOVE)
 	$(TOUCH)

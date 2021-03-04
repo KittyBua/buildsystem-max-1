@@ -7,6 +7,10 @@ HOST_LIBARCHIVE_SOURCE = libarchive-$(HOST_LIBARCHIVE_VER).tar.gz
 HOST_LIBARCHIVE_SITE   = https://www.libarchive.org/downloads
 HOST_LIBARCHIVE_DEPS   = bootstrap
 
+HOST_LIBARCHIVE_CONF_OPTS = \
+	--prefix= \
+	--without-xml2
+
 $(D)/host-libarchive:
 	$(START_BUILD)
 	$(REMOVE)
@@ -14,10 +18,7 @@ $(D)/host-libarchive:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		./configure \
-			--prefix= \
-			--without-xml2 \
-			; \
+		$(HOST_CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(HOST_DIR)
 	$(REMOVE)

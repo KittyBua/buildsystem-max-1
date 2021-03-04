@@ -10,6 +10,22 @@ HOST_PYTHON3_DEPS   = bootstrap
 HOST_PYTHON3_BASE_DIR    = lib/python$(basename $(HOST_PYTHON3_VER))
 HOST_PYTHON3_INCLUDE_DIR = include/python$(basename $(HOST_PYTHON3_VER))
 
+HOST_PYTHON3_AUTORECONF = YES
+
+HOST_PYTHON3_CONF_OPTS = \
+	--without-ensurepip \
+	--without-cxx-main \
+	--disable-sqlite3 \
+	--disable-tk \
+	--with-expat=system \
+	--disable-curses \
+	--disable-codecs-cjk \
+	--disable-nis \
+	--enable-unicodedata \
+	--disable-test-modules \
+	--disable-idle3 \
+	--disable-ossaudiodev
+
 $(D)/host-python3:
 	$(START_BUILD)
 	$(REMOVE)
@@ -17,24 +33,7 @@ $(D)/host-python3:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		autoconf; \
-		CONFIG_SITE= \
-		OPT="$(HOST_CFLAGS)" \
-		./configure \
-			--prefix=$(HOST_DIR) \
-			--without-ensurepip \
-			--without-cxx-main \
-			--disable-sqlite3 \
-			--disable-tk \
-			--with-expat=system \
-			--disable-curses \
-			--disable-codecs-cjk \
-			--disable-nis \
-			--enable-unicodedata \
-			--disable-test-modules \
-			--disable-idle3 \
-			--disable-ossaudiodev \
-			; \
+		$(HOST_CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install
 	$(REMOVE)

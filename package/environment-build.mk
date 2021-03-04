@@ -197,6 +197,14 @@ endif
 
 # -----------------------------------------------------------------------------
 
+HOST_CPPFLAGS   = -I$(HOST_DIR)/include
+HOST_CFLAGS    ?= -O2
+HOST_CFLAGS    += $(HOST_CPPFLAGS)
+HOST_CXXFLAGS  += $(HOST_CFLAGS)
+HOST_LDFLAGS   += -L$(HOST_DIR)/lib -Wl,-rpath,$(HOST_DIR)/lib
+
+GNU_HOST_NAME  := $(shell support/gnuconfig/config.guess)
+
 TARGET_CFLAGS   = $(TARGET_OPTIMIZATION) $(TARGET_ABI) $(TARGET_EXTRA_CFLAGS) -I$(TARGET_INCLUDE_DIR)
 TARGET_CPPFLAGS = $(TARGET_CFLAGS)
 TARGET_CXXFLAGS = $(TARGET_CFLAGS)
@@ -218,14 +226,6 @@ TARGET_READELF  = $(TARGET_CROSS)readelf
 TARGET_OBJCOPY  = $(TARGET_CROSS)objcopy
 TARGET_OBJDUMP  = $(TARGET_CROSS)objdump
 TARGET_STRIP    = $(TARGET_CROSS)strip
-
-GNU_HOST_NAME  := $(shell support/gnuconfig/config.guess)
-
-HOST_CPPFLAGS   = -I$(HOST_DIR)/include
-HOST_CFLAGS    ?= -O2
-HOST_CFLAGS    += $(HOST_CPPFLAGS)
-HOST_CXXFLAGS  += $(HOST_CFLAGS)
-HOST_LDFLAGS   += -L$(HOST_DIR)/lib -Wl,-rpath,$(HOST_DIR)/lib
 
 # -----------------------------------------------------------------------------
 
@@ -267,6 +267,47 @@ GET-SVN-SOURCE  = support/scripts/get-svn-source.sh
 UPDATE-RC.D     = support/scripts/update-rc.d -r $(TARGET_DIR)
 
 # -----------------------------------------------------------------------------
+
+HOST_MAKE_ENV = \
+	PATH=$(PATH) \
+	PKG_CONFIG=/usr/bin/pkg-config \
+	PKG_CONFIG_LIBDIR="$(HOST_DIR)/lib/pkgconfig"
+
+HOST_CONFIGURE_ENV = \
+	$(HOST_MAKE_ENV) \
+	AR="$(HOSTAR)" \
+	AS="$(HOSTAS)" \
+	LD="$(HOSTLD)" \
+	NM="$(HOSTNM)" \
+	CC="$(HOSTCC)" \
+	GCC="$(HOSTCC)" \
+	CXX="$(HOSTCXX)" \
+	CPP="$(HOSTCPP)" \
+	OBJCOPY="$(HOSTOBJCOPY)" \
+	RANLIB="$(HOSTRANLIB)" \
+	CPPFLAGS="$(HOST_CPPFLAGS)" \
+	CFLAGS="$(HOST_CFLAGS)" \
+	CXXFLAGS="$(HOST_CXXFLAGS)" \
+	LDFLAGS="$(HOST_LDFLAGS)" \
+	$($(PKG)_CONF_ENV)
+
+HOST_CONFIGURE_OPTS = \
+	--prefix=$(HOST_DIR) \
+	--sysconfdir=$(HOST_DIR)/etc \
+	--localstatedir=$(HOST_DIR)/var \
+	--enable-shared \
+	--disable-static \
+	$($(PKG)_CONF_OPTS)
+
+HOST_CONFIGURE = \
+	if [ "$($(PKG)_AUTORECONF)" == "YES" ]; then \
+	  autoreconf -fi; \
+	fi; \
+	test -f ./configure || ./autogen.sh && \
+	CONFIG_SITE=/dev/null \
+	$(HOST_CONFIGURE_ENV) \
+	./configure \
+	$(HOST_CONFIGURE_OPTS)
 
 MAKE_OPTS = \
 	CROSS_COMPILE="$(TARGET_CROSS)" \

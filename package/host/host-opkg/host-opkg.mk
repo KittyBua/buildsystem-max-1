@@ -7,6 +7,16 @@ HOST_OPKG_SOURCE = opkg-$(HOST_OPKG_VER).tar.gz
 HOST_OPKG_SITE   = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
 HOST_OPKG_DEPS   = bootstrap host-libarchive
 
+HOST_OPKG_ENV = \
+	CFLAGS="-I$(HOST_DIR)/include" \
+	LDFLAGS="-L$(HOST_DIR)/lib"
+
+HOST_OPKG_CONF_OPTS = \
+	PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig \
+	--prefix= \
+	--disable-curl \
+	--disable-gpg
+
 $(D)/host-opkg:
 	$(START_BUILD)
 	$(REMOVE)
@@ -14,15 +24,7 @@ $(D)/host-opkg:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		./autogen.sh; \
-		CFLAGS="-I$(HOST_DIR)/include" \
-		LDFLAGS="-L$(HOST_DIR)/lib" \
-		./configure \
-			PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig \
-			--prefix= \
-			--disable-curl \
-			--disable-gpg \
-			; \
+		$(HOST_CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(HOST_DIR)
 	$(REMOVE)

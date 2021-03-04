@@ -14,10 +14,7 @@ $(D)/host-libffi:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		./configure \
-			--prefix=$(HOST_DIR) \
-			--disable-static \
-			; \
+		$(HOST_CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install
 	$(REMOVE)

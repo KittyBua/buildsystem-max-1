@@ -7,6 +7,8 @@ HOST_PKGCONF_SOURCE = pkgconf-$(HOST_PKGCONF_VER).tar.xz
 HOST_PKGCONF_SITE   = https://distfiles.dereferenced.org/pkgconf
 HOST_PKGCONF_DEPS   = directories
 
+PKG_CONFIG_HOST_BINARY = $(HOST_DIR)/bin/pkg-config
+
 $(D)/host-pkgconf:
 	$(START_BUILD)
 	$(REMOVE)
@@ -14,9 +16,7 @@ $(D)/host-pkgconf:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		./configure \
-			--prefix=$(HOST_DIR) \
-			; \
+		$(HOST_CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/pkgconf-config $(HOST_DIR)/bin/pkg-config

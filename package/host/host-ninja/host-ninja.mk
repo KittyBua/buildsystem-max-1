@@ -14,9 +14,7 @@ $(D)/host-ninja:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		cmake . \
-			-DCMAKE_INSTALL_PREFIX="" \
-		; \
+		cmake . -DCMAKE_INSTALL_PREFIX=""; \
 		$(MAKE)
 		$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/ninja $(HOST_DIR)/bin/ninja
 	$(REMOVE)

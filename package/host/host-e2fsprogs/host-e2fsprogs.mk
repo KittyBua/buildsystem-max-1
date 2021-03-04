@@ -14,9 +14,7 @@ $(D)/host-e2fsprogs:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		export PKG_CONFIG=/usr/bin/pkg-config; \
-		export PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig; \
-		./configure; \
+		$(HOST_CONFIGURE); \
 		$(MAKE)
 	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/resize/resize2fs $(HOST_DIR)/bin/
 	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/misc/mke2fs $(HOST_DIR)/bin/
