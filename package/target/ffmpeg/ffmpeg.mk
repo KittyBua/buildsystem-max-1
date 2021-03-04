@@ -276,6 +276,7 @@ FFMPEG_CONF_OPTS = \
 	\
 	--disable-filters \
 	--enable-filter=drawtext \
+	--enable-filter=overlay \
 	--enable-filter=scale \
 	\
 	--enable-bsfs \
@@ -331,7 +332,7 @@ $(D)/ffmpeg:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		./configure $($(PKG)_CONF_OPTS); \
+		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REMOVE)
