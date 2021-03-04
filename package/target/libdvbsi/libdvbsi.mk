@@ -2,9 +2,9 @@
 # libdvbsi
 #
 LIBDVBSI_VER    = git
-LIBDVBSI_DIR    = libdvbsi.git
-LIBDVBSI_SOURCE = libdvbsi.git
-LIBDVBSI_SITE   = https://github.com/OpenVisionE2
+LIBDVBSI_DIR    = libdvbsi++.git
+LIBDVBSI_SOURCE = libdvbsi++.git
+LIBDVBSI_SITE   = https://git.code.sf.net/p/tuxbox-cvs
 LIBDVBSI_DEPS   = bootstrap
 
 $(D)/libdvbsi:
