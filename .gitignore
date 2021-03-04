@@ -7,6 +7,7 @@
 /support/scripts/*-local*
 /host
 /own-files
+/own-patches
 /package/extras
 /release
 /release_image
