@@ -10,6 +10,9 @@ HOST_LUAROCKS_DEPS   = bootstrap host-lua
 HOST_LUAROCKS_CONFIG = $(HOST_DIR)/etc/luarocks/config-$(LUA_ABIVER).lua
 HOST_LUAROCKS_BINARY = $(HOST_DIR)/bin/luarocks
 
+HOST_LUAROCKS_CONF_OPTS = \
+	--with-lua=$(HOST_DIR)
+
 HOST_LUAROCKS_BUILD_ENV = \
 	LUA_PATH="$(HOST_DIR)/share/lua/$(HOST_LUA_ABIVER)/?.lua" \
 	TARGET_CC="$(TARGET_CC)" \
@@ -25,11 +28,7 @@ $(D)/host-luarocks:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		./configure \
-			--prefix=$(HOST_DIR) \
-			--sysconfdir=$(HOST_DIR)/etc \
-			--with-lua=$(HOST_DIR) \
-			; \
+		$(HOST_CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install
 	cat $(PKG_FILES_DIR)/luarocks-config.lua >> $(HOST_LUAROCKS_CONFIG)
