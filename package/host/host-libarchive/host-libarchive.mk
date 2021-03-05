@@ -8,7 +8,6 @@ HOST_LIBARCHIVE_SITE   = https://www.libarchive.org/downloads
 HOST_LIBARCHIVE_DEPS   = bootstrap
 
 HOST_LIBARCHIVE_CONF_OPTS = \
-	--prefix= \
 	--without-xml2
 
 $(D)/host-libarchive:
@@ -20,6 +19,6 @@ $(D)/host-libarchive:
 	$(CD_BUILD_DIR); \
 		$(HOST_CONFIGURE); \
 		$(MAKE); \
-		$(MAKE) install DESTDIR=$(HOST_DIR)
+		$(MAKE) install
 	$(REMOVE)
 	$(TOUCH)
