@@ -185,7 +185,7 @@ $(D)/neutrino.do_prepare:
 	$(call APPLY_PATCHES_S,$(NEUTRINO_DIR))
 	@touch $@
 
-$(D)/neutrino.config.status:
+$(D)/neutrino.config.status: | $(NEUTRINO_DEPS)
 	rm -rf $(NEUTRINO_OBJ_DIR)
 	test -d $(NEUTRINO_OBJ_DIR) || mkdir -p $(NEUTRINO_OBJ_DIR)
 	cd $(NEUTRINO_OBJ_DIR); \
