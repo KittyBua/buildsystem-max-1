@@ -365,13 +365,19 @@ CONFIGURE = \
 
 # -----------------------------------------------------------------------------
 
-CMAKE_OPTS = \
+TARGET_CMAKE_ENV = \
+	$($(PKG)_CONF_ENV)
+
+TARGET_CMAKE_OPTS = \
+	--no-warn-unused-cli 
+
+TARGET_CMAKE_OPTS += \
 	-DBUILD_SHARED_LIBS=ON \
 	-DENABLE_STATIC=OFF \
 	-DCMAKE_BUILD_TYPE="None" \
 	-DCMAKE_SYSTEM_NAME="Linux" \
 	-DCMAKE_SYSTEM_PROCESSOR="$(TARGET_ARCH)" \
-	-DCMAKE_INSTALL_PREFIX="/usr" \
+	-DCMAKE_INSTALL_PREFIX="$(prefix)" \
 	-DCMAKE_INSTALL_DOCDIR="$(REMOVE_docdir)" \
 	-DCMAKE_INSTALL_MANDIR="$(REMOVE_mandir)" \
 	-DCMAKE_PREFIX_PATH="$(TARGET_DIR)" \
@@ -390,12 +396,14 @@ CMAKE_OPTS = \
 	-DCMAKE_OBJDUMP="$(TARGET_OBJDUMP)" \
 	-DCMAKE_RANLIB="$(TARGET_RANLIB)" \
 	-DCMAKE_READELF="$(TARGET_READELF)" \
-	-DCMAKE_STRIP="$(TARGET_STRIP)" \
+	-DCMAKE_STRIP="$(TARGET_STRIP)"
+
+TARGET_CMAKE_OPTS += \
 	$($(PKG)_CONF_OPTS)
 
 CMAKE = \
 	rm -f CMakeCache.txt; \
-	cmake . --no-warn-unused-cli $(CMAKE_OPTS)
+	$(TARGET_CMAKE_ENV) cmake $(TARGET_CMAKE_OPTS)
 
 # -----------------------------------------------------------------------------
 
