@@ -12,8 +12,6 @@ HOST_OPKG_ENV = \
 	LDFLAGS="-L$(HOST_DIR)/lib"
 
 HOST_OPKG_CONF_OPTS = \
-	PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig \
-	--prefix= \
 	--disable-curl \
 	--disable-gpg
 
@@ -26,6 +24,6 @@ $(D)/host-opkg:
 	$(CD_BUILD_DIR); \
 		$(HOST_CONFIGURE); \
 		$(MAKE); \
-		$(MAKE) install DESTDIR=$(HOST_DIR)
+		$(MAKE) install
 	$(REMOVE)
 	$(TOUCH)
