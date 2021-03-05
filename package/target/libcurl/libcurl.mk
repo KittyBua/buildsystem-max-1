@@ -33,6 +33,8 @@ LIBCURL_CONF_OPTS = \
 	--with-random=/dev/urandom \
 	--with-ssl=$(TARGET_DIR)/usr
 
+LIBCURL_CONFIG_SCRIPTS = curl-config
+
 $(D)/libcurl:
 	$(START_BUILD)
 	$(REMOVE)
@@ -43,8 +45,7 @@ $(D)/libcurl:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	mv $(TARGET_DIR)/usr/bin/curl-config $(HOST_DIR)/bin/
-	$(REWRITE_CONFIG) $(HOST_DIR)/bin/curl-config
+	$(REWRITE_CONFIG_SCRIPTS)
 	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

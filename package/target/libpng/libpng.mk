@@ -12,6 +12,8 @@ LIBPNG_CONF_OPTS = \
 	--disable-mips-msa \
 	--disable-powerpc-vsx
 
+LIBPNG_CONFIG_SCRIPTS = libpng$(LIBPNG_VER_X)-config
+
 $(D)/libpng:
 	$(START_BUILD)
 	$(REMOVE)
@@ -22,8 +24,7 @@ $(D)/libpng:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	mv $(TARGET_DIR)/usr/bin/libpng*-config $(HOST_DIR)/bin/
-	$(REWRITE_CONFIG) $(HOST_DIR)/bin/libpng$(LIBPNG_VER_X)-config
+	$(REWRITE_CONFIG_SCRIPTS)
 	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

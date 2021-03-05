@@ -12,6 +12,8 @@ PCRE_CONF_OPTS = \
 	--enable-utf8 \
 	--enable-unicode-properties
 
+PCRE_CONFIG_SCRIPTS = pcre-config
+
 $(D)/pcre:
 	$(START_BUILD)
 	$(REMOVE)
@@ -22,8 +24,7 @@ $(D)/pcre:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	mv $(TARGET_DIR)/usr/bin/pcre-config $(HOST_DIR)/bin/pcre-config
-	$(REWRITE_CONFIG) $(HOST_DIR)/bin/pcre-config
+	$(REWRITE_CONFIG_SCRIPTS)
 	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

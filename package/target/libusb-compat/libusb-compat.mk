@@ -12,6 +12,8 @@ LIBUSB_CONF_OPTS = \
 	--disable-debug-log \
 	--disable-examples-build
 
+LIBUSB_COMPAT_CONFIG_SCRIPTS = libusb-config
+
 $(D)/libusb-compat:
 	$(START_BUILD)
 	$(REMOVE)
@@ -22,8 +24,7 @@ $(D)/libusb-compat:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	mv $(TARGET_DIR)/usr/bin/libusb-config $(HOST_DIR)/bin
-	$(REWRITE_CONFIG) $(HOST_DIR)/bin/libusb-config
+	$(REWRITE_CONFIG_SCRIPTS)
 	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

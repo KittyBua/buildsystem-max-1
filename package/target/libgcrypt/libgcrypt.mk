@@ -9,9 +9,9 @@ LIBGCRYPT_DEPS   = bootstrap libgpg-error
 
 LIBGCRYPT_CONF_OPTS = \
 	--enable-shared \
-	--disable-static \
-	--disable-tests \
-	--with-gpg-error-prefix=$(TARGET_DIR)/usr
+	--disable-static
+
+LIBGCRYPT_CONFIG_SCRIPTS = libgcrypt-config
 
 $(D)/libgcrypt:
 	$(START_BUILD)
@@ -23,8 +23,7 @@ $(D)/libgcrypt:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	mv $(TARGET_DIR)/usr/bin/libgcrypt-config $(HOST_DIR)/bin
-	$(REWRITE_CONFIG) $(HOST_DIR)/bin/libgcrypt-config
+	$(REWRITE_CONFIG_SCRIPTS)
 	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

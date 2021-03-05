@@ -22,6 +22,8 @@ LIBXML2_CONF_OPTS = \
 	--without-lzma \
 	--with-zlib=$(TARGET_DIR)/usr
 
+LIBXML2_CONFIG_SCRIPTS = xml2-config
+
 $(D)/libxml2:
 	$(START_BUILD)
 	$(REMOVE)
@@ -35,10 +37,9 @@ $(D)/libxml2:
 	if [ -d $(TARGET_INCLUDE_DIR)/libxml2/libxml ] ; then \
 		ln -sf ./libxml2/libxml $(TARGET_INCLUDE_DIR)/libxml; \
 	fi
-	mv $(TARGET_DIR)/usr/bin/xml2-config $(HOST_DIR)/bin
-	$(REWRITE_CONFIG) $(HOST_DIR)/bin/xml2-config
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,xmlcatalog xmllint)
-	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake xml2Conf.sh)
+	$(REWRITE_CONFIG_SCRIPTS)
 	$(REWRITE_LIBTOOL)
 	$(REMOVE)
+	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,xmlcatalog xmllint)
+	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake xml2Conf.sh)
 	$(TOUCH)

@@ -17,6 +17,8 @@ LIBGPG_ERROR_CONF_OPTS = \
 	--disable-languages \
 	--disable-tests
 
+LIBGPG_ERROR_CONFIG_SCRIPTS = gpg-error-config
+
 $(D)/libgpg-error:
 	$(START_BUILD)
 	$(REMOVE)
@@ -27,8 +29,8 @@ $(D)/libgpg-error:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_CONFIG) $(TARGET_DIR)/usr/bin/gpg-error-config
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gpg-error gpgrt-config yat2m)
+	$(REWRITE_CONFIG_SCRIPTS)
 	$(REWRITE_LIBTOOL)
 	$(REMOVE)
+	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gpg-error gpgrt-config yat2m)
 	$(TOUCH)

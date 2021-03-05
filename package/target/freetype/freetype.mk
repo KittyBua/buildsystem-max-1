@@ -22,6 +22,8 @@ FREETYPE_CONF_OPTS = \
 	--without-bzip2 \
 	--without-brotli
 
+FREETYPE_CONFIG_SCRIPTS = freetype-config
+
 $(D)/freetype:
 	$(START_BUILD)
 	$(REMOVE)
@@ -37,8 +39,7 @@ $(D)/freetype:
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	ln -sf freetype2 $(TARGET_INCLUDE_DIR)/freetype
-	mv $(TARGET_DIR)/usr/bin/freetype-config $(HOST_DIR)/bin
-	$(REWRITE_CONFIG) $(HOST_DIR)/bin/freetype-config
+	$(REWRITE_CONFIG_SCRIPTS)
 	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)

@@ -128,7 +128,18 @@ REWRITE_CONFIG_RULES = \
 	 s,^libdir=.*,libdir='$(TARGET_LIB_DIR)',; \
 	 s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
 
-REWRITE_CONFIG = @$(SED) $(REWRITE_CONFIG_RULES)
+define rewrite_config_script
+	@( \
+	mv $(TARGET_DIR)/$(bindir)/$(1) $(HOST_DIR)/bin; \
+	$(call MESSAGE,"Rewriting $(1)"); \
+	$(SED) $(REWRITE_CONFIG_RULES) $(HOST_DIR)/bin/$(1); \
+	)
+endef
+
+# rewrite config scripts automatically
+REWRITE_CONFIG_SCRIPTS = \
+	$(foreach config_script,$($(PKG)_CONFIG_SCRIPTS),\
+		$(call rewrite_config_script,$(config_script))$(sep))
 
 # -----------------------------------------------------------------------------
 

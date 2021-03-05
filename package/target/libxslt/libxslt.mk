@@ -17,6 +17,8 @@ LIBXSLT_CONF_OPTS = \
 	--without-debug \
 	--without-mem-debug
 
+LIBXSLT_CONFIG_SCRIPTS = xslt-config
+
 $(D)/libxslt:
 	$(START_BUILD)
 	$(REMOVE)
@@ -27,10 +29,9 @@ $(D)/libxslt:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	mv $(TARGET_DIR)/usr/bin/xslt-config $(HOST_DIR)/bin
-	$(REWRITE_CONFIG) $(HOST_DIR)/bin/xslt-config
-	rm -rf $(TARGETLIB)/xsltConf.sh
-	rm -rf $(TARGETLIB)/libxslt-plugins/
+	$(REWRITE_CONFIG_SCRIPTS)
 	$(REWRITE_LIBTOOL)
 	$(REMOVE)
+	rm -rf $(TARGETLIB)/xsltConf.sh
+	rm -rf $(TARGETLIB)/libxslt-plugins/
 	$(TOUCH)
