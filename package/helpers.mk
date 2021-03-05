@@ -139,7 +139,7 @@ endef
 
 define TOUCH
 	@$(call MESSAGE,"Building completed")
-	@touch $@
+	@touch $(if $(findstring host-,$(notdir $@)),$(HOST_DEPS_DIR),$(DEPS_DIR))/$(notdir $@)
 	@echo ""
 endef
 
