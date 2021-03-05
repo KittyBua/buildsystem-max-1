@@ -8,6 +8,10 @@ HOST_CCACHE_DEPS = directories
 HOST_CCACHE_BIN    = $(CCACHE)
 HOST_CCACHE_BINDIR = $(HOST_DIR)/ccache-bin
 
+CCACHE     = /usr/bin/ccache
+CCACHE_DIR = $(HOME)/.ccache-bs-$(TARGET_ARCH)-$(CROSSTOOL_GCC_VER)-max
+export CCACHE_DIR
+
 HOST_CCACHE_LINKS = \
 	ln -sf $(HOST_CCACHE_BIN) $(HOST_CCACHE_BINDIR)/cc; \
 	ln -sf $(HOST_CCACHE_BIN) $(HOST_CCACHE_BINDIR)/gcc; \

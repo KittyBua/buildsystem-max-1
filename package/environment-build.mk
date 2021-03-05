@@ -64,12 +64,6 @@ CD_BUILD_DIR    = $(CD) $(PKG_BUILD_DIR)
 
 # -----------------------------------------------------------------------------
 
-CCACHE     = /usr/bin/ccache
-CCACHE_DIR = $(HOME)/.ccache-bs-$(TARGET_ARCH)-max
-export CCACHE_DIR
-
-# -----------------------------------------------------------------------------
-
 BOXMODEL ?= hd51
 ifeq ($(BOXMODEL),bre2ze4k)
   BOXNAME     = "WWIO BRE2ZE4K"
