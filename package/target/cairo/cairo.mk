@@ -30,11 +30,11 @@ $(D)/cairo:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
+	$(REWRITE_LIBTOOL)
+	$(REMOVE)
 	rm -rf $(TARGET_DIR)/usr/bin/cairo-sphinx
 	rm -rf $(TARGET_LIB_DIR)/cairo/cairo-fdr*
 	rm -rf $(TARGET_LIB_DIR)/cairo/cairo-sphinx*
 	rm -rf $(TARGET_LIB_DIR)/cairo/.debug/cairo-fdr*
 	rm -rf $(TARGET_LIB_DIR)/cairo/.debug/cairo-sphinx*
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
 	$(TOUCH)

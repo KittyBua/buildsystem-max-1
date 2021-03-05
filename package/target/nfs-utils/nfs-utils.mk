@@ -44,7 +44,7 @@ $(D)/nfs-utils:
 	$(UPDATE-RC.D) nfsserver defaults 13
 	$(UPDATE-RC.D) nfscommon defaults 19 11
 	chmod 0755 $(TARGET_DIR)/sbin/mount.nfs
+	$(REMOVE)
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,mount.nfs4 umount.nfs umount.nfs4)
 	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,mountstats nfsiostat)
-	$(REMOVE)
 	$(TOUCH)

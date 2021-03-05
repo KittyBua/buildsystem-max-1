@@ -49,9 +49,9 @@ $(D)/e2fsprogs:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
+	$(REMOVE)
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,badblocks dumpe2fs e2freefrag e2mmpstatus e2undo e4crypt filefrag logsave mklost+found)
 	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,mk_cmds uuidd)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,chattr compile_et irqtop mk_cmds lsattr uuidgen)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,et ss)
-	$(REMOVE)
 	$(TOUCH)

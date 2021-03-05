@@ -20,6 +20,6 @@ $(D)/pugixml:
 		$(CMAKE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	cd $(TARGET_DIR) && rm -rf usr/lib/cmake
 	$(REMOVE)
+	rm -rf $(addprefix $(TARGET_DIR)/usr/lib/,cmake)
 	$(TOUCH)

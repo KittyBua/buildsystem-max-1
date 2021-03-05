@@ -27,7 +27,7 @@ $(D)/mc:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
+	$(REMOVE)
 	rm -rf $(TARGET_SHARE_DIR)/mc/examples
 	find $(TARGET_SHARE_DIR)/mc/skins -type f ! -name default.ini | xargs --no-run-if-empty rm
-	$(REMOVE)
 	$(TOUCH)

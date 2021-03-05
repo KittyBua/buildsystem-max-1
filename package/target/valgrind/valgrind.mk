@@ -26,7 +26,7 @@ $(D)/valgrind:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
+	$(REMOVE)
 	rm -f $(addprefix $(TARGET_DIR)/usr/lib/valgrind/,*.a *.xml)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,cg_* callgrind_* ms_print)
-	$(REMOVE)
 	$(TOUCH)

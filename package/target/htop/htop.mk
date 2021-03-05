@@ -29,7 +29,7 @@ $(D)/htop:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,applications icons pixmaps)
 	ln -sf htop $(TARGET_DIR)/usr/bin/top
 	$(REMOVE)
+	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,applications icons pixmaps)
 	$(TOUCH)

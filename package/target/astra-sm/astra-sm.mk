@@ -27,6 +27,6 @@ $(D)/astra-sm:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,astra)
 	$(REMOVE)
+	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,astra)
 	$(TOUCH)

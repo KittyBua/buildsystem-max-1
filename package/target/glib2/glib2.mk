@@ -31,7 +31,7 @@ $(D)/glib2:
 		$($(PKG)_CONF_OPTS); \
 		$(NINJA); \
 		$(NINJA_INSTALL)
+	$(REMOVE)
 	rm -rf $(addprefix $(TARGET_DIR)/usr/share/,gettext gdb glib-2.0 locale)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gdbus-codegen glib-compile-schemas glib-compile-resources glib-genmarshal glib-gettextize gio-launch-desktop glib-mkenums gobject-query gtester gtester-report)
-	$(REMOVE)
 	$(TOUCH)

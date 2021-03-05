@@ -17,7 +17,7 @@ $(D)/libevent:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,event_rpcgen.py)
 	$(REWRITE_LIBTOOL)
 	$(REMOVE)
+	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,event_rpcgen.py)
 	$(TOUCH)

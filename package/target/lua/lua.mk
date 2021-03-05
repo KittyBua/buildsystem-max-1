@@ -27,6 +27,6 @@ $(D)/lua:
 			; \
 		$(INSTALL_DATA) -D $(BUILD_DIR)/lua-$(LUA_VER)/etc/lua.pc \
 			$(PKG_CONFIG_PATH)/lua.pc
-	rm -rf $(addprefix $(TARGET_DIR)/bin/,luac)
 	$(REMOVE)
+	rm -rf $(addprefix $(TARGET_DIR)/bin/,luac)
 	$(TOUCH)

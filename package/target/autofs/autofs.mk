@@ -52,6 +52,6 @@ $(D)/autofs:
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/autofs.init $(TARGET_DIR)/etc/init.d/autofs
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/volatiles.99_autofs $(TARGET_DIR)/etc/default/volatiles/99_autofs
 	$(UPDATE-RC.D) autofs defaults 17
-	rm -f $(addprefix $(TARGET_DIR)/etc/,autofs_ldap_auth.conf)
 	$(REMOVE)
+	rm -f $(addprefix $(TARGET_DIR)/etc/,autofs_ldap_auth.conf)
 	$(TOUCH)

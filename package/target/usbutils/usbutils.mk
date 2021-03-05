@@ -22,8 +22,8 @@ $(D)/usbutils:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
+	$(REMOVE)
 	rm -rf $(addprefix $(TARGET_DIR)/usr/bin/,lsusb.py usbhid-dump)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,pkgconfig)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/hwdata/,usb.ids.gz)
-	$(REMOVE)
 	$(TOUCH)

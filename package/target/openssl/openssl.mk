@@ -42,8 +42,8 @@ $(D)/openssl:
 		$(MAKE) depend; \
 		$(MAKE); \
 		$(MAKE) install_sw install_ssldirs DESTDIR=$(TARGET_DIR)
+	$(REMOVE)
 	rm -f $(addprefix $(TARGET_DIR)/etc/ssl/misc/,CA.pl tsget)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,openssl c_rehash)
 	rm -rf $(addprefix $(TARGET_DIR)/usr/lib/,engines-1.1)
-	$(REMOVE)
 	$(TOUCH)

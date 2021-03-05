@@ -37,9 +37,9 @@ $(D)/alsa-lib:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
+	$(REWRITE_LIBTOOL)
+	$(REMOVE)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/alsa/,topology ucm)
 	find $(TARGET_SHARE_DIR)/alsa/cards/ -not -name 'aliases.conf' -name '*.conf' -exec rm -f {} \;
 	find $(TARGET_SHARE_DIR)/alsa/pcm/ -not -name 'default.conf' -not -name 'dmix.conf' -name '*.conf' -exec rm -f {} \;
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
 	$(TOUCH)

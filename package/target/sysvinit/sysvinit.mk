@@ -29,7 +29,7 @@ $(D)/sysvinit:
 #	ln -sf bootlogd $(TARGET_DIR)/etc/init.d/stop-bootlogd
 #	$(UPDATE-RC.D) bootlogd start 07 S .
 #	$(UPDATE-RC.D) stop-bootlogd start 99 2 3 4 5 .
+	$(REMOVE)
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,fstab-decode logsave telinit)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,lastb)
-	$(REMOVE)
 	$(TOUCH)

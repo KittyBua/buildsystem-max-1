@@ -20,6 +20,6 @@ $(D)/strace:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,strace-graph strace-log-merge)
 	$(REMOVE)
+	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,strace-graph strace-log-merge)
 	$(TOUCH)
