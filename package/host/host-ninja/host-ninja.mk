@@ -7,6 +7,8 @@ HOST_NINJA_SOURCE = ninja-$(HOST_NINJA_VER).tar.gz
 HOST_NINJA_SITE   = $(call github,ninja-build,ninja,v$(HOST_NINJA_VER))
 HOST_NINJA_DEPS   = bootstrap
 
+HOST_NINJA = $(HOST_DIR)/bin/ninja
+
 $(D)/host-ninja:
 	$(START_BUILD)
 	$(REMOVE)

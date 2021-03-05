@@ -27,11 +27,10 @@ $(D)/glib2:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		unset CC CXX CPP LD AR NM STRIP; \
-		$(HOST_DIR)/bin/meson builddir/ --buildtype=release --cross-file $(HOST_DIR)/bin/meson-cross-config \
+		$(MESON_CONFIGURE) \
 		$($(PKG)_CONF_OPTS); \
-	$(CD_BUILD_DIR); \
-		DESTDIR=$(TARGET_DIR) $(HOST_DIR)/bin/ninja -C builddir install
+		$(NINJA); \
+		$(NINJA_INSTALL)
 	rm -rf $(addprefix $(TARGET_DIR)/usr/share/,gettext gdb glib-2.0 locale)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gdbus-codegen glib-compile-schemas glib-compile-resources glib-genmarshal glib-gettextize gio-launch-desktop glib-mkenums gobject-query gtester gtester-report)
 	$(REMOVE)
