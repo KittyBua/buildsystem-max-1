@@ -14,8 +14,7 @@ KMOD_CONF_OPTS = \
 	--disable-static \
 	--enable-shared \
 	--disable-manpages \
-	--without-zlib \
-	--without-zstd
+	--without-zlib
 
 $(D)/kmod:
 	$(START_BUILD)

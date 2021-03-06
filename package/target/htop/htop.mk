@@ -15,9 +15,7 @@ HTOP_CONF_ENV = \
 
 HTOP_CONF_OPTS = \
 	--disable-unicode \
-	--disable-hwloc \
-	--enable-cgroup \
-	--enable-taskstats
+	--disable-hwloc
 
 $(D)/htop:
 	$(START_BUILD)

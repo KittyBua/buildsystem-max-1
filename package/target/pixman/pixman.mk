@@ -10,8 +10,7 @@ PIXMAN_DEPS   = bootstrap zlib libpng
 PIXMAN_CONF_OPTS = \
 	--disable-gtk \
 	--disable-arm-simd \
-	--disable-loongson-mmi \
-	--disable-docs
+	--disable-loongson-mmi
 
 $(D)/pixman:
 	$(START_BUILD)

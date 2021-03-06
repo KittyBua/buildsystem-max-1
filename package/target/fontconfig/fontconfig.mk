@@ -8,7 +8,6 @@ FONTCONFIG_SITE   = https://www.freedesktop.org/software/fontconfig/release
 FONTCONFIG_DEPS   = bootstrap freetype expat
 
 FONTCONFIG_CONF_OPTS = \
-	--with-freetype-config=$(HOST_DIR)/bin/freetype-config \
 	--with-expat-includes=$(TARGET_INCLUDE_DIR) \
 	--with-expat-lib=$(TARGET_LIB_DIR) \
 	--disable-docs 
