@@ -1,21 +1,42 @@
-TOOLCHECK  = find-git find-svn find-gzip find-bzip2 find-patch find-gawk
-TOOLCHECK += find-makeinfo find-automake find-gcc find-libtool
-TOOLCHECK += find-yacc find-flex find-tic find-pkg-config find-help2man
-TOOLCHECK += find-cmake find-gperf
+TOOLCHECK  =
+TOOLCHECK += find-automake
+TOOLCHECK += find-autopoint
+TOOLCHECK += find-bc
+TOOLCHECK += find-bison
+TOOLCHECK += find-bzip2
+TOOLCHECK += find-ccache
+TOOLCHECK += find-cmake
+TOOLCHECK += find-curl
+TOOLCHECK += find-flex
+TOOLCHECK += find-gawk
+TOOLCHECK += find-gcc
+TOOLCHECK += find-gettext
+TOOLCHECK += find-git
+TOOLCHECK += find-gperf
+TOOLCHECK += find-gzip
+TOOLCHECK += find-help2man
+TOOLCHECK += find-libtool
+TOOLCHECK += find-lzma
+TOOLCHECK += find-makeinfo
+TOOLCHECK += find-patch
+TOOLCHECK += find-pkg-config
+TOOLCHECK += find-python
+TOOLCHECK += find-svn
+TOOLCHECK += find-tic
+TOOLCHECK += find-yacc
 
 find-%:
-	@TOOL=$(patsubst find-%,%,$@); \
-		type -p $$TOOL >/dev/null || \
-		{ echo "required tool $$TOOL missing."; false; }
+	@TOOL=$(patsubst find-%,%,$(@)); type -p $$TOOL >/dev/null || \
+		{ $(call MESSAGE_RED,"Warning",": required tool $$TOOL missing."); false; }
 
-toolcheck: $(TOOLCHECK) preqs
-	@echo "All required tools seem to be installed."
-	@echo
-	@if test "$(subst /bin/,,$(shell readlink /bin/sh))" != bash; then \
-		echo "WARNING: /bin/sh is not linked to bash."; \
-		echo "         This configuration might work, but is not supported."; \
-		echo; \
-	fi
+bashcheck:
+	@test "$(subst /bin/,,$(shell readlink /bin/sh))" == "bash" || \
+		{ $(call MESSAGE_RED,"Warning",": /bin/sh is not linked to bash"); false; }
+
+toolcheck: bashcheck $(TOOLCHECK) preqs
+	@$(call MESSAGE_GREEN,"All required tools seem to be installed.")
+
+# -----------------------------------------------------------------------------
 
 #
 # preqs
