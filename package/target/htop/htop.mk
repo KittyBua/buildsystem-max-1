@@ -5,7 +5,7 @@ HTOP_VER    = 3.0.5
 HTOP_DIR    = htop-$(HTOP_VER)
 HTOP_SOURCE = htop-$(HTOP_VER).tar.gz
 HTOP_SITE   = $(call github,htop-dev,htop,$(HTOP_VER))
-HTOP_DEPS   = bootstrap ncurses
+HTOP_DEPS   = bootstrap ncurses libnl
 
 HTOP_AUTORECONF = YES
 
