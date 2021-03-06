@@ -1,7 +1,7 @@
 #
 # openssh
 #
-OPENSSH_VER    = 8.4p1
+OPENSSH_VER    = 8.5p1
 OPENSSH_DIR    = openssh-$(OPENSSH_VER)
 OPENSSH_SOURCE = openssh-$(OPENSSH_VER).tar.gz
 OPENSSH_SITE   = https://artfiles.org/openbsd/OpenSSH/portable
