@@ -14,8 +14,9 @@ HTOP_CONF_ENV = \
 	ac_cv_file__proc_meminfo=yes
 
 HTOP_CONF_OPTS = \
-	--disable-unicode \
-	--disable-hwloc
+	--enable-unicode \
+	--enable-linux-affinity \
+	--enable-delayacct
 
 $(D)/htop:
 	$(START_BUILD)
