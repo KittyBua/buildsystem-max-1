@@ -48,35 +48,35 @@ e2-multiboot:
 # -----------------------------------------------------------------------------
 
 N_OMDB_API_KEY ?=
-ifneq ($(strip $(OMDB_API_KEY)),)
+ifneq ($(strip $(N_OMDB_API_KEY)),)
 N_CONFIG_KEYS += \
 	--with-omdb-api-key="$(N_OMDB_API_KEY)" \
 	--disable-omdb-key-manage
 endif
 
 N_TMDB_DEV_KEY ?=
-ifneq ($(strip $(TMDB_DEV_KEY)),)
+ifneq ($(strip $(N_TMDB_DEV_KEY)),)
 N_CONFIG_KEYS += \
 	--with-tmdb-dev-key="$(N_TMDB_DEV_KEY)" \
 	--disable-tmdb-key-manage
 endif
 
 N_YOUTUBE_DEV_KEY ?=
-ifneq ($(strip $(YOUTUBE_DEV_KEY)),)
+ifneq ($(strip $(N_YOUTUBE_DEV_KEY)),)
 N_CONFIG_KEYS += \
 	--with-youtube-dev-key="$(N_YOUTUBE_DEV_KEY)" \
 	--disable-youtube-key-manage
 endif
 
 N_SHOUTCAST_DEV_KEY ?=
-ifneq ($(strip $(SHOUTCAST_DEV_KEY)),)
+ifneq ($(strip $(N_SHOUTCAST_DEV_KEY)),)
 N_CONFIG_KEYS += \
 	--with-shoutcast-dev-key="$(N_SHOUTCAST_DEV_KEY)" \
 	--disable-shoutcast-key-manage
 endif
 
 N_WEATHER_DEV_KEY ?=
-ifneq ($(strip $(WEATHER_DEV_KEY)),)
+ifneq ($(strip $(N_WEATHER_DEV_KEY)),)
 N_CONFIG_KEYS += \
 	--with-weather-dev-key="$(N_WEATHER_DEV_KEY)" \
 	--disable-weather-key-manage
