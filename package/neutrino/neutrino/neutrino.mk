@@ -102,14 +102,19 @@ NEUTRINO_DEPS += openthreads
 NEUTRINO_DEPS += pugixml
 
 NEUTRINO_DEPS += $(LOCAL_NEUTRINO_DEPS)
-N_CONFIG_OPTS  = $(LOCAL_NEUTRINO_BUILD_OPTIONS)
 
+N_CONFIG_OPTS  =
 ifeq ($(BOXTYPE),armbox)
 N_CONFIG_OPTS += --disable-arm-acc
+N_CONFIG_OPTS += --enable-dynamicdemux
+N_CONFIG_OPTS += --enable-pip
 endif
 ifeq ($(BOXTYPE),mipsbox)
 N_CONFIG_OPTS += --disable-mips-acc
+N_CONFIG_OPTS += --enable-dynamicdemux
+N_CONFIG_OPTS += --enable-pip
 endif
+N_CONFIG_OPTS += $(LOCAL_NEUTRINO_BUILD_OPTIONS)
 
 EXTERNAL_LCD ?= both
 ifeq ($(EXTERNAL_LCD),graphlcd)
