@@ -1,7 +1,7 @@
 #
 # sysvinit
 #
-SYSVINIT_VER    = 2.98
+SYSVINIT_VER    = 2.99
 SYSVINIT_DIR    = sysvinit-$(SYSVINIT_VER)
 SYSVINIT_SOURCE = sysvinit-$(SYSVINIT_VER).tar.xz
 SYSVINIT_SITE   = http://download.savannah.nongnu.org/releases/sysvinit

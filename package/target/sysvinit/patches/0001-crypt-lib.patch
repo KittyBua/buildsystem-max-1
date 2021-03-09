@@ -18,7 +18,7 @@ diff --git a/src/Makefile b/src/Makefile
 index 5b1a5a2..b686394 100644
 --- a/src/Makefile
 +++ b/src/Makefile
-@@ -97,15 +97,8 @@ else
+@@ -90,15 +90,8 @@ else
  endif
  
  # Additional libs for GNU libc.
