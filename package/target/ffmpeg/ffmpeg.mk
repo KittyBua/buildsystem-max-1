@@ -23,8 +23,6 @@ FFMPEG_CONF_OPTS = \
 	--disable-amd3dnow \
 	--disable-amd3dnowext \
 	--disable-armv5te \
-	--disable-armv6 \
-	--disable-armv6t2 \
 	--disable-avx \
 	--disable-avx2 \
 	--disable-fast-unaligned \
@@ -42,7 +40,6 @@ FFMPEG_CONF_OPTS = \
 	--disable-sse4 \
 	--disable-sse42 \
 	--disable-ssse3 \
-	--disable-vfp \
 	--disable-xop \
 	--disable-x86asm \
 	\
@@ -304,9 +301,17 @@ FFMPEG_CONF_OPTS = \
 	--enable-hardcoded-tables
 
 ifeq ($(TARGET_ARCH), arm)
+FFMPEG_CONF_OPTS += --enable-armv6
+FFMPEG_CONF_OPTS += --enable-armv6t2
+FFMPEG_CONF_OPTS += --enable-neon
+FFMPEG_CONF_OPTS += --enable-vfp
 FFMPEG_CONF_OPTS += --cpu=cortex-a15
 endif
 ifeq ($(TARGET_ARCH), mips)
+FFMPEG_CONF_OPTS += --disable-armv6
+FFMPEG_CONF_OPTS += --disable-armv6t2
+FFMPEG_CONF_OPTS += --disable-neon
+FFMPEG_CONF_OPTS += --disable-vfp
 FFMPEG_CONF_OPTS += --cpu=generic
 endif
 
