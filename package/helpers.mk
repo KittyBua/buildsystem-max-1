@@ -273,11 +273,11 @@ rewrite-test:
 
 #
 neutrino-patch:
-	@printf "$(TERM_YELLOW)---> create $(NEUTRINO) patch ... $(TERM_NORMAL)"
-	$(shell cd $(SOURCE_DIR) && diff -Nur --exclude-from=../support/misc/diff-exclude $(NEUTRINO_DIR).org $(NEUTRINO_DIR) > $(BUILD_DIR)/$(NEUTRINO)-$(DATE).patch)
+	@printf "$(TERM_YELLOW)---> create $(NEUTRINO)-$(DATE).patch ... $(TERM_NORMAL)"
+	$(shell cd $(SOURCE_DIR)/$(NEUTRINO_DIR) && git diff > $(BUILD_DIR)/$(NEUTRINO)-$(DATE).patch)
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 libstb-hal-patch:
-	@printf "$(TERM_YELLOW)---> create $(LIBSTB_HAL) patch ... $(TERM_NORMAL)"
-	$(shell cd $(SOURCE_DIR) && diff -Nur --exclude-from=../support/misc/diff-exclude $(LIBSTB_HAL_DIR).org $(LIBSTB_HAL_DIR) > $(BUILD_DIR)/$(LIBSTB_HAL)-$(DATE).patch)
+	@printf "$(TERM_YELLOW)---> create $(LIBSTB_HAL)-$(DATE).patch ... $(TERM_NORMAL)"
+	$(shell cd $(SOURCE_DIR)/$(LIBSTB_HAL_DIR) && git diff > $(BUILD_DIR)/$(LIBSTB_HAL)-$(DATE).patch)
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"

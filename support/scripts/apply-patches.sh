@@ -164,10 +164,10 @@ touch ${builddir}/.applied_patches_list
 scan_patchdir "$patchdir" "$patchpattern"
 
 # Check for rejects...
-#if [ "`find $builddir/ '(' -name '*.rej' -o -name '.*.rej' ')' -print`" ] ; then
-#    echo "Aborting.  Reject files found."
-#    exit 1
-#fi
+if [ "`find $builddir/ '(' -name '*.rej' -o -name '.*.rej' ')' -print`" ] ; then
+    echo "Aborting.  Reject files found."
+    exit 1
+fi
 
 # Remove backup files
 #find $builddir/ '(' -name '*.orig' -o -name '.*.orig' ')' -exec rm -f {} \;

@@ -104,15 +104,13 @@ NEUTRINO_DEPS += pugixml
 NEUTRINO_DEPS += $(LOCAL_NEUTRINO_DEPS)
 
 N_CONFIG_OPTS  =
+#N_CONFIG_OPTS += --enable-dynamicdemux
+#N_CONFIG_OPTS += --enable-pip
 ifeq ($(BOXTYPE),armbox)
 N_CONFIG_OPTS += --disable-arm-acc
-N_CONFIG_OPTS += --enable-dynamicdemux
-N_CONFIG_OPTS += --enable-pip
 endif
 ifeq ($(BOXTYPE),mipsbox)
 N_CONFIG_OPTS += --disable-mips-acc
-N_CONFIG_OPTS += --enable-dynamicdemux
-N_CONFIG_OPTS += --enable-pip
 endif
 N_CONFIG_OPTS += $(LOCAL_NEUTRINO_BUILD_OPTIONS)
 
@@ -186,7 +184,6 @@ $(D)/neutrino.do_prepare:
 	rm -rf $(NEUTRINO_OBJ_DIR)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(SOURCE_DIR))
-	cp -ra $(SOURCE_DIR)/$(NEUTRINO_DIR) $(SOURCE_DIR)/$(NEUTRINO_DIR).org
 	$(call APPLY_PATCHES_S,$(NEUTRINO_DIR))
 	@touch $@
 
