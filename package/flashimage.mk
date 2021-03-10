@@ -136,7 +136,7 @@ LINUX_SWAP_PARTITION_SIZE_NL = 204800
 
 STORAGE_PARTITION_OFFSET_NL = $(shell expr $(LINUX_SWAP_PARTITION_OFFSET_NL) \+ $(LINUX_SWAP_PARTITION_SIZE_NL))
 
-flash-image-multi-disk: host-e2fsprogs
+flash-image-multi-disk: host-e2fsprogs host-parted
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(IMAGE_SUBDIR)
 	# Create a sparse image block
@@ -389,7 +389,7 @@ OSMIO4K_ROOTFS3_PARTITION_OFFSET = $(shell expr $(OSMIO4K_KERNEL3_PARTITION_OFFS
 OSMIO4K_KERNEL4_PARTITION_OFFSET = $(shell expr $(OSMIO4K_ROOTFS3_PARTITION_OFFSET) + $(OSMIO4K_ROOTFS_PARTITION_SIZE))
 OSMIO4K_ROOTFS4_PARTITION_OFFSET = $(shell expr $(OSMIO4K_KERNEL4_PARTITION_OFFSET) + $(OSMIO4K_KERNEL_PARTITION_SIZE))
 
-flash-image-osmio4k-multi-disk: host-e2fsprogs
+flash-image-osmio4k-multi-disk: host-e2fsprogs host-parted
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
 	# Create a sparse image block

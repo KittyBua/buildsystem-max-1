@@ -1,7 +1,7 @@
 #
 # parted
 #
-PARTED_VER    = 3.3
+PARTED_VER    = 3.2
 PARTED_DIR    = parted-$(PARTED_VER)
 PARTED_SOURCE = parted-$(PARTED_VER).tar.xz
 PARTED_SITE   = https://ftp.gnu.org/gnu/parted

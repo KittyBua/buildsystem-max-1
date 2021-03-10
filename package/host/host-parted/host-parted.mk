@@ -1,14 +1,14 @@
 #
 # parted
 #
-HOST_PARTED_VER    = 3.3
+HOST_PARTED_VER    = 3.2
 HOST_PARTED_DIR    = parted-$(PARTED_VER)
 HOST_PARTED_SOURCE = parted-$(PARTED_VER).tar.xz
 HOST_PARTED_SITE   = https://ftp.gnu.org/gnu/parted
 HOST_PARTED_DEPS   = bootstrap
 
 HOST_PARTED_CONF_OPTS = \
-	--sbindir=/bin \
+	--sbindir=$(HOST_DIR)/bin \
 	--without-readline \
 	--disable-debug \
 	--disable-device-mapper
