@@ -103,6 +103,7 @@ QUIET := $(if $(findstring s,$(filter-out --%,$(MAKEFLAGS))),-q)
 # -----------------------------------------------------------------------------
 
 config:
+	@make distclean
 	@rm -rf .config
 	@make .config
 
