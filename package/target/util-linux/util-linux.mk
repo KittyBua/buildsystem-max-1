@@ -6,7 +6,7 @@ UTIL_LINUX_DIR    = util-linux-$(UTIL_LINUX_VER)
 UTIL_LINUX_SOURCE = util-linux-$(UTIL_LINUX_VER).tar.xz
 #UTIL_LINUX_SITE   = https://www.kernel.org/pub/linux/utils/util-linux/v$(UTIL_LINUX_VER)
 UTIL_LINUX_SITE   = https://www.kernel.org/pub/linux/utils/util-linux/v$(basename $(UTIL_LINUX_VER))
-UTIL_LINUX_DEPS   = bootstrap zlib
+UTIL_LINUX_DEPS   = bootstrap ncurses zlib
 
 UTIL_LINUX_CONF_OPTS = \
 	--bindir=$(base_bindir) \
