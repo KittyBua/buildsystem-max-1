@@ -12,8 +12,24 @@ LIBSTB_HAL_SOURCE = $(LIBSTB_HAL).git
 LIBSTB_HAL_SITE   = $(GIT_SITE)
 LIBSTB_HAL_DEPS   = bootstrap ffmpeg openthreads
 
-LH_CONFIG_OPTS =
-#LH_CONFIG_OPTS += --enable-flv2mpeg4
+LIBSTB_HAL_CONF_OPTS = \
+	--host=$(GNU_TARGET_NAME) \
+	--build=$(GNU_HOST_NAME) \
+	--prefix=$(prefix) \
+	--enable-maintainer-mode \
+	--enable-silent-rules \
+	--enable-shared=no \
+	\
+	--with-target=cdk \
+	--with-targetprefix=$(prefix) \
+	--with-boxtype=$(BOXTYPE) \
+	--with-boxmodel=$(BOXMODEL) \
+	\
+	CFLAGS="$(NEUTRINO_CFLAGS)" \
+	CXXFLAGS="$(NEUTRINO_CFLAGS) -std=c++11" \
+	CPPFLAGS="$(NEUTRINO_CPPFLAGS)"
+
+#LIBSTB_HAL_CONF_OPTS += --enable-flv2mpeg4
 
 LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)
 
@@ -28,26 +44,14 @@ $(D)/libstb-hal.do_prepare:
 	$(call APPLY_PATCHES_S,$(LIBSTB_HAL_DIR))
 	@touch $@
 
-$(D)/libstb-hal.config.status: | $(LIBSTB_HAL_DEPS)
+$(D)/libstb-hal.config.status:
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
 	test -d $(LIBSTB_HAL_OBJ_DIR) || mkdir -p $(LIBSTB_HAL_OBJ_DIR)
-	cd $(LIBSTB_HAL_OBJ_DIR); \
-		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh; \
+	$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh
+	$(CD) $(LIBSTB_HAL_OBJ_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
 		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/configure \
-			--host=$(GNU_TARGET_NAME) \
-			--build=$(GNU_HOST_NAME) \
-			--prefix=/usr \
-			--enable-maintainer-mode \
-			--enable-silent-rules \
-			--enable-shared=no \
-			\
-			--with-target=cdk \
-			--with-targetprefix=/usr \
-			--with-boxtype=$(BOXTYPE) \
-			--with-boxmodel=$(BOXMODEL) \
-			$(LH_CONFIG_OPTS) \
-			CFLAGS="$(N_CFLAGS)" CXXFLAGS="$(N_CFLAGS) -std=c++11" CPPFLAGS="$(N_CPPFLAGS)"
+			$(LIBSTB_HAL_CONF_OPTS)
 ifeq ($(TINKER_OPTION),0)
 	@touch $@
 endif
@@ -56,7 +60,7 @@ $(D)/libstb-hal.do_compile: libstb-hal.config.status
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) DESTDIR=$(TARGET_DIR)
 	@touch $@
 
-$(D)/libstb-hal: libstb-hal.do_prepare libstb-hal.do_compile
+$(D)/libstb-hal: $(LIBSTB_HAL_DEPS) libstb-hal.do_prepare libstb-hal.do_compile
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL)
 	$(TOUCH)
