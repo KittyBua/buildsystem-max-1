@@ -272,6 +272,10 @@ rewrite-test:
 # -----------------------------------------------------------------------------
 
 #
+patch:
+	@make neutrino-patch
+	@make libstb-hal-patch
+
 neutrino-patch:
 	@printf "$(TERM_YELLOW)---> create $(NEUTRINO)-$(DATE).patch ... $(TERM_NORMAL)"
 	$(shell cd $(SOURCE_DIR)/$(NEUTRINO_DIR) && git diff > $(BUILD_DIR)/$(NEUTRINO)-$(DATE).patch)
