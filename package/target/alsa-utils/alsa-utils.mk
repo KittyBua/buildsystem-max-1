@@ -7,6 +7,8 @@ ALSA_UTILS_SOURCE = alsa-utils-$(ALSA_UTILS_VER).tar.bz2
 ALSA_UTILS_SITE   = https://www.alsa-project.org/files/pub/utils
 ALSA_UTILS_DEPS   = bootstrap ncurses alsa-lib
 
+ALSA_UTILS_AUTORECONF = YES
+
 define ALSA_UTILS_POST_PATCH
 	sed -ir -r "s/(amidi|aplay|iecset|speaker-test|seq|alsaucm|topology)//g" $(PKG_BUILD_DIR)/Makefile.am
 endef

@@ -355,7 +355,7 @@ TARGET_CONFIGURE_OPTS = \
 
 CONFIGURE = \
 	if [ "$($(PKG)_AUTORECONF)" == "YES" ]; then \
-	  autoreconf -fi; \
+	  autoreconf -fi -I $(TARGET_DIR)/usr/share/aclocal; \
 	fi; \
 	test -f ./configure || ./autogen.sh && \
 	CONFIG_SITE=/dev/null \
