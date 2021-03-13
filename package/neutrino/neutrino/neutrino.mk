@@ -36,136 +36,6 @@ NEUTRINO_CHECKOUT   ?= master
 LIBSTB_HAL_CHECKOUT ?= master
 endif
 
-NEUTRINO_OBJ_DIR   = $(BUILD_DIR)/$(NEUTRINO_DIR)
-
-# -----------------------------------------------------------------------------
-
-e2-multiboot:
-	touch $(TARGET_DIR)/usr/bin/enigma2
-	touch $(TARGET_DIR)/var/lib/opkg/status
-	echo -e "$(FLAVOUR) `sed -n 's/\#define PACKAGE_VERSION "//p' $(NEUTRINO_OBJ_DIR)/config.h | sed 's/"//'` \\\n \\\l\n" > $(TARGET_DIR)/etc/issue
-
-# -----------------------------------------------------------------------------
-
-N_OMDB_API_KEY ?=
-ifneq ($(strip $(N_OMDB_API_KEY)),)
-N_CONFIG_KEYS += \
-	--with-omdb-api-key="$(N_OMDB_API_KEY)" \
-	--disable-omdb-key-manage
-endif
-
-N_TMDB_DEV_KEY ?=
-ifneq ($(strip $(N_TMDB_DEV_KEY)),)
-N_CONFIG_KEYS += \
-	--with-tmdb-dev-key="$(N_TMDB_DEV_KEY)" \
-	--disable-tmdb-key-manage
-endif
-
-N_YOUTUBE_DEV_KEY ?=
-ifneq ($(strip $(N_YOUTUBE_DEV_KEY)),)
-N_CONFIG_KEYS += \
-	--with-youtube-dev-key="$(N_YOUTUBE_DEV_KEY)" \
-	--disable-youtube-key-manage
-endif
-
-N_SHOUTCAST_DEV_KEY ?=
-ifneq ($(strip $(N_SHOUTCAST_DEV_KEY)),)
-N_CONFIG_KEYS += \
-	--with-shoutcast-dev-key="$(N_SHOUTCAST_DEV_KEY)" \
-	--disable-shoutcast-key-manage
-endif
-
-N_WEATHER_DEV_KEY ?=
-ifneq ($(strip $(N_WEATHER_DEV_KEY)),)
-N_CONFIG_KEYS += \
-	--with-weather-dev-key="$(N_WEATHER_DEV_KEY)" \
-	--disable-weather-key-manage
-endif
-
-# -----------------------------------------------------------------------------
-
-NEUTRINO_DEPS  = bootstrap
-NEUTRINO_DEPS += e2fsprogs
-NEUTRINO_DEPS += libpng
-NEUTRINO_DEPS += alsa-utils
-NEUTRINO_DEPS += ffmpeg
-NEUTRINO_DEPS += freetype
-NEUTRINO_DEPS += giflib
-NEUTRINO_DEPS += libcurl
-NEUTRINO_DEPS += libdvbsi
-NEUTRINO_DEPS += fribidi
-NEUTRINO_DEPS += libjpeg-turbo
-NEUTRINO_DEPS += libsigc
-NEUTRINO_DEPS += lua
-NEUTRINO_DEPS += openssl
-NEUTRINO_DEPS += openthreads
-NEUTRINO_DEPS += pugixml
-
-NEUTRINO_DEPS += $(LOCAL_NEUTRINO_DEPS)
-
-N_CONFIG_OPTS  =
-#N_CONFIG_OPTS += --enable-dynamicdemux
-#N_CONFIG_OPTS += --enable-pip
-ifeq ($(BOXTYPE),armbox)
-N_CONFIG_OPTS += --disable-arm-acc
-endif
-ifeq ($(BOXTYPE),mipsbox)
-N_CONFIG_OPTS += --disable-mips-acc
-endif
-N_CONFIG_OPTS += $(LOCAL_NEUTRINO_BUILD_OPTIONS)
-
-EXTERNAL_LCD ?= both
-ifeq ($(EXTERNAL_LCD),graphlcd)
-N_CONFIG_OPTS += --enable-graphlcd
-NEUTRINO_DEPS += graphlcd-base
-endif
-ifeq ($(EXTERNAL_LCD),lcd4linux)
-N_CONFIG_OPTS += --enable-lcd4linux
-NEUTRINO_DEPS += lcd4linux
-endif
-ifeq ($(EXTERNAL_LCD),both)
-N_CONFIG_OPTS += --enable-graphlcd
-NEUTRINO_DEPS += graphlcd-base
-N_CONFIG_OPTS += --enable-lcd4linux
-NEUTRINO_DEPS += lcd4linux
-endif
-
-# enable ffmpeg audio decoder in neutrino
-AUDIODEC = ffmpeg
-
-ifeq ($(AUDIODEC),ffmpeg)
-N_CONFIG_OPTS += --enable-ffmpegdec
-else
-NEUTRINO_DEPS += libid3tag
-NEUTRINO_DEPS += libmad
-
-N_CONFIG_OPTS += --with-tremor
-NEUTRINO_DEPS += libvorbisidec
-
-N_CONFIG_OPTS += --enable-flac
-NEUTRINO_DEPS += flac
-endif
-
-NEUTRINO_DEPS += neutrino-channellogos
-NEUTRINO_DEPS += neutrino-mediathek
-NEUTRINO_DEPS += neutrino-plugins
-NEUTRINO_DEPS += xupnpd
-
-# -----------------------------------------------------------------------------
-
-N_CFLAGS       = -Wall -W -Wshadow -pipe -Os -Wno-psabi
-N_CFLAGS      += -D__STDC_FORMAT_MACROS
-N_CFLAGS      += -D__STDC_CONSTANT_MACROS
-N_CFLAGS      += -fno-strict-aliasing
-N_CFLAGS      += -funsigned-char
-N_CFLAGS      += -ffunction-sections
-N_CFLAGS      += -fdata-sections
-#N_CFLAGS      += -Wno-deprecated-declarations
-N_CFLAGS      += $(LOCAL_NEUTRINO_CFLAGS)
-
-N_CPPFLAGS     = -I$(TARGET_DIR)/usr/include
-N_CPPFLAGS    += -ffunction-sections -fdata-sections
-
 # -----------------------------------------------------------------------------
 
 #
@@ -175,7 +45,136 @@ NEUTRINO_VER    = git
 NEUTRINO_DIR    = $(NEUTRINO).git
 NEUTRINO_SOURCE = $(NEUTRINO).git
 NEUTRINO_SITE   = $(GIT_SITE)
-NEUTRINO_DEPS  += libstb-hal
+
+NEUTRINO_DEPS  = bootstrap libpng alsa-utils libjpeg-turbo fribidi freetype giflib
+NEUTRINO_DEPS += ffmpeg libcurl libdvbsi libsigc lua openssl e2fsprogs openthreads pugixml
+
+NEUTRINO_CFLAGS  = -Wall -W -Wshadow -pipe -Os -Wno-psabi
+NEUTRINO_CFLAGS += -D__STDC_FORMAT_MACROS
+NEUTRINO_CFLAGS += -D__STDC_CONSTANT_MACROS
+NEUTRINO_CFLAGS += -fno-strict-aliasing
+NEUTRINO_CFLAGS += -funsigned-char
+NEUTRINO_CFLAGS += -ffunction-sections
+NEUTRINO_CFLAGS += -fdata-sections
+#NEUTRINO_CFLAGS += -Wno-deprecated-declarations
+NEUTRINO_CFLAGS += $(LOCAL_NEUTRINO_CFLAGS)
+
+NEUTRINO_CPPFLAGS  = -I$(TARGET_DIR)/usr/include
+NEUTRINO_CPPFLAGS += -ffunction-sections -fdata-sections
+
+NEUTRINO_CONF_OPTS = \
+	--host=$(GNU_TARGET_NAME) \
+	--build=$(GNU_HOST_NAME) \
+	--prefix=$(prefix) \
+	--enable-maintainer-mode \
+	--enable-silent-rules \
+	\
+	--enable-freesatepg \
+	--enable-fribidi \
+	--enable-giflib \
+	--enable-lua \
+	--enable-pugixml \
+	--enable-reschange \
+	--enable-pip \
+	\
+	--with-tremor \
+	--with-target=cdk \
+	--with-targetprefix=$(prefix) \
+	--with-boxtype=$(BOXTYPE) \
+	--with-boxmodel=$(BOXMODEL) \
+	--with-stb-hal-includes=$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/include \
+	--with-stb-hal-build=$(LIBSTB_HAL_OBJ_DIR) \
+	\
+	CFLAGS="$(NEUTRINO_CFLAGS)" \
+	CXXFLAGS="$(NEUTRINO_CFLAGS) -std=c++11" \
+	CPPFLAGS="$(NEUTRINO_CPPFLAGS)"
+
+NEUTRINO_OMDB_API_KEY ?=
+ifneq ($(strip $(NEUTRINO_OMDB_API_KEY)),)
+NEUTRINO_CONF_OPTS += \
+	--with-omdb-api-key="$(NEUTRINO_OMDB_API_KEY)" \
+	--disable-omdb-key-manage
+endif
+
+NEUTRINO_TMDB_DEV_KEY ?=
+ifneq ($(strip $(NEUTRINO_TMDB_DEV_KEY)),)
+NEUTRINO_CONF_OPTS += \
+	--with-tmdb-dev-key="$(NEUTRINO_TMDB_DEV_KEY)" \
+	--disable-tmdb-key-manage
+endif
+
+NEUTRINO_YOUTUBE_DEV_KEY ?=
+ifneq ($(strip $(NEUTRINO_YOUTUBE_DEV_KEY)),)
+NEUTRINO_CONF_OPTS += \
+	--with-youtube-dev-key="$(NEUTRINO_YOUTUBE_DEV_KEY)" \
+	--disable-youtube-key-manage
+endif
+
+NEUTRINO_SHOUTCAST_DEV_KEY ?=
+ifneq ($(strip $(NEUTRINO_SHOUTCAST_DEV_KEY)),)
+NEUTRINO_CONF_OPTS += \
+	--with-shoutcast-dev-key="$(NEUTRINO_SHOUTCAST_DEV_KEY)" \
+	--disable-shoutcast-key-manage
+endif
+
+NEUTRINO_WEATHER_DEV_KEY ?=
+ifneq ($(strip $(NEUTRINO_WEATHER_DEV_KEY)),)
+NEUTRINO_CONF_OPTS += \
+	--with-weather-dev-key="$(NEUTRINO_WEATHER_DEV_KEY)" \
+	--disable-weather-key-manage
+endif
+
+EXTERNAL_LCD ?= both
+ifeq ($(EXTERNAL_LCD),graphlcd)
+NEUTRINO_CONF_OPTS += --enable-graphlcd
+NEUTRINO_DEPS += graphlcd-base
+endif
+ifeq ($(EXTERNAL_LCD),lcd4linux)
+NEUTRINO_CONF_OPTS += --enable-lcd4linux
+NEUTRINO_DEPS += lcd4linux
+endif
+ifeq ($(EXTERNAL_LCD),both)
+NEUTRINO_CONF_OPTS += --enable-graphlcd
+NEUTRINO_DEPS += graphlcd-base
+NEUTRINO_CONF_OPTS += --enable-lcd4linux
+NEUTRINO_DEPS += lcd4linux
+endif
+
+# enable ffmpeg audio decoder in neutrino
+AUDIODEC = ffmpeg
+
+ifeq ($(AUDIODEC),ffmpeg)
+NEUTRINO_CONF_OPTS += --enable-ffmpegdec
+else
+NEUTRINO_DEPS += libid3tag
+NEUTRINO_DEPS += libmad
+
+NEUTRINO_CONF_OPTS += --with-tremor
+NEUTRINO_DEPS += libvorbisidec
+
+NEUTRINO_CONF_OPTS += --enable-flac
+NEUTRINO_DEPS += flac
+endif
+
+ifeq ($(BOXTYPE),armbox)
+NEUTRINO_CONF_OPTS += --disable-arm-acc
+endif
+ifeq ($(BOXTYPE),mipsbox)
+NEUTRINO_CONF_OPTS += --disable-mips-acc
+endif
+NEUTRINO_CONF_OPTS += $(LOCAL_NEUTRINO_BUILD_OPTIONS)
+
+NEUTRINO_DEPS += $(LOCAL_NEUTRINO_DEPS)
+
+NEUTRINO_DEPS += neutrino-channellogos
+NEUTRINO_DEPS += neutrino-mediathek
+NEUTRINO_DEPS += neutrino-plugins
+NEUTRINO_DEPS += xupnpd
+NEUTRINO_DEPS += libstb-hal
+
+# -----------------------------------------------------------------------------
+
+NEUTRINO_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_DIR)
 
 $(D)/neutrino.do_prepare:
 	$(START_BUILD)
@@ -187,38 +186,14 @@ $(D)/neutrino.do_prepare:
 	$(call APPLY_PATCHES_S,$(NEUTRINO_DIR))
 	@touch $@
 
-$(D)/neutrino.config.status: | $(NEUTRINO_DEPS)
+$(D)/neutrino.config.status:
 	rm -rf $(NEUTRINO_OBJ_DIR)
 	test -d $(NEUTRINO_OBJ_DIR) || mkdir -p $(NEUTRINO_OBJ_DIR)
-	cd $(NEUTRINO_OBJ_DIR); \
-		$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh; \
+	$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh
+	$(CD) $(NEUTRINO_OBJ_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure \
-			--host=$(GNU_TARGET_NAME) \
-			--build=$(GNU_HOST_NAME) \
-			--prefix=/usr \
-			--enable-maintainer-mode \
-			--enable-silent-rules \
-			\
-			--enable-freesatepg \
-			--enable-fribidi \
-			--enable-giflib \
-			--enable-lua \
-			--enable-pugixml \
-			--enable-reschange \
-			\
-			$(N_CONFIG_KEYS) \
-			\
-			$(N_CONFIG_OPTS) \
-			\
-			--with-tremor \
-			--with-target=cdk \
-			--with-targetprefix=/usr \
-			--with-boxtype=$(BOXTYPE) \
-			--with-boxmodel=$(BOXMODEL) \
-			--with-stb-hal-includes=$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/include \
-			--with-stb-hal-build=$(LIBSTB_HAL_OBJ_DIR) \
-			CFLAGS="$(N_CFLAGS)" CXXFLAGS="$(N_CFLAGS) -std=c++11" CPPFLAGS="$(N_CPPFLAGS)"
+			$(NEUTRINO_CONF_OPTS)
 		+make $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
 ifeq ($(TINKER_OPTION),0)
 	@touch $@
@@ -228,7 +203,7 @@ $(D)/neutrino.do_compile:
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) DESTDIR=$(TARGET_DIR)
 	@touch $@
 
-$(D)/neutrino: neutrino.do_prepare neutrino.config.status neutrino.do_compile
+$(D)/neutrino: $(NEUTRINO_DEPS) neutrino.do_prepare neutrino.config.status neutrino.do_compile
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 	$(TOUCH)
 	( \
@@ -260,16 +235,6 @@ endif
 
 # -----------------------------------------------------------------------------
 
-version.h: $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
-$(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h:
-	@rm -f $@
-	echo '#define BUILT_DATE "'`date`'"' > $@
-	@if test -d $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); then \
-		echo '#define VCS "BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"' >> $@; \
-	fi
-
-# -----------------------------------------------------------------------------
-
 neutrino-clean:
 	rm -f $(D)/neutrino
 	rm -f $(D)/neutrino.config.status
@@ -286,6 +251,23 @@ neutrino-distclean:
 
 neutrino-uninstall:
 	-make -C $(NEUTRINO_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
+
+# -----------------------------------------------------------------------------
+
+version.h: $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
+$(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h:
+	@rm -f $@
+	echo '#define BUILT_DATE "'`date`'"' > $@
+	@if test -d $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); then \
+		echo '#define VCS "BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"' >> $@; \
+	fi
+
+# -----------------------------------------------------------------------------
+
+e2-multiboot:
+	touch $(TARGET_DIR)/usr/bin/enigma2
+	touch $(TARGET_DIR)/var/lib/opkg/status
+	echo -e "$(FLAVOUR) `sed -n 's/\#define PACKAGE_VERSION "//p' $(NEUTRINO_OBJ_DIR)/config.h | sed 's/"//'` \\\n \\\l\n" > $(TARGET_DIR)/etc/issue
 
 # -----------------------------------------------------------------------------
 
