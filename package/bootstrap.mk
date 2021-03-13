@@ -66,6 +66,7 @@ $(D)/directories:
 	mkdir -p $(TARGET_DIR)/etc/network/if-{post-down,pre-up,up,down}.d
 	mkdir -p $(TARGET_DIR)/lib/firmware
 	mkdir -p $(TARGET_DIR)/usr/{bin,include,lib,sbin,share}
+	mkdir -p $(TARGET_DIR)/usr/share/aclocal
 	mkdir -p $(TARGET_DIR)/usr/lib/pkgconfig
 	mkdir -p $(TARGET_DIR)/var/{bin,etc,lib,spool,tuxbox,volatile}
 	mkdir -p $(TARGET_DIR)/var/lib/{alsa,modules,nfs,opkg,urandom}
