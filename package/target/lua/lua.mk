@@ -18,7 +18,7 @@ $(D)/lua:
 		$(MAKE) linux \
 			BUILDMODE=dynamic \
 			PKG_VERSION=$(LUA_VER) \
-			$(MAKE_OPTS) \
+			$(TARGET_MAKE_OPTS) \
 			AR="$(TARGET_AR) rcu" \
 			LDFLAGS="$(TARGET_LDFLAGS)" \
 			; \

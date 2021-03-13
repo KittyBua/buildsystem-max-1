@@ -50,7 +50,7 @@ $(D)/python:
 			ac_cv_broken_sem_getvalue=no \
 			HOSTPYTHON=$(HOST_DIR)/bin/python$(basename $(PYTHON_VER)) \
 			; \
-		$(MAKE) $(MAKE_OPTS) \
+		$(MAKE) $(TARGET_MAKE_OPTS) \
 			PYTHON_MODULES_INCLUDE="$(TARGET_INCLUDE_DIR)" \
 			PYTHON_MODULES_LIB="$(TARGET_LIB_DIR)" \
 			PYTHON_XCOMPILE_DEPENDENCIES_PREFIX="$(TARGET_DIR)" \
