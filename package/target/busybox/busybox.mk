@@ -4,28 +4,36 @@
 BUSYBOX_VER    = 1.33.0
 BUSYBOX_DIR    = busybox-$(BUSYBOX_VER)
 BUSYBOX_SOURCE = busybox-$(BUSYBOX_VER).tar.bz2
-BUSYBOX_SITE   = https://busybox.net/downloads
+BUSYBOX_SITE   = https://www.busybox.net/downloads
 BUSYBOX_DEPS   = bootstrap libtirpc
 
-# Link busybox against libtirpc so that we can leverage its RPC support for NFS
-# mounting with BusyBox
-BUSYBOX_CFLAGS = $(TARGET_CFLAGS)
+BUSYBOX_CFLAGS = \
+	$(TARGET_CFLAGS)
+
+BUSYBOX_LDFLAGS = \
+	$(TARGET_LDFLAGS)
+
+# Link against libtirpc if available so that we can leverage its RPC
+# support for NFS mounting with BusyBox
 BUSYBOX_CFLAGS += "`$(PKG_CONFIG) --cflags libtirpc`"
+# Don't use LDFLAGS for -ltirpc, because LDFLAGS is used for
+# the non-final link of modules as well.
+BUSYBOX_CFLAGS_busybox += "`$(PKG_CONFIG) --libs libtirpc`"
 
-# Don't use LDFLAGS for -ltirpc, because LDFLAGS is used for the non-final link
-# of modules as well.
-BUSYBOX_CFLAGS_busybox = "`$(PKG_CONFIG) --libs libtirpc`"
-
-# Allows the buildsystem to tweak CFLAGS
+# Allows the build system to tweak CFLAGS
 BUSYBOX_MAKE_ENV = \
+	$(TARGET_MAKE_ENV) \
 	CFLAGS="$(BUSYBOX_CFLAGS)" \
 	CFLAGS_busybox="$(BUSYBOX_CFLAGS_busybox)"
 
 BUSYBOX_MAKE_OPTS = \
-	$(TARGET_MAKE_OPTS) \
-	EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
-	EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
-	CONFIG_PREFIX="$(TARGET_DIR)"
+	CC="$(TARGET_CC)" \
+	ARCH=$(TARGET_ARCH) \
+	PREFIX="$(TARGET_DIR)" \
+	EXTRA_LDFLAGS="$(BUSYBOX_LDFLAGS)" \
+	CROSS_COMPILE="$(TARGET_CROSS)" \
+	CONFIG_PREFIX="$(TARGET_DIR)" \
+	SKIP_STRIP=y
 
 $(D)/busybox:
 	$(START_BUILD)
