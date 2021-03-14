@@ -12,7 +12,7 @@ LIBMAD_AUTORECONF = YES
 LIBMAD_PATCH = libmad_$(LIBMAD_VER)-10.diff.gz
 
 define LIBMAD_APPLY_DEBIAN_PATCHES
-	if [ -d $(PKG_BUILD_DIR)/debian/patches ]; then \
+	@if [ -d $(PKG_BUILD_DIR)/debian/patches ]; then \
 		$(APPLY_PATCH) $(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/debian/patches *.patch; \
 	fi
 endef
