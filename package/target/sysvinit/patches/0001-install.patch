@@ -29,7 +29,7 @@ index 1b368dc..5b1a5a2 100644
  
  ifeq ($(WITH_SELINUX),yes)
    SELINUX_DEF	=  -DWITH_SELINUX
-@@ -191,43 +191,43 @@
+@@ -184,43 +191,43 @@
  distclean:	clobber
  
  install:	all

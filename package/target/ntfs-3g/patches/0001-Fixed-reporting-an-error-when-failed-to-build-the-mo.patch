@@ -23,7 +23,7 @@ diff --git a/src/lowntfs-3g.c b/src/lowntfs-3g.c
 index 993867fa..0660439b 100644
 --- a/src/lowntfs-3g.c
 +++ b/src/lowntfs-3g.c
-@@ -4411,7 +4411,8 @@ int main(int argc, char *argv[])
+@@ -4323,7 +4326,8 @@
  	else {
  		ctx->abs_mnt_point = (char*)ntfs_malloc(PATH_MAX);
  		if (ctx->abs_mnt_point) {
@@ -33,7 +33,7 @@ index 993867fa..0660439b 100644
  				     PATH_MAX - strlen(opts.mnt_point) - 1)) {
  				strcat(ctx->abs_mnt_point, "/");
  				strcat(ctx->abs_mnt_point, opts.mnt_point);
-@@ -4419,6 +4420,9 @@ int main(int argc, char *argv[])
+@@ -4331,6 +4335,9 @@
  			/* Solaris also wants the absolute mount point */
  				opts.mnt_point = ctx->abs_mnt_point;
  #endif /* defined(__sun) && defined (__SVR4) */
@@ -47,7 +47,7 @@ diff --git a/src/ntfs-3g.c b/src/ntfs-3g.c
 index 6ce89fef..4e0912ae 100644
 --- a/src/ntfs-3g.c
 +++ b/src/ntfs-3g.c
-@@ -4148,7 +4148,8 @@ int main(int argc, char *argv[])
+@@ -4123,7 +4126,8 @@
  	else {
  		ctx->abs_mnt_point = (char*)ntfs_malloc(PATH_MAX);
  		if (ctx->abs_mnt_point) {
@@ -57,7 +57,7 @@ index 6ce89fef..4e0912ae 100644
  				     PATH_MAX - strlen(opts.mnt_point) - 1)) {
  				strcat(ctx->abs_mnt_point, "/");
  				strcat(ctx->abs_mnt_point, opts.mnt_point);
-@@ -4156,6 +4157,9 @@ int main(int argc, char *argv[])
+@@ -4131,6 +4135,9 @@
  			/* Solaris also wants the absolute mount point */
  				opts.mnt_point = ctx->abs_mnt_point;
  #endif /* defined(__sun) && defined (__SVR4) */

@@ -2,7 +2,7 @@ diff --git a/udpxrec.c b/udpxrec.c
 index c58ceb5..eb186f3 100644
 --- a/chipmunk/udpxrec.c
 +++ b/chipmunk/udpxrec.c
-@@ -557,9 +557,9 @@ int udpxrec_main( int argc, char* const argv[] )
+@@ -604,9 +604,9 @@ int udpxrec_main( int argc, char* const argv[] )
                          }
                          else {
                              if( g_recopt.bg_time < now ) {
@@ -14,7 +14,7 @@ index c58ceb5..eb186f3 100644
                                          Zasctime(localtime( &g_recopt.bg_time )),
                                          sizeof(sel_buf) );
  
-@@ -587,9 +587,9 @@ int udpxrec_main( int argc, char* const argv[] )
+@@ -634,9 +634,9 @@ int udpxrec_main( int argc, char* const argv[] )
                          }
                          else {
                              if( g_recopt.end_time < now ) {

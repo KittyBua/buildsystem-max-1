@@ -21,7 +21,7 @@ diff --git a/config.c b/config.c
 index 57778e3..11b363b 100644
 --- a/config.c
 +++ b/config.c
-@@ -657,8 +657,7 @@ static const struct config_names_s {
+@@ -670,8 +671,7 @@
  static char *get_config_filename(const char *name, int add_dot_conf)
  {
  	char *realname;
