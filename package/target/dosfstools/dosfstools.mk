@@ -1,9 +1,9 @@
 #
 # dosfstools
 #
-DOSFSTOOLS_VER    = 4.1
+DOSFSTOOLS_VER    = 4.2
 DOSFSTOOLS_DIR    = dosfstools-$(DOSFSTOOLS_VER)
-DOSFSTOOLS_SOURCE = dosfstools-$(DOSFSTOOLS_VER).tar.xz
+DOSFSTOOLS_SOURCE = dosfstools-$(DOSFSTOOLS_VER).tar.gz
 DOSFSTOOLS_SITE   = https://github.com/dosfstools/dosfstools/releases/download/v$(DOSFSTOOLS_VER)
 DOSFSTOOLS_DEPS   = bootstrap libiconv
 
@@ -14,7 +14,6 @@ DOSFSTOOLS_CFLAGS = $(TARGET_CFLAGS) -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_O
 DOSFSTOOLS_CONF_OPTS = \
 	--sbindir=$(base_sbindir) \
 	--docdir=$(REMOVE_docdir) \
-	--without-udev \
 	--enable-compat-symlinks \
 	CFLAGS="$(DOSFSTOOLS_CFLAGS)"
 
