@@ -7,12 +7,24 @@ NEUTRINO_PLUGINS_SOURCE = neutrino-plugins-max.git
 NEUTRINO_PLUGINS_SITE   = $(MAX-GIT-GITHUB)
 NEUTRINO_PLUGINS_DEPS   = bootstrap ffmpeg libcurl libpng libjpeg-turbo giflib freetype
 
-NEUTRINO_PLUGINS_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)
+NEUTRINO_PLUGINS_CONF_OPTS = \
+	--host=$(GNU_TARGET_NAME) \
+	--build=$(GNU_HOST_NAME) \
+	--prefix=$(prefix) \
+	--enable-maintainer-mode \
+	--enable-silent-rules \
+	\
+	--with-target=cdk \
+	--include=/usr/include \
+	--with-targetprefix=$(prefix) \
+	--with-boxtype=$(BOXTYPE) \
+	--with-boxmodel=$(BOXMODEL) \
+	\
+	CXXFLAGS="$(NEUTRINO_CFLAGS) -std=c++11" \
+	CPPFLAGS="$(NEUTRINO_CPPFLAGS) -DNEW_LIBCURL" \
+	LDFLAGS="$(TARGET_LDFLAGS)"
 
-NP_CONFIGURE_ADDITIONS = \
-	$(LOCAL_N_PLUGIN_BUILD_OPTIONS)
-
-NP_CONFIGURE_ADDITIONS += \
+NEUTRINO_PLUGINS_CONF_OPTS += \
 	--disable-add-locale \
 	--disable-coolitsclimax \
 	--disable-emmrd \
@@ -24,24 +36,31 @@ NP_CONFIGURE_ADDITIONS += \
 	--enable-wortraten
 
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
-NP_CONFIGURE_ADDITIONS += \
+NEUTRINO_PLUGINS_CONF_OPTS += \
 	--disable-rcu_switcher
 endif
 
-NP_INIT_SCRIPTS  = emmrd
-NP_INIT_SCRIPTS += fritzcallmonitor
-#NP_INIT_SCRIPTS += openvpn
-NP_INIT_SCRIPTS += rcu_switcher
-NP_INIT_SCRIPTS += tuxcald
-NP_INIT_SCRIPTS += tuxmaild
+NEUTRINO_PLUGINS_CONF_OPTS += \
+	$(LOCAL_N_PLUGIN_BUILD_OPTIONS)
+
+NEUTRINO_PLUGINS_INIT_SCRIPTS  = emmrd
+NEUTRINO_PLUGINS_INIT_SCRIPTS += fritzcallmonitor
+#NEUTRINO_PLUGINS_INIT_SCRIPTS += openvpn
+NEUTRINO_PLUGINS_INIT_SCRIPTS += rcu_switcher
+NEUTRINO_PLUGINS_INIT_SCRIPTS += tuxcald
+NEUTRINO_PLUGINS_INIT_SCRIPTS += tuxmaild
 
 define NP_RUNLEVEL_INSTALL
-	for script in $(NP_INIT_SCRIPTS); do \
+	for script in $(NEUTRINO_PLUGINS_INIT_SCRIPTS); do \
 		if [ -x $(TARGET_DIR)/etc/init.d/$$script ]; then \
 			$(UPDATE-RC.D) $$script defaults 80 20; \
 		fi; \
 	done
 endef
+
+# -----------------------------------------------------------------------------
+
+NEUTRINO_PLUGINS_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)
 
 $(D)/neutrino-plugins.do_prepare:
 	$(START_BUILD)
@@ -54,25 +73,11 @@ $(D)/neutrino-plugins.do_prepare:
 $(D)/neutrino-plugins.config.status:
 	rm -rf $(NEUTRINO_PLUGINS_OBJ_DIR)
 	test -d $(NEUTRINO_PLUGINS_OBJ_DIR) || mkdir -p $(NEUTRINO_PLUGINS_OBJ_DIR)
+	$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/autogen.sh
 	cd $(NEUTRINO_PLUGINS_OBJ_DIR); \
-		$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/autogen.sh && automake --add-missing; \
 		$(TARGET_CONFIGURE_ENV) \
 		$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/configure \
-			--host=$(GNU_TARGET_NAME) \
-			--build=$(GNU_HOST_NAME) \
-			--prefix=/usr \
-			--enable-maintainer-mode \
-			--enable-silent-rules \
-			\
-			$(NP_CONFIGURE_ADDITIONS) \
-			\
-			--with-target=cdk \
-			--include=/usr/include \
-			--with-targetprefix=/usr \
-			--with-boxtype=$(BOXTYPE) \
-			--with-boxmodel=$(BOXMODEL) \
-			CXXFLAGS="$(N_CFLAGS) -std=c++11" CPPFLAGS="$(N_CPPFLAGS) -DNEW_LIBCURL" \
-			LDFLAGS="$(TARGET_LDFLAGS)"
+			$(NEUTRINO_PLUGINS_CONF_OPTS)
 	@touch $@
 
 $(D)/neutrino-plugins.do_compile: neutrino-plugins.config.status
