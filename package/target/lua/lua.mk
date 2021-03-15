@@ -20,13 +20,11 @@ $(D)/lua:
 			PKG_VERSION=$(LUA_VER) \
 			$(TARGET_MAKE_OPTS) \
 			AR="$(TARGET_AR) rcu" \
-			LDFLAGS="$(TARGET_LDFLAGS)" \
-			; \
-		$(MAKE) INSTALL_TOP=$(TARGET_DIR)/usr \
-			INSTALL_MAN=$(TARGET_DIR)$(REMOVE_mandir) install \
-			; \
-		$(INSTALL_DATA) -D $(BUILD_DIR)/lua-$(LUA_VER)/etc/lua.pc \
-			$(PKG_CONFIG_PATH)/lua.pc
+			LDFLAGS="$(TARGET_LDFLAGS)"; \
+		$(MAKE) install \
+			INSTALL_TOP=$(TARGET_DIR)/usr \
+			INSTALL_MAN=$(TARGET_DIR)$(REMOVE_mandir); \
+		$(INSTALL_DATA) -D $(PKG_BUILD_DIR)/lua.pc $(PKG_CONFIG_PATH)/lua.pc
 	$(REMOVE)
 	rm -rf $(addprefix $(TARGET_DIR)/bin/,luac)
 	$(TOUCH)

@@ -5,14 +5,14 @@ Signed-off-by: Francois Perrad <francois.perrad@gadz.org>
 Index: b/etc/lua.pc
 ===================================================================
 --- /dev/null
-+++ b/etc/lua.pc
++++ b/lua.pc
 @@ -0,0 +1,24 @@
 +# lua.pc -- pkg-config data for Lua
 +
 +V=5.2
 +R=5.2.4
 +
-+prefix= /usr
++prefix=/usr
 +INSTALL_BIN= ${prefix}/bin
 +INSTALL_INC= ${prefix}/include
 +INSTALL_LIB= ${prefix}/lib
