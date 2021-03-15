@@ -6,7 +6,7 @@
 WGET_DOWNLOAD = wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P
 
 define DOWNLOAD
-	@( \
+	$(Q)( \
 	if [ "$($(PKG)_VER)" == "git" ]; then \
 	  $(call MESSAGE,"Downloading") ; \
 	  $(GET-GIT-SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
@@ -31,7 +31,7 @@ github = https://github.com/$(1)/$(2)/archive/$(3)
 # unpack archives into build directory
 define EXTRACT
 	@$(call MESSAGE,"Extracting")
-	@( \
+	$(Q)( \
 	case $($(PKG)_SOURCE) in \
 	  *.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.xz | *.txz) \
 	    tar -xf ${DL_DIR}/$($(PKG)_SOURCE) -C ${1}; \
@@ -67,7 +67,7 @@ define APPLY_PATCHES
 	@$(call MESSAGE,"Patching")
 	$(foreach hook,$($(PKG)_PRE_PATCH_HOOKS),$(call $(hook))$(sep))
 	$(foreach p,$($(PKG)_PATCH),$(APPLY_PATCH) $(PKG_BUILD_DIR) $(DL_DIR) $(notdir $(p))$(sep))
-	@( \
+	$(Q)( \
 	for P in $(PKG_PATCHES_DIR); do \
 	  if test -d $${P}; then \
 	    if test -d $${P}/$($(PKG)_VER); then \
@@ -84,7 +84,7 @@ endef
 define APPLY_PATCHES_S
 	@$(call MESSAGE,"Patching")
 	$(foreach hook,$($(PKG)_PRE_PATCH_HOOKS),$(call $(hook))$(sep))
-	@( \
+	$(Q)( \
 	for P in $(PKG_PATCHES_DIR); do \
 	  if test -d $${P}; then \
 	    $(APPLY_PATCH) $(SOURCE_DIR)/$(1) $${P} \*.patch \*.patch.$(FLAVOUR) || exit 1; \
@@ -105,7 +105,7 @@ REWRITE_LIBTOOL_TAG = rewritten=1
 
 define rewrite_libtool
 	@$(call MESSAGE,"Fixing libtool files")
-	@( \
+	$(Q)( \
 	for la in $$(find $(1) -name "*.la" -type f); do \
 	  if ! grep -q "$(REWRITE_LIBTOOL_TAG)" $${la}; then \
 	    echo -e "$(TERM_YELLOW)Rewriting $${la#$(1)/}$(TERM_NORMAL)"; \
@@ -129,7 +129,7 @@ REWRITE_CONFIG_RULES = \
 	 s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
 
 define rewrite_config_script
-	@( \
+	$(Q)( \
 	mv $(TARGET_DIR)/$(bindir)/$(1) $(HOST_DIR)/bin; \
 	$(call MESSAGE,"Rewriting $(1)"); \
 	$(SED) $(REWRITE_CONFIG_RULES) $(HOST_DIR)/bin/$(1); \
