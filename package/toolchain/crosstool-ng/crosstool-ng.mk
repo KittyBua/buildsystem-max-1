@@ -30,16 +30,11 @@ crosstool-ng:
 	unset CONFIG_SITE LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE; \
 	$(CD_BUILD_DIR); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/$(CROSSTOOL_NG_CONFIG).config .config; \
-		NUM_CPUS=$$(expr `getconf _NPROCESSORS_ONLN` \* 2); \
-		MEM_512M=$$(awk '/MemTotal/ {M=int($$2/1024/512); print M==0?1:M}' /proc/meminfo); \
-		test $$NUM_CPUS -gt $$MEM_512M && NUM_CPUS=$$MEM_512M; \
-		test $$NUM_CPUS = 0 && NUM_CPUS=1; \
-		$(SED) "s@^CT_PARALLEL_JOBS=.*@CT_PARALLEL_JOBS=$$NUM_CPUS@" .config; \
-		\
+		$(SED) "s|^CT_PARALLEL_JOBS=.*|CT_PARALLEL_JOBS=$(PARALLEL_JOBS)|" .config; \
 		export CT_NG_ARCHIVE=$(DL_DIR); \
 		export CT_NG_BASE_DIR=$(CROSS_DIR); \
 		export CT_NG_CUSTOM_KERNEL=$(LINUX_DIR); \
-		test -f ./configure || ./bootstrap && \
+		test -f ./configure || ./bootstrap; \
 		./configure --enable-local; \
 		MAKELEVEL=0 make; \
 		chmod 0755 ct-ng; \
