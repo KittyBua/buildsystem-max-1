@@ -24,7 +24,7 @@ if [ ! -z $1 ] ; then
 
 	echo >> $LOGFILE
 	echo "---- BUILD  LOG ----" >> $LOGFILE
-	time make V=1 $* 2>&1 | tee -a $LOGFILE
+	time make $* 2>&1 | tee -a $LOGFILE
 else
 	echo "Usage: makelog some_commands"
 fi
