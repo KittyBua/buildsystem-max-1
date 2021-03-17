@@ -14,9 +14,8 @@ HTOP_CONF_ENV = \
 	ac_cv_file__proc_meminfo=yes
 
 HTOP_CONF_OPTS = \
-	--enable-unicode \
-	--enable-linux-affinity \
-	--enable-delayacct
+	--disable-unicode \
+	--disable-hwloc
 
 $(D)/htop:
 	$(START_BUILD)
@@ -28,7 +27,6 @@ $(D)/htop:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	ln -sf htop $(TARGET_DIR)/usr/bin/top
 	$(REMOVE)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,applications icons pixmaps)
 	$(TOUCH)
