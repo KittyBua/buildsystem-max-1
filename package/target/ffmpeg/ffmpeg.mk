@@ -1,9 +1,7 @@
 #
-# makefile to build ffmpeg
+# ffmpeg
 #
-# -----------------------------------------------------------------------------
-
-FFMPEG_VER    = 4.3
+FFMPEG_VER    = 4.3.2
 FFMPEG_DIR    = ffmpeg-$(FFMPEG_VER)
 FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VER).tar.xz
 FFMPEG_SITE   = http://www.ffmpeg.org/releases
@@ -47,6 +45,25 @@ FFMPEG_CONF_OPTS = \
 	--disable-vaapi \
 	--disable-vdpau \
 	\
+	--disable-muxers \
+	--enable-muxer=apng \
+	--enable-muxer=flac \
+	--enable-muxer=h261 \
+	--enable-muxer=h263 \
+	--enable-muxer=h264 \
+	--enable-muxer=hevc \
+	--enable-muxer=image2 \
+	--enable-muxer=image2pipe \
+	--enable-muxer=m4v \
+	--enable-muxer=matroska \
+	--enable-muxer=mjpeg \
+	--enable-muxer=mp3 \
+	--enable-muxer=mp4 \
+	--enable-muxer=mpeg1video \
+	--enable-muxer=mpeg2video \
+	--enable-muxer=mpegts \
+	--enable-muxer=ogg \
+	\
 	--disable-parsers \
 	--enable-parser=aac \
 	--enable-parser=aac_latm \
@@ -67,6 +84,21 @@ FFMPEG_CONF_OPTS = \
 	--enable-parser=vorbis \
 	--enable-parser=vp8 \
 	--enable-parser=vp9 \
+	\
+	--disable-encoders \
+	--enable-encoder=aac \
+	--enable-encoder=h261 \
+	--enable-encoder=h263 \
+	--enable-encoder=h263p \
+	--enable-encoder=jpeg2000 \
+	--enable-encoder=jpegls \
+	--enable-encoder=ljpeg \
+	--enable-encoder=mjpeg \
+	--enable-encoder=mpeg1video \
+	--enable-encoder=mpeg2video \
+	--enable-encoder=mpeg4 \
+	--enable-encoder=png \
+	--enable-encoder=rawvideo \
 	\
 	--disable-decoders \
 	--enable-decoder=aac \
@@ -123,6 +155,7 @@ FFMPEG_CONF_OPTS = \
 	--enable-decoder=mlp \
 	--enable-decoder=movtext \
 	--enable-decoder=mp1 \
+	--enable-decoder=mp2 \
 	--enable-decoder=mp3 \
 	--enable-decoder=mp3adu \
 	--enable-decoder=mp3adufloat \
@@ -163,6 +196,7 @@ FFMPEG_CONF_OPTS = \
 	--enable-decoder=pcm_u32be \
 	--enable-decoder=pcm_u32le \
 	--enable-decoder=pcm_u8 \
+	--enable-decoder=pcm_zork \
 	--enable-decoder=pgssub \
 	--enable-decoder=png \
 	--enable-decoder=qcelp \
@@ -193,21 +227,6 @@ FFMPEG_CONF_OPTS = \
 	--enable-decoder=wmavoice \
 	--enable-decoder=xsub \
 	\
-	--disable-encoders \
-	--enable-encoder=aac \
-	--enable-encoder=h261 \
-	--enable-encoder=h263 \
-	--enable-encoder=h263p \
-	--enable-encoder=jpeg2000 \
-	--enable-encoder=jpegls \
-	--enable-encoder=ljpeg \
-	--enable-encoder=mjpeg \
-	--enable-encoder=mpeg1video \
-	--enable-encoder=mpeg2video \
-	--enable-encoder=mpeg4 \
-	--enable-encoder=png \
-	--enable-encoder=rawvideo \
-	\
 	--disable-demuxers \
 	--enable-demuxer=aac \
 	--enable-demuxer=ac3 \
@@ -223,12 +242,12 @@ FFMPEG_CONF_OPTS = \
 	--enable-demuxer=h264 \
 	--enable-demuxer=hls \
 	--enable-demuxer=live_flv \
+	--enable-demuxer=image2 \
+	--enable-demuxer=image2pipe \
 	--enable-demuxer=image_bmp_pipe \
 	--enable-demuxer=image_jpeg_pipe \
 	--enable-demuxer=image_jpegls_pipe \
 	--enable-demuxer=image_png_pipe \
-	--enable-demuxer=image2 \
-	--enable-demuxer=image2pipe \
 	--enable-demuxer=m4v \
 	--enable-demuxer=matroska \
 	--enable-demuxer=mjpeg \
@@ -251,25 +270,6 @@ FFMPEG_CONF_OPTS = \
 	--enable-demuxer=vc1 \
 	--enable-demuxer=wav \
 	--enable-demuxer=webm_dash_manifest \
-	\
-	--disable-muxers \
-	--enable-muxer=apng \
-	--enable-muxer=flac \
-	--enable-muxer=h261 \
-	--enable-muxer=h263 \
-	--enable-muxer=h264 \
-	--enable-muxer=hevc \
-	--enable-muxer=image2 \
-	--enable-muxer=image2pipe \
-	--enable-muxer=m4v \
-	--enable-muxer=matroska \
-	--enable-muxer=mjpeg \
-	--enable-muxer=mp3 \
-	--enable-muxer=mp4 \
-	--enable-muxer=mpeg1video \
-	--enable-muxer=mpeg2video \
-	--enable-muxer=mpegts \
-	--enable-muxer=ogg \
 	\
 	--disable-filters \
 	--enable-filter=drawtext \
@@ -301,18 +301,20 @@ FFMPEG_CONF_OPTS = \
 	--enable-hardcoded-tables
 
 ifeq ($(TARGET_ARCH), arm)
-FFMPEG_CONF_OPTS += --enable-armv6
-FFMPEG_CONF_OPTS += --enable-armv6t2
-FFMPEG_CONF_OPTS += --enable-neon
-FFMPEG_CONF_OPTS += --enable-vfp
-FFMPEG_CONF_OPTS += --cpu=cortex-a15
+FFMPEG_CONF_OPTS += \
+	--enable-armv6 \
+	--enable-armv6t2 \
+	--enable-neon \
+	--enable-vfp \
+	--cpu=cortex-a15
 endif
 ifeq ($(TARGET_ARCH), mips)
-FFMPEG_CONF_OPTS += --disable-armv6
-FFMPEG_CONF_OPTS += --disable-armv6t2
-FFMPEG_CONF_OPTS += --disable-neon
-FFMPEG_CONF_OPTS += --disable-vfp
-FFMPEG_CONF_OPTS += --cpu=generic
+FFMPEG_CONF_OPTS += \
+	--disable-armv6 \
+	--disable-armv6t2 \
+	--disable-neon \
+	--disable-vfp \
+	--cpu=generic
 endif
 
 FFMPEG_CONF_OPTS += \
