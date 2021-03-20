@@ -254,9 +254,6 @@ define INSTALL_EXIST # (source, dest)
 	fi
 endef
 
-GET-GIT-ARCHIVE = support/scripts/get-git-archive.sh
-GET-GIT-SOURCE  = support/scripts/get-git-source.sh
-GET-SVN-SOURCE  = support/scripts/get-svn-source.sh
 UPDATE-RC.D     = support/scripts/update-rc.d -r $(TARGET_DIR)
 
 # -----------------------------------------------------------------------------

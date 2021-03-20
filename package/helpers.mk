@@ -2,19 +2,23 @@
 # makefile to keep buildsystem helpers
 #
 
-# download archives into archives directory
+# download archives into download directory
 WGET_DOWNLOAD = wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P
+
+GET_GIT_SOURCE = support/scripts/get-git-source.sh
+GET_SVN_SOURCE = support/scripts/get-svn-source.sh
 
 define DOWNLOAD
 	$(Q)( \
 	if [ "$($(PKG)_VER)" == "git" ]; then \
 	  $(call MESSAGE,"Downloading") ; \
-	  $(GET-GIT-SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
-	else \
-	  if [ ! -f $(DL_DIR)/$($(PKG)_SOURCE) ]; then \
-	    $(call MESSAGE,"Downloading") ; \
-	    $(WGET_DOWNLOAD) $(DL_DIR) $($(PKG)_SITE)/$(1); \
-	  fi; \
+	  $(GET_GIT_SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
+	elif [ "$($(PKG)_VER)" == "svn" ]; then \
+	  $(call MESSAGE,"Downloading") ; \
+	  $(GET_SVN_SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
+	elif [ ! -f $(DL_DIR)/$($(PKG)_SOURCE) ]; then \
+	  $(call MESSAGE,"Downloading") ; \
+	  $(WGET_DOWNLOAD) $(DL_DIR) $($(PKG)_SITE)/$(1); \
 	fi; \
 	)
 	$(foreach p,$(ALL_DOWNLOADS),@$(WGET_DOWNLOAD) $(DL_DIR) $(p)$(sep))
@@ -28,24 +32,22 @@ github = https://github.com/$(1)/$(2)/archive/$(3)
 
 # -----------------------------------------------------------------------------
 
-# unpack archives into build directory
+# unpack archives into given directory
 define EXTRACT
 	@$(call MESSAGE,"Extracting")
 	$(Q)( \
 	case $($(PKG)_SOURCE) in \
 	  *.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.xz | *.txz) \
-	    tar -xf ${DL_DIR}/$($(PKG)_SOURCE) -C ${1}; \
+	    tar -xf ${DL_DIR}/$($(PKG)_SOURCE) -C $(1); \
 	    ;; \
 	  *.zip) \
-	    unzip -o -q ${DL_DIR}/$($(PKG)_SOURCE) -d ${1}; \
+	    unzip -o -q ${DL_DIR}/$($(PKG)_SOURCE) -d $(1); \
 	    ;; \
 	  *.git) \
-	    cp -a -t ${1} $(DL_DIR)/$($(PKG)_SOURCE); \
-	    if test -z $($(PKG)_CHECKOUT); then \
-	      $(call MESSAGE,"use original head"); \
-	    else \
+	    cp -a -t $(1) $(DL_DIR)/$($(PKG)_SOURCE); \
+	    if test $($(PKG)_CHECKOUT); then \
 	      $(call MESSAGE,"git checkout $($(PKG)_CHECKOUT)"); \
-	      $(CD) ${1}/$($(PKG)_DIR); git checkout -q $($(PKG)_CHECKOUT); \
+	      $(CD) $(1)/$($(PKG)_DIR); git checkout -q $($(PKG)_CHECKOUT); \
 	    fi; \
 	    ;; \
 	  *) \
