@@ -1,11 +1,11 @@
 #
 # neutrino-plugins
 #
-NEUTRINO_PLUGINS_VER    = git
-NEUTRINO_PLUGINS_DIR    = neutrino-plugins-max.git
-NEUTRINO_PLUGINS_SOURCE = neutrino-plugins-max.git
-NEUTRINO_PLUGINS_SITE   = $(MAX-GIT-GITHUB)
-NEUTRINO_PLUGINS_DEPS   = bootstrap ffmpeg libcurl libpng libjpeg-turbo giflib freetype
+NEUTRINO_PLUGINS_VERSION = git
+NEUTRINO_PLUGINS_DIR     = neutrino-plugins-max.git
+NEUTRINO_PLUGINS_SOURCE  = neutrino-plugins-max.git
+NEUTRINO_PLUGINS_SITE    = $(MAX-GIT-GITHUB)
+NEUTRINO_PLUGINS_DEPENDS = bootstrap ffmpeg libcurl libpng libjpeg-turbo giflib freetype
 
 NEUTRINO_PLUGINS_CONF_OPTS = \
 	--host=$(GNU_TARGET_NAME) \

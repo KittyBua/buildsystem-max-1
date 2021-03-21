@@ -1,11 +1,11 @@
 #
 # libsigc
 #
-LIBSIGC_VER    = 2.10.2
-LIBSIGC_DIR    = libsigc++-$(LIBSIGC_VER)
-LIBSIGC_SOURCE = libsigc++-$(LIBSIGC_VER).tar.xz
-LIBSIGC_SITE   = https://download.gnome.org/sources/libsigc++/$(basename $(LIBSIGC_VER))
-LIBSIGC_DEPS   = bootstrap
+LIBSIGC_VERSION = 2.10.2
+LIBSIGC_DIR     = libsigc++-$(LIBSIGC_VERSION)
+LIBSIGC_SOURCE  = libsigc++-$(LIBSIGC_VERSION).tar.xz
+LIBSIGC_SITE    = https://download.gnome.org/sources/libsigc++/$(basename $(LIBSIGC_VERSION))
+LIBSIGC_DEPENDS = bootstrap
 
 LIBSIGC_CONF_OPTS = \
 	--enable-shared \

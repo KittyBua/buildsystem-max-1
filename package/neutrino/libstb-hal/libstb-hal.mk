@@ -6,11 +6,11 @@
 #
 # libstb-hal
 #
-LIBSTB_HAL_VER    = git
-LIBSTB_HAL_DIR    = $(LIBSTB_HAL).git
-LIBSTB_HAL_SOURCE = $(LIBSTB_HAL).git
-LIBSTB_HAL_SITE   = $(GIT_SITE)
-LIBSTB_HAL_DEPS   = bootstrap ffmpeg openthreads
+LIBSTB_HAL_VERSION = git
+LIBSTB_HAL_DIR     = $(LIBSTB_HAL).git
+LIBSTB_HAL_SOURCE  = $(LIBSTB_HAL).git
+LIBSTB_HAL_SITE    = $(GIT_SITE)
+LIBSTB_HAL_DEPENDS = bootstrap ffmpeg openthreads
 
 LIBSTB_HAL_CONF_OPTS = \
 	--host=$(GNU_TARGET_NAME) \
@@ -29,7 +29,8 @@ LIBSTB_HAL_CONF_OPTS = \
 	CXXFLAGS="$(NEUTRINO_CFLAGS) -std=c++11" \
 	CPPFLAGS="$(NEUTRINO_CPPFLAGS)"
 
-#LIBSTB_HAL_CONF_OPTS += --enable-flv2mpeg4
+LIBSTB_HAL_CONF_OPTS += \
+	--enable-flv2mpeg4
 
 LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)
 
@@ -60,7 +61,7 @@ $(D)/libstb-hal.do_compile: libstb-hal.config.status
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) DESTDIR=$(TARGET_DIR)
 	@touch $@
 
-$(D)/libstb-hal: $(LIBSTB_HAL_DEPS) libstb-hal.do_prepare libstb-hal.do_compile
+$(D)/libstb-hal: $(LIBSTB_HAL_DEPENDS) libstb-hal.do_prepare libstb-hal.do_compile
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL)
 	$(TOUCH)

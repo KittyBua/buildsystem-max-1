@@ -1,11 +1,11 @@
 #
 # graphlcd-base
 #
-GRAPHLCD_BASE_VER    = git
-GRAPHLCD_BASE_DIR    = graphlcd-base.git
-GRAPHLCD_BASE_SOURCE = graphlcd-base.git
-GRAPHLCD_BASE_SITE   = git://projects.vdr-developer.org
-GRAPHLCD_BASE_DEPS   = bootstrap freetype libiconv libusb
+GRAPHLCD_BASE_VERSION = git
+GRAPHLCD_BASE_DIR     = graphlcd-base.git
+GRAPHLCD_BASE_SOURCE  = graphlcd-base.git
+GRAPHLCD_BASE_SITE    = git://projects.vdr-developer.org
+GRAPHLCD_BASE_DEPENDS = bootstrap freetype libiconv libusb
 
 ifeq ($(FLAVOUR),$(filter $(FLAVOUR),neutrino-ni))
 GRAPHLCD_BASE_CUSTOM_PATCH += 0004-material-colors.patch.custom

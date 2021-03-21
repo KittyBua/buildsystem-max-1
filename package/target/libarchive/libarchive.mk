@@ -1,11 +1,11 @@
 #
 # libarchive
 #
-LIBARCHIVE_VER    = 3.4.0
-LIBARCHIVE_DIR    = libarchive-$(LIBARCHIVE_VER)
-LIBARCHIVE_SOURCE = libarchive-$(LIBARCHIVE_VER).tar.gz
-LIBARCHIVE_SITE   = https://www.libarchive.org/downloads
-LIBARCHIVE_DEPS   = bootstrap
+LIBARCHIVE_VERSION = 3.4.0
+LIBARCHIVE_DIR     = libarchive-$(LIBARCHIVE_VERSION)
+LIBARCHIVE_SOURCE  = libarchive-$(LIBARCHIVE_VERSION).tar.gz
+LIBARCHIVE_SITE    = https://www.libarchive.org/downloads
+LIBARCHIVE_DEPENDS = bootstrap
 
 LIBARCHIVE_CONF_OPTS = \
 	--enable-static=no \

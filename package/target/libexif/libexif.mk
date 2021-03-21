@@ -1,11 +1,11 @@
 #
 # libexif
 #
-LIBEXIF_VER    = 0.6.22
-LIBEXIF_DIR    = libexif-$(LIBEXIF_VER)
-LIBEXIF_SOURCE = libexif-$(LIBEXIF_VER).tar.xz
-LIBEXIF_SITE   = https://github.com/libexif/libexif/releases/download/libexif-$(subst .,_,$(LIBEXIF_VER))-release
-LIBEXIF_DEPS   = bootstrap
+LIBEXIF_VERSION = 0.6.22
+LIBEXIF_DIR     = libexif-$(LIBEXIF_VERSION)
+LIBEXIF_SOURCE  = libexif-$(LIBEXIF_VERSION).tar.xz
+LIBEXIF_SITE    = https://github.com/libexif/libexif/releases/download/libexif-$(subst .,_,$(LIBEXIF_VERSION))-release
+LIBEXIF_DEPENDS = bootstrap
 
 LIBEXIF_AUTORECONF = YES
 

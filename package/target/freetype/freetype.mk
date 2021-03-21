@@ -1,11 +1,11 @@
 #
 # freetype
 #
-FREETYPE_VER    = 2.10.4
-FREETYPE_DIR    = freetype-$(FREETYPE_VER)
-FREETYPE_SOURCE = freetype-$(FREETYPE_VER).tar.xz
-FREETYPE_SITE   = https://sourceforge.net/projects/freetype/files/freetype2/$(FREETYPE_VER)
-FREETYPE_DEPS   = bootstrap zlib libpng
+FREETYPE_VERSION = 2.10.4
+FREETYPE_DIR     = freetype-$(FREETYPE_VERSION)
+FREETYPE_SOURCE  = freetype-$(FREETYPE_VERSION).tar.xz
+FREETYPE_SITE    = https://sourceforge.net/projects/freetype/files/freetype2/$(FREETYPE_VERSION)
+FREETYPE_DEPENDS = bootstrap zlib libpng
 
 define FREETYPE_POST_PATCH
 	$(SED) '/^FONT_MODULES += \(type1\|cid\|pfr\|type42\|pcf\|bdf\|winfonts\|cff\)/d' $(PKG_BUILD_DIR)/modules.cfg

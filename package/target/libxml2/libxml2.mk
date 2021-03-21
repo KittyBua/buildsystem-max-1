@@ -1,11 +1,11 @@
 #
 # libxml2
 #
-LIBXML2_VER    = 2.9.10
-LIBXML2_DIR    = libxml2-$(LIBXML2_VER)
-LIBXML2_SOURCE = libxml2-$(LIBXML2_VER).tar.gz
-LIBXML2_SITE   = http://xmlsoft.org/sources
-LIBXML2_DEPS   = bootstrap zlib
+LIBXML2_VERSION = 2.9.10
+LIBXML2_DIR     = libxml2-$(LIBXML2_VERSION)
+LIBXML2_SOURCE  = libxml2-$(LIBXML2_VERSION).tar.gz
+LIBXML2_SITE    = http://xmlsoft.org/sources
+LIBXML2_DEPENDS = bootstrap zlib
 
 LIBXML2_AUTORECONF = YES
 

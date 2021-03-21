@@ -1,11 +1,11 @@
 #
 # libgcrypt
 #
-LIBGCRYPT_VER    = 1.8.5
-LIBGCRYPT_DIR    = libgcrypt-$(LIBGCRYPT_VER)
-LIBGCRYPT_SOURCE = libgcrypt-$(LIBGCRYPT_VER).tar.bz2
-LIBGCRYPT_SITE   = https://gnupg.org/ftp/gcrypt/libgcrypt
-LIBGCRYPT_DEPS   = bootstrap libgpg-error
+LIBGCRYPT_VERSION = 1.8.5
+LIBGCRYPT_DIR     = libgcrypt-$(LIBGCRYPT_VERSION)
+LIBGCRYPT_SOURCE  = libgcrypt-$(LIBGCRYPT_VERSION).tar.bz2
+LIBGCRYPT_SITE    = https://gnupg.org/ftp/gcrypt/libgcrypt
+LIBGCRYPT_DEPENDS = bootstrap libgpg-error
 
 LIBGCRYPT_CONF_OPTS = \
 	--enable-shared \

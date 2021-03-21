@@ -1,11 +1,11 @@
 #
 # pcre
 #
-PCRE_VER    = 8.39
-PCRE_DIR    = pcre-$(PCRE_VER)
-PCRE_SOURCE = pcre-$(PCRE_VER).tar.bz2
-PCRE_SITE   = https://sourceforge.net/projects/pcre/files/pcre/$(PCRE_VER)
-PCRE_DEPS   = bootstrap
+PCRE_VERSION = 8.39
+PCRE_DIR     = pcre-$(PCRE_VERSION)
+PCRE_SOURCE  = pcre-$(PCRE_VERSION).tar.bz2
+PCRE_SITE    = https://sourceforge.net/projects/pcre/files/pcre/$(PCRE_VERSION)
+PCRE_DEPENDS = bootstrap
 
 PCRE_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \

@@ -1,11 +1,11 @@
 #
 # pugixml
 #
-PUGIXML_VER    = 1.10
-PUGIXML_DIR    = pugixml-$(PUGIXML_VER)
-PUGIXML_SOURCE = pugixml-$(PUGIXML_VER).tar.gz
-PUGIXML_SITE   = https://github.com/zeux/pugixml/releases/download/v$(PUGIXML_VER)
-PUGIXML_DEPS   = bootstrap
+PUGIXML_VERSION = 1.10
+PUGIXML_DIR     = pugixml-$(PUGIXML_VERSION)
+PUGIXML_SOURCE  = pugixml-$(PUGIXML_VERSION).tar.gz
+PUGIXML_SITE    = https://github.com/zeux/pugixml/releases/download/v$(PUGIXML_VERSION)
+PUGIXML_DEPENDS = bootstrap
 
 PUGIXML_CONF_OPTS = \
 	| tail -n +90

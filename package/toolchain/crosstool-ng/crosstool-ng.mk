@@ -1,14 +1,14 @@
 #
 # crosstool-ng
 #
-CROSSTOOL_NG_VER    = git
-CROSSTOOL_NG_DIR    = crosstool-ng.git
-CROSSTOOL_NG_SOURCE = crosstool-ng.git
-CROSSTOOL_NG_SITE   = https://github.com/crosstool-ng
-CROSSTOOL_NG_DEPS   = directories host-ccache kernel.do_prepare
+CROSSTOOL_NG_VERSION = git
+CROSSTOOL_NG_DIR     = crosstool-ng.git
+CROSSTOOL_NG_SOURCE  = crosstool-ng.git
+CROSSTOOL_NG_SITE    = https://github.com/crosstool-ng
+CROSSTOOL_NG_DEPENDS = directories host-ccache kernel.do_prepare
 
-CROSSTOOL_NG_CONFIG = crosstool-ng-$(TARGET_ARCH)-$(CROSSTOOL_GCC_VER)
-CROSSTOOL_NG_BACKUP = $(DL_DIR)/$(CROSSTOOL_NG_CONFIG)-kernel-$(KERNEL_VER)-backup.tar.gz
+CROSSTOOL_NG_CONFIG = crosstool-ng-$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION)
+CROSSTOOL_NG_BACKUP = $(DL_DIR)/$(CROSSTOOL_NG_CONFIG)-kernel-$(KERNEL_VERSION)-backup.tar.gz
 
 CROSSTOOL_NG_CHECKOUT = dd20ee55
 # -----------------------------------------------------------------------------

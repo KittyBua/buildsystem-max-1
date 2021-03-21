@@ -1,11 +1,11 @@
 #
 # hd-idle
 #
-HD_IDLE_VER    = 1.05
-HD_IDLE_DIR    = hd-idle
-HD_IDLE_SOURCE = hd-idle-$(HD_IDLE_VER).tgz
-HD_IDLE_SITE   = https://sourceforge.net/projects/hd-idle/files
-HD_IDLE_DEPS   = bootstrap
+HD_IDLE_VERSION = 1.05
+HD_IDLE_DIR     = hd-idle
+HD_IDLE_SOURCE  = hd-idle-$(HD_IDLE_VERSION).tgz
+HD_IDLE_SITE    = https://sourceforge.net/projects/hd-idle/files
+HD_IDLE_DEPENDS = bootstrap
 
 $(D)/hd-idle:
 	$(START_BUILD)

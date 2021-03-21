@@ -1,11 +1,11 @@
 #
 # parted
 #
-HOST_PARTED_VER    = 3.2
-HOST_PARTED_DIR    = parted-$(PARTED_VER)
-HOST_PARTED_SOURCE = parted-$(PARTED_VER).tar.xz
-HOST_PARTED_SITE   = https://ftp.gnu.org/gnu/parted
-HOST_PARTED_DEPS   = bootstrap
+HOST_PARTED_VERSION = 3.2
+HOST_PARTED_DIR     = parted-$(PARTED_VERSION)
+HOST_PARTED_SOURCE  = parted-$(PARTED_VERSION).tar.xz
+HOST_PARTED_SITE    = https://ftp.gnu.org/gnu/parted
+HOST_PARTED_DEPENDS = bootstrap
 
 HOST_PARTED_CONF_OPTS = \
 	--sbindir=$(HOST_DIR)/bin \

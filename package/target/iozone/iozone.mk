@@ -1,11 +1,11 @@
 #
 # iozone
 #
-IOZONE_VER    = 3_490
-IOZONE_DIR    = iozone$(IOZONE_VER)
-IOZONE_SOURCE = iozone$(IOZONE_VER).tar
-IOZONE_SITE   = http://www.iozone.org/src/current
-IOZONEL_DEPS   = bootstrap
+IOZONE_VERSION = 3_490
+IOZONE_DIR     = iozone$(IOZONE_VERSION)
+IOZONE_SOURCE  = iozone$(IOZONE_VERSION).tar
+IOZONE_SITE    = http://www.iozone.org/src/current
+IOZONE_DEPENDS = bootstrap
 
 define IOZONE_POST_PATCH
 	$(SED) s~'gcc'~"$(TARGET_CC)"~ $(PKG_BUILD_DIR)/src/current/makefile

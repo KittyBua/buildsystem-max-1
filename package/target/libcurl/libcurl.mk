@@ -1,11 +1,11 @@
 #
 # libcurl
 #
-LIBCURL_VER    = 7.75.0
-LIBCURL_DIR    = curl-$(LIBCURL_VER)
-LIBCURL_SOURCE = curl-$(LIBCURL_VER).tar.bz2
-LIBCURL_SITE   = https://curl.haxx.se/download
-LIBCURL_DEPS   = bootstrap zlib openssl ca-bundle
+LIBCURL_VERSION = 7.75.0
+LIBCURL_DIR     = curl-$(LIBCURL_VERSION)
+LIBCURL_SOURCE  = curl-$(LIBCURL_VERSION).tar.bz2
+LIBCURL_SITE    = https://curl.haxx.se/download
+LIBCURL_DEPENDS = bootstrap zlib openssl ca-bundle
 
 LIBCURL_AUTORECONF = YES
 

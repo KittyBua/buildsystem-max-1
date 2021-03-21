@@ -1,11 +1,11 @@
 #
 # rsync
 #
-RSYNC_VER    = 3.1.3
-RSYNC_DIR    = rsync-$(RSYNC_VER)
-RSYNC_SOURCE = rsync-$(RSYNC_VER).tar.gz
-RSYNC_SITE   = https://download.samba.org/pub/rsync/src
-RSYNC_DEPS   = bootstrap
+RSYNC_VERSION = 3.1.3
+RSYNC_DIR     = rsync-$(RSYNC_VERSION)
+RSYNC_SOURCE  = rsync-$(RSYNC_VERSION).tar.gz
+RSYNC_SITE    = https://download.samba.org/pub/rsync/src
+RSYNC_DEPENDS = bootstrap
 
 RSYNC_CONF_OPTS = \
 	--disable-debug \

@@ -1,11 +1,11 @@
 #
 # strace
 #
-STRACE_VER    = 5.7
-STRACE_DIR    = strace-$(STRACE_VER)
-STRACE_SOURCE = strace-$(STRACE_VER).tar.xz
-STRACE_SITE   = https://strace.io/files/$(STRACE_VER)
-STRACE_DEPS   = bootstrap
+STRACE_VERSION = 5.7
+STRACE_DIR     = strace-$(STRACE_VERSION)
+STRACE_SOURCE  = strace-$(STRACE_VERSION).tar.xz
+STRACE_SITE    = https://strace.io/files/$(STRACE_VERSION)
+STRACE_DEPENDS = bootstrap
 
 STRACE_CONF_OPTS = \
 	--enable-silent-rules

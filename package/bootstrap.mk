@@ -48,7 +48,7 @@ preqs:
 #
 # directories
 #
-DIRECTORIES_VER = 2020-05-25
+DIRECTORIES_VERSION = 2020-05-25
 
 $(D)/directories:
 	$(START_BUILD)
@@ -75,7 +75,7 @@ $(D)/directories:
 #
 # cross-libs
 #
-CROSS_LIBS_VER = 2020-05-25
+CROSS_LIBS_VERSION = 2020-05-25
 
 $(D)/cross-libs: directories $(CROSSTOOL)
 	$(START_BUILD)
@@ -103,76 +103,76 @@ $(D)/bootstrap: $(BOOTSTRAP)
 #
 # image-deps
 #
-IMAGE_DEPS  =
-IMAGE_DEPS += bash
-IMAGE_DEPS += procps-ng
-IMAGE_DEPS += kmod
-IMAGE_DEPS += sysvinit
-IMAGE_DEPS += base-files
-IMAGE_DEPS += netbase
-IMAGE_DEPS += e2fsprogs
-#IMAGE_DEPS += jfsutils
-IMAGE_DEPS += dosfstools
-IMAGE_DEPS += parted
-IMAGE_DEPS += gptfdisk
-IMAGE_DEPS += hd-idle
-IMAGE_DEPS += ntfs-3g
-IMAGE_DEPS += tzdata
-IMAGE_DEPS += openresolv
-IMAGE_DEPS += rpcbind
-IMAGE_DEPS += nfs-utils
-IMAGE_DEPS += htop
-IMAGE_DEPS += vsftpd
-IMAGE_DEPS += autofs
-IMAGE_DEPS += ethtool
-IMAGE_DEPS += ofgwrite
-IMAGE_DEPS += wget
-IMAGE_DEPS += busybox
-IMAGE_DEPS += ncurses
-IMAGE_DEPS += fbshot
-IMAGE_DEPS += aio-grab
-IMAGE_DEPS += dvbsnoop
-IMAGE_DEPS += libusb
-IMAGE_DEPS += lua
-IMAGE_DEPS += luaposix
-IMAGE_DEPS += luaexpat
-IMAGE_DEPS += luacurl
-IMAGE_DEPS += luasocket
-IMAGE_DEPS += lua-feedparser
-IMAGE_DEPS += luasoap
-IMAGE_DEPS += luajson
-IMAGE_DEPS += wpa-supplicant
-IMAGE_DEPS += wireless-tools
-IMAGE_DEPS += udpxy
-IMAGE_DEPS += mc
+IMAGE_DEPENDS  =
+IMAGE_DEPENDS += bash
+IMAGE_DEPENDS += procps-ng
+IMAGE_DEPENDS += kmod
+IMAGE_DEPENDS += sysvinit
+IMAGE_DEPENDS += base-files
+IMAGE_DEPENDS += netbase
+IMAGE_DEPENDS += e2fsprogs
+#IMAGE_DEPENDS += jfsutils
+IMAGE_DEPENDS += dosfstools
+IMAGE_DEPENDS += parted
+IMAGE_DEPENDS += gptfdisk
+IMAGE_DEPENDS += hd-idle
+IMAGE_DEPENDS += ntfs-3g
+IMAGE_DEPENDS += tzdata
+IMAGE_DEPENDS += openresolv
+IMAGE_DEPENDS += rpcbind
+IMAGE_DEPENDS += nfs-utils
+IMAGE_DEPENDS += htop
+IMAGE_DEPENDS += vsftpd
+IMAGE_DEPENDS += autofs
+IMAGE_DEPENDS += ethtool
+IMAGE_DEPENDS += ofgwrite
+IMAGE_DEPENDS += wget
+IMAGE_DEPENDS += busybox
+IMAGE_DEPENDS += ncurses
+IMAGE_DEPENDS += fbshot
+IMAGE_DEPENDS += aio-grab
+IMAGE_DEPENDS += dvbsnoop
+IMAGE_DEPENDS += libusb
+IMAGE_DEPENDS += lua
+IMAGE_DEPENDS += luaposix
+IMAGE_DEPENDS += luaexpat
+IMAGE_DEPENDS += luacurl
+IMAGE_DEPENDS += luasocket
+IMAGE_DEPENDS += lua-feedparser
+IMAGE_DEPENDS += luasoap
+IMAGE_DEPENDS += luajson
+IMAGE_DEPENDS += wpa-supplicant
+IMAGE_DEPENDS += wireless-tools
+IMAGE_DEPENDS += udpxy
+IMAGE_DEPENDS += mc
 ifeq ($(BOXMODEL),hd60)
-IMAGE_DEPS += harfbuzz
+IMAGE_DEPENDS += harfbuzz
 endif
 
-$(D)/image-deps: $(IMAGE_DEPS)
+$(D)/image-deps: $(IMAGE_DEPENDS)
 	@touch $@
 
 #
 # machine-deps
 #
-MACHINE_DEPS  = kernel
-MACHINE_DEPS += kernel-modules-clean
-MACHINE_DEPS += $(BOXMODEL)-driver
+MACHINE_DEPENDS  = kernel
+MACHINE_DEPENDS += kernel-modules-clean
+MACHINE_DEPENDS += $(BOXMODEL)-driver
 ifneq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 hd60 hd61 vuduo))
-MACHINE_DEPS += $(BOXMODEL)-libgles
+MACHINE_DEPENDS += $(BOXMODEL)-libgles
 endif
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
-MACHINE_DEPS += $(BOXMODEL)-platform-util
-MACHINE_DEPS += $(BOXMODEL)-vmlinuz-initrd
+MACHINE_DEPENDS += $(BOXMODEL)-platform-util
+MACHINE_DEPENDS += $(BOXMODEL)-vmlinuz-initrd
 endif
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
-MACHINE_DEPS += $(BOXMODEL)-libs
-#MACHINE_DEPS += $(BOXMODEL)-mali-module
+MACHINE_DEPENDS += $(BOXMODEL)-libs
+#MACHINE_DEPENDS += $(BOXMODEL)-mali-module
 endif
 ifeq ($(BOXMODEL), $(filter $(BOXMODEL),osmio4k osmio4kplus))
-MACHINE_DEPS += wlan-qcom
+MACHINE_DEPENDS += wlan-qcom
 endif
 
-$(D)/machine-deps: $(MACHINE_DEPS)
+$(D)/machine-deps: $(MACHINE_DEPENDS)
 	$(LINUX_RUN_DEPMOD)
 	@touch $@

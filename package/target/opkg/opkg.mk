@@ -1,11 +1,11 @@
 #
 # opkg
 #
-OPKG_VER    = 0.3.3
-OPKG_DIR    = opkg-$(OPKG_VER)
-OPKG_SOURCE = opkg-$(OPKG_VER).tar.gz
-OPKG_SITE   = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
-OPKG_DEPS   = bootstrap host-opkg libarchive
+OPKG_VERSION = 0.3.3
+OPKG_DIR     = opkg-$(OPKG_VERSION)
+OPKG_SOURCE  = opkg-$(OPKG_VERSION).tar.gz
+OPKG_SITE    = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
+OPKG_DEPENDS = bootstrap host-opkg libarchive
 
 OPKG_CONF_OPTS = \
 	--disable-curl \

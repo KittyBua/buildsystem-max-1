@@ -60,7 +60,6 @@ neutrino-release-base:
 	ln -sf /.version $(RELEASE_DIR)/var/etc/.version
 	ln -sf /proc/mounts $(RELEASE_DIR)/etc/mtab
 	cp -aR $(TARGET_DIR)/etc/* $(RELEASE_DIR)/etc/
-	ln -sf media/hdd $(RELEASE_DIR)/hdd
 	ln -sf media $(RELEASE_DIR)/mnt
 	ln -sf /etc/cron $(RELEASE_DIR)/var/spool/cron
 	ln -sf volatile/tmp $(RELEASE_DIR)/var/tmp

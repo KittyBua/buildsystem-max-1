@@ -1,11 +1,11 @@
 #
 # nettle
 #
-NETTLE_VER    = 3.5.1
-NETTLE_DIR    = nettle-$(NETTLE_VER)
-NETTLE_SOURCE = nettle-$(NETTLE_VER).tar.gz
-NETTLE_SITE   = https://ftp.gnu.org/gnu/nettle
-NETTLE_DEPS   = bootstrap gmp
+NETTLE_VERSION = 3.5.1
+NETTLE_DIR     = nettle-$(NETTLE_VERSION)
+NETTLE_SOURCE  = nettle-$(NETTLE_VERSION).tar.gz
+NETTLE_SITE    = https://ftp.gnu.org/gnu/nettle
+NETTLE_DEPENDS = bootstrap gmp
 
 NETTLE_CONF_OPTS = \
 	--disable-documentation

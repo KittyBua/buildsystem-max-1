@@ -1,11 +1,11 @@
 #
 # hdparm
 #
-HDPARM_VER    = 9.60
-HDPARM_DIR    = hdparm-$(HDPARM_VER)
-HDPARM_SOURCE = hdparm-$(HDPARM_VER).tar.gz
-HDPARM_SITE   = https://sourceforge.net/projects/hdparm/files/hdparm
-HDPARM_DEPS   = bootstrap
+HDPARM_VERSION = 9.60
+HDPARM_DIR     = hdparm-$(HDPARM_VERSION)
+HDPARM_SOURCE  = hdparm-$(HDPARM_VERSION).tar.gz
+HDPARM_SITE    = https://sourceforge.net/projects/hdparm/files/hdparm
+HDPARM_DEPENDS = bootstrap
 
 $(D)/hdparm:
 	$(START_BUILD)

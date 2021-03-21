@@ -1,11 +1,11 @@
 #
 # host-e2fsprogs
 #
-HOST_E2FSPROGS_VER    = 1.45.7
-HOST_E2FSPROGS_DIR    = e2fsprogs-$(HOST_E2FSPROGS_VER)
-HOST_E2FSPROGS_SOURCE = e2fsprogs-$(HOST_E2FSPROGS_VER).tar.gz
-HOST_E2FSPROGS_SITE   = https://sourceforge.net/projects/e2fsprogs/files/e2fsprogs/v$(HOST_E2FSPROGS_VER)
-HOST_E2FSPROGS_DEPS   = bootstrap
+HOST_E2FSPROGS_VERSION = 1.45.7
+HOST_E2FSPROGS_DIR     = e2fsprogs-$(HOST_E2FSPROGS_VERSION)
+HOST_E2FSPROGS_SOURCE  = e2fsprogs-$(HOST_E2FSPROGS_VERSION).tar.gz
+HOST_E2FSPROGS_SITE    = https://sourceforge.net/projects/e2fsprogs/files/e2fsprogs/v$(HOST_E2FSPROGS_VERSION)
+HOST_E2FSPROGS_DEPENDS = bootstrap
 
 $(D)/host-e2fsprogs:
 	$(START_BUILD)

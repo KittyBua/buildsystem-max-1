@@ -1,11 +1,11 @@
 #
 # host-zic
 #
-HOST_ZIC_VER    = 2020f
-HOST_ZIC_DIR    = tzcode
-HOST_ZIC_SOURCE = tzcode$(HOST_ZIC_VER).tar.gz
-HOST_ZIC_SITE   = https://www.iana.org/time-zones/repository/releases
-HOST_ZIC_DEPS   = bootstrap
+HOST_ZIC_VERSION = 2020f
+HOST_ZIC_DIR     = tzcode
+HOST_ZIC_SOURCE  = tzcode$(HOST_ZIC_VERSION).tar.gz
+HOST_ZIC_SITE    = https://www.iana.org/time-zones/repository/releases
+HOST_ZIC_DEPENDS = bootstrap
 
 $(D)/host-zic:
 	$(START_BUILD)

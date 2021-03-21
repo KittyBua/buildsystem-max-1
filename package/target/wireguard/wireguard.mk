@@ -1,11 +1,11 @@
 #
 # wireguard
 #
-WIREGUARD_VER    = 0.0.20191212
-WIREGUARD_DIR    = WireGuard-$(WIREGUARD_VER)
-WIREGUARD_SOURCE = WireGuard-$(WIREGUARD_VER).tar.xz
-WIREGUARD_SITE   = https://git.zx2c4.com/WireGuard/snapshot
-WIREGUARD_DEPS   = bootstrap kernel libmnl openresolv
+WIREGUARD_VERSION = 0.0.20191212
+WIREGUARD_DIR     = WireGuard-$(WIREGUARD_VERSION)
+WIREGUARD_SOURCE  = WireGuard-$(WIREGUARD_VERSION).tar.xz
+WIREGUARD_SITE    = https://git.zx2c4.com/WireGuard/snapshot
+WIREGUARD_DEPENDS = bootstrap kernel libmnl openresolv
 
 WIREGUARD_MAKE_OPTS = WITH_SYSTEMDUNITS=no WITH_BASHCOMPLETION=yes WITH_WGQUICK=yes
 

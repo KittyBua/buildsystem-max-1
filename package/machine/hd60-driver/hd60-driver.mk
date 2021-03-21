@@ -1,11 +1,11 @@
 #
 # hd60-driver
 #
-HD60_DRIVER_DATE   = 20200731
-HD60_DRIVER_VER    = 4.4.35
-HD60_DRIVER_SOURCE = hd60-drivers-$(HD60_DRIVER_VER)-$(HD60_DRIVER_DATE).zip
-HD60_DRIVER_SITE   = http://source.mynonpublic.com/gfutures
-HD60_DRIVER_DEPS   = bootstrap
+HD60_DRIVER_DATE    = 20200731
+HD60_DRIVER_VERSION = 4.4.35
+HD60_DRIVER_SOURCE  = hd60-drivers-$(HD60_DRIVER_VERSION)-$(HD60_DRIVER_DATE).zip
+HD60_DRIVER_SITE    = http://source.mynonpublic.com/gfutures
+HD60_DRIVER_DEPENDS = bootstrap
 
 $(D)/hd60-driver:
 	$(START_BUILD)

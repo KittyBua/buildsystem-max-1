@@ -1,11 +1,11 @@
 #
 # mc
 #
-MC_VER    = 4.8.26
-MC_DIR    = mc-$(MC_VER)
-MC_SOURCE = mc-$(MC_VER).tar.xz
-MC_SITE   = ftp.midnight-commander.org
-MC_DEPS   = bootstrap ncurses glib2
+MC_VERSION = 4.8.26
+MC_DIR     = mc-$(MC_VERSION)
+MC_SOURCE  = mc-$(MC_VERSION).tar.xz
+MC_SITE    = ftp.midnight-commander.org
+MC_DEPENDS = bootstrap ncurses glib2
 
 MC_AUTORECONF = YES
 

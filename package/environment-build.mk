@@ -42,7 +42,7 @@ TARGET_DIR    = $(BASE_DIR)/root
 SOURCE_DIR    = $(BASE_DIR)/build_source
 IMAGE_DIR     = $(BASE_DIR)/release_image
 OWN_FILES    ?= $(BASE_DIR)/own-files
-CROSS_DIR     = $(BASE_DIR)/cross/$(TARGET_ARCH)-$(CROSSTOOL_GCC_VER)-kernel-$(KERNEL_VER)
+CROSS_DIR     = $(BASE_DIR)/cross/$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION)-kernel-$(KERNEL_VERSION)
 HOST_DIR      = $(BASE_DIR)/host
 STAGING_DIR   = $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root
 
@@ -128,17 +128,17 @@ BOXTYPE     = mipsbox
 TARGET_ARCH = mips
 endif
 
-BS_GCC_VER ?= 8.4.0
-ifeq ($(BS_GCC_VER),6.5.0)
-CROSSTOOL_GCC_VER = gcc-6.5.0
-else ifeq ($(BS_GCC_VER),7.5.0)
-CROSSTOOL_GCC_VER = gcc-7.5.0
-else ifeq ($(BS_GCC_VER),8.4.0)
-CROSSTOOL_GCC_VER = gcc-8.4.0
-else ifeq ($(BS_GCC_VER),9.3.0)
-CROSSTOOL_GCC_VER = gcc-9.3.0
-else ifeq ($(BS_GCC_VER),10.2.0)
-CROSSTOOL_GCC_VER = gcc-10.2.0
+BS_GCC_VERSION ?= 8.4.0
+ifeq ($(BS_GCC_VERSION),6.5.0)
+CROSSTOOL_GCC_VERSION = gcc-6.5.0
+else ifeq ($(BS_GCC_VERSION),7.5.0)
+CROSSTOOL_GCC_VERSION = gcc-7.5.0
+else ifeq ($(BS_GCC_VERSION),8.4.0)
+CROSSTOOL_GCC_VERSION = gcc-8.4.0
+else ifeq ($(BS_GCC_VERSION),9.3.0)
+CROSSTOOL_GCC_VERSION = gcc-9.3.0
+else ifeq ($(BS_GCC_VERSION),10.2.0)
+CROSSTOOL_GCC_VERSION = gcc-10.2.0
 endif
 
 ifeq ($(TARGET_ARCH),arm)
@@ -150,7 +150,7 @@ else ifeq ($(TARGET_ARCH),aarch64)
 GNU_TARGET_NAME = aarch64-unknown-linux-gnu
 TARGET_CPU      =
 TARGET_ABI      =
-TARGET_ENDIAN   = big
+TARGET_ENDIAN   = little
 else ifeq ($(TARGET_ARCH),mips)
 GNU_TARGET_NAME = mipsel-unknown-linux-gnu
 TARGET_CPU      = mips32

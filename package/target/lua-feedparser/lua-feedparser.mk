@@ -1,11 +1,11 @@
 #
 # lua-feedparser
 #
-LUA_FEEDPARSER_VER    = 0.71
-LUA_FEEDPARSER_DIR    = lua-feedparser-$(LUA_FEEDPARSER_VER)
-LUA_FEEDPARSER_SOURCE = lua-feedparser-$(LUA_FEEDPARSER_VER).tar.gz
-LUA_FEEDPARSER_SITE   = $(call github,slact,lua-feedparser,$(LUA_FEEDPARSER_VER))
-LUA_FEEDPARSER_DEPS   = bootstrap lua luasocket luaexpat
+LUA_FEEDPARSER_VERSION = 0.71
+LUA_FEEDPARSER_DIR     = lua-feedparser-$(LUA_FEEDPARSER_VERSION)
+LUA_FEEDPARSER_SOURCE  = lua-feedparser-$(LUA_FEEDPARSER_VERSION).tar.gz
+LUA_FEEDPARSER_SITE    = $(call github,slact,lua-feedparser,$(LUA_FEEDPARSER_VERSION))
+LUA_FEEDPARSER_DEPENDS = bootstrap lua luasocket luaexpat
 
 define LUA_FEEDPARSER_POST_PATCH
 	$(SED) "s/^PREFIX.*//" -e "s/^LUA_DIR.*//" $(PKG_BUILD_DIR)/Makefile
@@ -20,6 +20,6 @@ $(D)/lua-feedparser:
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
-		$(MAKE) install LUA_DIR=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVER)
+		$(MAKE) install LUA_DIR=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVERSION)
 	$(REMOVE)
 	$(TOUCH)

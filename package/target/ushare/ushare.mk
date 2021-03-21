@@ -1,8 +1,8 @@
-USHARE_VER    = 1.1a
-USHARE_DIR    = ushare-uShare_v$(USHARE_VER)
-USHARE_SOURCE = uShare_v$(USHARE_VER).tar.gz
-USHARE_SITE   = https://github.com/GeeXboX/ushare/archive
-USHARE_DEPS   = bootstrap libupnp
+USHARE_VERSION = 1.1a
+USHARE_DIR     = ushare-uShare_v$(USHARE_VERSION)
+USHARE_SOURCE  = uShare_v$(USHARE_VERSION).tar.gz
+USHARE_SITE    = https://github.com/GeeXboX/ushare/archive
+USHARE_DEPENDS = bootstrap libupnp
 
 USHARE_CONF_OPTS = \
 	--prefix=/usr \

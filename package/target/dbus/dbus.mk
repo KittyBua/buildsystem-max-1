@@ -1,11 +1,11 @@
 #
 # dbus
 #
-DBUS_VER    = 1.12.6
-DBUS_DIR    = dbus-$(DBUS_VER)
-DBUS_SOURCE = dbus-$(DBUS_VER).tar.gz
-DBUS_SITE   = https://dbus.freedesktop.org/releases/dbus
-DBUS_DEPS   = bootstrap expat
+DBUS_VERSION = 1.12.6
+DBUS_DIR     = dbus-$(DBUS_VERSION)
+DBUS_SOURCE  = dbus-$(DBUS_VERSION).tar.gz
+DBUS_SITE    = https://dbus.freedesktop.org/releases/dbus
+DBUS_DEPENDS = bootstrap expat
 
 DBUS_CONF_OPTS = \
 	CFLAGS="$(TARGET_CFLAGS) -Wno-cast-align" \
@@ -21,7 +21,7 @@ ifeq ($(BS_INIT_SYSTEMD),y)
 DBUS_CONF_OPTS += \
 	--enable-systemd \
 	--with-systemdsystemunitdir=/usr/lib/systemd/system
-DBUS_DEPS += systemd
+DBUS_DEPENDS += systemd
 else
 DBUS_CONF_OPTS += \
 	--disable-systemd \

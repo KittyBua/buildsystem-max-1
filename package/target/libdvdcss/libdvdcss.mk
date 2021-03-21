@@ -1,11 +1,11 @@
 #
 # libdvdcss
 #
-LIBDVDCSS_VER    = 1.4.2
-LIBDVDCSS_DIR    = libdvdcss-$(LIBDVDCSS_VER)
-LIBDVDCSS_SOURCE = libdvdcss-$(LIBDVDCSS_VER).tar.bz2
-LIBDVDCSS_SITE   = https://download.videolan.org/pub/libdvdcss/$(LIBDVDCSS_VER)
-LIBDVDCSS_DEPS   = bootstrap
+LIBDVDCSS_VERSION = 1.4.2
+LIBDVDCSS_DIR     = libdvdcss-$(LIBDVDCSS_VERSION)
+LIBDVDCSS_SOURCE  = libdvdcss-$(LIBDVDCSS_VERSION).tar.bz2
+LIBDVDCSS_SITE    = https://download.videolan.org/pub/libdvdcss/$(LIBDVDCSS_VERSION)
+LIBDVDCSS_DEPENDS = bootstrap
 
 LIBDVDCSS_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir)

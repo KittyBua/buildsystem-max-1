@@ -1,11 +1,11 @@
 #
 # rpcbind
 #
-RPCBIND_VER    = 1.2.5
-RPCBIND_DIR    = rpcbind-$(RPCBIND_VER)
-RPCBIND_SOURCE = rpcbind-$(RPCBIND_VER).tar.bz2
-RPCBIND_SITE   = https://sourceforge.net/projects/rpcbind/files/rpcbind/$(RPCBIND_VER)
-RPCBIND_DEPS   = bootstrap libtirpc
+RPCBIND_VERSION = 1.2.5
+RPCBIND_DIR     = rpcbind-$(RPCBIND_VERSION)
+RPCBIND_SOURCE  = rpcbind-$(RPCBIND_VERSION).tar.bz2
+RPCBIND_SITE    = https://sourceforge.net/projects/rpcbind/files/rpcbind/$(RPCBIND_VERSION)
+RPCBIND_DEPENDS = bootstrap libtirpc
 
 RPCBIND_AUTORECONF = YES
 

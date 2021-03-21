@@ -4,17 +4,17 @@
 OSCAM_FLAVOUR ?= oscam-smod
 
 ifeq ($(OSCAM_FLAVOUR),oscam)
-OSCAM_VER    = git
-OSCAM_DIR    = oscam.git
-OSCAM_SOURCE = oscam.git
-OSCAM_SITE   = https://repo.or.cz
+OSCAM_VERSION = git
+OSCAM_DIR     = oscam.git
+OSCAM_SOURCE  = oscam.git
+OSCAM_SITE    = https://repo.or.cz
 else ifeq ($(OSCAM_FLAVOUR),oscam-smod)
-OSCAM_VER    = git
-OSCAM_DIR    = oscam-smod.git
-OSCAM_SOURCE = oscam-smod.git
-OSCAM_SITE   = https://github.com/Schimmelreiter
+OSCAM_VERSION = git
+OSCAM_DIR     = oscam-smod.git
+OSCAM_SOURCE  = oscam-smod.git
+OSCAM_SITE    = https://github.com/Schimmelreiter
 endif
-OSCAM_DEPS   = bootstrap openssl libusb
+OSCAM_DEPENDS = bootstrap openssl libusb
 
 OSCAM_CONF_OPTS = \
 	--disable all \

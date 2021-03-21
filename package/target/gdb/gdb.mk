@@ -1,11 +1,11 @@
 #
 # gdb
 #
-GDB_VER    = 8.3
-GDB_DIR    = gdb-$(GDB_VER)
-GDB_SOURCE = gdb-$(GDB_VER).tar.xz
-GDB_SITE   = https://sourceware.org/pub/gdb/releases
-GDB_DEPS   = bootstrap zlib ncurses
+GDB_VERSION = 8.3
+GDB_DIR     = gdb-$(GDB_VERSION)
+GDB_SOURCE  = gdb-$(GDB_VERSION).tar.xz
+GDB_SITE    = https://sourceware.org/pub/gdb/releases
+GDB_DEPENDS = bootstrap zlib ncurses
 
 GDB_CONF_OPTS = \
 	--enable-static \

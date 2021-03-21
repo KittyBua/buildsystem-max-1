@@ -1,11 +1,11 @@
 #
 # popt
 #
-POPT_VER    = 1.16
-POPT_DIR    = popt-$(POPT_VER)
-POPT_SOURCE = popt-$(POPT_VER).tar.gz
-POPT_SITE   = ftp://anduin.linuxfromscratch.org/BLFS/popt
-POPT_DEPS   = bootstrap
+POPT_VERSION = 1.16
+POPT_DIR     = popt-$(POPT_VERSION)
+POPT_SOURCE  = popt-$(POPT_VERSION).tar.gz
+POPT_SITE    = ftp://anduin.linuxfromscratch.org/BLFS/popt
+POPT_DEPENDS = bootstrap
 
 POPT_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \

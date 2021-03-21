@@ -1,15 +1,16 @@
 #
 # libdvdnav
 #
-LIBDVDNAV_VER    = 6.1.0
-LIBDVDNAV_DIR    = libdvdnav-$(LIBDVDNAV_VER)
-LIBDVDNAV_SOURCE = libdvdnav-$(LIBDVDNAV_VER).tar.bz2
-LIBDVDNAV_SITE   = http://www.videolan.org/pub/videolan/libdvdnav/$(LIBDVDNAV_VER)
-LIBDVDNAV_DEPS   = bootstrap libdvdread
+LIBDVDNAV_VERSION = 6.1.0
+LIBDVDNAV_DIR     = libdvdnav-$(LIBDVDNAV_VERSION)
+LIBDVDNAV_SOURCE  = libdvdnav-$(LIBDVDNAV_VERSION).tar.bz2
+LIBDVDNAV_SITE    = http://www.videolan.org/pub/videolan/libdvdnav/$(LIBDVDNAV_VERSION)
+LIBDVDNAV_DEPENDS = bootstrap libdvdread
 
 LIBDVDNAV_AUTORECONF = YES
 
 LIBDVDNAV_CONF_OPTS = \
+	--docdir=$(REMOVE_docdir) \
 	--enable-static \
 	--enable-shared
 

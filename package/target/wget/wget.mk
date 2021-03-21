@@ -1,11 +1,11 @@
 #
 # wget
 #
-WGET_VER    = 1.21.1
-WGET_DIR    = wget-$(WGET_VER)
-WGET_SOURCE = wget-$(WGET_VER).tar.gz
-WGET_SITE   = https://ftp.gnu.org/gnu/wget
-WGET_DEPS   = bootstrap openssl
+WGET_VERSION = 1.21.1
+WGET_DIR     = wget-$(WGET_VERSION)
+WGET_SOURCE  = wget-$(WGET_VERSION).tar.gz
+WGET_SITE    = https://ftp.gnu.org/gnu/wget
+WGET_DEPENDS = bootstrap openssl
 
 WGET_CFLAGS = $(TARGET_CFLAGS) -DOPENSSL_NO_ENGINE
 

@@ -1,15 +1,15 @@
 #
 # luaposix
 #
-LUAPOSIX_VER    = 31
-LUAPOSIX_DIR    = luaposix-$(LUAPOSIX_VER)
-LUAPOSIX_SOURCE = luaposix-$(LUAPOSIX_VER).tar.gz
-LUAPOSIX_SITE   = $(call github,luaposix,luaposix,v$(LUAPOSIX_VER))
-LUAPOSIX_DEPS   = bootstrap host-lua lua luaexpat slingshot gnulib
+LUAPOSIX_VERSION = 31
+LUAPOSIX_DIR     = luaposix-$(LUAPOSIX_VERSION)
+LUAPOSIX_SOURCE  = luaposix-$(LUAPOSIX_VERSION).tar.gz
+LUAPOSIX_SITE    = $(call github,luaposix,luaposix,v$(LUAPOSIX_VERSION))
+LUAPOSIX_DEPENDS = bootstrap host-lua lua luaexpat slingshot gnulib
 
 LUAPOSIX_CONF_OPTS = \
-	--libdir=$(TARGET_LIB_DIR)/lua/$(LUA_ABIVER) \
-	--datadir=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVER) \
+	--libdir=$(TARGET_LIB_DIR)/lua/$(LUA_ABIVERSION) \
+	--datadir=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVERSION) \
 	--mandir=$(TARGET_DIR)/$(REMOVE_mandir) \
 	--docdir=$(TARGET_DIR)/$(REMOVE_docdir) \
 	--enable-silent-rules

@@ -1,12 +1,12 @@
 #
 # host-lua
 #
-HOST_LUA_VER    = 5.2.4
-HOST_LUA_ABIVER = $(basename $(HOST_LUA_VER))
-HOST_LUA_DIR    = lua-$(HOST_LUA_VER)
-HOST_LUA_SOURCE = lua-$(HOST_LUA_VER).tar.gz
-HOST_LUA_SITE   = https://www.lua.org/ftp
-HOST_LUA_DEPS   = bootstrap
+HOST_LUA_VERSION    = 5.2.4
+HOST_LUA_ABIVERSION = $(basename $(HOST_LUA_VERSION))
+HOST_LUA_DIR        = lua-$(HOST_LUA_VERSION)
+HOST_LUA_SOURCE     = lua-$(HOST_LUA_VERSION).tar.gz
+HOST_LUA_SITE       = https://www.lua.org/ftp
+HOST_LUA_DEPENDS    = bootstrap
 
 HOST_LUA_BINARY = $(HOST_DIR)/bin/lua
 

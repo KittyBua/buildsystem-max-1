@@ -1,11 +1,11 @@
 #
 # bzip2
 #
-BZIP2_VER    = 1.0.8
-BZIP2_DIR    = bzip2-$(BZIP2_VER)
-BZIP2_SOURCE = bzip2-$(BZIP2_VER).tar.gz
-BZIP2_SITE   = https://sourceware.org/pub/bzip2
-BZIP2_DEPS   = bootstrap
+BZIP2_VERSION = 1.0.8
+BZIP2_DIR     = bzip2-$(BZIP2_VERSION)
+BZIP2_SOURCE  = bzip2-$(BZIP2_VERSION).tar.gz
+BZIP2_SITE    = https://sourceware.org/pub/bzip2
+BZIP2_DEPENDS = bootstrap
 
 $(D)/bzip2:
 	$(START_BUILD)

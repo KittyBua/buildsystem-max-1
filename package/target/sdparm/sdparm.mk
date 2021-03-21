@@ -1,11 +1,11 @@
 #
 # sdparm
 #
-SDPARM_VER    = 1.11
-SDPARM_DIR    = sdparm-$(SDPARM_VER)
-SDPARM_SOURCE = sdparm-$(SDPARM_VER).tgz
-SDPARM_SITE   = http://sg.danny.cz/sg/p
-SDPARM_DEPS   = bootstrap
+SDPARM_VERSION = 1.11
+SDPARM_DIR     = sdparm-$(SDPARM_VERSION)
+SDPARM_SOURCE  = sdparm-$(SDPARM_VERSION).tgz
+SDPARM_SITE    = http://sg.danny.cz/sg/p
+SDPARM_DEPENDS = bootstrap
 
 SDPARM_CONF_OPTS = \
 	--bindir=$(base_sbindir)

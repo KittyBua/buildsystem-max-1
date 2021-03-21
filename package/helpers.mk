@@ -10,10 +10,10 @@ GET_SVN_SOURCE = support/scripts/get-svn-source.sh
 
 define DOWNLOAD
 	$(Q)( \
-	if [ "$($(PKG)_VER)" == "git" ]; then \
+	if [ "$($(PKG)_VERSION)" == "git" ]; then \
 	  $(call MESSAGE,"Downloading") ; \
 	  $(GET_GIT_SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
-	elif [ "$($(PKG)_VER)" == "svn" ]; then \
+	elif [ "$($(PKG)_VERSION)" == "svn" ]; then \
 	  $(call MESSAGE,"Downloading") ; \
 	  $(GET_SVN_SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
 	elif [ ! -f $(DL_DIR)/$($(PKG)_SOURCE) ]; then \
@@ -72,8 +72,8 @@ define APPLY_PATCHES
 	$(Q)( \
 	for P in $(PKG_PATCHES_DIR); do \
 	  if test -d $${P}; then \
-	    if test -d $${P}/$($(PKG)_VER); then \
-	      $(APPLY_PATCH) $(PKG_BUILD_DIR) $${P}/$($(PKG)_VER) \*.patch \*.patch.$(TARGET_ARCH) || exit 1; \
+	    if test -d $${P}/$($(PKG)_VERSION); then \
+	      $(APPLY_PATCH) $(PKG_BUILD_DIR) $${P}/$($(PKG)_VERSION) \*.patch \*.patch.$(TARGET_ARCH) || exit 1; \
 	    else \
 	      $(APPLY_PATCH) $(PKG_BUILD_DIR) $${P} \*.patch \*.patch.$(TARGET_ARCH) \*.patch.$(FLAVOUR) || exit 1; \
 	    fi; \
@@ -146,7 +146,7 @@ REWRITE_CONFIG_SCRIPTS = \
 # -----------------------------------------------------------------------------
 
 define START_BUILD
-	@make $($(PKG)_DEPS)
+	@make $($(PKG)_DEPENDS)
 	@$(call MESSAGE,"Building")
 endef
 

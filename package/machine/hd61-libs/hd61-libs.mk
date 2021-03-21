@@ -2,11 +2,11 @@
 # hd61-libs
 #
 HD61_LIBS_DATE   = 20200622
-HD61_LIBS_VER    = $(HD61_LIBS_DATE)
-HD61_LIBS_DIR    = hiplay
-HD61_LIBS_SOURCE = hd61-libs-$(HD61_LIBS_VER).zip
-HD61_LIBS_SITE   = http://downloads.mutant-digital.net/hd61
-HD61_LIBS_DEPS   = bootstrap
+HD61_LIBS_VERSION = $(HD61_LIBS_DATE)
+HD61_LIBS_DIR     = hiplay
+HD61_LIBS_SOURCE  = hd61-libs-$(HD61_LIBS_VERSION).zip
+HD61_LIBS_SITE    = http://downloads.mutant-digital.net/hd61
+HD61_LIBS_DEPENDS = bootstrap
 
 $(D)/hd61-libs:
 	$(START_BUILD)

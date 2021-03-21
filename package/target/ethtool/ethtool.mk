@@ -1,11 +1,11 @@
 #
 # ethtool
 #
-ETHTOOL_VER    = 5.10
-ETHTOOL_DIR    = ethtool-$(ETHTOOL_VER)
-ETHTOOL_SOURCE = ethtool-$(ETHTOOL_VER).tar.xz
-ETHTOOL_SITE   = https://www.kernel.org/pub/software/network/ethtool
-ETHTOOL_DEPS   = bootstrap
+ETHTOOL_VERSION = 5.10
+ETHTOOL_DIR     = ethtool-$(ETHTOOL_VERSION)
+ETHTOOL_SOURCE  = ethtool-$(ETHTOOL_VERSION).tar.xz
+ETHTOOL_SITE    = https://www.kernel.org/pub/software/network/ethtool
+ETHTOOL_DEPENDS = bootstrap
 
 ETHTOOL_CONF_OPTS = \
 	--disable-pretty-dump \

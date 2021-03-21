@@ -1,11 +1,11 @@
 #
 # openssh
 #
-OPENSSH_VER    = 8.5p1
-OPENSSH_DIR    = openssh-$(OPENSSH_VER)
-OPENSSH_SOURCE = openssh-$(OPENSSH_VER).tar.gz
-OPENSSH_SITE   = https://artfiles.org/openbsd/OpenSSH/portable
-OPENSSH_DEPS   = bootstrap zlib openssl
+OPENSSH_VERSION = 8.5p1
+OPENSSH_DIR     = openssh-$(OPENSSH_VERSION)
+OPENSSH_SOURCE  = openssh-$(OPENSSH_VERSION).tar.gz
+OPENSSH_SITE    = https://artfiles.org/openbsd/OpenSSH/portable
+OPENSSH_DEPENDS = bootstrap zlib openssl
 
 OPENSSH_CONF_ENV = \
 	ac_cv_search_dlopen=no
@@ -35,7 +35,7 @@ $(D)/openssh:
 		$($(PKG)_CONF_ENV) ./configure $(TARGET_CONFIGURE_OPTS); \
 		$(MAKE); \
 		$(MAKE) install-nokeys DESTDIR=$(TARGET_DIR)
-	$(INSTALL_EXEC) $(BUILD_DIR)/openssh-$(OPENSSH_VER)/opensshd.init $(TARGET_DIR)/etc/init.d/openssh
+	$(INSTALL_EXEC) $(BUILD_DIR)/openssh-$(OPENSSH_VERSION)/opensshd.init $(TARGET_DIR)/etc/init.d/openssh
 	$(SED) 's/^#PermitRootLogin prohibit-password/PermitRootLogin yes/' $(TARGET_DIR)/etc/ssh/sshd_config
 	$(REMOVE)
 	$(TOUCH)

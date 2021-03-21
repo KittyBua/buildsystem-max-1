@@ -1,11 +1,11 @@
 #
 # zlib
 #
-ZLIB_VER    = 1.2.11
-ZLIB_DIR    = zlib-$(ZLIB_VER)
-ZLIB_SOURCE = zlib-$(ZLIB_VER).tar.xz
-ZLIB_SITE   = https://sourceforge.net/projects/libpng/files/zlib/$(ZLIB_VER)
-ZLIB_DEPS   = bootstrap
+ZLIB_VERSION = 1.2.11
+ZLIB_DIR     = zlib-$(ZLIB_VERSION)
+ZLIB_SOURCE  = zlib-$(ZLIB_VERSION).tar.xz
+ZLIB_SITE    = https://sourceforge.net/projects/libpng/files/zlib/$(ZLIB_VERSION)
+ZLIB_DEPENDS = bootstrap
 
 ZLIB_CONF_ENV = \
 	mandir=$(REMOVE_mandir)

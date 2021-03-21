@@ -1,11 +1,11 @@
 #
 # tzdata
 #
-TZDATA_VER    = 2020f
-TZDATA_DIR    = timezone
-TZDATA_SOURCE = tzdata$(TZDATA_VER).tar.gz
-TZDATA_SITE   = https://data.iana.org/time-zones/releases
-TZDATA_DEPS   = bootstrap host-zic
+TZDATA_VERSION = 2020f
+TZDATA_DIR     = timezone
+TZDATA_SOURCE  = tzdata$(TZDATA_VERSION).tar.gz
+TZDATA_SITE    = https://data.iana.org/time-zones/releases
+TZDATA_DEPENDS = bootstrap host-zic
 
 TZDATA_ZONELIST = \
 	africa antarctica asia australasia \

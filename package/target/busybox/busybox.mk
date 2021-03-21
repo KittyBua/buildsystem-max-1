@@ -1,11 +1,11 @@
 #
 # busybox
 #
-BUSYBOX_VER    = 1.33.0
-BUSYBOX_DIR    = busybox-$(BUSYBOX_VER)
-BUSYBOX_SOURCE = busybox-$(BUSYBOX_VER).tar.bz2
-BUSYBOX_SITE   = https://www.busybox.net/downloads
-BUSYBOX_DEPS   = bootstrap libtirpc
+BUSYBOX_VERSION = 1.33.0
+BUSYBOX_DIR     = busybox-$(BUSYBOX_VERSION)
+BUSYBOX_SOURCE  = busybox-$(BUSYBOX_VERSION).tar.bz2
+BUSYBOX_SITE    = https://www.busybox.net/downloads
+BUSYBOX_DEPENDS = bootstrap libtirpc
 
 BUSYBOX_CFLAGS = \
 	$(TARGET_CFLAGS)

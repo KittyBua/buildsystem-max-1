@@ -1,11 +1,11 @@
 #
 # flac
 #
-FLAC_VER    = 1.3.3
-FLAC_DIR    = flac-$(FLAC_VER)
-FLAC_SOURCE = flac-$(FLAC_VER).tar.xz
-FLAC_SITE   = https://ftp.osuosl.org/pub/xiph/releases/flac
-FLAC_DEPS   = bootstrap
+FLAC_VERSION = 1.3.3
+FLAC_DIR     = flac-$(FLAC_VERSION)
+FLAC_SOURCE  = flac-$(FLAC_VERSION).tar.xz
+FLAC_SITE    = https://ftp.osuosl.org/pub/xiph/releases/flac
+FLAC_DEPENDS = bootstrap
 
 FLAC_AUTORECONF = YES
 

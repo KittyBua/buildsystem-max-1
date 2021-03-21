@@ -1,20 +1,20 @@
 #
 # host-luarocks
 #
-HOST_LUAROCKS_VER    = 3.1.3
-HOST_LUAROCKS_DIR    = luarocks-$(HOST_LUAROCKS_VER)
-HOST_LUAROCKS_SOURCE = luarocks-$(HOST_LUAROCKS_VER).tar.gz
-HOST_LUAROCKS_SITE   = https://luarocks.github.io/luarocks/releases
-HOST_LUAROCKS_DEPS   = bootstrap host-lua
+HOST_LUAROCKS_VERSION = 3.1.3
+HOST_LUAROCKS_DIR     = luarocks-$(HOST_LUAROCKS_VERSION)
+HOST_LUAROCKS_SOURCE  = luarocks-$(HOST_LUAROCKS_VERSION).tar.gz
+HOST_LUAROCKS_SITE    = https://luarocks.github.io/luarocks/releases
+HOST_LUAROCKS_DEPENDS = bootstrap host-lua
 
-HOST_LUAROCKS_CONFIG = $(HOST_DIR)/etc/luarocks/config-$(LUA_ABIVER).lua
+HOST_LUAROCKS_CONFIG = $(HOST_DIR)/etc/luarocks/config-$(LUA_ABIVERSION).lua
 HOST_LUAROCKS_BINARY = $(HOST_DIR)/bin/luarocks
 
 HOST_LUAROCKS_CONF_OPTS = \
 	--with-lua=$(HOST_DIR)
 
 HOST_LUAROCKS_BUILD_ENV = \
-	LUA_PATH="$(HOST_DIR)/share/lua/$(HOST_LUA_ABIVER)/?.lua" \
+	LUA_PATH="$(HOST_DIR)/share/lua/$(HOST_LUA_ABIVERSION)/?.lua" \
 	TARGET_CC="$(TARGET_CC)" \
 	TARGET_LD="$(TARGET_LD)" \
 	TARGET_CFLAGS="$(TARGET_CFLAGS) -fPIC" \

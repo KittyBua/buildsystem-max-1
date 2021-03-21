@@ -1,11 +1,11 @@
 #
 # libass
 #
-LIBASS_VER    = 0.14.0
-LIBASS_DIR    = libass-$(LIBASS_VER)
-LIBASS_SOURCE = libass-$(LIBASS_VER).tar.xz
-LIBASS_SITE   = https://github.com/libass/libass/releases/download/$(LIBASS_VER)
-LIBASS_DEPS   = bootstrap freetype fribidi
+LIBASS_VERSION = 0.14.0
+LIBASS_DIR     = libass-$(LIBASS_VERSION)
+LIBASS_SOURCE  = libass-$(LIBASS_VERSION).tar.xz
+LIBASS_SITE    = https://github.com/libass/libass/releases/download/$(LIBASS_VERSION)
+LIBASS_DEPENDS = bootstrap freetype fribidi
 
 LIBASS_CONF_OPTS = \
 	--disable-static \

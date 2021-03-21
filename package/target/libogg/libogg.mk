@@ -1,11 +1,11 @@
 #
 # libogg
 #
-LIBOGG_VER    = 1.3.4
-LIBOGG_DIR    = libogg-$(LIBOGG_VER)
-LIBOGG_SOURCE = libogg-$(LIBOGG_VER).tar.gz
-LIBOGG_SITE   = https://ftp.osuosl.org/pub/xiph/releases/ogg
-LIBOGG_DEPS   = bootstrap
+LIBOGG_VERSION = 1.3.4
+LIBOGG_DIR     = libogg-$(LIBOGG_VERSION)
+LIBOGG_SOURCE  = libogg-$(LIBOGG_VERSION).tar.gz
+LIBOGG_SITE    = https://ftp.osuosl.org/pub/xiph/releases/ogg
+LIBOGG_DEPENDS = bootstrap
 
 LIBOGG_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \

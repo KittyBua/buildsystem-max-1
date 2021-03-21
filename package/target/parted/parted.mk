@@ -1,11 +1,11 @@
 #
 # parted
 #
-PARTED_VER    = 3.2
-PARTED_DIR    = parted-$(PARTED_VER)
-PARTED_SOURCE = parted-$(PARTED_VER).tar.xz
-PARTED_SITE   = https://ftp.gnu.org/gnu/parted
-PARTED_DEPS   = bootstrap e2fsprogs libiconv
+PARTED_VERSION = 3.2
+PARTED_DIR     = parted-$(PARTED_VERSION)
+PARTED_SOURCE  = parted-$(PARTED_VERSION).tar.xz
+PARTED_SITE    = https://ftp.gnu.org/gnu/parted
+PARTED_DEPENDS = bootstrap e2fsprogs libiconv
 
 PARTED_AUTORECONF = YES
 

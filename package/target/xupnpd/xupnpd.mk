@@ -1,11 +1,11 @@
 #
 # xupnpd
 #
-XUPNPD_VER    = git
-XUPNPD_DIR    = xupnpd.git
-XUPNPD_SOURCE = xupnpd.git
-XUPNPD_SITE   = https://github.com/clark15b
-XUPNPD_DEPS   = bootstrap lua openssl neutrino-plugins
+XUPNPD_VERSION = git
+XUPNPD_DIR     = xupnpd.git
+XUPNPD_SOURCE  = xupnpd.git
+XUPNPD_SITE    = https://github.com/clark15b
+XUPNPD_DEPENDS = bootstrap lua openssl neutrino-plugins
 
 XUPNPD_CHECKOUT = 25d6d44
 

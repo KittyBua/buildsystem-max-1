@@ -1,11 +1,11 @@
 #
 # htop
 #
-HTOP_VER    = 3.0.5
-HTOP_DIR    = htop-$(HTOP_VER)
-HTOP_SOURCE = htop-$(HTOP_VER).tar.gz
-HTOP_SITE   = $(call github,htop-dev,htop,$(HTOP_VER))
-HTOP_DEPS   = bootstrap ncurses libnl
+HTOP_VERSION = 3.0.5
+HTOP_DIR     = htop-$(HTOP_VERSION)
+HTOP_SOURCE  = htop-$(HTOP_VERSION).tar.gz
+HTOP_SITE    = $(call github,htop-dev,htop,$(HTOP_VERSION))
+HTOP_DEPENDS = bootstrap ncurses libnl
 
 HTOP_AUTORECONF = YES
 

@@ -1,12 +1,12 @@
 #
 # lua
 #
-LUA_VER    = 5.2.4
-LUA_ABIVER = $(basename $(LUA_VER))
-LUA_DIR    = lua-$(LUA_VER)
-LUA_SOURCE = lua-$(LUA_VER).tar.gz
-LUA_SITE   = https://www.lua.org/ftp
-LUA_DEPS   = bootstrap host-lua ncurses
+LUA_VERSION    = 5.2.4
+LUA_ABIVERSION = $(basename $(LUA_VERSION))
+LUA_DIR        = lua-$(LUA_VERSION)
+LUA_SOURCE     = lua-$(LUA_VERSION).tar.gz
+LUA_SITE       = https://www.lua.org/ftp
+LUA_DEPENDS    = bootstrap host-lua ncurses
 
 $(D)/lua:
 	$(START_BUILD)
@@ -17,7 +17,7 @@ $(D)/lua:
 	$(CD_BUILD_DIR); \
 		$(MAKE) linux \
 			BUILDMODE=dynamic \
-			PKG_VERSION=$(LUA_VER) \
+			PKG_VERSION=$(LUA_VERSION) \
 			$(TARGET_MAKE_OPTS) \
 			AR="$(TARGET_AR) rcu" \
 			LDFLAGS="$(TARGET_LDFLAGS)"; \

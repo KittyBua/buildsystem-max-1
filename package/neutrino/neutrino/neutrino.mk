@@ -41,13 +41,13 @@ endif
 #
 # neutrino
 #
-NEUTRINO_VER    = git
-NEUTRINO_DIR    = $(NEUTRINO).git
-NEUTRINO_SOURCE = $(NEUTRINO).git
-NEUTRINO_SITE   = $(GIT_SITE)
+NEUTRINO_VERSION = git
+NEUTRINO_DIR     = $(NEUTRINO).git
+NEUTRINO_SOURCE  = $(NEUTRINO).git
+NEUTRINO_SITE    = $(GIT_SITE)
 
-NEUTRINO_DEPS  = bootstrap libpng alsa-utils libjpeg-turbo fribidi freetype giflib
-NEUTRINO_DEPS += ffmpeg libcurl libdvbsi libsigc lua openssl e2fsprogs openthreads pugixml
+NEUTRINO_DEPENDS  = bootstrap libpng alsa-utils libjpeg-turbo fribidi freetype giflib
+NEUTRINO_DEPENDS += ffmpeg libcurl libdvbsi libsigc lua openssl e2fsprogs openthreads pugixml
 
 NEUTRINO_CFLAGS  = -Wall -W -Wshadow -pipe -Os -Wno-psabi
 NEUTRINO_CFLAGS += -D__STDC_FORMAT_MACROS
@@ -127,17 +127,17 @@ endif
 EXTERNAL_LCD ?= both
 ifeq ($(EXTERNAL_LCD),graphlcd)
 NEUTRINO_CONF_OPTS += --enable-graphlcd
-NEUTRINO_DEPS += graphlcd-base
+NEUTRINO_DEPENDS += graphlcd-base
 endif
 ifeq ($(EXTERNAL_LCD),lcd4linux)
 NEUTRINO_CONF_OPTS += --enable-lcd4linux
-NEUTRINO_DEPS += lcd4linux
+NEUTRINO_DEPENDS += lcd4linux
 endif
 ifeq ($(EXTERNAL_LCD),both)
 NEUTRINO_CONF_OPTS += --enable-graphlcd
-NEUTRINO_DEPS += graphlcd-base
+NEUTRINO_DEPENDS += graphlcd-base
 NEUTRINO_CONF_OPTS += --enable-lcd4linux
-NEUTRINO_DEPS += lcd4linux
+NEUTRINO_DEPENDS += lcd4linux
 endif
 
 # enable ffmpeg audio decoder in neutrino
@@ -146,14 +146,14 @@ AUDIODEC = ffmpeg
 ifeq ($(AUDIODEC),ffmpeg)
 NEUTRINO_CONF_OPTS += --enable-ffmpegdec
 else
-NEUTRINO_DEPS += libid3tag
-NEUTRINO_DEPS += libmad
+NEUTRINO_DEPENDS += libid3tag
+NEUTRINO_DEPENDS += libmad
 
 NEUTRINO_CONF_OPTS += --with-tremor
-NEUTRINO_DEPS += libvorbisidec
+NEUTRINO_DEPENDS += libvorbisidec
 
 NEUTRINO_CONF_OPTS += --enable-flac
-NEUTRINO_DEPS += flac
+NEUTRINO_DEPENDS += flac
 endif
 
 ifeq ($(BOXTYPE),armbox)
@@ -164,13 +164,13 @@ NEUTRINO_CONF_OPTS += --disable-mips-acc
 endif
 NEUTRINO_CONF_OPTS += $(LOCAL_NEUTRINO_BUILD_OPTIONS)
 
-NEUTRINO_DEPS += $(LOCAL_NEUTRINO_DEPS)
+NEUTRINO_DEPENDS += $(LOCAL_NEUTRINO_DEPENDS)
 
-NEUTRINO_DEPS += neutrino-channellogos
-NEUTRINO_DEPS += neutrino-mediathek
-NEUTRINO_DEPS += neutrino-plugins
-NEUTRINO_DEPS += xupnpd
-NEUTRINO_DEPS += libstb-hal
+NEUTRINO_DEPENDS += neutrino-channellogos
+NEUTRINO_DEPENDS += neutrino-mediathek
+NEUTRINO_DEPENDS += neutrino-plugins
+NEUTRINO_DEPENDS += xupnpd
+NEUTRINO_DEPENDS += libstb-hal
 
 # -----------------------------------------------------------------------------
 
@@ -203,7 +203,7 @@ $(D)/neutrino.do_compile:
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) DESTDIR=$(TARGET_DIR)
 	@touch $@
 
-$(D)/neutrino: $(NEUTRINO_DEPS) neutrino.do_prepare neutrino.config.status neutrino.do_compile
+$(D)/neutrino: $(NEUTRINO_DEPENDS) neutrino.do_prepare neutrino.config.status neutrino.do_compile
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 	$(TOUCH)
 	( \

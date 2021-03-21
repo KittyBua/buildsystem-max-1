@@ -1,11 +1,11 @@
 #
 # udpxy
 #
-UDPXY_VER    = git
-UDPXY_DIR    = udpxy.git
-UDPXY_SOURCE = udpxy.git
-UDPXY_SITE   = https://github.com/pcherenkov
-UDPXY_DEPS   = bootstrap
+UDPXY_VERSION = git
+UDPXY_DIR     = udpxy.git
+UDPXY_SOURCE  = udpxy.git
+UDPXY_SITE    = https://github.com/pcherenkov
+UDPXY_DEPENDS = bootstrap
 
 $(D)/udpxy:
 	$(START_BUILD)

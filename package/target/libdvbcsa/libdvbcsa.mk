@@ -1,11 +1,11 @@
 #
 # libdvbcsa
 #
-LIBDVBCSA_VER    = git
-LIBDVBCSA_DIR    = libdvbcsa.git
-LIBDVBCSA_SOURCE = libdvbcsa.git
-LIBDVBCSA_SITE   = https://code.videolan.org/videolan
-LIBDVBCSA_DEPS   = bootstrap
+LIBDVBCSA_VERSION = git
+LIBDVBCSA_DIR     = libdvbcsa.git
+LIBDVBCSA_SOURCE  = libdvbcsa.git
+LIBDVBCSA_SITE    = https://code.videolan.org/videolan
+LIBDVBCSA_DEPENDS = bootstrap
 
 LIBDVBCSA_AUTORECONF = YES
 

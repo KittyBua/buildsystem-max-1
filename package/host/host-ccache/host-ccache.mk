@@ -1,15 +1,15 @@
 #
 # host-ccache
 #
-HOST_CCACHE_VER  = 2020-05-25
-HOST_CCACHE_DIR  = local
-HOST_CCACHE_DEPS = directories
+HOST_CCACHE_VERSION = 2020-05-25
+HOST_CCACHE_DIR     = local
+HOST_CCACHE_DEPENDS = directories
 
 HOST_CCACHE_BIN    = $(CCACHE)
 HOST_CCACHE_BINDIR = $(HOST_DIR)/ccache-bin
 
 CCACHE     = /usr/bin/ccache
-CCACHE_DIR = $(HOME)/.ccache-bs-$(TARGET_ARCH)-$(CROSSTOOL_GCC_VER)-max
+CCACHE_DIR = $(HOME)/.ccache-bs-$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION)-max
 export CCACHE_DIR
 
 HOST_CCACHE_LINKS = \

@@ -1,11 +1,11 @@
 #
 # minidlna
 #
-MINIDLNA_VER    = 1.3.0
-MINIDLNA_DIR    = minidlna-$(MINIDLNA_VER)
-MINIDLNA_SOURCE = minidlna-$(MINIDLNA_VER).tar.gz
-MINIDLNA_SITE   = https://sourceforge.net/projects/minidlna/files/minidlna/$(MINIDLNA_VER)
-MINIDLNA_DEPS   = bootstrap zlib sqlite libexif libjpeg-turbo libid3tag libogg libvorbis flac ffmpeg
+MINIDLNA_VERSION = 1.3.0
+MINIDLNA_DIR     = minidlna-$(MINIDLNA_VERSION)
+MINIDLNA_SOURCE  = minidlna-$(MINIDLNA_VERSION).tar.gz
+MINIDLNA_SITE    = https://sourceforge.net/projects/minidlna/files/minidlna/$(MINIDLNA_VERSION)
+MINIDLNA_DEPENDS = bootstrap zlib sqlite libexif libjpeg-turbo libid3tag libogg libvorbis flac ffmpeg
 
 MINIDLNA_AUTORECONF = YES
 

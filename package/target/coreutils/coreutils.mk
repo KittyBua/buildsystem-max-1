@@ -1,11 +1,11 @@
 #
 # coreutils
 #
-COREUTILS_VER    = 8.30
-COREUTILS_DIR    = coreutils-$(COREUTILS_VER)
-COREUTILS_SOURCE = coreutils-$(COREUTILS_VER).tar.xz
-COREUTILS_SITE   = https://ftp.gnu.org/gnu/coreutils
-COREUTILS_DEPS   = bootstrap openssl
+COREUTILS_VERSION = 8.30
+COREUTILS_DIR     = coreutils-$(COREUTILS_VERSION)
+COREUTILS_SOURCE  = coreutils-$(COREUTILS_VERSION).tar.xz
+COREUTILS_SITE    = https://ftp.gnu.org/gnu/coreutils
+COREUTILS_DEPENDS = bootstrap openssl
 
 COREUTILS_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \

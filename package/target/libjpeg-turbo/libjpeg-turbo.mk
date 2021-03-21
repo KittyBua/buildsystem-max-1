@@ -1,11 +1,11 @@
 #
 # libjpeg-turbo
 #
-LIBJPEG_TURBO_VER    = 2.0.6
-LIBJPEG_TURBO_DIR    = libjpeg-turbo-$(LIBJPEG_TURBO_VER)
-LIBJPEG_TURBO_SOURCE = libjpeg-turbo-$(LIBJPEG_TURBO_VER).tar.gz
-LIBJPEG_TURBO_SITE   = https://sourceforge.net/projects/libjpeg-turbo/files/$(LIBJPEG_TURBO_VER)
-LIBJPEG_TURBO_DEPS   = bootstrap
+LIBJPEG_TURBO_VERSION = 2.0.6
+LIBJPEG_TURBO_DIR     = libjpeg-turbo-$(LIBJPEG_TURBO_VERSION)
+LIBJPEG_TURBO_SOURCE  = libjpeg-turbo-$(LIBJPEG_TURBO_VERSION).tar.gz
+LIBJPEG_TURBO_SITE    = https://sourceforge.net/projects/libjpeg-turbo/files/$(LIBJPEG_TURBO_VERSION)
+LIBJPEG_TURBO_DEPENDS = bootstrap
 
 LIBJPEG_TURBO_CONF_OPTS = \
 	-DWITH_SIMD=False \

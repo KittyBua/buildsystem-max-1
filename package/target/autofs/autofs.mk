@@ -1,11 +1,11 @@
 #
 # autofs
 #
-AUTOFS_VER    = 5.1.7
-AUTOFS_DIR    = autofs-$(AUTOFS_VER)
-AUTOFS_SOURCE = autofs-$(AUTOFS_VER).tar.xz
-AUTOFS_SITE   = https://www.kernel.org/pub/linux/daemons/autofs/v5
-AUTOFS_DEPS   = bootstrap libtirpc e2fsprogs openssl libxml2
+AUTOFS_VERSION = 5.1.7
+AUTOFS_DIR     = autofs-$(AUTOFS_VERSION)
+AUTOFS_SOURCE  = autofs-$(AUTOFS_VERSION).tar.xz
+AUTOFS_SITE    = https://www.kernel.org/pub/linux/daemons/autofs/v5
+AUTOFS_DEPENDS = bootstrap libtirpc e2fsprogs openssl libxml2
 
 AUTOFS_AUTORECONF = YES
 

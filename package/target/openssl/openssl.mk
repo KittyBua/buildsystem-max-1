@@ -1,11 +1,11 @@
 #
 # openssl
 #
-OPENSSL_VER    = 1.1.1h
-OPENSSL_DIR    = openssl-$(OPENSSL_VER)
-OPENSSL_SOURCE = openssl-$(OPENSSL_VER).tar.gz
-OPENSSL_SITE   = https://www.openssl.org/source
-OPENSSL_DEPS   = bootstrap
+OPENSSL_VERSION = 1.1.1h
+OPENSSL_DIR     = openssl-$(OPENSSL_VERSION)
+OPENSSL_SOURCE  = openssl-$(OPENSSL_VERSION).tar.gz
+OPENSSL_SITE    = https://www.openssl.org/source
+OPENSSL_DEPENDS = bootstrap
 
 ifeq ($(TARGET_ARCH),arm)
 OPENSSL_TARGET_ARCH = linux-armv4

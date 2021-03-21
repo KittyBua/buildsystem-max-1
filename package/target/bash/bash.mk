@@ -1,11 +1,11 @@
 #
 # bash
 #
-BASH_VER    = 5.0
-BASH_DIR    = bash-$(BASH_VER)
-BASH_SOURCE = bash-$(BASH_VER).tar.gz
-BASH_SITE   = http://ftp.gnu.org/gnu/bash
-BASH_DEPS   = bootstrap ncurses
+BASH_VERSION = 5.0
+BASH_DIR     = bash-$(BASH_VERSION)
+BASH_SOURCE  = bash-$(BASH_VERSION).tar.gz
+BASH_SITE    = http://ftp.gnu.org/gnu/bash
+BASH_DEPENDS = bootstrap ncurses
 
 $(D)/bash:
 	$(START_BUILD)

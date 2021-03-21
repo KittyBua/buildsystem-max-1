@@ -1,8 +1,8 @@
 #
 # base-files
 #
-BASE_FILES_VER  = 2020-05-25
-BASE_FILES_DEPS = directories
+BASE_FILES_VERSION = 2020-05-25
+BASE_FILES_DEPENDS = directories
 
 $(D)/base-files:
 	$(START_BUILD)

@@ -1,11 +1,11 @@
 #
 # luaexpat
 #
-LUAEXPAT_VER    = 1.3.3
-LUAEXPAT_DIR    = luaexpat-$(LUAEXPAT_VER)
-LUAEXPAT_SOURCE = luaexpat-$(LUAEXPAT_VER).tar.gz
-LUAEXPAT_SITE   = $(call github,tomasguisasola,luaexpat,v$(LUAEXPAT_VER))
-LUAEXPAT_DEPS   = bootstrap lua expat
+LUAEXPAT_VERSION = 1.3.3
+LUAEXPAT_DIR     = luaexpat-$(LUAEXPAT_VERSION)
+LUAEXPAT_SOURCE  = luaexpat-$(LUAEXPAT_VERSION).tar.gz
+LUAEXPAT_SITE    = $(call github,tomasguisasola,luaexpat,v$(LUAEXPAT_VERSION))
+LUAEXPAT_DEPENDS = bootstrap lua expat
 
 define LUAEXPAT_POST_PATCH
 	$(SED) 's|^EXPAT_INC=.*|EXPAT_INC= $(TARGET_INCLUDE_DIR)|' $(PKG_BUILD_DIR)/makefile
@@ -24,10 +24,10 @@ $(D)/luaexpat:
 		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) \
 			PREFIX=$(TARGET_DIR)/usr \
-			LUA_SYS_VER=$(LUA_ABIVER) \
+			LUA_SYS_VER=$(LUA_ABIVERSION) \
 			; \
 		$(MAKE) install \
 			PREFIX=$(TARGET_DIR)/usr \
-			LUA_SYS_VER=$(LUA_ABIVER)
+			LUA_SYS_VER=$(LUA_ABIVERSION)
 	$(REMOVE)
 	$(TOUCH)

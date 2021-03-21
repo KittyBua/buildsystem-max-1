@@ -1,11 +1,11 @@
 #
 # fontconfig
 #
-FONTCONFIG_VER    = 2.11.93
-FONTCONFIG_DIR    = fontconfig-$(FONTCONFIG_VER)
-FONTCONFIG_SOURCE = fontconfig-$(FONTCONFIG_VER).tar.bz2
-FONTCONFIG_SITE   = https://www.freedesktop.org/software/fontconfig/release
-FONTCONFIG_DEPS   = bootstrap freetype expat
+FONTCONFIG_VERSION = 2.11.93
+FONTCONFIG_DIR     = fontconfig-$(FONTCONFIG_VERSION)
+FONTCONFIG_SOURCE  = fontconfig-$(FONTCONFIG_VERSION).tar.bz2
+FONTCONFIG_SITE    = https://www.freedesktop.org/software/fontconfig/release
+FONTCONFIG_DEPENDS = bootstrap freetype expat
 
 FONTCONFIG_CONF_OPTS = \
 	--with-expat-includes=$(TARGET_INCLUDE_DIR) \

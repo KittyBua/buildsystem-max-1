@@ -1,11 +1,11 @@
 #
 # dosfstools
 #
-DOSFSTOOLS_VER    = 4.2
-DOSFSTOOLS_DIR    = dosfstools-$(DOSFSTOOLS_VER)
-DOSFSTOOLS_SOURCE = dosfstools-$(DOSFSTOOLS_VER).tar.gz
-DOSFSTOOLS_SITE   = https://github.com/dosfstools/dosfstools/releases/download/v$(DOSFSTOOLS_VER)
-DOSFSTOOLS_DEPS   = bootstrap libiconv
+DOSFSTOOLS_VERSION = 4.2
+DOSFSTOOLS_DIR     = dosfstools-$(DOSFSTOOLS_VERSION)
+DOSFSTOOLS_SOURCE  = dosfstools-$(DOSFSTOOLS_VERSION).tar.gz
+DOSFSTOOLS_SITE    = https://github.com/dosfstools/dosfstools/releases/download/v$(DOSFSTOOLS_VERSION)
+DOSFSTOOLS_DEPENDS = bootstrap libiconv
 
 DOSFSTOOLS_AUTORECONF = YES
 

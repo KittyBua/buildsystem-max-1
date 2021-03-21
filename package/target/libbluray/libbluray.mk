@@ -1,11 +1,11 @@
 #
 # libbluray
 #
-LIBBLURAY_VER    = 0.9.3
-LIBBLURAY_DIR    = libbluray-$(LIBBLURAY_VER)
-LIBBLURAY_SOURCE = libbluray-$(LIBBLURAY_VER).tar.bz2
-LIBBLURAY_SITE   = ftp.videolan.org/pub/videolan/libbluray/$(LIBBLURAY_VER)
-LIBBLURAY_DEPS   = bootstrap
+LIBBLURAY_VERSION = 0.9.3
+LIBBLURAY_DIR     = libbluray-$(LIBBLURAY_VERSION)
+LIBBLURAY_SOURCE  = libbluray-$(LIBBLURAY_VERSION).tar.bz2
+LIBBLURAY_SITE    = ftp.videolan.org/pub/videolan/libbluray/$(LIBBLURAY_VERSION)
+LIBBLURAY_DEPENDS = bootstrap
 
 LIBBLURAY_CONF_OPTS = \
 	--enable-shared \

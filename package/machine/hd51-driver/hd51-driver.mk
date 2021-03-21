@@ -1,11 +1,11 @@
 #
 # hd51-driver
 #
-HD51_DRIVER_DATE   = 20191120
-HD51_DRIVER_VER    = 4.10.12-$(HD51_DRIVER_DATE)
-HD51_DRIVER_SOURCE = hd51-drivers-$(HD51_DRIVER_VER).zip
-HD51_DRIVER_SITE   = http://source.mynonpublic.com/gfutures
-HD51_DRIVER_DEPS   = bootstrap
+HD51_DRIVER_DATE    = 20191120
+HD51_DRIVER_VERSION = 4.10.12-$(HD51_DRIVER_DATE)
+HD51_DRIVER_SOURCE  = hd51-drivers-$(HD51_DRIVER_VERSION).zip
+HD51_DRIVER_SITE    = http://source.mynonpublic.com/gfutures
+HD51_DRIVER_DEPENDS = bootstrap
 
 $(D)/hd51-driver:
 	$(START_BUILD)

@@ -1,11 +1,11 @@
 #
 # hd60-libgles
 #
-HD60_LIBGLES_DATE   = 20181201
-HD60_LIBGLES_VER    = $(HD60_LIBGLES_DATE)
-HD60_LIBGLES_SOURCE = hd60-mali-$(HD60_LIBGLES_VER).zip
-HD60_LIBGLES_SITE   = http://downloads.mutant-digital.net/hd60
-HD60_LIBGLES_DEPS   = bootstrap
+HD60_LIBGLES_DATE    = 20181201
+HD60_LIBGLES_VERSION = $(HD60_LIBGLES_DATE)
+HD60_LIBGLES_SOURCE  = hd60-mali-$(HD60_LIBGLES_VERSION).zip
+HD60_LIBGLES_SITE    = http://downloads.mutant-digital.net/hd60
+HD60_LIBGLES_DEPENDS = bootstrap
 
 $(D)/hd60-libgles:
 	$(START_BUILD)

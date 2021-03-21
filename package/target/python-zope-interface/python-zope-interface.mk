@@ -1,11 +1,11 @@
 #
 # python-zope-interface
 #
-PYTHON_ZOPE_INTERFACE_VER    = 4.5.0
-PYTHON_ZOPE_INTERFACE_DIR    = zope.interface-$(PYTHON_ZOPE_INTERFACE_VER)
-PYTHON_ZOPE_INTERFACE_SOURCE = zope.interface-$(PYTHON_ZOPE_INTERFACE_VER).tar.gz
-PYTHON_ZOPE_INTERFACE_SITE   = https://pypi.python.org/packages/source/z/zope.interface
-PYTHON_ZOPE_INTERFACE_DEPS   = bootstrap python python-setuptools
+PYTHON_ZOPE_INTERFACE_VERSION = 4.5.0
+PYTHON_ZOPE_INTERFACE_DIR     = zope.interface-$(PYTHON_ZOPE_INTERFACE_VERSION)
+PYTHON_ZOPE_INTERFACE_SOURCE  = zope.interface-$(PYTHON_ZOPE_INTERFACE_VERSION).tar.gz
+PYTHON_ZOPE_INTERFACE_SITE    = https://pypi.python.org/packages/source/z/zope.interface
+PYTHON_ZOPE_INTERFACE_DEPENDS = bootstrap python python-setuptools
 
 $(D)/python-zope-interface:
 	$(START_BUILD)

@@ -1,11 +1,11 @@
 #
 # libxslt
 #
-LIBXSLT_VER    = 1.1.34
-LIBXSLT_DIR    = libxslt-$(LIBXSLT_VER)
-LIBXSLT_SOURCE = libxslt-$(LIBXSLT_VER).tar.gz
-LIBXSLT_SITE   = ftp://xmlsoft.org/libxml2
-LIBXSLT_DEPS   = bootstrap libxml2
+LIBXSLT_VERSION = 1.1.34
+LIBXSLT_DIR     = libxslt-$(LIBXSLT_VERSION)
+LIBXSLT_SOURCE  = libxslt-$(LIBXSLT_VERSION).tar.gz
+LIBXSLT_SITE    = ftp://xmlsoft.org/libxml2
+LIBXSLT_DEPENDS = bootstrap libxml2
 
 LIBXSLT_CONF_OPTS = \
 	CPPFLAGS="$(CPPFLAGS) -I$(TARGET_INCLUDE_DIR)/libxml2" \

@@ -1,11 +1,11 @@
 #
 # valgrind
 #
-VALGRIND_VER    = 3.13.0
-VALGRIND_DIR    = valgrind-$(VALGRIND_VER)
-VALGRIND_SOURCE = valgrind-$(VALGRIND_VER).tar.bz2
-VALGRIND_SITE   = ftp://sourceware.org/pub/valgrind
-VALGRIND_DEPS   = bootstrap
+VALGRIND_VERSION = 3.13.0
+VALGRIND_DIR     = valgrind-$(VALGRIND_VERSION)
+VALGRIND_SOURCE  = valgrind-$(VALGRIND_VERSION).tar.bz2
+VALGRIND_SITE    = ftp://sourceware.org/pub/valgrind
+VALGRIND_DEPENDS = bootstrap
 
 define VALGRIND_POST_PATCH
 	$(SED) "s#armv7#arm#g" $(PKG_BUILD_DIR)/configure

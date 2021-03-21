@@ -1,11 +1,11 @@
 #
 # astra-sm
 #
-ASTRA_SM_VER    = git
-ASTRA_SM_DIR    = astra-sm.git
-ASTRA_SM_SOURCE = astra-sm.git
-ASTRA_SM_SITE   = https://gitlab.com/crazycat69
-ASTRA_SM_DEPS   = bootstrap openssl
+ASTRA_SM_VERSION = git
+ASTRA_SM_DIR     = astra-sm.git
+ASTRA_SM_SOURCE  = astra-sm.git
+ASTRA_SM_SITE    = https://gitlab.com/crazycat69
+ASTRA_SM_DEPENDS = bootstrap openssl
 
 ASTRA_SM_AUTORECONF = YES
 

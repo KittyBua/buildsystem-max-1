@@ -1,11 +1,11 @@
 #
 # jfsutils
 #
-JFSUTILS_VER    = 1.1.15
-JFSUTILS_DIR    = jfsutils-$(JFSUTILS_VER)
-JFSUTILS_SOURCE = jfsutils-$(JFSUTILS_VER).tar.gz
-JFSUTILS_SITE   = http://jfs.sourceforge.net/project/pub
-JFSUTILS_DEPS   = bootstrap e2fsprogs
+JFSUTILS_VERSION = 1.1.15
+JFSUTILS_DIR     = jfsutils-$(JFSUTILS_VERSION)
+JFSUTILS_SOURCE  = jfsutils-$(JFSUTILS_VERSION).tar.gz
+JFSUTILS_SITE    = http://jfs.sourceforge.net/project/pub
+JFSUTILS_DEPENDS = bootstrap e2fsprogs
 
 define JFSUTILS_POST_PATCH
 	$(SED) '/unistd.h/a#include <sys/types.h>' $(PKG_BUILD_DIR)/fscklog/extract.c

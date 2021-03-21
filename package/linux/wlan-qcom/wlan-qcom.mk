@@ -1,11 +1,11 @@
 #
 # wlan-qcom osmio4k | osmio4kplus
 #
-WLAN_QCOM_VER    = 4.5.25.46
-WLAN_QCOM_DIR    = qcacld-2.0-$(WLAN_QCOM_VER)
-WLAN_QCOM_SOURCE = qcacld-2.0-$(WLAN_QCOM_VER).tar.gz
-WLAN_QCOM_SITE   = https://www.codeaurora.org/cgit/external/wlan/qcacld-2.0/snapshot
-WLAN_QCOM_DEPS   = bootstrap kernel wlan-qcom-firmware wireless-regdb
+WLAN_QCOM_VERSION = 4.5.25.46
+WLAN_QCOM_DIR     = qcacld-2.0-$(WLAN_QCOM_VERSION)
+WLAN_QCOM_SOURCE  = qcacld-2.0-$(WLAN_QCOM_VERSION).tar.gz
+WLAN_QCOM_SITE    = https://www.codeaurora.org/cgit/external/wlan/qcacld-2.0/snapshot
+WLAN_QCOM_DEPENDS = bootstrap kernel wlan-qcom-firmware wireless-regdb
 
 $(D)/wlan-qcom:
 	$(START_BUILD)

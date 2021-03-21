@@ -1,11 +1,11 @@
 #
 # sysvinit
 #
-SYSVINIT_VER    = 2.99
-SYSVINIT_DIR    = sysvinit-$(SYSVINIT_VER)
-SYSVINIT_SOURCE = sysvinit-$(SYSVINIT_VER).tar.xz
-SYSVINIT_SITE   = http://download.savannah.nongnu.org/releases/sysvinit
-SYSVINIT_DEPS   = bootstrap
+SYSVINIT_VERSION = 2.99
+SYSVINIT_DIR     = sysvinit-$(SYSVINIT_VERSION)
+SYSVINIT_SOURCE  = sysvinit-$(SYSVINIT_VERSION).tar.xz
+SYSVINIT_SITE    = http://download.savannah.nongnu.org/releases/sysvinit
+SYSVINIT_DEPENDS = bootstrap
 
 $(D)/sysvinit:
 	$(START_BUILD)

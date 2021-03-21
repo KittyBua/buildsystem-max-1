@@ -1,11 +1,11 @@
 #
 # libevent
 #
-LIBEVENT_VER    = 2.1.11-stable
-LIBEVENT_DIR    = libevent-$(LIBEVENT_VER)
-LIBEVENT_SOURCE = libevent-$(LIBEVENT_VER).tar.gz
-LIBEVENT_SITE   = https://github.com/libevent/libevent/releases/download/release-$(LIBEVENT_VER)
-LIBEVENT_DEPS   = bootstrap
+LIBEVENT_VERSION = 2.1.11-stable
+LIBEVENT_DIR     = libevent-$(LIBEVENT_VERSION)
+LIBEVENT_SOURCE  = libevent-$(LIBEVENT_VERSION).tar.gz
+LIBEVENT_SITE    = https://github.com/libevent/libevent/releases/download/release-$(LIBEVENT_VERSION)
+LIBEVENT_DEPENDS = bootstrap
 
 $(D)/libevent:
 	$(START_BUILD)

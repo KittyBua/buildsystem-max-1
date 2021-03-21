@@ -1,11 +1,11 @@
 #
 # openvpn
 #
-OPENVPN_VER    = 2.5.1
-OPENVPN_DIR    = openvpn-$(OPENVPN_VER)
-OPENVPN_SOURCE = openvpn-$(OPENVPN_VER).tar.xz
-OPENVPN_SITE   = http://build.openvpn.net/downloads/releases
-OPENVPN_DEPS   = bootstrap openssl lzo
+OPENVPN_VERSION = 2.5.1
+OPENVPN_DIR     = openvpn-$(OPENVPN_VERSION)
+OPENVPN_SOURCE  = openvpn-$(OPENVPN_VERSION).tar.xz
+OPENVPN_SITE    = http://build.openvpn.net/downloads/releases
+OPENVPN_DEPENDS = bootstrap openssl lzo
 
 OPENVPN_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \

@@ -1,11 +1,11 @@
 #
 # curlftpfs
 #
-CURLFTPFS_VER    = 0.9.2
-CURLFTPFS_DIR    = curlftpfs-$(CURLFTPFS_VER)
-CURLFTPFS_SOURCE = curlftpfs-$(CURLFTPFS_VER).tar.gz
-CURLFTPFS_SITE   = https://sourceforge.net/projects/curlftpfs/files/latest/download
-CURLFTPFS_DEPS   = bootstrap libcurl libfuse glib2
+CURLFTPFS_VERSION = 0.9.2
+CURLFTPFS_DIR     = curlftpfs-$(CURLFTPFS_VERSION)
+CURLFTPFS_SOURCE  = curlftpfs-$(CURLFTPFS_VERSION).tar.gz
+CURLFTPFS_SITE    = https://sourceforge.net/projects/curlftpfs/files/latest/download
+CURLFTPFS_DEPENDS = bootstrap libcurl libfuse glib2
 
 $(D)/curlftpfs:
 	$(START_BUILD)

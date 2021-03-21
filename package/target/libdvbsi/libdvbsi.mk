@@ -1,11 +1,11 @@
 #
 # libdvbsi
 #
-LIBDVBSI_VER    = git
-LIBDVBSI_DIR    = libdvbsi.git
-LIBDVBSI_SOURCE = libdvbsi.git
-LIBDVBSI_SITE   = https://github.com/OpenVisionE2
-LIBDVBSI_DEPS   = bootstrap
+LIBDVBSI_VERSION = git
+LIBDVBSI_DIR     = libdvbsi.git
+LIBDVBSI_SOURCE  = libdvbsi.git
+LIBDVBSI_SITE    = https://github.com/OpenVisionE2
+LIBDVBSI_DEPENDS = bootstrap
 
 $(D)/libdvbsi:
 	$(START_BUILD)

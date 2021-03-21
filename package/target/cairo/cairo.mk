@@ -1,11 +1,11 @@
 #
 # cairo
 #
-CAIRO_VER    = 1.16.0
-CAIRO_DIR    = cairo-$(CAIRO_VER)
-CAIRO_SOURCE = cairo-$(CAIRO_VER).tar.xz
-CAIRO_SITE   = https://www.cairographics.org/releases
-CAIRO_DEPS   = bootstrap glib2 zlib libpng freetype pixman
+CAIRO_VERSION = 1.16.0
+CAIRO_DIR     = cairo-$(CAIRO_VERSION)
+CAIRO_SOURCE  = cairo-$(CAIRO_VERSION).tar.xz
+CAIRO_SITE    = https://www.cairographics.org/releases
+CAIRO_DEPENDS = bootstrap glib2 zlib libpng freetype pixman
 
 CAIRO_CONF_ENV = \
 	ax_cv_c_float_words_bigendian="no"

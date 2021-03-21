@@ -1,11 +1,11 @@
 #
 # usbutils
 #
-USBUTILS_VER    = 007
-USBUTILS_DIR    = usbutils-$(USBUTILS_VER)
-USBUTILS_SOURCE = usbutils-$(USBUTILS_VER).tar.xz
-USBUTILS_SITE   = https://www.kernel.org/pub/linux/utils/usb/usbutils
-USBUTILS_DEPS   = bootstrap libusb
+USBUTILS_VERSION = 007
+USBUTILS_DIR     = usbutils-$(USBUTILS_VERSION)
+USBUTILS_SOURCE  = usbutils-$(USBUTILS_VERSION).tar.xz
+USBUTILS_SITE    = https://www.kernel.org/pub/linux/utils/usb/usbutils
+USBUTILS_DEPENDS = bootstrap libusb
 
 USBUTILS_AUTORECONF = YES
 

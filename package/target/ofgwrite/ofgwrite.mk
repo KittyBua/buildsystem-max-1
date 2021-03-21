@@ -1,11 +1,11 @@
 #
 # ofgwrite
 #
-OFGWRITE_VER    = git
-OFGWRITE_DIR    = ofgwrite-max.git
-OFGWRITE_SOURCE = ofgwrite-max.git
-OFGWRITE_SITE   = $(MAX-GIT-GITHUB)
-OFGWRITE_DEPS   = bootstrap
+OFGWRITE_VERSION = git
+OFGWRITE_DIR     = ofgwrite-max.git
+OFGWRITE_SOURCE  = ofgwrite-max.git
+OFGWRITE_SITE    = $(MAX-GIT-GITHUB)
+OFGWRITE_DEPENDS = bootstrap
 
 $(D)/ofgwrite:
 	$(START_BUILD)

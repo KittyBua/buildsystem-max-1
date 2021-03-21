@@ -1,11 +1,11 @@
 #
 # libcap
 #
-LIBCAP_VER    = 2.25
-LIBCAP_DIR    = libcap-$(LIBCAP_VER)
-LIBCAP_SOURCE = libcap-$(LIBCAP_VER).tar.xz
-LIBCAP_SITE   = https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2
-LIBCAP_DEPS   = bootstrap
+LIBCAP_VERSION = 2.25
+LIBCAP_DIR     = libcap-$(LIBCAP_VERSION)
+LIBCAP_SOURCE  = libcap-$(LIBCAP_VERSION).tar.xz
+LIBCAP_SITE    = https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2
+LIBCAP_DEPENDS = bootstrap
 
 define LIBCAP_POST_PATCH
 	$(SED) 's@^BUILD_GPERF@#\0@' $(PKG_BUILD_DIR)/Make.Rules

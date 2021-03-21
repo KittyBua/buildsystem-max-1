@@ -172,14 +172,14 @@ config:
 	@read -p "Select gcc version? [default: 3] " bs_gcc_ver; \
 	bs_gcc_ver=$${bs_gcc_ver:-3}; \
 	case "$$bs_gcc_ver" in \
-		1) bs_gcc_ver=6.5.0;; \
-		2) bs_gcc_ver=7.5.0;; \
-		3) bs_gcc_ver=8.4.0;; \
-		4) bs_gcc_ver=9.3.0;; \
-		5) bs_gcc_ver=10.2.0;; \
-		*) bs_gcc_ver=8.4.0;; \
+		1) gcc_version=6.5.0;; \
+		2) gcc_version=7.5.0;; \
+		3) gcc_version=8.4.0;; \
+		4) gcc_version=9.3.0;; \
+		5) gcc_version=10.2.0;; \
+		*) gcc_version=8.4.0;; \
 	esac; \
-	sed -i -e "s|^#BS_GCC_VER = $$bs_gcc_ver|BS_GCC_VER = $$bs_gcc_ver|" $@
+	sed -i -e "s|^#BS_GCC_VERSION = $$gcc_version|BS_GCC_VERSION = $$gcc_version|" $@
 	@echo ""
 	@echo "Optimization:"
 	@echo "   1) optimization for size"
@@ -277,9 +277,9 @@ printenv:
 	@echo "TARGET_ARCH       : $(TARGET_ARCH)"
 	@echo "BOXTYPE           : $(BOXTYPE)"
 	@echo "BOXMODEL          : $(BOXMODEL)"
-	@echo "KERNEL_VER        : $(KERNEL_VER)"
+	@echo "KERNEL_VERSION    : $(KERNEL_VERSION)"
 	@echo "PARALLEL_JOBS     : $(PARALLEL_JOBS)"
-	@echo "CROSS_GCC_VERSION : $(CROSSTOOL_GCC_VER)"
+	@echo "CROSS_GCC_VERSION : $(CROSSTOOL_GCC_VERSION)"
 	@echo "OPTIMIZATION      : $(OPTIMIZATIONS)"
 	@echo -e "FLAVOUR           : $(TERM_YELLOW)$(FLAVOUR)$(TERM_NORMAL)"
 	@echo "EXTERNAL_LCD      : $(EXTERNAL_LCD)"
@@ -293,7 +293,7 @@ endif
 	@echo -e "LOCAL_N_PLUGIN_BUILD_OPTIONS : $(TERM_GREEN)$(LOCAL_N_PLUGIN_BUILD_OPTIONS)$(TERM_NORMAL)"
 	@echo -e "LOCAL_NEUTRINO_BUILD_OPTIONS : $(TERM_GREEN)$(LOCAL_NEUTRINO_BUILD_OPTIONS)$(TERM_NORMAL)"
 	@echo -e "LOCAL_NEUTRINO_CFLAGS        : $(TERM_GREEN)$(LOCAL_NEUTRINO_CFLAGS)$(TERM_NORMAL)"
-	@echo -e "LOCAL_NEUTRINO_DEPS          : $(TERM_GREEN)$(LOCAL_NEUTRINO_DEPS)$(TERM_NORMAL)"
+	@echo -e "LOCAL_NEUTRINO_DEPENDS       : $(TERM_GREEN)$(LOCAL_NEUTRINO_DEPENDS)$(TERM_NORMAL)"
 	$(call draw_line);
 	@echo ""
 	@echo "'make help' lists useful targets."

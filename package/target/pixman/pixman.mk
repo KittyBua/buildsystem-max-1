@@ -1,11 +1,11 @@
 #
 # pixman
 #
-PIXMAN_VER    = 0.34.0
-PIXMAN_DIR    = pixman-$(PIXMAN_VER)
-PIXMAN_SOURCE = pixman-$(PIXMAN_VER).tar.gz
-PIXMAN_SITE   = https://www.cairographics.org/releases
-PIXMAN_DEPS   = bootstrap zlib libpng
+PIXMAN_VERSION = 0.34.0
+PIXMAN_DIR     = pixman-$(PIXMAN_VERSION)
+PIXMAN_SOURCE  = pixman-$(PIXMAN_VERSION).tar.gz
+PIXMAN_SITE    = https://www.cairographics.org/releases
+PIXMAN_DEPENDS = bootstrap zlib libpng
 
 PIXMAN_CONF_OPTS = \
 	--disable-gtk \

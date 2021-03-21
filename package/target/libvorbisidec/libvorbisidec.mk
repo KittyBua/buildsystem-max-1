@@ -1,11 +1,11 @@
 #
 # libvorbisidec
 #
-LIBVORBISIDEC_VER    = 1.2.1+git20180316
-LIBVORBISIDEC_DIR    = libvorbisidec-$(LIBVORBISIDEC_VER)
-LIBVORBISIDEC_SOURCE = libvorbisidec_$(LIBVORBISIDEC_VER).orig.tar.gz
-LIBVORBISIDEC_SITE   = https://ftp.de.debian.org/debian/pool/main/libv/libvorbisidec
-LIBVORBISIDEC_DEPS   = bootstrap libogg
+LIBVORBISIDEC_VERSION = 1.2.1+git20180316
+LIBVORBISIDEC_DIR     = libvorbisidec-$(LIBVORBISIDEC_VERSION)
+LIBVORBISIDEC_SOURCE  = libvorbisidec_$(LIBVORBISIDEC_VERSION).orig.tar.gz
+LIBVORBISIDEC_SITE    = https://ftp.de.debian.org/debian/pool/main/libv/libvorbisidec
+LIBVORBISIDEC_DEPENDS = bootstrap libogg
 
 LIBVORBISIDEC_AUTORECONF = YES
 

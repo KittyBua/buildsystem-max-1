@@ -1,11 +1,11 @@
 #
 # libmodplug
 #
-LIBMODPLUG_VER    = 0.8.8.4
-LIBMODPLUG_DIR    = libmodplug-$(LIBMODPLUG_VER)
-LIBMODPLUG_SOURCE = libmodplug-$(LIBMODPLUG_VER).tar.gz
-LIBMODPLUG_SITE   = https://sourceforge.net/projects/modplug-xmms/files/libmodplug/$(LIBMODPLUG_VER)
-LIBMODPLUG_DEPS   = bootstrap
+LIBMODPLUG_VERSION = 0.8.8.4
+LIBMODPLUG_DIR     = libmodplug-$(LIBMODPLUG_VERSION)
+LIBMODPLUG_SOURCE  = libmodplug-$(LIBMODPLUG_VERSION).tar.gz
+LIBMODPLUG_SITE    = https://sourceforge.net/projects/modplug-xmms/files/libmodplug/$(LIBMODPLUG_VERSION)
+LIBMODPLUG_DEPENDS = bootstrap
 
 $(D)/libmodplug:
 	$(START_BUILD)

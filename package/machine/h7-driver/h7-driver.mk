@@ -1,11 +1,11 @@
 #
 # zgemma h7-driver
 #
-H7_DRIVER_DATE   = 20191123
-H7_DRIVER_VER    = 4.10.12-$(H7_DRIVER_DATE)
-H7_DRIVER_SOURCE = h7-drivers-$(H7_DRIVER_VER).zip
-H7_DRIVER_SITE   = http://source.mynonpublic.com/zgemma
-H7_DRIVER_DEPS   = bootstrap
+H7_DRIVER_DATE    = 20191123
+H7_DRIVER_VERSION = 4.10.12-$(H7_DRIVER_DATE)
+H7_DRIVER_SOURCE  = h7-drivers-$(H7_DRIVER_VERSION).zip
+H7_DRIVER_SITE    = http://source.mynonpublic.com/zgemma
+H7_DRIVER_DEPENDS = bootstrap
 
 $(D)/h7-driver:
 	$(START_BUILD)
