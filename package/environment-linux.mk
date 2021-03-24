@@ -4,17 +4,12 @@
 # -----------------------------------------------------------------------------
 
 #
-# gfutures
+# gfutures / Air Digital
 #
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 hd60 hd61))
 
-ifeq ($(BOXMODEL),bre2ze4k)
-KERNEL_VERSION = 4.10.12
-MTD_BLACK      = mmcblk0
-MTD_BOOTFS     = mmcblk0p1
-endif
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 hd60 hd61))
 
-ifeq ($(BOXMODEL),hd51)
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51))
 KERNEL_VERSION = 4.10.12
 MTD_BLACK      = mmcblk0
 MTD_BOOTFS     = mmcblk0p1
@@ -34,7 +29,7 @@ MTD_BLACK      = mmcblk0
 MTD_BOOTFS     = mmcblk0p4
 endif
 
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51))
 KERNEL_IMAGE_TYPE = zImage
 KERNEL_SOURCE     = linux-$(KERNEL_VERSION)-arm.tar.gz
 else
@@ -42,7 +37,7 @@ KERNEL_IMAGE_TYPE = uImage
 KERNEL_SOURCE     = linux-$(KERNEL_VERSION)-$(KERNEL_DATE)-arm.tar.gz
 endif
 
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51))
 KERNEL_DTB = bcm7445-bcm97445svmb.dtb
 else
 KERNEL_DTB = hi3798mv200.dtb
@@ -50,24 +45,6 @@ endif
 
 KERNEL_SITE = http://downloads.mutant-digital.net
 KERNEL_DIR  = linux-$(KERNEL_VERSION)
-
-endif
-
-# -----------------------------------------------------------------------------
-
-#
-# Air Digital
-#
-ifeq ($(BOXMODEL),h7)
-
-KERNEL_VERSION    = 4.10.12
-MTD_BLACK         = mmcblk0
-MTD_BOOTFS        = mmcblk0p1
-KERNEL_IMAGE_TYPE = zImage
-KERNEL_SOURCE     = linux-$(KERNEL_VERSION)-arm.tar.gz
-KERNEL_DTB        = bcm7445-bcm97445svmb.dtb
-KERNEL_SITE       = http://www.zgemma.org/downloads/
-KERNEL_DIR        = linux-$(KERNEL_VERSION)
 
 endif
 
@@ -154,19 +131,10 @@ endif
 #
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),osmio4k osmio4kplus))
 
-ifeq ($(BOXMODEL),osmio4k)
 KERNEL_VERSION        = 5.9.0
 KERNEL_SOURCE_VERSION = 5.9
 MTD_BLACK             = mmcblk1
 MTD_BOOTFS            = mmcblk1p1
-endif
-
-ifeq ($(BOXMODEL),osmio4kplus)
-KERNEL_VERSION        = 5.9.0
-KERNEL_SOURCE_VERSION = 5.9
-MTD_BLACK             = mmcblk1
-MTD_BOOTFS            = mmcblk1p1
-endif
 
 KERNEL_IMAGE_TYPE = zImage
 KERNEL_SOURCE     = linux-edision-$(KERNEL_SOURCE_VERSION).tar.gz
