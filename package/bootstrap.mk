@@ -75,12 +75,13 @@ $(D)/directories:
 #
 # cross-libs
 #
-CROSS_LIBS_VERSION = 2020-05-25
+CROSS_LIBS_VERSION = 2021-03-25
 
 $(D)/cross-libs: directories $(CROSSTOOL)
 	$(START_BUILD)
 	if test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/lib; then \
 		cp -a $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/lib/*so* $(TARGET_DIR)/lib; \
+		cd $(TARGET_LIB_DIR); ln -sf ../../lib/libgcc_s.so.1 libgcc_s.so.1; \
 	fi; \
 	if [ "$(TARGET_ARCH)" = "aarch64" ]; then \
 		cd ${TARGET_DIR}; ln -sf lib lib64; \
