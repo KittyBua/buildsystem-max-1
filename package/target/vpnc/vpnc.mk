@@ -14,7 +14,7 @@ $(D)/vpnc:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		$(MAKE); \
 		$(MAKE) \
 			install DESTDIR=$(TARGET_DIR) \

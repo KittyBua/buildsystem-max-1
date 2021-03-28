@@ -18,9 +18,8 @@ $(D)/lua:
 		$(MAKE) linux \
 			BUILDMODE=dynamic \
 			PKG_VERSION=$(LUA_VERSION) \
-			$(TARGET_MAKE_OPTS) \
-			AR="$(TARGET_AR) rcu" \
-			LDFLAGS="$(TARGET_LDFLAGS)"; \
+			$(TARGET_CONFIGURE_OPTS) \
+			AR="$(TARGET_AR) rcu"; \
 		$(MAKE) install \
 			INSTALL_TOP=$(TARGET_DIR)/usr \
 			INSTALL_MAN=$(TARGET_DIR)$(REMOVE_mandir); \

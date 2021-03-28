@@ -50,7 +50,7 @@ $(D)/libstb-hal.config.status:
 	test -d $(LIBSTB_HAL_OBJ_DIR) || mkdir -p $(LIBSTB_HAL_OBJ_DIR)
 	$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh
 	$(CD) $(LIBSTB_HAL_OBJ_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/configure \
 			$(LIBSTB_HAL_CONF_OPTS)
 ifeq ($(TINKER_OPTION),0)

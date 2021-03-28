@@ -19,7 +19,7 @@ $(D)/lua-feedparser:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		$(MAKE) install LUA_DIR=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVERSION)
 	$(REMOVE)
 	$(TOUCH)

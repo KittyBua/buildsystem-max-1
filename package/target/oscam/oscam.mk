@@ -69,7 +69,7 @@ $(D)/oscam.do_prepare:
 
 $(D)/oscam.do_compile:
 	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		$(MAKE) CROSS=$(TARGET_CROSS) OSCAM_BIN=$(OSCAM_FLAVOUR) USE_LIBCRYPTO=1 USE_LIBUSB=1 \
 		PLUS_TARGET="-rezap" \
 		CONF_DIR=/var/keys \

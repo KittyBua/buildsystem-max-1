@@ -22,7 +22,7 @@ $(D)/zlib:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		./configure $($(PKG)_CONF_OPTS); \
 		$(MAKE); \
 		ln -sf /bin/true ldconfig; \

@@ -14,7 +14,7 @@ $(D)/hd-idle:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		$(MAKE); \
 		$(MAKE) install TARGET_DIR=$(TARGET_DIR) install
 	$(REMOVE)

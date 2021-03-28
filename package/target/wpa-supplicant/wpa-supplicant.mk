@@ -15,7 +15,7 @@ $(D)/wpa-supplicant:
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/wpa_supplicant.config wpa_supplicant/.config; \
-		$(TARGET_CONFIGURE_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		$(MAKE) -C wpa_supplicant; \
 		$(MAKE) -C wpa_supplicant install LIBDIR=$(libdir) BINDIR=$(sbindir) DESTDIR=$(TARGET_DIR)
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/post-wlan0.sh $(TARGET_DIR)/etc/network

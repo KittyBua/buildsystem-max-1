@@ -20,7 +20,7 @@ $(D)/ushare:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		./configure $($(PKG)_CONF_OPTS); \
 		ln -sf ../config.h src/; \
 		$(MAKE); \

@@ -21,7 +21,7 @@ $(D)/vsftpd:
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
 		$(MAKE) clean; \
-		$(MAKE) $(TARGET_CONFIGURE_ENV) LIBS="-lcrypt -lcrypto -lssl"; \
+		$(MAKE) $(TARGET_CONFIGURE_OPTS) LIBS="-lcrypt -lcrypto -lssl"; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/vsftpd $(TARGET_DIR)/etc/default/vsftpd
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/vsftpd.init $(TARGET_DIR)/etc/init.d/vsftpd

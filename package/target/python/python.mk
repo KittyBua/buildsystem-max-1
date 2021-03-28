@@ -18,7 +18,7 @@ $(D)/python:
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
 		CONFIG_SITE= \
-		$(TARGET_CONFIGURE_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		autoreconf -vfi Modules/_ctypes/libffi; \
 		autoconf; \
 		./configure \

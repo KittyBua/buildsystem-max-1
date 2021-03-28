@@ -14,7 +14,7 @@ $(D)/hdparm:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(MAKE) $(TARGET_CONFIGURE_ENV); \
+		$(MAKE) $(TARGET_CONFIGURE_OPTS); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR) mandir=$(REMOVE_mandir)
 	$(REMOVE)
 	$(TOUCH)

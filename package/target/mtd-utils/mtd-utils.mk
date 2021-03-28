@@ -14,7 +14,7 @@ $(D)/mtd-utils:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		$(MAKE) PREFIX= CC=$(TARGET_CC) LD=$(TARGET_LD) STRIP=$(TARGET_STRIP) WITHOUT_XATTR=1 DESTDIR=$(TARGET_DIR); \
 		cp -a $(BUILD_DIR)/mtd-utils-$(MTD_UTILS_VERSION)/mkfs.jffs2 $(TARGET_DIR)/usr/sbin
 		cp -a $(BUILD_DIR)/mtd-utils-$(MTD_UTILS_VERSION)/sumtool $(TARGET_DIR)/usr/sbin

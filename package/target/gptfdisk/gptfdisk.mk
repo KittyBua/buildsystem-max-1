@@ -14,7 +14,7 @@ $(D)/gptfdisk:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		$(MAKE) sgdisk; \
 		$(INSTALL_EXEC) sgdisk $(TARGET_DIR)/usr/sbin/sgdisk
 	$(REMOVE)

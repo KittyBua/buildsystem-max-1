@@ -17,7 +17,7 @@ $(D)/pugixml:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(CMAKE); \
+		$(TARGET_CMAKE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REMOVE)

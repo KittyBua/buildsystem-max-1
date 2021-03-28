@@ -75,7 +75,7 @@ $(D)/neutrino-plugins.config.status:
 	test -d $(NEUTRINO_PLUGINS_OBJ_DIR) || mkdir -p $(NEUTRINO_PLUGINS_OBJ_DIR)
 	$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/autogen.sh
 	cd $(NEUTRINO_PLUGINS_OBJ_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/configure \
 			$(NEUTRINO_PLUGINS_CONF_OPTS)
 	@touch $@

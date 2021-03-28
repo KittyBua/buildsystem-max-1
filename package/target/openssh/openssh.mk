@@ -32,7 +32,7 @@ $(D)/openssh:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$($(PKG)_CONF_ENV) ./configure $(TARGET_CONFIGURE_OPTS); \
+		$($(PKG)_CONF_ENV) ./configure $(TARGET_CONFIGURE_OPTIONS); \
 		$(MAKE); \
 		$(MAKE) install-nokeys DESTDIR=$(TARGET_DIR)
 	$(INSTALL_EXEC) $(BUILD_DIR)/openssh-$(OPENSSH_VERSION)/opensshd.init $(TARGET_DIR)/etc/init.d/openssh

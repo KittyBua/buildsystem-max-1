@@ -21,7 +21,7 @@ $(D)/openthreads:
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
 		echo "# dummy file to prevent warning message" > examples/CMakeLists.txt; \
-		$(CMAKE); \
+		$(TARGET_CMAKE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REMOVE)

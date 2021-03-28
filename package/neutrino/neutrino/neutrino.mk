@@ -191,7 +191,7 @@ $(D)/neutrino.config.status:
 	test -d $(NEUTRINO_OBJ_DIR) || mkdir -p $(NEUTRINO_OBJ_DIR)
 	$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh
 	$(CD) $(NEUTRINO_OBJ_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure \
 			$(NEUTRINO_CONF_OPTS)
 		+make $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h

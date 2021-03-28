@@ -14,7 +14,7 @@ $(D)/sysvinit:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		$(MAKE) SULOGINLIBS=-lcrypt; \
 		$(MAKE) install ROOT=$(TARGET_DIR) mandir=$(REMOVE_mandir)
 	mkdir -p $(TARGET_DIR)/etc/{init.d,rc{{0..6},S}.d}

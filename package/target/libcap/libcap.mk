@@ -23,7 +23,7 @@ $(D)/libcap:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_ENV) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS) prefix=/usr lib=lib; \
-		$(TARGET_CONFIGURE_ENV) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS) prefix=/usr lib=lib DESTDIR=$(TARGET_DIR) install
+		$(TARGET_CONFIGURE_OPTS) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS) prefix=/usr lib=lib; \
+		$(TARGET_CONFIGURE_OPTS) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS) prefix=/usr lib=lib DESTDIR=$(TARGET_DIR) install
 	$(REMOVE)
 	$(TOUCH)

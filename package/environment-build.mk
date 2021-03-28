@@ -263,7 +263,7 @@ HOST_MAKE_ENV = \
 	PKG_CONFIG=/usr/bin/pkg-config \
 	PKG_CONFIG_LIBDIR="$(HOST_DIR)/lib/pkgconfig"
 
-HOST_CONFIGURE_ENV = \
+HOST_CONFIGURE_OPTS = \
 	$(HOST_MAKE_ENV) \
 	AR="$(HOSTAR)" \
 	AS="$(HOSTAS)" \
@@ -278,12 +278,16 @@ HOST_CONFIGURE_ENV = \
 	CPPFLAGS="$(HOST_CPPFLAGS)" \
 	CFLAGS="$(HOST_CFLAGS)" \
 	CXXFLAGS="$(HOST_CXXFLAGS)" \
-	LDFLAGS="$(HOST_LDFLAGS)" \
+	LDFLAGS="$(HOST_LDFLAGS)"
+
+HOST_CONFIGURE_OPTS += \
 	$($(PKG)_CONF_ENV)
 
-HOST_CONFIGURE_OPTS = \
+HOST_CONFIGURE_OPTIONS = \
 	--prefix=$(HOST_DIR) \
-	--sysconfdir=$(HOST_DIR)/etc \
+	--sysconfdir=$(HOST_DIR)/etc
+
+HOST_CONFIGURE_OPTIONS += \
 	$($(PKG)_CONF_OPTS)
 
 HOST_CONFIGURE = \
@@ -292,14 +296,14 @@ HOST_CONFIGURE = \
 	fi; \
 	test -f ./configure || ./autogen.sh && \
 	CONFIG_SITE=/dev/null \
-	$(HOST_CONFIGURE_ENV) \
+	$(HOST_CONFIGURE_OPTS) \
 	./configure \
-	$(HOST_CONFIGURE_OPTS)
+	$(HOST_CONFIGURE_OPTIONS)
 
 TARGET_MAKE_ENV = \
 	PATH=$(PATH)
 
-TARGET_MAKE_OPTS = \
+TARGET_CONFIGURE_OPTS = \
 	$(TARGET_MAKE_ENV) \
 	CROSS_COMPILE="$(TARGET_CROSS)" \
 	AR="$(TARGET_AR)" \
@@ -315,22 +319,31 @@ TARGET_MAKE_OPTS = \
 	STRIP="$(TARGET_STRIP)" \
 	OBJCOPY="$(TARGET_OBJCOPY)" \
 	OBJDUMP="$(TARGET_OBJDUMP)" \
-	ARCH="$(TARGET_ARCH)"
-
-TARGET_CONFIGURE_ENV = \
-	$(TARGET_MAKE_OPTS) \
+	ARCH="$(TARGET_ARCH)" \
+	AR_FOR_BUILD="$(HOSTAR)" \
+	AS_FOR_BUILD="$(HOSTAS)" \
+	CC_FOR_BUILD="$(HOSTCC)" \
+	GCC_FOR_BUILD="$(HOSTCC)" \
+	CXX_FOR_BUILD="$(HOSTCXX)" \
+	LD_FOR_BUILD="$(HOSTLD)" \
+	CPPFLAGS_FOR_BUILD="$(HOST_CPPFLAGS)" \
+	CFLAGS_FOR_BUILD="$(HOST_CFLAGS)" \
+	CXXFLAGS_FOR_BUILD="$(HOST_CXXFLAGS)" \
+	LDFLAGS_FOR_BUILD="$(HOST_LDFLAGS)" \
+	FCFLAGS_FOR_BUILD="$(HOST_FCFLAGS)" \
+	DEFAULT_ASSEMBLER="$(TARGET_AS)" \
+	DEFAULT_LINKER="$(TARGET_LD)" \
 	CPPFLAGS="$(TARGET_CPPFLAGS)" \
 	CFLAGS="$(TARGET_CFLAGS)" \
 	CXXFLAGS="$(TARGET_CXXFLAGS)" \
-	LDFLAGS="$(TARGET_LDFLAGS)"
+	LDFLAGS="$(TARGET_LDFLAGS)" \
+	PKG_CONFIG="$(PKG_CONFIG_HOST_BINARY)" \
+	PKG_CONFIG_SYSROOT_DIR=$(TARGET_DIR)
 
-TARGET_CONFIGURE_ENV += \
-	PKG_CONFIG_PATH="" \
-	PKG_CONFIG_LIBDIR=$(PKG_CONFIG_LIBDIR) \
-	PKG_CONFIG_SYSROOT_DIR=$(TARGET_DIR) \
+TARGET_CONFIGURE_OPTS += \
 	$($(PKG)_CONF_ENV)
 
-TARGET_CONFIGURE_OPTS = \
+TARGET_CONFIGURE_OPTIONS = \
 	--build=$(GNU_HOST_NAME) \
 	--host=$(GNU_TARGET_NAME) \
 	--target=$(GNU_TARGET_NAME) \
@@ -349,28 +362,32 @@ TARGET_CONFIGURE_OPTS = \
 	--oldincludedir=$(oldincludedir) \
 	--sbindir=$(sbindir) \
 	--sharedstatedir=$(sharedstatedir) \
-	--sysconfdir=$(sysconfdir) \
+	--sysconfdir=$(sysconfdir)
+
+TARGET_CONFIGURE_OPTIONS += \
 	$($(PKG)_CONF_OPTS)
 
-CONFIGURE = \
+TARGET_CONFIGURE = \
 	if [ "$($(PKG)_AUTORECONF)" == "YES" ]; then \
 	  autoreconf -fi -I $(TARGET_DIR)/usr/share/aclocal; \
 	fi; \
 	test -f ./configure || ./autogen.sh && \
 	CONFIG_SITE=/dev/null \
-	$(TARGET_CONFIGURE_ENV) \
+	$(TARGET_CONFIGURE_OPTS) \
 	./configure \
-	$(TARGET_CONFIGURE_OPTS)
+	$(TARGET_CONFIGURE_OPTIONS)
+
+CONFIGURE = $(TARGET_CONFIGURE)
 
 # -----------------------------------------------------------------------------
 
-TARGET_CMAKE_ENV = \
+TARGET_CMAKE_OPTS = \
 	$($(PKG)_CONF_ENV)
 
-TARGET_CMAKE_OPTS = \
+TARGET_CMAKE_OPTIONS = \
 	--no-warn-unused-cli 
 
-TARGET_CMAKE_OPTS += \
+TARGET_CMAKE_OPTIONS += \
 	-DBUILD_SHARED_LIBS=ON \
 	-DENABLE_STATIC=OFF \
 	-DCMAKE_BUILD_TYPE="None" \
@@ -397,12 +414,12 @@ TARGET_CMAKE_OPTS += \
 	-DCMAKE_READELF="$(TARGET_READELF)" \
 	-DCMAKE_STRIP="$(TARGET_STRIP)"
 
-TARGET_CMAKE_OPTS += \
+TARGET_CMAKE_OPTIONS += \
 	$($(PKG)_CONF_OPTS)
 
-CMAKE = \
+TARGET_CMAKE = \
 	rm -f CMakeCache.txt; \
-	$(TARGET_CMAKE_ENV) cmake $(TARGET_CMAKE_OPTS)
+	$(TARGET_CMAKE_OPTS) cmake $(TARGET_CMAKE_OPTIONS)
 
 # -----------------------------------------------------------------------------
 
