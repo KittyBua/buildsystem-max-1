@@ -10,6 +10,30 @@ PYTHON_DEPENDS = bootstrap host-python ncurses zlib openssl libffi expat bzip2
 PYTHON_BASE_DIR    = usr/lib/python$(basename $(PYTHON_VERSION))
 PYTHON_INCLUDE_DIR = usr/include/python$(basename $(PYTHON_VERSION))
 
+PYTHON_CONF_ENV = \
+	ac_sys_system=Linux \
+	ac_sys_release=2 \
+	ac_cv_file__dev_ptmx=yes \
+	ac_cv_file__dev_ptc=no \
+	ac_cv_have_long_long_format=yes \
+	ac_cv_no_strict_aliasing_ok=yes \
+	ac_cv_pthread=yes \
+	ac_cv_cxx_thread=yes \
+	ac_cv_sizeof_off_t=8 \
+	ac_cv_have_chflags=no \
+	ac_cv_have_lchflags=no \
+	ac_cv_py_format_size_t=yes \
+	ac_cv_broken_sem_getvalue=no
+
+PYTHON_CONF_OPTS = \
+	--enable-shared \
+	--with-lto \
+	--enable-ipv6 \
+	--with-threads \
+	--with-pymalloc \
+	--with-signal-module \
+	--with-wctype-functions
+
 $(D)/python:
 	$(START_BUILD)
 	$(REMOVE)
@@ -18,36 +42,9 @@ $(D)/python:
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
 		CONFIG_SITE= \
-		$(TARGET_CONFIGURE_OPTS) \
 		autoreconf -vfi Modules/_ctypes/libffi; \
 		autoconf; \
-		./configure \
-			--build=$(GNU_HOST_NAME) \
-			--host=$(GNU_TARGET_NAME) \
-			--target=$(GNU_TARGET_NAME) \
-			--prefix=/usr \
-			--mandir=$(REMOVE_mandir) \
-			--sysconfdir=/etc \
-			--enable-shared \
-			--with-lto \
-			--enable-ipv6 \
-			--with-threads \
-			--with-pymalloc \
-			--with-signal-module \
-			--with-wctype-functions \
-			ac_sys_system=Linux \
-			ac_sys_release=2 \
-			ac_cv_file__dev_ptmx=yes \
-			ac_cv_file__dev_ptc=no \
-			ac_cv_have_long_long_format=yes \
-			ac_cv_no_strict_aliasing_ok=yes \
-			ac_cv_pthread=yes \
-			ac_cv_cxx_thread=yes \
-			ac_cv_sizeof_off_t=8 \
-			ac_cv_have_chflags=no \
-			ac_cv_have_lchflags=no \
-			ac_cv_py_format_size_t=yes \
-			ac_cv_broken_sem_getvalue=no \
+		$(CONFIGURE) \
 			HOSTPYTHON=$(HOST_DIR)/bin/python$(basename $(PYTHON_VERSION)) \
 			; \
 		$(MAKE) $(TARGET_MAKE_OPTS) \
