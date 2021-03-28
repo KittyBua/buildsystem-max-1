@@ -261,14 +261,14 @@ switch-url:
 
 #
 rewrite-test:
+	@printf "$(TERM_YELLOW)---> create rewrite-dependency_libs.txt ... "
+	$(shell cd $(TARGET_DIR)/usr/lib && grep ^dependency_libs *.la > $(BUILD_DIR)/rewrite-dependency_libs.txt)
+	@printf "done\n$(TERM_NORMAL)"
 	@printf "$(TERM_YELLOW)---> create rewrite-libdir.txt ... "
-	$(shell grep ^libdir $(TARGET_DIR)/usr/lib/*.la > $(BUILD_DIR)/rewrite-libdir.txt)
+	$(shell cd $(TARGET_DIR)/usr/lib && grep ^libdir *.la > $(BUILD_DIR)/rewrite-libdir.txt)
 	@printf "done\n$(TERM_NORMAL)"
 	@printf "$(TERM_YELLOW)---> create rewrite-pkgconfig.txt ... "
-	$(shell grep ^prefix $(TARGET_DIR)/usr/lib/pkgconfig/* > $(BUILD_DIR)/rewrite-pkgconfig.txt)
-	@printf "done\n$(TERM_NORMAL)"
-	@printf "$(TERM_YELLOW)---> create rewrite-dependency_libs.txt ... "
-	$(shell grep ^dependency_libs $(TARGET_DIR)/usr/lib/*.la > $(BUILD_DIR)/rewrite-dependency_libs.txt)
+	$(shell cd $(TARGET_DIR)/usr/lib/pkgconfig && grep ^prefix * > $(BUILD_DIR)/rewrite-pkgconfig.txt)
 	@printf "done\n$(TERM_NORMAL)"
 
 # -----------------------------------------------------------------------------
