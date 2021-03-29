@@ -39,7 +39,7 @@ E2FSPROGS_CONF_OPTS = \
 	--with-root-prefix="" \
 	--with-crond-dir=no
 
-$(D)/e2fsprogs:
+e2fsprogs:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

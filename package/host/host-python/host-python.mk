@@ -13,7 +13,7 @@ HOST_PYTHON_CONF_OPTS = \
 	--without-cxx-main \
 	--with-threads
 
-$(D)/host-python:
+host-python:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

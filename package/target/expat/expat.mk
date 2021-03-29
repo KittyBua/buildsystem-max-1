@@ -14,7 +14,7 @@ EXPAT_CONF_OPTS = \
 	--without-xmlwf \
 	--without-docbook
 
-$(D)/expat:
+expat:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

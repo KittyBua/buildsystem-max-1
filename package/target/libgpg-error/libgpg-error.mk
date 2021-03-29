@@ -19,7 +19,7 @@ LIBGPG_ERROR_CONF_OPTS = \
 
 LIBGPG_ERROR_CONFIG_SCRIPTS = gpg-error-config
 
-$(D)/libgpg-error:
+libgpg-error:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

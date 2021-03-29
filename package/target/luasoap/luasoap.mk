@@ -7,7 +7,7 @@ LUASOAP_SOURCE  = luasoap-$(LUASOAP_VERSION).tar.gz
 LUASOAP_SITE    = https://github.com/downloads/tomasguisasola/luasoap
 LUASOAP_DEPENDS = bootstrap lua luasocket luaexpat
 
-$(D)/luasoap:
+luasoap:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -12,7 +12,7 @@ define LUA_FEEDPARSER_POST_PATCH
 endef
 LUA_FEEDPARSER_POST_PATCH_HOOKS += LUA_FEEDPARSER_POST_PATCH
 
-$(D)/lua-feedparser:
+lua-feedparser:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

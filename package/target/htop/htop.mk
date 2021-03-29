@@ -17,7 +17,7 @@ HTOP_CONF_OPTS = \
 	--disable-unicode \
 	--disable-hwloc
 
-$(D)/htop:
+htop:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

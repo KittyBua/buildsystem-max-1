@@ -9,7 +9,7 @@ VUSOLO4K_LIBGLES_SOURCE  = libgles-vusolo4k-$(VUSOLO4K_LIBGLES_VERSION).tar.gz
 VUSOLO4K_LIBGLES_SITE    = http://code.vuplus.com/download/release/libgles
 VUSOLO4K_LIBGLES_DEPENDS = bootstrap
 
-$(D)/vusolo4k-libgles:
+vusolo4k-libgles:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

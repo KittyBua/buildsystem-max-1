@@ -14,7 +14,7 @@ LIBDVDNAV_CONF_OPTS = \
 	--enable-static \
 	--enable-shared
 
-$(D)/libdvdnav:
+libdvdnav:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

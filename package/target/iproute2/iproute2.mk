@@ -7,7 +7,7 @@ IPROUTE2_SOURCE  = iproute2-$(IPROUTE2_VERSION).tar.xz
 IPROUTE2_SITE    = https://kernel.org/pub/linux/utils/net/iproute2
 IPROUTE2_DEPENDS = bootstrap libmnl
 
-$(D)/iproute2:
+iproute2:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

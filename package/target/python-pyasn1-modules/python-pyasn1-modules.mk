@@ -7,7 +7,7 @@ PYTHON_PYASN1_MODULES_SOURCE  = pyasn1-modules-$(PYTHON_PYASN1_MODULES_VERSION).
 PYTHON_PYASN1_MODULES_SITE    = https://pypi.python.org/packages/source/p/pyasn1-modules
 PYTHON_PYASN1_MODULES_DEPENDS = bootstrap python python-setuptools
 
-$(D)/python-pyasn1-modules:
+python-pyasn1-modules:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

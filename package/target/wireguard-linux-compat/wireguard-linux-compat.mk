@@ -7,7 +7,7 @@ WIREGUARD_LINUX_COMPAT_SOURCE  = wireguard-linux-compat-$(WIREGUARD_LINUX_COMPAT
 WIREGUARD_LINUX_COMPAT_SITE    = https://git.zx2c4.com/wireguard-linux-compat/snapshot
 WIREGUARD_LINUX_COMPAT_DEPENDS = bootstrap kernel libmnl
 
-$(D)/wireguard-linux-compat:
+wireguard-linux-compat:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -20,7 +20,7 @@ CAIRO_CONF_OPTS = \
 	--disable-gl \
 	--enable-tee
 
-$(D)/cairo:
+cairo:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

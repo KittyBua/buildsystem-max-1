@@ -10,7 +10,7 @@ SDPARM_DEPENDS = bootstrap
 SDPARM_CONF_OPTS = \
 	--bindir=$(base_sbindir)
 
-$(D)/sdparm:
+sdparm:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

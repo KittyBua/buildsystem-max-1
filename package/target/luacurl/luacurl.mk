@@ -7,7 +7,7 @@ LUACURL_SOURCE  = lua-curlv3.git
 LUACURL_SITE    = git://github.com/Lua-cURL
 LUACURL_DEPENDS = bootstrap libcurl lua
 
-$(D)/luacurl:
+luacurl:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

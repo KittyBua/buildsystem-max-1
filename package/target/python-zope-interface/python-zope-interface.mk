@@ -7,7 +7,7 @@ PYTHON_ZOPE_INTERFACE_SOURCE  = zope.interface-$(PYTHON_ZOPE_INTERFACE_VERSION).
 PYTHON_ZOPE_INTERFACE_SITE    = https://pypi.python.org/packages/source/z/zope.interface
 PYTHON_ZOPE_INTERFACE_DEPENDS = bootstrap python python-setuptools
 
-$(D)/python-zope-interface:
+python-zope-interface:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -13,7 +13,7 @@ MINIDLNA_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
 	--disable-static
 
-$(D)/minidlna:
+minidlna:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

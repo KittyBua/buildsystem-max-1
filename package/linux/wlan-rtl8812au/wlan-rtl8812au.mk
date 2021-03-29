@@ -7,7 +7,7 @@ WLAN_RTL8812AU_SOURCE  = rtl8812AU-driver-$(WLAN_RTL8812AU_VERSION).zip
 WLAN_RTL8812AU_SITE    = http://source.mynonpublic.com
 WLAN_RTL8812AU_DEPENDS = bootstrap kernel
 
-$(D)/wlan-rtl8812au:
+wlan-rtl8812au:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

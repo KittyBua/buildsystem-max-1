@@ -7,7 +7,7 @@ WLAN_RTL8822BU_SOURCE  = rtl8822bu-driver-$(WLAN_RTL8822BU_VERSION).zip
 WLAN_RTL8822BU_SITE    = http://source.mynonpublic.com
 WLAN_RTL8822BU_DEPENDS = bootstrap kernel
 
-$(D)/wlan-rtl8822bu:
+wlan-rtl8822bu:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

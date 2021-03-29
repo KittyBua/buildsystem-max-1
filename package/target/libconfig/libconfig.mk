@@ -10,7 +10,7 @@ LIBCONFIG_DEPENDS = bootstrap
 LIBCONFIG_CONF_OPTS = \
 	--disable-static
 
-$(D)/libconfig:
+libconfig:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

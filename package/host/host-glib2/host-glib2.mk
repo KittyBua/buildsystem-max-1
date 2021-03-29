@@ -7,7 +7,7 @@ HOST_GLIB2_SOURCE  = glib-$(HOST_GLIB2_VERSION).tar.xz
 HOST_GLIB2_SITE    = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(HOST_GLIB2_VERSION))
 HOST_GLIB2_DEPENDS = bootstrap host-meson host-libffi
 
-$(D)/host-glib2:
+host-glib2:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

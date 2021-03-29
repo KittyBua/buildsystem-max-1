@@ -14,7 +14,7 @@ TZDATA_ZONELIST = \
 
 TZDATA_LOCALTIME = CET
 
-$(D)/tzdata:
+tzdata:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

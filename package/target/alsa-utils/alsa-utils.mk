@@ -25,7 +25,7 @@ ALSA_UTILS_CONF_OPTS = \
 	--disable-xmlto \
 	--disable-rst2man
 
-$(D)/alsa-utils:
+alsa-utils:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

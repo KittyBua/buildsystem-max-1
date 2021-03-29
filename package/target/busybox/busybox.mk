@@ -34,7 +34,7 @@ BUSYBOX_MAKE_OPTS = \
 	CROSS_COMPILE="$(TARGET_CROSS)" \
 	CONFIG_PREFIX="$(TARGET_DIR)"
 
-$(D)/busybox:
+busybox:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

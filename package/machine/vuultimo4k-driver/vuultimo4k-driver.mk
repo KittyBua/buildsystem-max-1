@@ -8,7 +8,7 @@ VUULTIMO4K_DRIVER_SOURCE  = vuplus-dvb-proxy-vuultimo4k-$(VUULTIMO4K_DRIVER_VERS
 VUULTIMO4K_DRIVER_SITE    = http://code.vuplus.com/download/release/vuplus-dvb-proxy
 VUULTIMO4K_DRIVER_DEPENDS = bootstrap
 
-$(D)/vuultimo4k-driver:
+vuultimo4k-driver:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

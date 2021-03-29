@@ -7,7 +7,7 @@ NETBASE_SOURCE  = netbase_$(NETBASE_VERSION).tar.xz
 NETBASE_SITE    = https://ftp.debian.org/debian/pool/main/n/netbase
 NETBASE_DEPENDS = bootstrap
 
-$(D)/netbase:
+netbase:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

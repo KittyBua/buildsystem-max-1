@@ -101,7 +101,7 @@ neutrino-release-base:
 # The main target depends on the model.
 # IMPORTANT: it is assumed that only one variable is set. Otherwise the target name won't be resolved.
 #
-$(D)/neutrino-release: neutrino-release-base
+neutrino-release: neutrino-release-base
 #
 # FOR YOUR OWN CHANGES use these folder in own-imagefiles/neutrino-hd
 #
@@ -122,4 +122,4 @@ endif
 	@echo " Build of Neutrino for $(BOXMODEL) successfully completed."
 	@echo -e "\033[00m"
 	@echo "***************************************************************"
-	@touch $@
+	@touch $(DEPS_DIR)/$(notdir $@)

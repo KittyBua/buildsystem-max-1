@@ -9,7 +9,7 @@ VUDUO4K_LIBGLES_SOURCE  = libgles-vuduo4k-$(VUDUO4K_LIBGLES_VERSION).tar.gz
 VUDUO4K_LIBGLES_SITE    = http://code.vuplus.com/download/release/libgles
 VUDUO4K_LIBGLES_DEPENDS = bootstrap
 
-$(D)/vuduo4k-libgles:
+vuduo4k-libgles:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

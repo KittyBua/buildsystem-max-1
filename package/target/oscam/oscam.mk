@@ -57,7 +57,7 @@ OSCAM_CONF_OPTS = \
 	CARDREADER_SMARGO \
 	CARDREADER_SC8IN1
 
-$(D)/oscam.do_prepare:
+oscam.do_prepare:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
@@ -65,9 +65,9 @@ $(D)/oscam.do_prepare:
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
 		$(SHELL) ./config.sh $($(PKG)_CONF_OPTS)
-	@touch $@
+	@touch $(DEPS_DIR)/$(notdir $@)
 
-$(D)/oscam.do_compile:
+oscam.do_compile:
 	$(CD_BUILD_DIR); \
 		$(TARGET_CONFIGURE_OPTS) \
 		$(MAKE) CROSS=$(TARGET_CROSS) OSCAM_BIN=$(OSCAM_FLAVOUR) USE_LIBCRYPTO=1 USE_LIBUSB=1 \
@@ -75,9 +75,9 @@ $(D)/oscam.do_compile:
 		CONF_DIR=/var/keys \
 		EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		CC_OPTS=" -Os -pipe "
-	@touch $@
+	@touch $(DEPS_DIR)/$(notdir $@)
 
-$(D)/oscam: oscam.do_prepare oscam.do_compile
+oscam: oscam.do_prepare oscam.do_compile
 	rm -rf $(IMAGE_DIR)/$(OSCAM_FLAVOUR)
 	mkdir $(IMAGE_DIR)/$(OSCAM_FLAVOUR)
 	cp -pR $(PKG_BUILD_DIR)/$(OSCAM_FLAVOUR)* $(IMAGE_DIR)/$(OSCAM_FLAVOUR)/
@@ -85,10 +85,10 @@ $(D)/oscam: oscam.do_prepare oscam.do_compile
 	$(TOUCH)
 
 oscam-clean:
-	rm -f $(D)/oscam
-	rm -f $(D)/oscam.do_compile
+	rm -f $(DEPS_DIR)/oscam
+	rm -f $(DEPS_DIR)/oscam.do_compile
 	$(CD_BUILD_DIR); \
 		$(MAKE) distclean
 
 oscam-distclean:
-	rm -f $(D)/oscam*
+	rm -f $(DEPS_DIR)/oscam*

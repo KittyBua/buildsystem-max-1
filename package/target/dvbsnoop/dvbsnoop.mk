@@ -10,7 +10,7 @@ DVBSNOOP_DEPENDS = bootstrap kernel
 DVBSNOOP_CONF_OPTS = \
 	--enable-silent-rules
 
-$(D)/dvbsnoop:
+dvbsnoop:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

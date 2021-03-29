@@ -14,7 +14,7 @@ PCRE_CONF_OPTS = \
 
 PCRE_CONFIG_SCRIPTS = pcre-config
 
-$(D)/pcre:
+pcre:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

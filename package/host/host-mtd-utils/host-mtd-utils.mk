@@ -7,7 +7,7 @@ HOST_MTD_UTILS_SOURCE  = mtd-utils-$(HOST_MTD_UTILS_VERSION).tar.bz2
 HOST_MTD_UTILS_SITE    = ftp://ftp.infradead.org/pub/mtd-utils
 HOST_MTD_UTILS_DEPENDS = bootstrap
 
-$(D)/host-mtd-utils:
+host-mtd-utils:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

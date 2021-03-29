@@ -16,7 +16,7 @@ LIBFUSE_CONF_OPTS = \
 	--enable-lib \
 	--enable-silent-rules
 
-$(D)/libfuse:
+libfuse:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

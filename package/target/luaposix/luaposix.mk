@@ -14,7 +14,7 @@ LUAPOSIX_CONF_OPTS = \
 	--docdir=$(TARGET_DIR)/$(REMOVE_docdir) \
 	--enable-silent-rules
 
-$(D)/luaposix:
+luaposix:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

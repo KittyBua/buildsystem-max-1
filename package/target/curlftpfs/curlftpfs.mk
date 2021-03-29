@@ -7,7 +7,7 @@ CURLFTPFS_SOURCE  = curlftpfs-$(CURLFTPFS_VERSION).tar.gz
 CURLFTPFS_SITE    = https://sourceforge.net/projects/curlftpfs/files/latest/download
 CURLFTPFS_DEPENDS = bootstrap libcurl libfuse glib2
 
-$(D)/curlftpfs:
+curlftpfs:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

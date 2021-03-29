@@ -38,7 +38,7 @@ LINKS_CONF_OPTS = \
 	--with-ssl=$(TARGET_DIR)/usr \
 	--without-x
 
-$(D)/links:
+links:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

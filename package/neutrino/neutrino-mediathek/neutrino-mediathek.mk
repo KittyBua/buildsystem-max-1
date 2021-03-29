@@ -7,7 +7,7 @@ NEUTRINO_MEDIATHEK_SOURCE  = mediathek.git
 NEUTRINO_MEDIATHEK_SITE    = https://github.com/neutrino-mediathek
 NEUTRINO_MEDIATHEK_DEPENDS = bootstrap $(SHARE_PLUGINS)
 
-$(D)/neutrino-mediathek:
+neutrino-mediathek:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

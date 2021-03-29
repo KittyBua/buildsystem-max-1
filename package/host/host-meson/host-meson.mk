@@ -9,7 +9,7 @@ HOST_MESON_DEPENDS = bootstrap host-ninja host-python3 host-python3-setuptools
 
 HOST_MESON = $(HOST_DIR)/bin/meson
 
-$(D)/host-meson:
+host-meson:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

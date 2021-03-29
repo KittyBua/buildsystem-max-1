@@ -10,7 +10,7 @@ STRACE_DEPENDS = bootstrap
 STRACE_CONF_OPTS = \
 	--enable-silent-rules
 
-$(D)/strace:
+strace:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

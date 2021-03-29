@@ -14,7 +14,7 @@ LIBASS_CONF_OPTS = \
 	--disable-harfbuzz \
 	--disable-require-system-font-provider
 
-$(D)/libass:
+libass:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

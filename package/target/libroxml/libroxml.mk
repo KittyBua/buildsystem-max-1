@@ -12,7 +12,7 @@ LIBROXML_CONF_OPTS = \
 	--disable-static \
 	--disable-roxml
 
-$(D)/libroxml:
+libroxml:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -7,7 +7,7 @@ LIBEVENT_SOURCE  = libevent-$(LIBEVENT_VERSION).tar.gz
 LIBEVENT_SITE    = https://github.com/libevent/libevent/releases/download/release-$(LIBEVENT_VERSION)
 LIBEVENT_DEPENDS = bootstrap
 
-$(D)/libevent:
+libevent:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

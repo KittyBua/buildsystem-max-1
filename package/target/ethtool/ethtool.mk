@@ -11,7 +11,7 @@ ETHTOOL_CONF_OPTS = \
 	--disable-pretty-dump \
 	--disable-netlink
 
-$(D)/ethtool:
+ethtool:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

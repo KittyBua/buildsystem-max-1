@@ -14,7 +14,7 @@ NTFS_3G_CONF_OPTS = \
 	--disable-library \
 	--with-fuse=external
 
-$(D)/ntfs-3g:
+ntfs-3g:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

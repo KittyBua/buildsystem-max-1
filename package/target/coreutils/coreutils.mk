@@ -17,7 +17,7 @@ COREUTILS_CONF_OPTS = \
 	--without-gmp \
 	--without-selinux
 
-$(D)/coreutils:
+coreutils:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

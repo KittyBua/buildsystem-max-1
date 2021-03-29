@@ -10,7 +10,7 @@ LZO_DEPENDS = bootstrap
 LZO_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir)
 
-$(D)/lzo:
+lzo:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

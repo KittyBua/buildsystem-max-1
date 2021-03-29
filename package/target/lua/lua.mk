@@ -8,7 +8,7 @@ LUA_SOURCE     = lua-$(LUA_VERSION).tar.gz
 LUA_SITE       = https://www.lua.org/ftp
 LUA_DEPENDS    = bootstrap host-lua ncurses
 
-$(D)/lua:
+lua:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

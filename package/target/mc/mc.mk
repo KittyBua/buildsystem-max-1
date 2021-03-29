@@ -17,7 +17,7 @@ MC_CONF_OPTS = \
 	--without-gpm-mouse \
 	--without-x
 
-$(D)/mc:
+mc:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

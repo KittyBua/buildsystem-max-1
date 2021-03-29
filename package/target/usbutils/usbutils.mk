@@ -12,7 +12,7 @@ USBUTILS_AUTORECONF = YES
 USBUTILS_CONF_OPTS = \
 	--datadir=/usr/share/hwdata
 
-$(D)/usbutils:
+usbutils:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

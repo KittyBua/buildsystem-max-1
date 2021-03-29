@@ -7,7 +7,7 @@ BRE2ZE4K_DRIVER_SOURCE  = bre2ze4k-drivers-$(BRE2ZE4K_DRIVER_VERSION).zip
 BRE2ZE4K_DRIVER_SITE    = http://source.mynonpublic.com/gfutures
 BRE2ZE4K_DRIVER_DEPENDS = bootstrap
 
-$(D)/bre2ze4k-driver:
+bre2ze4k-driver:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

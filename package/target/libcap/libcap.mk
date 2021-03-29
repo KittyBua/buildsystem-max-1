@@ -16,7 +16,7 @@ LIBCAP_MAKE_FLAGS = \
 	BUILD_CC="$(HOSTCC)" \
 	BUILD_CFLAGS="$(HOST_CFLAGS)"
 
-$(D)/libcap:
+libcap:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

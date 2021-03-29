@@ -7,7 +7,7 @@ PYTHON_PYOPENSSL_SOURCE  = pyOpenSSL-$(PYTHON_PYOPENSSL_VERSION).tar.gz
 PYTHON_PYOPENSSL_SITE    = https://pypi.python.org/packages/source/p/pyOpenSSL
 PYTHON_PYOPENSSL_DEPENDS = bootstrap python python-setuptools
 
-$(D)/python-pyopenssl:
+python-pyopenssl:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

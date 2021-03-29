@@ -18,7 +18,7 @@ LIBARCHIVE_CONF_OPTS = \
 	--without-xml2 \
 	--without-expat
 
-$(D)/libarchive:
+libarchive:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

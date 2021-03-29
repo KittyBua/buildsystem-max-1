@@ -9,7 +9,7 @@ XUPNPD_DEPENDS = bootstrap lua openssl neutrino-plugins
 
 XUPNPD_CHECKOUT = 25d6d44
 
-$(D)/xupnpd:
+xupnpd:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

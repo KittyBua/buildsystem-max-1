@@ -14,7 +14,7 @@ LIBSIGC_CONF_OPTS = \
 	--disable-warnings \
 	--without-boost
 
-$(D)/libsigc:
+libsigc:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

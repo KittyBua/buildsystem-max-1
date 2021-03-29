@@ -7,7 +7,7 @@ WLAN_QCOM_FIRMWARE_SOURCE  = firmware-$(WLAN_QCOM_FIRMWARE_VERSION).zip
 WLAN_QCOM_FIRMWARE_SITE    = http://source.mynonpublic.com/edision
 WLAN_QCOM_FIRMWARE_DEPENDS = bootstrap
 
-$(D)/wlan-qcom-firmware:
+wlan-qcom-firmware:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

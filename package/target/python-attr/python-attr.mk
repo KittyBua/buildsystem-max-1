@@ -7,7 +7,7 @@ PYTHON_ATTR_SOURCE  = attr-$(PYTHON_ATTR_VERSION).tar.gz
 PYTHON_ATTR_SITE    = https://pypi.python.org/packages/source/a/attr
 PYTHON_ATTR_DEPENDS = bootstrap python python-setuptools
 
-$(D)/python-attr:
+python-attr:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -20,7 +20,7 @@ DJMOUNT_CONF_OPTS = \
 	--with-libupnp-prefix=$(TARGET_DIR)/usr \
 	--disable-debug
 
-$(D)/djmount:
+djmount:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

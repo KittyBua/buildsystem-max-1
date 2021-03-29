@@ -26,7 +26,7 @@ FLAC_CONF_OPTS = \
 	--disable-examples \
 	--disable-rpath
 
-$(D)/flac:
+flac:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

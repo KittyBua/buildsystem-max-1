@@ -12,7 +12,7 @@ LCD4LINUX_CONF_OPTS = \
 	--with-plugins='all,!apm,!asterisk,!dbus,!dvb,!gps,!hddtemp,!huawei,!imon,!isdn,!kvv,!mpd,!mpris_dbus,!mysql,!pop3,!ppp,!python,!qnaplog,!raspi,!sample,!seti,!w1retap,!wireless,!xmms' \
 	--with-ncurses=$(TARGET_LIB_DIR)
 
-$(D)/lcd4linux:
+lcd4linux:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

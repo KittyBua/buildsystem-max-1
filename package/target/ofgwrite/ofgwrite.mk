@@ -7,7 +7,7 @@ OFGWRITE_SOURCE  = ofgwrite-max.git
 OFGWRITE_SITE    = $(MAX-GIT-GITHUB)
 OFGWRITE_DEPENDS = bootstrap
 
-$(D)/ofgwrite:
+ofgwrite:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

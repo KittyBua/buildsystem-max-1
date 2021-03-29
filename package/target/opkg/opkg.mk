@@ -11,7 +11,7 @@ OPKG_CONF_OPTS = \
 	--disable-curl \
 	--disable-gpg
 
-$(D)/opkg:
+opkg:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

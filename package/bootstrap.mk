@@ -50,7 +50,7 @@ preqs:
 #
 DIRECTORIES_VERSION = 2020-05-25
 
-$(D)/directories:
+directories:
 	$(START_BUILD)
 	mkdir -p $(DEPS_DIR)
 	mkdir -p $(DL_DIR)
@@ -77,7 +77,7 @@ $(D)/directories:
 #
 CROSS_LIBS_VERSION = 2021-03-25
 
-$(D)/cross-libs: directories $(CROSSTOOL)
+cross-libs: directories $(CROSSTOOL)
 	$(START_BUILD)
 	if test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/lib; then \
 		cp -a $(CROSS_DIR)/$(GNU_TARGET_NAME)/sys-root/lib/*so* $(TARGET_DIR)/lib; \
@@ -98,8 +98,8 @@ BOOTSTRAP += host-ccache
 BOOTSTRAP += cross-libs
 BOOTSTRAP += host-pkgconf
 
-$(D)/bootstrap: $(BOOTSTRAP)
-	@touch $@
+bootstrap: $(BOOTSTRAP)
+	@touch $(DEPS_DIR)/$(notdir $@)
 
 #
 # image-deps
@@ -150,8 +150,8 @@ ifeq ($(BOXMODEL),hd60)
 IMAGE_DEPENDS += harfbuzz
 endif
 
-$(D)/image-deps: $(IMAGE_DEPENDS)
-	@touch $@
+image-deps: $(IMAGE_DEPENDS)
+	@touch $(DEPS_DIR)/$(notdir $@)
 
 #
 # machine-deps
@@ -174,6 +174,6 @@ ifeq ($(BOXMODEL), $(filter $(BOXMODEL),osmio4k osmio4kplus))
 MACHINE_DEPENDS += wlan-qcom
 endif
 
-$(D)/machine-deps: $(MACHINE_DEPENDS)
+machine-deps: $(MACHINE_DEPENDS)
 	$(LINUX_RUN_DEPMOD)
-	@touch $@
+	@touch $(DEPS_DIR)/$(notdir $@)

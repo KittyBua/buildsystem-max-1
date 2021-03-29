@@ -7,7 +7,7 @@ SMARTMONTOOLS_SOURCE  = smartmontools-$(SMARTMONTOOLS_VERSION).tar.gz
 SMARTMONTOOLS_SITE    = https://sourceforge.net/projects/smartmontools/files/smartmontools/$(SMARTMONTOOLS_VERSION)
 SMARTMONTOOLS_DEPENDS = bootstrap
 
-$(D)/smartmontools:
+smartmontools:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

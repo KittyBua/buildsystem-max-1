@@ -9,7 +9,7 @@ LIBID3TAG_DEPENDS = bootstrap zlib
 
 LIBID3TAG_AUTORECONF = YES
 
-$(D)/libid3tag:
+libid3tag:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

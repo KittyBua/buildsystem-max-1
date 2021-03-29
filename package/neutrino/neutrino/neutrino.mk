@@ -176,7 +176,7 @@ NEUTRINO_DEPENDS += libstb-hal
 
 NEUTRINO_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_DIR)
 
-$(D)/neutrino.do_prepare:
+neutrino.do_prepare:
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR).org
@@ -184,9 +184,9 @@ $(D)/neutrino.do_prepare:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(SOURCE_DIR))
 	$(call APPLY_PATCHES_S,$(NEUTRINO_DIR))
-	@touch $@
+	@touch $(DEPS_DIR)/$(notdir $@)
 
-$(D)/neutrino.config.status:
+neutrino.config.status: $(NEUTRINO_DEPENDS)
 	rm -rf $(NEUTRINO_OBJ_DIR)
 	test -d $(NEUTRINO_OBJ_DIR) || mkdir -p $(NEUTRINO_OBJ_DIR)
 	$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh
@@ -196,14 +196,14 @@ $(D)/neutrino.config.status:
 			$(NEUTRINO_CONF_OPTS)
 		+make $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
 ifeq ($(TINKER_OPTION),0)
-	@touch $@
+	@touch $(DEPS_DIR)/$(notdir $@)
 endif
 
-$(D)/neutrino.do_compile:
+neutrino.do_compile:
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) DESTDIR=$(TARGET_DIR)
-	@touch $@
+	@touch $(DEPS_DIR)/$(notdir $@)
 
-$(D)/neutrino: $(NEUTRINO_DEPENDS) neutrino.do_prepare neutrino.config.status neutrino.do_compile
+neutrino: neutrino.do_prepare neutrino.config.status neutrino.do_compile
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 	$(TOUCH)
 	( \
@@ -236,18 +236,18 @@ endif
 # -----------------------------------------------------------------------------
 
 neutrino-clean:
-	rm -f $(D)/neutrino
-	rm -f $(D)/neutrino.config.status
+	rm -f $(DEPS_DIR)/neutrino
+	rm -f $(DEPS_DIR)/neutrino.config.status
 	rm -f $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
 	cd $(NEUTRINO_OBJ_DIR); \
 		$(MAKE) -C $(NEUTRINO_OBJ_DIR) distclean
 
 neutrino-distclean:
 	rm -rf $(NEUTRINO_OBJ_DIR)
-	rm -f $(D)/neutrino
-	rm -f $(D)/neutrino.config.status
-	rm -f $(D)/neutrino.do_compile
-	rm -f $(D)/neutrino.do_prepare
+	rm -f $(DEPS_DIR)/neutrino
+	rm -f $(DEPS_DIR)/neutrino.config.status
+	rm -f $(DEPS_DIR)/neutrino.do_compile
+	rm -f $(DEPS_DIRD)/neutrino.do_prepare
 
 neutrino-uninstall:
 	-make -C $(NEUTRINO_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)

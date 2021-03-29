@@ -13,7 +13,7 @@ FRIBIDI_CONF_OPTS = \
 	--disable-debug \
 	--disable-deprecated
 
-$(D)/fribidi:
+fribidi:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

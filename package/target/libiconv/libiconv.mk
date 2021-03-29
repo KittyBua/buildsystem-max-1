@@ -15,7 +15,7 @@ LIBICONV_CONF_OPTS = \
 	--disable-shared \
 	--enable-relocatable
 
-$(D)/libiconv:
+libiconv:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

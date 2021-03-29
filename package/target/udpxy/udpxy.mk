@@ -7,7 +7,7 @@ UDPXY_SOURCE  = udpxy.git
 UDPXY_SITE    = https://github.com/pcherenkov
 UDPXY_DEPENDS = bootstrap
 
-$(D)/udpxy:
+udpxy:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

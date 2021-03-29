@@ -14,7 +14,7 @@ define LUAEXPAT_POST_PATCH
 endef
 LUAEXPAT_POST_PATCH_HOOKS = LUAEXPAT_POST_PATCH
 
-$(D)/luaexpat:
+luaexpat:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -12,7 +12,7 @@ RARFS_CONF_OPTS = \
 	--disable-option-checking \
 	--includedir=/usr/include/fuse
 
-$(D)/rarfs:
+rarfs:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

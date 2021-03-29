@@ -10,7 +10,7 @@ HOST_LUA_DEPENDS    = bootstrap
 
 HOST_LUA_BINARY = $(HOST_DIR)/bin/lua
 
-$(D)/host-lua:
+host-lua:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

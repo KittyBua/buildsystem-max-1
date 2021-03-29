@@ -13,7 +13,7 @@ HDDTEMP_CONF_OPTS = \
 	--with-db_path=/usr/share/misc/hddtemp.db \
 	--disable-dependency-tracking
 
-$(D)/hddtemp:
+hddtemp:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

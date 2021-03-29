@@ -9,7 +9,7 @@ VUZERO4K_PLATFORM_UTIL_SOURCE  = platform-util-vuzero4k-$(VUZERO4K_PLATFORM_UTIL
 VUZERO4K_PLATFORM_UTIL_SITE    = http://code.vuplus.com/download/release/platform-util
 VUZERO4K_PLATFORM_UTIL_DEPENDS = bootstrap
 
-$(D)/vuzero4k-platform-util:
+vuzero4k-platform-util:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

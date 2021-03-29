@@ -21,7 +21,7 @@ OPENVPN_CONF_OPTS = \
 	IPROUTE="/sbin/ip" \
 	ROUTE="/sbin/route"
 
-$(D)/openvpn:
+openvpn:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

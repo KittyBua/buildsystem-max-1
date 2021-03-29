@@ -19,7 +19,7 @@ DROPBEAR_CONF_OPTS = \
 	--disable-loginfunc \
 	--disable-pam 
 
-$(D)/dropbear:
+dropbear:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

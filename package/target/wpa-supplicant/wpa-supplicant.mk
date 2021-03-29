@@ -7,7 +7,7 @@ WPA_SUPPLICANT_SOURCE  = wpa_supplicant-$(WPA_SUPPLICANT_VERSION).tar.gz
 WPA_SUPPLICANT_SITE    = https://w1.fi/releases
 WPA_SUPPLICANT_DEPENDS = bootstrap libnl openssl wireless-tools
 
-$(D)/wpa-supplicant:
+wpa-supplicant:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

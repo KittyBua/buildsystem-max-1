@@ -25,7 +25,7 @@ LIBMAD_CONF_OPTS = \
 	--disable-debugging \
 	$(if $(filter $(TARGET_ARCH),arm mips),--enable-fpm=$(TARGET_ARCH),--enable-fpm=64bit)
 
-$(D)/libmad:
+libmad:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

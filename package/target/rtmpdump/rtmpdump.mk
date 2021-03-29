@@ -7,7 +7,7 @@ RTMPDUMP_SOURCE  = rtmpdump.git
 RTMPDUMP_SITE    = git://github.com/oe-alliance
 RTMPDUMP_DEPENDS = bootstrap zlib openssl
 
-$(D)/rtmpdump:
+rtmpdump:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

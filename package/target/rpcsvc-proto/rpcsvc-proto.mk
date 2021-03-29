@@ -9,7 +9,7 @@ RPCSVC_PROTO_DEPENDS = bootstrap
 
 RPCSVC_PROTO_AUTORECONF = YES
 
-$(D)/rpcsvc-proto:
+rpcsvc-proto:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

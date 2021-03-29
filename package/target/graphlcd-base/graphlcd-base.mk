@@ -29,7 +29,7 @@ GRAPHLCD_BASE_CONF_OPTS = \
 	PREFIX=/usr \
 	DESTDIR=$(TARGET_DIR)
 
-$(D)/graphlcd-base:
+graphlcd-base:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

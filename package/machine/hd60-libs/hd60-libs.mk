@@ -8,7 +8,7 @@ HD60_LIBS_SOURCE  = hd60-libs-$(HD60_LIBS_VERSION).zip
 HD60_LIBS_SITE    = http://downloads.mutant-digital.net/hd60
 HD60_LIBS_DEPENDS = bootstrap
 
-$(D)/hd60-libs:
+hd60-libs:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

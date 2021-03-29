@@ -7,7 +7,7 @@ H7_DRIVER_SOURCE  = h7-drivers-$(H7_DRIVER_VERSION).zip
 H7_DRIVER_SITE    = http://source.mynonpublic.com/zgemma
 H7_DRIVER_DEPENDS = bootstrap
 
-$(D)/h7-driver:
+h7-driver:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

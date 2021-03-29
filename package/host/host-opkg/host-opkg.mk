@@ -15,7 +15,7 @@ HOST_OPKG_CONF_OPTS = \
 	--disable-curl \
 	--disable-gpg
 
-$(D)/host-opkg:
+host-opkg:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

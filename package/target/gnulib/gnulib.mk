@@ -7,7 +7,7 @@ GNULIB_SOURCE  = gnulib-$(GNULIB_VERSION)-stable.tar.gz
 GNULIB_SITE    = http://erislabs.net/ianb/projects/gnulib
 GNULIB_DEPENDS = bootstrap
 
-$(D)/gnulib:
+gnulib:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(TOUCH)

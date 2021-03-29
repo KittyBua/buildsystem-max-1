@@ -21,7 +21,7 @@ GDB_CONF_OPTS = \
 	--without-uiout \
 	--without-x
 
-$(D)/gdb:
+gdb:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

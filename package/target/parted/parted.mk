@@ -17,7 +17,7 @@ PARTED_CONF_OPTS = \
 	--disable-device-mapper \
 	--disable-nls
 
-$(D)/parted:
+parted:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

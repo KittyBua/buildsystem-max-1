@@ -7,7 +7,7 @@ JPEG_SOURCE  = jpegsrc.v$(JPEG_VERSION).tar.gz
 JPEG_SITE    = http://www.ijg.org/files
 JPEG_DEPENDS = bootstrap
 
-$(D)/jpeg:
+jpeg:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

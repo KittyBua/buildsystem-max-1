@@ -9,7 +9,7 @@ VUULTIMO4K_PLATFORM_UTIL_SOURCE  = platform-util-vuultimo4k-$(VUULTIMO4K_PLATFOR
 VUULTIMO4K_PLATFORM_UTIL_SITE    = http://code.vuplus.com/download/release/platform-util
 VUULTIMO4K_PLATFORM_UTIL_DEPENDS = bootstrap
 
-$(D)/vuultimo4k-platform-util:
+vuultimo4k-platform-util:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

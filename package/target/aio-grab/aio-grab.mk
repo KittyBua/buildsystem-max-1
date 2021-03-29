@@ -13,7 +13,7 @@ AIO_GRAB_CONF_OPTS = \
 	--bindir=$(base_bindir) \
 	--enable-silent-rules
 
-$(D)/aio-grab:
+aio-grab:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

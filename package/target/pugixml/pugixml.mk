@@ -10,7 +10,7 @@ PUGIXML_DEPENDS = bootstrap
 PUGIXML_CONF_OPTS = \
 	| tail -n +90
 
-$(D)/pugixml:
+pugixml:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

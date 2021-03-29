@@ -12,7 +12,7 @@ LIBPLIST_AUTORECONF = YES
 LIBPLIST_CONF_OPTS = \
 	--without-cython
 
-$(D)/libplist:
+libplist:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

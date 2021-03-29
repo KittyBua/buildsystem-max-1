@@ -34,7 +34,7 @@ PYTHON_CONF_OPTS = \
 	--with-signal-module \
 	--with-wctype-functions
 
-$(D)/python:
+python:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -17,7 +17,7 @@ ASTRA_SM_POST_PATCH_HOOKS = ASTRA_SM_POST_PATCH
 ASTRA_SM_CONF_OPTS = \
 	--without-lua
 
-$(D)/astra-sm:
+astra-sm:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

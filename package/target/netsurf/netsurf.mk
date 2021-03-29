@@ -20,7 +20,7 @@ NETSURF_CONF_OPTS = \
 	NETSURF_FB_FONT_SANS_SERIF=neutrino.ttf \
 	TARGET=framebuffer
 
-$(D)/netsurf:
+netsurf:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

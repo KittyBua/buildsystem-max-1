@@ -7,7 +7,7 @@ SQLITE_SOURCE  = sqlite-autoconf-$(SQLITE_VERSION).tar.gz
 SQLITE_SITE    = http://www.sqlite.org/2020
 SQLITE_DEPENDS = bootstrap
 
-$(D)/sqlite:
+sqlite:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
