@@ -353,7 +353,7 @@ all:
 
 # target for testing only. not useful otherwise
 everything:
-	@make $(shell sed -n 's/^\$$.D.\/\(.*\):.*/\1/p' package/target/*/*.mk)
+	@make $(shell find package/target/*/*.mk  -type f | cut -d'/' -f3)
 
 # print all present targets...
 print-targets:
