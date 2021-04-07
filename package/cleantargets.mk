@@ -5,7 +5,7 @@
 
 %-clean:
 	@printf "$(TERM_YELLOW)===> clean $(subst -clean,,$@) .. $(TERM_NORMAL)"
-	$(shell find $(if $(findstring host-,$@),$(HOST_DEPS_DIR),$(DEPS_DIR)) -name $(subst -clean,,$@) -delete)
+	$(shell find $(DEPS_DIR) -name $(subst -clean,,$@) -delete)
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 depsclean:
@@ -13,6 +13,7 @@ depsclean:
 
 clean: depsclean
 	@printf "$(TERM_YELLOW)===> cleaning system build directories and files .. $(TERM_NORMAL)"
+	@-rm -rf $(BASE_DIR)/host
 	@-rm -rf $(BASE_DIR)/release
 	@-rm -rf $(BASE_DIR)/root
 	@-rm -rf $(DEPS_DIR)/kernel
