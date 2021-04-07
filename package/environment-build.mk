@@ -222,7 +222,7 @@ TARGET_STRIP    = $(TARGET_CROSS)strip
 # -----------------------------------------------------------------------------
 
 # search path(s) for all prerequisites
-VPATH = $(DEPS_DIR)
+VPATH = $(HOST_DEPS_DIR):$(DEPS_DIR)
 
 # -----------------------------------------------------------------------------
 
