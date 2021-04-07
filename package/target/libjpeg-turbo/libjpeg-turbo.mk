@@ -12,7 +12,7 @@ LIBJPEG_TURBO_CONF_OPTS = \
 	-DWITH_JPEG8=80 \
 	| tail -n +90
 
-libjpeg-turbo:
+$(D)/libjpeg-turbo:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

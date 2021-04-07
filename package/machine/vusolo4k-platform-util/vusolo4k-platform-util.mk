@@ -9,7 +9,7 @@ VUSOLO4K_PLATFORM_UTIL_SOURCE  = platform-util-vusolo4k-$(VUSOLO4K_PLATFORM_UTIL
 VUSOLO4K_PLATFORM_UTIL_SITE    = http://code.vuplus.com/download/release/platform-util
 VUSOLO4K_PLATFORM_UTIL_DEPENDS = bootstrap
 
-vusolo4k-platform-util:
+$(D)/vusolo4k-platform-util:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

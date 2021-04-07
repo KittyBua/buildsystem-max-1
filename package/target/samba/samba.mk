@@ -90,7 +90,7 @@ SAMBA_CONF_OPTS = \
 	--without-libtevent \
 	--without-libaddns
 
-samba:
+$(D)/samba:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

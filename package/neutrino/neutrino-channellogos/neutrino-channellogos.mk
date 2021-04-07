@@ -7,7 +7,7 @@ NEUTRINO_CHANNELLOGOS_SOURCE  = ni-logo-stuff.git
 NEUTRINO_CHANNELLOGOS_SITE    = https://github.com/neutrino-images
 NEUTRINO_CHANNELLOGOS_DEPENDS = bootstrap $(SHARE_ICONS) $(SHARE_PLUGINS)
 
-neutrino-channellogos:
+$(D)/neutrino-channellogos:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

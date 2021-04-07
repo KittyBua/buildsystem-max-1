@@ -10,7 +10,7 @@ NETTLE_DEPENDS = bootstrap gmp
 NETTLE_CONF_OPTS = \
 	--disable-documentation
 
-nettle:
+$(D)/nettle:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

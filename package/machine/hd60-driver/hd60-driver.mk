@@ -7,7 +7,7 @@ HD60_DRIVER_SOURCE  = hd60-drivers-$(HD60_DRIVER_VERSION)-$(HD60_DRIVER_DATE).zi
 HD60_DRIVER_SITE    = http://source.mynonpublic.com/gfutures
 HD60_DRIVER_DEPENDS = bootstrap
 
-hd60-driver:
+$(D)/hd60-driver:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

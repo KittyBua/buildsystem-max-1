@@ -21,7 +21,7 @@ HOST_LUAROCKS_BUILD_ENV = \
 	TARGET_LDFLAGS="-L$(TARGET_LIB_DIR)" \
 	TARGET_DIR="$(TARGET_DIR)"
 
-host-luarocks:
+$(D)/host-luarocks:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

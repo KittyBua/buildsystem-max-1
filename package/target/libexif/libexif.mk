@@ -9,7 +9,7 @@ LIBEXIF_DEPENDS = bootstrap
 
 LIBEXIF_AUTORECONF = YES
 
-libexif:
+$(D)/libexif:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

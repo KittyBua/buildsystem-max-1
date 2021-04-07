@@ -7,7 +7,7 @@ WLAN_QCOM_SOURCE  = qcacld-2.0-$(WLAN_QCOM_VERSION).tar.gz
 WLAN_QCOM_SITE    = https://www.codeaurora.org/cgit/external/wlan/qcacld-2.0/snapshot
 WLAN_QCOM_DEPENDS = bootstrap kernel wlan-qcom-firmware wireless-regdb
 
-wlan-qcom:
+$(D)/wlan-qcom:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

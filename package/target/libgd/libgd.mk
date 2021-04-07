@@ -13,7 +13,7 @@ LIBGD_CONF_OPTS = \
 	--without-xpm \
 	--without-x
 
-libgd:
+$(D)/libgd:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -15,7 +15,7 @@ define LUASOCKET_POST_PATCH
 endef
 LUASOCKET_POST_PATCH_HOOKS = LUASOCKET_POST_PATCH
 
-luasocket:
+$(D)/luasocket:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

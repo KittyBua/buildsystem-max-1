@@ -11,7 +11,7 @@ RSYNC_CONF_OPTS = \
 	--disable-debug \
 	--disable-locale
 
-rsync:
+$(D)/rsync:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

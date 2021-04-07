@@ -7,7 +7,7 @@ PNGPP_SOURCE  = png++-$(PNGPP_VERSION).tar.gz
 PNGPP_SITE    = https://download.savannah.gnu.org/releases/pngpp
 PNGPP_DEPENDS = bootstrap libpng
 
-pngpp:
+$(D)/pngpp:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

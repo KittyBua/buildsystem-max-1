@@ -7,7 +7,7 @@ GPTFDISK_SOURCE  = gptfdisk-$(GPTFDISK_VERSION).tar.gz
 GPTFDISK_SITE    = https://sourceforge.net/projects/gptfdisk/files/gptfdisk/$(GPTFDISK_VERSION)
 GPTFDISK_DEPENDS = bootstrap e2fsprogs ncurses popt
 
-gptfdisk:
+$(D)/gptfdisk:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

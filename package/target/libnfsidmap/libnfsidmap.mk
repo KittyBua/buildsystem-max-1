@@ -10,7 +10,7 @@ LIBNFSIDMAP_DEPENDS = bootstrap
 LIBNFSIDMAP_CONF_OPTS = \
 	ac_cv_func_malloc_0_nonnull=yes
 
-libnfsidmap:
+$(D)/libnfsidmap:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

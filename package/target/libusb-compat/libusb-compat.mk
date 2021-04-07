@@ -14,7 +14,7 @@ LIBUSB_CONF_OPTS = \
 
 LIBUSB_COMPAT_CONFIG_SCRIPTS = libusb-config
 
-libusb-compat:
+$(D)/libusb-compat:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

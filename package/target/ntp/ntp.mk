@@ -15,7 +15,7 @@ NTP_CONF_OPTS = \
 	--with-yielding-select=yes \
 	--without-ntpsnmpd
 
-ntp:
+$(D)/ntp:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

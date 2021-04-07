@@ -7,7 +7,7 @@ HD51_DRIVER_SOURCE  = hd51-drivers-$(HD51_DRIVER_VERSION).zip
 HD51_DRIVER_SITE    = http://source.mynonpublic.com/gfutures
 HD51_DRIVER_DEPENDS = bootstrap
 
-hd51-driver:
+$(D)/hd51-driver:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

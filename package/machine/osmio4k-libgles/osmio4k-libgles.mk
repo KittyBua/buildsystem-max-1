@@ -7,7 +7,7 @@ OSMIO4K_LIBGLES_SOURCE  = edision-libv3d-$(OSMIO4K_LIBGLES_VERSION).tar.xz
 OSMIO4K_LIBGLES_SITE    = http://source.mynonpublic.com/edision
 OSMIO4K_LIBGLES_DEPENDS = bootstrap
 
-osmio4k-libgles:
+$(D)/osmio4k-libgles:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

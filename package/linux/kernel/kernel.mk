@@ -2,15 +2,15 @@
 # makefile to build kernel
 #
 
-kernel.do_prepare:
+$(D)/kernel.do_prepare:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
-	@touch $(DEPS_DIR)/$(notdir $@)
+	@touch $@
 
-kernel.do_compile: kernel.do_prepare
+$(D)/kernel.do_compile: kernel.do_prepare
 	rm -rf $(BUILD_DIR)/$(KERNEL_OBJ)
 	rm -rf $(BUILD_DIR)/$(KERNEL_MODULES)
 	$(MKDIR)/$(KERNEL_OBJ)
@@ -26,9 +26,9 @@ endif
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 h7))
 	cat $(KERNEL_OUTPUT) $(KERNEL_INPUT_DTB) > $(KERNEL_OUTPUT_DTB)
 endif
-	@touch $(DEPS_DIR)/$(notdir $@)
+	@touch $@
 
-kernel: bootstrap kernel.do_compile
+$(D)/kernel: bootstrap kernel.do_compile
 	mkdir -p $(TARGET_MODULES_DIR)
 	cp -a $(KERNEL_MODULES_DIR)/kernel $(TARGET_MODULES_DIR)
 	cp -a $(KERNEL_MODULES_DIR)/modules.builtin $(TARGET_MODULES_DIR)
@@ -103,4 +103,4 @@ kernel-modules-clean:
 	rm -fr $(TARGET_MODULES_DIR)/kernel/net/ipv6/sit.ko
 	rm -fr $(TARGET_MODULES_DIR)/kernel/net/llc
 	rm -fr $(TARGET_MODULES_DIR)/kernel/net/sunrpc
-	@touch $(DEPS_DIR)/$(notdir $@)
+	@touch $(D)/$(notdir $@)

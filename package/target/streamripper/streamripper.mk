@@ -17,7 +17,7 @@ STREAMRIPPER_CONF_OPTS = \
 	--with-included-argv=yes \
 	--with-included-libmad=no
 
-streamripper:
+$(D)/streamripper:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

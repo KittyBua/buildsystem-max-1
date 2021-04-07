@@ -7,7 +7,7 @@ VUDUO_DRIVER_SOURCE  = vuplus-dvb-modules-bm750-$(VUDUO_DRIVER_VERSION).tar.gz
 VUDUO_DRIVER_SITE    = http://code.vuplus.com/download/release/vuplus-dvb-modules
 VUDUO_DRIVER_DEPENDS = bootstrap
 
-vuduo-driver:
+$(D)/vuduo-driver:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

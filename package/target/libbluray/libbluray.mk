@@ -21,7 +21,7 @@ LIBBLURAY_CONF_OPTS = \
 	--without-libxml2 \
 	--without-fontconfig
 
-libbluray:
+$(D)/libbluray:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

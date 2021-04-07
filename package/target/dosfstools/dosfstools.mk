@@ -17,7 +17,7 @@ DOSFSTOOLS_CONF_OPTS = \
 	--enable-compat-symlinks \
 	CFLAGS="$(DOSFSTOOLS_CFLAGS)"
 
-dosfstools:
+$(D)/dosfstools:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

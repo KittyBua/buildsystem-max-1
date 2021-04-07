@@ -14,7 +14,7 @@ LIBUSB_CONF_OPTS = \
 	--disable-udev \
 	--disable-examples-build
 
-libusb:
+$(D)/libusb:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

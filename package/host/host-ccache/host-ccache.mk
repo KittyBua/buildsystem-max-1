@@ -24,7 +24,7 @@ HOST_CCACHE_ENV = \
 	mkdir -p $(HOST_DIR)/bin; \
 	$(HOST_CCACHE_LINKS)
 
-host-ccache:
+$(D)/host-ccache:
 	$(START_BUILD)
 	$(HOST_CCACHE_ENV)
 	$(TOUCH)

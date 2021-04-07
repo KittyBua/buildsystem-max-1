@@ -15,7 +15,7 @@ LIBDVDREAD_CONF_OPTS = \
 	--enable-shared \
 	--with-libdvdcss
 
-libdvdread:
+$(D)/libdvdread:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

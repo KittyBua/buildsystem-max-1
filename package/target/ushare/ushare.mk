@@ -13,7 +13,7 @@ USHARE_CONF_OPTS = \
 	--disable-dlna \
 	--disable-nls
 
-ushare:
+$(D)/ushare:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

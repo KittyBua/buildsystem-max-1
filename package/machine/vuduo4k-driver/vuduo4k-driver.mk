@@ -8,7 +8,7 @@ VUDUO4K_DRIVER_SOURCE  = vuplus-dvb-proxy-vuduo4k-$(VUDUO4K_DRIVER_VERSION).tar.
 VUDUO4K_DRIVER_SITE    = http://code.vuplus.com/download/release/vuplus-dvb-proxy
 VUDUO4K_DRIVER_DEPENDS = bootstrap
 
-vuduo4k-driver:
+$(D)/vuduo4k-driver:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

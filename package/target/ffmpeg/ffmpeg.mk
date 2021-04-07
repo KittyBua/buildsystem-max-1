@@ -332,7 +332,7 @@ FFMPEG_CONF_OPTS += \
 	--extra-cflags="$(TARGET_CFLAGS) -I$(TARGET_INCLUDE_DIR)/libxml2" \
 	--extra-ldflags="$(TARGET_LDFLAGS) -lrt"
 
-ffmpeg:
+$(D)/ffmpeg:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

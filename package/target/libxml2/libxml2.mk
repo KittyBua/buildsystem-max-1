@@ -24,7 +24,7 @@ LIBXML2_CONF_OPTS = \
 
 LIBXML2_CONFIG_SCRIPTS = xml2-config
 
-libxml2:
+$(D)/libxml2:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

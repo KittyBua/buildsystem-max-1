@@ -7,7 +7,7 @@ HD_IDLE_SOURCE  = hd-idle-$(HD_IDLE_VERSION).tgz
 HD_IDLE_SITE    = https://sourceforge.net/projects/hd-idle/files
 HD_IDLE_DEPENDS = bootstrap
 
-hd-idle:
+$(D)/hd-idle:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

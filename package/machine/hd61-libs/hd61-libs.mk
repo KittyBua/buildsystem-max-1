@@ -8,7 +8,7 @@ HD61_LIBS_SOURCE  = hd61-libs-$(HD61_LIBS_VERSION).zip
 HD61_LIBS_SITE    = http://downloads.mutant-digital.net/hd61
 HD61_LIBS_DEPENDS = bootstrap
 
-hd61-libs:
+$(D)/hd61-libs:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

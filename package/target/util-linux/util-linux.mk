@@ -101,7 +101,7 @@ UTIL_LINUX_CONF_OPTS = \
 	--without-udev \
 	--without-utempter
 
-util-linux:
+$(D)/util-linux:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -13,7 +13,7 @@ define IOZONE_POST_PATCH
 endef
 IOZONE_POST_PATCH_HOOKS = IOZONE_POST_PATCH
 
-iozone:
+$(D)/iozone:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

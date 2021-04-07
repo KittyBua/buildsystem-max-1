@@ -13,7 +13,7 @@ NANO_CONF_OPTS = \
 	--enable-tiny \
 	--enable-color
 
-nano:
+$(D)/nano:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

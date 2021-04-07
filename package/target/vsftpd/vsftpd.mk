@@ -13,7 +13,7 @@ define VSFTPD_POST_PATCH
 endef
 VSFTPD_POST_PATCH_HOOKS = VSFTPD_POST_PATCH
 
-vsftpd:
+$(D)/vsftpd:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

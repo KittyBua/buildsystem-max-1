@@ -10,7 +10,7 @@ LIBNL_DEPENDS = bootstrap
 LIBNL_CONF_OPTS = \
 	--disable-cli
 
-libnl:
+$(D)/libnl:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

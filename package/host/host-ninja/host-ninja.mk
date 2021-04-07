@@ -9,7 +9,7 @@ HOST_NINJA_DEPENDS = bootstrap
 
 HOST_NINJA = $(HOST_DIR)/bin/ninja
 
-host-ninja:
+$(D)/host-ninja:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

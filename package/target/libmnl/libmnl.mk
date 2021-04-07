@@ -7,7 +7,7 @@ LIBMNL_SOURCE  = libmnl-$(LIBMNL_VERSION).tar.bz2
 LIBMNL_SITE    = http://netfilter.org/projects/libmnl/files
 LIBMNL_DEPENDS = bootstrap
 
-libmnl:
+$(D)/libmnl:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

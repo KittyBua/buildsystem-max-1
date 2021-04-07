@@ -7,7 +7,7 @@ BZIP2_SOURCE  = bzip2-$(BZIP2_VERSION).tar.gz
 BZIP2_SITE    = https://sourceware.org/pub/bzip2
 BZIP2_DEPENDS = bootstrap
 
-bzip2:
+$(D)/bzip2:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -7,7 +7,7 @@ SSHFS_SOURCE  = sshfs-$(SSHFS_VERSION).tar.gz
 SSHFS_SITE    = https://github.com/libfuse/sshfs/releases/download/sshfs-$(SSHFS_VERSION)
 SSHFS_DEPENDS = bootstrap glib2 libfuse
 
-sshfs:
+$(D)/sshfs:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -12,7 +12,7 @@ PIXMAN_CONF_OPTS = \
 	--disable-arm-simd \
 	--disable-loongson-mmi
 
-pixman:
+$(D)/pixman:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -62,15 +62,15 @@ endef
 
 NEUTRINO_PLUGINS_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)
 
-neutrino-plugins.do_prepare:
+$(D)/neutrino-plugins.do_prepare:
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(SOURCE_DIR))
 	$(call APPLY_PATCHES_S,$(NEUTRINO_PLUGINS_DIR))
-	@touch $(DEPS_DIR)/$(notdir $@)
+	@touch $@
 
-neutrino-plugins.config.status:
+$(D)/neutrino-plugins.config.status:
 	rm -rf $(NEUTRINO_PLUGINS_OBJ_DIR)
 	test -d $(NEUTRINO_PLUGINS_OBJ_DIR) || mkdir -p $(NEUTRINO_PLUGINS_OBJ_DIR)
 	$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/autogen.sh
@@ -78,26 +78,26 @@ neutrino-plugins.config.status:
 		$(TARGET_CONFIGURE_OPTS) \
 		$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/configure \
 			$(NEUTRINO_PLUGINS_CONF_OPTS)
-	@touch $(DEPS_DIR)/$(notdir $@)
+	@touch $@
 
-neutrino-plugins.do_compile: neutrino-plugins.config.status
+$(D)/neutrino-plugins.do_compile: neutrino-plugins.config.status
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) DESTDIR=$(TARGET_DIR)
-	@touch $(DEPS_DIR)/$(notdir $@)
+	@touch $@
 
-neutrino-plugins: neutrino-plugins.do_prepare neutrino-plugins.do_compile
+$(D)/neutrino-plugins: neutrino-plugins.do_prepare neutrino-plugins.do_compile
 	mkdir -p $(SHARE_ICONS)
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 	$(NP_RUNLEVEL_INSTALL)
 	$(TOUCH)
 
 neutrino-plugins-clean:
-	rm -f $(DEPS_DIR)/neutrino-plugins
-	rm -f $(DEPS_DIR)/neutrino-plugins.config.status
-	rm -f $(DEPS_DIR)/neutrino.config.status
+	rm -f $(D)/neutrino-plugins
+	rm -f $(D)/neutrino-plugins.config.status
+	rm -f $(D)/neutrino.config.status
 	cd $(NEUTRINO_PLUGINS_OBJ_DIR); \
 		$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) clean
 
 neutrino-plugins-distclean:
 	rm -rf $(NEUTRINO_PLUGINS_OBJ_DIR)
-	rm -f $(DEPS_DIR)/neutrino-plugin*
-	rm -f $(DEPS_DIR)/neutrino.config.status
+	rm -f $(D)/neutrino-plugin*
+	rm -f $(D)/neutrino.config.status

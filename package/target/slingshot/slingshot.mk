@@ -7,7 +7,7 @@ SLINGSHOT_SOURCE  = slingshot-$(SLINGSHOT_VERSION).tar.gz
 SLINGSHOT_SITE    = $(call github,gvvaughan,slingshot,v$(SLINGSHOT_VERSION))
 SLINGSHOT_DEPENDS = bootstrap
 
-slingshot:
+$(D)/slingshot:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(TOUCH)

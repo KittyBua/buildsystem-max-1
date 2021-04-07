@@ -25,7 +25,7 @@ DROPBEARMULTI_CONF_OPTS = \
 	--disable-pututline \
 	--disable-pututxline
 
-dropbearmulti:
+$(D)/dropbearmulti:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

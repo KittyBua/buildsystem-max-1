@@ -14,7 +14,7 @@ READLINE_CONF_OPTS = \
 	bash_cv_func_sigsetjmp=yes \
 	bash_cv_wcwidth_broken=no
 
-readline:
+$(D)/readline:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

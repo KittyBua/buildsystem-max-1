@@ -9,7 +9,7 @@ VUULTIMO4K_LIBGLES_SOURCE  = libgles-vuultimo4k-$(VUULTIMO4K_LIBGLES_VERSION).ta
 VUULTIMO4K_LIBGLES_SITE    = http://code.vuplus.com/download/release/libgles
 VUULTIMO4K_LIBGLES_DEPENDS = bootstrap
 
-vuultimo4k-libgles:
+$(D)/vuultimo4k-libgles:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

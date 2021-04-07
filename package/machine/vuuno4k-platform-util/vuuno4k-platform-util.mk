@@ -9,7 +9,7 @@ VUUNO4K_PLATFORM_UTIL_SOURCE  = platform-util-vuuno4k-$(VUUNO4K_PLATFORM_UTIL_VE
 VUUNO4K_PLATFORM_UTIL_SITE    = http://code.vuplus.com/download/release/platform-util
 VUUNO4K_PLATFORM_UTIL_DEPENDS = bootstrap
 
-vuuno4k-platform-util:
+$(D)/vuuno4k-platform-util:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

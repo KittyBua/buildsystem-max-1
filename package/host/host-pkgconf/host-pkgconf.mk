@@ -9,7 +9,7 @@ HOST_PKGCONF_DEPENDS = directories
 
 PKG_CONFIG_HOST_BINARY = $(HOST_DIR)/bin/pkg-config
 
-host-pkgconf:
+$(D)/host-pkgconf:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -27,7 +27,7 @@ ALSA_LIB_CONF_OPTS = \
 	--disable-python \
 	--disable-topology
 
-alsa-lib:
+$(D)/alsa-lib:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

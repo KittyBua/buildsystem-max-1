@@ -23,7 +23,7 @@ WGET_CONF_OPTS = \
 	--without-libpsl \
 	CFLAGS="$(WGET_CFLAGS)"
 
-wget:
+$(D)/wget:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -7,7 +7,7 @@ BASE_PASSWD_SOURCE  = base-passwd_$(BASE_PASSWD_VERSION).tar.gz
 BASE_PASSWD_SITE    = https://launchpad.net/debian/+archive/primary/+files
 BASE_PASSWD_DEPENDS = bootstrap
 
-base-passwd:
+$(D)/base-passwd:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

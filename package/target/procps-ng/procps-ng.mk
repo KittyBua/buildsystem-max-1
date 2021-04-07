@@ -24,7 +24,7 @@ PROCPS_NG_CONF_OPTS = \
 PROCPS_NG_BIN = \
 	free pgrep pkill pmap pwdx slabtop skill snice tload top uptime vmstat w
 
-procps-ng:
+$(D)/procps-ng:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

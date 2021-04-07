@@ -17,7 +17,7 @@ SYSSTAT_CONF_OPTS = \
 	sa_dir="/var/log/sysstat" \
 	conf_dir="/etc/sysstat"
 
-sysstat:
+$(D)/sysstat:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

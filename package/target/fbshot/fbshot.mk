@@ -13,7 +13,7 @@ define FBSHOT_POST_PATCH
 endef
 FBSHOT_POST_PATCH_HOOKS = FBSHOT_POST_PATCH
 
-fbshot:
+$(D)/fbshot:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

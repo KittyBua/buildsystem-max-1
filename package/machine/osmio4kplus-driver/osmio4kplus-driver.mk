@@ -7,7 +7,7 @@ OSMIO4KPLUS_DRIVER_SOURCE  = osmio4kplus-drivers-$(OSMIO4KPLUS_DRIVER_VERSION).z
 OSMIO4KPLUS_DRIVER_SITE    = http://source.mynonpublic.com/edision
 OSMIO4KPLUS_DRIVER_DEPENDS = bootstrap
 
-osmio4kplus-driver:
+$(D)/osmio4kplus-driver:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

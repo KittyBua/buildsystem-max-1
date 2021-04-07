@@ -7,7 +7,7 @@ H7_LIBGLES_SOURCE  = h7-v3ddriver-$(H7_LIBGLES_VERSION).zip
 H7_LIBGLES_SITE    = http://source.mynonpublic.com/zgemma
 H7_LIBGLES_DEPENDS = bootstrap
 
-h7-libgles:
+$(D)/h7-libgles:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(TARGET_LIB_DIR))

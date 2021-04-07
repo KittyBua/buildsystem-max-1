@@ -7,7 +7,7 @@ HD51_LIBGLES_SOURCE  = hd51-v3ddriver-$(HD51_LIBGLES_VERSION).zip
 HD51_LIBGLES_SITE    = http://downloads.mutant-digital.net/v3ddriver
 HD51_LIBGLES_DEPENDS = bootstrap
 
-hd51-libgles:
+$(D)/hd51-libgles:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(TARGET_LIB_DIR))

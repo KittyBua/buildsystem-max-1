@@ -57,7 +57,7 @@ define NCURSES_LINK_PC
 	)
 endef
 
-ncurses:
+$(D)/ncurses:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

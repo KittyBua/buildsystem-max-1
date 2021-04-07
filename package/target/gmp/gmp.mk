@@ -10,7 +10,7 @@ GMP_DEPENDS = bootstrap
 GMP_CONF_OPTS = \
 	--enable-silent-rules
 
-gmp:
+$(D)/gmp:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

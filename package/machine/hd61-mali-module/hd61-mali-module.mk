@@ -18,7 +18,7 @@ HD61_MALI_MODULE_MAKEVARS = \
 	CONFIG_MALI_DVFS=y \
 	CONFIG_GPU_AVS_ENABLE=y
 
-hd61-mali-module:
+$(D)/hd61-mali-module:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

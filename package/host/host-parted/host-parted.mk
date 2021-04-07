@@ -13,7 +13,7 @@ HOST_PARTED_CONF_OPTS = \
 	--disable-debug \
 	--disable-device-mapper
 
-host-parted:
+$(D)/host-parted:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

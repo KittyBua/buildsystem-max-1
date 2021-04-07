@@ -13,7 +13,7 @@ LIBGCRYPT_CONF_OPTS = \
 
 LIBGCRYPT_CONFIG_SCRIPTS = libgcrypt-config
 
-libgcrypt:
+$(D)/libgcrypt:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

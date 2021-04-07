@@ -7,7 +7,7 @@ GIFLIB_SOURCE  = giflib-$(GIFLIB_VERSION).tar.bz2
 GIFLIB_SITE    = https://downloads.sourceforge.net/project/giflib
 GIFLIB_DEPENDS = bootstrap
 
-giflib:
+$(D)/giflib:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

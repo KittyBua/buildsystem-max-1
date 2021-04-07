@@ -11,7 +11,7 @@ POPT_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
 	--disable-static
 
-popt:
+$(D)/popt:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

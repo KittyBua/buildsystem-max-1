@@ -15,7 +15,7 @@ ZLIB_CONF_OPTS = \
 	--shared \
 	--uname=Linux
 
-zlib:
+$(D)/zlib:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

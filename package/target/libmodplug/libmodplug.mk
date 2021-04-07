@@ -7,7 +7,7 @@ LIBMODPLUG_SOURCE  = libmodplug-$(LIBMODPLUG_VERSION).tar.gz
 LIBMODPLUG_SITE    = https://sourceforge.net/projects/modplug-xmms/files/libmodplug/$(LIBMODPLUG_VERSION)
 LIBMODPLUG_DEPENDS = bootstrap
 
-libmodplug:
+$(D)/libmodplug:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

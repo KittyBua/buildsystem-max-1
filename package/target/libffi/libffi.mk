@@ -13,7 +13,7 @@ LIBFFI_CONF_OPTS = \
 	--disable-static \
 	--enable-builddir=libffi
 
-libffi:
+$(D)/libffi:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

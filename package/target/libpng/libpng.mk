@@ -14,7 +14,7 @@ LIBPNG_CONF_OPTS = \
 
 LIBPNG_CONFIG_SCRIPTS = libpng$(LIBPNG_VERSION_X)-config
 
-libpng:
+$(D)/libpng:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

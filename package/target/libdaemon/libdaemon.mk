@@ -15,7 +15,7 @@ LIBDAEMON_CONF_OPTS = \
 	--disable-lynx \
 	--disable-examples
 
-libdaemon:
+$(D)/libdaemon:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

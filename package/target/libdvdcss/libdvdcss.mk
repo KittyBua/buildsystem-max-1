@@ -10,7 +10,7 @@ LIBDVDCSS_DEPENDS = bootstrap
 LIBDVDCSS_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir)
 
-libdvdcss:
+$(D)/libdvdcss:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

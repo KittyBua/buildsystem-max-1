@@ -7,7 +7,7 @@ PYTHON_PYASN1_SOURCE  = pyasn1-$(PYTHON_PYASN1_VERSION).tar.gz
 PYTHON_PYASN1_SITE    = https://pypi.python.org/packages/source/p/pyasn1
 PYTHON_PYASN1_DEPENDS = bootstrap python python-setuptools python-pyasn1-modules
 
-python-pyasn1:
+$(D)/python-pyasn1:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

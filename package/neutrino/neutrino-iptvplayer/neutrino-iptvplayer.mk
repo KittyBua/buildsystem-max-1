@@ -7,13 +7,13 @@ NEUTRINO_IPTVPLAYER_SOURCE  = iptvplayer.git
 NEUTRINO_IPTVPLAYER_SITE    = https://github.com/TangoCash
 NEUTRINO_IPTVPLAYER_DEPENDS = rtmpdump python-twisted $(SHARE_PLUGINS)
 
-neutrino-iptvplayer-nightly \
-neutrino-iptvplayer:
+$(D)/neutrino-iptvplayer-nightly \
+$(D)/neutrino-iptvplayer:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	@if [ "$@" = "$(DEPS_DIR)/neutrino-iptvplayer-nightly" ]; then \
+	@if [ "$@" = "$(D)/neutrino-iptvplayer-nightly" ]; then \
 		$(BUILD_DIR)/iptvplayer/SyncWithGitLab.sh $(BUILD_DIR)/iptvplayer; \
 	fi
 	mkdir -p $(TARGET_SHARE_DIR)/E2emulator

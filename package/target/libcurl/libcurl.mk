@@ -35,7 +35,7 @@ LIBCURL_CONF_OPTS = \
 
 LIBCURL_CONFIG_SCRIPTS = curl-config
 
-libcurl:
+$(D)/libcurl:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

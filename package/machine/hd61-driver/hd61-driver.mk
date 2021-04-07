@@ -7,7 +7,7 @@ HD61_DRIVER_SOURCE  = hd61-drivers-$(HD61_DRIVER_VERSION)-$(HD61_DRIVER_DATE).zi
 HD61_DRIVER_SITE    = http://source.mynonpublic.com/gfutures
 HD61_DRIVER_DEPENDS = bootstrap
 
-hd61-driver:
+$(D)/hd61-driver:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

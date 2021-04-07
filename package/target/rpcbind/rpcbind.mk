@@ -16,7 +16,7 @@ RPCBIND_CONF_OPTS = \
 	--with-rpcuser=root \
 	--with-systemdsystemunitdir=no
 
-rpcbind:
+$(D)/rpcbind:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -7,7 +7,7 @@ BASH_SOURCE  = bash-$(BASH_VERSION).tar.gz
 BASH_SITE    = http://ftp.gnu.org/gnu/bash
 BASH_DEPENDS = bootstrap ncurses
 
-bash:
+$(D)/bash:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -12,7 +12,7 @@ WIREGUARD_TOOLS_MAKE_OPTS = \
 	WITH_BASHCOMPLETION=yes \
 	WITH_WGQUICK=yes
 
-wireguard-tools:
+$(D)/wireguard-tools:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

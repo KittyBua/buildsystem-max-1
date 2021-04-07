@@ -8,7 +8,7 @@ VUZERO4K_DRIVER_SOURCE  = vuplus-dvb-proxy-vuzero4k-$(VUZERO4K_DRIVER_VERSION).t
 VUZERO4K_DRIVER_SITE    = http://code.vuplus.com/download/release/vuplus-dvb-proxy
 VUZERO4K_DRIVER_DEPENDS = bootstrap
 
-vuzero4k-driver:
+$(D)/vuzero4k-driver:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

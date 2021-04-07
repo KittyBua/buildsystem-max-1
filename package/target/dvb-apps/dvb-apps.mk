@@ -17,7 +17,7 @@ DVB_APPS_LDLIBS = -liconv
 DVB_APPS_MAKE_OPTS  = PERL5LIB=$(PKG_BUILD_DIR)/util/scan
 DVB_APPS_MAKE_OPTS += enable_shared=no
 
-dvb-apps:
+$(D)/dvb-apps:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -7,7 +7,7 @@ PYTHON_SETUPTOOLS_SOURCE  = setuptools-$(PYTHON_SETUPTOOLS_VERSION).tar.gz
 PYTHON_SETUPTOOLS_SITE    = https://pypi.python.org/packages/source/s/setuptools
 PYTHON_SETUPTOOLS_DEPENDS = bootstrap python
 
-python-setuptools:
+$(D)/python-setuptools:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

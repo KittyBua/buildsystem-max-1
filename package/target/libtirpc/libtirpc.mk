@@ -13,7 +13,7 @@ LIBTIRPC_CONF_OPTS = \
 	CFLAGS="$(TARGET_CFLAGS) -DGQ" \
 	--disable-gssapi
 
-libtirpc:
+$(D)/libtirpc:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

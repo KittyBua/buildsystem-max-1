@@ -10,7 +10,7 @@ HOST_LIBFFI_DEPENDS = bootstrap
 HOST_LIBFFI_CONF_OPTS = \
 	--disable-static
 
-host-libffi:
+$(D)/host-libffi:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

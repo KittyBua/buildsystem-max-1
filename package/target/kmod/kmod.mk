@@ -16,7 +16,7 @@ KMOD_CONF_OPTS = \
 	--disable-manpages \
 	--without-zlib
 
-kmod:
+$(D)/kmod:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -19,7 +19,7 @@ LIBXSLT_CONF_OPTS = \
 
 LIBXSLT_CONFIG_SCRIPTS = xslt-config
 
-libxslt:
+$(D)/libxslt:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

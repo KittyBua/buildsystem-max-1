@@ -17,7 +17,7 @@ HARFBUZZ_CONF_OPTS = \
 	--without-graphite2 \
 	--without-icu
 
-harfbuzz:
+$(D)/harfbuzz:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

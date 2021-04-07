@@ -25,7 +25,7 @@ OPENSSH_CONF_OPTS = \
 	--disable-pututline \
 	--disable-pututxline
 
-openssh:
+$(D)/openssh:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

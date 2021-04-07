@@ -12,7 +12,7 @@ LIBOGG_CONF_OPTS = \
 	--enable-shared \
 	--disable-static
 
-libogg:
+$(D)/libogg:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

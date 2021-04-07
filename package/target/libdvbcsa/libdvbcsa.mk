@@ -9,7 +9,7 @@ LIBDVBCSA_DEPENDS = bootstrap
 
 LIBDVBCSA_AUTORECONF = YES
 
-libdvbcsa:
+$(D)/libdvbcsa:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

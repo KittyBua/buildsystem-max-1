@@ -7,7 +7,7 @@ SYSVINIT_SOURCE  = sysvinit-$(SYSVINIT_VERSION).tar.xz
 SYSVINIT_SITE    = http://download.savannah.nongnu.org/releases/sysvinit
 SYSVINIT_DEPENDS = bootstrap
 
-sysvinit:
+$(D)/sysvinit:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

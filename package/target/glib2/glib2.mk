@@ -20,7 +20,7 @@ GLIB2_CONF_OPTS = \
 	-Doss_fuzz=disabled \
 	-Dselinux=disabled
 
-glib2:
+$(D)/glib2:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

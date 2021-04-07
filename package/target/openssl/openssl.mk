@@ -15,7 +15,7 @@ else ifeq ($(TARGET_ARCH),mips)
 OPENSSL_TARGET_ARCH = linux-generic32
 endif
 
-openssl:
+$(D)/openssl:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -7,7 +7,7 @@ PYTHON_SERVICE_IDENTITY_SOURCE  = service_identity-$(PYTHON_SERVICE_IDENTITY_VER
 PYTHON_SERVICE_IDENTITY_SITE    = https://pypi.python.org/packages/source/s/service_identity
 PYTHON_SERVICE_IDENTITY_DEPENDS = bootstrap python python-setuptools python-attr python-attrs python-pyasn1
 
-python-service-identity:
+$(D)/python-service-identity:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -22,7 +22,7 @@ GNUTLS_CONF_OPTS = \
 	--enable-local-libopts \
 	--enable-openssl-compatibility
 
-gnutls:
+$(D)/gnutls:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

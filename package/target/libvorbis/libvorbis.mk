@@ -14,7 +14,7 @@ LIBVORBIS_CONF_OPTS = \
 	--disable-examples \
 	--disable-oggtest
 
-libvorbis:
+$(D)/libvorbis:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

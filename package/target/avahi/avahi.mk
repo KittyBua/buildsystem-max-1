@@ -45,7 +45,7 @@ AVAHI_CONF_OPTS = \
 	--disable-xmltoman \
 	--disable-tests
 
-avahi:
+$(D)/avahi:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

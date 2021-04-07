@@ -9,7 +9,7 @@ WIREGUARD_DEPENDS = bootstrap kernel libmnl openresolv
 
 WIREGUARD_MAKE_OPTS = WITH_SYSTEMDUNITS=no WITH_BASHCOMPLETION=yes WITH_WGQUICK=yes
 
-wireguard:
+$(D)/wireguard:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

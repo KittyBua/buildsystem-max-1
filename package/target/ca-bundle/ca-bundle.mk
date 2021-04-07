@@ -9,7 +9,7 @@ CA_BUNDLE_DEPENDS = bootstrap
 
 CA_BUNDLE_CRT = ca-certificates.crt
 
-ca-bundle:
+$(D)/ca-bundle:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	cd $(DL_DIR); \

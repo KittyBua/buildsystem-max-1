@@ -7,7 +7,7 @@ LIBDPF_SOURCE  = dpf-ax.git
 LIBDPF_SITE    = $(MAX-GIT-GITHUB)
 LIBDPF_DEPENDS = bootstrap libusb-compat
 
-libdpf:
+$(D)/libdpf:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

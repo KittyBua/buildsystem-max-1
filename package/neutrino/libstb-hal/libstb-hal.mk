@@ -34,7 +34,7 @@ LIBSTB_HAL_CONF_OPTS += \
 
 LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)
 
-libstb-hal.do_prepare:
+$(D)/libstb-hal.do_prepare:
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR)
 	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR).org
@@ -43,9 +43,9 @@ libstb-hal.do_prepare:
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(SOURCE_DIR))
 	$(call APPLY_PATCHES_S,$(LIBSTB_HAL_DIR))
-	@touch $(DEPS_DIR)/$(notdir $@)
+	@touch $@
 
-libstb-hal.config.status: $(LIBSTB_HAL_DEPENDS)
+$(D)/libstb-hal.config.status:
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
 	test -d $(LIBSTB_HAL_OBJ_DIR) || mkdir -p $(LIBSTB_HAL_OBJ_DIR)
 	$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh
@@ -54,14 +54,14 @@ libstb-hal.config.status: $(LIBSTB_HAL_DEPENDS)
 		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/configure \
 			$(LIBSTB_HAL_CONF_OPTS)
 ifeq ($(TINKER_OPTION),0)
-	@touch $(DEPS_DIR)/$(notdir $@)
+	@touch $@
 endif
 
-libstb-hal.do_compile: libstb-hal.config.status
+$(D)/libstb-hal.do_compile: libstb-hal.config.status
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) DESTDIR=$(TARGET_DIR)
-	@touch $(DEPS_DIR)/$(notdir $@)
+	@touch $@
 
-libstb-hal: libstb-hal.do_prepare libstb-hal.do_compile
+$(D)/libstb-hal: $(LIBSTB_HAL_DEPENDS) libstb-hal.do_prepare libstb-hal.do_compile
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL)
 	$(TOUCH)
@@ -69,16 +69,16 @@ libstb-hal: libstb-hal.do_prepare libstb-hal.do_compile
 # -----------------------------------------------------------------------------
 
 libstb-hal-clean:
-	rm -f $(DEPS_DIR)/libstb-hal
-	rm -f $(DEPS_DIR)/libstb-hal.config.status
-	rm -f $(DEPS_DIR)/neutrino.config.status
+	rm -f $(D)/libstb-hal
+	rm -f $(D)/libstb-hal.config.status
+	rm -f $(D)/neutrino.config.status
 	cd $(LIBSTB_HAL_OBJ_DIR); \
 		$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) distclean
 
 libstb-hal-distclean:
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
-	rm -f $(DEPS_DIR)/libstb-hal*
-	rm -f $(DEPS_DIR)/neutrino.config.status
+	rm -f $(D)/libstb-hal*
+	rm -f $(D)/neutrino.config.status
 
 libstb-hal-uninstall:
 	-make -C $(LIBSTB_HAL_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)

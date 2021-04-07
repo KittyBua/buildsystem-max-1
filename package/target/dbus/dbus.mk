@@ -28,7 +28,7 @@ DBUS_CONF_OPTS += \
 	--without-systemdsystemunitdir
 endif
 
-dbus:
+$(D)/dbus:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

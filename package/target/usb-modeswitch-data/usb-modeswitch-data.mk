@@ -7,7 +7,7 @@ USB_MODESWITCH_DATA_SOURCE  = usb-modeswitch-data-$(USB_MODESWITCH_DATA_VERSION)
 USB_MODESWITCH_DATA_SITE    = http://www.draisberghof.de/usb_modeswitch
 USB_MODESWITCH_DATA_DEPENDS = bootstrap
 
-usb-modeswitch-data:
+$(D)/usb-modeswitch-data:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

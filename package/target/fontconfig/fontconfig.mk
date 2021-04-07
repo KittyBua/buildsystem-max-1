@@ -12,7 +12,7 @@ FONTCONFIG_CONF_OPTS = \
 	--with-expat-lib=$(TARGET_LIB_DIR) \
 	--disable-docs 
 
-fontconfig:
+$(D)/fontconfig:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

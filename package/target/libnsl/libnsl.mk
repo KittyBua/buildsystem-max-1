@@ -9,7 +9,7 @@ LIBNSL_DEPENDS = bootstrap libtirpc
 
 LIBNSL_AUTORECONF = YES
 
-libnsl:
+$(D)/libnsl:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

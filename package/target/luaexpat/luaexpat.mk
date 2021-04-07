@@ -18,7 +18,7 @@ LUAEXPAT_MAKE_OPTS = \
 	PREFIX=$(TARGET_DIR)/usr \
 	LUA_SYS_VER=$(LUA_ABIVERSION)
 
-luaexpat:
+$(D)/luaexpat:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

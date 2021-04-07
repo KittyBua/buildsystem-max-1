@@ -26,7 +26,7 @@ HOST_PYTHON3_CONF_OPTS = \
 	--disable-idle3 \
 	--disable-ossaudiodev
 
-host-python3:
+$(D)/host-python3:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

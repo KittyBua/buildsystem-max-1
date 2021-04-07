@@ -12,7 +12,7 @@ MINISATIP_CONF_OPTS = \
 	--enable-enigma \
 	--disable-netcv
 
-minisatip:
+$(D)/minisatip:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

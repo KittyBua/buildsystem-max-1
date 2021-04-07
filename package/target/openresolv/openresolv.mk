@@ -7,7 +7,7 @@ OPENRESOLV_SOURCE  = openresolv-$(OPENRESOLV_VERSION).tar.gz
 OPENRESOLV_SITE    = https://github.com/rsmarples/openresolv/archive
 OPENRESOLV_DEPENDS = bootstrap
 
-openresolv:
+$(D)/openresolv:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

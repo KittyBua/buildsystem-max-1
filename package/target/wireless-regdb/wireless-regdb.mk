@@ -7,7 +7,7 @@ WIRELESS_REGDB_SOURCE  = wireless-regdb-$(WIRELESS_REGDB_VERSION).tar.xz
 WIRELESS_REGDB_SITE    = https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb
 WIRELESS_REGDB_DEPENDS = bootstrap
 
-wireless-regdb:
+$(D)/wireless-regdb:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

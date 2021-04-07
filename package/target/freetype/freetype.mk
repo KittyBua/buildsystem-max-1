@@ -24,7 +24,7 @@ FREETYPE_CONF_OPTS = \
 
 FREETYPE_CONFIG_SCRIPTS = freetype-config
 
-freetype:
+$(D)/freetype:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

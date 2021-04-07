@@ -10,7 +10,7 @@ HOST_LIBARCHIVE_DEPENDS = bootstrap
 HOST_LIBARCHIVE_CONF_OPTS = \
 	--without-xml2
 
-host-libarchive:
+$(D)/host-libarchive:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

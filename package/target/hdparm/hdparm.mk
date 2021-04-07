@@ -7,7 +7,7 @@ HDPARM_SOURCE  = hdparm-$(HDPARM_VERSION).tar.gz
 HDPARM_SITE    = https://sourceforge.net/projects/hdparm/files/hdparm
 HDPARM_DEPENDS = bootstrap
 
-hdparm:
+$(D)/hdparm:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

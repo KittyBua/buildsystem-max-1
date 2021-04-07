@@ -13,7 +13,7 @@ OPENTHREADS_CONF_OPTS = \
 	-D_OPENTHREADS_ATOMIC_USE_GCC_BUILTINS_EXITCODE__TRYRUN_OUTPUT="1" \
 	| tail -n +90
 
-openthreads:
+$(D)/openthreads:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

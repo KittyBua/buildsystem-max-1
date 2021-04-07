@@ -8,7 +8,7 @@ LIBUPNP_CONF_OPTS = \
 	--enable-shared \
 	--disable-static
 
-libupnp:
+$(D)/libupnp:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

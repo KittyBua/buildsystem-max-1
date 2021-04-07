@@ -7,7 +7,7 @@ HD61_LIBGLES_SOURCE  = hd61-mali-$(HD61_LIBGLES_VERSION).zip
 HD61_LIBGLES_SITE    = http://downloads.mutant-digital.net/hd61
 HD61_LIBGLES_DEPENDS = bootstrap
 
-hd61-libgles:
+$(D)/hd61-libgles:
 	$(START_BUILD)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(TARGET_LIB_DIR))

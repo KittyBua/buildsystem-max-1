@@ -34,7 +34,7 @@ AUTOFS_CONF_OPTS = \
 	--with-fifodir=/var/run \
 	--with-flagdir=/var/run
 
-autofs:
+$(D)/autofs:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

@@ -9,7 +9,7 @@ VUUNO4KSE_LIBGLES_SOURCE  = libgles-vuuno4kse-$(VUUNO4KSE_LIBGLES_VERSION).tar.g
 VUUNO4KSE_LIBGLES_SITE    = http://code.vuplus.com/download/release/libgles
 VUUNO4KSE_LIBGLES_DEPENDS = bootstrap
 
-vuuno4kse-libgles:
+$(D)/vuuno4kse-libgles:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

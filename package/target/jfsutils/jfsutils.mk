@@ -13,7 +13,7 @@ define JFSUTILS_POST_PATCH
 endef
 JFSUTILS_POST_PATCH_HOOKS = JFSUTILS_POST_PATCH
 
-jfsutils:
+$(D)/jfsutils:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

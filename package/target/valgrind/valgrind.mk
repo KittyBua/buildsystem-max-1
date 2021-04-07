@@ -16,7 +16,7 @@ VALGRIND_CONF_OPTS = \
 	--datadir=$(REMOVE_datarootdir) \
 	--enable-only32bit
 
-valgrind:
+$(D)/valgrind:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

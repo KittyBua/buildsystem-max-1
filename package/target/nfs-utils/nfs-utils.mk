@@ -27,7 +27,7 @@ NFS_UTILS_CONF_OPTS = \
 NFS_UTILS_CONF_OPTS += \
 	$(if $(filter $(BOXMODEL),vuduo),--disable-ipv6,--enable-ipv6)
 
-nfs-utils:
+$(D)/nfs-utils:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

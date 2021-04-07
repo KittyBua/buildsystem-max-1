@@ -7,7 +7,7 @@ HOST_ZIC_SOURCE  = tzcode$(HOST_ZIC_VERSION).tar.gz
 HOST_ZIC_SITE    = https://www.iana.org/time-zones/repository/releases
 HOST_ZIC_DEPENDS = bootstrap
 
-host-zic:
+$(D)/host-zic:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))

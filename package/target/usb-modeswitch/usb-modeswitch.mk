@@ -7,7 +7,7 @@ USB_MODESWITCH_SOURCE  = usb-modeswitch-$(USB_MODESWITCH_VERSION).tar.bz2
 USB_MODESWITCH_SITE    = http://www.draisberghof.de/usb_modeswitch
 USB_MODESWITCH_DEPENDS = bootstrap libusb usb-modeswitch-data
 
-usb-modeswitch:
+$(D)/usb-modeswitch:
 	$(START_BUILD)
 	$(REMOVE)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
