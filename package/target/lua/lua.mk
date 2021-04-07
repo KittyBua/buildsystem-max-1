@@ -18,7 +18,9 @@ lua:
 		$(MAKE) linux \
 			BUILDMODE=dynamic \
 			PKG_VERSION=$(LUA_VERSION) \
-			$(TARGET_CONFIGURE_OPTS) \
+			CC=$(TARGET_CC) \
+			CPPFLAGS="$(TARGET_CPPFLAGS) -fPIC" \
+			LDFLAGS="-L$(TARGET_LIB_DIR)" \
 			AR="$(TARGET_AR) rcu"; \
 		$(MAKE) install \
 			INSTALL_TOP=$(TARGET_DIR)/usr \

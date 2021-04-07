@@ -41,13 +41,12 @@
  
  # Targets start here.
  default: $(PLAT)
-@@ -54,13 +60,24 @@
- o:	$(ALL_O)
+@@ -55,12 +61,23 @@
  
  a:	$(ALL_A)
-+
-+so:	$(ALL_SO)
  
++so:	$(ALL_SO)
++
  $(LUA_A): $(BASE_O)
  	$(AR) $@ $(BASE_O)
  	$(RANLIB) $@
