@@ -119,6 +119,7 @@ PACKAGES="\
 	${UBUNTU:+curl}                                                                                               \
 	${UBUNTU:+libcap-dev}                                                                                         \
 	${UBUNTU:+libseccomp-dev}                                                                                     \
+	${UBUNTU:+libexpat1-dev}                                                                                      \
 ";
 
 if [ "$UBUNTU" == 1 ]; then
