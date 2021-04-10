@@ -37,7 +37,6 @@ BUILD_DIR     = $(BASE_DIR)/build_tmp
 RELEASE_DIR  ?= $(BASE_DIR)/release
 DEPS_DIR      = $(BASE_DIR)/.deps
 D             = $(DEPS_DIR)
-HOST_DEPS_DIR = $(HOST_DIR)/.deps
 TARGET_DIR    = $(BASE_DIR)/root
 SOURCE_DIR    = $(BASE_DIR)/build_source
 IMAGE_DIR     = $(BASE_DIR)/release_image
@@ -223,7 +222,7 @@ TARGET_STRIP    = $(TARGET_CROSS)strip
 # -----------------------------------------------------------------------------
 
 # search path(s) for all prerequisites
-VPATH = $(HOST_DEPS_DIR):$(DEPS_DIR)
+VPATH = $(DEPS_DIR)
 
 # -----------------------------------------------------------------------------
 

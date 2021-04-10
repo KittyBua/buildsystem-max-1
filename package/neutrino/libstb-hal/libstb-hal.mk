@@ -45,7 +45,7 @@ $(D)/libstb-hal.do_prepare:
 	$(call APPLY_PATCHES_S,$(LIBSTB_HAL_DIR))
 	@touch $@
 
-$(D)/libstb-hal.config.status:
+$(D)/libstb-hal.config.status: | $(NEUTRINO_DEPENDS)
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
 	test -d $(LIBSTB_HAL_OBJ_DIR) || mkdir -p $(LIBSTB_HAL_OBJ_DIR)
 	$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh
@@ -61,7 +61,7 @@ $(D)/libstb-hal.do_compile: libstb-hal.config.status
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) DESTDIR=$(TARGET_DIR)
 	@touch $@
 
-$(D)/libstb-hal: $(LIBSTB_HAL_DEPENDS) libstb-hal.do_prepare libstb-hal.do_compile
+$(D)/libstb-hal: libstb-hal.do_prepare libstb-hal.do_compile
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL)
 	$(TOUCH)

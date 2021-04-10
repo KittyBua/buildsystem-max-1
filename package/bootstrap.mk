@@ -56,7 +56,6 @@ $(D)/directories:
 	mkdir -p $(DL_DIR)
 	mkdir -p $(BUILD_DIR)
 	mkdir -p $(HOST_DIR)
-	mkdir -p $(HOST_DEPS_DIR)
 	mkdir -p $(IMAGE_DIR)
 	mkdir -p $(SOURCE_DIR)
 	mkdir -p $(HOST_DIR)/{ccache-bin,bin,lib,share}

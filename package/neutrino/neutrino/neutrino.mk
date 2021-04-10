@@ -186,7 +186,7 @@ $(D)/neutrino.do_prepare:
 	$(call APPLY_PATCHES_S,$(NEUTRINO_DIR))
 	@touch $@
 
-$(D)/neutrino.config.status:
+$(D)/neutrino.config.status: | $(NEUTRINO_DEPENDS)
 	rm -rf $(NEUTRINO_OBJ_DIR)
 	test -d $(NEUTRINO_OBJ_DIR) || mkdir -p $(NEUTRINO_OBJ_DIR)
 	$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh
@@ -199,11 +199,11 @@ ifeq ($(TINKER_OPTION),0)
 	@touch $@
 endif
 
-$(D)/neutrino.do_compile:
+$(D)/neutrino.do_compile: neutrino.config.status
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) DESTDIR=$(TARGET_DIR)
 	@touch $@
 
-$(D)/neutrino: $(NEUTRINO_DEPENDS) neutrino.do_prepare neutrino.config.status neutrino.do_compile
+$(D)/neutrino: neutrino.do_prepare neutrino.do_compile
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 	$(TOUCH)
 	( \
