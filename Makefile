@@ -228,6 +228,7 @@ config:
 		*) external_lcd=both;; \
 	esac; \
 	sed -i -e "s|^#EXTERNAL_LCD = $$external_lcd|EXTERNAL_LCD = $$external_lcd|" $@
+	make printenv
 	@echo ""
 	@echo "Your next step could be:"
 	@echo "   make flashimage"
