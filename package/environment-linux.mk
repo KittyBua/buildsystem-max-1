@@ -156,7 +156,7 @@ KERNEL_OUTPUT      = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/$(KERNEL_IMAGE_T
 KERNEL_INPUT_DTB   = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/dts/$(KERNEL_DTB)
 KERNEL_OUTPUT_DTB  = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/zImage_dtb
 
-ifeq ($(VU_MULTIBOOT),1)
+ifeq ($(VU_MULTIBOOT),multi)
 KERNEL_CONFIG = $(BOXMODEL)_defconfig_multi
 else
 KERNEL_CONFIG = $(BOXMODEL)_defconfig

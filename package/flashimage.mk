@@ -5,7 +5,7 @@
 
 flashimage: bootstrap machine-deps image-deps neutrino
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 h7))
-	$(MAKE) flash-image-multi-disk flash-image-multi-rootfs
+	$(MAKE) flash-image-hd5x-multi-disk flash-image-hd5x-multi-rootfs
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
 	$(MAKE) flash-image-hd6x-multi-disk
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),osmio4k osmio4kplus))
@@ -22,17 +22,13 @@ else
 	echo -e "$(TERM_RED_BOLD)unsupported box model$(TERM_NORMAL)"
 endif
 	$(TUXBOX_CUSTOMIZE)
-	@echo "***************************************************************"
-	@echo -e "\033[01;32m"
-	@echo " Build of $@ for $(BOXMODEL) successfully completed."
-	@echo -e "\033[00m"
-	@echo "***************************************************************"
+	@$(call MESSAGE,"for $(BOXMODEL) successfully completed.")
 
 # -----------------------------------------------------------------------------
 
 ofgimage: bootstrap machine-deps image-deps neutrino
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 h7))
-	$(MAKE) ITYPE=ofg flash-image-multi-rootfs
+	$(MAKE) ITYPE=ofg flash-image-hd5x-multi-rootfs
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
 	$(MAKE) ITYPE=ofg flash-image-hd6x-multi-rootfs
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),osmio4k osmio4kplus))
@@ -43,18 +39,14 @@ else
 	echo -e "$(TERM_RED_BOLD)unsupported box model$(TERM_NORMAL)"
 endif
 	$(TUXBOX_CUSTOMIZE)
-	@echo "***************************************************************"
-	@echo -e "\033[01;32m"
-	@echo " Build of $@ for $(BOXMODEL) successfully completed."
-	@echo -e "\033[00m"
-	@echo "***************************************************************"
+	@$(call MESSAGE,"for $(BOXMODEL) successfully completed.")
 
 # -----------------------------------------------------------------------------
 
 oi \
 online-image: bootstrap machine-deps image-deps neutrino
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 h7))
-	$(MAKE) ITYPE=online flash-image-online
+	$(MAKE) ITYPE=online flash-image-hd5x-online
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
 	$(MAKE) ITYPE=online flash-image-hd6x-online
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),osmio4k osmio4kplus))
@@ -65,11 +57,7 @@ else
 	echo -e "$(TERM_RED_BOLD)unsupported box model$(TERM_NORMAL)"
 endif
 	$(TUXBOX_CUSTOMIZE)
-	@echo "***************************************************************"
-	@echo -e "\033[01;32m"
-	@echo " Build of $@ for $(BOXMODEL) successfully completed."
-	@echo -e "\033[00m"
-	@echo "***************************************************************"
+	@$(call MESSAGE,"for $(BOXMODEL) successfully completed.")
 
 # -----------------------------------------------------------------------------
 
@@ -79,10 +67,10 @@ ITYPE ?= multi_usb
 # -----------------------------------------------------------------------------
 
 # bre2ze4k/hd51/h7
-IMAGE_NAME = disk
-BOOT_IMAGE = boot.img
-IMAGE_LINK = $(IMAGE_NAME).ext4
-IMAGE_ROOTFS_SIZE = 294912
+HD5X_IMAGE_NAME = disk
+HD5X_BOOT_IMAGE = boot.img
+HD5X_IMAGE_LINK = $(HD5X_IMAGE_NAME).ext4
+HD5X_IMAGE_ROOTFS_SIZE = 294912
 
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd51 bre2ze4k))
 IMAGE_SUBDIR = $(BOXMODEL)
@@ -92,123 +80,111 @@ endif
 
 # emmc image
 EMMC_IMAGE_SIZE = 3817472
-EMMC_IMAGE = $(IMAGE_BUILD_DIR)/$(IMAGE_NAME).img
+EMMC_IMAGE = $(IMAGE_BUILD_DIR)/$(HD5X_IMAGE_NAME).img
 
+# partition sizes
 BLOCK_SIZE = 512
 BLOCK_SECTOR = 2
-
-# partition offsets/sizes
 IMAGE_ROOTFS_ALIGNMENT = 1024
 BOOT_PARTITION_SIZE = 3072
+KERNEL_PARTITION_SIZE = 8192
+SWAP_PARTITION_SIZE = 262144
+STORAGE_PARTITION_SIZE = 204800
+ROOTFS_PARTITION_SINGLE_SIZE = 768000
+# linuxrootfs1
+ROOTFS_PARTITION_MULTI_SIZE = 1048576
+# linuxrootfs2-4
+ALL_KERNEL_SIZE = $(shell expr 4 \* $(KERNEL_PARTITION_SIZE))
+MULTI_ROOTFS_PARTITION_SIZE = $(shell expr $(EMMC_IMAGE_SIZE) \- $(BLOCK_SECTOR) \* $(IMAGE_ROOTFS_ALIGNMENT) \- $(BOOT_PARTITION_SIZE) \- $(ALL_KERNEL_SIZE) \- $(ROOTFS_PARTITION_MULTI_SIZE) \- $(SWAP_PARTITION_SIZE) \- $(STORAGE_PARTITION_SIZE))
 
 KERNEL_PARTITION_OFFSET = $(shell expr $(IMAGE_ROOTFS_ALIGNMENT) \+ $(BOOT_PARTITION_SIZE))
-KERNEL_PARTITION_SIZE = 8192
-
 ROOTFS_PARTITION_OFFSET = $(shell expr $(KERNEL_PARTITION_OFFSET) \+ $(KERNEL_PARTITION_SIZE))
-ROOTFS_PARTITION_SIZE = 768000
-ROOTFS_PARTITION_SIZE_NL = 1048576
 
-SECOND_KERNEL_PARTITION_OFFSET = $(shell expr $(ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SIZE))
+#calc the offsets (single)
+SECOND_KERNEL_PARTITION_OFFSET = $(shell expr $(ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SINGLE_SIZE))
 SECOND_ROOTFS_PARTITION_OFFSET = $(shell expr $(SECOND_KERNEL_PARTITION_OFFSET) \+ $(KERNEL_PARTITION_SIZE))
-
-THIRD_KERNEL_PARTITION_OFFSET = $(shell expr $(SECOND_ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SIZE))
+THIRD_KERNEL_PARTITION_OFFSET = $(shell expr $(SECOND_ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SINGLE_SIZE))
 THIRD_ROOTFS_PARTITION_OFFSET = $(shell expr $(THIRD_KERNEL_PARTITION_OFFSET) \+ $(KERNEL_PARTITION_SIZE))
-
-FOURTH_KERNEL_PARTITION_OFFSET = $(shell expr $(THIRD_ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SIZE))
+FOURTH_KERNEL_PARTITION_OFFSET = $(shell expr $(THIRD_ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SINGLE_SIZE))
 FOURTH_ROOTFS_PARTITION_OFFSET = $(shell expr $(FOURTH_KERNEL_PARTITION_OFFSET) \+ $(KERNEL_PARTITION_SIZE))
+SWAP_PARTITION_OFFSET = $(shell expr $(FOURTH_ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SINGLE_SIZE))
+STORAGE_PARTITION_OFFSET = $(shell expr $(SWAP_PARTITION_OFFSET) \+ $(SWAP_PARTITION_SIZE))
 
-LINUX_SWAP_PARTITION_OFFSET = $(shell expr $(FOURTH_ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SIZE))
-LINUX_SWAP_PARTITION_SIZE = 204800
-
-STORAGE_PARTITION_OFFSET = $(shell expr $(LINUX_SWAP_PARTITION_OFFSET) \+ $(LINUX_SWAP_PARTITION_SIZE))
-
-SECOND_KERNEL_PARTITION_OFFSET_NL = $(shell expr $(ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SIZE_NL))
-
+#calc the offsets (multi)
+SECOND_KERNEL_PARTITION_OFFSET_NL = $(shell expr $(ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_MULTI_SIZE))
 THIRD_KERNEL_PARTITION_OFFSET_NL = $(shell expr $(SECOND_KERNEL_PARTITION_OFFSET_NL) \+ $(KERNEL_PARTITION_SIZE))
-
 FOURTH_KERNEL_PARTITION_OFFSET_NL = $(shell expr $(THIRD_KERNEL_PARTITION_OFFSET_NL) \+ $(KERNEL_PARTITION_SIZE))
+SWAP_PARTITION_OFFSET_NL = $(shell expr $(FOURTH_KERNEL_PARTITION_OFFSET_NL) \+ $(KERNEL_PARTITION_SIZE))
+MULTI_ROOTFS_PARTITION_OFFSET = $(shell expr $(SWAP_PARTITION_OFFSET_NL) \+ $(SWAP_PARTITION_SIZE))
+STORAGE_PARTITION_OFFSET_NL = $(shell expr $(MULTI_ROOTFS_PARTITION_OFFSET) \+ $(MULTI_ROOTFS_PARTITION_SIZE))
 
-MULTI_ROOTFS_PARTITION_OFFSET_NL = $(shell expr $(FOURTH_KERNEL_PARTITION_OFFSET_NL) \+ $(KERNEL_PARTITION_SIZE))
-MULTI_ROOTFS_PARTITION_SIZE_NL = 2321408
-
-LINUX_SWAP_PARTITION_OFFSET_NL = $(shell expr $(MULTI_ROOTFS_PARTITION_OFFSET_NL) \+ $(MULTI_ROOTFS_PARTITION_SIZE_NL))
-LINUX_SWAP_PARTITION_SIZE_NL = 204800
-
-STORAGE_PARTITION_OFFSET_NL = $(shell expr $(LINUX_SWAP_PARTITION_OFFSET_NL) \+ $(LINUX_SWAP_PARTITION_SIZE_NL))
-
-flash-image-multi-disk: host-e2fsprogs host-parted
+flash-image-hd5x-multi-disk:
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(IMAGE_SUBDIR)
 	# Create a sparse image block
-	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(IMAGE_LINK) seek=$(shell expr $(IMAGE_ROOTFS_SIZE) \* $(BLOCK_SECTOR)) count=0 bs=$(BLOCK_SIZE)
-ifeq ($(LAYOUT),1)
-	$(HOST_DIR)/bin/mkfs.ext4 -F -m0 $(IMAGE_BUILD_DIR)/$(IMAGE_LINK) -d $(RELEASE_DIR)/..
+	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(HD5X_IMAGE_LINK) seek=$(shell expr $(HD5X_IMAGE_ROOTFS_SIZE) \* $(BLOCK_SECTOR)) count=0 bs=$(BLOCK_SIZE)
+ifeq ($(LAYOUT),multi)
+	mkfs.ext4 -F $(IMAGE_BUILD_DIR)/$(HD5X_IMAGE_LINK) -d $(RELEASE_DIR)/..
 else
-	$(HOST_DIR)/bin/mkfs.ext4 -F -m0 $(IMAGE_BUILD_DIR)/$(IMAGE_LINK) -d $(RELEASE_DIR)
+	mkfs.ext4 -F $(IMAGE_BUILD_DIR)/$(HD5X_IMAGE_LINK) -d $(RELEASE_DIR)
 endif
 	# Error codes 0-3 indicate successfull operation of fsck (no errors or errors corrected)
-	$(HOST_DIR)/bin/fsck.ext4 -pfD $(IMAGE_BUILD_DIR)/$(IMAGE_LINK) || [ $? -le 3 ]
+	fsck.ext4 -pvfD $(IMAGE_BUILD_DIR)/$(HD5X_IMAGE_LINK) || [ $? -le 3 ]
 	dd if=/dev/zero of=$(EMMC_IMAGE) bs=$(BLOCK_SIZE) count=0 seek=$(shell expr $(EMMC_IMAGE_SIZE) \* $(BLOCK_SECTOR))
 	parted -s $(EMMC_IMAGE) mklabel gpt
 	parted -s $(EMMC_IMAGE) unit KiB mkpart boot fat16 $(IMAGE_ROOTFS_ALIGNMENT) $(shell expr $(IMAGE_ROOTFS_ALIGNMENT) \+ $(BOOT_PARTITION_SIZE))
-ifeq ($(LAYOUT),1)
+ifeq ($(LAYOUT),multi)
 	parted -s $(EMMC_IMAGE) unit KiB mkpart linuxkernel $(KERNEL_PARTITION_OFFSET) $(shell expr $(KERNEL_PARTITION_OFFSET) \+ $(KERNEL_PARTITION_SIZE))
-	parted -s $(EMMC_IMAGE) unit KiB mkpart linuxrootfs ext4 $(ROOTFS_PARTITION_OFFSET) $(shell expr $(ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SIZE_NL))
+	parted -s $(EMMC_IMAGE) unit KiB mkpart linuxrootfs ext4 $(ROOTFS_PARTITION_OFFSET) $(shell expr $(ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_MULTI_SIZE))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart linuxkernel2 $(SECOND_KERNEL_PARTITION_OFFSET_NL) $(shell expr $(SECOND_KERNEL_PARTITION_OFFSET_NL) \+ $(KERNEL_PARTITION_SIZE))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart linuxkernel3 $(THIRD_KERNEL_PARTITION_OFFSET_NL) $(shell expr $(THIRD_KERNEL_PARTITION_OFFSET_NL) \+ $(KERNEL_PARTITION_SIZE))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart linuxkernel4 $(FOURTH_KERNEL_PARTITION_OFFSET_NL) $(shell expr $(FOURTH_KERNEL_PARTITION_OFFSET_NL) \+ $(KERNEL_PARTITION_SIZE))
-ifeq ($(LAYOUT_SWAP),1)
-	parted -s $(EMMC_IMAGE) unit KiB mkpart userdata ext4 $(MULTI_ROOTFS_PARTITION_OFFSET_NL) $(shell expr $(MULTI_ROOTFS_PARTITION_OFFSET_NL) \+ $(MULTI_ROOTFS_PARTITION_SIZE_NL))
-	parted -s $(EMMC_IMAGE) unit KiB mkpart swap linux-swap $(LINUX_SWAP_PARTITION_OFFSET_NL) $(shell expr $(LINUX_SWAP_PARTITION_OFFSET_NL) \+ $(LINUX_SWAP_PARTITION_SIZE_NL))
+	parted -s $(EMMC_IMAGE) unit KiB mkpart swap linux-swap $(SWAP_PARTITION_OFFSET_NL) $(shell expr $(SWAP_PARTITION_OFFSET_NL) \+ $(SWAP_PARTITION_SIZE))
+	parted -s $(EMMC_IMAGE) unit KiB mkpart userdata ext4 $(MULTI_ROOTFS_PARTITION_OFFSET) $(shell expr $(MULTI_ROOTFS_PARTITION_OFFSET) \+ $(MULTI_ROOTFS_PARTITION_SIZE))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart storage ext4 $(STORAGE_PARTITION_OFFSET_NL) 100%
-else
-	parted -s $(EMMC_IMAGE) unit KiB mkpart userdata ext4 $(MULTI_ROOTFS_PARTITION_OFFSET_NL) 100%
-endif
-	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(BOOT_IMAGE) bs=$(BLOCK_SIZE) count=$(shell expr $(BOOT_PARTITION_SIZE) \* $(BLOCK_SECTOR))
-	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(BOOT_IMAGE)
+	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) bs=$(BLOCK_SIZE) count=$(shell expr $(BOOT_PARTITION_SIZE) \* $(BLOCK_SECTOR))
+	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE)
 	echo "boot emmcflash0.linuxkernel  'root=/dev/mmcblk0p3 rootsubdir=linuxrootfs1 kernel=/dev/mmcblk0p2 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP
 	echo "boot emmcflash0.linuxkernel  'root=/dev/mmcblk0p3 rootsubdir=linuxrootfs1 kernel=/dev/mmcblk0p2 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_1
-	echo "boot emmcflash0.linuxkernel2 'root=/dev/mmcblk0p7 rootsubdir=linuxrootfs2 kernel=/dev/mmcblk0p4 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_2
-	echo "boot emmcflash0.linuxkernel3 'root=/dev/mmcblk0p7 rootsubdir=linuxrootfs3 kernel=/dev/mmcblk0p5 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_3
-	echo "boot emmcflash0.linuxkernel4 'root=/dev/mmcblk0p7 rootsubdir=linuxrootfs4 kernel=/dev/mmcblk0p6 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_4
+	echo "boot emmcflash0.linuxkernel2 'root=/dev/mmcblk0p8 rootsubdir=linuxrootfs2 kernel=/dev/mmcblk0p4 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_2
+	echo "boot emmcflash0.linuxkernel3 'root=/dev/mmcblk0p8 rootsubdir=linuxrootfs3 kernel=/dev/mmcblk0p5 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_3
+	echo "boot emmcflash0.linuxkernel4 'root=/dev/mmcblk0p8 rootsubdir=linuxrootfs4 kernel=/dev/mmcblk0p6 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_4
 else
 	parted -s $(EMMC_IMAGE) unit KiB mkpart kernel1 $(KERNEL_PARTITION_OFFSET) $(shell expr $(KERNEL_PARTITION_OFFSET) \+ $(KERNEL_PARTITION_SIZE))
-	parted -s $(EMMC_IMAGE) unit KiB mkpart rootfs1 ext4 $(ROOTFS_PARTITION_OFFSET) $(shell expr $(ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SIZE))
+	parted -s $(EMMC_IMAGE) unit KiB mkpart rootfs1 ext4 $(ROOTFS_PARTITION_OFFSET) $(shell expr $(ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SINGLE_SIZE))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart kernel2 $(SECOND_KERNEL_PARTITION_OFFSET) $(shell expr $(SECOND_KERNEL_PARTITION_OFFSET) \+ $(KERNEL_PARTITION_SIZE))
-	parted -s $(EMMC_IMAGE) unit KiB mkpart rootfs2 ext4 $(SECOND_ROOTFS_PARTITION_OFFSET) $(shell expr $(SECOND_ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SIZE))
+	parted -s $(EMMC_IMAGE) unit KiB mkpart rootfs2 ext4 $(SECOND_ROOTFS_PARTITION_OFFSET) $(shell expr $(SECOND_ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SINGLE_SIZE))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart kernel3 $(THIRD_KERNEL_PARTITION_OFFSET) $(shell expr $(THIRD_KERNEL_PARTITION_OFFSET) \+ $(KERNEL_PARTITION_SIZE))
-	parted -s $(EMMC_IMAGE) unit KiB mkpart rootfs3 ext4 $(THIRD_ROOTFS_PARTITION_OFFSET) $(shell expr $(THIRD_ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SIZE))
+	parted -s $(EMMC_IMAGE) unit KiB mkpart rootfs3 ext4 $(THIRD_ROOTFS_PARTITION_OFFSET) $(shell expr $(THIRD_ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SINGLE_SIZE))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart kernel4 $(FOURTH_KERNEL_PARTITION_OFFSET) $(shell expr $(FOURTH_KERNEL_PARTITION_OFFSET) \+ $(KERNEL_PARTITION_SIZE))
-	parted -s $(EMMC_IMAGE) unit KiB mkpart rootfs4 ext4 $(FOURTH_ROOTFS_PARTITION_OFFSET) $(shell expr $(FOURTH_ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SIZE))
-	parted -s $(EMMC_IMAGE) unit KiB mkpart swap linux-swap $(LINUX_SWAP_PARTITION_OFFSET) $(shell expr $(LINUX_SWAP_PARTITION_OFFSET) \+ $(LINUX_SWAP_PARTITION_SIZE))
+	parted -s $(EMMC_IMAGE) unit KiB mkpart rootfs4 ext4 $(FOURTH_ROOTFS_PARTITION_OFFSET) $(shell expr $(FOURTH_ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SINGLE_SIZE))
+	parted -s $(EMMC_IMAGE) unit KiB mkpart swap linux-swap $(SWAP_PARTITION_OFFSET) $(shell expr $(SWAP_PARTITION_OFFSET) \+ $(SWAP_PARTITION_SIZE))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart storage ext4 $(STORAGE_PARTITION_OFFSET) $(shell expr $(EMMC_IMAGE_SIZE) \- 1024)
-	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(BOOT_IMAGE) bs=$(BLOCK_SIZE) count=$(shell expr $(BOOT_PARTITION_SIZE) \* $(BLOCK_SECTOR))
-	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(BOOT_IMAGE)
+	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) bs=$(BLOCK_SIZE) count=$(shell expr $(BOOT_PARTITION_SIZE) \* $(BLOCK_SECTOR))
+	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE)
 	echo "boot emmcflash0.kernel1 'root=/dev/mmcblk0p3 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP
 	echo "boot emmcflash0.kernel1 'root=/dev/mmcblk0p3 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_1
 	echo "boot emmcflash0.kernel2 'root=/dev/mmcblk0p5 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_2
 	echo "boot emmcflash0.kernel3 'root=/dev/mmcblk0p7 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_3
 	echo "boot emmcflash0.kernel4 'root=/dev/mmcblk0p9 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_4
 endif
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_1 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_2 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_3 ::
-	mcopy -i $(IMAGE_BUILD_DIR)/$(BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_4 ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_1 ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_2 ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_3 ::
+	mcopy -i $(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_4 ::
 	parted -s $(EMMC_IMAGE) unit KiB print
-	dd conv=notrunc if=$(IMAGE_BUILD_DIR)/$(BOOT_IMAGE) of=$(EMMC_IMAGE) bs=$(BLOCK_SIZE) seek=$(shell expr $(IMAGE_ROOTFS_ALIGNMENT) \* $(BLOCK_SECTOR))
+	dd conv=notrunc if=$(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) of=$(EMMC_IMAGE) bs=$(BLOCK_SIZE) seek=$(shell expr $(IMAGE_ROOTFS_ALIGNMENT) \* $(BLOCK_SECTOR))
 	dd conv=notrunc if=$(KERNEL_OUTPUT_DTB) of=$(EMMC_IMAGE) bs=$(BLOCK_SIZE) seek=$(shell expr $(KERNEL_PARTITION_OFFSET) \* $(BLOCK_SECTOR))
-ifeq ($(LAYOUT),1)
-	$(HOST_DIR)/bin/resize2fs $(IMAGE_BUILD_DIR)/$(IMAGE_LINK) $(ROOTFS_PARTITION_SIZE_NL)k
+ifeq ($(LAYOUT),multi)
+	resize2fs $(IMAGE_BUILD_DIR)/$(HD5X_IMAGE_LINK) $(ROOTFS_PARTITION_MULTI_SIZE)k
 else
-	$(HOST_DIR)/bin/resize2fs $(IMAGE_BUILD_DIR)/$(IMAGE_LINK) $(ROOTFS_PARTITION_SIZE)k
+	resize2fs $(IMAGE_BUILD_DIR)/$(HD5X_IMAGE_LINK) $(ROOTFS_PARTITION_SINGLE_SIZE)k
 endif
-	# Truncate on purpose
-	dd if=$(IMAGE_BUILD_DIR)/$(IMAGE_LINK) of=$(EMMC_IMAGE) bs=$(BLOCK_SIZE) seek=$(shell expr $(ROOTFS_PARTITION_OFFSET) \* $(BLOCK_SECTOR)) count=$(shell expr $(IMAGE_ROOTFS_SIZE) \* $(BLOCK_SECTOR))
-	mv $(IMAGE_BUILD_DIR)/$(IMAGE_NAME).img $(IMAGE_BUILD_DIR)/$(IMAGE_SUBDIR)/
+	dd if=$(IMAGE_BUILD_DIR)/$(HD5X_IMAGE_LINK) of=$(EMMC_IMAGE) bs=$(BLOCK_SIZE) seek=$(shell expr $(ROOTFS_PARTITION_OFFSET) \* $(BLOCK_SECTOR)) count=$(shell expr $(HD5X_IMAGE_ROOTFS_SIZE) \* $(BLOCK_SECTOR))
+	mv $(IMAGE_BUILD_DIR)/$(HD5X_IMAGE_NAME).img $(IMAGE_BUILD_DIR)/$(IMAGE_SUBDIR)/
 
-flash-image-multi-rootfs:
-	# Create final USB-image
+flash-image-hd5x-multi-rootfs:
 	mkdir -p $(IMAGE_BUILD_DIR)/$(IMAGE_SUBDIR)
 	cp $(KERNEL_OUTPUT_DTB) $(IMAGE_BUILD_DIR)/$(IMAGE_SUBDIR)/kernel.bin
 	$(CD) $(RELEASE_DIR); \
@@ -216,12 +192,10 @@ flash-image-multi-rootfs:
 		bzip2 $(IMAGE_BUILD_DIR)/$(IMAGE_SUBDIR)/rootfs.tar
 	echo "$(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE)" > $(IMAGE_BUILD_DIR)/$(IMAGE_SUBDIR)/imageversion
 	$(CD) $(IMAGE_BUILD_DIR); \
-		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE).zip $(IMAGE_SUBDIR)/rootfs.tar.bz2 $(IMAGE_SUBDIR)/kernel.bin $(IMAGE_SUBDIR)/$(IMAGE_NAME).img $(IMAGE_SUBDIR)/imageversion
-	# cleanup
+		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE).zip $(IMAGE_SUBDIR)/rootfs.tar.bz2 $(IMAGE_SUBDIR)/kernel.bin $(IMAGE_SUBDIR)/$(HD5X_IMAGE_NAME).img $(IMAGE_SUBDIR)/imageversion
 	rm -rf $(IMAGE_BUILD_DIR)
 
-flash-image-online:
-	# Create final USB-image
+flash-image-hd5x-online:
 	rm -rf $(IMAGE_BUILD_DIR) || true
 	mkdir -p $(IMAGE_BUILD_DIR)/$(BOXMODEL)
 	cp $(KERNEL_OUTPUT_DTB) $(IMAGE_BUILD_DIR)/$(BOXMODEL)/kernel.bin
@@ -230,8 +204,7 @@ flash-image-online:
 		bzip2 $(IMAGE_BUILD_DIR)/$(BOXMODEL)/rootfs.tar
 	echo "$(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE)" > $(IMAGE_BUILD_DIR)/$(BOXMODEL)/imageversion
 	$(CD) $(IMAGE_BUILD_DIR)/$(BOXMODEL); \
-		tar -cvzf $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE).tgz rootfs.tar.bz2 kernel.bin imageversion
-	# cleanup
+		tar -czf $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE).tgz rootfs.tar.bz2 kernel.bin imageversion
 	rm -rf $(IMAGE_BUILD_DIR)
 
 # -----------------------------------------------------------------------------

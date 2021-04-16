@@ -173,17 +173,16 @@ TARGET_EXTRA_LDFLAGS =
 endif
 
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vusolo4k vuduo4k vuduo4kse vuultimo4k vuzero4k vuuno4k vuuno4kse))
-VU_MULTIBOOT ?= 1
+VU_MULTIBOOT ?= multi
 endif
 
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51))
-LAYOUT      ?= 1
-LAYOUT_SWAP ?= 1
+LAYOUT ?= multi
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
-LAYOUT      ?= 1
+LAYOUT ?= multi
 endif
 
-ifeq ($(LAYOUT),1)
+ifeq ($(LAYOUT),multi)
 RELEASE_DIR  = $(BASE_DIR)/release/linuxrootfs1
 endif
 

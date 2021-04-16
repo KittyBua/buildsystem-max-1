@@ -284,10 +284,10 @@ printenv:
 	@echo "OPTIMIZATION      : $(OPTIMIZATIONS)"
 	@echo -e "FLAVOUR           : $(TERM_YELLOW)$(FLAVOUR)$(TERM_NORMAL)"
 	@echo "EXTERNAL_LCD      : $(EXTERNAL_LCD)"
-ifeq ($(LAYOUT),1)
+ifeq ($(LAYOUT),multi)
 	@echo -e "IMAGE TYPE        : $(TERM_YELLOW)1 single + multirootfs$(TERM_NORMAL)"
 endif
-ifeq ($(VU_MULTIBOOT),1)
+ifeq ($(VU_MULTIBOOT),multi)
 	@echo -e "IMAGE TYPE        : $(TERM_YELLOW)multirootfs$(TERM_NORMAL)"
 endif
 	$(call draw_line);
