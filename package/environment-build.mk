@@ -34,7 +34,11 @@ MAKEFLAGS += --no-print-directory
 BASE_DIR     := ${CURDIR}
 DL_DIR       ?= $(HOME)/Archive
 BUILD_DIR     = $(BASE_DIR)/build_tmp
-RELEASE_DIR  ?= $(BASE_DIR)/release
+ifeq ($(LAYOUT),multi)
+RELEASE_DIR   = $(BASE_DIR)/release/linuxrootfs1
+else
+RELEASE_DIR   = $(BASE_DIR)/release
+endif
 DEPS_DIR      = $(BASE_DIR)/.deps
 D             = $(DEPS_DIR)
 TARGET_DIR    = $(BASE_DIR)/root
@@ -63,69 +67,6 @@ PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(pkgname)/patches
 CD_BUILD_DIR    = $(CD) $(PKG_BUILD_DIR)
 
 # -----------------------------------------------------------------------------
-
-BOXMODEL ?= hd51
-ifeq ($(BOXMODEL),bre2ze4k)
-BOXNAME     = "WWIO BRE2ZE4K"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),h7)
-BOXNAME     = "Air Digital Zgemma H7S/C"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),hd51)
-BOXNAME     = "AX/Mut@nt HD51"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),hd60)
-BOXNAME     = "AX/Mut@nt HD60"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),hd61)
-BOXNAME     = "AX/Mut@nt HD61"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),osmio4k)
-BOXNAME     = "Edison Os mio 4k"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),osmio4kplus)
-BOXNAME     = "Edison Os mio+ 4K"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vusolo4k)
-BOXNAME     = "VU+ Solo 4K"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vuduo4k)
-BOXNAME     = "VU+ Duo 4K"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vuduo4kse)
-BOXNAME     = "VU+ Duo 4K SE"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vuultimo4k)
-BOXNAME     = "VU+ Ultimo 4K"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vuzero4k)
-BOXNAME     = "VU+ Zero 4K"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vuuno4k)
-BOXNAME     = "VU+ Uno 4K"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vuuno4kse)
-BOXNAME     = "VU+ Uno 4K SE"
-BOXTYPE     = armbox
-TARGET_ARCH = arm
-else ifeq ($(BOXMODEL),vuduo)
-BOXNAME     = "VU+ Duo"
-BOXTYPE     = mipsbox
-TARGET_ARCH = mips
-endif
 
 ifeq ($(BS_GCC_VERSION),6.5.0)
 CROSSTOOL_GCC_VERSION = gcc-6.5.0
@@ -165,20 +106,6 @@ else ifeq ($(OPTIMIZATIONS),debug)
 TARGET_OPTIMIZATION  = -O0 -g
 TARGET_EXTRA_CFLAGS  =
 TARGET_EXTRA_LDFLAGS =
-endif
-
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vusolo4k vuduo4k vuduo4kse vuultimo4k vuzero4k vuuno4k vuuno4kse))
-VU_MULTIBOOT ?= multi
-endif
-
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51))
-LAYOUT ?= multi
-else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
-LAYOUT ?= multi
-endif
-
-ifeq ($(LAYOUT),multi)
-RELEASE_DIR  = $(BASE_DIR)/release/linuxrootfs1
 endif
 
 # -----------------------------------------------------------------------------
@@ -461,7 +388,6 @@ NINJA_INSTALL = DESTDIR=$(TARGET_DIR) \
 	$(HOST_NINJA) -C $(PKG_BUILD_DIR)/build install
 
 # -----------------------------------------------------------------------------
-
 
 TUXBOX_CUSTOMIZE = [ -x support/scripts/$(notdir $@)-local.sh ] && \
 	support/scripts/$(notdir $@)-local.sh \
