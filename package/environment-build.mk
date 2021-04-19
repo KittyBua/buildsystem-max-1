@@ -127,23 +127,18 @@ BOXTYPE     = mipsbox
 TARGET_ARCH = mips
 endif
 
-BS_GCC_VERSION ?= 8.4.0
 ifeq ($(BS_GCC_VERSION),6.5.0)
 CROSSTOOL_GCC_VERSION = gcc-6.5.0
-else ifeq ($(BS_GCC_VERSION),7.5.0)
-CROSSTOOL_GCC_VERSION = gcc-7.5.0
 else ifeq ($(BS_GCC_VERSION),8.4.0)
 CROSSTOOL_GCC_VERSION = gcc-8.4.0
-else ifeq ($(BS_GCC_VERSION),9.3.0)
-CROSSTOOL_GCC_VERSION = gcc-9.3.0
-else ifeq ($(BS_GCC_VERSION),10.2.0)
-CROSSTOOL_GCC_VERSION = gcc-10.2.0
+else ifeq ($(BS_GCC_VERSION),10.3.0)
+CROSSTOOL_GCC_VERSION = gcc-10.3.0
 endif
 
 ifeq ($(TARGET_ARCH),arm)
-GNU_TARGET_NAME = arm-cortex-linux-gnueabihf
+GNU_TARGET_NAME = arm-unknown-linux-gnueabihf
 TARGET_CPU      = armv7ve
-TARGET_ABI      = -march=$(TARGET_CPU) -mtune=cortex-a15 -mfpu=neon-vfpv4 -mcpu=cortex-a15 -mfloat-abi=hard
+TARGET_ABI      = -mcpu=cortex-a15 -mfpu=neon-vfpv4 -mfloat-abi=hard -ffast-math
 TARGET_ENDIAN   = little
 else ifeq ($(TARGET_ARCH),aarch64)
 GNU_TARGET_NAME = aarch64-unknown-linux-gnu
