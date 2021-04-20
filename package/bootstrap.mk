@@ -58,7 +58,7 @@ $(D)/directories:
 	mkdir -p $(HOST_DIR)
 	mkdir -p $(IMAGE_DIR)
 	mkdir -p $(SOURCE_DIR)
-	mkdir -p $(HOST_DIR)/{ccache-bin,bin,lib,share}
+	mkdir -p $(HOST_DIR)/{bin,lib,share}
 	mkdir -p $(TARGET_DIR)/{bin,boot,etc,lib,sbin,usr,var}
 	mkdir -p $(TARGET_DIR)/etc/{default,init.d,network,ssl,udev}
 	mkdir -p $(TARGET_DIR)/etc/default/volatiles
