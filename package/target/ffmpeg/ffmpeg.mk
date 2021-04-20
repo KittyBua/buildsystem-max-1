@@ -196,7 +196,6 @@ FFMPEG_CONF_OPTS = \
 	--enable-decoder=pcm_u32be \
 	--enable-decoder=pcm_u32le \
 	--enable-decoder=pcm_u8 \
-	--enable-decoder=pcm_zork \
 	--enable-decoder=pgssub \
 	--enable-decoder=png \
 	--enable-decoder=qcelp \
