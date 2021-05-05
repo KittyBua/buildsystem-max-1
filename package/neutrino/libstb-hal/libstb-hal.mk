@@ -37,7 +37,6 @@ LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)
 $(D)/libstb-hal.do_prepare:
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR)
-	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR).org
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
 	test -d $(SOURCE_DIR) || mkdir -p $(SOURCE_DIR)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
