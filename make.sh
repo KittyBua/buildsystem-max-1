@@ -131,15 +131,16 @@ echo "OPTIMIZATIONS=$OPTIMIZATIONS" >> .config
 ##############################################
 
 case $4 in
-	[1-5]) REPLY=$4;;
+	[1-6]) REPLY=$4;;
 	*)	echo -e "\nWhich Neutrino variant do you want to build?:"
 		echo "   1)  neutrino-ddt   "
 		echo "   2)  neutrino-max   "
 		echo "   3)  neutrino-ni    "
 		echo "   4)  neutrino-tangos"
 		echo "   5)  neutrino-redblue"
-		read -p "Select Image to build (1-5)? [2] "
-		REPLY="${REPLY:-2}";;
+		echo "   6)  neutrino-test-max"
+		read -p "Select Image to build (1-6)? [6] "
+		REPLY="${REPLY:-6}";;
 esac
 
 case "$REPLY" in
@@ -148,7 +149,8 @@ case "$REPLY" in
 	3) FLAVOUR="neutrino-ni";;
 	4) FLAVOUR="neutrino-tangos";;
 	5) FLAVOUR="neutrino-redblue";;
-	*) FLAVOUR="neutrino-max";;
+	6) FLAVOUR="neutrino-test-max";;
+	*) FLAVOUR="neutrino-test-max";;
 esac
 echo "FLAVOUR=$FLAVOUR" >> .config
 
