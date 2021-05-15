@@ -68,18 +68,20 @@ CD_BUILD_DIR    = $(CD) $(PKG_BUILD_DIR)
 
 # -----------------------------------------------------------------------------
 
-ifeq ($(BS_GCC_VERSION),6.5.0)
+ifeq ($(GCC_VERSION),6.5.0)
 CROSSTOOL_GCC_VERSION = gcc-6.5.0
-else ifeq ($(BS_GCC_VERSION),8.4.0)
+else ifeq ($(GCC_VERSION),8.4.0)
 CROSSTOOL_GCC_VERSION = gcc-8.4.0
-else ifeq ($(BS_GCC_VERSION),10.3.0)
+else ifeq ($(GCC_VERSION),10.3.0)
 CROSSTOOL_GCC_VERSION = gcc-10.3.0
+else ifeq ($(GCC_VERSION),11.1.0)
+CROSSTOOL_GCC_VERSION = gcc-11.1.0
 endif
 
 ifeq ($(TARGET_ARCH),arm)
-GNU_TARGET_NAME = arm-unknown-linux-gnueabihf
+GNU_TARGET_NAME = arm-cortex-linux-gnueabihf
 TARGET_CPU      = armv7ve
-TARGET_ABI      = -mcpu=cortex-a15 -mfpu=neon-vfpv4 -mfloat-abi=hard -ffast-math
+TARGET_ABI      = -mtune=cortex-a15 -mfloat-abi=hard -mfpu=neon-vfpv4 -march=armv7ve
 TARGET_ENDIAN   = little
 else ifeq ($(TARGET_ARCH),aarch64)
 GNU_TARGET_NAME = aarch64-unknown-linux-gnu
