@@ -129,7 +129,7 @@ config.local:
 	@cp support/config.local.example $@
 
 Makefile.local:
-	@cp support/Makefile.example $@
+	@cp support/Makefile.local.example $@
 
 # target for testing only. not useful otherwise
 .PHONY: everything
