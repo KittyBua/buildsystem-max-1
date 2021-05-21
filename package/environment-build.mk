@@ -93,6 +93,11 @@ GNU_TARGET_NAME = mipsel-unknown-linux-gnu
 TARGET_CPU      = mips32
 TARGET_ABI      = -march=$(TARGET_CPU) -mtune=mips32
 TARGET_ENDIAN   = little
+else ifeq ($(TARGET_ARCH),x86_64)
+GNU_TARGET_NAME = x86_64-linux-gnu
+TARGET_CPU      = generic
+TARGET_ABI      =
+TARGET_ENDIAN   =
 endif
 
 OPTIMIZATIONS ?= size
@@ -256,6 +261,7 @@ TARGET_CONFIGURE_OPTS = \
 	CXXFLAGS="$(TARGET_CXXFLAGS)" \
 	LDFLAGS="$(TARGET_LDFLAGS)" \
 	PKG_CONFIG="$(PKG_CONFIG_HOST_BINARY)" \
+	PKG_CONFIG_PATH="$(TARGET_DIR)/usr/lib/pkgconfig" \
 	PKG_CONFIG_SYSROOT_DIR="$(TARGET_DIR)" \
 	$($(PKG)_CONF_ENV)
 

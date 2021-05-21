@@ -91,10 +91,15 @@ $(D)/cross-libs: directories $(CROSSTOOL)
 #
 # bootstrap
 #
-BOOTSTRAP  = $(CROSSTOOL)
+BOOTSTRAP  =
+ifneq ($(BOXMODEL),generic)
+BOOTSTRAP += $(CROSSTOOL)
+endif
 BOOTSTRAP += directories
 BOOTSTRAP += host-ccache
+ifneq ($(BOXMODEL),generic)
 BOOTSTRAP += cross-libs
+endif
 BOOTSTRAP += host-pkgconf
 
 $(D)/bootstrap: $(BOOTSTRAP)
@@ -133,14 +138,6 @@ IMAGE_DEPENDS += fbshot
 IMAGE_DEPENDS += aio-grab
 IMAGE_DEPENDS += dvbsnoop
 IMAGE_DEPENDS += libusb
-IMAGE_DEPENDS += lua
-IMAGE_DEPENDS += luaposix
-IMAGE_DEPENDS += luaexpat
-IMAGE_DEPENDS += luacurl
-IMAGE_DEPENDS += luasocket
-IMAGE_DEPENDS += lua-feedparser
-IMAGE_DEPENDS += luasoap
-IMAGE_DEPENDS += luajson
 IMAGE_DEPENDS += wpa-supplicant
 IMAGE_DEPENDS += wireless-tools
 IMAGE_DEPENDS += udpxy

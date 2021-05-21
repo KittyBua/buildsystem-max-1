@@ -18,9 +18,9 @@ if [ "$1" == -h ] || [ "$1" == --help ]; then
 	echo "Usage: $0 [Parameter1 Parameter2 ... Parameter6]"
 	echo
 	echo "Parameter 1     : target system"
-	echo "Parameter 2     : Toolchain gcc version"
-	echo "Parameter 3     : optimization"
-	echo "Parameter 4     : Neutrino variant"
+	echo "Parameter 2     : Neutrino variant"
+	echo "Parameter 3     : Toolchain gcc version"
+	echo "Parameter 4     : optimization"
 	echo "Parameter 5     : External LCD support"
 	echo "Parameter 6     : Image layout single or multiboot"
 	exit
@@ -44,7 +44,7 @@ echo "                            |___/                        "
 ##############################################
 
 case $1 in
-	[1-9] | 1[0-9] | 2[0-9] | 3[0-9] | 4[0-9]) REPLY=$1;;
+	[1-9] | 1[0-9] | 2[0-9] | 3[0-9] | 4[0-9] | 9[0-9]) REPLY=$1;;
 	*)
 		echo "Target receivers:"
 		echo "   1)  VU+ Duo"
@@ -62,6 +62,7 @@ case $1 in
 		echo "  30)  Edision OS mio 4K"
 		echo "  31)  Edision OS mio+ 4K"
 		echo "  40)  AirDigital Zgemma H7C/H7S"
+		echo "  99)  Neutrino PC"
 		read -p "Select target? [21] "
 		REPLY="${REPLY:-21}";;
 esac
@@ -82,6 +83,7 @@ case "$REPLY" in
 	30) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="osmio4k";;
 	31) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="osmio4kplus";;
 	40) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="h7";;
+	99) TARGET_ARCH="x86_64";BOXTYPE="generic";BOXMODEL="generic";;
 	 *) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd51";;
 esac
 echo "TARGET_ARCH=$TARGET_ARCH" > .config
@@ -91,49 +93,7 @@ echo "BOXMODEL=$BOXMODEL" >> .config
 ##############################################
 
 case $2 in
-	[1-4]) REPLY=$2;;
-	*)	echo -e "\nToolchain gcc version:"
-		echo "   1) GCC version 6.5.0"
-		echo "   2) GCC version 8.4.0"
-		echo "   3) GCC version 10.3.0"
-		echo "   4) GCC version 11.1.0"
-		read -p "Select toolchain gcc version (1-4)? [2] "
-		REPLY="${REPLY:-2}";;
-esac
-
-case "$REPLY" in
-	1) GCC_VERSION="6.5.0";;
-	2) GCC_VERSION="8.4.0";;
-	3) GCC_VERSION="10.3.0";;
-	4) GCC_VERSION="11.1.0";;
-	*) GCC_VERSION="8.4.0";;
-esac
-echo "GCC_VERSION=$GCC_VERSION" >> .config
-
-##############################################
-
-case $3 in
-	[1-3]) REPLY=$3;;
-	*)	echo -e "\nOptimization:"
-		echo "   1)  optimization for size"
-		echo "   2)  optimization normal"
-		echo "   3)  debug"
-		read -p "Select optimization (1-3)? [1] "
-		REPLY="${REPLY:-1}";;
-esac
-
-case "$REPLY" in
-	1)  OPTIMIZATIONS="size";;
-	2)  OPTIMIZATIONS="normal";;
-	3)  OPTIMIZATIONS="debug";;
-	*)  OPTIMIZATIONS="size";;
-esac
-echo "OPTIMIZATIONS=$OPTIMIZATIONS" >> .config
-
-##############################################
-
-case $4 in
-	[1-6]) REPLY=$4;;
+	[1-6]) REPLY=$2;;
 	*)	echo -e "\nWhich Neutrino variant do you want to build?:"
 		echo "   1)  neutrino-ddt   "
 		echo "   2)  neutrino-max   "
@@ -155,6 +115,62 @@ case "$REPLY" in
 	*) FLAVOUR="neutrino-test-max";;
 esac
 echo "FLAVOUR=$FLAVOUR" >> .config
+
+##############################################
+
+if [ $BOXMODEL == 'generic' ]; then
+##############################################
+echo " "
+make printenv
+##############################################
+echo "Your next step could be:"
+echo "  make neutrino-pc"
+echo "  make neutrino-pc-gdb"
+echo "  make neutrino-pc-valgrind"
+echo " "
+else
+
+##############################################
+
+case $3 in
+	[1-4]) REPLY=$3;;
+	*)	echo -e "\nToolchain gcc version:"
+		echo "   1) GCC version 6.5.0"
+		echo "   2) GCC version 8.4.0"
+		echo "   3) GCC version 10.3.0"
+		echo "   4) GCC version 11.1.0"
+		read -p "Select toolchain gcc version (1-4)? [2] "
+		REPLY="${REPLY:-2}";;
+esac
+
+case "$REPLY" in
+	1) GCC_VERSION="6.5.0";;
+	2) GCC_VERSION="8.4.0";;
+	3) GCC_VERSION="10.3.0";;
+	4) GCC_VERSION="11.1.0";;
+	*) GCC_VERSION="8.4.0";;
+esac
+echo "GCC_VERSION=$GCC_VERSION" >> .config
+
+##############################################
+
+case $4 in
+	[1-3]) REPLY=$4;;
+	*)	echo -e "\nOptimization:"
+		echo "   1)  optimization for size"
+		echo "   2)  optimization normal"
+		echo "   3)  debug"
+		read -p "Select optimization (1-3)? [1] "
+		REPLY="${REPLY:-1}";;
+esac
+
+case "$REPLY" in
+	1)  OPTIMIZATIONS="size";;
+	2)  OPTIMIZATIONS="normal";;
+	3)  OPTIMIZATIONS="debug";;
+	*)  OPTIMIZATIONS="size";;
+esac
+echo "OPTIMIZATIONS=$OPTIMIZATIONS" >> .config
 
 ##############################################
 
@@ -242,3 +258,5 @@ echo "Your next step could be:"
 echo "  make flashimage"
 echo "  make ofgimage"
 echo " "
+
+fi
