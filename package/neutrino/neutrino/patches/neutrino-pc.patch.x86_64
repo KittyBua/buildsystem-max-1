@@ -46,6 +46,30 @@ index f149ac7a4..8e6bba56e 100755
 -service tuxmaild stop
  
  exit 0
+diff --git a/data/control/standby.off b/data/control/standby.off
+index 28872e901..cf2532b21 100755
+--- a/data/control/standby.off
++++ b/data/control/standby.off
+@@ -2,7 +2,5 @@
+ 
+ echo "StandBy deaktiviert"
+ 
+-service tuxcald start
+-service tuxmaild start
+ 
+ exit 0
+diff --git a/data/control/standby.on b/data/control/standby.on
+index 686b423c0..60a7e9ff0 100755
+--- a/data/control/standby.on
++++ b/data/control/standby.on
+@@ -2,7 +2,5 @@
+ 
+ echo "StandBy aktiviert"
+ 
+-service tuxcald stop
+-service tuxmaild stop
+ 
+ exit 0
 diff --git a/src/eitd/sectionsd.cpp b/src/eitd/sectionsd.cpp
 index 859942701..af6504741 100644
 --- a/src/eitd/sectionsd.cpp
@@ -60,7 +84,7 @@ index 859942701..af6504741 100644
  			success = true;
  		} else if (dvb_time_update) {
 diff --git a/src/neutrino.cpp b/src/neutrino.cpp
-index 7f16c8a7a..092605d94 100644
+index 9b7377260..1cd321b06 100644
 --- a/src/neutrino.cpp
 +++ b/src/neutrino.cpp
 @@ -784,7 +784,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
@@ -72,7 +96,7 @@ index 7f16c8a7a..092605d94 100644
  	}
  	else
  	{
-@@ -3178,9 +3178,9 @@ TIMER_START();
+@@ -3182,9 +3182,9 @@ TIMER_START();
  
  	InitZapper();
  
@@ -85,7 +109,7 @@ index 7f16c8a7a..092605d94 100644
  
  	hintBox->hide(); // InitZapper also displays a hintbox
  	delete hintBox;
-@@ -5527,7 +5527,7 @@ void stop_daemons(bool stopall, bool for_flash)
+@@ -5532,7 +5532,7 @@ void stop_daemons(bool stopall, bool for_flash)
  		delete InfoClock;
  	if(FileTimeOSD)
  		delete FileTimeOSD;
