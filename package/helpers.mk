@@ -145,8 +145,13 @@ REWRITE_CONFIG_SCRIPTS = \
 
 # -----------------------------------------------------------------------------
 
-define START_BUILD
+# resolve dependencies
+define DEPENDS
 	@make $($(PKG)_DEPENDS)
+endef
+
+define START_BUILD
+	$(call DEPENDS)
 	@$(call MESSAGE,"Building")
 endef
 
