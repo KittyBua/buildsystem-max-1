@@ -29,8 +29,8 @@ AUTOFS_CONF_OPTS = \
 	--with-path=$(PATH) \
 	--with-libtirpc \
 	--with-hesiod=no \
-	--with-confdir=/etc \
-	--with-mapdir=/etc \
+	--with-confdir=$(sysconfdir) \
+	--with-mapdir=$(sysconfdir) \
 	--with-fifodir=/var/run \
 	--with-flagdir=/var/run
 
