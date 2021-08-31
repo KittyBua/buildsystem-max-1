@@ -282,6 +282,7 @@ rewrite-test:
 patch:
 	@make neutrino-patch
 	@make libstb-hal-patch
+	@make neutrino-plugins-patch
 
 neutrino-patch:
 	@printf "$(TERM_YELLOW)---> create $(NEUTRINO)-$(DATE).patch ... $(TERM_NORMAL)"
@@ -291,4 +292,9 @@ neutrino-patch:
 libstb-hal-patch:
 	@printf "$(TERM_YELLOW)---> create $(LIBSTB_HAL)-$(DATE).patch ... $(TERM_NORMAL)"
 	$(shell cd $(SOURCE_DIR)/$(LIBSTB_HAL_DIR) && git diff > $(BUILD_DIR)/$(LIBSTB_HAL)-$(DATE).patch)
+	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
+
+neutrino-plugins-patch:
+	@printf "$(TERM_YELLOW)---> create $(NEUTRINO_PLUGINS_DIR)-$(DATE).patch ... $(TERM_NORMAL)"
+	$(shell cd $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR) && git diff > $(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)-$(DATE).patch)
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
