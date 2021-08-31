@@ -123,13 +123,10 @@ endif
 	$(TOUCH)
 
 neutrino-plugins-clean:
-	rm -f $(D)/neutrino-plugins
 	rm -f $(D)/neutrino-plugins.config.status
-	rm -f $(D)/neutrino.config.status
 	cd $(NEUTRINO_PLUGINS_OBJ_DIR); \
 		$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) clean
 
 neutrino-plugins-distclean:
 	rm -rf $(NEUTRINO_PLUGINS_OBJ_DIR)
 	rm -f $(D)/neutrino-plugin*
-	rm -f $(D)/neutrino.config.status
