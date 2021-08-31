@@ -85,16 +85,13 @@ endif
 # -----------------------------------------------------------------------------
 
 libstb-hal-clean:
-	rm -f $(D)/libstb-hal
 	rm -f $(D)/libstb-hal.config.status
-	rm -f $(D)/neutrino.config.status
 	cd $(LIBSTB_HAL_OBJ_DIR); \
 		$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) distclean
 
 libstb-hal-distclean:
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
 	rm -f $(D)/libstb-hal*
-	rm -f $(D)/neutrino.config.status
 
 libstb-hal-uninstall:
 	-make -C $(LIBSTB_HAL_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
