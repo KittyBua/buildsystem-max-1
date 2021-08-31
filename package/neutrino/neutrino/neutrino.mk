@@ -309,7 +309,6 @@ neutrino-pc-valgrind: neutrino
 # -----------------------------------------------------------------------------
 
 neutrino-clean:
-	rm -f $(D)/neutrino
 	rm -f $(D)/neutrino.config.status
 	rm -f $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
 	cd $(NEUTRINO_OBJ_DIR); \
