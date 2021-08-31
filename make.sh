@@ -97,6 +97,36 @@ echo "BOXMODEL=$BOXMODEL" >> .config
 
 ##############################################
 
+if [ $BOXMODEL == 'generic' ]; then
+
+case $2 in
+	[1-2]) REPLY=$2;;
+	*)	echo -e "\nWhich Neutrino variant do you want to build?:"
+		echo "   1)  neutrino-max   "
+		echo "   2)  neutrino-test-max"
+		read -p "Select Image to build (1-2)? [2] "
+		REPLY="${REPLY:-2}";;
+esac
+
+case "$REPLY" in
+	1) FLAVOUR="neutrino-max";;
+	2) FLAVOUR="neutrino-test-max";;
+	*) FLAVOUR="neutrino-test-max";;
+esac
+echo "FLAVOUR=$FLAVOUR" >> .config
+
+echo " "
+make printenv
+echo "Your next step could be:"
+echo "  make neutrino-pc"
+echo "  make neutrino-pc-gdb"
+echo "  make neutrino-pc-valgrind"
+echo " "
+
+else
+
+##############################################
+
 case $2 in
 	[1-6]) REPLY=$2;;
 	*)	echo -e "\nWhich Neutrino variant do you want to build?:"
@@ -120,20 +150,6 @@ case "$REPLY" in
 	*) FLAVOUR="neutrino-test-max";;
 esac
 echo "FLAVOUR=$FLAVOUR" >> .config
-
-##############################################
-
-if [ $BOXMODEL == 'generic' ]; then
-##############################################
-echo " "
-make printenv
-##############################################
-echo "Your next step could be:"
-echo "  make neutrino-pc"
-echo "  make neutrino-pc-gdb"
-echo "  make neutrino-pc-valgrind"
-echo " "
-else
 
 ##############################################
 
@@ -258,9 +274,9 @@ if [ $BOXMODEL == 'vuduo4k' -o \
 fi
 
 ##############################################
+
 echo " "
 make printenv
-##############################################
 echo "Your next step could be:"
 echo "  make flashimage"
 echo "  make ofgimage"
