@@ -1,13 +1,16 @@
 #
 # mc
 #
-MC_VERSION = 4.8.26
+MC_VERSION = 4.8.27
 MC_DIR     = mc-$(MC_VERSION)
 MC_SOURCE  = mc-$(MC_VERSION).tar.xz
 MC_SITE    = ftp.midnight-commander.org
 MC_DEPENDS = bootstrap ncurses glib2
 
 MC_AUTORECONF = YES
+
+MC_CONF_ENV = \
+	CFLAGS+=' -DNCURSES_WIDECHAR=0'
 
 MC_CONF_OPTS = \
 	--with-homedir=/var/tuxbox/config/mc \
