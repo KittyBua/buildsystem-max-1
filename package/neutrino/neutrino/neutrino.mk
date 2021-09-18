@@ -97,9 +97,10 @@ NEUTRINO_CONF_OPTS = \
 	--enable-pip
 else
 NEUTRINO_CONF_OPTS = \
-	--prefix=$(TARGET_DIR)/$(prefix) \
+	--prefix=$(TARGET_DIR)/usr \
 	--with-target=native \
-	--with-targetprefix=$(TARGET_DIR)/$(prefix) \
+	--with-targetrootprefix=$(TARGET_DIR) \
+	--with-targetprefix=$(TARGET_DIR)/usr \
 	\
 	--with-configdir=$(TARGET_DIR)/var/tuxbox/config \
 	--with-datadir_var=$(TARGET_DIR)/var/tuxbox \
@@ -113,6 +114,7 @@ NEUTRINO_CONF_OPTS = \
 	--with-localedir_var=$(TARGET_DIR)/var/tuxbox/locale \
 	--with-themesdir_var=$(TARGET_DIR)/var/tuxbox/themes \
 	--with-iconsdir_var=$(TARGET_DIR)/var/tuxbox/icons \
+	--with-logodir_var=$(TARGET_DIR)/var/tuxbox/icons/logo \
 	--with-public_httpddir=$(TARGET_DIR)/var/tuxbox/httpd \
 	--with-flagdir=$(TARGET_DIR)/var/etc
 endif
@@ -229,7 +231,6 @@ NEUTRINO_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_DIR)
 $(D)/neutrino.do_prepare:
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR)
-	rm -rf $(NEUTRINO_OBJ_DIR)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(SOURCE_DIR))
 	$(call APPLY_PATCHES_S,$(NEUTRINO_DIR))
@@ -237,7 +238,7 @@ $(D)/neutrino.do_prepare:
 
 $(D)/neutrino.config.status: | $(NEUTRINO_DEPENDS)
 	rm -rf $(NEUTRINO_OBJ_DIR)
-	test -d $(NEUTRINO_OBJ_DIR) || mkdir -p $(NEUTRINO_OBJ_DIR)
+	mkdir -p $(NEUTRINO_OBJ_DIR)
 	$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh
 	$(CD) $(NEUTRINO_OBJ_DIR); \
 		$(TARGET_CONFIGURE_OPTS) \
@@ -261,6 +262,9 @@ ifneq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 else
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install
+	mkdir -p $(TARGET_DIR)/tmp
+	mkdir -p $(TARGET_DIR)/media/hdd
+	mkdir -p $(TARGET_DIR)/media/hdd/{epg,music,movie,pictures}
 endif
 	( \
 		echo "distro=$(subst neutrino-,,$(FLAVOUR))"; \
@@ -308,12 +312,14 @@ neutrino-pc-valgrind: neutrino
 
 # -----------------------------------------------------------------------------
 
+neutrino-pc-clean \
 neutrino-clean:
 	rm -f $(D)/neutrino.config.status
 	rm -f $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
 	cd $(NEUTRINO_OBJ_DIR); \
 		$(MAKE) -C $(NEUTRINO_OBJ_DIR) distclean
 
+neutrino-pc-distclean \
 neutrino-distclean:
 	rm -rf $(NEUTRINO_OBJ_DIR)
 	rm -f $(D)/neutrino
