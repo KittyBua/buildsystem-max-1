@@ -14,7 +14,7 @@ NEUTRINO_PLUGINS_CONF_OPTS = \
 	--with-targetprefix=$(prefix)
 else
 NEUTRINO_PLUGINS_CONF_OPTS = \
-	--prefix=$(TARGET_DIR)/$(prefix) \
+	--prefix=$(TARGET_DIR)/usr \
 	--sysconfdir=$(TARGET_DIR)/etc \
 	--with-target=native \
 	\
@@ -30,6 +30,7 @@ NEUTRINO_PLUGINS_CONF_OPTS = \
 	--with-localedir_var=$(TARGET_DIR)/var/tuxbox/locale \
 	--with-themesdir_var=$(TARGET_DIR)/var/tuxbox/themes \
 	--with-iconsdir_var=$(TARGET_DIR)/var/tuxbox/icons \
+	--with-logodir_var=$(TARGET_DIR)/var/tuxbox/icons/logo \
 	--with-public_httpddir=$(TARGET_DIR)/var/tuxbox/httpd \
 	--with-flagdir=$(TARGET_DIR)/var/etc
 endif
@@ -59,7 +60,16 @@ NEUTRINO_PLUGINS_CONF_OPTS += \
 	--disable-stbup \
 	--enable-wortraten
 
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+ifeq ($(BOXMODEL),generic)
+NEUTRINO_PLUGINS_CONF_OPTS += \
+	--disable-fritzcallmonitor \
+	--disable-fritzinfomonitor \
+	--disable-logomask \
+	--disable-stb_startup \
+	--disable-pr-auto-timer
+endif
+
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),generic vuduo vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 NEUTRINO_PLUGINS_CONF_OPTS += \
 	--disable-rcu_switcher
 endif
@@ -70,9 +80,11 @@ NEUTRINO_PLUGINS_CONF_OPTS += \
 NEUTRINO_PLUGINS_INIT_SCRIPTS  = emmrd
 NEUTRINO_PLUGINS_INIT_SCRIPTS += fritzcallmonitor
 #NEUTRINO_PLUGINS_INIT_SCRIPTS += openvpn
+ifneq ($(BOXMODEL),generic)
 NEUTRINO_PLUGINS_INIT_SCRIPTS += rcu_switcher
 NEUTRINO_PLUGINS_INIT_SCRIPTS += tuxcald
 NEUTRINO_PLUGINS_INIT_SCRIPTS += tuxmaild
+endif
 
 define NP_RUNLEVEL_INSTALL
 	for script in $(NEUTRINO_PLUGINS_INIT_SCRIPTS); do \
@@ -96,7 +108,7 @@ $(D)/neutrino-plugins.do_prepare:
 
 $(D)/neutrino-plugins.config.status:
 	rm -rf $(NEUTRINO_PLUGINS_OBJ_DIR)
-	test -d $(NEUTRINO_PLUGINS_OBJ_DIR) || mkdir -p $(NEUTRINO_PLUGINS_OBJ_DIR)
+	mkdir -p $(NEUTRINO_PLUGINS_OBJ_DIR)
 	$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/autogen.sh
 	cd $(NEUTRINO_PLUGINS_OBJ_DIR); \
 		$(TARGET_CONFIGURE_OPTS) \
@@ -118,9 +130,30 @@ ifneq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 else
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) install
+	find $(SHARE_PLUGINS)/ $(SHARE_WEBTV)/ $(VAR_CONFIG)/ \
+		\( -name '*.conf' \
+		-o -name '*.lua' \
+		-o -name '*.sh' \
+		-o -name '*.so' \) \
+		-type f -exec \
+		sed -i  -e 's#/var/tuxbox/config#$(TARGET_DIR)/var/tuxbox/config#g' \
+			-e 's#/var/tuxbox/icons/logo/#$(TARGET_DIR)/var/tuxbox/icons/logo/#g' \
+			-e 's#/media/hdd#$(TARGET_DIR)/media/hdd#g' \
+			-e 's#/tmp#$(TARGET_DIR)/tmp#g' {} \;
 endif
 	$(NP_RUNLEVEL_INSTALL)
 	$(TOUCH)
+
+# -----------------------------------------------------------------------------
+
+# To build single plugins from neutrino-plugins repository call
+# make neutrino-plugin-<subdir>; e.g. make neutrino-plugin-tuxwetter
+
+neutrino-plugin-%: neutrino-plugins.do_prepare neutrino-plugins.config.status
+	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)/$(subst neutrino-plugin-,,$(@))
+	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)/$(subst neutrino-plugin-,,$(@)) install DESTDIR=$(TARGET_DIR)
+
+# -----------------------------------------------------------------------------
 
 neutrino-plugins-clean:
 	rm -f $(D)/neutrino-plugins.config.status
