@@ -29,5 +29,6 @@ $(D)/luaposix:
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install
+	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)
