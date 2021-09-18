@@ -46,8 +46,6 @@ LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)
 $(D)/libstb-hal.do_prepare:
 	$(START_BUILD)
 	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR)
-	rm -rf $(LIBSTB_HAL_OBJ_DIR)
-	test -d $(SOURCE_DIR) || mkdir -p $(SOURCE_DIR)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(SOURCE_DIR))
 	$(call APPLY_PATCHES_S,$(LIBSTB_HAL_DIR))
@@ -55,7 +53,7 @@ $(D)/libstb-hal.do_prepare:
 
 $(D)/libstb-hal.config.status: | $(NEUTRINO_DEPENDS)
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
-	test -d $(LIBSTB_HAL_OBJ_DIR) || mkdir -p $(LIBSTB_HAL_OBJ_DIR)
+	mkdir -p $(LIBSTB_HAL_OBJ_DIR)
 	$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh
 	$(CD) $(LIBSTB_HAL_OBJ_DIR); \
 		$(TARGET_CONFIGURE_OPTS) \
