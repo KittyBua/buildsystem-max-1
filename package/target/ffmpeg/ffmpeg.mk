@@ -27,9 +27,6 @@ FFMPEG_CONF_OPTS = \
 	--disable-fma3 \
 	--disable-fma4 \
 	--disable-inline-asm \
-	--disable-mips32r2 \
-	--disable-mipsdsp \
-	--disable-mipsdspr2 \
 	--disable-mmx \
 	--disable-mmxext \
 	--disable-sse \
@@ -294,11 +291,13 @@ FFMPEG_CONF_OPTS = \
 	--disable-libxcb-xfixes \
 	--disable-libxcb-shape \
 	\
-	--enable-runtime-cpudetect \
 	--enable-pic \
 	--enable-pthreads \
 	--enable-small \
+	--enable-stripping \
 	--enable-swresample \
+	--disable-debug \
+	--disable-runtime-cpudetect \
 	--enable-hardcoded-tables
 
 ifeq ($(TARGET_ARCH), arm)
@@ -309,10 +308,17 @@ FFMPEG_CONF_OPTS += \
 	--enable-vfp \
 	--cpu=cortex-a15
 endif
+ifeq ($(TARGET_ARCH), aarch64)
+FFMPEG_CONF_OPTS += \
+	--enable-armv8 \
+	--enable-vfp \
+	--enable-neon
+endif
 ifeq ($(TARGET_ARCH), mips)
 FFMPEG_CONF_OPTS += \
-	--disable-armv6 \
-	--disable-armv6t2 \
+	--disable-mipsdsp \
+	--disable-mipsdspr \
+	--disable-mmi \
 	--disable-neon \
 	--disable-vfp \
 	--cpu=generic
