@@ -16,7 +16,7 @@ $(D)/iproute2:
 	$(CD_BUILD_DIR); \
 		$(CONFIGURE); \
 		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR) MANDIR=$(TARGET_DIR)$(REMOVE_mandir)
+		$(MAKE) install DESTDIR=$(TARGET_DIR) MANDIR=$(REMOVE_mandir)
 	$(REWRITE_LIBTOOL)
 	$(REMOVE)
 	$(TOUCH)
