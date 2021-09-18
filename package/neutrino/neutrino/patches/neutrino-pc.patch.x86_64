@@ -1,77 +1,29 @@
-diff --git a/data/control/movieplayer.end b/data/control/movieplayer.end
-index db808d1a9..878009464 100755
---- a/data/control/movieplayer.end
-+++ b/data/control/movieplayer.end
-@@ -2,7 +2,5 @@
+diff --git a/acinclude.m4 b/acinclude.m4
+index b0a9ab28e..cb4390090 100644
+--- a/acinclude.m4
++++ b/acinclude.m4
+@@ -9,6 +9,11 @@ AC_ARG_WITH(target,
+ 	[TARGET="$withval"],
+ 	[TARGET="native"])
  
- echo "Movieplayer wird beendet"
++AC_ARG_WITH(targetrootprefix,
++	AS_HELP_STRING([--with-targetrootprefix=PATH], [prefix relative to target root (only applicable in native mode)]),
++	[TARGET_ROOT_PREFIX="$withval"],
++	[TARGET_ROOT_PREFIX=""])
++
+ AC_ARG_WITH(targetprefix,
+ 	AS_HELP_STRING([--with-targetprefix=PATH], [prefix relative to target root (only applicable in cdk mode)]),
+ 	[TARGET_PREFIX="$withval"],
+@@ -161,6 +166,7 @@ if test "$TARGET" = "native"; then
+ 	targetprefix=$prefix
+ 	TARGET_PREFIX=$prefix
+ 	AC_DEFINE_UNQUOTED(TARGET_PREFIX, "$TARGET_PREFIX", [The targets prefix])
++	AC_DEFINE_UNQUOTED(TARGET_ROOT_PREFIX, "$TARGET_ROOT_PREFIX", [The targets root prefix native])
+ elif test "$TARGET" = "cdk"; then
+ 	AC_MSG_RESULT(cdk)
  
--service tuxcald start
--service tuxmaild start
- 
- exit 0
-diff --git a/data/control/movieplayer.start b/data/control/movieplayer.start
-index 2058541dc..9642fc212 100755
---- a/data/control/movieplayer.start
-+++ b/data/control/movieplayer.start
-@@ -2,7 +2,5 @@
- 
- echo "Movieplayer wird gestartet"
- 
--service tuxcald stop
--service tuxmaild stop
- 
- exit 0
-diff --git a/data/control/recording.end b/data/control/recording.end
-index 7d78ef53d..df4d3157e 100755
---- a/data/control/recording.end
-+++ b/data/control/recording.end
-@@ -2,7 +2,5 @@
- 
- echo "Recording wird beendet"
- 
--service tuxcald start
--service tuxmaild start
- 
- exit 0
-diff --git a/data/control/recording.start b/data/control/recording.start
-index f149ac7a4..8e6bba56e 100755
---- a/data/control/recording.start
-+++ b/data/control/recording.start
-@@ -2,7 +2,5 @@
- 
- echo "Recording wird gestartet"
- 
--service tuxcald stop
--service tuxmaild stop
- 
- exit 0
-diff --git a/data/control/standby.off b/data/control/standby.off
-index 28872e901..cf2532b21 100755
---- a/data/control/standby.off
-+++ b/data/control/standby.off
-@@ -2,7 +2,5 @@
- 
- echo "StandBy deaktiviert"
- 
--service tuxcald start
--service tuxmaild start
- 
- exit 0
-diff --git a/data/control/standby.on b/data/control/standby.on
-index 686b423c0..60a7e9ff0 100755
---- a/data/control/standby.on
-+++ b/data/control/standby.on
-@@ -2,7 +2,5 @@
- 
- echo "StandBy aktiviert"
- 
--service tuxcald stop
--service tuxmaild stop
- 
- exit 0
 diff --git a/src/eitd/sectionsd.cpp b/src/eitd/sectionsd.cpp
-index 859942701..af6504741 100644
+index 338a2de8e..568b7b945 100644
 --- a/src/eitd/sectionsd.cpp
 +++ b/src/eitd/sectionsd.cpp
 @@ -1505,7 +1505,7 @@ void CTimeThread::run()
@@ -83,11 +35,50 @@ index 859942701..af6504741 100644
  			time_ntp = true;
  			success = true;
  		} else if (dvb_time_update) {
+diff --git a/src/global.h b/src/global.h
+index 1211e1f40..593878885 100644
+--- a/src/global.h
++++ b/src/global.h
+@@ -114,4 +114,8 @@ NEUTRINO_CPP CRadioTextGUI *g_RadiotextWin;
+ #define TARGET_PREFIX ""
+ #endif
+ 
++#ifndef TARGET_ROOT_PREFIX
++#define TARGET_ROOT_PREFIX ""
++#endif
++
+ #endif /* __neutrino_global_h__ */
 diff --git a/src/neutrino.cpp b/src/neutrino.cpp
-index 9b7377260..1cd321b06 100644
+index 4754ea0ba..d5bd83839 100644
 --- a/src/neutrino.cpp
 +++ b/src/neutrino.cpp
-@@ -784,7 +784,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
+@@ -684,7 +683,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
+ 	g_settings.timezone = configfile.getString("timezone", "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Vienna");
+ 
+ 	// epg
+-	g_settings.epg_dir = configfile.getString("epg_dir", "/media/hdd/epg");
++	g_settings.epg_dir = configfile.getString("epg_dir", TARGET_ROOT_PREFIX "/media/hdd/epg");
+ 	g_settings.epg_cache = configfile.getInt32("epg_cache_time", 7);
+ 	g_settings.epg_extendedcache = configfile.getInt32("epg_extendedcache_time", 168);
+ 	g_settings.epg_max_events = configfile.getInt32("epg_max_events", 30000);
+@@ -739,11 +738,11 @@ int CNeutrinoApp::loadSetup(const char *fname)
+ 		g_settings.network_nfs[i].password = configfile.getString("network_nfs_password_" + i_str, "");
+ 	}
+ 
+-	g_settings.network_nfs_audioplayerdir = configfile.getString("network_nfs_audioplayerdir", "/media/hdd/music");
+-	g_settings.network_nfs_moviedir = configfile.getString("network_nfs_moviedir", "/media/hdd/movie");
+-	g_settings.network_nfs_picturedir = configfile.getString("network_nfs_picturedir", "/media/hdd/pictures");
+-	g_settings.network_nfs_recordingdir = configfile.getString("network_nfs_recordingdir", "/media/hdd/movie");
+-	g_settings.network_nfs_streamripperdir = configfile.getString("network_nfs_streamripperdir", "/media/hdd/music/streamripper");
++	g_settings.network_nfs_audioplayerdir = configfile.getString("network_nfs_audioplayerdir", TARGET_ROOT_PREFIX "/media/hdd/music");
++	g_settings.network_nfs_moviedir = configfile.getString("network_nfs_moviedir", TARGET_ROOT_PREFIX "/media/hdd/movie");
++	g_settings.network_nfs_picturedir = configfile.getString("network_nfs_picturedir", TARGET_ROOT_PREFIX "/media/hdd/pictures");
++	g_settings.network_nfs_recordingdir = configfile.getString("network_nfs_recordingdir", TARGET_ROOT_PREFIX "/media/hdd/movie");
++	g_settings.network_nfs_streamripperdir = configfile.getString("network_nfs_streamripperdir", TARGET_ROOT_PREFIX "/media/hdd/music/streamripper");
+ 
+ 	g_settings.downloadcache_dir = configfile.getString("downloadcache_dir", g_settings.network_nfs_recordingdir.c_str());
+ 	g_settings.logo_hdd_dir = configfile.getString("logo_hdd_dir", LOGODIR );
+@@ -784,7 +783,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
  	if (g_settings.timeshiftdir.empty())
  	{
  		timeshiftdir = g_settings.network_nfs_recordingdir + "/.timeshift";
@@ -96,7 +87,25 @@ index 9b7377260..1cd321b06 100644
  	}
  	else
  	{
-@@ -3182,9 +3182,9 @@ TIMER_START();
+@@ -918,7 +917,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
+ 	g_settings.livestreamScriptPath = configfile.getString("livestreamScriptPath", WEBTVDIR);
+ 
+ 	// plugins
+-	g_settings.plugin_hdd_dir = configfile.getString("plugin_hdd_dir", "/media/hdd/plugins");
++	g_settings.plugin_hdd_dir = configfile.getString("plugin_hdd_dir", TARGET_ROOT_PREFIX "/media/hdd/plugins");
+ 	g_settings.plugins_disabled = configfile.getString("plugins_disabled", "");
+ 	g_settings.plugins_game = configfile.getString("plugins_game", "");
+ 	g_settings.plugins_lua = configfile.getString("plugins_lua", "");
+@@ -929,7 +928,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
+ 	g_settings.movieplayer_plugin = configfile.getString("movieplayer_plugin", "---");
+ 
+ 	// screenshot
+-	g_settings.screenshot_dir = configfile.getString("screenshot_dir", "/media/hdd/pictures");
++	g_settings.screenshot_dir = configfile.getString("screenshot_dir", TARGET_ROOT_PREFIX "/media/hdd/pictures");
+ 	g_settings.screenshot_count = configfile.getInt32("screenshot_count", 1);
+ 	g_settings.screenshot_cover = configfile.getInt32("screenshot_cover", 0);
+ 	g_settings.screenshot_format = configfile.getInt32("screenshot_format", 1);
+@@ -3185,9 +2988,9 @@ TIMER_START();
  
  	InitZapper();
  
@@ -109,7 +118,7 @@ index 9b7377260..1cd321b06 100644
  
  	hintBox->hide(); // InitZapper also displays a hintbox
  	delete hintBox;
-@@ -5532,7 +5532,7 @@ void stop_daemons(bool stopall, bool for_flash)
+@@ -5541,7 +5344,7 @@ void stop_daemons(bool stopall, bool for_flash)
  		delete InfoClock;
  	if(FileTimeOSD)
  		delete FileTimeOSD;
@@ -118,3 +127,16 @@ index 9b7377260..1cd321b06 100644
  
  	CZapit::getInstance()->Stop();
  	printf("zapit shutdown done\n");
+diff --git a/src/nhttpd/nhttpd.conf.in b/src/nhttpd/nhttpd.conf.in
+index f22ffa825..646cff6e3 100644
+--- a/src/nhttpd/nhttpd.conf.in
++++ b/src/nhttpd/nhttpd.conf.in
+@@ -3,7 +3,7 @@ Language.selected=Deutsch
+ Tuxbox.LogosURL=@TARGET_PUBLIC_HTTPDDIR@/logo
+ WebsiteMain.directory=@TARGET_PRIVATE_HTTPDDIR@
+ WebsiteMain.override_directory=@TARGET_PUBLIC_HTTPDDIR@
+-WebsiteMain.port=80
++WebsiteMain.port=8080
+ WebsiteMain.hosted_directory=@TARGET_HOSTED_HTTPDDIR@
+ configfile.version=4
+ mod_auth.authenticate=false
