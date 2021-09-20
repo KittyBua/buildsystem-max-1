@@ -27,4 +27,5 @@ $(D)/libpng:
 	$(REWRITE_CONFIG_SCRIPTS)
 	$(REWRITE_LIBTOOL)
 	$(REMOVE)
+	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,libpng-config)
 	$(TOUCH)
