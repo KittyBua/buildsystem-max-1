@@ -28,4 +28,5 @@ $(D)/ntfs-3g:
 	$(REMOVE)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,lowntfs-3g ntfs-3g.probe)
 	rm -f $(addprefix $(TARGET_DIR)/sbin/,mount.lowntfs-3g)
+	rm -rf $(addprefix $(TARGET_LIB_DIR)/,ntfs-3g)
 	$(TOUCH)
