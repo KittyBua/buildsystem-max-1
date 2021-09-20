@@ -24,4 +24,5 @@ $(D)/libjpeg-turbo:
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REMOVE)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,cjpeg djpeg jpegtran rdjpgcom tjbench wrjpgcom)
+	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake)
 	$(TOUCH)
