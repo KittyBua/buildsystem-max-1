@@ -49,7 +49,7 @@ index 1211e1f40..593878885 100644
 +
  #endif /* __neutrino_global_h__ */
 diff --git a/src/neutrino.cpp b/src/neutrino.cpp
-index 4754ea0ba..d5bd83839 100644
+index eeb6c3c05..fcd9e0c77 100644
 --- a/src/neutrino.cpp
 +++ b/src/neutrino.cpp
 @@ -684,7 +683,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
@@ -87,7 +87,7 @@ index 4754ea0ba..d5bd83839 100644
  	}
  	else
  	{
-@@ -918,7 +917,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
+@@ -919,7 +918,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
  	g_settings.livestreamScriptPath = configfile.getString("livestreamScriptPath", WEBTVDIR);
  
  	// plugins
@@ -96,7 +96,7 @@ index 4754ea0ba..d5bd83839 100644
  	g_settings.plugins_disabled = configfile.getString("plugins_disabled", "");
  	g_settings.plugins_game = configfile.getString("plugins_game", "");
  	g_settings.plugins_lua = configfile.getString("plugins_lua", "");
-@@ -929,7 +928,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
+@@ -930,7 +929,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
  	g_settings.movieplayer_plugin = configfile.getString("movieplayer_plugin", "---");
  
  	// screenshot
@@ -105,7 +105,7 @@ index 4754ea0ba..d5bd83839 100644
  	g_settings.screenshot_count = configfile.getInt32("screenshot_count", 1);
  	g_settings.screenshot_cover = configfile.getInt32("screenshot_cover", 0);
  	g_settings.screenshot_format = configfile.getInt32("screenshot_format", 1);
-@@ -3185,9 +2988,9 @@ TIMER_START();
+@@ -3187,9 +2990,9 @@ TIMER_START();
  
  	InitZapper();
  
@@ -118,7 +118,7 @@ index 4754ea0ba..d5bd83839 100644
  
  	hintBox->hide(); // InitZapper also displays a hintbox
  	delete hintBox;
-@@ -5541,7 +5344,7 @@ void stop_daemons(bool stopall, bool for_flash)
+@@ -5552,7 +5355,7 @@ void stop_daemons(bool stopall, bool for_flash)
  		delete InfoClock;
  	if(FileTimeOSD)
  		delete FileTimeOSD;
