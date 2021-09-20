@@ -26,4 +26,5 @@ $(D)/expat:
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(REWRITE_LIBTOOL)
 	$(REMOVE)
+	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake)
 	$(TOUCH)
