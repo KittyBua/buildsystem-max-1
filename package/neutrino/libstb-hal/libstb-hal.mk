@@ -51,7 +51,7 @@ $(D)/libstb-hal.do_prepare:
 	$(call APPLY_PATCHES_S,$(LIBSTB_HAL_DIR))
 	@touch $@
 
-$(D)/libstb-hal.config.status: | $(NEUTRINO_DEPENDS)
+$(D)/libstb-hal.config.status: | $(LIBSTB_HAL_DEPENDS)
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
 	mkdir -p $(LIBSTB_HAL_OBJ_DIR)
 	$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh
