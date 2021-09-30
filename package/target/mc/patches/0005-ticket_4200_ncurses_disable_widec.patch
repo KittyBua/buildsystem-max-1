@@ -46,7 +46,7 @@ diff --git a/lib/tty/tty-slang.h b/lib/tty/tty-slang.h
 index c36785ffc..15fd00a94 100644
 --- a/lib/tty/tty-slang.h
 +++ b/lib/tty/tty-slang.h
-@@ -27,6 +27,8 @@
+@@ -23,6 +23,8 @@
  #define COLS  SLtt_Screen_Cols
  #define LINES SLtt_Screen_Rows
  

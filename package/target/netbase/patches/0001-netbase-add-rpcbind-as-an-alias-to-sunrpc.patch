@@ -13,7 +13,7 @@ diff --git a/etc-services b/etc-services
 index fa7ae24..10ba2bc 100644
 --- a/etc/services
 +++ b/etc/services
-@@ -46,8 +46,8 @@
+@@ -42,8 +42,8 @@
  iso-tsap	102/tcp		tsap		# part of ISODE
  acr-nema	104/tcp		dicom		# Digital Imag. & Comm. 300
  pop3		110/tcp		pop-3		# POP version 3

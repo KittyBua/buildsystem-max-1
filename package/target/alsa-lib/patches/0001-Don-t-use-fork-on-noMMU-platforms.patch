@@ -19,15 +19,15 @@ diff --git a/configure.ac b/configure.ac
 index cce195ae..0c852434 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -51,6 +51,8 @@ dnl Checks for library functions.
+@@ -51,6 +51,8 @@
  AC_PROG_GCC_TRADITIONAL
  AC_CHECK_FUNCS([uselocale])
- 
-+AC_CHECK_FUNC([fork])
+ AC_CHECK_FUNCS([eaccess])
 +
++AC_CHECK_FUNC([fork])
+ 
  SAVE_LIBRARY_VERSION
  AC_SUBST(LIBTOOL_VERSION_INFO)
- 
 diff --git a/src/pcm/pcm_direct.c b/src/pcm/pcm_direct.c
 index 2b07eff9..4dc3ea26 100644
 --- a/src/pcm/pcm_direct.c

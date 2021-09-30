@@ -28,7 +28,7 @@ diff --git a/mesonbuild/dependencies/base.py b/mesonbuild/dependencies/base.py
 index cd77b4b..08675e6 100644
 --- a/mesonbuild/dependencies/base.py
 +++ b/mesonbuild/dependencies/base.py
-@@ -883,7 +883,8 @@ class PkgConfigDependency(ExternalDependency):
+@@ -872,7 +872,8 @@ class PkgConfigDependency(ExternalDependency):
          env = None
          libcmd = ['--libs']
  
