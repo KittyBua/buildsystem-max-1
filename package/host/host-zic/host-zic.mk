@@ -1,7 +1,7 @@
 #
 # host-zic
 #
-HOST_ZIC_VERSION = 2020f
+HOST_ZIC_VERSION = 2021b
 HOST_ZIC_DIR     = tzcode
 HOST_ZIC_SOURCE  = tzcode$(HOST_ZIC_VERSION).tar.gz
 HOST_ZIC_SITE    = https://www.iana.org/time-zones/repository/releases
