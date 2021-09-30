@@ -1,7 +1,7 @@
 #
 # tzdata
 #
-TZDATA_VERSION = 2020f
+TZDATA_VERSION = 2021b
 TZDATA_DIR     = timezone
 TZDATA_SOURCE  = tzdata$(TZDATA_VERSION).tar.gz
 TZDATA_SITE    = https://data.iana.org/time-zones/releases
