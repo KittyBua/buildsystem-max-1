@@ -1,7 +1,7 @@
 #
 # ntfs-3g
 #
-NTFS_3G_VERSION = 2017.3.23
+NTFS_3G_VERSION = 2021.8.22
 NTFS_3G_DIR     = ntfs-3g_ntfsprogs-$(NTFS_3G_VERSION)
 NTFS_3G_SOURCE  = ntfs-3g_ntfsprogs-$(NTFS_3G_VERSION).tgz
 NTFS_3G_SITE    = https://tuxera.com/opensource
