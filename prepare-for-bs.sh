@@ -123,6 +123,10 @@ PACKAGES="\
 	${UBUNTU:+libseccomp-dev}                                                                                     \
 	${UBUNTU:+libexpat1-dev}                                                                                      \
 	${UBUNTU:+libexpat1}                                                                                          \
+	\
+	${UBUNTU:+libao-dev}                                                                                          \
+	${UBUNTU:+libglew-dev}                                                                                        \
+	${UBUNTU:+freeglut3-dev}                                                                                      \
 	${UBUNTU:+mpv}                                                                                                \
 ";
 
