@@ -109,6 +109,7 @@ $(D)/bootstrap: $(BOOTSTRAP)
 # image-deps
 #
 IMAGE_DEPENDS  =
+IMAGE_DEPENDS += ncurses
 IMAGE_DEPENDS += bash
 IMAGE_DEPENDS += procps-ng
 IMAGE_DEPENDS += kmod
@@ -133,7 +134,6 @@ IMAGE_DEPENDS += ethtool
 IMAGE_DEPENDS += ofgwrite
 IMAGE_DEPENDS += wget
 IMAGE_DEPENDS += busybox
-IMAGE_DEPENDS += ncurses
 IMAGE_DEPENDS += fbshot
 IMAGE_DEPENDS += aio-grab
 IMAGE_DEPENDS += dvbsnoop
