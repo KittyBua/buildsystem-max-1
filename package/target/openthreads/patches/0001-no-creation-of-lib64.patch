@@ -1,0 +1,14 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -31,11 +31,6 @@
+ SET(CMAKE_DEBUG_POSTFIX  "d")
+ 
+ SET(LIB_POSTFIX "")
+-IF(UNIX AND NOT WIN32 AND NOT APPLE)
+-  IF(CMAKE_SIZEOF_VOID_P MATCHES "8")
+-      SET(LIB_POSTFIX "64")
+-  ENDIF(CMAKE_SIZEOF_VOID_P MATCHES "8")
+-ENDIF(UNIX AND NOT WIN32 AND NOT APPLE)
+ 
+ ################################################################################
+ 
