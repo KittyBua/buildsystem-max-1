@@ -1,5 +1,5 @@
---- /home/max/Videos/aio-grab.git/main.c
-+++ /home/max/Videos/aio-grab.git/main (Kopie).c
+--- a/main.c
++++ b/main.c
 @@ -121,6 +121,36 @@
  	return x->tv_sec < y->tv_sec;
  }
