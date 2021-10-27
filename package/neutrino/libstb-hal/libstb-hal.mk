@@ -51,7 +51,7 @@ $(D)/libstb-hal.do_prepare:
 	$(call APPLY_PATCHES_S,$(LIBSTB_HAL_DIR))
 	@touch $@
 
-$(D)/libstb-hal.config.status: | $(LIBSTB_HAL_DEPENDS)
+$(D)/libstb-hal.config.status:
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
 	mkdir -p $(LIBSTB_HAL_OBJ_DIR)
 	$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh
@@ -71,7 +71,7 @@ else
 endif
 	@touch $@
 
-$(D)/libstb-hal: libstb-hal.do_prepare libstb-hal.do_compile
+$(D)/libstb-hal: $(LIBSTB_HAL_DEPENDS) libstb-hal.do_prepare libstb-hal.do_compile
 ifneq ($(BOXMODEL),generic)
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 else
