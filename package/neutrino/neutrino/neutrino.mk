@@ -116,7 +116,8 @@ NEUTRINO_CONF_OPTS = \
 	--with-iconsdir_var=$(TARGET_DIR)/var/tuxbox/icons \
 	--with-logodir_var=$(TARGET_DIR)/var/tuxbox/icons/logo \
 	--with-public_httpddir=$(TARGET_DIR)/var/tuxbox/httpd \
-	--with-flagdir=$(TARGET_DIR)/var/etc
+	--with-flagdir=$(TARGET_DIR)/var/etc \
+	--with-zapitdir=$(TARGET_DIR)/var/tuxbox/config/zapit
 endif
 
 NEUTRINO_CONF_OPTS += \
@@ -236,7 +237,7 @@ $(D)/neutrino.do_prepare:
 	$(call APPLY_PATCHES_S,$(NEUTRINO_DIR))
 	@touch $@
 
-$(D)/neutrino.config.status: | $(NEUTRINO_DEPENDS)
+$(D)/neutrino.config.status:
 	rm -rf $(NEUTRINO_OBJ_DIR)
 	mkdir -p $(NEUTRINO_OBJ_DIR)
 	$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh
@@ -257,7 +258,7 @@ else
 endif
 	@touch $@
 
-$(D)/neutrino: neutrino.do_prepare neutrino.do_compile
+$(D)/neutrino: $(NEUTRINO_DEPENDS) neutrino.do_prepare neutrino.do_compile
 ifneq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 else
