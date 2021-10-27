@@ -1,11 +1,11 @@
 #
 # htop
 #
-HTOP_VERSION = 3.0.5
+HTOP_VERSION = 3.1.1
 HTOP_DIR     = htop-$(HTOP_VERSION)
 HTOP_SOURCE  = htop-$(HTOP_VERSION).tar.gz
 HTOP_SITE    = $(call github,htop-dev,htop,$(HTOP_VERSION))
-HTOP_DEPENDS = bootstrap ncurses libnl
+HTOP_DEPENDS = bootstrap ncurses libcap libnl
 
 HTOP_AUTORECONF = YES
 
@@ -14,7 +14,9 @@ HTOP_CONF_ENV = \
 	ac_cv_file__proc_meminfo=yes
 
 HTOP_CONF_OPTS = \
-	--disable-unicode \
+	--enable-affinity \
+	--enable-capabilities \
+	--enable-unicode \
 	--disable-hwloc
 
 $(D)/htop:
