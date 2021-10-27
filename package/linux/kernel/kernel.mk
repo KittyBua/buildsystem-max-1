@@ -38,6 +38,17 @@ $(D)/kernel: bootstrap kernel.do_compile
 
 # -----------------------------------------------------------------------------
 
+kernel-clean:
+	rm -f $(D)/kernel
+	rm -f $(D)/kernel.do_compile
+
+kernel-distclean:
+	rm -f $(D)/kernel
+	rm -f $(D)/kernel.do_compile
+	rm -f $(D)/kernel.do_prepare
+
+# -----------------------------------------------------------------------------
+
 kernel-config: bootstrap kernel.do_compile
 	$(CD_BUILD_DIR); \
 		make $(KERNEL_MAKEVARS) menuconfig
