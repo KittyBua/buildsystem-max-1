@@ -88,7 +88,7 @@ case "$REPLY" in
 	30) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="osmio4k";;
 	31) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="osmio4kplus";;
 	40) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="h7";;
-	99) TARGET_ARCH="x86_64";BOXTYPE="generic";BOXMODEL="generic";;
+	99) TARGET_ARCH="$(shell which arch > /dev/null 2>&1 && arch || uname -m)";BOXTYPE="generic";BOXMODEL="generic";;
 	 *) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd51";;
 esac
 echo "TARGET_ARCH=$TARGET_ARCH" > .config
@@ -100,6 +100,24 @@ echo "BOXMODEL=$BOXMODEL" >> .config
 if [ $BOXMODEL == 'generic' ]; then
 
 echo "FLAVOUR=neutrino-test-max" >> .config
+
+case $2 in
+	[1-2]) REPLY=$2;;
+	*)	echo -e "\nMedia Framework:"
+		echo "   1)  mpv player"
+		echo "   2)  gstreamer"
+		read -p "Select media framework (1-2)? [1] "
+		REPLY="${REPLY:-1}";;
+esac
+
+case "$REPLY" in
+	1)  MEDIAFW="mpv-player";;
+	2)  MEDIAFW="gstreamer";;
+	*)  MEDIAFW="mpv-player";;
+esac
+echo "MEDIAFW=$MEDIAFW" >> .config
+
+##############################################
 
 echo " "
 make printenv

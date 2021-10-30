@@ -12,6 +12,9 @@ LIBSTB_HAL_SOURCE  = $(LIBSTB_HAL).git
 LIBSTB_HAL_SITE    = $(GIT_SITE)
 LIBSTB_HAL_DEPENDS = bootstrap ffmpeg openthreads
 
+LIBSTB_HAL_CONF_ENV = \
+	$(NEUTRINO_CONF_ENV)
+
 ifneq ($(BOXMODEL),generic)
 LIBSTB_HAL_CONF_OPTS = \
 	--prefix=$(prefix) \
@@ -22,6 +25,23 @@ LIBSTB_HAL_CONF_OPTS = \
 	--prefix=$(TARGET_DIR)/usr \
 	--with-target=native \
 	--with-targetprefix=$(TARGET_DIR)/usr
+
+ifeq ($(MEDIAFW),gstreamer)
+LIBSTB_HAL_CONF_OPTS += \
+	--enable-gstreamer
+
+LIBSTB_HAL_CONF_ENV += \
+	PKG_CONFIG_PATH=$(PKG_CONFIG_PATH):/usr/lib/$(GNU_TARGET_NAME)/pkgconfig/
+
+GST_CFLAGS = \
+	-I/usr/include \
+	-I/usr/include/glib-2.0 \
+	-I/usr/include/gstreamer-1.0 \
+	-I/usr/lib/$(GNU_TARGET_NAME)/glib-2.0/include \
+	$(shell pkg-config --cflags --libs gstreamer-1.0) \
+	$(shell pkg-config --cflags --libs gstreamer-audio-1.0) \
+	$(shell pkg-config --cflags --libs gstreamer-video-1.0)
+endif
 endif
 
 LIBSTB_HAL_CONF_OPTS += \
@@ -34,9 +54,9 @@ LIBSTB_HAL_CONF_OPTS += \
 	--with-boxtype=$(BOXTYPE) \
 	--with-boxmodel=$(BOXMODEL) \
 	\
-	CFLAGS="$(NEUTRINO_CFLAGS)" \
-	CXXFLAGS="$(NEUTRINO_CFLAGS) -std=c++11" \
-	CPPFLAGS="$(NEUTRINO_CPPFLAGS)"
+	CFLAGS="$(NEUTRINO_CFLAGS) $(GST_CFLAGS)" \
+	CXXFLAGS="$(NEUTRINO_CFLAGS) $(GST_CFLAGS) -std=c++11" \
+	CPPFLAGS="$(NEUTRINO_CPPFLAGS) $(GST_CFLAGS)"
 
 LIBSTB_HAL_CONF_OPTS += \
 	--enable-flv2mpeg4
@@ -56,7 +76,7 @@ $(D)/libstb-hal.config.status:
 	mkdir -p $(LIBSTB_HAL_OBJ_DIR)
 	$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh
 	$(CD) $(LIBSTB_HAL_OBJ_DIR); \
-		$(TARGET_CONFIGURE_OPTS) \
+		$(LIBSTB_HAL_CONF_ENV) \
 		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/configure \
 			$(LIBSTB_HAL_CONF_OPTS)
 ifeq ($(TINKER_OPTION),0)
@@ -83,13 +103,15 @@ endif
 # -----------------------------------------------------------------------------
 
 libstb-hal-clean:
+	rm -f $(D)/libstb-hal
 	rm -f $(D)/libstb-hal.config.status
-	cd $(LIBSTB_HAL_OBJ_DIR); \
-		$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) distclean
+	rm -f $(D)/libstb-hal.do_compile
 
 libstb-hal-distclean:
-	rm -rf $(LIBSTB_HAL_OBJ_DIR)
-	rm -f $(D)/libstb-hal*
+	rm -f $(D)/libstb-hal
+	rm -f $(D)/libstb-hal.config.status
+	rm -f $(D)/libstb-hal.do_compile
+	rm -f $(D)/libstb-hal.do_prepare
 
 libstb-hal-uninstall:
 	-make -C $(LIBSTB_HAL_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)

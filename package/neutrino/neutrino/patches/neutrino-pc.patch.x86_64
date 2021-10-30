@@ -36,10 +36,10 @@ index 338a2de8e..568b7b945 100644
  			success = true;
  		} else if (dvb_time_update) {
 diff --git a/src/global.h b/src/global.h
-index 1211e1f40..593878885 100644
+index 37fecaae3..ad065478c 100644
 --- a/src/global.h
 +++ b/src/global.h
-@@ -114,4 +114,8 @@ NEUTRINO_CPP CRadioTextGUI *g_RadiotextWin;
+@@ -110,4 +110,8 @@ NEUTRINO_CPP CRadioTextGUI *g_RadiotextWin;
  #define TARGET_PREFIX ""
  #endif
  
@@ -49,10 +49,10 @@ index 1211e1f40..593878885 100644
 +
  #endif /* __neutrino_global_h__ */
 diff --git a/src/neutrino.cpp b/src/neutrino.cpp
-index eeb6c3c05..fcd9e0c77 100644
+index 270b27dca..48224205e 100644
 --- a/src/neutrino.cpp
 +++ b/src/neutrino.cpp
-@@ -684,7 +683,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
+@@ -686,7 +685,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
  	g_settings.timezone = configfile.getString("timezone", "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Vienna");
  
  	// epg
@@ -61,7 +61,7 @@ index eeb6c3c05..fcd9e0c77 100644
  	g_settings.epg_cache = configfile.getInt32("epg_cache_time", 7);
  	g_settings.epg_extendedcache = configfile.getInt32("epg_extendedcache_time", 168);
  	g_settings.epg_max_events = configfile.getInt32("epg_max_events", 30000);
-@@ -739,11 +738,11 @@ int CNeutrinoApp::loadSetup(const char *fname)
+@@ -741,11 +740,11 @@ int CNeutrinoApp::loadSetup(const char *fname)
  		g_settings.network_nfs[i].password = configfile.getString("network_nfs_password_" + i_str, "");
  	}
  
@@ -78,7 +78,7 @@ index eeb6c3c05..fcd9e0c77 100644
  
  	g_settings.downloadcache_dir = configfile.getString("downloadcache_dir", g_settings.network_nfs_recordingdir.c_str());
  	g_settings.logo_hdd_dir = configfile.getString("logo_hdd_dir", LOGODIR );
-@@ -784,7 +783,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
+@@ -786,7 +785,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
  	if (g_settings.timeshiftdir.empty())
  	{
  		timeshiftdir = g_settings.network_nfs_recordingdir + "/.timeshift";
@@ -87,7 +87,7 @@ index eeb6c3c05..fcd9e0c77 100644
  	}
  	else
  	{
-@@ -919,7 +918,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
+@@ -920,7 +919,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
  	g_settings.livestreamScriptPath = configfile.getString("livestreamScriptPath", WEBTVDIR);
  
  	// plugins
@@ -96,7 +96,7 @@ index eeb6c3c05..fcd9e0c77 100644
  	g_settings.plugins_disabled = configfile.getString("plugins_disabled", "");
  	g_settings.plugins_game = configfile.getString("plugins_game", "");
  	g_settings.plugins_lua = configfile.getString("plugins_lua", "");
-@@ -930,7 +929,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
+@@ -931,7 +930,7 @@ int CNeutrinoApp::loadSetup(const char *fname)
  	g_settings.movieplayer_plugin = configfile.getString("movieplayer_plugin", "---");
  
  	// screenshot
@@ -105,7 +105,7 @@ index eeb6c3c05..fcd9e0c77 100644
  	g_settings.screenshot_count = configfile.getInt32("screenshot_count", 1);
  	g_settings.screenshot_cover = configfile.getInt32("screenshot_cover", 0);
  	g_settings.screenshot_format = configfile.getInt32("screenshot_format", 1);
-@@ -3187,9 +2990,9 @@ TIMER_START();
+@@ -3209,9 +3010,9 @@ TIMER_START();
  
  	InitZapper();
  
@@ -118,7 +118,7 @@ index eeb6c3c05..fcd9e0c77 100644
  
  	hintBox->hide(); // InitZapper also displays a hintbox
  	delete hintBox;
-@@ -5552,7 +5355,7 @@ void stop_daemons(bool stopall, bool for_flash)
+@@ -5572,7 +5373,7 @@ void stop_daemons(bool stopall, bool for_flash)
  		delete InfoClock;
  	if(FileTimeOSD)
  		delete FileTimeOSD;

@@ -75,19 +75,51 @@ NEUTRINO_DEPENDS += lua-feedparser
 NEUTRINO_DEPENDS += luasoap
 NEUTRINO_DEPENDS += luajson
 
-NEUTRINO_CFLAGS  = -Wall -W -Wshadow -Wno-psabi -Wno-unused-result
-NEUTRINO_CFLAGS += $(TARGET_CFLAGS)
+NEUTRINO_CFLAGS  = -Wall -W -Wshadow 
+NEUTRINO_CFLAGS += -Wno-psabi
+NEUTRINO_CFLAGS += -Wno-unused-result
 NEUTRINO_CFLAGS += -D__STDC_FORMAT_MACROS
 NEUTRINO_CFLAGS += -D__STDC_CONSTANT_MACROS
 NEUTRINO_CFLAGS += -fno-strict-aliasing
 NEUTRINO_CFLAGS += -funsigned-char
 NEUTRINO_CFLAGS += -ffunction-sections
 NEUTRINO_CFLAGS += -fdata-sections
+ifeq ($(MEDIAFW),gstreamer)
+NEUTRINO_CFLAGS += -DENABLE_GSTREAMER
+endif
+ifeq ($(DEBUG),yes)
+NEUTRINO_CFLAGS += -ggdb3 -rdynamic -I$(TARGET_INCLUDE_DIR)
+else
+NEUTRINO_CFLAGS += $(TARGET_CFLAGS)
+endif
 #NEUTRINO_CFLAGS += -Wno-deprecated-declarations
 NEUTRINO_CFLAGS += $(LOCAL_NEUTRINO_CFLAGS)
 
-NEUTRINO_CPPFLAGS  = -I$(TARGET_DIR)/usr/include
-NEUTRINO_CPPFLAGS += -ffunction-sections -fdata-sections
+# -----------------------------------------------------------------------------
+
+NEUTRINO_LDFLAGS += -L$(TARGET_BASE_LIB_DIR) -L$(TARGET_LIB_DIR)
+NEUTRINO_LDFLAGS += -Wl,-rpath,$(TARGET_LIB_DIR) -Wl,-rpath-link,$(TARGET_LIB_DIR)
+ifeq ($(DEBUG),yes)
+NEUTRINO_LDFLAGS += -Wl,-O0
+else
+NEUTRINO_LDFLAGS += -Wl,-O1 $(TARGET_EXTRA_LDFLAGS)
+endif
+NEUTRINO_LDFLAGS += -lcrypto -ldl -lz
+
+# -----------------------------------------------------------------------------
+
+NEUTRINO_CONF_ENV = \
+	$(TARGET_MAKE_OPTS) \
+	\
+	CFLAGS="$(NEUTRINO_CFLAGS)" \
+	CPPFLAGS="$(NEUTRINO_CFLAGS)" \
+	CXXFLAGS="$(NEUTRINO_CFLAGS) -std=c++11" \
+	LDFLAGS="$(NEUTRINO_LDFLAGS)"
+
+NEUTRINO_CONF_ENV0 += \
+	PKG_CONFIG=$(PKG_CONFIG) \
+	PKG_CONFIG_PATH="$(PKG_CONFIG_PATH)" \
+	PKG_CONFIG_SYSROOT_DIR=$(PKG_CONFIG_SYSROOT_DIR)
 
 ifneq ($(BOXMODEL),generic)
 NEUTRINO_CONF_OPTS = \
@@ -141,7 +173,7 @@ NEUTRINO_CONF_OPTS += \
 	\
 	CFLAGS="$(NEUTRINO_CFLAGS)" \
 	CXXFLAGS="$(NEUTRINO_CFLAGS) -std=c++11" \
-	CPPFLAGS="$(NEUTRINO_CPPFLAGS)"
+	CPPFLAGS="$(NEUTRINO_CFLAGS)"
 
 NEUTRINO_OMDB_API_KEY ?=
 ifneq ($(strip $(NEUTRINO_OMDB_API_KEY)),)
@@ -242,7 +274,7 @@ $(D)/neutrino.config.status:
 	mkdir -p $(NEUTRINO_OBJ_DIR)
 	$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh
 	$(CD) $(NEUTRINO_OBJ_DIR); \
-		$(TARGET_CONFIGURE_OPTS) \
+		$(NEUTRINO_CONF_ENV) \
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure \
 			$(NEUTRINO_CONF_OPTS)
 		+make $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
@@ -315,14 +347,13 @@ neutrino-pc-valgrind: neutrino
 
 neutrino-pc-clean \
 neutrino-clean:
+	rm -f $(D)/neutrino
 	rm -f $(D)/neutrino.config.status
+	rm -f $(D)/neutrino.do_compile
 	rm -f $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
-	cd $(NEUTRINO_OBJ_DIR); \
-		$(MAKE) -C $(NEUTRINO_OBJ_DIR) distclean
 
 neutrino-pc-distclean \
 neutrino-distclean:
-	rm -rf $(NEUTRINO_OBJ_DIR)
 	rm -f $(D)/neutrino
 	rm -f $(D)/neutrino.config.status
 	rm -f $(D)/neutrino.do_compile

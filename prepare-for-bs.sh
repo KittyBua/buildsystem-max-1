@@ -128,6 +128,8 @@ PACKAGES="\
 	${UBUNTU:+libglew-dev}                                                                                        \
 	${UBUNTU:+freeglut3-dev}                                                                                      \
 	${UBUNTU:+mpv}                                                                                                \
+	${UBUNTU:+libgstreamer1.0-dev}                                                                                \
+	${UBUNTU:+libgstreamer-plugins-base1.0-dev}                                                                   \
 ";
 
 if [ "$UBUNTU" == 1 ]; then
