@@ -61,6 +61,8 @@ LIBSTB_HAL_CONF_OPTS += \
 LIBSTB_HAL_CONF_OPTS += \
 	--enable-flv2mpeg4
 
+# -----------------------------------------------------------------------------
+
 LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)
 
 $(D)/libstb-hal.do_prepare:
@@ -98,18 +100,24 @@ endif
 	$(REWRITE_LIBTOOL)
 	$(TOUCH)
 
-# -----------------------------------------------------------------------------
-
 libstb-hal-clean:
-	rm -f $(D)/libstb-hal
-	rm -f $(D)/libstb-hal.config.status
-	rm -f $(D)/libstb-hal.do_compile
+	@printf "$(TERM_YELLOW)===> clean $(subst -clean,,$@) .. $(TERM_NORMAL)"
+	@rm -f $(D)/libstb-hal
+	@rm -f $(D)/libstb-hal.config.status
+	@rm -f $(D)/libstb-hal.do_compile
+	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 libstb-hal-distclean:
-	rm -f $(D)/libstb-hal
-	rm -f $(D)/libstb-hal.config.status
-	rm -f $(D)/libstb-hal.do_compile
-	rm -f $(D)/libstb-hal.do_prepare
+	@printf "$(TERM_YELLOW)===> distclean $(subst -distclean,,$@) .. $(TERM_NORMAL)"
+	@rm -f $(D)/libstb-hal
+	@rm -f $(D)/libstb-hal.config.status
+	@rm -f $(D)/libstb-hal.do_compile
+	@rm -f $(D)/libstb-hal.do_prepare
+	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 libstb-hal-uninstall:
+ifneq ($(BOXMODEL),generic)
 	-make -C $(LIBSTB_HAL_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
+else
+	-make -C $(LIBSTB_HAL_OBJ_DIR) uninstall
+endif
