@@ -341,24 +341,30 @@ neutrino-pc-valgrind: neutrino
 	export SIMULATE_FE=1; \
 	valgrind --leak-check=full --log-file="$(BUILD_TMP)/valgrind.log" -v $(TARGET_DIR)/usr/bin/neutrino || true
 
-# -----------------------------------------------------------------------------
-
 neutrino-pc-clean \
 neutrino-clean:
-	rm -f $(D)/neutrino
-	rm -f $(D)/neutrino.config.status
-	rm -f $(D)/neutrino.do_compile
-	rm -f $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
+	@printf "$(TERM_YELLOW)===> clean $(subst -clean,,$@) .. $(TERM_NORMAL)"
+	@rm -f $(D)/neutrino
+	@rm -f $(D)/neutrino.config.status
+	@rm -f $(D)/neutrino.do_compile
+	@rm -f $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
+	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 neutrino-pc-distclean \
 neutrino-distclean:
-	rm -f $(D)/neutrino
-	rm -f $(D)/neutrino.config.status
-	rm -f $(D)/neutrino.do_compile
-	rm -f $(D)/neutrino.do_prepare
+	@printf "$(TERM_YELLOW)===> distclean $(subst -distclean,,$@) .. $(TERM_NORMAL)"
+	@rm -f $(D)/neutrino
+	@rm -f $(D)/neutrino.config.status
+	@rm -f $(D)/neutrino.do_compile
+	@rm -f $(D)/neutrino.do_prepare
+	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 neutrino-uninstall:
+ifneq ($(BOXMODEL),generic)
 	-make -C $(NEUTRINO_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
+else
+	-make -C $(NEUTRINO_OBJ_DIR) uninstall
+endif
 
 # -----------------------------------------------------------------------------
 
