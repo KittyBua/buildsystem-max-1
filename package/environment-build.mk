@@ -170,8 +170,6 @@ MKDIR = mkdir -p $(BUILD_DIR)
 STRIP = $(GNU_TARGET_NAME)-strip
 DATE  = $(shell date '+%Y-%m-%d_%H.%M')
 
-TINKER_OPTION ?= 0
-
 INSTALL      = install
 INSTALL_CONF = $(INSTALL) -m 0600
 INSTALL_DATA = $(INSTALL) -m 0644

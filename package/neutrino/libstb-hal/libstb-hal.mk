@@ -79,9 +79,7 @@ $(D)/libstb-hal.config.status:
 		$(LIBSTB_HAL_CONF_ENV) \
 		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/configure \
 			$(LIBSTB_HAL_CONF_OPTS)
-ifeq ($(TINKER_OPTION),0)
 	@touch $@
-endif
 
 $(D)/libstb-hal.do_compile: libstb-hal.config.status
 ifneq ($(BOXMODEL),generic)

@@ -278,9 +278,7 @@ $(D)/neutrino.config.status:
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure \
 			$(NEUTRINO_CONF_OPTS)
 		+make $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
-ifeq ($(TINKER_OPTION),0)
 	@touch $@
-endif
 
 $(D)/neutrino.do_compile: neutrino.config.status
 ifneq ($(BOXMODEL),generic)
