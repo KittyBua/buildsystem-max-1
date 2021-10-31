@@ -184,6 +184,7 @@ define INSTALL_EXIST # (source, dest)
 endef
 
 UPDATE-RC.D = support/scripts/update-rc.d -r $(TARGET_DIR)
+REMOVE-RC.D = support/scripts/update-rc.d -f -r $(TARGET_DIR)
 
 # -----------------------------------------------------------------------------
 
