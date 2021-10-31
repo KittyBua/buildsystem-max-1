@@ -39,13 +39,17 @@ $(D)/kernel: bootstrap kernel.do_compile
 # -----------------------------------------------------------------------------
 
 kernel-clean:
-	rm -f $(D)/kernel
-	rm -f $(D)/kernel.do_compile
+	@printf "$(TERM_YELLOW)===> clean $(subst -clean,,$@) .. $(TERM_NORMAL)"
+	@rm -f $(D)/kernel
+	@rm -f $(D)/kernel.do_compile
+	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 kernel-distclean:
-	rm -f $(D)/kernel
-	rm -f $(D)/kernel.do_compile
-	rm -f $(D)/kernel.do_prepare
+	@printf "$(TERM_YELLOW)===> distclean $(subst -distclean,,$@) .. $(TERM_NORMAL)"
+	@rm -f $(D)/kernel
+	@rm -f $(D)/kernel.do_compile
+	@rm -f $(D)/kernel.do_prepare
+	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 # -----------------------------------------------------------------------------
 
