@@ -144,7 +144,20 @@ endif
 	$(NP_RUNLEVEL_INSTALL)
 	$(TOUCH)
 
-# -----------------------------------------------------------------------------
+neutrino-plugins-clean:
+	@printf "$(TERM_YELLOW)===> clean $(subst -clean,,$@) .. $(TERM_NORMAL)"
+	@rm -f $(D)/neutrino-plugins
+	@rm -f $(D)/neutrino-plugins.config.status
+	@rm -f $(D)/neutrino-plugins.do_compile
+	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
+
+neutrino-plugins-distclean:
+	@printf "$(TERM_YELLOW)===> distclean $(subst -distclean,,$@) .. $(TERM_NORMAL)"
+	@rm -f $(D)/neutrino-plugins
+	@rm -f $(D)/neutrino-plugins.config.status
+	@rm -f $(D)/neutrino-plugins.do_compile
+	@rm -f $(D)/neutrino-plugins.do_prepare
+	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 # To build single plugins from neutrino-plugins repository call
 # make neutrino-plugin-<subdir>; e.g. make neutrino-plugin-tuxwetter
@@ -152,14 +165,3 @@ endif
 neutrino-plugin-%: neutrino-plugins.do_prepare neutrino-plugins.config.status
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)/$(subst neutrino-plugin-,,$(@))
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)/$(subst neutrino-plugin-,,$(@)) install DESTDIR=$(TARGET_DIR)
-
-# -----------------------------------------------------------------------------
-
-neutrino-plugins-clean:
-	rm -f $(D)/neutrino-plugins.config.status
-	cd $(NEUTRINO_PLUGINS_OBJ_DIR); \
-		$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) clean
-
-neutrino-plugins-distclean:
-	rm -rf $(NEUTRINO_PLUGINS_OBJ_DIR)
-	rm -f $(D)/neutrino-plugin*
