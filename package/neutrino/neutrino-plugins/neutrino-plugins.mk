@@ -80,16 +80,22 @@ NEUTRINO_PLUGINS_CONF_OPTS += \
 NEUTRINO_PLUGINS_INIT_SCRIPTS  = emmrd
 NEUTRINO_PLUGINS_INIT_SCRIPTS += fritzcallmonitor
 #NEUTRINO_PLUGINS_INIT_SCRIPTS += openvpn
-ifneq ($(BOXMODEL),generic)
 NEUTRINO_PLUGINS_INIT_SCRIPTS += rcu_switcher
 NEUTRINO_PLUGINS_INIT_SCRIPTS += tuxcald
 NEUTRINO_PLUGINS_INIT_SCRIPTS += tuxmaild
-endif
 
-define NP_RUNLEVEL_INSTALL
+define NEUTRINO_PLUGINS_RUNLEVEL_INSTALL
 	for script in $(NEUTRINO_PLUGINS_INIT_SCRIPTS); do \
 		if [ -x $(TARGET_DIR)/etc/init.d/$$script ]; then \
 			$(UPDATE-RC.D) $$script defaults 80 20; \
+		fi; \
+	done
+endef
+
+define NEUTRINO_PLUGINS_RUNLEVEL_UNINSTALL
+	for script in $(NEUTRINO_PLUGINS_INIT_SCRIPTS); do \
+		if [ -x $(TARGET_DIR)/etc/init.d/$$script ]; then \
+			$(REMOVE-RC.D) $$script remove; \
 		fi; \
 	done
 endef
@@ -141,7 +147,7 @@ else
 			-e 's#/media/hdd#$(TARGET_DIR)/media/hdd#g' \
 			-e 's#/tmp#$(TARGET_DIR)/tmp#g' {} \;
 endif
-	$(NP_RUNLEVEL_INSTALL)
+	$(NEUTRINO_PLUGINS_RUNLEVEL_INSTALL)
 	$(TOUCH)
 
 neutrino-plugins-clean:
@@ -158,6 +164,16 @@ neutrino-plugins-distclean:
 	@rm -f $(D)/neutrino-plugins.do_compile
 	@rm -f $(D)/neutrino-plugins.do_prepare
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
+
+neutrino-plugins-uninstall:
+	$(NEUTRINO_PLUGINS_RUNLEVEL_UNINSTALL)
+ifneq ($(BOXMODEL),generic)
+	-make -C $(NEUTRINO_PLUGINS_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
+else
+	-make -C $(NEUTRINO_PLUGINS_OBJ_DIR) uninstall
+endif
+
+# -----------------------------------------------------------------------------
 
 # To build single plugins from neutrino-plugins repository call
 # make neutrino-plugin-<subdir>; e.g. make neutrino-plugin-tuxwetter
