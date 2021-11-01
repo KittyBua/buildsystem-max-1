@@ -88,38 +88,17 @@ ifeq ($(MEDIAFW),gstreamer)
 NEUTRINO_CFLAGS += -DENABLE_GSTREAMER
 endif
 ifeq ($(DEBUG),yes)
-NEUTRINO_CFLAGS += -ggdb3 -rdynamic -I$(TARGET_INCLUDE_DIR)
+NEUTRINO_CFLAGS += -ggdb3 -rdynamic -I$(TARGET_DIR)/usr/include
 else
 NEUTRINO_CFLAGS += $(TARGET_CFLAGS)
 endif
 #NEUTRINO_CFLAGS += -Wno-deprecated-declarations
 NEUTRINO_CFLAGS += $(LOCAL_NEUTRINO_CFLAGS)
 
-# -----------------------------------------------------------------------------
-
-NEUTRINO_LDFLAGS += -L$(TARGET_BASE_LIB_DIR) -L$(TARGET_LIB_DIR)
-NEUTRINO_LDFLAGS += -Wl,-rpath,$(TARGET_LIB_DIR) -Wl,-rpath-link,$(TARGET_LIB_DIR)
-ifeq ($(DEBUG),yes)
-NEUTRINO_LDFLAGS += -Wl,-O0
-else
-NEUTRINO_LDFLAGS += -Wl,-O1 $(TARGET_EXTRA_LDFLAGS)
-endif
-NEUTRINO_LDFLAGS += -lcrypto -ldl -lz
+NEUTRINO_CPPFLAGS  = -I$(TARGET_DIR)/usr/include
+NEUTRINO_CPPFLAGS += -ffunction-sections -fdata-sections
 
 # -----------------------------------------------------------------------------
-
-NEUTRINO_CONF_ENV = \
-	$(TARGET_MAKE_OPTS) \
-	\
-	CFLAGS="$(NEUTRINO_CFLAGS)" \
-	CPPFLAGS="$(NEUTRINO_CFLAGS)" \
-	CXXFLAGS="$(NEUTRINO_CFLAGS) -std=c++11" \
-	LDFLAGS="$(NEUTRINO_LDFLAGS)"
-
-NEUTRINO_CONF_ENV0 += \
-	PKG_CONFIG=$(PKG_CONFIG) \
-	PKG_CONFIG_PATH="$(PKG_CONFIG_PATH)" \
-	PKG_CONFIG_SYSROOT_DIR=$(PKG_CONFIG_SYSROOT_DIR)
 
 ifneq ($(BOXMODEL),generic)
 NEUTRINO_CONF_OPTS = \
@@ -173,7 +152,7 @@ NEUTRINO_CONF_OPTS += \
 	\
 	CFLAGS="$(NEUTRINO_CFLAGS)" \
 	CXXFLAGS="$(NEUTRINO_CFLAGS) -std=c++11" \
-	CPPFLAGS="$(NEUTRINO_CFLAGS)"
+	CPPFLAGS="$(NEUTRINO_CPPFLAGS)"
 
 NEUTRINO_OMDB_API_KEY ?=
 ifneq ($(strip $(NEUTRINO_OMDB_API_KEY)),)
@@ -274,7 +253,7 @@ $(D)/neutrino.config.status:
 	mkdir -p $(NEUTRINO_OBJ_DIR)
 	$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh
 	$(CD) $(NEUTRINO_OBJ_DIR); \
-		$(NEUTRINO_CONF_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure \
 			$(NEUTRINO_CONF_OPTS)
 		+make $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
