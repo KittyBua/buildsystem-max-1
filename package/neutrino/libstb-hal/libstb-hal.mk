@@ -12,9 +12,6 @@ LIBSTB_HAL_SOURCE  = $(LIBSTB_HAL).git
 LIBSTB_HAL_SITE    = $(GIT_SITE)
 LIBSTB_HAL_DEPENDS = bootstrap ffmpeg openthreads
 
-LIBSTB_HAL_CONF_ENV = \
-	$(NEUTRINO_CONF_ENV)
-
 ifneq ($(BOXMODEL),generic)
 LIBSTB_HAL_CONF_OPTS = \
 	--prefix=$(prefix) \
@@ -28,19 +25,14 @@ LIBSTB_HAL_CONF_OPTS = \
 
 ifeq ($(MEDIAFW),gstreamer)
 LIBSTB_HAL_CONF_OPTS += \
+	PKG_CONFIG_PATH=/usr/lib/$(GNU_TARGET_NAME)/pkgconfig \
 	--enable-gstreamer
 
-LIBSTB_HAL_CONF_ENV += \
-	PKG_CONFIG_PATH=$(PKG_CONFIG_PATH):/usr/lib/$(GNU_TARGET_NAME)/pkgconfig/
-
 GST_CFLAGS = \
-	-I/usr/include \
-	-I/usr/include/glib-2.0 \
-	-I/usr/include/gstreamer-1.0 \
-	-I/usr/lib/$(GNU_TARGET_NAME)/glib-2.0/include \
 	$(shell pkg-config --cflags --libs gstreamer-1.0) \
 	$(shell pkg-config --cflags --libs gstreamer-audio-1.0) \
-	$(shell pkg-config --cflags --libs gstreamer-video-1.0)
+	$(shell pkg-config --cflags --libs gstreamer-video-1.0) \
+	$(shell pkg-config --cflags --libs glib-2.0)
 endif
 endif
 
@@ -78,7 +70,7 @@ $(D)/libstb-hal.config.status:
 	mkdir -p $(LIBSTB_HAL_OBJ_DIR)
 	$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh
 	$(CD) $(LIBSTB_HAL_OBJ_DIR); \
-		$(LIBSTB_HAL_CONF_ENV) \
+		$(TARGET_CONFIGURE_OPTS) \
 		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/configure \
 			$(LIBSTB_HAL_CONF_OPTS)
 	@touch $@
