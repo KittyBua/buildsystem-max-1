@@ -4,7 +4,7 @@
 RTMPDUMP_VERSION = git
 RTMPDUMP_DIR     = rtmpdump.git
 RTMPDUMP_SOURCE  = rtmpdump.git
-RTMPDUMP_SITE    = git://github.com/oe-alliance
+RTMPDUMP_SITE    = https://github.com/oe-alliance
 RTMPDUMP_DEPENDS = bootstrap zlib openssl
 
 $(D)/rtmpdump:
