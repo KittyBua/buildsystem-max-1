@@ -24,7 +24,7 @@ diff --git a/configure.in b/configure.in
 index 25d7c4e..44a1c8b 100644
 --- a/configure.in
 +++ b/configure.in
-@@ -364,13 +364,15 @@
+@@ -363,13 +363,15 @@
  cat > pietest.c <<EOF
  int main(void) { return 0; }
  EOF
@@ -42,7 +42,7 @@ index 25d7c4e..44a1c8b 100644
  AC_MSG_RESULT([$gcc_supports_pie])
  if test $gcc_supports_pie = yes ; then
  	DAEMON_CFLAGS="-fPIE"
-@@ -379,6 +381,8 @@
+@@ -378,6 +380,8 @@
  rm -f pietest.c
  AC_SUBST(DAEMON_CFLAGS)
  AC_SUBST(DAEMON_LDFLAGS)

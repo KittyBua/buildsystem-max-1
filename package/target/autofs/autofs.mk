@@ -1,7 +1,7 @@
 #
 # autofs
 #
-AUTOFS_VERSION = 5.1.7
+AUTOFS_VERSION = 5.1.8
 AUTOFS_DIR     = autofs-$(AUTOFS_VERSION)
 AUTOFS_SOURCE  = autofs-$(AUTOFS_VERSION).tar.xz
 AUTOFS_SITE    = https://www.kernel.org/pub/linux/daemons/autofs/v5
