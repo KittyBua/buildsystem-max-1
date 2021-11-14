@@ -110,8 +110,8 @@ else
 NEUTRINO_CONF_OPTS = \
 	--prefix=$(TARGET_DIR)/usr \
 	--with-target=native \
-	--with-targetrootprefix=$(TARGET_DIR) \
 	--with-targetprefix=$(TARGET_DIR)/usr \
+	--with-generic-root-prefix=$(TARGET_DIR) \
 	\
 	--with-configdir=$(TARGET_DIR)/var/tuxbox/config \
 	--with-datadir_var=$(TARGET_DIR)/var/tuxbox \
@@ -127,6 +127,7 @@ NEUTRINO_CONF_OPTS = \
 	--with-iconsdir_var=$(TARGET_DIR)/var/tuxbox/icons \
 	--with-logodir_var=$(TARGET_DIR)/var/tuxbox/icons/logo \
 	--with-public_httpddir=$(TARGET_DIR)/var/tuxbox/httpd \
+	--with-hosted_httpddir=$(TARGET_DIR)/mnt/hosted \
 	--with-flagdir=$(TARGET_DIR)/var/etc \
 	--with-zapitdir=$(TARGET_DIR)/var/tuxbox/config/zapit
 endif
@@ -291,7 +292,11 @@ endif
 		echo "git=BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"; \
 		echo "imagedir=$(BOXMODEL)" \
 	) > $(TARGET_DIR)/etc/image-version
+ifneq ($(BOXMODEL),generic)
 	ln -sf /etc/image-version $(TARGET_DIR)/.version
+else
+	ln -sf $(TARGET_DIR)/etc/image-version $(TARGET_DIR)/.version
+endif
 	( \
 		echo "PRETTY_NAME=$(FLAVOUR) BS-rev$(BS_REV) HAL-rev$(HAL_REV) NMP-rev$(NMP_REV)"; \
 	) > $(TARGET_DIR)/usr/lib/os-release
