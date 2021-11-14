@@ -53,6 +53,7 @@ NEUTRINO_PLUGINS_CONF_OPTS += \
 	--disable-add-locale \
 	--disable-coolitsclimax \
 	--disable-emmrd \
+	--disable-filmon \
 	--disable-logoupdater \
 	--disable-logoview \
 	--disable-mountpointmanagement \
@@ -66,7 +67,9 @@ NEUTRINO_PLUGINS_CONF_OPTS += \
 	--disable-fritzinfomonitor \
 	--disable-logomask \
 	--disable-stb_startup \
-	--disable-pr-auto-timer
+	--disable-pr-auto-timer \
+	--disable-imgbackup \
+	--disable-corona-info
 endif
 
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),generic vuduo vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
