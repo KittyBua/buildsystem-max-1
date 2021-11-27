@@ -7,6 +7,9 @@ GIFLIB_SOURCE  = giflib-$(GIFLIB_VERSION).tar.bz2
 GIFLIB_SITE    = https://downloads.sourceforge.net/project/giflib
 GIFLIB_DEPENDS = bootstrap
 
+GIFLIB_CONF_ENV = \
+	ac_cv_prog_have_xmlto=no
+
 $(D)/giflib:
 	$(START_BUILD)
 	$(REMOVE)
@@ -14,7 +17,6 @@ $(D)/giflib:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		export ac_cv_prog_have_xmlto=no; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
