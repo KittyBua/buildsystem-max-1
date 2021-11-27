@@ -10,7 +10,7 @@ AUTOFS_DEPENDS = bootstrap libtirpc e2fsprogs openssl libxml2
 AUTOFS_AUTORECONF = YES
 
 AUTOFS_CONF_ENV = \
-	ac_cv_path_RANLIB=$(TARGET_RANLIB); \
+	ac_cv_path_RANLIB=$(TARGET_RANLIB) \
 	ac_cv_path_E2FSCK=/sbin/fsck \
 	ac_cv_path_E3FSCK=no \
 	ac_cv_path_E4FSCK=no \
