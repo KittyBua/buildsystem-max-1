@@ -36,13 +36,13 @@ crosstool-ng:
 		export CT_NG_ARCHIVE=$(DL_DIR); \
 		export CT_NG_BASE_DIR=$(CROSS_DIR); \
 		export CT_NG_CUSTOM_KERNEL=$(LINUX_DIR); \
-		test -f ./configure || ./bootstrap; \
+		./bootstrap; \
 		./configure --enable-local; \
-		MAKELEVEL=0 make; \
-		chmod 0755 ct-ng; \
+		make; \
 		./ct-ng oldconfig; \
 		./ct-ng build
 	test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/lib || ln -sf sysroot/lib $(CROSS_DIR)/$(GNU_TARGET_NAME)/
+	rm -f $(CROSS_DIR)/$(GNU_TARGET_NAME)/lib/libstdc++.so.6.0.*-gdb.py
 	rm -f $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot/lib/libstdc++.so.6.0.*-gdb.py
 	$(REMOVE)
 endif
