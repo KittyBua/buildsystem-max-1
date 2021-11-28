@@ -12,6 +12,8 @@ HOST_PYTHON3_INCLUDE_DIR = include/python$(basename $(HOST_PYTHON3_VERSION))
 
 HOST_PYTHON3_AUTORECONF = YES
 
+HOST_PYTHON3_BIN = $(HOST_DIR)/bin/python3
+
 HOST_PYTHON3_CONF_OPTS = \
 	--without-ensurepip \
 	--without-cxx-main \
