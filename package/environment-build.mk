@@ -343,6 +343,24 @@ TARGET_CMAKE = \
 
 # -----------------------------------------------------------------------------
 
+HOST_MESON_CONFIGURE = \
+	unset CC CXX CPP LD AR NM STRIP; \
+	PKG_CONFIG=/usr/bin/pkg-config \
+	PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig \
+	$($(PKG)_CONF_ENV) \
+	$(HOST_MESON_BIN) \
+		--prefix=/ \
+		--buildtype=release \
+		$($(PKG)_CONF_OPTS) \
+		$(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/build
+
+HOST_NINJA = \
+	$(HOST_NINJA_BIN) -C $(PKG_BUILD_DIR)/build
+
+HOST_NINJA_INSTALL = \
+	DESTDIR=$(HOST_DIR) \
+	$(HOST_NINJA_BIN) -C $(PKG_BUILD_DIR)/build install
+
 define meson-cross-config
 	mkdir -p $(1)
 	( \
