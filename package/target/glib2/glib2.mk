@@ -8,7 +8,6 @@ GLIB2_SITE    = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(GLIB2_
 GLIB2_DEPENDS = bootstrap host-glib2 libffi util-linux zlib libiconv
 
 GLIB2_CONF_OPTS = \
-	--prefix=/usr \
 	-Dman=false \
 	-Ddtrace=false \
 	-Dsystemtap=false \
@@ -27,10 +26,9 @@ $(D)/glib2:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(MESON_CONFIGURE) \
-		$($(PKG)_CONF_OPTS); \
-		$(NINJA); \
-		$(NINJA_INSTALL)
+		$(TARGET_MESON_CONFIGURE); \
+		$(TARGET_NINJA); \
+		$(TARGET_NINJA_INSTALL)
 	$(REMOVE)
 	rm -rf $(addprefix $(TARGET_DIR)/usr/share/,gettext gdb glib-2.0 locale)
 	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gdbus-codegen glib-compile-schemas glib-compile-resources glib-genmarshal glib-gettextize gio-launch-desktop glib-mkenums gobject-query gtester gtester-report)
