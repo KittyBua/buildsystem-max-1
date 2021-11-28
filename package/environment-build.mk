@@ -383,7 +383,7 @@ MESON_CONFIGURE = \
 	$(call meson-cross-config,$(PKG_BUILD_DIR)/build); \
 	unset CC CXX CPP LD AR NM STRIP; \
 	$($(PKG)_CONF_ENV) \
-	$(HOST_MESON) \
+	$(HOST_MESON_BIN) \
 		--buildtype=release \
 		--cross-file $(PKG_BUILD_DIR)/build/meson-cross.config \
 		-Db_pie=false \
