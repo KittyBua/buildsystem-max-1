@@ -14,7 +14,7 @@ $(D)/host-python3-setuptools:
 	$(call EXTRACT,$(BUILD_DIR))
 	$(APPLY_PATCHES)
 	$(CD_BUILD_DIR); \
-		$(HOST_PYTHON_BUILD); \
-		$(HOST_PYTHON_INSTALL)
+		$(HOST_PYTHON3_BUILD); \
+		$(HOST_PYTHON3_INSTALL)
 	$(REMOVE)
 	$(TOUCH)

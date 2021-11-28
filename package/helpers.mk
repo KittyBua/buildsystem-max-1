@@ -203,7 +203,7 @@ HAL_REV=$(shell cd $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); git log | grep "^commit" | w
 # -----------------------------------------------------------------------------
 
 # python helpers
-HOST_PYTHON_BUILD = \
+HOST_PYTHON3_BUILD = \
 	CC="$(HOSTCC)" \
 	CFLAGS="$(HOST_CFLAGS)" \
 	LDFLAGS="$(HOST_LDFLAGS)" \
@@ -211,7 +211,7 @@ HOST_PYTHON_BUILD = \
 	PYTHONPATH=$(HOST_DIR)/$(HOST_PYTHON3_BASE_DIR)/site-packages \
 	$(HOST_DIR)/bin/python3 ./setup.py -q build --executable=/usr/python
 
-HOST_PYTHON_INSTALL = \
+HOST_PYTHON3_INSTALL = \
 	CC="$(HOSTCC)" \
 	CFLAGS="$(HOST_CFLAGS)" \
 	LDFLAGS="$(HOST_LDFLAGS)" \
