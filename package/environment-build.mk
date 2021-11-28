@@ -364,7 +364,7 @@ define meson-cross-config
 		echo "c_link_args = '$(TARGET_LDFLAGS)'"; \
 		echo "cpp_args = '$(TARGET_CXXFLAGS)'"; \
 		echo "cpp_link_args = '$(TARGET_LDFLAGS)'"; \
-		echo "prefix = '/usr'"; \
+		echo "prefix = '$(prefix)'"; \
 		echo ""; \
 		echo "[properties]"; \
 		echo "needs_exe_wrapper = true"; \
@@ -379,7 +379,7 @@ define meson-cross-config
 	) > $(1)/meson-cross.config
 endef
 
-MESON_CONFIGURE = \
+TARGET_MESON_CONFIGURE = \
 	$(call meson-cross-config,$(PKG_BUILD_DIR)/build); \
 	unset CC CXX CPP LD AR NM STRIP; \
 	$($(PKG)_CONF_ENV) \
