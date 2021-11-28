@@ -392,10 +392,11 @@ MESON_CONFIGURE = \
 		$(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/build
 
 NINJA = \
-	$(HOST_NINJA) -C $(PKG_BUILD_DIR)/build
+	$(HOST_NINJA_BIN) -C $(PKG_BUILD_DIR)/build
 
-NINJA_INSTALL = DESTDIR=$(TARGET_DIR) \
-	$(HOST_NINJA) -C $(PKG_BUILD_DIR)/build install
+NINJA_INSTALL = \
+	DESTDIR=$(TARGET_DIR) \
+	$(HOST_NINJA_BIN) -C $(PKG_BUILD_DIR)/build install
 
 # -----------------------------------------------------------------------------
 
