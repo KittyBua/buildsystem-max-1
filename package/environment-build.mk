@@ -31,23 +31,23 @@ MAKEFLAGS += --no-print-directory
 
 # -----------------------------------------------------------------------------
 
-BASE_DIR     := ${CURDIR}
-DL_DIR       ?= $(HOME)/Archive
-BUILD_DIR     = $(BASE_DIR)/build_tmp
+BASE_DIR       := ${CURDIR}
+DL_DIR         ?= $(HOME)/Archive
+BUILD_DIR       = $(BASE_DIR)/build_tmp
 ifeq ($(LAYOUT),multi)
-RELEASE_DIR   = $(BASE_DIR)/release/linuxrootfs1
+RELEASE_DIR     = $(BASE_DIR)/release/linuxrootfs1
 else
-RELEASE_DIR   = $(BASE_DIR)/release
+RELEASE_DIR     = $(BASE_DIR)/release
 endif
-DEPS_DIR      = $(BASE_DIR)/.deps
-D             = $(DEPS_DIR)
-TARGET_DIR    = $(BASE_DIR)/root
-SOURCE_DIR    = $(BASE_DIR)/build_source
-IMAGE_DIR     = $(BASE_DIR)/release_image
-OWN_FILES    ?= $(BASE_DIR)/own-files
-CROSS_DIR     = $(BASE_DIR)/cross/$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION)-kernel-$(KERNEL_VERSION)
-HOST_DIR      = $(BASE_DIR)/host
-STAGING_DIR   = $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot
+DEPS_DIR        = $(BASE_DIR)/.deps
+D               = $(DEPS_DIR)
+TARGET_DIR      = $(BASE_DIR)/root
+SOURCE_DIR      = $(BASE_DIR)/build_source
+IMAGE_DIR       = $(BASE_DIR)/release_image
+OWN_FILES      ?= $(BASE_DIR)/own-files
+CROSS_DIR       = $(BASE_DIR)/cross/$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION)-kernel-$(KERNEL_VERSION)
+HOST_DIR        = $(BASE_DIR)/host
+CROSS_ROOT_DIR  = $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot
 
 MAINTAINER   ?= $(shell whoami)
 

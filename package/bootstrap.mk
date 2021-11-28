@@ -78,8 +78,8 @@ CROSS_LIBS_VERSION = 2021-03-25
 
 $(D)/cross-libs: directories $(CROSSTOOL)
 	$(START_BUILD)
-	if test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot/lib; then \
-		cp -a $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot/lib/*so* $(TARGET_DIR)/lib; \
+	if test -e $(CROSS_ROOT_DIR)/lib; then \
+		cp -a $(CROSS_ROOT_DIR)/lib/*so* $(TARGET_DIR)/lib; \
 		cd $(TARGET_LIB_DIR); ln -sf ../../lib/libgcc_s.so.1 libgcc_s.so.1; \
 	fi; \
 	if [ "$(TARGET_ARCH)" = "aarch64" ]; then \
