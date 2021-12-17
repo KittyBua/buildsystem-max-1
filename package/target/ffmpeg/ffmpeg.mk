@@ -316,12 +316,16 @@ FFMPEG_CONF_OPTS += \
 endif
 ifeq ($(TARGET_ARCH), mips)
 FFMPEG_CONF_OPTS += \
+	--disable-mips32r5 \
 	--disable-mipsdsp \
-	--disable-mipsdspr \
+	--disable-mipsdspr2 \
+	--disable-loongson2 \
+	--disable-loongson3 \
 	--disable-mmi \
+	--disable-msa \
+	--disable-msa2 \
 	--disable-neon \
-	--disable-vfp \
-	--cpu=generic
+	--disable-vfp
 endif
 
 FFMPEG_CONF_OPTS += \
