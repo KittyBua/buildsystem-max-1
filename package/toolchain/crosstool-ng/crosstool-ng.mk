@@ -10,7 +10,7 @@ CROSSTOOL_NG_DEPENDS = directories host-ccache kernel.do_prepare
 CROSSTOOL_NG_CONFIG = crosstool-ng-$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION)
 CROSSTOOL_NG_BACKUP = $(DL_DIR)/$(CROSSTOOL_NG_CONFIG)-kernel-$(KERNEL_VERSION)-backup.tar.gz
 
-CROSSTOOL_NG_CHECKOUT = bf890ce5
+CROSSTOOL_NG_CHECKOUT = 584e57e8
 
 # -----------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ crosstool-ng:
 		export CT_NG_CUSTOM_KERNEL=$(LINUX_DIR); \
 		./bootstrap; \
 		./configure --enable-local; \
-		make; \
+		MAKELEVEL=0 make; \
 		./ct-ng oldconfig; \
 		./ct-ng build
 	test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/lib || ln -sf sysroot/lib $(CROSS_DIR)/$(GNU_TARGET_NAME)/
@@ -63,7 +63,6 @@ crosstool-ng-config: directories
 		test -f ./configure || ./bootstrap && \
 		./configure --enable-local; \
 		MAKELEVEL=0 make; \
-		chmod 0755 ct-ng; \
 		./ct-ng menuconfig
 
 # -----------------------------------------------------------------------------
