@@ -20,8 +20,6 @@ TOOLCHECK += find-lzma
 TOOLCHECK += find-makeinfo
 TOOLCHECK += find-patch
 TOOLCHECK += find-pkg-config
-TOOLCHECK += find-python
-TOOLCHECK += find-svn
 TOOLCHECK += find-tic
 TOOLCHECK += find-yacc
 
