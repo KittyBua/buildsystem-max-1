@@ -180,7 +180,8 @@ endif
 
 # To build single plugins from neutrino-plugins repository call
 # make neutrino-plugin-<subdir>; e.g. make neutrino-plugin-tuxwetter
+NEUTRINO_PLUGINS_SUBDIR_DEPENDS = bootstrap libcurl libpng libjpeg-turbo giflib freetype
 
-neutrino-plugin-%: neutrino-plugins.do_prepare neutrino-plugins.config.status
+neutrino-plugin-%: $(NEUTRINO_PLUGINS_SUBDIR_DEPENDS) neutrino-plugins.do_prepare neutrino-plugins.config.status
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)/$(subst neutrino-plugin-,,$(@))
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)/$(subst neutrino-plugin-,,$(@)) install DESTDIR=$(TARGET_DIR)
