@@ -86,7 +86,6 @@ PACKAGES="\
 	cmake \
 	gperf \
 	\
-	${UBUNTU:+rpm}                                               ${FEDORA:+rpm-build}      ${GENTOO:+rpm}         \
 	${UBUNTU:+lsb-release}          ${SUSE:+lsb-release}         ${FEDORA:+redhat-lsb}     ${GENTOO:+lsb-release} \
 	${UBUNTU:+git}                  ${SUSE:+git-core}            ${FEDORA:+git}            ${GENTOO:+git}         \
 	${UBUNTU:+libncurses5-dev}      ${SUSE:+ncurses-devel}       ${FEDORA:+ncurses-devel}  ${GENTOO:+ncurses}     \
@@ -123,6 +122,7 @@ PACKAGES="\
 	${UBUNTU:+libseccomp-dev}                                                                                     \
 	${UBUNTU:+libexpat1-dev}                                                                                      \
 	${UBUNTU:+libexpat1}                                                                                          \
+	${UBUNTU:+libpng-dev}                                                                                         \
 	\
 	${UBUNTU:+libao-dev}                                                                                          \
 	${UBUNTU:+libglew-dev}                                                                                        \
