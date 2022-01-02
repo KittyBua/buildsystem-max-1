@@ -3,30 +3,6 @@
 #
 #SHELL := $(SHELL) -x
 
-ifndef MAKE
-MAKE := make
-endif
-ifndef HOSTMAKE
-HOSTMAKE = $(MAKE)
-endif
-HOSTMAKE := $(shell which $(HOSTMAKE) || type -p $(HOSTMAKE) || echo make)
-
-# If BS_JLEVEL is 0, scale the maximum concurrency with the number of
-# CPUs. An additional job is used in order to keep processors busy
-# while waiting on I/O.
-# If the number of processors is not available, assume one.
-BS_JLEVEL ?= 0
-ifeq ($(BS_JLEVEL),0)
-PARALLEL_JOBS := $(shell echo \
-	$$((1 + `getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1`)))
-else
-PARALLEL_JOBS := $(BS_JLEVEL)
-endif
-
-MAKE1 := $(HOSTMAKE) -j1
-override MAKE = $(HOSTMAKE) \
-	$(if $(findstring j,$(filter-out --%,$(MAKEFLAGS))),,-j$(PARALLEL_JOBS))
-
 MAKEFLAGS += --no-print-directory
 
 # -----------------------------------------------------------------------------
@@ -126,8 +102,6 @@ HOST_CFLAGS    ?= -O2
 HOST_CFLAGS    += $(HOST_CPPFLAGS)
 HOST_CXXFLAGS  += $(HOST_CFLAGS)
 HOST_LDFLAGS   += -L$(HOST_DIR)/lib -Wl,-rpath,$(HOST_DIR)/lib
-
-GNU_HOST_NAME  := $(shell support/gnuconfig/config.guess)
 
 TARGET_CFLAGS   = $(TARGET_OPTIMIZATION) $(TARGET_ABI) $(TARGET_EXTRA_CFLAGS) -I$(TARGET_INCLUDE_DIR)
 TARGET_CPPFLAGS = $(TARGET_CFLAGS)
@@ -275,7 +249,7 @@ TARGET_CONFIGURE_OPTIONS = \
 	--program-prefix= \
 	--program-suffix= \
 	--prefix=$(prefix) \
-	--exec_prefix=$(exec_prefix) \
+	--exec-prefix=$(exec_prefix) \
 	--bindir=$(bindir) \
 	--datadir=$(datadir) \
 	--includedir=$(includedir) \

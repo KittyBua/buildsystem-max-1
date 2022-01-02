@@ -101,6 +101,8 @@ SED := $(shell which sed || type -p sed) -i -e
 export HOSTAR HOSTAS HOSTCC HOSTCXX HOSTLD
 export HOSTCC_NOCCACHE HOSTCXX_NOCCACHE
 
+GNU_HOST_NAME  := $(shell support/gnuconfig/config.guess)
+
 # silent mode requested?
 QUIET := $(if $(findstring s,$(filter-out --%,$(MAKEFLAGS))),-q)
 
@@ -108,6 +110,8 @@ QUIET := $(if $(findstring s,$(filter-out --%,$(MAKEFLAGS))),-q)
 
 -include .config
 -include config.local
+
+include package/Makefile.in
 
 include package/environment-linux.mk
 include package/environment-build.mk
