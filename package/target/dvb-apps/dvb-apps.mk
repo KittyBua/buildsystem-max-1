@@ -14,8 +14,9 @@ DVB_APPS_POST_PATCH_HOOKS = DVB_APPS_POST_PATCH
 
 DVB_APPS_LDLIBS = -liconv
 
-DVB_APPS_MAKE_OPTS  = PERL5LIB=$(PKG_BUILD_DIR)/util/scan
-DVB_APPS_MAKE_OPTS += enable_shared=no
+DVB_APPS_MAKE_OPTS = \
+	PERL5LIB=$(PKG_BUILD_DIR)/util/scan \
+	enable_shared=no
 
 $(D)/dvb-apps:
 	$(START_BUILD)
