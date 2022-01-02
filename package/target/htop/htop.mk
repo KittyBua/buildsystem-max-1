@@ -1,7 +1,7 @@
 #
 # htop
 #
-HTOP_VERSION = 3.1.1
+HTOP_VERSION = 3.1.2
 HTOP_DIR     = htop-$(HTOP_VERSION)
 HTOP_SOURCE  = htop-$(HTOP_VERSION).tar.gz
 HTOP_SITE    = $(call github,htop-dev,htop,$(HTOP_VERSION))
