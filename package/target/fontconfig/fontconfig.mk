@@ -10,7 +10,8 @@ FONTCONFIG_DEPENDS = bootstrap freetype expat
 FONTCONFIG_CONF_OPTS = \
 	--with-expat-includes=$(TARGET_INCLUDE_DIR) \
 	--with-expat-lib=$(TARGET_LIB_DIR) \
-	--disable-docs 
+	--localedir=$(REMOVE_localedir) \
+	--disable-docs
 
 $(D)/fontconfig:
 	$(START_BUILD)
