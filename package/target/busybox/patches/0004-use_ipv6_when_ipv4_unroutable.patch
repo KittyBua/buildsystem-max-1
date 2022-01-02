@@ -1,6 +1,6 @@
 --- a/libbb/xconnect.c
 +++ b/libbb/xconnect.c
-@@ -188,6 +188,7 @@
+@@ -180,6 +180,7 @@
  {
  IF_NOT_FEATURE_IPV6(sa_family_t af = AF_INET;)
  	int rc;
@@ -8,7 +8,7 @@
  	len_and_sockaddr *r;
  	struct addrinfo *result = NULL;
  	struct addrinfo *used_res;
-@@ -294,13 +295,39 @@
+@@ -286,13 +287,39 @@
  	}
  	used_res = result;
  #if ENABLE_FEATURE_PREFER_IPV4_ADDRESS
