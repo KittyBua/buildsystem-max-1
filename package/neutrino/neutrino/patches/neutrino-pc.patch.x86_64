@@ -1,3 +1,17 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -37,6 +37,11 @@
+ AC_PROG_CXX
+ AC_DISABLE_STATIC
+ LT_INIT
++
++# Set default for ARFLAGS, since autoconf does not have a macro for it.
++# This allows people to set it when running configure or make
++test -n "$ARFLAGS" || ARFLAGS="cr"
++AC_SUBST(ARFLAGS)
+ 
+ # Add build information to local_build_config.h.tmp
+ # -------------------------------------------------
 diff --git a/src/eitd/sectionsd.cpp b/src/eitd/sectionsd.cpp
 index 338a2de8e..568b7b945 100644
 --- a/src/eitd/sectionsd.cpp
