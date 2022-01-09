@@ -1,7 +1,7 @@
 #
 # freetype
 #
-FREETYPE_VERSION = 2.11.0
+FREETYPE_VERSION = 2.11.1
 FREETYPE_DIR     = freetype-$(FREETYPE_VERSION)
 FREETYPE_SOURCE  = freetype-$(FREETYPE_VERSION).tar.xz
 FREETYPE_SITE    = https://sourceforge.net/projects/freetype/files/freetype2/$(FREETYPE_VERSION)
