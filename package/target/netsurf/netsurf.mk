@@ -30,7 +30,7 @@ $(D)/netsurf:
 		$(TARGET_CONFIGURE_OPTS) \
 		CFLAGS="$(TARGET_CFLAGS) -I$(BUILD_DIR)/netsurf-all-$(NETSURF_VERSION)/tmpusr/include" \
 		LDFLAGS="$(TARGET_LDFLAGS) -L$(BUILD_DIR)/netsurf-all-$(NETSURF_VERSION)/tmpusr/lib" \
-		$(MAKE) $($(PKG)_CONF_OPTS); \
+		$(MAKE) $($(PKG)_CONF_OPTS) build; \
 		$(MAKE) $($(PKG)_CONF_OPTS) install DESTDIR=$(TARGET_DIR)
 	mkdir -p $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins
 	mv $(TARGET_DIR)/usr/bin/netsurf-fb $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/netsurf-fb.so
