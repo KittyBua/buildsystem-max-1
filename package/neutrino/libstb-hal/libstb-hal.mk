@@ -1,23 +1,16 @@
-#
-# makefile to build libstb-hal
-#
-# -----------------------------------------------------------------------------
-
+################################################################################
 #
 # libstb-hal
 #
+################################################################################
+
 LIBSTB_HAL_VERSION = git
 LIBSTB_HAL_DIR     = $(LIBSTB_HAL).git
 LIBSTB_HAL_SOURCE  = $(LIBSTB_HAL).git
 LIBSTB_HAL_SITE    = $(GIT_SITE)
 LIBSTB_HAL_DEPENDS = bootstrap ffmpeg openthreads
 
-ifneq ($(BOXMODEL),generic)
-LIBSTB_HAL_CONF_OPTS = \
-	--prefix=$(prefix) \
-	--with-target=cdk \
-	--with-targetprefix=$(prefix)
-else
+ifeq ($(BOXMODEL),generic)
 LIBSTB_HAL_CONF_OPTS = \
 	--prefix=$(TARGET_DIR)/usr \
 	--with-target=native \
@@ -34,6 +27,11 @@ GST_CFLAGS = \
 	$(shell pkg-config --cflags --libs gstreamer-video-1.0) \
 	$(shell pkg-config --cflags --libs glib-2.0)
 endif
+else
+LIBSTB_HAL_CONF_OPTS = \
+	--prefix=$(prefix) \
+	--with-target=cdk \
+	--with-targetprefix=$(prefix)
 endif
 
 LIBSTB_HAL_CONF_OPTS += \
@@ -76,18 +74,18 @@ $(D)/libstb-hal.config.status:
 	@touch $@
 
 $(D)/libstb-hal.do_compile: libstb-hal.config.status
-ifneq ($(BOXMODEL),generic)
-	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) DESTDIR=$(TARGET_DIR)
-else
+ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR)
+else
+	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) DESTDIR=$(TARGET_DIR)
 endif
 	@touch $@
 
 $(D)/libstb-hal: $(LIBSTB_HAL_DEPENDS) libstb-hal.do_prepare libstb-hal.do_compile
-ifneq ($(BOXMODEL),generic)
-	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
-else
+ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install
+else
+	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 endif
 	$(REWRITE_LIBTOOL)
 	$(TOUCH)
@@ -108,8 +106,8 @@ libstb-hal-distclean:
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 libstb-hal-uninstall:
-ifneq ($(BOXMODEL),generic)
-	-make -C $(LIBSTB_HAL_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
-else
+ifeq ($(BOXMODEL),generic)
 	-make -C $(LIBSTB_HAL_OBJ_DIR) uninstall
+else
+	-make -C $(LIBSTB_HAL_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
 endif
