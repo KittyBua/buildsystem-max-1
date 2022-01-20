@@ -1,7 +1,13 @@
+################################################################################
 #
-# makefile to build neutrino
+# neutrino
 #
-# -----------------------------------------------------------------------------
+################################################################################
+
+NEUTRINO_VERSION = git
+NEUTRINO_DIR     = $(NEUTRINO).git
+NEUTRINO_SOURCE  = $(NEUTRINO).git
+NEUTRINO_SITE    = $(GIT_SITE)
 
 FLAVOUR ?= neutrino-max
 ifeq ($(FLAVOUR),neutrino-ddt)
@@ -42,16 +48,6 @@ NEUTRINO_CHECKOUT   ?= master
 LIBSTB_HAL_CHECKOUT ?= master
 endif
 
-# -----------------------------------------------------------------------------
-
-#
-# neutrino
-#
-NEUTRINO_VERSION = git
-NEUTRINO_DIR     = $(NEUTRINO).git
-NEUTRINO_SOURCE  = $(NEUTRINO).git
-NEUTRINO_SITE    = $(GIT_SITE)
-
 NEUTRINO_DEPENDS  = bootstrap
 NEUTRINO_DEPENDS += libpng
 NEUTRINO_DEPENDS += libjpeg-turbo
@@ -84,6 +80,7 @@ NEUTRINO_CFLAGS += -fno-strict-aliasing
 NEUTRINO_CFLAGS += -funsigned-char
 NEUTRINO_CFLAGS += -ffunction-sections
 NEUTRINO_CFLAGS += -fdata-sections
+NEUTRINO_CFLAGS += -DVCS
 ifeq ($(MEDIAFW),gstreamer)
 NEUTRINO_CFLAGS += -DENABLE_GSTREAMER
 endif
@@ -100,13 +97,7 @@ NEUTRINO_CPPFLAGS += -ffunction-sections -fdata-sections
 
 # -----------------------------------------------------------------------------
 
-ifneq ($(BOXMODEL),generic)
-NEUTRINO_CONF_OPTS = \
-	--prefix=$(prefix) \
-	--with-target=cdk \
-	--with-targetprefix=$(prefix) \
-	--enable-pip
-else
+ifeq ($(BOXMODEL),generic)
 NEUTRINO_CONF_OPTS = \
 	--prefix=$(TARGET_DIR)/usr \
 	--with-target=native \
@@ -130,6 +121,11 @@ NEUTRINO_CONF_OPTS = \
 	--with-hosted_httpddir=$(TARGET_DIR)/mnt/hosted \
 	--with-flagdir=$(TARGET_DIR)/var/etc \
 	--with-zapitdir=$(TARGET_DIR)/var/tuxbox/config/zapit
+else
+NEUTRINO_CONF_OPTS = \
+	--prefix=$(prefix) \
+	--with-target=cdk \
+	--with-targetprefix=$(prefix)
 endif
 
 NEUTRINO_CONF_OPTS += \
@@ -138,6 +134,7 @@ NEUTRINO_CONF_OPTS += \
 	--enable-maintainer-mode \
 	--enable-silent-rules \
 	\
+	$(if $(filter $(BOXMODEL),generic),,--enable-pip) \
 	--enable-freesatepg \
 	--enable-fribidi \
 	--enable-giflib \
@@ -257,25 +254,25 @@ $(D)/neutrino.config.status:
 		$(TARGET_CONFIGURE_OPTS) \
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure \
 			$(NEUTRINO_CONF_OPTS)
-		+make $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
+		$(if $(findstring VCS,$(NEUTRINO_CFLAGS)),+make $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h)
 	@touch $@
 
 $(D)/neutrino.do_compile: neutrino.config.status
-ifneq ($(BOXMODEL),generic)
-	$(MAKE) -C $(NEUTRINO_OBJ_DIR) DESTDIR=$(TARGET_DIR)
-else
+ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR)
+else
+	$(MAKE) -C $(NEUTRINO_OBJ_DIR) DESTDIR=$(TARGET_DIR)
 endif
 	@touch $@
 
 $(D)/neutrino: $(NEUTRINO_DEPENDS) neutrino.do_prepare neutrino.do_compile
-ifneq ($(BOXMODEL),generic)
-	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
-else
+ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install
 	mkdir -p $(TARGET_DIR)/tmp
 	mkdir -p $(TARGET_DIR)/media/hdd
 	mkdir -p $(TARGET_DIR)/media/hdd/{epg,music,movie,pictures}
+else
+	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 endif
 	( \
 		echo "distro=$(subst neutrino-,,$(FLAVOUR))"; \
@@ -292,10 +289,10 @@ endif
 		echo "git=BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"; \
 		echo "imagedir=$(BOXMODEL)" \
 	) > $(TARGET_DIR)/etc/image-version
-ifneq ($(BOXMODEL),generic)
-	ln -sf /etc/image-version $(TARGET_DIR)/.version
-else
+ifeq ($(BOXMODEL),generic)
 	ln -sf $(TARGET_DIR)/etc/image-version $(TARGET_DIR)/.version
+else
+	ln -sf /etc/image-version $(TARGET_DIR)/.version
 endif
 	( \
 		echo "PRETTY_NAME=$(FLAVOUR) BS-rev$(BS_REV) HAL-rev$(HAL_REV) NMP-rev$(NMP_REV)"; \
@@ -343,21 +340,20 @@ neutrino-distclean:
 	@rm -f $(D)/neutrino.do_prepare
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
-neutrino-uninstall:
-ifneq ($(BOXMODEL),generic)
-	-make -C $(NEUTRINO_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
-else
+neutrino-uninstall: neutrino-clean
+ifeq ($(BOXMODEL),generic)
 	-make -C $(NEUTRINO_OBJ_DIR) uninstall
+	rm -f $(addprefix $(TARGET_DIR)/var/tuxbox/config/,EPGscan.conf moviebrowser.conf neutrino.conf scan.conf timerd.conf)
+else
+	-make -C $(NEUTRINO_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
 endif
 
 # -----------------------------------------------------------------------------
 
-version.h: $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
 $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h:
 	@rm -f $@
-	echo '#define BUILT_DATE "'`date`'"' > $@
 	@if test -d $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); then \
-		echo '#define VCS "BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"' >> $@; \
+		echo '#define VCS "BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"' > $@; \
 	fi
 
 # -----------------------------------------------------------------------------
