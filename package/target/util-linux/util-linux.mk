@@ -90,8 +90,6 @@ UTIL_LINUX_CONF_OPTS = \
 	--without-audit \
 	--without-cap-ng \
 	--without-btrfs \
-	--without-ncurses \
-	--without-ncursesw \
 	--without-python \
 	--without-readline \
 	--without-slang \
