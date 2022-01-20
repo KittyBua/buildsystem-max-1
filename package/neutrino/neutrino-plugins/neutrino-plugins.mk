@@ -1,18 +1,16 @@
+################################################################################
 #
 # neutrino-plugins
 #
+################################################################################
+
 NEUTRINO_PLUGINS_VERSION = git
 NEUTRINO_PLUGINS_DIR     = neutrino-plugins-max.git
 NEUTRINO_PLUGINS_SOURCE  = neutrino-plugins-max.git
 NEUTRINO_PLUGINS_SITE    = $(MAX-GIT-GITHUB)
 NEUTRINO_PLUGINS_DEPENDS = bootstrap ffmpeg libcurl libpng libjpeg-turbo giflib freetype
 
-ifneq ($(BOXMODEL),generic)
-NEUTRINO_PLUGINS_CONF_OPTS = \
-	--prefix=$(prefix) \
-	--with-target=cdk \
-	--with-targetprefix=$(prefix)
-else
+ifeq ($(BOXMODEL),generic)
 NEUTRINO_PLUGINS_CONF_OPTS = \
 	--prefix=$(TARGET_DIR)/usr \
 	--sysconfdir=$(TARGET_DIR)/etc \
@@ -33,6 +31,11 @@ NEUTRINO_PLUGINS_CONF_OPTS = \
 	--with-logodir_var=$(TARGET_DIR)/var/tuxbox/icons/logo \
 	--with-public_httpddir=$(TARGET_DIR)/var/tuxbox/httpd \
 	--with-flagdir=$(TARGET_DIR)/var/etc
+else
+NEUTRINO_PLUGINS_CONF_OPTS = \
+	--prefix=$(prefix) \
+	--with-target=cdk \
+	--with-targetprefix=$(prefix)
 endif
 
 NEUTRINO_PLUGINS_CONF_OPTS += \
@@ -126,18 +129,16 @@ $(D)/neutrino-plugins.config.status:
 	@touch $@
 
 $(D)/neutrino-plugins.do_compile: neutrino-plugins.config.status
-ifneq ($(BOXMODEL),generic)
-	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) DESTDIR=$(TARGET_DIR)
-else
+ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)
+else
+	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) DESTDIR=$(TARGET_DIR)
 endif
 	@touch $@
 
 $(D)/neutrino-plugins: neutrino-plugins.do_prepare neutrino-plugins.do_compile
 	mkdir -p $(SHARE_ICONS)
-ifneq ($(BOXMODEL),generic)
-	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
-else
+ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) install
 	find $(SHARE_PLUGINS)/ $(SHARE_WEBTV)/ $(VAR_CONFIG)/ \
 		\( -name '*.conf' \
@@ -149,6 +150,8 @@ else
 			-e 's#/var/tuxbox/icons/logo/#$(TARGET_DIR)/var/tuxbox/icons/logo/#g' \
 			-e 's#/media/hdd#$(TARGET_DIR)/media/hdd#g' \
 			-e 's#/tmp#$(TARGET_DIR)/tmp#g' {} \;
+else
+	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
 endif
 	$(NEUTRINO_PLUGINS_RUNLEVEL_INSTALL)
 	$(TOUCH)
@@ -170,10 +173,10 @@ neutrino-plugins-distclean:
 
 neutrino-plugins-uninstall:
 	$(NEUTRINO_PLUGINS_RUNLEVEL_UNINSTALL)
-ifneq ($(BOXMODEL),generic)
-	-make -C $(NEUTRINO_PLUGINS_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
-else
+ifeq ($(BOXMODEL),generic)
 	-make -C $(NEUTRINO_PLUGINS_OBJ_DIR) uninstall
+else
+	-make -C $(NEUTRINO_PLUGINS_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
 endif
 
 # -----------------------------------------------------------------------------
