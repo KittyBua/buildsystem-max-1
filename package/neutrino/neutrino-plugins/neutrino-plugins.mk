@@ -5,8 +5,13 @@
 ################################################################################
 
 NEUTRINO_PLUGINS_VERSION = git
+ifeq ($(FLAVOUR),neutrino-test-max)
+NEUTRINO_PLUGINS_DIR     = neutrino-plugins-test-max.git
+NEUTRINO_PLUGINS_SOURCE  = neutrino-plugins-test-max.git
+else
 NEUTRINO_PLUGINS_DIR     = neutrino-plugins-max.git
 NEUTRINO_PLUGINS_SOURCE  = neutrino-plugins-max.git
+endif
 NEUTRINO_PLUGINS_SITE    = $(MAX-GIT-GITHUB)
 NEUTRINO_PLUGINS_DEPENDS = bootstrap ffmpeg libcurl libpng libjpeg-turbo giflib freetype
 
