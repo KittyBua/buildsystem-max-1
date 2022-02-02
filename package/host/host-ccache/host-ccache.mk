@@ -5,10 +5,9 @@ HOST_CCACHE_VERSION = 2021-03-29
 HOST_CCACHE_DIR     = local
 HOST_CCACHE_DEPENDS = directories
 
-HOST_CCACHE_BIN    = $(CCACHE)
+HOST_CCACHE_BIN    = /usr/bin/ccache
 HOST_CCACHE_BINDIR = $(HOST_DIR)/bin
 
-CCACHE     = /usr/bin/ccache
 CCACHE_DIR = $(HOME)/.ccache-bs-$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION)-kernel-$(KERNEL_VERSION)-max
 export CCACHE_DIR
 
@@ -21,7 +20,6 @@ HOST_CCACHE_LINKS = \
 
 HOST_CCACHE_ENV = \
 	mkdir -p $(HOST_CCACHE_BINDIR); \
-	mkdir -p $(HOST_DIR)/bin; \
 	$(HOST_CCACHE_LINKS)
 
 $(D)/host-ccache:
