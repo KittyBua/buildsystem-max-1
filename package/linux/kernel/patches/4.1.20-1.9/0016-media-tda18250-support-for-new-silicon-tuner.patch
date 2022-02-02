@@ -25,7 +25,7 @@ diff --git a/MAINTAINERS b/MAINTAINERS
 index f50910d..a3877d6 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -9692,6 +9692,15 @@ T:	git git://linuxtv.org/anttip/media_tree.git
+@@ -9676,6 +9676,15 @@ T:	git git://linuxtv.org/anttip/media_tree.git
  S:	Maintained
  F:	drivers/media/tuners/tda18218*
  

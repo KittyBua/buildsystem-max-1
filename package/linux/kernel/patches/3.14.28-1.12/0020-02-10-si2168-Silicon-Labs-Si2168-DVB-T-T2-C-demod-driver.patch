@@ -2,10 +2,11 @@ diff --git a/drivers/media/dvb-frontends/Kconfig b/drivers/media/dvb-frontends/K
 index 025fc54..1469d44 100644
 --- a/drivers/media/dvb-frontends/Kconfig
 +++ b/drivers/media/dvb-frontends/Kconfig
-@@ -446,5 +446,13 @@ config DVB_RTL2832
+@@ -445,6 +445,14 @@
+ 	default m if !MEDIA_SUBDRV_AUTOSELECT
  	help
  	  Say Y when you want to support this frontend.
- 
++
 +config DVB_SI2168
 +	tristate "Silicon Labs Si2168"
 +	depends on DVB_CORE && I2C && I2C_MUX
@@ -13,7 +14,7 @@ index 025fc54..1469d44 100644
 +	help
 +	  Silicon Labs Si2168 DVB-T/T2/C demodulator driver.
 +	  Say Y when you want to support these frontends.
-+
+ 
  comment "DVB-C (cable) frontends"
  	depends on DVB_CORE
 diff --git a/drivers/media/dvb-frontends/Makefile b/drivers/media/dvb-frontends/Makefile

@@ -1,6 +1,6 @@
 --- a/drivers/media/usb/dvb-usb-v2/Kconfig
 +++ b/drivers/media/usb/dvb-usb-v2/Kconfig
-@@ -141,3 +141,10 @@ config DVB_USB_RTL28XXU
+@@ -147,3 +147,10 @@ config DVB_USB_RTL28XXU
  	help
  	  Say Y here to support the Realtek RTL28xxU DVB USB receiver.
  
@@ -13,7 +13,7 @@
 +	  Say Y here to support the USB receivers from DVBSky.
 --- a/drivers/media/usb/dvb-usb-v2/Makefile
 +++ b/drivers/media/usb/dvb-usb-v2/Makefile
-@@ -37,6 +37,9 @@ obj-$(CONFIG_DVB_USB_MXL111SF) += mxl111sf-tuner.o
+@@ -40,6 +40,9 @@ obj-$(CONFIG_DVB_USB_MXL111SF) += mxl111sf-tuner.o
  dvb-usb-rtl28xxu-objs := rtl28xxu.o
  obj-$(CONFIG_DVB_USB_RTL28XXU) += dvb-usb-rtl28xxu.o
  
@@ -2506,12 +2506,12 @@ diff -urN a/drivers/media/rc/keymaps/rc-dvbsky.c b/drivers/media/rc/keymaps/rc-d
  #endif
 --- a/drivers/media/dvb-core/dvb-usb-ids.h
 +++ b/drivers/media/dvb-core/dvb-usb-ids.h
-@@ -244,6 +245,9 @@
+@@ -245,6 +245,9 @@
  #define USB_PID_TECHNOTREND_CONNECT_S2400               0x3006
  #define USB_PID_TECHNOTREND_CONNECT_S2400_8KEEPROM	0x3009
  #define USB_PID_TECHNOTREND_CONNECT_CT3650		0x300d
-+#define USB_PID_TECHNOTREND_CONNECT_S2_4600             0x3011
-+#define USB_PID_TECHNOTREND_CONNECT_CT2_4650_CI		0x3012
++#define USB_PID_TECHNOTREND_CONNECT_S2_4600		0x3011
++#define USB_PID_TECHNOTREND_CONNECT_CT2_4650_CI	0x3012
 +#define USB_PID_TECHNOTREND_TVSTICK_CT2_4400		0x3014
  #define USB_PID_TERRATEC_CINERGY_DT_XS_DIVERSITY	0x005a
  #define USB_PID_TERRATEC_CINERGY_DT_XS_DIVERSITY_2	0x0081

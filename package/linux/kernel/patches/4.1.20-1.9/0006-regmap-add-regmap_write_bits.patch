@@ -61,7 +61,7 @@ index 59c55ea0f0b50..e4b9ad4f05ef3 100644
  int regmap_update_bits_async(struct regmap *map, unsigned int reg,
  			     unsigned int mask, unsigned int val);
  int regmap_update_bits_check(struct regmap *map, unsigned int reg,
-@@ -645,6 +647,13 @@ static inline int regmap_update_bits(struct regmap *map, unsigned int reg,
+@@ -643,6 +645,13 @@ static inline int regmap_update_bits(struct regmap *map, unsigned int reg,
  	return -EINVAL;
  }
  

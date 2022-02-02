@@ -1,6 +1,3 @@
-diff --git a/include/linux/compiler-gcc10.h b/include/linux/compiler-gcc10.h
-new file mode 100644
-index 0000000..ba064fa
 --- /dev/null
 +++ b/include/linux/compiler-gcc10.h
 @@ -0,0 +1,59 @@

@@ -2,7 +2,7 @@ diff --git a/drivers/net/ethernet/broadcom/bcmsysport.c b/drivers/net/ethernet/b
 index 6fc9b29..0aec0c5 100644
 --- a/drivers/net/ethernet/broadcom/bcmsysport.c
 +++ b/drivers/net/ethernet/broadcom/bcmsysport.c
-@@ -2146,7 +2146,7 @@ static int bcm_sysport_probe(struct platform_device *pdev)
+@@ -1974,7 +1974,7 @@ static int bcm_sysport_probe(struct platform_device *pdev)
  	if (!txq || txq > TDMA_NUM_RINGS)
  		return -EINVAL;
  

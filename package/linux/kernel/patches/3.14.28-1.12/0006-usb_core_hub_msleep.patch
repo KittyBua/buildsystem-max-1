@@ -2,7 +2,7 @@ diff --git a/drivers/usb/core/hub.c b/drivers/usb/core/hub.c
 index d2bd9d7..cf796c3 100644
 --- a/drivers/usb/core/hub.c
 +++ b/drivers/usb/core/hub.c
-@@ -5001,6 +5001,7 @@ static int hub_thread(void *__unused)
+@@ -5005,6 +5005,7 @@ static int hub_thread(void *__unused)
  	set_freezable();
  
  	do {

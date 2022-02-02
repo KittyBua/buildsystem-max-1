@@ -77,7 +77,7 @@ diff --git a/drivers/media/usb/dvb-usb/dib0700_core.c b/drivers/media/usb/dvb-us
 index 8106137..80792d2 100644
 --- a/drivers/media/usb/dvb-usb/dib0700_core.c
 +++ b/drivers/media/usb/dvb-usb/dib0700_core.c
-@@ -874,10 +874,34 @@ static int dib0700_probe(struct usb_interface *intf,
+@@ -871,10 +871,34 @@ static int dib0700_probe(struct usb_interface *intf,
  	return -ENODEV;
  }
  
