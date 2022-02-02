@@ -15,6 +15,7 @@ FLAC_CONF_OPTS = \
 	--disable-asm-optimizations \
 	--disable-sse \
 	--disable-altivec \
+	--disable-vsx \
 	--disable-doxygen-docs \
 	--disable-thorough-tests \
 	--disable-exhaustive-tests \
