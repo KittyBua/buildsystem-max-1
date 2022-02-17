@@ -26,7 +26,8 @@ python-iptv-install:
 		-o -name '*.pyx' \
 		-o -name '*.txt' \
 		-o -name 'test' \
-		-o -name 'tests' \) \
+		-o -name 'tests' \
+		\) \
 		-print0 | xargs --no-run-if-empty -0 rm -rf
 ifeq ($(OPTIMIZATIONS), size)
 	find $(RELEASE_DIR)/$(PYTHON_BASE_DIR)/ -name '*.py' -exec rm -f {} \;
@@ -91,7 +92,8 @@ neutrino-release-base:
 		\( -name '*.a' \
 		-o -name '*.la' \
 		-o -name '*.orig' \
-		-o -name '*.-config' \) \
+		-o -name '*.-config' \
+		\) \
 		-print0 | xargs --no-run-if-empty -0 rm -f
 	rm -rf $(RELEASE_DIR)/usr/lib/{gconv,gio,glib-2.0,libxslt-plugins,pkgconfig,sigc++-2.0}
 	rm -rf $(RELEASE_DIR)/usr/share/aclocal
