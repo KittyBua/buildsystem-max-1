@@ -24,7 +24,12 @@ if [ ! -z $1 ] ; then
 
 	echo >> $LOGFILE
 	echo "---- BUILD  LOG ----" >> $LOGFILE
-	time make $* 2>&1 | tee -a $LOGFILE
+	begin=$(date +"%s")
+	make $* 2>&1 | tee -a $LOGFILE
+	finish=$(date +"%s")
+	timediff=$(($finish-$begin))
+	echo -e "Change time was $(($timediff / 60)) minutes and $(($timediff % 60)) seconds."
+	echo ""
 else
 	echo "Usage: makelog some_commands"
 fi
