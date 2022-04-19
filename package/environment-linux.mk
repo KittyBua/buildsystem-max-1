@@ -61,14 +61,7 @@ MTD_BLACK      = $(empty)
 MTD_BOOTFS     = $(empty)
 endif
 
-ifeq ($(BOXMODEL),vuduo4k)
-KERNEL_VERSION        = 4.1.45-1.17
-KERNEL_SOURCE_VERSION = 4.1-1.17
-MTD_BLACK             = mmcblk0
-MTD_BOOTFS            = mmcblk0p6
-endif
-
-ifeq ($(BOXMODEL),vuduo4kse)
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo4k vuduo4kse))
 KERNEL_VERSION        = 4.1.45-1.17
 KERNEL_SOURCE_VERSION = 4.1-1.17
 MTD_BLACK             = mmcblk0
@@ -82,32 +75,22 @@ MTD_BLACK             = mmcblk0
 MTD_BOOTFS            = mmcblk0p1
 endif
 
-ifeq ($(BOXMODEL),vuultimo4k)
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuultimo4k vuuno4k))
 KERNEL_VERSION        = 3.14.28-1.12
 KERNEL_SOURCE_VERSION = 3.14-1.12
 MTD_BLACK             = mmcblk0
 MTD_BOOTFS            = mmcblk0p1
 endif
 
-ifeq ($(BOXMODEL),vuuno4k)
-KERNEL_VERSION        = 3.14.28-1.12
-KERNEL_SOURCE_VERSION = 3.14-1.12
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuuno4kse vuzero4k))
+KERNEL_VERSION        = 4.1.20-1.9
+KERNEL_SOURCE_VERSION = 4.1-1.9
 MTD_BLACK             = mmcblk0
-MTD_BOOTFS            = mmcblk0p1
-endif
-
 ifeq ($(BOXMODEL),vuuno4kse)
-KERNEL_VERSION        = 4.1.20-1.9
-KERNEL_SOURCE_VERSION = 4.1-1.9
-MTD_BLACK             = mmcblk0
 MTD_BOOTFS            = mmcblk0p1
-endif
-
-ifeq ($(BOXMODEL),vuzero4k)
-KERNEL_VERSION        = 4.1.20-1.9
-KERNEL_SOURCE_VERSION = 4.1-1.9
-MTD_BLACK             = mmcblk0
+else ifeq ($(BOXMODEL),vuzero4k)
 MTD_BOOTFS            = mmcblk0p4
+endif
 endif
 
 ifeq ($(BOXMODEL),vuduo)
