@@ -23,7 +23,7 @@ if `which lsb_release > /dev/null 2>&1`; then
 		CentOS*) FEDORA=1; INSTALL="yum install -y";;
 		SUSE*)   SUSE=1  ; INSTALL="zypper install -y";;
 		Ubuntu*) UBUNTU=1; INSTALL="apt-get install -y";;
-		LinuxM*) UBUNTU=2; INSTALL="apt-get install -y";;
+		Linuxm*) UBUNTU=2; INSTALL="apt-get install -y";;
 		Debian*) UBUNTU=3; INSTALL="apt-get install -y";;
 		Gentoo)  GENTOO=1; INSTALL="emerge -uN";;
 	esac
@@ -141,7 +141,7 @@ elif [ "$UBUNTU" == 3 ]; then
 fi
 
 if ([ "$UBUNTU" == 1 ] &&  [ "$UBUNTU_VERSION" -ge "16" ]) || \
-   ([ "$UBUNTU" == 2 ] && [ "$MINT_VERSION" -ge "18" ]) || \
+   ([ "$UBUNTU" == 2 ] && [ "$MINT_VERSION" -ge "5" ]) || \
    ([ "$UBUNTU" == 3 ] && [ "$DEBIAN_VERSION" -ge "10" ]); then
 	PACKAGES="$PACKAGES \
 	${UBUNTU:+libtool-bin} \
