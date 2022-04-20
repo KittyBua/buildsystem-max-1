@@ -1,7 +1,7 @@
 #
 # pugixml
 #
-PUGIXML_VERSION = 1.11.1
+PUGIXML_VERSION = 1.12
 PUGIXML_DIR     = pugixml-$(PUGIXML_VERSION)
 PUGIXML_SOURCE  = pugixml-$(PUGIXML_VERSION).tar.gz
 PUGIXML_SITE    = https://github.com/zeux/pugixml/releases/download/v$(PUGIXML_VERSION)
