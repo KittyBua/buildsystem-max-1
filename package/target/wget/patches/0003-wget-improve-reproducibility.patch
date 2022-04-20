@@ -42,7 +42,7 @@ diff --git a/src/Makefile.am b/src/Makefile.am
 index 28c0be2..44084a3 100644
 --- a/src/Makefile.am
 +++ b/src/Makefile.am
-@@ -86,9 +86,13 @@ version.c:  $(wget_SOURCES) ../lib/libgnu.a
+@@ -108,9 +108,13 @@ version.c:  $(wget_SOURCES) ../lib/libgnu.a
  	echo '#include "version.h"' >> $@
  	echo 'const char *version_string = "@VERSION@";' >> $@
  	echo 'const char *compilation_string = "'$(COMPILE)'";' \
