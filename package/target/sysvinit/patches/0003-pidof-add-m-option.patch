@@ -27,9 +27,9 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
  .RB [ \-o
  .IR omitpid[,omitpid...] ]
  .RB [ \-o
-@@ -79,6 +80,11 @@
+@@ -77,6 +78,11 @@
  Tells \fIpidof\fP to omit processes with that process id. The special
- pid \fB%PPID\fP can be used to name the parent process of the \fIpidof\fP
+ pid \fB%PPID\fP can be used to name the parent process of the \fBpidof\fP
  program, in other words the calling shell or shell script.
 +.IP -m
 +When used with -o, will also omit any processes that have the same
