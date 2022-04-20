@@ -1,7 +1,7 @@
 #
 # libgpg-error
 #
-LIBGPG_ERROR_VERSION = 1.41
+LIBGPG_ERROR_VERSION = 1.44
 LIBGPG_ERROR_DIR     = libgpg-error-$(LIBGPG_ERROR_VERSION)
 LIBGPG_ERROR_SOURCE  = libgpg-error-$(LIBGPG_ERROR_VERSION).tar.bz2
 LIBGPG_ERROR_SITE    = https://www.gnupg.org/ftp/gcrypt/libgpg-error
