@@ -7,7 +7,7 @@ DAEMON=/usr/bin/lcd4linux
 DESC=lcd4linux
 
 
-configfile() {
+lcd4linux_conf() {
 	if [ ! -e /tmp/lcd/layout ]; then
 		mkdir -p /tmp/lcd
 		echo Pearl_standard > /tmp/lcd/layout
@@ -23,9 +23,12 @@ configfile() {
 
 daemon_start() {
 	( # do always run in background
-		while [ ! -e /tmp/.lcd4linux ]; do sleep 2; done
+		while [ ! -e /tmp/.lcd4linux ]; do
+			sleep 1;
+		done
+
 		echo -n "Starting $DESC "
-		start-stop-daemon --start --quiet --pidfile /var/run/lcd4linux.pid --exec $DAEMON -- -p /var/run/lcd4linux.pid -f $(configfile)
+		start-stop-daemon --start --quiet --pidfile /var/run/lcd4linux.pid --exec $DAEMON -- -p /var/run/lcd4linux.pid -f $(lcd4linux_conf)
 		echo "done."
 	) &
 }
@@ -47,28 +50,27 @@ daemon_reload() {
 	fi
 }
 
-doOff() {
+daemon_Off() {
 	echo "LCD::backlight(0)" | $DAEMON -i > /dev/null 2>&1
 }
-
 
 case "$1" in
 	start)
 		daemon_start
-		;;
+	;;
 	stop)
 		daemon_stop
-		;;
+	;;
 	off)
 		daemon_stop
-		doOff
-		;;
+		daemon_Off
+	;;
 	restart|reload)
 		daemon_stop
 		daemon_start
-		;;
+	;;
 	*)
-		echo "Usage: $0 {start|stop|restart|reload|force-reload}" >&2
+		echo "Usage: $0 {start|stop|off|restart|reload}"
 		exit
-		;;
+	;;
 esac
