@@ -1,7 +1,7 @@
 #
 # mc
 #
-MC_VERSION = 4.8.27
+MC_VERSION = 4.8.28
 MC_DIR     = mc-$(MC_VERSION)
 MC_SOURCE  = mc-$(MC_VERSION).tar.xz
 MC_SITE    = ftp.midnight-commander.org
