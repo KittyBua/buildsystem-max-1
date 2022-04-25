@@ -1,7 +1,7 @@
 #
 # coreutils
 #
-COREUTILS_VERSION = 8.30
+COREUTILS_VERSION = 9.1
 COREUTILS_DIR     = coreutils-$(COREUTILS_VERSION)
 COREUTILS_SOURCE  = coreutils-$(COREUTILS_VERSION).tar.xz
 COREUTILS_SITE    = https://ftp.gnu.org/gnu/coreutils
