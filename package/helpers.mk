@@ -50,6 +50,13 @@ define EXTRACT
 	      $(CD) $(1)/$($(PKG)_DIR); git checkout -q $($(PKG)_CHECKOUT); \
 	    fi; \
 	    ;; \
+	  *.svn | svn.*) \
+	    cp -a -t $(1) $(DL_DIR)/$($(PKG)_SOURCE); \
+	    if test $($(PKG)_CHECKOUT); then \
+	      $(call MESSAGE,"svn checkout $($(PKG)_CHECKOUT)"); \
+	      $(CD) $(1)/$($(PKG)_DIR); svn checkout $($(PKG)_CHECKOUT); \
+	    fi; \
+	    ;; \
 	  *) \
 	    $(call MESSAGE,"Cannot extract $($(PKG)_SOURCE)"); \
 	    false ;; \
