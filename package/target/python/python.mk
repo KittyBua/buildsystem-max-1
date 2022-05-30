@@ -43,7 +43,7 @@ $(D)/python:
 		CONFIG_SITE= \
 		autoreconf -vfi Modules/_ctypes/libffi; \
 		autoconf; \
-		$(CONFIGURE) HOSTPYTHON=$(HOST_PYTHON_BINARY); \
+		$(TARGET_CONFIGURE) HOSTPYTHON=$(HOST_PYTHON_BINARY); \
 		$(MAKE) \
 			PYTHON_MODULES_INCLUDE="$(TARGET_INCLUDE_DIR)" \
 			PYTHON_MODULES_LIB="$(TARGET_LIB_DIR)" \

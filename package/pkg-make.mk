@@ -78,8 +78,6 @@ TARGET_CONFIGURE = \
 	./configure \
 	$(TARGET_CONFIGURE_OPTS)
 
-CONFIGURE = $(TARGET_CONFIGURE)
-
 define make-package
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \

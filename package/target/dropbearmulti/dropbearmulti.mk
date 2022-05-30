@@ -37,7 +37,7 @@ endef
 $(D)/dropbearmulti:
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(CONFIGURE); \
+		$(TARGET_CONFIGURE); \
 		$(MAKE) PROGRAMS="dropbear scp dropbearkey" MULTI=1; \
 		$(MAKE) PROGRAMS="dropbear scp dropbearkey" MULTI=1 install DESTDIR=$(TARGET_DIR)
 	$(call TARGET_FOLLOWUP)

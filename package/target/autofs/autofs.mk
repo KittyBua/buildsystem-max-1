@@ -60,7 +60,7 @@ AUTOFS_CLEANUP_TARGET_HOOKS += AUTOFS_CLEANUP_TARGET
 $(D)/autofs:
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(CONFIGURE); \
+		$(TARGET_CONFIGURE); \
 		$(MAKE) SUBDIRS="lib daemon modules" DONTSTRIP=1; \
 		$(MAKE) SUBDIRS="lib daemon modules" install DESTDIR=$(TARGET_DIR)
 	$(call TARGET_FOLLOWUP)

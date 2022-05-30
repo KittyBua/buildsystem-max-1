@@ -13,7 +13,7 @@ SMARTMONTOOLS_DEPENDS = bootstrap
 $(D)/smartmontools:
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(CONFIGURE); \
+		$(TARGET_CONFIGURE); \
 		$(MAKE); \
 		$(INSTALL_EXEC) smartctl $(TARGET_SBIN_DIR)/smartctl
 	$(call TARGET_FOLLOWUP)

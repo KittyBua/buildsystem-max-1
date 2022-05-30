@@ -64,7 +64,7 @@ NCURSES_POST_INSTALL_TARGET_HOOKS += NCURSES_LINK_PC
 $(D)/ncurses:
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(CONFIGURE); \
+		$(TARGET_CONFIGURE); \
 		$(MAKE) libs; \
 		$(MAKE) install.libs DESTDIR=$(TARGET_DIR)
 	$(call TARGET_FOLLOWUP)

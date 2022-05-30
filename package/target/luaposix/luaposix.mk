@@ -32,7 +32,7 @@ $(D)/luaposix:
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
 		./bootstrap; \
-		$(CONFIGURE); \
+		$(TARGET_CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install
 	$(call TARGET_FOLLOWUP)

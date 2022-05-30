@@ -28,7 +28,7 @@ $(D)/lcd4linux:
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
 		./bootstrap; \
-		$(CONFIGURE); \
+		$(TARGET_CONFIGURE); \
 		$(MAKE) vcs_version; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(call TARGET_FOLLOWUP)

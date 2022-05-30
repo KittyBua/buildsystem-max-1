@@ -113,7 +113,7 @@ $(D)/samba:
 	$(CHDIR)/$($(PKG)_DIR); \
 		cd source3; \
 		./autogen.sh; \
-		$(CONFIGURE); \
+		$(TARGET_CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) installservers SBIN_PROGS="bin/samba_multicall" DESTDIR=$(TARGET_DIR) LOCALEDIR=$(REMOVE_localedir)
 	$(call TARGET_FOLLOWUP)

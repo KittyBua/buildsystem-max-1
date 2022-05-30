@@ -33,7 +33,7 @@ GDB_CLEANUP_TARGET_HOOKS += GDB_CLEANUP_TARGET
 $(D)/gdb:
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(CONFIGURE); \
+		$(TARGET_CONFIGURE); \
 		$(MAKE) all-gdb; \
 		$(MAKE) install-gdb DESTDIR=$(TARGET_DIR)
 	$(call TARGET_FOLLOWUP)
