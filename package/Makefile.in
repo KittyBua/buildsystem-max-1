@@ -163,6 +163,10 @@ VPATH = $(DEPS_DIR)
 
 # -----------------------------------------------------------------------------
 
+BS_INIT_SYSV=1
+
+# -----------------------------------------------------------------------------
+
 include package/environment-linux.mk
 include package/environment-target.mk
 include package/flashimage.mk
