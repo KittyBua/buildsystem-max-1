@@ -34,7 +34,7 @@ crosstool-ng:
 	ln -sf $(HOST_CCACHE_BIN) $(HOST_CCACHE_BINDIR)/c++; \
 	ln -sf $(HOST_CCACHE_BIN) $(HOST_CCACHE_BINDIR)/gcc; \
 	ln -sf $(HOST_CCACHE_BIN) $(HOST_CCACHE_BINDIR)/g++; \
-	$(CHDIR)/$($(PKG)_DIR); \\
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/$(CROSSTOOL_NG_CONFIG).config .config; \
 		$(SED) "s|^CT_PARALLEL_JOBS=.*|CT_PARALLEL_JOBS=$(PARALLEL_JOBS)|" .config; \
 		export CT_NG_ARCHIVE=$(DL_DIR); \
