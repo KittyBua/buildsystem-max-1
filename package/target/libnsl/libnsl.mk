@@ -1,6 +1,9 @@
+################################################################################
 #
 # libnsl
 #
+################################################################################
+
 LIBNSL_VERSION = 1.2.0
 LIBNSL_DIR     = libnsl-$(LIBNSL_VERSION)
 LIBNSL_SOURCE  = libnsl-$(LIBNSL_VERSION).tar.gz
@@ -9,18 +12,11 @@ LIBNSL_DEPENDS = bootstrap libtirpc
 
 LIBNSL_AUTORECONF = YES
 
+define LIBNSL_INSTALL_FILES
+	mv $(TARGET_LIB_DIR)/libnsl.so.2* $(TARGET_DIR)/lib
+	ln -sfv ../../lib/libnsl.so.2.0.0 $(TARGET_LIB_DIR)/libnsl.so
+endef
+LIBNSL_POST_INSTALL_TARGET_HOOKS += LIBNSL_INSTALL_FILES
+
 $(D)/libnsl:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	mv $(TARGET_DIR)/usr/lib/libnsl.so.2* $(TARGET_DIR)/lib; \
-	ln -sfv ../../lib/libnsl.so.2.0.0 $(TARGET_DIR)/usr/lib/libnsl.so
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

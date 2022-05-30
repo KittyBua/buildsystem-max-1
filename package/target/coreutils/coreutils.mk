@@ -1,6 +1,9 @@
+################################################################################
 #
 # coreutils
 #
+################################################################################
+
 COREUTILS_VERSION = 9.1
 COREUTILS_DIR     = coreutils-$(COREUTILS_VERSION)
 COREUTILS_SOURCE  = coreutils-$(COREUTILS_VERSION).tar.xz
@@ -21,14 +24,4 @@ COREUTILS_CONF_OPTS = \
 	--without-selinux
 
 $(D)/coreutils:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

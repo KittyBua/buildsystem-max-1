@@ -1,6 +1,9 @@
+################################################################################
 #
 # aio-grab
 #
+################################################################################
+
 AIO_GRAB_VERSION = git
 AIO_GRAB_DIR     = aio-grab.git
 AIO_GRAB_SOURCE  = aio-grab.git
@@ -14,14 +17,4 @@ AIO_GRAB_CONF_OPTS = \
 	--enable-silent-rules
 
 $(D)/aio-grab:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

@@ -1,6 +1,9 @@
+################################################################################
 #
 # host-glib2
 #
+################################################################################
+
 HOST_GLIB2_VERSION = 2.62.4
 HOST_GLIB2_DIR     = glib-$(HOST_GLIB2_VERSION)
 HOST_GLIB2_SOURCE  = glib-$(HOST_GLIB2_VERSION).tar.xz
@@ -18,14 +21,4 @@ HOST_GLIB2_CONF_OPTS = \
 	-Doss_fuzz=disabled
 
 $(D)/host-glib2:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(HOST_MESON_CONFIGURE); \
-		$(HOST_NINJA); \
-		$(HOST_NINJA_INSTALL)
-	$(REMOVE)
-	$(TOUCH)
+	$(call host-meson-package)

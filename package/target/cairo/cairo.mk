@@ -1,6 +1,9 @@
+################################################################################
 #
 # cairo
 #
+################################################################################
+
 CAIRO_VERSION = 1.16.0
 CAIRO_DIR     = cairo-$(CAIRO_VERSION)
 CAIRO_SOURCE  = cairo-$(CAIRO_VERSION).tar.xz
@@ -20,21 +23,12 @@ CAIRO_CONF_OPTS = \
 	--disable-gl \
 	--enable-tee
 
+define CAIRO_CLEANUP_TARGET
+	rm -rf $(addprefix $(TARGET_BIN_DIR)/,cairo-sphinx)
+	rm -rf $(addprefix $(TARGET_LIB_DIR)/cairo/,cairo-fdr* cairo-sphinx*)
+	rm -rf $(addprefix $(TARGET_LIB_DIR)/cairo/.debug/,cairo-fdr* cairo-sphinx*)
+endef
+CAIRO_CLEANUP_TARGET_HOOKS += CAIRO_CLEANUP_TARGET
+
 $(D)/cairo:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	rm -rf $(TARGET_DIR)/usr/bin/cairo-sphinx
-	rm -rf $(TARGET_LIB_DIR)/cairo/cairo-fdr*
-	rm -rf $(TARGET_LIB_DIR)/cairo/cairo-sphinx*
-	rm -rf $(TARGET_LIB_DIR)/cairo/.debug/cairo-fdr*
-	rm -rf $(TARGET_LIB_DIR)/cairo/.debug/cairo-sphinx*
-	$(TOUCH)
+	$(call make-package)

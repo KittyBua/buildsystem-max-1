@@ -1,23 +1,25 @@
+################################################################################
 #
 # ofgwrite
 #
+################################################################################
+
 OFGWRITE_VERSION = git
 OFGWRITE_DIR     = ofgwrite-max.git
 OFGWRITE_SOURCE  = ofgwrite-max.git
 OFGWRITE_SITE    = $(MAX-GIT-GITHUB)
 OFGWRITE_DEPENDS = bootstrap
 
+define OFGWRITE_INSTALL_FILES
+	$(INSTALL_EXEC) $(PKG_BUILD_DIR)/ofgwrite_bin $(TARGET_BIN_DIR)
+	$(INSTALL_EXEC) $(PKG_BUILD_DIR)/ofgwrite_caller $(TARGET_BIN_DIR)
+	$(INSTALL_EXEC) $(PKG_BUILD_DIR)/ofgwrite $(TARGET_BIN_DIR)
+endef
+OFGWRITE_POST_INSTALL_TARGET_HOOKS += OFGWRITE_INSTALL_FILES
+
 $(D)/ofgwrite:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_OPTS) \
-		$(MAKE); \
-	$(INSTALL_EXEC) $(BUILD_DIR)/$(OFGWRITE_DIR)/ofgwrite_bin $(TARGET_DIR)/usr/bin
-	$(INSTALL_EXEC) $(BUILD_DIR)/$(OFGWRITE_DIR)/ofgwrite_caller $(TARGET_DIR)/usr/bin
-	$(INSTALL_EXEC) $(BUILD_DIR)/$(OFGWRITE_DIR)/ofgwrite $(TARGET_DIR)/usr/bin
-	$(REMOVE)
-	$(TOUCH)
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
+		$(TARGET_CONFIGURE_ENV) \
+		$(MAKE)
+	$(call TARGET_FOLLOWUP)

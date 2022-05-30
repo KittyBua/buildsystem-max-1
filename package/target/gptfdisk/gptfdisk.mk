@@ -1,6 +1,9 @@
+################################################################################
 #
 # gptfdisk
 #
+################################################################################
+
 GPTFDISK_VERSION = 1.0.9
 GPTFDISK_DIR     = gptfdisk-$(GPTFDISK_VERSION)
 GPTFDISK_SOURCE  = gptfdisk-$(GPTFDISK_VERSION).tar.gz
@@ -8,14 +11,9 @@ GPTFDISK_SITE    = https://sourceforge.net/projects/gptfdisk/files/gptfdisk/$(GP
 GPTFDISK_DEPENDS = bootstrap e2fsprogs ncurses popt
 
 $(D)/gptfdisk:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_OPTS) \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
+		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) sgdisk; \
-		$(INSTALL_EXEC) sgdisk $(TARGET_DIR)/usr/sbin/sgdisk
-	$(REMOVE)
-	$(TOUCH)
+		$(INSTALL_EXEC) sgdisk $(TARGET_SBIN_DIR)/sgdisk
+	$(call TARGET_FOLLOWUP)

@@ -1,6 +1,9 @@
+################################################################################
 #
 # luasocket
 #
+################################################################################
+
 LUASOCKET_VERSION = git
 LUASOCKET_DIR     = luasocket.git
 LUASOCKET_SOURCE  = luasocket.git
@@ -16,13 +19,8 @@ endef
 LUASOCKET_POST_PATCH_HOOKS = LUASOCKET_POST_PATCH
 
 $(D)/luasocket:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(MAKE) CC=$(TARGET_CC) LD=$(TARGET_CC) LUAV=$(LUA_ABIVERSION) PLAT=linux COMPAT=COMPAT LUAINC_linux=$(TARGET_INCLUDE_DIR) LUAPREFIX_linux=; \
 		$(MAKE) install LUAPREFIX_linux= LUAV=$(LUA_ABIVERSION)
-	$(REMOVE)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

@@ -1,10 +1,16 @@
+################################################################################
+#
+# neutrino-release
+#
+################################################################################
+
 #
 # python-iptv-install
 #
 python-iptv-install:
 	mkdir -p $(RELEASE_DIR)/$(PYTHON_INCLUDE_DIR)
 	cp $(TARGET_DIR)/$(PYTHON_INCLUDE_DIR)/pyconfig.h $(RELEASE_DIR)/$(PYTHON_INCLUDE_DIR)
-	cp -af $(TARGET_DIR)/usr/share/E2emulator $(RELEASE_DIR)/usr/share/
+	cp -af $(TARGET_SHARE_DIR)/E2emulator $(RELEASE_DIR)/usr/share/
 	ln -sf /usr/share/E2emulator/Plugins/Extensions/IPTVPlayer/cmdlineIPTV.sh $(RELEASE_DIR)/usr/bin/cmdlineIPTV
 	rm -f $(RELEASE_DIR)/usr/bin/{cftp,ckeygen,easy_install*,mailmail,pyhtmlizer,tkconch,trial,twist,twistd}
 	rm -rf $(RELEASE_DIR)/$(PYTHON_BASE_DIR)/{bsddb,compiler,curses,distutils,email,ensurepip,hotshot,idlelib,lib2to3}
@@ -45,13 +51,13 @@ neutrino-release-base:
 	mkdir -p $(RELEASE_DIR)/home/root
 	mkdir -p $(RELEASE_DIR)/media/hdd
 	mkdir -p $(RELEASE_DIR)/usr/{bin,lib,sbin,share}
-	cp -a $(TARGET_DIR)/bin/* $(RELEASE_DIR)/bin/
-	cp -a $(TARGET_DIR)/sbin/* $(RELEASE_DIR)/sbin/
-	cp -a $(TARGET_DIR)/usr/bin/* $(RELEASE_DIR)/usr/bin/
-	cp -a $(TARGET_DIR)/usr/share/* $(RELEASE_DIR)/usr/share/
-	cp -a $(TARGET_DIR)/usr/sbin/* $(RELEASE_DIR)/usr/sbin/
-	cp -a $(TARGET_DIR)/lib/* $(RELEASE_DIR)/lib/
-	cp -a $(TARGET_DIR)/usr/lib/* $(RELEASE_DIR)/usr/lib/
+	cp -a $(TARGET_BASE_BIN_DIR)/* $(RELEASE_DIR)/bin/
+	cp -a $(TARGET_BASE_SBIN_DIR)/* $(RELEASE_DIR)/sbin/
+	cp -a $(TARGET_BIN_DIR)/* $(RELEASE_DIR)/usr/bin/
+	cp -a $(TARGET_SHARE_DIR)/* $(RELEASE_DIR)/usr/share/
+	cp -a $(TARGET_SBIN_DIR)/* $(RELEASE_DIR)/usr/sbin/
+	cp -a $(TARGET_BASE_LIB_DIR)/* $(RELEASE_DIR)/lib/
+	cp -a $(TARGET_LIB_DIR)/* $(RELEASE_DIR)/usr/lib/
 	if [ $(TARGET_ARCH) = "aarch64" ]; then \
 		cd ${RELEASE_DIR}; ln -sf lib lib64; \
 		cd ${RELEASE_DIR}/usr; ln -sf lib lib64; \
@@ -76,13 +82,13 @@ neutrino-release-base:
 #
 # mc
 #
-	if [ -e $(TARGET_DIR)/usr/bin/mc ]; then \
-		cp -af $(TARGET_DIR)/usr/libexec $(RELEASE_DIR)/usr/; \
+	if [ -e $(TARGET_BIN_DIR)/mc ]; then \
+		cp -af $(TARGET_LIBEXEC_DIR) $(RELEASE_DIR)/usr/; \
 	fi
 #
 # E2emulator
 #
-	if [ -d $(TARGET_DIR)/usr/share/E2emulator ]; then \
+	if [ -d $(TARGET_SHARE_DIR)/E2emulator ]; then \
 		make python-iptv-install; \
 	fi
 #

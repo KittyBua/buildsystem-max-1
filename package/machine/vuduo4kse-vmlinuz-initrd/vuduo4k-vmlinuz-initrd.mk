@@ -1,6 +1,9 @@
+################################################################################
 #
 # vuduo4kse-vmlinuz-initrd 7278b1
 #
+################################################################################
+
 ifeq ($(VU_MULTIBOOT),multi)
 VUDUO4KSE_VMLINUZ_INITRD_DATE = 20201010
 VUDUO4KSE_VMLINUZ_INITRD_SITE = https://bitbucket.org/max_10/vmlinuz-initrd-vuduo4kse/downloads
@@ -13,7 +16,7 @@ VUDUO4KSE_VMLINUZ_INITRD_SOURCE  = vmlinuz-initrd_vuduo4kse_$(VUDUO4KSE_VMLINUZ_
 VUDUO4KSE_VMLINUZ_INITRD_DEPENDS = bootstrap
 
 $(D)/vuduo4kse-vmlinuz-initrd:
-	$(START_BUILD)
+	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

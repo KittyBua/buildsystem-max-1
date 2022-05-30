@@ -1,11 +1,61 @@
+################################################################################
 #
 # set up linux environment for other makefiles
 #
-# -----------------------------------------------------------------------------
+################################################################################
 
+KERNEL_OBJ         = linux-$(KERNEL_VERSION)-kernel-obj
+KERNEL_OBJ_DIR     = $(BUILD_DIR)/$(KERNEL_OBJ)
+KERNEL_MODULES     = linux-$(KERNEL_VERSION)-modules
+KERNEL_MODULES_DIR = $(BUILD_DIR)/linux-$(KERNEL_VERSION)-modules/lib/modules/$(KERNEL_VERSION)
+TARGET_MODULES_DIR = $(TARGET_DIR)/lib/modules/$(KERNEL_VERSION)
+
+KERNEL_OUTPUT      = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/$(KERNEL_IMAGE_TYPE)
+KERNEL_INPUT_DTB   = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/dts/$(KERNEL_DTB)
+KERNEL_OUTPUT_DTB  = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/zImage_dtb
+
+LINUX_DIR          = $(BUILD_DIR)/$(KERNEL_DIR)
+
+# translate toolchain arch to kernel arch
+ifeq ($(TARGET_ARCH),arm)
+KERNEL_ARCH = arm
+else ifeq ($(TARGET_ARCH),aarch64)
+KERNEL_ARCH = arm64
+else ifeq ($(TARGET_ARCH),mips)
+KERNEL_ARCH = mips
+endif
+
+KERNEL_MAKEVARS = \
+	ARCH=$(KERNEL_ARCH) \
+	CROSS_COMPILE=$(TARGET_CROSS) \
+	INSTALL_MOD_PATH=$(BUILD_DIR)/$(KERNEL_MODULES) \
+	O=$(KERNEL_OBJ_DIR)
+
+# Compatibility variables
+KERNEL_MAKEVARS += \
+	KDIR=$(LINUX_DIR) \
+	KSRC=$(LINUX_DIR) \
+	SRC=$(LINUX_DIR) \
+	KERNDIR=$(LINUX_DIR) \
+	KERNELDIR=$(LINUX_DIR) \
+	KERNEL_SRC=$(LINUX_DIR) \
+	KERNEL_SOURCE=$(LINUX_DIR) \
+	LINUX_SRC=$(LINUX_DIR) \
+	KVER=$(KERNEL_VERSION) \
+	KERNEL_VERSIONSION=$(KERNEL_VERSION)
+
+define LINUX_RUN_DEPMOD
+	if test -d $(TARGET_DIR)/lib/modules/$(KERNEL_VERSION) \
+		&& grep -q "CONFIG_MODULES=y" $(KERNEL_OBJ_DIR)/.config; then \
+		PATH=$(PATH):/sbin:/usr/sbin depmod -a -b $(TARGET_DIR) $(KERNEL_VERSION); \
+	fi
+endef
+
+################################################################################
 #
 # gfutures / Air Digital
 #
+################################################################################
 
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 hd60 hd61))
 
@@ -48,11 +98,12 @@ KERNEL_DIR  = linux-$(KERNEL_VERSION)
 
 endif
 
-# -----------------------------------------------------------------------------
-
+################################################################################
 #
 # VU Plus
 #
+################################################################################
+
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 
 ifeq ($(BOXMODEL),vuduo)
@@ -107,11 +158,18 @@ KERNEL_DIR  = linux
 
 endif
 
-# -----------------------------------------------------------------------------
+ifeq ($(VU_MULTIBOOT),multi)
+KERNEL_CONFIG = $(BOXMODEL)_defconfig_multi
+else
+KERNEL_CONFIG = $(BOXMODEL)_defconfig
+endif
 
+################################################################################
 #
 # Edision
 #
+################################################################################
+
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),osmio4k osmio4kplus))
 
 KERNEL_VERSION        = 5.9.0
@@ -126,64 +184,3 @@ KERNEL_SITE       = http://source.mynonpublic.com/edision
 KERNEL_DIR        = linux-brcmstb-$(KERNEL_SOURCE_VERSION)
 
 endif
-
-# -----------------------------------------------------------------------------
-
-KERNEL_OBJ         = linux-$(KERNEL_VERSION)-kernel-obj
-KERNEL_OBJ_DIR     = $(BUILD_DIR)/$(KERNEL_OBJ)
-KERNEL_MODULES     = linux-$(KERNEL_VERSION)-modules
-KERNEL_MODULES_DIR = $(BUILD_DIR)/linux-$(KERNEL_VERSION)-modules/lib/modules/$(KERNEL_VERSION)
-TARGET_MODULES_DIR = $(TARGET_DIR)/lib/modules/$(KERNEL_VERSION)
-
-KERNEL_OUTPUT      = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/$(KERNEL_IMAGE_TYPE)
-KERNEL_INPUT_DTB   = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/dts/$(KERNEL_DTB)
-KERNEL_OUTPUT_DTB  = $(KERNEL_OBJ_DIR)/arch/$(KERNEL_ARCH)/boot/zImage_dtb
-
-ifeq ($(VU_MULTIBOOT),multi)
-KERNEL_CONFIG = $(BOXMODEL)_defconfig_multi
-else
-KERNEL_CONFIG = $(BOXMODEL)_defconfig
-endif
-
-LINUX_DIR = $(BUILD_DIR)/$(KERNEL_DIR)
-
-# -----------------------------------------------------------------------------
-
-# translate toolchain arch to kernel arch
-ifeq ($(TARGET_ARCH),arm)
-KERNEL_ARCH = arm
-else ifeq ($(TARGET_ARCH),aarch64)
-KERNEL_ARCH = arm64
-else ifeq ($(TARGET_ARCH),mips)
-KERNEL_ARCH = mips
-endif
-
-# -----------------------------------------------------------------------------
-
-KERNEL_MAKEVARS = \
-	ARCH=$(KERNEL_ARCH) \
-	CROSS_COMPILE=$(TARGET_CROSS) \
-	INSTALL_MOD_PATH=$(BUILD_DIR)/$(KERNEL_MODULES) \
-	O=$(KERNEL_OBJ_DIR)
-
-# Compatibility variables
-KERNEL_MAKEVARS += \
-	KDIR=$(LINUX_DIR) \
-	KSRC=$(LINUX_DIR) \
-	SRC=$(LINUX_DIR) \
-	KERNDIR=$(LINUX_DIR) \
-	KERNELDIR=$(LINUX_DIR) \
-	KERNEL_SRC=$(LINUX_DIR) \
-	KERNEL_SOURCE=$(LINUX_DIR) \
-	LINUX_SRC=$(LINUX_DIR) \
-	KVER=$(KERNEL_VERSION) \
-	KERNEL_VERSIONSION=$(KERNEL_VERSION)
-
-# -----------------------------------------------------------------------------
-
-define LINUX_RUN_DEPMOD
-	if test -d $(TARGET_DIR)/lib/modules/$(KERNEL_VERSION) \
-		&& grep -q "CONFIG_MODULES=y" $(KERNEL_OBJ_DIR)/.config; then \
-		PATH=$(PATH):/sbin:/usr/sbin depmod -a -b $(TARGET_DIR) $(KERNEL_VERSION); \
-	fi
-endef

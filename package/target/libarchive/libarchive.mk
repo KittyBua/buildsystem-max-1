@@ -1,6 +1,9 @@
+################################################################################
 #
 # libarchive
 #
+################################################################################
+
 LIBARCHIVE_VERSION = 3.5.2
 LIBARCHIVE_DIR     = libarchive-$(LIBARCHIVE_VERSION)
 LIBARCHIVE_SOURCE  = libarchive-$(LIBARCHIVE_VERSION).tar.gz
@@ -19,15 +22,4 @@ LIBARCHIVE_CONF_OPTS = \
 	--without-expat
 
 $(D)/libarchive:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

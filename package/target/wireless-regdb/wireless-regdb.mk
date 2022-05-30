@@ -1,18 +1,21 @@
+################################################################################
 #
 # wireless-regdb
 #
+################################################################################
+
 WIRELESS_REGDB_VERSION = 2020.04.29
 WIRELESS_REGDB_DIR     = wireless-regdb-$(WIRELESS_REGDB_VERSION)
 WIRELESS_REGDB_SOURCE  = wireless-regdb-$(WIRELESS_REGDB_VERSION).tar.xz
 WIRELESS_REGDB_SITE    = https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb
 WIRELESS_REGDB_DEPENDS = bootstrap
 
-$(D)/wireless-regdb:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
+define WIRELESS_REGDB_INSTALL_FILES
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/regulatory.db $(TARGET_FIRMWARE_DIR)/regulatory.db
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/regulatory.db.p7s $(TARGET_FIRMWARE_DIR)/regulatory.db.p7s
-	$(REMOVE)
-	$(TOUCH)
+endef
+WIRELESS_REGDB_POST_INSTALL_TARGET_HOOKS += WIRELESS_REGDB_INSTALL_FILES
+
+$(D)/wireless-regdb:
+	$(call PREPARE)
+	$(call TARGET_FOLLOWUP)

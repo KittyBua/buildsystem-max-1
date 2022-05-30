@@ -1,6 +1,9 @@
+################################################################################
 #
 # ncurses
 #
+################################################################################
+
 NCURSES_VERSION = 6.1
 NCURSES_DIR     = ncurses-$(NCURSES_VERSION)
 NCURSES_SOURCE  = ncurses-$(NCURSES_VERSION).tar.gz
@@ -36,40 +39,32 @@ NCURSES_LIBS = ncurses menu panel form
 
 define NCURSES_LINK_LIBS_STATIC
 	$(foreach lib,$(NCURSES_LIBS:%=lib%), \
-		ln -sf $(lib)$(NCURSES_LIB_SUFFIX).a $(TARGET_DIR)/usr/lib/$(lib).a
+		ln -sf $(lib)$(NCURSES_LIB_SUFFIX).a $(TARGET_LIB_DIR)/$(lib).a
 	)
-	ln -sf libncurses$(NCURSES_LIB_SUFFIX).a \
-		$(TARGET_DIR)/usr/lib/libcurses.a
+	ln -sf libncurses$(NCURSES_LIB_SUFFIX).a $(TARGET_LIB_DIR)/libcurses.a
 endef
 
 define NCURSES_LINK_LIBS_SHARED
 	$(foreach lib,$(NCURSES_LIBS:%=lib%), \
-		ln -sf $(lib)$(NCURSES_LIB_SUFFIX).so $(TARGET_DIR)/usr/lib/$(lib).so
+		ln -sf $(lib)$(NCURSES_LIB_SUFFIX).so $(TARGET_LIB_DIR)/$(lib).so
 	)
-	ln -sf libncurses$(NCURSES_LIB_SUFFIX).so \
-		$(TARGET_DIR)/usr/lib/libcurses.so
+	ln -sf libncurses$(NCURSES_LIB_SUFFIX).so $(TARGET_LIB_DIR)/libcurses.so
 endef
 
 define NCURSES_LINK_PC
 	$(foreach pc,$(NCURSES_LIBS), \
-		ln -sf $(pc)$(NCURSES_LIB_SUFFIX).pc \
-			$(TARGET_DIR)/usr/lib/pkgconfig/$(pc).pc
+		ln -sf $(pc)$(NCURSES_LIB_SUFFIX).pc $(TARGET_LIB_DIR)/pkgconfig/$(pc).pc
 	)
 endef
 
+NCURSES_POST_INSTALL_TARGET_HOOKS += NCURSES_LINK_LIBS_STATIC
+NCURSES_POST_INSTALL_TARGET_HOOKS += NCURSES_LINK_LIBS_SHARED
+NCURSES_POST_INSTALL_TARGET_HOOKS += NCURSES_LINK_PC
+
 $(D)/ncurses:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(CONFIGURE); \
 		$(MAKE) libs; \
 		$(MAKE) install.libs DESTDIR=$(TARGET_DIR)
-	$(REWRITE_CONFIG_SCRIPTS)
-	$(NCURSES_LINK_LIBS_STATIC)
-	$(NCURSES_LINK_LIBS_SHARED)
-	$(NCURSES_LINK_PC)
-	$(REMOVE)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

@@ -1,6 +1,9 @@
+################################################################################
 #
 # mc
 #
+################################################################################
+
 MC_VERSION = 4.8.28
 MC_DIR     = mc-$(MC_VERSION)
 MC_SOURCE  = mc-$(MC_VERSION).tar.xz
@@ -20,17 +23,11 @@ MC_CONF_OPTS = \
 	--without-gpm-mouse \
 	--without-x
 
-$(D)/mc:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
+define MC_CLEANUP_TARGET
 	rm -rf $(TARGET_SHARE_DIR)/mc/examples
 	find $(TARGET_SHARE_DIR)/mc/skins -type f ! -name default.ini | xargs --no-run-if-empty rm
-	$(TOUCH)
+endef
+MC_CLEANUP_TARGET_HOOKS += MC_CLEANUP_TARGET
+
+$(D)/mc:
+	$(call make-package)

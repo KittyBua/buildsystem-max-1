@@ -1,6 +1,9 @@
+################################################################################
 #
 # e2fsprogs
 #
+################################################################################
+
 E2FSPROGS_VERSION = 1.46.5
 E2FSPROGS_DIR     = e2fsprogs-$(E2FSPROGS_VERSION)
 E2FSPROGS_SOURCE  = e2fsprogs-$(E2FSPROGS_VERSION).tar.gz
@@ -39,19 +42,13 @@ E2FSPROGS_CONF_OPTS = \
 	--with-root-prefix="" \
 	--with-crond-dir=no
 
-$(D)/e2fsprogs:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	rm -f $(addprefix $(TARGET_DIR)/sbin/,badblocks dumpe2fs e2freefrag e2mmpstatus e2undo e4crypt filefrag logsave mklost+found)
-	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,mk_cmds uuidd)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,chattr compile_et irqtop mk_cmds lsattr uuidgen)
+define E2FSPROGS_CLEANUP_TARGET
+	rm -f $(addprefix $(TARGET_BASE_SBIN_DIR)/,badblocks dumpe2fs e2freefrag e2mmpstatus e2undo e4crypt filefrag logsave mklost+found)
+	rm -f $(addprefix $(TARGET_SBIN_DIR)/,mk_cmds uuidd)
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,chattr compile_et irqtop mk_cmds lsattr uuidgen)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,et ss)
-	$(TOUCH)
+endef
+E2FSPROGS_CLEANUP_TARGET_HOOKS += E2FSPROGS_CLEANUP_TARGET
+
+$(D)/e2fsprogs:
+	$(call make-package)

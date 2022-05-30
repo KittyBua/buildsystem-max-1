@@ -1,25 +1,24 @@
+################################################################################
 #
 # rsync
 #
-RSYNC_VERSION = 3.1.3
+################################################################################
+
+RSYNC_VERSION = 3.2.4
 RSYNC_DIR     = rsync-$(RSYNC_VERSION)
 RSYNC_SOURCE  = rsync-$(RSYNC_VERSION).tar.gz
 RSYNC_SITE    = https://download.samba.org/pub/rsync/src
 RSYNC_DEPENDS = bootstrap
 
 RSYNC_CONF_OPTS = \
-	--disable-debug \
-	--disable-locale
+	--with-included-zlib=no \
+	--with-included-popt=no \
+	--disable-simd \
+	--disable-openssl \
+	--disable-xxhash \
+	--disable-zstd \
+	--disable-lz4 \
+	--disable-asm
 
 $(D)/rsync:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install-all DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

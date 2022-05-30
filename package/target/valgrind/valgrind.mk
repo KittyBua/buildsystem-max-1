@@ -1,11 +1,16 @@
+################################################################################
 #
 # valgrind
 #
-VALGRIND_VERSION = 3.13.0
+################################################################################
+
+VALGRIND_VERSION = 3.18.1
 VALGRIND_DIR     = valgrind-$(VALGRIND_VERSION)
 VALGRIND_SOURCE  = valgrind-$(VALGRIND_VERSION).tar.bz2
 VALGRIND_SITE    = ftp://sourceware.org/pub/valgrind
 VALGRIND_DEPENDS = bootstrap
+
+VALGRIND_AUTORECONF = YES
 
 define VALGRIND_POST_PATCH
 	$(SED) "s#armv7#arm#g" $(PKG_BUILD_DIR)/configure
@@ -16,17 +21,12 @@ VALGRIND_CONF_OPTS = \
 	--datadir=$(REMOVE_datarootdir) \
 	--enable-only32bit
 
+define VALGRIND_CLEANUP_TARGET
+	rm -rf $(addprefix $(TARGET_LIB_DIR)/,valgrind)
+	rm -rf $(addprefix $(TARGET_LIBEXEC_DIR)/,valgrind)
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,cg_* callgrind_* ms_print valgrind-* vgdb)
+endef
+VALGRIND_CLEANUP_TARGET_HOOKS += VALGRIND_CLEANUP_TARGET
+
 $(D)/valgrind:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	rm -f $(addprefix $(TARGET_DIR)/usr/lib/valgrind/,*.a *.xml)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,cg_* callgrind_* ms_print)
-	$(TOUCH)
+	$(call make-package)

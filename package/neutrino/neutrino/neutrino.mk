@@ -239,11 +239,11 @@ NEUTRINO_DEPENDS += libstb-hal
 NEUTRINO_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_DIR)
 
 $(D)/neutrino.do_prepare:
-	$(START_BUILD)
+	$(call STARTUP)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(SOURCE_DIR))
-	$(call APPLY_PATCHES_S,$(NEUTRINO_DIR))
+	$(call APPLY_PATCHES_S,$(PKG_PATCHES_DIR),$($(PKG)_PATCH))
 	@touch $@
 
 $(D)/neutrino.config.status:
@@ -251,7 +251,7 @@ $(D)/neutrino.config.status:
 	mkdir -p $(NEUTRINO_OBJ_DIR)
 	$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh
 	$(CD) $(NEUTRINO_OBJ_DIR); \
-		$(TARGET_CONFIGURE_OPTS) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure \
 			$(NEUTRINO_CONF_OPTS)
 		$(if $(findstring VCS,$(NEUTRINO_CFLAGS)),+make $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h)
@@ -296,7 +296,7 @@ else
 endif
 	( \
 		echo "PRETTY_NAME=$(FLAVOUR) BS-rev$(BS_REV) HAL-rev$(HAL_REV) NMP-rev$(NMP_REV)"; \
-	) > $(TARGET_DIR)/usr/lib/os-release
+	) > $(TARGET_LIB_DIR)/os-release
 ifeq ($(FLAVOUR),$(filter $(FLAVOUR),neutrino-max neutrino-ni neutrino-test-max neutrino-redblue))
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/start_neutrino1 $(TARGET_DIR)/etc/init.d/start_neutrino
 else
@@ -306,21 +306,21 @@ endif
 
 neutrino-pc: neutrino
 	export LUA_CPATH_5_2=";;$(TARGET_LIB_DIR)/lua/5.2/?.so"; \
-	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/rss_addon/?.lua"; \
+	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(SHARE_NEUTRINO_PLUGINS)/rss_addon/?.lua"; \
 	export SIMULATE_FE=1; \
-	$(TARGET_DIR)/usr/bin/neutrino || true
+	$(TARGET_BIN_DIR)/neutrino || true
 
 neutrino-pc-gdb: neutrino
 	export LUA_CPATH_5_2=";;$(TARGET_LIB_DIR)/lua/5.2/?.so"; \
-	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/rss_addon/?.lua"; \
+	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(SHARE_NEUTRINO_PLUGINS)/rss_addon/?.lua"; \
 	export SIMULATE_FE=1; \
-	gdb -ex run $(TARGET_DIR)/usr/bin/neutrino || true
+	gdb -ex run $(TARGET_BIN_DIR)/neutrino || true
 
 neutrino-pc-valgrind: neutrino
 	export LUA_CPATH_5_2=";;$(TARGET_LIB_DIR)/lua/5.2/?.so"; \
-	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins/rss_addon/?.lua"; \
+	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(SHARE_NEUTRINO_PLUGINS)/rss_addon/?.lua"; \
 	export SIMULATE_FE=1; \
-	valgrind --leak-check=full --log-file="$(BUILD_TMP)/valgrind.log" -v $(TARGET_DIR)/usr/bin/neutrino || true
+	valgrind --leak-check=full --log-file="$(BUILD_TMP)/valgrind.log" -v $(TARGET_BIN_DIR)/neutrino || true
 
 neutrino-pc-clean \
 neutrino-clean:

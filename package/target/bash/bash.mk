@@ -1,21 +1,32 @@
+################################################################################
 #
 # bash
 #
+################################################################################
+
 BASH_VERSION = 5.0
 BASH_DIR     = bash-$(BASH_VERSION)
 BASH_SOURCE  = bash-$(BASH_VERSION).tar.gz
 BASH_SITE    = http://ftp.gnu.org/gnu/bash
-BASH_DEPENDS = bootstrap ncurses
+BASH_DEPENDS = bootstrap
+
+BASH_CONF_ENV += \
+	bash_cv_getcwd_malloc=yes \
+	bash_cv_job_control_missing=present \
+	bash_cv_sys_named_pipes=present \
+	bash_cv_func_sigsetjmp=present \
+	bash_cv_printf_a_format=yes
+
+BASH_CONF_OPTS = \
+	--bindir=$(base_bindir) \
+	--datarootdir=$(REMOVE_datarootdir) \
+	--without-bash-malloc
+
+define BASH_CLEANUP_TARGET
+	rm -rf $(addprefix $(TARGET_LIB_DIR)/,bash)
+	rm -f $(addprefix $(TARGET_BASE_BIN_DIR)/,bashbug)
+endef
+BASH_CLEANUP_TARGET_HOOKS += BASH_CLEANUP_TARGET
 
 $(D)/bash:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(INSTALL_EXEC) bash $(TARGET_DIR)/$(base_bindir)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

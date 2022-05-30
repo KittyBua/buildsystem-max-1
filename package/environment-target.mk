@@ -1,32 +1,8 @@
+################################################################################
 #
 # set up target environment for other makefiles
 #
-# -----------------------------------------------------------------------------
-
-SHARE_FLEX      = $(TARGET_SHARE_DIR)/tuxbox/neutrino/flex
-SHARE_ICONS     = $(TARGET_SHARE_DIR)/tuxbox/neutrino/icons
-SHARE_LCD4LINUX = $(TARGET_SHARE_DIR)/tuxbox/neutrino/lcd/icons
-SHARE_LOGOS     = $(TARGET_SHARE_DIR)/tuxbox/neutrino/icons/logo
-SHARE_PLUGINS   = $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins
-SHARE_THEMES    = $(TARGET_SHARE_DIR)/tuxbox/neutrino/themes
-SHARE_WEBRADIO  = $(TARGET_SHARE_DIR)/tuxbox/neutrino/webradio
-SHARE_WEBTV     = $(TARGET_SHARE_DIR)/tuxbox/neutrino/webtv
-VAR_CONFIG      = $(TARGET_DIR)/var/tuxbox/config
-VAR_PLUGINS     = $(TARGET_DIR)/var/tuxbox/plugins
-
-$(SHARE_FLEX) \
-$(SHARE_ICONS) \
-$(SHARE_LCD4LINUX) \
-$(SHARE_LOGOS) \
-$(SHARE_PLUGINS) \
-$(SHARE_THEMES) \
-$(SHARE_WEBRADIO) \
-$(SHARE_WEBTV) \
-$(VAR_CONFIG) \
-$(VAR_PLUGINS):
-	mkdir -p $(@)
-
-# -----------------------------------------------------------------------------
+################################################################################
 
 # Used by multilib code to change the library paths
 baselib                = $(BASELIB)
@@ -71,8 +47,25 @@ localedir              = $(libdir)/locale
 
 # -----------------------------------------------------------------------------
 
+TARGET_BASE_BIN_DIR    = $(TARGET_DIR)$(base_bindir)
+TARGET_BASE_SBIN_DIR   = $(TARGET_DIR)$(base_sbindir)
+TARGET_BASE_LIB_DIR    = $(TARGET_DIR)$(base_libdir)
+
+TARGET_BIN_DIR         = $(TARGET_DIR)$(bindir)
+TARGET_SBIN_DIR        = $(TARGET_DIR)$(sbindir)
+TARGET_LIB_DIR         = $(TARGET_DIR)$(libdir)
+
+TARGET_INCLUDE_DIR     = $(TARGET_DIR)$(includedir)
+TARGET_LIBEXEC_DIR     = $(TARGET_DIR)$(libexecdir)
+TARGET_SHARE_DIR       = $(TARGET_DIR)$(datadir)
+
+TARGET_FIRMWARE_DIR    = $(TARGET_BASE_LIB_DIR)/firmware
+
+# -----------------------------------------------------------------------------
+
 # 
 REMOVE_dir             = /.remove
+REMOVE_sysconfdir      = $(REMOVE_dir)/etc
 REMOVE_bindir          = $(REMOVE_dir)$(bindir)
 REMOVE_datarootdir     = $(REMOVE_dir)/share
 REMOVE_docdir          = $(REMOVE_datarootdir)/doc
@@ -80,3 +73,28 @@ REMOVE_htmldir         = $(REMOVE_docdir)
 REMOVE_infodir         = $(REMOVE_datarootdir)/info
 REMOVE_localedir       = $(REMOVE_datarootdir)/locale
 REMOVE_mandir          = $(REMOVE_datarootdir)/man
+
+# -----------------------------------------------------------------------------
+
+SHARE_NEUTRINO_FLEX      = $(TARGET_SHARE_DIR)/tuxbox/neutrino/flex
+SHARE_NEUTRINO_ICONS     = $(TARGET_SHARE_DIR)/tuxbox/neutrino/icons
+SHARE_NEUTRINO_LCD4LINUX = $(TARGET_SHARE_DIR)/tuxbox/neutrino/lcd/icons
+SHARE_NEUTRINO_LOGOS     = $(TARGET_SHARE_DIR)/tuxbox/neutrino/icons/logo
+SHARE_NEUTRINO_PLUGINS   = $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins
+SHARE_NEUTRINO_THEMES    = $(TARGET_SHARE_DIR)/tuxbox/neutrino/themes
+SHARE_NEUTRINO_WEBRADIO  = $(TARGET_SHARE_DIR)/tuxbox/neutrino/webradio
+SHARE_NEUTRINO_WEBTV     = $(TARGET_SHARE_DIR)/tuxbox/neutrino/webtv
+VAR_NEUTRINO_CONFIG      = $(TARGET_DIR)/var/tuxbox/config
+VAR_NEUTRINO_PLUGINS     = $(TARGET_DIR)/var/tuxbox/plugins
+
+$(SHARE_NEUTRINO_FLEX) \
+$(SHARE_NEUTRINO_ICONS) \
+$(SHARE_NEUTRINO_LCD4LINUX) \
+$(SHARE_NEUTRINO_LOGOS) \
+$(SHARE_NEUTRINO_PLUGINS) \
+$(SHARE_NEUTRINO_THEMES) \
+$(SHARE_NEUTRINO_WEBRADIO) \
+$(SHARE_NEUTRINO_WEBTV) \
+$(VAR_NEUTRINO_CONFIG) \
+$(VAR_NEUTRINO_PLUGINS):
+	mkdir -p $(@)

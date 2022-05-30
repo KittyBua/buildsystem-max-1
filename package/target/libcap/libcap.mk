@@ -17,13 +17,8 @@ LIBCAP_MAKE_FLAGS = \
 	BUILD_CFLAGS="$(HOST_CFLAGS)"
 
 $(D)/libcap:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_OPTS) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS) prefix=/usr lib=lib; \
-		$(TARGET_CONFIGURE_OPTS) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS) prefix=/usr lib=lib DESTDIR=$(TARGET_DIR) install
-	$(REMOVE)
-	$(TOUCH)
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
+		$(TARGET_CONFIGURE_ENV) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS) prefix=/usr lib=lib; \
+		$(TARGET_CONFIGURE_ENV) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS) prefix=/usr lib=lib DESTDIR=$(TARGET_DIR) install
+	$(call TARGET_FOLLOWUP)

@@ -21,3 +21,159 @@ endif
 MAKE1 := $(HOSTMAKE) -j1
 override MAKE = $(HOSTMAKE) \
 	$(if $(findstring j,$(filter-out --%,$(MAKEFLAGS))),,-j$(PARALLEL_JOBS))
+
+ifeq ($(GCC_VERSION),6.5.0)
+CROSSTOOL_GCC_VERSION = gcc-6.5.0
+else ifeq ($(GCC_VERSION),8.5.0)
+CROSSTOOL_GCC_VERSION = gcc-8.5.0
+else ifeq ($(GCC_VERSION),11.3.0)
+CROSSTOOL_GCC_VERSION = gcc-11.3.0
+else ifeq ($(GCC_VERSION),12.1.0)
+CROSSTOOL_GCC_VERSION = gcc-12.1.0
+else ifeq ($(BOXMODEL),generic)
+CROSSTOOL_GCC_VERSION = gcc-$(shell gcc -dumpfullversion)
+endif
+
+ifeq ($(TARGET_ARCH),arm)
+GNU_TARGET_NAME = arm-cortex-linux-gnueabihf
+TARGET_CPU      = armv7ve
+TARGET_ABI      = -mtune=cortex-a15 -mfloat-abi=hard -mfpu=neon-vfpv4 -march=armv7ve
+TARGET_ENDIAN   = little
+else ifeq ($(TARGET_ARCH),aarch64)
+GNU_TARGET_NAME = aarch64-unknown-linux-gnu
+TARGET_CPU      =
+TARGET_ABI      =
+TARGET_ENDIAN   = little
+else ifeq ($(TARGET_ARCH),mips)
+GNU_TARGET_NAME = mipsel-unknown-linux-gnu
+TARGET_CPU      = mips32
+TARGET_ABI      = -march=$(TARGET_CPU) -mtune=mips32
+TARGET_ENDIAN   = little
+else ifeq ($(TARGET_ARCH),x86_64)
+GNU_TARGET_NAME = x86_64-linux-gnu
+TARGET_CPU      = generic
+TARGET_ABI      =
+TARGET_ENDIAN   =
+endif
+
+OPTIMIZATIONS ?= size
+ifeq ($(OPTIMIZATIONS),size)
+TARGET_OPTIMIZATION  = -pipe -Os
+TARGET_EXTRA_CFLAGS  = -ffunction-sections -fdata-sections
+TARGET_EXTRA_LDFLAGS = -Wl,--gc-sections
+else ifeq ($(OPTIMIZATIONS),normal)
+TARGET_OPTIMIZATION  = -pipe -O2
+TARGET_EXTRA_CFLAGS  =
+TARGET_EXTRA_LDFLAGS =
+else ifeq ($(OPTIMIZATIONS),debug)
+TARGET_OPTIMIZATION  = -O0 -g
+TARGET_EXTRA_CFLAGS  =
+TARGET_EXTRA_LDFLAGS =
+endif
+
+HOST_CPPFLAGS   = -I$(HOST_DIR)/include
+HOST_CFLAGS    ?= -O2
+HOST_CFLAGS    += $(HOST_CPPFLAGS)
+HOST_CXXFLAGS  += $(HOST_CFLAGS)
+HOST_LDFLAGS   += -L$(HOST_DIR)/lib -Wl,-rpath,$(HOST_DIR)/lib
+
+TARGET_CFLAGS   = $(TARGET_OPTIMIZATION) $(TARGET_ABI) $(TARGET_EXTRA_CFLAGS) -I$(TARGET_INCLUDE_DIR)
+TARGET_CPPFLAGS = $(TARGET_CFLAGS)
+TARGET_CXXFLAGS = $(TARGET_CFLAGS)
+TARGET_LDFLAGS  = -L$(TARGET_DIR)/lib -L$(TARGET_DIR)/usr/lib -Wl,-O1 -Wl,-rpath -Wl,/usr/lib -Wl,-rpath-link -Wl,${TARGET_DIR}/usr/lib $(TARGET_EXTRA_LDFLAGS)
+
+#TARGET_CROSS    = $(CROSS_DIR)/bin/$(GNU_TARGET_NAME)-
+TARGET_CROSS    = $(GNU_TARGET_NAME)-
+
+# Define TARGET_xx variables for all common binutils/gcc
+TARGET_AR       = $(TARGET_CROSS)ar
+TARGET_AS       = $(TARGET_CROSS)as
+TARGET_CC       = $(TARGET_CROSS)gcc
+TARGET_CPP      = $(TARGET_CROSS)cpp
+TARGET_CXX      = $(TARGET_CROSS)g++
+TARGET_LD       = $(TARGET_CROSS)ld
+TARGET_NM       = $(TARGET_CROSS)nm
+TARGET_RANLIB   = $(TARGET_CROSS)ranlib
+TARGET_READELF  = $(TARGET_CROSS)readelf
+TARGET_OBJCOPY  = $(TARGET_CROSS)objcopy
+TARGET_OBJDUMP  = $(TARGET_CROSS)objdump
+TARGET_STRIP    = $(TARGET_CROSS)strip
+
+MAKEFLAGS += --no-print-directory
+
+# -----------------------------------------------------------------------------
+
+BASE_DIR       := ${CURDIR}
+DL_DIR         ?= $(HOME)/Archive
+BUILD_DIR       = $(BASE_DIR)/build_tmp
+ifeq ($(LAYOUT),multi)
+RELEASE_DIR     = $(BASE_DIR)/release/linuxrootfs1
+else
+RELEASE_DIR     = $(BASE_DIR)/release
+endif
+DEPS_DIR        = $(BASE_DIR)/.deps
+D               = $(DEPS_DIR)
+TARGET_DIR      = $(BASE_DIR)/root
+SOURCE_DIR      = $(BASE_DIR)/build_source
+IMAGE_DIR       = $(BASE_DIR)/release_image
+OWN_FILES      ?= $(BASE_DIR)/own-files
+CROSS_DIR       = $(BASE_DIR)/cross/$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION)-kernel-$(KERNEL_VERSION)
+HOST_DIR        = $(BASE_DIR)/host
+CROSS_ROOT_DIR  = $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot
+
+DATE            = $(shell date '+%Y-%m-%d_%H.%M')
+MAINTAINER     ?= $(shell whoami)
+
+pkgname         = $(subst -config,,$(subst -upgradeconfig,,$(basename $(@F))))
+PKG             = $(call UPPERCASE,$(pkgname))
+PKG_BUILD_DIR   = $(BUILD_DIR)/$($(PKG)_DIR)
+PACKAGE_DIR     = $(BASE_DIR)/package
+PKG_FILES_DIR   = $(BASE_DIR)/package/*/$(pkgname)/files
+PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(pkgname)/patches
+
+CD              = set -e; cd
+CD_BUILD_DIR    = $(CD) $(PKG_BUILD_DIR)
+CHDIR           = $(CD) $(BUILD_DIR)
+MKDIR           = mkdir -p $(BUILD_DIR)
+CPDIR           = cp -a -t $(BUILD_DIR) $(DL_DIR)
+
+PKG_CONFIG        = $(HOST_DIR)/bin/$(GNU_TARGET_NAME)-pkg-config
+PKG_CONFIG_PATH   = $(TARGET_LIB_DIR)/pkgconfig
+PKG_CONFIG_LIBDIR = $(TARGET_LIB_DIR)/pkgconfig
+
+UPDATE-RC.D     = support/scripts/update-rc.d -r $(TARGET_DIR)
+REMOVE-RC.D     = support/scripts/update-rc.d -f -r $(TARGET_DIR)
+
+# build helper variables
+INSTALL      = $(shell which install || type -p install || echo install)
+INSTALL_CONF = $(INSTALL) -m 0600
+INSTALL_DATA = $(INSTALL) -m 0644
+INSTALL_EXEC = $(INSTALL) -m 0755
+INSTALL_COPY = cp -a
+
+define INSTALL_EXIST # (source, dest)
+	if [ -d $(dir $(1)) ]; then \
+		$(INSTALL) -d $(2); \
+		$(INSTALL_COPY) $(1) $(2); \
+	fi
+endef
+
+# search path(s) for all prerequisites
+VPATH = $(DEPS_DIR)
+
+# -----------------------------------------------------------------------------
+
+include package/environment-linux.mk
+include package/environment-target.mk
+include package/flashimage.mk
+include package/pkg-generic.mk
+include $(sort $(wildcard package/*/*/*.mk))
+include package/cleantargets.mk
+include package/bootstrap.mk
+include package/pkg-make.mk
+include package/pkg-cmake.mk
+include package/pkg-meson.mk
+include package/pkg-python.mk
+include package/pkg-utils.mk
+include package/pkg-waf.mk
+

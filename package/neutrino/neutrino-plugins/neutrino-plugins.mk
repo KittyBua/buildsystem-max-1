@@ -116,11 +116,11 @@ endef
 NEUTRINO_PLUGINS_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)
 
 $(D)/neutrino-plugins.do_prepare:
-	$(START_BUILD)
+	$(call STARTUP)
 	rm -rf $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(SOURCE_DIR))
-	$(call APPLY_PATCHES_S,$(NEUTRINO_PLUGINS_DIR))
+	$(call APPLY_PATCHES_S,$(PKG_PATCHES_DIR),$($(PKG)_PATCH))
 	@touch $@
 
 $(D)/neutrino-plugins.config.status:
@@ -128,7 +128,7 @@ $(D)/neutrino-plugins.config.status:
 	mkdir -p $(NEUTRINO_PLUGINS_OBJ_DIR)
 	$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/autogen.sh
 	cd $(NEUTRINO_PLUGINS_OBJ_DIR); \
-		$(TARGET_CONFIGURE_OPTS) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/configure \
 			$(NEUTRINO_PLUGINS_CONF_OPTS)
 	@touch $@
@@ -142,10 +142,10 @@ endif
 	@touch $@
 
 $(D)/neutrino-plugins: neutrino-plugins.do_prepare neutrino-plugins.do_compile
-	mkdir -p $(SHARE_ICONS)
+	mkdir -p $(SHARE_NEUTRINO_ICONS)
 ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) install
-	find $(SHARE_PLUGINS)/ $(SHARE_WEBTV)/ $(VAR_CONFIG)/ \
+	find $(SHARE_NEUTRINO_PLUGINS)/ $(SHARE_NEUTRINO_WEBTV)/ $(VAR_NEUTRINO_CONFIG)/ \
 		\( -name '*.conf' \
 		-o -name '*.lua' \
 		-o -name '*.sh' \

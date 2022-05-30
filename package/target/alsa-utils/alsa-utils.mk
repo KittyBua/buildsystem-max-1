@@ -1,6 +1,9 @@
+################################################################################
 #
 # alsa-utils
 #
+################################################################################
+
 ALSA_UTILS_VERSION = 1.2.6
 ALSA_UTILS_DIR     = alsa-utils-$(ALSA_UTILS_VERSION)
 ALSA_UTILS_SOURCE  = alsa-utils-$(ALSA_UTILS_VERSION).tar.bz2
@@ -25,21 +28,18 @@ ALSA_UTILS_CONF_OPTS = \
 	--disable-xmlto \
 	--disable-rst2man
 
-$(D)/alsa-utils:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
+define ALSA_UTILS_INSTALL_TARGET_FILES
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/asound.conf $(TARGET_DIR)/etc/asound.conf
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/alsa-state.init $(TARGET_DIR)/etc/init.d/alsa-state
 	$(UPDATE-RC.D) alsa-state start 39 S . stop 31 0 6 .
-	$(REMOVE)
+endef
+ALSA_UTILS_POST_INSTALL_TARGET_HOOKS = ALSA_UTILS_INSTALL_TARGET_FILES
+
+define ALSA_UTILS_CLEANUP_TARGET
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/alsa/,init)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,aserver axfer)
-	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,alsa-info.sh)
-	$(TOUCH)
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,aserver axfer)
+	rm -f $(addprefix $(TARGET_SBIN_DIR)/,alsa-info.sh)
+endef
+
+$(D)/alsa-utils:
+	$(call make-package)

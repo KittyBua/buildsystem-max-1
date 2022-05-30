@@ -1,6 +1,9 @@
+################################################################################
 #
 # dropbearmulti
 #
+################################################################################
+
 DROPBEARMULTI_VERSION = git
 DROPBEARMULTI_DIR     = dropbear.git
 DROPBEARMULTI_SOURCE  = dropbear.git
@@ -25,18 +28,16 @@ DROPBEARMULTI_CONF_OPTS = \
 	--disable-pututline \
 	--disable-pututxline
 
+define DROPBEARMULTI_INSTALL_INIT_SYSV
+	cd $(TARGET_BIN_DIR) && ln -sf /usr/bin/dropbearmulti dropbear
+	mkdir -p $(TARGET_DIR)/etc/dropbear
+	$(INSTALL_EXEC) $(PKG_FILES_DIR)/dropbear $(TARGET_DIR)/etc/init.d/
+endef
+
 $(D)/dropbearmulti:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(CONFIGURE); \
 		$(MAKE) PROGRAMS="dropbear scp dropbearkey" MULTI=1; \
 		$(MAKE) PROGRAMS="dropbear scp dropbearkey" MULTI=1 install DESTDIR=$(TARGET_DIR)
-	cd $(TARGET_DIR)/usr/bin && ln -sf /usr/bin/dropbearmulti dropbear
-	mkdir -p $(TARGET_DIR)/etc/dropbear
-	$(INSTALL_EXEC) $(PKG_FILES_DIR)/dropbear $(TARGET_DIR)/etc/init.d/
-	$(REMOVE)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

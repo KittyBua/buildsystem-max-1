@@ -1,6 +1,9 @@
+################################################################################
 #
 # ffmpeg
 #
+################################################################################
+
 FFMPEG_VERSION ?= 4.4.1
 FFMPEG_DIR      = ffmpeg-$(FFMPEG_VERSION)
 FFMPEG_SOURCE   = ffmpeg-$(FFMPEG_VERSION).tar.xz
@@ -344,15 +347,10 @@ FFMPEG_CONF_OPTS += \
 	--extra-ldflags="$(TARGET_LDFLAGS) -lrt"
 
 $(D)/ffmpeg:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_OPTS) \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
+		$(TARGET_CONFIGURE_ENV) \
 		./configure $($(PKG)_CONF_OPTS); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

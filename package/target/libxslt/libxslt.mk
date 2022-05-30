@@ -1,11 +1,16 @@
+################################################################################
 #
 # libxslt
 #
+################################################################################
+
 LIBXSLT_VERSION = 1.1.34
 LIBXSLT_DIR     = libxslt-$(LIBXSLT_VERSION)
 LIBXSLT_SOURCE  = libxslt-$(LIBXSLT_VERSION).tar.gz
 LIBXSLT_SITE    = ftp://xmlsoft.org/libxml2
 LIBXSLT_DEPENDS = bootstrap libxml2
+
+LIBXSLT_CONFIG_SCRIPTS = xslt-config
 
 LIBXSLT_AUTORECONF = YES
 
@@ -20,21 +25,10 @@ LIBXSLT_CONF_OPTS = \
 	--without-debug \
 	--without-mem-debug
 
-LIBXSLT_CONFIG_SCRIPTS = xslt-config
+define LIBXSLT_CLEANUP_TARGET
+	rm -rf  $(addprefix $(TARGET_LIB_DIR)/,libxslt-plugins xsltConf.sh)
+endef
+LIBXSLT_CLEANUP_TARGET_HOOKS += LIBXSLT_CLEANUP_TARGET
 
 $(D)/libxslt:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_CONFIG_SCRIPTS)
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	rm -rf $(TARGETLIB)/xsltConf.sh
-	rm -rf $(TARGETLIB)/libxslt-plugins/
-	$(TOUCH)
+	$(call make-package)

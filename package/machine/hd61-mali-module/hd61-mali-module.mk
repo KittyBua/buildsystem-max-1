@@ -1,6 +1,9 @@
+################################################################################
 #
 # hd61-mali-module
 #
+################################################################################
+
 HD61_MALI_MODULE_VERSION = DX910-SW-99002-r7p0-00rel0
 HD61_MALI_MODULE_DIR     = $(HD61_MALI_MODULE_VERSION)
 HD61_MALI_MODULE_SOURCE  = $(HD61_MALI_MODULE_VERSION).tgz
@@ -19,12 +22,8 @@ HD61_MALI_MODULE_MAKEVARS = \
 	CONFIG_GPU_AVS_ENABLE=y
 
 $(D)/hd61-mali-module:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKEVARS) \
 		$(HD61_MALI_MODULE_MAKEVARS); \
 		$(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKEVARS) \
@@ -33,5 +32,4 @@ $(D)/hd61-mali-module:
 		modules_install
 #	mkdir -p ${TARGET_DIR}/etc/modules-load.d
 #	echo mali > ${TARGET_DIR}/etc/modules-load.d/mali.conf
-	$(REMOVE)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

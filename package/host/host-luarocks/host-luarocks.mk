@@ -1,6 +1,9 @@
+################################################################################
 #
 # host-luarocks
 #
+################################################################################
+
 HOST_LUAROCKS_VERSION = 3.1.3
 HOST_LUAROCKS_DIR     = luarocks-$(HOST_LUAROCKS_VERSION)
 HOST_LUAROCKS_SOURCE  = luarocks-$(HOST_LUAROCKS_VERSION).tar.gz
@@ -21,16 +24,15 @@ HOST_LUAROCKS_BUILD_ENV = \
 	TARGET_LDFLAGS="-L$(TARGET_LIB_DIR)" \
 	TARGET_DIR="$(TARGET_DIR)"
 
-$(D)/host-luarocks:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(HOST_CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install
+define HOST_LUAROCKS_DELETE_BEFORE_REBUILD
+	rm -f $(HOST_LUAROCKS_CONFIG)
+endef
+HOST_LUAROCKS_POST_EXTRACT_HOOKS += HOST_LUAROCKS_DELETE_BEFORE_REBUILD
+
+define HOST_LUAROCKS_INSTALL_FILES
 	cat $(PKG_FILES_DIR)/luarocks-config.lua >> $(HOST_LUAROCKS_CONFIG)
-	$(REMOVE)
-	$(TOUCH)
+endef
+HOST_LUAROCKS_POST_INSTALL_HOOKS += HOST_LUAROCKS_INSTALL_FILES
+
+$(D)/host-luarocks:
+	$(call host-make-package)

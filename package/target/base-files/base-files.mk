@@ -1,12 +1,15 @@
+################################################################################
 #
 # base-files
 #
+################################################################################
+
 BASE_FILES_VERSION = 2020-05-25
 BASE_FILES_DEPENDS = directories
 
 $(D)/base-files:
 	$(START_BUILD)
-	$(INSTALL_EXEC) support/scripts/update-rc.d $(TARGET_DIR)/usr/sbin/update-rc.d
+	$(INSTALL_EXEC) support/scripts/update-rc.d $(TARGET_SBIN_DIR)/update-rc.d
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/alignment.sh $(TARGET_DIR)/etc/init.d/alignment.sh
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/banner.sh $(TARGET_DIR)/etc/init.d/banner.sh
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/bootmisc.sh $(TARGET_DIR)/etc/init.d/bootmisc.sh

@@ -1,6 +1,9 @@
+################################################################################
 #
 # util-linux
 #
+################################################################################
+
 UTIL_LINUX_VERSION = 2.38
 UTIL_LINUX_DIR     = util-linux-$(UTIL_LINUX_VERSION)
 UTIL_LINUX_SOURCE  = util-linux-$(UTIL_LINUX_VERSION).tar.xz
@@ -101,22 +104,19 @@ UTIL_LINUX_CONF_OPTS = \
 	--without-udev \
 	--without-utempter
 
-$(D)/util-linux:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
+define UTIL_LINUX_INSTALL_FILES
 	$(INSTALL) -d $(TARGET_DIR)/etc/default/
 	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"' > $(TARGET_DIR)/etc/default/mountall
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
+endef
+UTIL_LINUX_POST_INSTALL_TARGET_HOOKS += UTIL_LINUX_INSTALL_FILES
+
+define UTIL_LINUX_CLEANUP_TARGET
 	rm -f $(addprefix $(TARGET_DIR)/bin/,findmnt)
-	rm -f $(addprefix $(TARGET_DIR)/sbin/,blkdiscard blkzone blockdev cfdisk chcpu ctrlaltdel fsfreeze fstrim mkfs mkswap swaplabel)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,choom col colcrt colrm column fincore flock getopt ipcmk isosize linux32 linux64 look lscpu lsipc lslocks lsns mcookie namei prlimit renice rev script scriptlive scriptreplay setarch setsid uname26 uuidgen uuidparse whereis)
-	rm -f $(addprefix $(TARGET_DIR)/usr/sbin/,ldattach readprofile rtcwake)
-	$(TOUCH)
+	rm -f $(addprefix $(TARGET_BASE_SBIN_DIR)/,blkdiscard blkzone blockdev cfdisk chcpu ctrlaltdel fsfreeze fstrim mkfs mkswap swaplabel)
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,choom col colcrt colrm column fincore flock getopt ipcmk isosize linux32 linux64 look lscpu lsipc lslocks lsns mcookie namei prlimit renice rev script scriptlive scriptreplay setarch setsid uname26 uuidgen uuidparse whereis)
+	rm -f $(addprefix $(TARGET_SBIN_DIR)/,ldattach readprofile rtcwake)
+endef
+UTIL_LINUX_CLEANUP_TARGET_HOOKS += UTIL_LINUX_CLEANUP_TARGET
+
+$(D)/util-linux:
+	$(call make-package)

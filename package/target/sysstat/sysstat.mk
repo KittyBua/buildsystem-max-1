@@ -1,6 +1,9 @@
+################################################################################
 #
 # sysstat
 #
+################################################################################
+
 SYSSTAT_VERSION = 12.5.1
 SYSSTAT_DIR     = sysstat-$(SYSSTAT_VERSION)
 SYSSTAT_SOURCE  = sysstat-$(SYSSTAT_VERSION).tar.xz
@@ -18,14 +21,4 @@ SYSSTAT_CONF_OPTS = \
 	conf_dir="/etc/sysstat"
 
 $(D)/sysstat:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

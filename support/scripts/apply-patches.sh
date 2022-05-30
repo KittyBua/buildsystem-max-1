@@ -10,8 +10,8 @@
 # isn't any error.
 # - the build directory, optional, default value is '.'. The place where are
 # the package sources.
-# - the patch directory, optional, default '../kernel-patches'. The place
-# where are the scripts you want to apply.
+# - the patch directory, optional, default '../patches'. The place where are
+# the scripts you want to apply.
 # - other parameters are the patch name patterns, optional, default value is
 # '*'. Pattern(s) describing the patch names you want to apply.
 #
@@ -113,7 +113,7 @@ function apply_patch {
         echo "  to be applied  : ${path}/${patch}"
         exit 1
     fi
-    ${uncomp} "${path}/$patch" | patch -g0 -p1 -E --no-backup-if-mismatch -d "${builddir}" -t -N $silent
+    ${uncomp} "${path}/$patch" | patch -g0 -p1 -d "${builddir}" -t -N $silent
     if [ $? != 0 ] ; then
         echo "Patch failed!  Please fix ${patch}!"
         exit 1
@@ -160,7 +160,7 @@ touch ${builddir}/.applied_patches_list
 scan_patchdir "$patchdir" "$patchpattern"
 
 # Check for rejects...
-if [ "`find $builddir/ '(' -name '*.rej' -o -name '.*.rej' ')' -print`" ] ; then
-    echo "Aborting.  Reject files found."
-    exit 1
-fi
+#if [ "`find $builddir/ '(' -name '*.rej' -o -name '.*.rej' ')' -print`" ] ; then
+#    echo "Aborting.  Reject files found."
+#    exit 1
+#fi

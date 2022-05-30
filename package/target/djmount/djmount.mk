@@ -1,6 +1,9 @@
+################################################################################
 #
 # djmount
 #
+################################################################################
+
 DJMOUNT_VERSION = 0.71
 DJMOUNT_DIR     = djmount-$(DJMOUNT_VERSION)
 DJMOUNT_SOURCE  = djmount-$(DJMOUNT_VERSION).tar.gz
@@ -21,14 +24,4 @@ DJMOUNT_CONF_OPTS = \
 	--disable-debug
 
 $(D)/djmount:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

@@ -1,6 +1,9 @@
+################################################################################
 #
 # procps-ng
 #
+################################################################################
+
 PROCPS_NG_VERSION = 3.3.17
 PROCPS_NG_DIR     = procps-$(PROCPS_NG_VERSION)
 PROCPS_NG_SOURCE  = procps-ng-$(PROCPS_NG_VERSION).tar.xz
@@ -24,20 +27,13 @@ PROCPS_NG_CONF_OPTS = \
 PROCPS_NG_BIN = \
 	free pgrep pkill pmap pwdx slabtop skill snice tload top uptime vmstat w
 
-$(D)/procps-ng:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
+define PROCPS_NG_INSTALL_FILES
 	for i in $(PROCPS_NG_BIN); do \
-		mv $(TARGET_DIR)/bin/$$i $(TARGET_DIR)/usr/bin/$$i; \
+		mv $(TARGET_DIR)/bin/$$i $(TARGET_BIN_DIR)/$$i; \
 	done
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/sysctl.conf $(TARGET_DIR)/etc/sysctl.conf
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	$(TOUCH)
+endef
+PROCPS_NG_POST_INSTALL_TARGET_HOOKS += PROCPS_NG_INSTALL_FILES
+
+$(D)/procps-ng:
+	$(call make-package)

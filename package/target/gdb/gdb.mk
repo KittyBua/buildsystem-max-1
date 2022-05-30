@@ -1,6 +1,9 @@
+################################################################################
 #
 # gdb
 #
+################################################################################
+
 GDB_VERSION = 8.3
 GDB_DIR     = gdb-$(GDB_VERSION)
 GDB_SOURCE  = gdb-$(GDB_VERSION).tar.xz
@@ -21,17 +24,16 @@ GDB_CONF_OPTS = \
 	--without-uiout \
 	--without-x
 
+define GDB_CLEANUP_TARGET
+	rm -rf $(addprefix $(TARGET_SHARE_DIR)/gdb/,system-gdbinit)
+	find $(TARGET_SHARE_DIR)/gdb/syscalls -type f -not -name 'arm-linux.xml' -not -name 'gdb-syscalls.dtd' -print0 | xargs -0 rm --
+endef
+GDB_CLEANUP_TARGET_HOOKS += GDB_CLEANUP_TARGET
+
 $(D)/gdb:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(CONFIGURE); \
 		$(MAKE) all-gdb; \
 		$(MAKE) install-gdb DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	rm -rf $(addprefix $(TARGET_SHARE_DIR)/gdb/,system-gdbinit)
-	find $(TARGET_SHARE_DIR)/gdb/syscalls -type f -not -name 'arm-linux.xml' -not -name 'gdb-syscalls.dtd' -print0 | xargs -0 rm --
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

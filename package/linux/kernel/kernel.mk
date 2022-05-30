@@ -1,13 +1,11 @@
+################################################################################
 #
 # makefile to build kernel
 #
+################################################################################
 
 $(D)/kernel.do_prepare:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
+	$(call PREPARE)
 	@touch $@
 
 $(D)/kernel.do_compile: kernel.do_prepare
@@ -19,7 +17,7 @@ $(D)/kernel.do_compile: kernel.do_prepare
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 hd60 hd61 h7))
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/initramfs-subdirboot.cpio.gz $(KERNEL_OBJ_DIR)
 endif
-	$(CD_BUILD_DIR); \
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(MAKE) $(KERNEL_MAKEVARS) oldconfig; \
 		$(MAKE) $(KERNEL_MAKEVARS) modules $(KERNEL_DTB) $(KERNEL_IMAGE_TYPE); \
 		$(MAKE) $(KERNEL_MAKEVARS) modules_install
@@ -54,7 +52,7 @@ kernel-distclean:
 # -----------------------------------------------------------------------------
 
 kernel-config: bootstrap kernel.do_compile
-	$(CD_BUILD_DIR); \
+	$(CHDIR)/$($(PKG)_DIR); \
 		make $(KERNEL_MAKEVARS) menuconfig
 	@echo ""
 	@echo -e "You have to edit $(KERNEL_CONFIG) $(TERM_YELLOW)m a n u a l l y$(TERM_NORMAL) to make changes permanent !!!"

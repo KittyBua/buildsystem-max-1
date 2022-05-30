@@ -1,6 +1,9 @@
+################################################################################
 #
 # vuultimo4k-vmlinuz-initrd 7445d0
 #
+################################################################################
+
 ifeq ($(VU_MULTIBOOT),multi)
 VUULTIMO4K_VMLINUZ_INITRD_DATE = 20190911
 VUULTIMO4K_VMLINUZ_INITRD_SITE = https://bitbucket.org/max_10/vmlinuz-initrd-vuultimo4k/downloads
@@ -13,7 +16,7 @@ VUULTIMO4K_VMLINUZ_INITRD_SOURCE  = vmlinuz-initrd_vuultimo4k_$(VUULTIMO4K_VMLIN
 VUULTIMO4K_VMLINUZ_INITRD_DEPENDS = bootstrap
 
 $(D)/vuultimo4k-vmlinuz-initrd:
-	$(START_BUILD)
+	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

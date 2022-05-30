@@ -1,6 +1,9 @@
+################################################################################
 #
 # gnutls
 #
+################################################################################
+
 GNUTLS_VERSION = 3.6.10
 GNUTLS_DIR     = gnutls-$(GNUTLS_VERSION)
 GNUTLS_SOURCE  = gnutls-$(GNUTLS_VERSION).tar.xz
@@ -22,17 +25,10 @@ GNUTLS_CONF_OPTS = \
 	--enable-local-libopts \
 	--enable-openssl-compatibility
 
+define GNUTLS_CLEANUP_TARGET
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,psktool gnutls-cli-debug certtool srptool ocsptool gnutls-serv gnutls-cli)
+endef
+GNUTLS_CLEANUP_TARGET_HOOKS += GNUTLS_CLEANUP_TARGET
+
 $(D)/gnutls:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,psktool gnutls-cli-debug certtool srptool ocsptool gnutls-serv gnutls-cli)
-	$(TOUCH)
+	$(call make-package)

@@ -1,6 +1,9 @@
+################################################################################
 #
 # busybox
 #
+################################################################################
+
 BUSYBOX_VERSION = 1.35.0
 BUSYBOX_DIR     = busybox-$(BUSYBOX_VERSION)
 BUSYBOX_SOURCE  = busybox-$(BUSYBOX_VERSION).tar.bz2
@@ -38,12 +41,8 @@ BUSYBOX_MAKE_OPTS = \
 	CONFIG_PREFIX="$(TARGET_DIR)"
 
 $(D)/busybox:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/busybox.config .config; \
 		$(SED) 's#^CONFIG_PREFIX.*#CONFIG_PREFIX="$(TARGET_DIR)"#' .config; \
 		$(BUSYBOX_MAKE_ENV) $(MAKE) $(BUSYBOX_MAKE_OPTS) busybox; \
@@ -78,14 +77,10 @@ $(D)/busybox:
 		$(INSTALL_EXEC) $(PKG_FILES_DIR)/50default $(TARGET_DIR)/etc/udhcpc.d/50default; \
 		$(INSTALL_EXEC) -D $(PKG_FILES_DIR)/default.script $(TARGET_SHARE_DIR)/udhcpc/default.script; \
 	fi
-	$(REMOVE)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)
 
 busybox-config: bootstrap
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(CD_BUILD_DIR); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(INSTALL_DATA) $(subst -config,,$(PKG_FILES_DIR))/busybox.config .config; \
 		make menuconfig

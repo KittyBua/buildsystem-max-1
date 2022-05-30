@@ -1,37 +1,38 @@
+################################################################################
 #
 # openvpn
 #
-OPENVPN_VERSION = 2.5.5
+################################################################################
+
+OPENVPN_VERSION = 2.5.7
 OPENVPN_DIR     = openvpn-$(OPENVPN_VERSION)
 OPENVPN_SOURCE  = openvpn-$(OPENVPN_VERSION).tar.xz
 OPENVPN_SITE    = http://build.openvpn.net/downloads/releases
 OPENVPN_DEPENDS = bootstrap openssl lzo
 
-OPENVPN_CONF_OPTS = \
-	--docdir=$(REMOVE_docdir) \
-	--disable-lz4 \
-	--disable-selinux \
-	--disable-systemd \
-	--disable-plugins \
-	--disable-debug \
-	--disable-pkcs11 \
-	--enable-small \
+OPENVPN_CONF_ENV = \
 	NETSTAT="/bin/netstat" \
 	IFCONFIG="/sbin/ifconfig" \
 	IPROUTE="/sbin/ip" \
 	ROUTE="/sbin/route"
 
-$(D)/openvpn:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(INSTALL_EXEC) $(PKG_FILES_DIR)/openvpn $(TARGET_DIR)/etc/init.d/
+OPENVPN_CONF_OPTS = \
+	--docdir=$(REMOVE_docdir) \
+	--enable-shared \
+	--disable-static \
+	--enable-small \
+	--enable-management \
+	--disable-debug \
+	--disable-selinux \
+	--disable-plugins \
+	--disable-pkcs11 \
+	--disable-systemd \
+	--disable-lz4
+
+define OPENVPN_INSTALL_INIT_SYSV
 	mkdir -p $(TARGET_DIR)/etc/openvpn
-	$(REMOVE)
-	$(TOUCH)
+	$(INSTALL_EXEC) $(PKG_FILES_DIR)/openvpn $(TARGET_DIR)/etc/init.d/
+endef
+
+$(D)/openvpn:
+	$(call make-package)

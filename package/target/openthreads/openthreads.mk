@@ -1,6 +1,9 @@
+################################################################################
 #
 # openthreads
 #
+################################################################################
+
 OPENTHREADS_VERSION = 3.2
 OPENTHREADS_DIR     = OpenThreads-$(OPENTHREADS_VERSION)
 OPENTHREADS_SOURCE  = OpenThreads-$(OPENTHREADS_VERSION).tar.gz
@@ -13,16 +16,10 @@ OPENTHREADS_CONF_OPTS = \
 	-D_OPENTHREADS_ATOMIC_USE_GCC_BUILTINS_EXITCODE__TRYRUN_OUTPUT="1" \
 	| tail -n +90
 
+define OPENTHREADS_CREATE_CONF_ENV_FILE
+	echo "# dummy file to prevent warning message" > $(PKG_BUILD_DIR)/examples/CMakeLists.txt
+endef
+OPENTHREADS_POST_PATCH_HOOKS += OPENTHREADS_CREATE_CONF_ENV_FILE
+
 $(D)/openthreads:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		echo "# dummy file to prevent warning message" > examples/CMakeLists.txt; \
-		$(TARGET_CMAKE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	$(TOUCH)
+	$(call cmake-package)

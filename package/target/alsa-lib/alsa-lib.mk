@@ -1,6 +1,9 @@
+################################################################################
 #
 # alsa-lib
 #
+################################################################################
+
 ALSA_LIB_VERSION = 1.2.6.1
 ALSA_LIB_DIR     = alsa-lib-$(ALSA_LIB_VERSION)
 ALSA_LIB_SOURCE  = alsa-lib-$(ALSA_LIB_VERSION).tar.bz2
@@ -26,19 +29,12 @@ ALSA_LIB_CONF_OPTS = \
 	--disable-python \
 	--disable-topology
 
-$(D)/alsa-lib:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
+define ALSA_LIB_CLEANUP_TARGET
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/alsa/,topology ucm)
-	find $(TARGET_SHARE_DIR)/alsa/cards/ -not -name 'aliases.conf' -name '*.conf' -exec rm -f {} \;
-	find $(TARGET_SHARE_DIR)/alsa/pcm/ -not -name 'default.conf' -not -name 'dmix.conf' -name '*.conf' -exec rm -f {} \;
-	$(TOUCH)
+	find $(TARGET_SHARE_DIR)/alsa/cards/ -not -name 'aliases.conf' -name '*.conf' -print0 | xargs -0 rm -f
+	find $(TARGET_SHARE_DIR)/alsa/pcm/ -not -name 'default.conf' -not -name 'dmix.conf' -name '*.conf' -print0 | xargs -0 rm -f
+endef
+ALSA_LIB_CLEANUP_TARGET_HOOKS += ALSA_LIB_CLEANUP_TARGET
+
+$(D)/alsa-lib:
+	$(call make-package)

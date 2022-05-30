@@ -18,8 +18,7 @@ LIBSTB_HAL_CONF_OPTS = \
 
 ifeq ($(MEDIAFW),gstreamer)
 LIBSTB_HAL_CONF_OPTS += \
-	PKG_CONFIG_PATH=/usr/lib/$(GNU_TARGET_NAME)/pkgconfig \
-	--enable-gstreamer
+	PKG_CONFIG_PATH=/usr/lib/$(GNU_TARGET_NAME)/pkgconfig
 
 GST_CFLAGS = \
 	$(shell pkg-config --cflags --libs gstreamer-1.0) \
@@ -49,6 +48,7 @@ LIBSTB_HAL_CONF_OPTS += \
 	CPPFLAGS="$(NEUTRINO_CPPFLAGS) $(GST_CFLAGS)"
 
 LIBSTB_HAL_CONF_OPTS += \
+	$(if $(findstring gstreamer,$(GST_CFLAGS)),--enable-gstreamer) \
 	--enable-flv2mpeg4
 
 # -----------------------------------------------------------------------------
@@ -56,11 +56,11 @@ LIBSTB_HAL_CONF_OPTS += \
 LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)
 
 $(D)/libstb-hal.do_prepare:
-	$(START_BUILD)
+	$(call STARTUP)
 	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(SOURCE_DIR))
-	$(call APPLY_PATCHES_S,$(LIBSTB_HAL_DIR))
+	$(call APPLY_PATCHES_S,$(PKG_PATCHES_DIR),$($(PKG)_PATCH))
 	@touch $@
 
 $(D)/libstb-hal.config.status:
@@ -68,7 +68,7 @@ $(D)/libstb-hal.config.status:
 	mkdir -p $(LIBSTB_HAL_OBJ_DIR)
 	$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh
 	$(CD) $(LIBSTB_HAL_OBJ_DIR); \
-		$(TARGET_CONFIGURE_OPTS) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/configure \
 			$(LIBSTB_HAL_CONF_OPTS)
 	@touch $@

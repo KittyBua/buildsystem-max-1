@@ -1,6 +1,9 @@
+################################################################################
 #
 # vuultimo4k-driver
 #
+################################################################################
+
 VUULTIMO4K_DRIVER_DATE    = 20190424
 VUULTIMO4K_DRIVER_REV     = r0
 VUULTIMO4K_DRIVER_VERSION = 3.14.28-$(VUULTIMO4K_DRIVER_DATE).$(VUULTIMO4K_DRIVER_REV)
@@ -9,8 +12,8 @@ VUULTIMO4K_DRIVER_SITE    = http://code.vuplus.com/download/release/vuplus-dvb-p
 VUULTIMO4K_DRIVER_DEPENDS = bootstrap
 
 $(D)/vuultimo4k-driver:
-	$(START_BUILD)
+	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra
 	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

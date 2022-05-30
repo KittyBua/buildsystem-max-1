@@ -1,0 +1,66 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -37,6 +37,11 @@
+ AC_PROG_CXX
+ AC_DISABLE_STATIC
+ LT_INIT
++
++# Set default for ARFLAGS, since autoconf does not have a macro for it.
++# This allows people to set it when running configure or make
++test -n "$ARFLAGS" || ARFLAGS="cr"
++AC_SUBST(ARFLAGS)
+ 
+ # Add build information to local_build_config.h.tmp
+ # -------------------------------------------------
+diff --git a/src/eitd/sectionsd.cpp b/src/eitd/sectionsd.cpp
+index 338a2de8e..568b7b945 100644
+--- a/src/eitd/sectionsd.cpp
++++ b/src/eitd/sectionsd.cpp
+@@ -1505,7 +1505,7 @@ void CTimeThread::run()
+ 		dvb_time = 0;
+ 		timediff = 0;
+ 
+-		if (ntpenable && system( ntp_system_cmd.c_str() ) == 0) {
++		if (ntpenable /*&& system( ntp_system_cmd.c_str() ) == 0*/) {
+ 			time_ntp = true;
+ 			success = true;
+ 		} else if (dvb_time_update) {
+diff --git a/src/neutrino.cpp b/src/neutrino.cpp
+index eff263f05..062102df3 100644
+--- a/src/neutrino.cpp
++++ b/src/neutrino.cpp
+@@ -3005,9 +3005,9 @@ TIMER_START();
+ 
+ 	InitZapper();
+ 
+-	CHDDDestExec * hdd = new CHDDDestExec();
+-	hdd->exec(NULL, "");
+-	delete hdd;
++	//CHDDDestExec * hdd = new CHDDDestExec();
++	//hdd->exec(NULL, "");
++	//delete hdd;
+ 
+ 	hintBox->hide(); // InitZapper also displays a hintbox
+ 	delete hintBox;
+@@ -5369,7 +5369,7 @@ void stop_daemons(bool stopall, bool for_flash)
+ 		delete InfoClock;
+ 	if(FileTimeOSD)
+ 		delete FileTimeOSD;
+-	delete &CMoviePlayerGui::getInstance();
++//	delete &CMoviePlayerGui::getInstance();
+ 
+ 	CZapit::getInstance()->Stop();
+ 	printf("zapit shutdown done\n");
+diff --git a/src/nhttpd/nhttpd.conf.in b/src/nhttpd/nhttpd.conf.in
+index f22ffa825..646cff6e3 100644
+--- a/src/nhttpd/nhttpd.conf.in
++++ b/src/nhttpd/nhttpd.conf.in
+@@ -3,7 +3,7 @@ Language.selected=Deutsch
+ Tuxbox.LogosURL=@TARGET_PUBLIC_HTTPDDIR@/logo
+ WebsiteMain.directory=@TARGET_PRIVATE_HTTPDDIR@
+ WebsiteMain.override_directory=@TARGET_PUBLIC_HTTPDDIR@
+-WebsiteMain.port=80
++WebsiteMain.port=8080
+ WebsiteMain.hosted_directory=@TARGET_HOSTED_HTTPDDIR@
+ configfile.version=4
+ mod_auth.authenticate=false

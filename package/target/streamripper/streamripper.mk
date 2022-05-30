@@ -1,6 +1,9 @@
+################################################################################
 #
 # streamripper
 #
+################################################################################
+
 STREAMRIPPER_VERSION = git
 STREAMRIPPER_DIR     = ni-streamripper.git
 STREAMRIPPER_SOURCE  = ni-streamripper.git
@@ -17,16 +20,10 @@ STREAMRIPPER_CONF_OPTS = \
 	--with-included-argv=yes \
 	--with-included-libmad=no
 
-$(D)/streamripper:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
+define STREAMRIPPER_INSTALL_FILES
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/streamripper.sh $(TARGET_DIR)/bin/
-	$(REMOVE)
-	$(TOUCH)
+endef
+STREAMRIPPER_POST_INSTALL_TARGET_HOOKS += STREAMRIPPER_INSTALL_FILES
+
+$(D)/streamripper:
+	$(call make-package)

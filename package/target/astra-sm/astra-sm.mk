@@ -1,6 +1,9 @@
+################################################################################
 #
 # astra-sm
 #
+################################################################################
+
 ASTRA_SM_VERSION = git
 ASTRA_SM_DIR     = astra-sm.git
 ASTRA_SM_SOURCE  = astra-sm.git
@@ -9,24 +12,17 @@ ASTRA_SM_DEPENDS = bootstrap openssl
 
 ASTRA_SM_AUTORECONF = YES
 
-define ASTRA_SM_POST_PATCH
-	$(SED) 's:(CFLAGS):(CFLAGS_FOR_BUILD):' $(PKG_BUILD_DIR)/tools/Makefile.am
-endef
-ASTRA_SM_POST_PATCH_HOOKS = ASTRA_SM_POST_PATCH
+ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),11.3.0 12.1.0))
+ASTRA_SM_PATCH += 0004-replace-sys-siglist.patch-gcc
+endif
 
 ASTRA_SM_CONF_OPTS = \
 	--without-lua
 
-$(D)/astra-sm:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
+define ASTRA_SM_CLEANUP_TARGET
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,astra)
-	$(TOUCH)
+endef
+ASTRA_SM_CLEANUP_TARGET_HOOKS += ASTRA_SM_CLEANUP_TARGET
+
+$(D)/astra-sm:
+	$(call make-package)

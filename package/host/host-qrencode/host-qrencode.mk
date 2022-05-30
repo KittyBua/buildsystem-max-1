@@ -1,6 +1,9 @@
+################################################################################
 #
 # host-qrencode
 #
+################################################################################
+
 HOST_QRENCODE_VERSION = 4.1.1
 HOST_QRENCODE_DIR     = qrencode-$(HOST_QRENCODE_VERSION)
 HOST_QRENCODE_SOURCE  = qrencode-$(HOST_QRENCODE_VERSION).tar.gz
@@ -12,14 +15,4 @@ HOST_QRENCODE_CONF_OPTS = \
 	png_CFLAGS="-I/usr/include/libpng"
 
 $(D)/host-qrencode:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(HOST_CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install
-	$(REMOVE)
-	$(TOUCH)
+	$(call host-make-package)

@@ -1,6 +1,9 @@
+################################################################################
 #
 # vuzero4k-vmlinuz-initrd 7260a0
 #
+################################################################################
+
 ifeq ($(VU_MULTIBOOT),multi)
 VUZERO4K_VMLINUZ_INITRD_DATE = 20190911
 VUZERO4K_VMLINUZ_INITRD_SITE = https://bitbucket.org/max_10/vmlinuz-initrd-vuzero4k/downloads
@@ -13,7 +16,7 @@ VUZERO4K_VMLINUZ_INITRD_SOURCE  = vmlinuz-initrd_vuzero4k_$(VUZERO4K_VMLINUZ_INI
 VUZERO4K_VMLINUZ_INITRD_DEPENDS = bootstrap
 
 $(D)/vuzero4k-vmlinuz-initrd:
-	$(START_BUILD)
+	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

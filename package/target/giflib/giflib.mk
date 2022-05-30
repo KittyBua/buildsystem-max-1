@@ -1,26 +1,19 @@
+################################################################################
 #
 # giflib
 #
-GIFLIB_VERSION = 5.1.4
+################################################################################
+
+GIFLIB_VERSION = 5.2.1
 GIFLIB_DIR     = giflib-$(GIFLIB_VERSION)
-GIFLIB_SOURCE  = giflib-$(GIFLIB_VERSION).tar.bz2
+GIFLIB_SOURCE  = giflib-$(GIFLIB_VERSION).tar.gz
 GIFLIB_SITE    = https://downloads.sourceforge.net/project/giflib
 GIFLIB_DEPENDS = bootstrap
 
-GIFLIB_CONF_ENV = \
-	ac_cv_prog_have_xmlto=no
-
 $(D)/giflib:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
+		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gif2rgb gifbuild gifclrmp gifecho giffix gifinto giftext giftool)
-	$(TOUCH)
+		$(MAKE) install-include install-lib DESTDIR=$(TARGET_DIR) PREFIX=$(prefix)
+	$(call TARGET_FOLLOWUP)

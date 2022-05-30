@@ -1,6 +1,9 @@
+################################################################################
 #
 # host-e2fsprogs
 #
+################################################################################
+
 HOST_E2FSPROGS_VERSION = 1.46.4
 HOST_E2FSPROGS_DIR     = e2fsprogs-$(HOST_E2FSPROGS_VERSION)
 HOST_E2FSPROGS_SOURCE  = e2fsprogs-$(HOST_E2FSPROGS_VERSION).tar.gz
@@ -8,12 +11,8 @@ HOST_E2FSPROGS_SITE    = https://sourceforge.net/projects/e2fsprogs/files/e2fspr
 HOST_E2FSPROGS_DEPENDS = bootstrap
 
 $(D)/host-e2fsprogs:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \\
 		$(HOST_CONFIGURE); \
 		$(MAKE)
 	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/resize/resize2fs $(HOST_DIR)/bin/
@@ -27,5 +26,4 @@ $(D)/host-e2fsprogs:
 	ln -sf e2fsck $(HOST_DIR)/bin/fsck.ext3
 	ln -sf e2fsck $(HOST_DIR)/bin/fsck.ext4
 	ln -sf e2fsck $(HOST_DIR)/bin/fsck.ext4dev
-	$(REMOVE)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

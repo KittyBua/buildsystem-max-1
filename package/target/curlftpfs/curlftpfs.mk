@@ -1,6 +1,9 @@
+################################################################################
 #
 # curlftpfs
 #
+################################################################################
+
 CURLFTPFS_VERSION = 0.9.2
 CURLFTPFS_DIR     = curlftpfs-$(CURLFTPFS_VERSION)
 CURLFTPFS_SOURCE  = curlftpfs-$(CURLFTPFS_VERSION).tar.gz
@@ -12,14 +15,4 @@ CURLFTPFS_CONF_ENV = \
 	ac_cv_func_realloc_0_nonnull=yes
 
 $(D)/curlftpfs:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

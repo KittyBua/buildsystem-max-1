@@ -1,6 +1,9 @@
+################################################################################
 #
 # oscam
 #
+################################################################################
+
 OSCAM_FLAVOUR ?= oscam-smod
 
 ifeq ($(OSCAM_FLAVOUR),oscam)
@@ -58,18 +61,14 @@ OSCAM_CONF_OPTS = \
 	CARDREADER_SC8IN1
 
 $(D)/oscam.do_prepare:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(SHELL) ./config.sh $($(PKG)_CONF_OPTS)
 	@touch $@
 
 $(D)/oscam.do_compile:
-	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_OPTS) \
+	$(CHDIR)/$($(PKG)_DIR); \
+		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) CROSS=$(TARGET_CROSS) OSCAM_BIN=$(OSCAM_FLAVOUR) USE_LIBCRYPTO=1 USE_LIBUSB=1 \
 		PLUS_TARGET="-rezap" \
 		CONF_DIR=/var/keys \
@@ -81,14 +80,10 @@ $(D)/oscam: oscam.do_prepare oscam.do_compile
 	rm -rf $(IMAGE_DIR)/$(OSCAM_FLAVOUR)
 	mkdir $(IMAGE_DIR)/$(OSCAM_FLAVOUR)
 	cp -pR $(PKG_BUILD_DIR)/$(OSCAM_FLAVOUR)* $(IMAGE_DIR)/$(OSCAM_FLAVOUR)/
-	$(REMOVE)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)
 
 oscam-clean:
 	rm -f $(D)/oscam
 	rm -f $(D)/oscam.do_compile
-	$(CD_BUILD_DIR); \
-		$(MAKE) distclean
+	rm -f $(D)/oscam.do_prepare
 
-oscam-distclean:
-	rm -f $(D)/oscam*

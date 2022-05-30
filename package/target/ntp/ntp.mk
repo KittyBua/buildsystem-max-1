@@ -1,6 +1,9 @@
+################################################################################
 #
 # ntp
 #
+################################################################################
+
 NTP_VERSION = 4.2.8p15
 NTP_DIR     = ntp-$(NTP_VERSION)
 NTP_SOURCE  = ntp-$(NTP_VERSION).tar.gz
@@ -15,15 +18,11 @@ NTP_CONF_OPTS = \
 	--with-yielding-select=yes \
 	--without-ntpsnmpd
 
+define NTP_CLEANUP_TARGET
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,calc_tickadj ntp-keygen ntp-wait ntpd ntptime tickadj update-leap)
+	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,ntp)
+endef
+NTP_CLEANUP_TARGET_HOOKS += NTP_CLEANUP_TARGET
+
 $(D)/ntp:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

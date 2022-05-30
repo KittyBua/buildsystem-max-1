@@ -1,7 +1,10 @@
+################################################################################
 #
 # readline
 #
-READLINE_VERSION = 8.1
+################################################################################
+
+READLINE_VERSION = 8.1.2
 READLINE_DIR     = readline-$(READLINE_VERSION)
 READLINE_SOURCE  = readline-$(READLINE_VERSION).tar.gz
 READLINE_SITE    = https://ftp.gnu.org/gnu/readline
@@ -14,16 +17,10 @@ READLINE_CONF_OPTS = \
 	bash_cv_func_sigsetjmp=yes \
 	bash_cv_wcwidth_broken=no
 
-$(D)/readline:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
+define READLINE_INSTALL_FILES
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/inputrc $(TARGET_DIR)/etc/inputrc
-	$(REMOVE)
-	$(TOUCH)
+endef
+READLINE_POST_INSTALL_TARGET_HOOKS += READLINE_INSTALL_FILES
+
+$(D)/readline:
+	$(call make-package)

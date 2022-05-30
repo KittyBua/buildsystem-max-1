@@ -1,6 +1,9 @@
+################################################################################
 #
 # libvorbisidec
 #
+################################################################################
+
 LIBVORBISIDEC_VERSION = 1.2.1+git20180316
 LIBVORBISIDEC_DIR     = libvorbisidec-$(LIBVORBISIDEC_VERSION)
 LIBVORBISIDEC_SOURCE  = libvorbisidec_$(LIBVORBISIDEC_VERSION).orig.tar.gz
@@ -9,21 +12,10 @@ LIBVORBISIDEC_DEPENDS = bootstrap libogg
 
 LIBVORBISIDEC_AUTORECONF = YES
 
-define LIBVORBISIDEC_POST_PATCH
+define LIBVORBISIDEC_PATCH_CONFIGURE
 	$(SED) '122 s/^/#/' $(PKG_BUILD_DIR)/configure.in
 endef
-LIBVORBISIDEC_POST_PATCH_HOOKS = LIBVORBISIDEC_POST_PATCH
+LIBVORBISIDEC_POST_PATCH_HOOKS = LIBVORBISIDEC_PATCH_CONFIGURE
 
 $(D)/libvorbisidec:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE) ; \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

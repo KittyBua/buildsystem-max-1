@@ -1,13 +1,18 @@
+################################################################################
 #
 # libgpg-error
 #
-LIBGPG_ERROR_VERSION = 1.44
+################################################################################
+
+LIBGPG_ERROR_VERSION = 1.42
 LIBGPG_ERROR_DIR     = libgpg-error-$(LIBGPG_ERROR_VERSION)
 LIBGPG_ERROR_SOURCE  = libgpg-error-$(LIBGPG_ERROR_VERSION).tar.bz2
 LIBGPG_ERROR_SITE    = https://www.gnupg.org/ftp/gcrypt/libgpg-error
 LIBGPG_ERROR_DEPENDS = bootstrap
 
 LIBGPG_ERROR_AUTORECONF = YES
+
+LIBGPG_ERROR_CONFIG_SCRIPTS = gpg-error-config
 
 LIBGPG_ERROR_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
@@ -17,20 +22,10 @@ LIBGPG_ERROR_CONF_OPTS = \
 	--disable-languages \
 	--disable-tests
 
-LIBGPG_ERROR_CONFIG_SCRIPTS = gpg-error-config
+define LIBGPG_ERROR_CLEANUP_TARGET
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,gpg-error gpgrt-config yat2m)
+endef
+LIBGPG_ERROR_CLEANUP_TARGET_HOOKS += LIBGPG_ERROR_CLEANUP_TARGET
 
 $(D)/libgpg-error:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_CONFIG_SCRIPTS)
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gpg-error gpgrt-config yat2m)
-	$(TOUCH)
+	$(call make-package)

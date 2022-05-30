@@ -1,6 +1,9 @@
+################################################################################
 #
 # host-ccache
 #
+################################################################################
+
 HOST_CCACHE_VERSION = 2021-03-29
 HOST_CCACHE_DIR     = local
 HOST_CCACHE_DEPENDS = directories
@@ -12,7 +15,7 @@ CCACHE_DIR = $(HOME)/.ccache-bs-$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION)-kernel-$
 export CCACHE_DIR
 
 $(D)/host-ccache:
-	$(START_BUILD)
+	$(call STARTUP)
 	ln -sf $(HOST_CCACHE_BIN) $(HOST_CCACHE_BINDIR)/cc; \
 	ln -sf $(HOST_CCACHE_BIN) $(HOST_CCACHE_BINDIR)/gcc; \
 	ln -sf $(HOST_CCACHE_BIN) $(HOST_CCACHE_BINDIR)/g++; \

@@ -1,6 +1,9 @@
+################################################################################
 #
 # minidlna
 #
+################################################################################
+
 MINIDLNA_VERSION = 1.3.0
 MINIDLNA_DIR     = minidlna-$(MINIDLNA_VERSION)
 MINIDLNA_SOURCE  = minidlna-$(MINIDLNA_VERSION).tar.gz
@@ -13,16 +16,13 @@ MINIDLNA_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
 	--disable-static
 
-$(D)/minidlna:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
+define MINIDLNA_INSTALL_MINIDLNAD_CONF
 	$(INSTALL_DATA) -D $(PKG_BUILD_DIR)/minidlna.conf $(TARGET_DIR)/etc/minidlna.conf
-	$(REMOVE)
-	$(TOUCH)
+	$(SED) 's|^media_dir=.*|media_dir=A,/media/music\nmedia_dir=V,/media/movies\nmedia_dir=P,/media/pictures|' $(TARGET_DIR)/etc/minidlna.conf
+	$(SED) 's|^#user=.*|user=root|' $(TARGET_DIR)/etc/minidlna.conf
+	$(SED) 's|^#friendly_name=.*|friendly_name=$(BOXTYPE)-$(BOXMODEL):ReadyMedia|' $(TARGET_DIR)/etc/minidlna.conf
+endef
+MINIDLNA_POST_INSTALL_TARGET_HOOKS += MINIDLNA_INSTALL_MINIDLNAD_CONF
+
+$(D)/minidlna:
+	$(call make-package)

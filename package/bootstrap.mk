@@ -1,3 +1,9 @@
+################################################################################
+#
+# makefile to setup and initialize the final buildsystem
+#
+################################################################################
+
 TOOLCHECK  =
 TOOLCHECK += find-automake
 TOOLCHECK += find-autopoint
@@ -34,18 +40,22 @@ bashcheck:
 toolcheck: bashcheck $(TOOLCHECK) preqs
 	@$(call MESSAGE_GREEN,"All required tools seem to be installed.")
 
-# -----------------------------------------------------------------------------
-
+################################################################################
 #
 # preqs
 #
+################################################################################
+
 preqs:
 	@mkdir -p $(OWN_FILES)/neutrino-hd
 	@mkdir -p $(OWN_FILES)/neutrino-hd.$(BOXMODEL)
 
+################################################################################
 #
 # directories
 #
+################################################################################
+
 DIRECTORIES_VERSION = 2020-05-25
 
 $(D)/directories:
@@ -69,9 +79,12 @@ $(D)/directories:
 	mkdir -p $(TARGET_DIR)/var/lib/{alsa,modules,nfs,opkg,urandom}
 	$(TOUCH)
 
+################################################################################
 #
 # cross-libs
 #
+################################################################################
+
 CROSS_LIBS_VERSION = 2021-03-25
 
 $(D)/cross-libs: directories $(CROSSTOOL)
@@ -86,9 +99,12 @@ $(D)/cross-libs: directories $(CROSSTOOL)
 	fi
 	$(TOUCH)
 
+################################################################################
 #
 # bootstrap
 #
+################################################################################
+
 BOOTSTRAP  =
 ifneq ($(BOXMODEL),generic)
 BOOTSTRAP += $(CROSSTOOL)
@@ -103,9 +119,12 @@ BOOTSTRAP += host-pkgconf
 $(D)/bootstrap: $(BOOTSTRAP)
 	@touch $@
 
+################################################################################
 #
 # image-deps
 #
+################################################################################
+
 IMAGE_DEPENDS  =
 IMAGE_DEPENDS += ncurses
 IMAGE_DEPENDS += bash
@@ -147,9 +166,12 @@ endif
 $(D)/image-deps: $(IMAGE_DEPENDS)
 	@touch $@
 
+################################################################################
 #
 # machine-deps
 #
+################################################################################
+
 MACHINE_DEPENDS  = kernel
 MACHINE_DEPENDS += kernel-modules-clean
 MACHINE_DEPENDS += $(BOXMODEL)-driver

@@ -1,18 +1,18 @@
+################################################################################
 #
 # neutrino-iptvplayer
 #
+################################################################################
+
 NEUTRINO_IPTVPLAYER_VERSION = git
 NEUTRINO_IPTVPLAYER_DIR     = iptvplayer.git
 NEUTRINO_IPTVPLAYER_SOURCE  = iptvplayer.git
 NEUTRINO_IPTVPLAYER_SITE    = https://github.com/TangoCash
-NEUTRINO_IPTVPLAYER_DEPENDS = rtmpdump python-twisted $(SHARE_PLUGINS)
+NEUTRINO_IPTVPLAYER_DEPENDS = rtmpdump python-twisted $(SHARE_NEUTRINO_PLUGINS)
 
 $(D)/neutrino-iptvplayer-nightly \
 $(D)/neutrino-iptvplayer:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
+	$(call PREPARE)
 	@if [ "$@" = "$(D)/neutrino-iptvplayer-nightly" ]; then \
 		$(BUILD_DIR)/iptvplayer/SyncWithGitLab.sh $(BUILD_DIR)/iptvplayer; \
 	fi
@@ -26,6 +26,5 @@ $(D)/neutrino-iptvplayer:
 	PYTHONPATH=$(TARGET_DIR)/$(basename $(PYTHON_VERSION)) \
 	$(HOST_DIR)/bin/python$(basename $(PYTHON_VERSION)) -Wi -t -O $(TARGET_DIR)/$(PYTHON_BASE_DIR)/compileall.py -q \
 		-d /usr/share/E2emulator -f -x badsyntax $(TARGET_SHARE_DIR)/E2emulator
-	cp -R $(PKG_BUILD_DIR)/addon4neutrino/neutrinoIPTV/* $(SHARE_PLUGINS)
-	$(REMOVE)
-	$(TOUCH)
+	cp -R $(PKG_BUILD_DIR)/addon4neutrino/neutrinoIPTV/* $(SHARE_NEUTRINO_PLUGINS)
+	$(call TARGET_FOLLOWUP)

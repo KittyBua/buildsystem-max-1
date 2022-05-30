@@ -1,6 +1,9 @@
+################################################################################
 #
 # kmod
 #
+################################################################################
+
 KMOD_VERSION = 29
 KMOD_DIR     = kmod-$(KMOD_VERSION)
 KMOD_SOURCE  = kmod-$(KMOD_VERSION).tar.xz
@@ -16,21 +19,14 @@ KMOD_CONF_OPTS = \
 	--disable-manpages \
 	--with-zlib
 
-$(D)/kmod:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	for target in depmod insmod lsmod modinfo modprobe rmmod; do \
-		ln -sfv ../bin/kmod $(TARGET_DIR)/sbin/$$target; \
-	done
+define KMOD_INSTALL_FILES
 	mkdir -p $(TARGET_DIR)/lib/{depmod.d,modprobe.d}
 	mkdir -p $(TARGET_DIR)/etc/{depmod.d,modprobe.d}
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	$(TOUCH)
+	for target in depmod insmod lsmod modinfo modprobe rmmod; do \
+		ln -sfv ../bin/kmod $(TARGET_BASE_SBIN_DIR)/$$target; \
+	done
+endef
+KMOD_POST_INSTALL_TARGET_HOOKS += KMOD_INSTALL_FILES
+
+$(D)/kmod:
+	$(call make-package)

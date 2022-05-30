@@ -1,6 +1,9 @@
+################################################################################
 #
 # zlib
 #
+################################################################################
+
 ZLIB_VERSION = 1.2.11
 ZLIB_DIR     = zlib-$(ZLIB_VERSION)
 ZLIB_SOURCE  = zlib-$(ZLIB_VERSION).tar.xz
@@ -16,16 +19,11 @@ ZLIB_CONF_OPTS = \
 	--uname=Linux
 
 $(D)/zlib:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(TARGET_CONFIGURE_OPTS) \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
+		$(TARGET_CONFIGURE_ENV) \
 		./configure $($(PKG)_CONF_OPTS); \
 		$(MAKE); \
 		ln -sf /bin/true ldconfig; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

@@ -1,6 +1,9 @@
+################################################################################
 #
 # dbus
 #
+################################################################################
+
 DBUS_VERSION = 1.12.6
 DBUS_DIR     = dbus-$(DBUS_VERSION)
 DBUS_SOURCE  = dbus-$(DBUS_VERSION).tar.gz
@@ -28,17 +31,11 @@ DBUS_CONF_OPTS += \
 	--without-systemdsystemunitdir
 endif
 
+define DBUS_CLEANUP_TARGET
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,dbus-cleanup-sockets dbus-daemon dbus-launch dbus-monitor)
+	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,xml)
+endef
+DBUS_CLEANUP_TARGET_HOOKS += DBUS_CLEANUP_TARGET
+
 $(D)/dbus:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,dbus-cleanup-sockets dbus-daemon dbus-launch dbus-monitor)
-	$(TOUCH)
+	$(call make-package)

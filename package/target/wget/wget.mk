@@ -1,6 +1,9 @@
+################################################################################
 #
 # wget
 #
+################################################################################
+
 WGET_VERSION = 1.21.3
 WGET_DIR     = wget-$(WGET_VERSION)
 WGET_SOURCE  = wget-$(WGET_VERSION).tar.gz
@@ -24,14 +27,4 @@ WGET_CONF_OPTS = \
 	CFLAGS="$(WGET_CFLAGS)"
 
 $(D)/wget:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

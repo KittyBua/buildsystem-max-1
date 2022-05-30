@@ -1,6 +1,9 @@
+################################################################################
 #
 # rarfs
 #
+################################################################################
+
 RARFS_VERSION = 0.1.1
 RARFS_DIR     = rarfs-$(RARFS_VERSION)
 RARFS_SOURCE  = rarfs-$(RARFS_VERSION).tar.gz
@@ -13,14 +16,4 @@ RARFS_CONF_OPTS = \
 	--includedir=/usr/include/fuse
 
 $(D)/rarfs:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

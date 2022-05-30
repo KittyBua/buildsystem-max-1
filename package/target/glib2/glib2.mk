@@ -1,6 +1,9 @@
+################################################################################
 #
 # glib2
 #
+################################################################################
+
 GLIB2_VERSION = 2.62.4
 GLIB2_DIR     = glib-$(GLIB2_VERSION)
 GLIB2_SOURCE  = glib-$(GLIB2_VERSION).tar.xz
@@ -19,17 +22,11 @@ GLIB2_CONF_OPTS = \
 	-Doss_fuzz=disabled \
 	-Dselinux=disabled
 
+define GLIB2_CLEANUP_TARGET
+	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,gettext gdb glib-2.0 locale)
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,gdbus-codegen glib-compile-schemas glib-compile-resources glib-genmarshal glib-gettextize gio-launch-desktop glib-mkenums gobject-query gtester gtester-report)
+endef
+GLIB2_CLEANUP_TARGET_HOOKS += GLIB2_CLEANUP_TARGET
+
 $(D)/glib2:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(TARGET_MESON_CONFIGURE); \
-		$(TARGET_NINJA); \
-		$(TARGET_NINJA_INSTALL)
-	$(REMOVE)
-	rm -rf $(addprefix $(TARGET_DIR)/usr/share/,gettext gdb glib-2.0 locale)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,gdbus-codegen glib-compile-schemas glib-compile-resources glib-genmarshal glib-gettextize gio-launch-desktop glib-mkenums gobject-query gtester gtester-report)
-	$(TOUCH)
+	$(call meson-package)

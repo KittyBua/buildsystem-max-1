@@ -1,6 +1,9 @@
+################################################################################
 #
 # htop
 #
+################################################################################
+
 HTOP_VERSION = 3.2.0
 HTOP_DIR     = htop-$(HTOP_VERSION)
 HTOP_SOURCE  = htop-$(HTOP_VERSION).tar.gz
@@ -19,16 +22,10 @@ HTOP_CONF_OPTS = \
 	--enable-unicode \
 	--disable-hwloc
 
-$(D)/htop:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
+define HTOP_CLEANUP_TARGET
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,applications icons pixmaps)
-	$(TOUCH)
+endef
+HTOP_CLEANUP_TARGET_HOOKS += HTOP_CLEANUP_TARGET
+
+$(D)/htop:
+	$(call make-package)

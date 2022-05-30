@@ -1,23 +1,19 @@
+################################################################################
 #
 # libevent
 #
+################################################################################
+
 LIBEVENT_VERSION = 2.1.11-stable
 LIBEVENT_DIR     = libevent-$(LIBEVENT_VERSION)
 LIBEVENT_SOURCE  = libevent-$(LIBEVENT_VERSION).tar.gz
 LIBEVENT_SITE    = https://github.com/libevent/libevent/releases/download/release-$(LIBEVENT_VERSION)
 LIBEVENT_DEPENDS = bootstrap
 
+define LIBEVENT_CLEANUP_TARGET
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,event_rpcgen.py)
+endef
+LIBEVENT_CLEANUP_TARGET_HOOKS += LIBEVENT_CLEANUP_TARGET
+
 $(D)/libevent:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,event_rpcgen.py)
-	$(TOUCH)
+	$(call make-package)

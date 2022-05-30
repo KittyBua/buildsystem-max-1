@@ -1,6 +1,9 @@
+################################################################################
 #
 # ethtool
 #
+################################################################################
+
 ETHTOOL_VERSION = 5.17
 ETHTOOL_DIR     = ethtool-$(ETHTOOL_VERSION)
 ETHTOOL_SOURCE  = ethtool-$(ETHTOOL_VERSION).tar.xz
@@ -12,14 +15,4 @@ ETHTOOL_CONF_OPTS = \
 	--disable-netlink
 
 $(D)/ethtool:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

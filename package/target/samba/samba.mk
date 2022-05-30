@@ -1,6 +1,9 @@
+################################################################################
 #
 # samba
 #
+################################################################################
+
 SAMBA_VERSION = 3.6.25
 SAMBA_DIR     = samba-$(SAMBA_VERSION)
 SAMBA_SOURCE  = samba-$(SAMBA_VERSION).tar.gz
@@ -90,25 +93,27 @@ SAMBA_CONF_OPTS = \
 	--without-libtevent \
 	--without-libaddns
 
+define SAMBA_INSTALL_INIT_SYSV
+	$(INSTALL_EXEC) $(PKG_FILES_DIR)/samba.init $(TARGET_DIR)/etc/init.d/samba
+	$(UPDATE-RC.D) samba start 20 2 3 4 5 . stop 20 0 1 6 .
+endef
+
+define SAMBA_INSTALL_FILES
+	ln -sf samba_multicall $(TARGET_SBIN_DIR)/nmbd
+	ln -sf samba_multicall $(TARGET_SBIN_DIR)/smbd
+	ln -sf samba_multicall $(TARGET_SBIN_DIR)/smbpasswd
+	$(INSTALL_DATA) $(PKG_FILES_DIR)/smb.conf $(TARGET_DIR)/etc/samba/smb.conf
+	$(INSTALL_DATA) $(PKG_FILES_DIR)/smbpasswd $(TARGET_DIR)/etc/samba/private/smbpasswd
+	$(INSTALL_DATA) $(PKG_FILES_DIR)/volatiles.03_samba $(TARGET_DIR)/etc/default/volatiles/03_samba
+endef
+SAMBA_POST_INSTALL_TARGET_HOOKS += SAMBA_INSTALL_FILES
+
 $(D)/samba:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		cd source3; \
 		./autogen.sh; \
 		$(CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) installservers SBIN_PROGS="bin/samba_multicall" DESTDIR=$(TARGET_DIR) LOCALEDIR=$(REMOVE_localedir)
-	ln -sf samba_multicall $(TARGET_DIR)/usr/sbin/nmbd
-	ln -sf samba_multicall $(TARGET_DIR)/usr/sbin/smbd
-	ln -sf samba_multicall $(TARGET_DIR)/usr/sbin/smbpasswd
-	$(INSTALL_DATA) $(PKG_FILES_DIR)/smb.conf $(TARGET_DIR)/etc/samba/smb.conf
-	$(INSTALL_DATA) $(PKG_FILES_DIR)/smbpasswd $(TARGET_DIR)/etc/samba/private/smbpasswd
-	$(INSTALL_EXEC) $(PKG_FILES_DIR)/samba.init $(TARGET_DIR)/etc/init.d/samba
-	$(INSTALL_DATA) $(PKG_FILES_DIR)/volatiles.03_samba $(TARGET_DIR)/etc/default/volatiles/03_samba
-	$(UPDATE-RC.D) samba start 20 2 3 4 5 . stop 20 0 1 6 .
-	$(REMOVE)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

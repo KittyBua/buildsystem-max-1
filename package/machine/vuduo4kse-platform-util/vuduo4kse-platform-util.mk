@@ -1,6 +1,9 @@
+################################################################################
 #
 # vuduo4kSE-platform-util
 #
+################################################################################
+
 VUDUO4KSE_PLATFORM_UTIL_DATE    = $(VUDUO4KSE_DRIVER_DATE)
 VUDUO4KSE_PLATFORM_UTIL_REV     = r0
 VUDUO4KSE_PLATFORM_UTIL_VERSION = 17.1-$(VUDUO4KSE_PLATFORM_UTIL_DATE).$(VUDUO4KSE_PLATFORM_UTIL_REV)
@@ -9,15 +12,18 @@ VUDUO4KSE_PLATFORM_UTIL_SOURCE  = platform-util-vuduo4kse-$(VUDUO4KSE_PLATFORM_U
 VUDUO4KSE_PLATFORM_UTIL_SITE    = http://code.vuplus.com/download/release/platform-util
 VUDUO4KSE_PLATFORM_UTIL_DEPENDS = bootstrap
 
-$(D)/vuduo4kse-platform-util:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(INSTALL_EXEC) $(BUILD_DIR)/platform-util-vuduo4kse/* $(TARGET_DIR)/usr/bin
+define VUDUO4KSE_PLATFORM_UTIL_INSTALL_FILES
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/vuplus-platform-util $(TARGET_DIR)/etc/init.d/vuplus-platform-util
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/vuplus-shutdown $(TARGET_DIR)/etc/init.d/vuplus-shutdown
+endef
+VUDUO4KSE_PLATFORM_UTIL_PRE_INSTALL_TARGET_HOOKS += VUDUO4KSE_PLATFORM_UTIL_INSTALL_FILES
+
+define VUDUO4KSE_PLATFORM_UTIL_INSTALL_INIT_SYSV
 	$(UPDATE-RC.D) vuplus-platform-util start 65 S . stop 90 0 .
 	$(UPDATE-RC.D) vuplus-shutdown start 89 0 .
-	$(REMOVE)
-	$(TOUCH)
+endef
+
+$(D)/vuduo4kse-platform-util:
+	$(call PREPARE)
+	$(INSTALL_EXEC) $(BUILD_DIR)/platform-util-vuduo4kse/* $(TARGET_BIN_DIR)
+	$(call TARGET_FOLLOWUP)

@@ -1,6 +1,9 @@
+################################################################################
 #
 # dropbear
 #
+################################################################################
+
 DROPBEAR_VERSION = 2018.76
 DROPBEAR_DIR     = dropbear-$(DROPBEAR_VERSION)
 DROPBEAR_SOURCE  = dropbear-$(DROPBEAR_VERSION).tar.bz2
@@ -19,17 +22,19 @@ DROPBEAR_CONF_OPTS = \
 	--disable-loginfunc \
 	--disable-pam 
 
+define DROPBEAR_INSTALL_INIT_SYSV
+	$(INSTALL_EXEC) $(PKG_FILES_DIR)/dropbear $(TARGET_DIR)/etc/init.d/
+endef
+
+define DROPBEAR_INSTALL_FILES
+	mkdir -p $(TARGET_DIR)/etc/dropbear
+endef
+DROPBEAR_POST_INSTALL_TARGET_HOOKS += DROPBEAR_INSTALL_FILES
+
 $(D)/dropbear:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(CONFIGURE); \
 		$(MAKE) PROGRAMS="dropbear dbclient dropbearkey scp" SCPPROGRESS=1; \
 		$(MAKE) PROGRAMS="dropbear dbclient dropbearkey scp" install DESTDIR=$(TARGET_DIR)
-	mkdir -p $(TARGET_DIR)/etc/dropbear
-	$(INSTALL_EXEC) $(PKG_FILES_DIR)/dropbear $(TARGET_DIR)/etc/init.d/
-	$(REMOVE)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

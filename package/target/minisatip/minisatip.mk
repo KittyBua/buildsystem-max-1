@@ -1,6 +1,9 @@
+################################################################################
 #
 # minisatip
 #
+################################################################################
+
 MINISATIP_VERSION = git
 MINISATIP_DIR     = minisatip.git
 MINISATIP_SOURCE  = minisatip.git
@@ -14,20 +17,23 @@ MINISATIP_CONF_OPTS = \
 	--enable-static \
 	--disable-netcv
 
-$(D)/minisatip:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(TARGET_CONFIGURE_OPTS) \
-		$(MAKE)
-	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/minisatip $(TARGET_DIR)/usr/bin
-	$(INSTALL) -d $(TARGET_SHARE_DIR)/minisatip
-	$(INSTALL_COPY) $(PKG_BUILD_DIR)/html $(TARGET_SHARE_DIR)/minisatip
+define MINISATIP_INSTALL_INIT_SYSV
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/minisatip $(TARGET_DIR)/etc/default/minisatip
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/minisatip.init $(TARGET_DIR)/etc/init.d/minisatip
-	$(REMOVE)
-	$(TOUCH)
+	$(UPDATE-RC.D) minisatip defaults 75 25
+endef
+
+define MINISATIP_INSTALL_FILES
+	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/minisatip $(TARGET_BIN_DIR)
+	$(INSTALL) -d $(TARGET_SHARE_DIR)/minisatip
+	$(INSTALL_COPY) $(PKG_BUILD_DIR)/html $(TARGET_SHARE_DIR)/minisatip
+endef
+MINISATIP_POST_INSTALL_TARGET_HOOKS += MINISATIP_INSTALL_FILES
+
+$(D)/minisatip:
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
+		$(CONFIGURE); \
+		$(TARGET_CONFIGURE_ENV) \
+		$(MAKE)
+	$(call TARGET_FOLLOWUP)

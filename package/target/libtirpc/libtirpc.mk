@@ -1,6 +1,9 @@
+################################################################################
 #
 # libtirpc
 #
+################################################################################
+
 LIBTIRPC_VERSION = 1.3.2
 LIBTIRPC_DIR     = libtirpc-$(LIBTIRPC_VERSION)
 LIBTIRPC_SOURCE  = libtirpc-$(LIBTIRPC_VERSION).tar.bz2
@@ -16,15 +19,4 @@ LIBTIRPC_CONF_OPTS = \
 	--disable-gssapi
 
 $(D)/libtirpc:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	$(TOUCH)
+	$(call make-package)

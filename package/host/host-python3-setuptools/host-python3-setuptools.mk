@@ -1,6 +1,9 @@
+################################################################################
 #
 # python3-setuptools
 #
+################################################################################
+
 HOST_PYTHON3_SETUPTOOLS_VERSION = 44.0.0
 HOST_PYTHON3_SETUPTOOLS_DIR     = setuptools-$(HOST_PYTHON3_SETUPTOOLS_VERSION)
 HOST_PYTHON3_SETUPTOOLS_SOURCE  = setuptools-$(HOST_PYTHON3_SETUPTOOLS_VERSION).zip
@@ -8,13 +11,4 @@ HOST_PYTHON3_SETUPTOOLS_SITE    = https://files.pythonhosted.org/packages/b0/f3/
 HOST_PYTHON3_SETUPTOOLS_DEPENDS = bootstrap host-python3
 
 $(D)/host-python3-setuptools:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(HOST_PYTHON3_BUILD); \
-		$(HOST_PYTHON3_INSTALL)
-	$(REMOVE)
-	$(TOUCH)
+	$(call host-python3-package)

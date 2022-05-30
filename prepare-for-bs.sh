@@ -74,6 +74,7 @@ fi
 PACKAGES="\
 	make \
 	subversion \
+	mercurial \
 	ccache \
 	flex \
 	bison \
@@ -112,7 +113,7 @@ PACKAGES="\
 	${UBUNTU:+libltdl-dev}                                       ${FEDORA:+libtool-ltdl-devel}                    \
 	                                                             ${FEDORA:+byacc}                                 \
 	${UBUNTU:+libssl-dev}           ${SUSE:+libopenssl-devel}    ${FEDORA:+openssl-devel}                         \
-	${UBUNTU:+libmount-dev}                                      ${FEDORA:+help2man}                              \
+	${UBUNTU:+libmount-dev}                                                                                       \
 	${UBUNTU:+mtools}                                            ${FEDORA:+rpcgen}                                \
 	${UBUNTU:+u-boot-tools}                                                                                       \
 	${UBUNTU:+curl}                                                                                               \
@@ -122,14 +123,12 @@ PACKAGES="\
 	${UBUNTU:+libseccomp-dev}                                                                                     \
 	${UBUNTU:+libexpat1-dev}                                                                                      \
 	${UBUNTU:+libexpat1}                                                                                          \
-	${UBUNTU:+libpng-dev}                                                                                         \
+	${UBUNTU:+libpng-dev}           ${SUSE:+libpng-devel}        ${FEDORA:+libpng-devel}   ${GENTOO:+libpng}      \
 	\
 	${UBUNTU:+libao-dev}                                                                                          \
 	${UBUNTU:+libglew-dev}                                                                                        \
 	${UBUNTU:+freeglut3-dev}                                                                                      \
 	${UBUNTU:+mpv}                                                                                                \
-	${UBUNTU:+libgstreamer1.0-dev}                                                                                \
-	${UBUNTU:+libgstreamer-plugins-base1.0-dev}                                                                   \
 ";
 
 if [ "$UBUNTU" == 1 ]; then

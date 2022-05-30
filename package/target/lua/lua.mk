@@ -1,6 +1,9 @@
+################################################################################
 #
 # lua
 #
+################################################################################
+
 LUA_VERSION    = 5.2.4
 LUA_ABIVERSION = $(basename $(LUA_VERSION))
 LUA_DIR        = lua-$(LUA_VERSION)
@@ -8,13 +11,14 @@ LUA_SOURCE     = lua-$(LUA_VERSION).tar.gz
 LUA_SITE       = https://www.lua.org/ftp
 LUA_DEPENDS    = bootstrap host-lua ncurses
 
+define LUA_CLEANUP_TARGET
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,luac)
+endef
+LUA_CLEANUP_TARGET_HOOKS += LUA_CLEANUP_TARGET
+
 $(D)/lua:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(MAKE) linux \
 			BUILDMODE=dynamic \
 			PKG_VERSION=$(LUA_VERSION) \
@@ -26,6 +30,4 @@ $(D)/lua:
 			INSTALL_TOP=$(TARGET_DIR)/usr \
 			INSTALL_MAN=$(TARGET_DIR)$(REMOVE_mandir); \
 		$(INSTALL_DATA) -D $(PKG_BUILD_DIR)/lua.pc $(PKG_CONFIG_PATH)/lua.pc
-	$(REMOVE)
-	rm -rf $(addprefix $(TARGET_DIR)/bin/,luac)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

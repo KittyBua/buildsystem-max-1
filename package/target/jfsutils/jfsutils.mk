@@ -1,6 +1,9 @@
+################################################################################
 #
 # jfsutils
 #
+################################################################################
+
 JFSUTILS_VERSION = 1.1.15
 JFSUTILS_DIR     = jfsutils-$(JFSUTILS_VERSION)
 JFSUTILS_SOURCE  = jfsutils-$(JFSUTILS_VERSION).tar.gz
@@ -13,16 +16,10 @@ define JFSUTILS_POST_PATCH
 endef
 JFSUTILS_POST_PATCH_HOOKS = JFSUTILS_POST_PATCH
 
+define JFSUTILS_CLEANUP_TARGET
+	rm -f $(addprefix $(TARGET_BASE_SBIN_DIR)/,jfs_debugfs jfs_fscklog jfs_logdump)
+endef
+JFSUTILS_CLEANUP_TARGET_HOOKS += JFSUTILS_CLEANUP_TARGET
+
 $(D)/jfsutils:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REMOVE)
-	rm -f $(addprefix $(TARGET_DIR)/sbin/,jfs_debugfs jfs_fscklog jfs_logdump)
-	$(TOUCH)
+	$(call make-package)

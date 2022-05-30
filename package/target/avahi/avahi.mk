@@ -1,6 +1,9 @@
+################################################################################
 #
 # avahi
 #
+################################################################################
+
 AVAHI_VERSION = 0.7
 AVAHI_DIR     = avahi-$(AVAHI_VERSION)
 AVAHI_SOURCE  = avahi-$(AVAHI_VERSION).tar.gz
@@ -45,17 +48,10 @@ AVAHI_CONF_OPTS = \
 	--disable-xmltoman \
 	--disable-tests
 
-$(D)/avahi:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
+define AVAHI_INSTALL_FILES
 	cp $(PKG_BUILD_DIR)/avahi-daemon/avahi-daemon $(TARGET_DIR)/etc/init.d
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	$(TOUCH)
+endef
+AVAHI_POST_INSTALL_TARGET_HOOKS += AVAHI_INSTALL_FILES
+
+$(D)/avahi:
+	$(call make-package)

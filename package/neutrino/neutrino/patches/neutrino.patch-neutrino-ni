@@ -1,0 +1,10 @@
+--- ni-neutrino.git.org/src/Makefile.am	2020-08-26 22:20:15.435811711 +0200
++++ ni-neutrino.git/src/Makefile.am	2020-08-26 22:28:37.239685931 +0200
+@@ -205,6 +205,7 @@
+ 
+ if BOXTYPE_ARMBOX
+ neutrino_LDADD += @SWSCALE_LIBS@
++neutrino_LDADD += -liconv
+ endif
+ 
+ if BOXMODEL_RASPI

@@ -1,24 +1,25 @@
+################################################################################
 #
 # libdpf
 #
+##############################################################################
+
 LIBDPF_VERSION = git
 LIBDPF_DIR     = dpf-ax.git
 LIBDPF_SOURCE  = dpf-ax.git
 LIBDPF_SITE    = $(MAX-GIT-GITHUB)
 LIBDPF_DEPENDS = bootstrap libusb-compat
 
+define LIBDPF_INSTALL_FILES
+	$(INSTALL_DATA) -D $(PKG_BUILD_DIR)/dpflib/libdpf.a $(TARGET_LIB_DIR)/libdpf.a
+	$(INSTALL_DATA) -D $(PKG_BUILD_DIR)/dpflib/dpf.h $(TARGET_INCLUDE_DIR)/libdpf/libdpf.h
+	$(INSTALL_DATA) -D $(PKG_BUILD_DIR)/include/spiflash.h $(TARGET_INCLUDE_DIR)/libdpf/spiflash.h
+	$(INSTALL_DATA) -D $(PKG_BUILD_DIR)/include/usbuser.h $(TARGET_INCLUDE_DIR)/libdpf/usbuser.h
+endef
+LIBDPF_POST_INSTALL_TARGET_HOOKS += LIBDPF_INSTALL_FILES
+
 $(D)/libdpf:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		make -C dpflib libdpf.a CC=$(TARGET_CC) PREFIX=$(TARGET_DIR)/usr; \
-		mkdir -p $(TARGET_INCLUDE_DIR)/libdpf; \
-		cp dpflib/dpf.h $(TARGET_INCLUDE_DIR)/libdpf/libdpf.h; \
-		cp dpflib/libdpf.a $(TARGET_LIB_DIR)/; \
-		cp include/usbuser.h $(TARGET_INCLUDE_DIR)/libdpf/; \
-		cp include/spiflash.h $(TARGET_INCLUDE_DIR)/libdpf/
-	$(REMOVE)
-	$(TOUCH)
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
+		make -C dpflib libdpf.a CC=$(TARGET_CC) PREFIX=$(TARGET_DIR)/usr
+	$(call TARGET_FOLLOWUP)

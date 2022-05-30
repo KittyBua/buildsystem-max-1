@@ -1,6 +1,9 @@
+################################################################################
 #
 # fbshot
 #
+################################################################################
+
 FBSHOT_VERSION = 0.3
 FBSHOT_DIR     = fbshot-$(FBSHOT_VERSION)
 FBSHOT_SOURCE  = fbshot-$(FBSHOT_VERSION).tar.gz
@@ -14,13 +17,8 @@ endef
 FBSHOT_POST_PATCH_HOOKS = FBSHOT_POST_PATCH
 
 $(D)/fbshot:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(MAKE); \
 		$(INSTALL_EXEC) -D fbshot $(TARGET_DIR)/bin/fbshot
-	$(REMOVE)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

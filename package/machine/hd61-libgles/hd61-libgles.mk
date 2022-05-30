@@ -1,6 +1,9 @@
+################################################################################
 #
 # hd61-libgles
 #
+################################################################################
+
 HD61_LIBGLES_DATE    = 20181201
 HD61_LIBGLES_VERSION = $(HD61_LIBGLES_DATE)
 HD61_LIBGLES_SOURCE  = hd61-mali-$(HD61_LIBGLES_VERSION).zip
@@ -8,7 +11,7 @@ HD61_LIBGLES_SITE    = http://downloads.mutant-digital.net/hd61
 HD61_LIBGLES_DEPENDS = bootstrap
 
 $(D)/hd61-libgles:
-	$(START_BUILD)
+	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(TARGET_LIB_DIR))
 	(cd $(TARGET_LIB_DIR) && ln -sf libMali.so libmali.so)
@@ -17,4 +20,4 @@ $(D)/hd61-libgles:
 	(cd $(TARGET_LIB_DIR) && ln -sf libMali.so libGLESv2.so.2.0 && ln -sf libGLESv2.so.2.0 libGLESv2.so.2  && ln -sf libGLESv2.so.2 libGLESv2.so)
 	(cd $(TARGET_LIB_DIR) && ln -sf libMali.so libgbm.so)
 	cp $(PKG_FILES_DIR)/* $(TARGET_LIB_DIR)/pkgconfig
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)

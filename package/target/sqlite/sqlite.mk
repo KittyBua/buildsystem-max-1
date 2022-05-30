@@ -1,6 +1,9 @@
+################################################################################
 #
 # sqlite
 #
+################################################################################
+
 SQLITE_VERSION = 3350500
 SQLITE_DIR     = sqlite-autoconf-$(SQLITE_VERSION)
 SQLITE_SOURCE  = sqlite-autoconf-$(SQLITE_VERSION).tar.gz
@@ -12,17 +15,10 @@ SQLITE_CONF_OPTS = \
 	--enable-threadsafe \
 	--disable-static-shell
 
+define SQLITE_CLEANUP_TARGET
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,sqlite3)
+endef
+SQLITE_CLEANUP_TARGET_HOOKS += SQLITE_CLEANUP_TARGET
+
 $(D)/sqlite:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
-		$(CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(REWRITE_LIBTOOL)
-	$(REMOVE)
-	rm -f $(addprefix $(TARGET_DIR)/usr/bin/,sqlite3)
-	$(TOUCH)
+	$(call make-package)

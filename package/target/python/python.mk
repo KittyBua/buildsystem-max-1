@@ -1,6 +1,9 @@
+################################################################################
 #
 # python
 #
+################################################################################
+
 PYTHON_VERSION = 2.7.18
 PYTHON_DIR     = Python-$(PYTHON_VERSION)
 PYTHON_SOURCE  = Python-$(PYTHON_VERSION).tar.xz
@@ -35,19 +38,13 @@ PYTHON_CONF_OPTS = \
 	--with-wctype-functions
 
 $(D)/python:
-	$(START_BUILD)
-	$(REMOVE)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(APPLY_PATCHES)
-	$(CD_BUILD_DIR); \
+	$(call PREPARE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		CONFIG_SITE= \
 		autoreconf -vfi Modules/_ctypes/libffi; \
 		autoconf; \
-		$(CONFIGURE) \
-			HOSTPYTHON=$(HOST_DIR)/bin/python$(basename $(PYTHON_VERSION)) \
-			; \
-		$(MAKE) $(TARGET_MAKE_OPTS) \
+		$(CONFIGURE) HOSTPYTHON=$(HOST_PYTHON_BINARY); \
+		$(MAKE) \
 			PYTHON_MODULES_INCLUDE="$(TARGET_INCLUDE_DIR)" \
 			PYTHON_MODULES_LIB="$(TARGET_LIB_DIR)" \
 			PYTHON_XCOMPILE_DEPENDENCIES_PREFIX="$(TARGET_DIR)" \
@@ -58,6 +55,9 @@ $(D)/python:
 			CFLAGS="$(TARGET_CFLAGS)" \
 			LDFLAGS="$(TARGET_LDFLAGS)" \
 			LD="$(TARGET_CC)" \
+			NM="$(TARGET_NM)" \
+			AR="$(TARGET_AR)" \
+			AS="$(TARGET_AS)" \
 			HOSTPYTHON=$(HOST_DIR)/bin/python$(basename $(PYTHON_VERSION)) \
 			HOSTPGEN=$(HOST_DIR)/bin/pgen \
 			all DESTDIR=$(TARGET_DIR) \
@@ -65,5 +65,4 @@ $(D)/python:
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	ln -sf ../../libpython$(PYTHON_VERSION_MAJOR).so.1.0 $(TARGET_DIR)/$(PYTHON_BASE_DIR)/config/libpython$(basename $(PYTHON_VERSION)).so; \
 	ln -sf $(TARGET_DIR)/$(PYTHON_INCLUDE_DIR) $(TARGET_DIR)/usr/include/python
-	$(REMOVE)
-	$(TOUCH)
+	$(call TARGET_FOLLOWUP)
