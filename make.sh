@@ -158,13 +158,13 @@ echo "FLAVOUR=$FLAVOUR" >> .config
 ##############################################
 
 case $3 in
-	[1-6]) REPLY=$3;;
+	[1-4]) REPLY=$3;;
 	*)	echo -e "\nToolchain gcc version:"
 		echo "   1) GCC version 6.5.0"
 		echo "   2) GCC version 8.5.0"
 		echo "   3) GCC version 11.3.0"
 		echo "   4) GCC version 12.1.0"
-		read -p "Select toolchain gcc version (1-6)? [2] "
+		read -p "Select toolchain gcc version (1-4)? [2] "
 		REPLY="${REPLY:-2}";;
 esac
 
