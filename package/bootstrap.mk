@@ -157,7 +157,7 @@ IMAGE_DEPENDS += dvbsnoop
 IMAGE_DEPENDS += libusb
 IMAGE_DEPENDS += wpa-supplicant
 IMAGE_DEPENDS += wireless-tools
-IMAGE_DEPENDS += udpxy
+#IMAGE_DEPENDS += udpxy
 IMAGE_DEPENDS += mc
 ifeq ($(BOXMODEL),hd60)
 IMAGE_DEPENDS += harfbuzz
