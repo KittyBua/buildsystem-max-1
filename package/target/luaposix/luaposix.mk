@@ -21,12 +21,15 @@ LUAPOSIX_CONF_OPTS = \
 	--mandir=$(TARGET_DIR)$(REMOVE_mandir) \
 	--docdir=$(TARGET_DIR)$(REMOVE_docdir)
 
-define LUAPOSIX_INSTALL_PATCH
-	$(CHDIR)/$($(PKG)_DIR); \
-		tar -C gnulib --strip=1 -xf $(DL_DIR)/$(GNULIB_SOURCE); \
-		tar -C slingshot --strip=1 -xf $(DL_DIR)/$(SLINGSHOT_SOURCE)
+define LUAPOSIX_UNPACK_GNULIB
+	tar -C $(PKG_BUILD_DIR)/gnulib --strip=1 -xf $(DL_DIR)/$(GNULIB_SOURCE)
 endef
-LUAPOSIX_POST_PATCH_HOOKS += LUAPOSIX_INSTALL_PATCH
+LUAPOSIX_POST_PATCH_HOOKS += LUAPOSIX_UNPACK_GNULIB
+
+define LUAPOSIX_UNPACK_SLINGSHOT
+	tar -C $(PKG_BUILD_DIR)/slingshot --strip=1 -xf $(DL_DIR)/$(SLINGSHOT_SOURCE)
+endef
+LUAPOSIX_POST_PATCH_HOOKS += LUAPOSIX_UNPACK_SLINGSHOT
 
 $(D)/luaposix:
 	$(call PREPARE)
