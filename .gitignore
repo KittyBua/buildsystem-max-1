@@ -1,17 +1,16 @@
 #
 # exclude directories explicitly
 #
+/build_cross
+/build_host
 /build_source
 /build_tmp
-/cross
-/support/scripts/*-local*
-/host
 /own-files
 /own-patches
 /package/extras
-/release
 /release_image
 /root
+/support/scripts/*-local*
 /.deps
 #
 # exclude files explicitly
