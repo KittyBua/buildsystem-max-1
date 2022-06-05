@@ -15,7 +15,7 @@ depsclean:
 clean: depsclean
 	@printf "$(TERM_YELLOW)===> cleaning system build directories and files .. $(TERM_NORMAL)"
 	@-rm -rf $(HOST_DIR)
-	@-rm -rf $(RELEASE_DIR)
+	@-rm -rf $(BASE_DIR)/release
 	@-rm -rf $(TARGET_DIR)
 	@-rm -rf $(D)/kernel
 	@-rm -rf $(D)/*.do_compile
@@ -25,7 +25,7 @@ clean: depsclean
 distclean:
 	@printf "$(TERM_YELLOW)===> cleaning system build directories and files .. $(TERM_NORMAL)"
 	@-rm -rf $(HOST_DIR)
-	@-rm -rf $(RELEASE_DIR)
+	@-rm -rf $(BASE_DIR)/release
 	@-rm -rf $(TARGET_DIR)
 	@-rm -rf $(BUILD_DIR)
 	@-rm -rf $(SOURCE_DIR)
