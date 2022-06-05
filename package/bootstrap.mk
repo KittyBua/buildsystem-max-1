@@ -60,7 +60,7 @@ DIRECTORIES_VERSION = 2020-05-25
 
 $(D)/directories:
 	$(call STARTUP)
-	mkdir -p $(DEPS_DIR)
+	mkdir -p $(D)
 	mkdir -p $(DL_DIR)
 	mkdir -p $(BUILD_DIR)
 	mkdir -p $(HOST_DIR)

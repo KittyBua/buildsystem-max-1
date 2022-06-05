@@ -26,8 +26,6 @@ SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 	 else if [ -x /bin/bash ]; then echo /bin/bash; \
 	 else echo sh; fi; fi)
 
-#SHELL := $(SHELL) -x
-
 # Include some helper macros and variables
 include support/misc/utils.mk
 
