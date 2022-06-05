@@ -30,10 +30,7 @@ crosstool-ng:
 	$(call PREPARE)
 	unset CONFIG_SITE LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE; \
 	ulimit -n 2048; \
-	ln -sf $(HOST_CCACHE_BIN) $(HOST_CCACHE_BINDIR)/cc; \
-	ln -sf $(HOST_CCACHE_BIN) $(HOST_CCACHE_BINDIR)/c++; \
-	ln -sf $(HOST_CCACHE_BIN) $(HOST_CCACHE_BINDIR)/gcc; \
-	ln -sf $(HOST_CCACHE_BIN) $(HOST_CCACHE_BINDIR)/g++; \
+	$(HOST_CCACHE_LINK); \
 	$(CHDIR)/$($(PKG)_DIR); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/$(CROSSTOOL_NG_CONFIG).config .config; \
 		$(SED) "s|^CT_PARALLEL_JOBS=.*|CT_PARALLEL_JOBS=$(PARALLEL_JOBS)|" .config; \
@@ -48,7 +45,7 @@ crosstool-ng:
 	test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/lib || ln -sf sysroot/lib $(CROSS_DIR)/$(GNU_TARGET_NAME)/
 	rm -f $(CROSS_DIR)/$(GNU_TARGET_NAME)/lib/libstdc++.so.6.0.*-gdb.py
 	rm -f $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot/lib/libstdc++.so.6.0.*-gdb.py
-	$(call TARGET_FOLLOWUP)
+	$(REMOVE)
 endif
 
 # -----------------------------------------------------------------------------
