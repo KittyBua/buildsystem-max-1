@@ -13,7 +13,7 @@ WLAN_RTL8822BU_DEPENDS = bootstrap kernel
 $(D)/wlan-rtl8822bu:
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) $(KERNEL_MAKEVARS); \
+		$(MAKE) $(KERNEL_MAKE_VARS); \
 	$(INSTALL_DATA) 88x2bu.ko $(TARGET_MODULES_DIR)/kernel/drivers/net/wireless/
 	$(LINUX_RUN_DEPMOD)
 	$(call TARGET_FOLLOWUP)

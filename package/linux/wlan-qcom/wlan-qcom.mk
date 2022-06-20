@@ -13,7 +13,7 @@ WLAN_QCOM_DEPENDS = bootstrap kernel wlan-qcom-firmware wireless-regdb
 $(D)/wlan-qcom:
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) $(KERNEL_MAKEVARS); \
+		$(MAKE) $(KERNEL_MAKE_VARS); \
 	$(INSTALL_DATA) wlan.ko $(TARGET_MODULES_DIR)/extra
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d
 	for i in wlan; do \

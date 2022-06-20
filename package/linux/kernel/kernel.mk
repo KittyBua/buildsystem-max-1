@@ -18,9 +18,9 @@ ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 hd60 hd61 h7))
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/initramfs-subdirboot.cpio.gz $(KERNEL_OBJ_DIR)
 endif
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) $(KERNEL_MAKEVARS) oldconfig; \
-		$(MAKE) $(KERNEL_MAKEVARS) modules $(KERNEL_DTB) $(KERNEL_IMAGE_TYPE); \
-		$(MAKE) $(KERNEL_MAKEVARS) modules_install
+		$(MAKE) $(KERNEL_MAKE_VARS) oldconfig; \
+		$(MAKE) $(KERNEL_MAKE_VARS) modules $(KERNEL_DTB) $(KERNEL_IMAGE_TYPE); \
+		$(MAKE) $(KERNEL_MAKE_VARS) modules_install
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 h7))
 	cat $(KERNEL_OUTPUT) $(KERNEL_INPUT_DTB) > $(KERNEL_OUTPUT_DTB)
 endif
@@ -53,7 +53,7 @@ kernel-distclean:
 
 kernel-config: bootstrap kernel.do_compile
 	$(CHDIR)/$($(PKG)_DIR); \
-		make $(KERNEL_MAKEVARS) menuconfig
+		make $(KERNEL_MAKE_VARS) menuconfig
 	@echo ""
 	@echo -e "You have to edit $(KERNEL_CONFIG) $(TERM_YELLOW)m a n u a l l y$(TERM_NORMAL) to make changes permanent !!!"
 	@echo ""

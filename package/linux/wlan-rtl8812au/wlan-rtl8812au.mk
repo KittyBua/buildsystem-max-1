@@ -13,7 +13,7 @@ WLAN_RTL8812AU_DEPENDS = bootstrap kernel
 $(D)/wlan-rtl8812au:
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) $(KERNEL_MAKEVARS); \
+		$(MAKE) $(KERNEL_MAKE_VARS); \
 	$(INSTALL_DATA) 8812au.ko $(TARGET_MODULES_DIR)/kernel/drivers/net/wireless/
 	$(LINUX_RUN_DEPMOD)
 	$(call TARGET_FOLLOWUP)
