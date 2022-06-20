@@ -10,8 +10,9 @@ PYTHON_SOURCE  = Python-$(PYTHON_VERSION).tar.xz
 PYTHON_SITE    = https://www.python.org/ftp/python/$(PYTHON_VERSION)
 PYTHON_DEPENDS = bootstrap host-python ncurses zlib openssl libffi expat bzip2
 
-PYTHON_BASE_DIR    = usr/lib/python$(basename $(PYTHON_VERSION))
+PYTHON_LIB_DIR     = usr/lib/python$(basename $(PYTHON_VERSION))
 PYTHON_INCLUDE_DIR = usr/include/python$(basename $(PYTHON_VERSION))
+PYTHON_SITEPACKAGES_DIR = $(PYTHON_LIB_DIR)/site-packages
 
 PYTHON_CONF_ENV = \
 	ac_sys_system=Linux \

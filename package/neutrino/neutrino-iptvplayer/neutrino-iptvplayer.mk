@@ -24,7 +24,7 @@ $(D)/neutrino-iptvplayer:
 	chmod 755 $(TARGET_SHARE_DIR)/E2emulator/Plugins/Extensions/IPTVPlayer/cmdlineIPTV.*
 	chmod 755 $(TARGET_SHARE_DIR)/E2emulator/Plugins/Extensions/IPTVPlayer/IPTVdaemon.*
 	PYTHONPATH=$(TARGET_DIR)/$(basename $(PYTHON_VERSION)) \
-	$(HOST_DIR)/bin/python$(basename $(PYTHON_VERSION)) -Wi -t -O $(TARGET_DIR)/$(PYTHON_BASE_DIR)/compileall.py -q \
+	$(HOST_DIR)/bin/python$(basename $(PYTHON_VERSION)) -Wi -t -O $(TARGET_DIR)/$(PYTHON_LIB_DIR)/compileall.py -q \
 		-d /usr/share/E2emulator -f -x badsyntax $(TARGET_SHARE_DIR)/E2emulator
 	cp -R $(PKG_BUILD_DIR)/addon4neutrino/neutrinoIPTV/* $(SHARE_NEUTRINO_PLUGINS)
 	$(call TARGET_FOLLOWUP)

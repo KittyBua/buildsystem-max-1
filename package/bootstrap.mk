@@ -63,7 +63,6 @@ $(D)/directories:
 	mkdir -p $(D)
 	mkdir -p $(DL_DIR)
 	mkdir -p $(BUILD_DIR)
-	mkdir -p $(HOST_DIR)
 	mkdir -p $(IMAGE_DIR)
 	mkdir -p $(SOURCE_DIR)
 	mkdir -p $(HOST_DIR)/{bin,lib,share}

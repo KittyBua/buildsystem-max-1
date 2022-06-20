@@ -13,15 +13,15 @@ python-iptv-install:
 	cp -af $(TARGET_SHARE_DIR)/E2emulator $(RELEASE_DIR)/usr/share/
 	ln -sf /usr/share/E2emulator/Plugins/Extensions/IPTVPlayer/cmdlineIPTV.sh $(RELEASE_DIR)/usr/bin/cmdlineIPTV
 	rm -f $(RELEASE_DIR)/usr/bin/{cftp,ckeygen,easy_install*,mailmail,pyhtmlizer,tkconch,trial,twist,twistd}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_BASE_DIR)/{bsddb,compiler,curses,distutils,email,ensurepip,hotshot,idlelib,lib2to3}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_BASE_DIR)/{lib-old,lib-tk,multiprocessing,plat-linux2,pydoc_data,sqlite3,unittest,wsgiref}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_BASE_DIR)/lib-dynload/{_codecs_*.so,_curses*.so,_csv.so,_multi*.so}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_BASE_DIR)/lib-dynload/{audioop.so,cmath.so,future_builtins.so,mmap.so,strop.so}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_BASE_DIR)/site-packages/setuptools
-	rm -rf $(RELEASE_DIR)/$(PYTHON_BASE_DIR)/site-packages/twisted/{application,conch,cred,enterprise,flow,lore,mail,names,news,pair,persisted}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_BASE_DIR)/site-packages/twisted/{plugins,positioning,runner,scripts,spread,tap,_threads,trial,web,words}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_BASE_DIR)/site-packages/twisted/python/_pydoctortemplates
-	find $(RELEASE_DIR)/$(PYTHON_BASE_DIR)/ $(RELEASE_DIR)/usr/share/E2emulator/ \
+	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/{bsddb,compiler,curses,distutils,email,ensurepip,hotshot,idlelib,lib2to3}
+	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/{lib-old,lib-tk,multiprocessing,plat-linux2,pydoc_data,sqlite3,unittest,wsgiref}
+	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/lib-dynload/{_codecs_*.so,_curses*.so,_csv.so,_multi*.so}
+	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/lib-dynload/{audioop.so,cmath.so,future_builtins.so,mmap.so,strop.so}
+	rm -rf $(RELEASE_DIR)/$(PYTHON_SITEPACKAGES_DIR)/setuptools
+	rm -rf $(RELEASE_DIR)/$(PYTHON_SITEPACKAGES_DIR)/twisted/{application,conch,cred,enterprise,flow,lore,mail,names,news,pair,persisted}
+	rm -rf $(RELEASE_DIR)/$(PYTHON_SITEPACKAGES_DIR)/twisted/{plugins,positioning,runner,scripts,spread,tap,_threads,trial,web,words}
+	rm -rf $(RELEASE_DIR)/$(PYTHON_SITEPACKAGES_DIR)/twisted/python/_pydoctortemplates
+	find $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/ $(RELEASE_DIR)/usr/share/E2emulator/ \
 		\( -name '*.a' \
 		-o -name '*.c' \
 		-o -name '*.doc' \
@@ -36,7 +36,7 @@ python-iptv-install:
 		\) \
 		-print0 | xargs --no-run-if-empty -0 rm -rf
 ifeq ($(OPTIMIZATIONS), size)
-	find $(RELEASE_DIR)/$(PYTHON_BASE_DIR)/ -name '*.py' -exec rm -f {} \;
+	find $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/ -name '*.py' -exec rm -f {} \;
 	find $(RELEASE_DIR)/usr/share/E2emulator/ -name '*.py' -exec rm -f {} \;
 endif
 
