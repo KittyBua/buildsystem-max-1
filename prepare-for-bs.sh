@@ -140,7 +140,7 @@ elif [ "$UBUNTU" == 3 ]; then
 fi
 
 if ([ "$UBUNTU" == 1 ] &&  [ "$UBUNTU_VERSION" -ge "16" ]) || \
-   ([ "$UBUNTU" == 2 ] && [ "$MINT_VERSION" -ge "5" ]) || \
+   ([ "$UBUNTU" == 2 ] && [ "$MINT_VERSION" -ge "18" ]) || \
    ([ "$UBUNTU" == 3 ] && [ "$DEBIAN_VERSION" -ge "10" ]); then
 	PACKAGES="$PACKAGES \
 	${UBUNTU:+libtool-bin} \

@@ -26,5 +26,5 @@ define LIBBDPLUS_INSTALL_FILES
 endef
 LIBBDPLUS_POST_INSTALL_TARGET_HOOKS += LIBBDPLUS_INSTALL_FILES
 
-libbdplus: | $(TARGET_DIR)
+$(D)/libbdplus:
 	$(call autotools-package)

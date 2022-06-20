@@ -32,5 +32,5 @@ define LIBAACS_INSTALL_FILES
 endef
 LIBAACS_POST_INSTALL_TARGET_HOOKS += LIBAACS_INSTALL_FILES
 
-libaacs:
+$(D)/libaacs:
 	$(call autotools-package)

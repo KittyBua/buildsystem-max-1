@@ -10,15 +10,12 @@ HOSTMAKE := $(shell which $(HOSTMAKE) || type -p $(HOSTMAKE) || echo make)
 # CPUs. An additional job is used in order to keep processors busy
 # while waiting on I/O.
 # If the number of processors is not available, assume one.
-BS_JLEVEL ?= 0
 ifeq ($(BS_JLEVEL),0)
 PARALLEL_JOBS := $(shell echo \
 	$$((1 + `getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1`)))
 else
 PARALLEL_JOBS := $(BS_JLEVEL)
 endif
-
-#SHELL := $(SHELL) -x
 
 MAKE1 := $(HOSTMAKE) -j1
 override MAKE = $(HOSTMAKE) \
@@ -73,18 +70,11 @@ TARGET_EXTRA_CFLAGS  =
 TARGET_EXTRA_LDFLAGS =
 endif
 
-HOST_CPPFLAGS   = -I$(HOST_DIR)/include
-HOST_CFLAGS    ?= -O2
-HOST_CFLAGS    += $(HOST_CPPFLAGS)
-HOST_CXXFLAGS  += $(HOST_CFLAGS)
-HOST_LDFLAGS   += -L$(HOST_DIR)/lib -Wl,-rpath,$(HOST_DIR)/lib
-
 TARGET_CFLAGS   = $(TARGET_OPTIMIZATION) $(TARGET_ABI) $(TARGET_EXTRA_CFLAGS) -I$(TARGET_INCLUDE_DIR)
 TARGET_CPPFLAGS = $(TARGET_CFLAGS)
 TARGET_CXXFLAGS = $(TARGET_CFLAGS)
 TARGET_LDFLAGS  = -L$(TARGET_DIR)/lib -L$(TARGET_DIR)/usr/lib -Wl,-O1 -Wl,-rpath -Wl,/usr/lib -Wl,-rpath-link -Wl,${TARGET_DIR}/usr/lib $(TARGET_EXTRA_LDFLAGS)
 
-#TARGET_CROSS    = $(CROSS_DIR)/bin/$(GNU_TARGET_NAME)-
 TARGET_CROSS    = $(GNU_TARGET_NAME)-
 
 # Define TARGET_xx variables for all common binutils/gcc
@@ -103,9 +93,16 @@ TARGET_STRIP    = $(TARGET_CROSS)strip
 
 MAKEFLAGS += --no-print-directory
 
+HOST_CPPFLAGS   = -I$(HOST_DIR)/include
+HOST_CFLAGS    ?= -O2
+HOST_CFLAGS    += $(HOST_CPPFLAGS)
+HOST_CXXFLAGS  += $(HOST_CFLAGS)
+HOST_LDFLAGS   += -L$(HOST_DIR)/lib -Wl,-rpath,$(HOST_DIR)/lib
+
 # -----------------------------------------------------------------------------
 
 BASE_DIR       := ${CURDIR}
+
 DL_DIR         ?= $(HOME)/Archive
 BUILD_DIR       = $(BASE_DIR)/build_tmp
 ifeq ($(LAYOUT),multi)
@@ -164,7 +161,9 @@ VPATH = $(D)
 
 # -----------------------------------------------------------------------------
 
-BS_INIT_SYSV=1
+BS_INIT_SYSV = 1
+BS_JLEVEL ?= 0
+#SHELL := $(SHELL) -x
 
 # -----------------------------------------------------------------------------
 
