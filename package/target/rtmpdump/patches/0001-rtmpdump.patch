@@ -36,13 +36,3 @@
  
  
  OBJS=rtmp.o log.o amf.o hashswf.o parseurl.o
---- rtmpdump-2.4.orig/librtmp/librtmp.pc.in
-+++ rtmpdump-2.4/librtmp/librtmp.pc.in
-@@ -1,6 +1,6 @@
- prefix=@prefix@
- exec_prefix=${prefix}
--libdir=@libdir@
-+libdir=${prefix}/lib
- incdir=${prefix}/include
- 
- Name: librtmp
