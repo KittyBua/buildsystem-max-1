@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-ALSA_UTILS_VERSION = 1.2.6
+ALSA_UTILS_VERSION = 1.2.7
 ALSA_UTILS_DIR     = alsa-utils-$(ALSA_UTILS_VERSION)
 ALSA_UTILS_SOURCE  = alsa-utils-$(ALSA_UTILS_VERSION).tar.bz2
 ALSA_UTILS_SITE    = https://www.alsa-project.org/files/pub/utils
@@ -16,6 +16,9 @@ define ALSA_UTILS_POST_PATCH
 	sed -ir -r "s/(amidi|aplay|iecset|speaker-test|seq|alsaucm|topology)//g" $(PKG_BUILD_DIR)/Makefile.am
 endef
 ALSA_UTILS_POST_PATCH_HOOKS = ALSA_UTILS_POST_PATCH
+
+ALSA_UTILS_CONF_ENV = \
+	ac_cv_prog_ncurses5_config=$(HOST_DIR)/bin/$(NCURSES_CONFIG_SCRIPTS)
 
 ALSA_UTILS_CONF_OPTS = \
 	--with-curses=ncurses \
