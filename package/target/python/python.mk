@@ -38,13 +38,18 @@ PYTHON_CONF_OPTS = \
 	--with-signal-module \
 	--with-wctype-functions
 
-$(D)/python:
-	$(call PREPARE)
+define PYTHON_EXECUTE_AUTOTOOLS
 	$(CHDIR)/$($(PKG)_DIR); \
 		CONFIG_SITE= \
 		autoreconf -vfi Modules/_ctypes/libffi; \
-		autoconf; \
-		$(TARGET_CONFIGURE) HOSTPYTHON=$(HOST_PYTHON_BINARY); \
+		autoconf
+endef
+PYTHON_PRE_CONFIGURE_HOOKS += PYTHON_EXECUTE_AUTOTOOLS
+
+$(D)/python:
+	$(call PREPARE)
+	$(call TARGET_CONFIGURE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(MAKE) \
 			PYTHON_MODULES_INCLUDE="$(TARGET_INCLUDE_DIR)" \
 			PYTHON_MODULES_LIB="$(TARGET_LIB_DIR)" \

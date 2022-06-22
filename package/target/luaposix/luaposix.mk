@@ -16,10 +16,10 @@ LUAPOSIX_CONF_ENV = \
 	LUA=$(HOST_LUA_BINARY)
 
 LUAPOSIX_CONF_OPTS = \
-	--libdir=$(TARGET_LIB_DIR)/lua/$(LUA_ABIVERSION) \
-	--datadir=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVERSION) \
-	--mandir=$(TARGET_DIR)$(REMOVE_mandir) \
-	--docdir=$(TARGET_DIR)$(REMOVE_docdir)
+	--libdir=/usr/lib/lua/$(LUA_ABIVERSION) \
+	--datadir=/usr/share/lua/$(LUA_ABIVERSION) \
+	--mandir=$(REMOVE_mandir) \
+	--docdir=$(REMOVE_docdir)
 
 define LUAPOSIX_UNPACK_GNULIB
 	tar -C $(PKG_BUILD_DIR)/gnulib --strip=1 -xf $(DL_DIR)/$(GNULIB_SOURCE)
@@ -31,11 +31,11 @@ define LUAPOSIX_UNPACK_SLINGSHOT
 endef
 LUAPOSIX_POST_PATCH_HOOKS += LUAPOSIX_UNPACK_SLINGSHOT
 
-$(D)/luaposix:
-	$(call PREPARE)
+define LUAPOSIX_BOOTSTRAP
 	$(CHDIR)/$($(PKG)_DIR); \
-		./bootstrap; \
-		$(TARGET_CONFIGURE); \
-		$(MAKE); \
-		$(MAKE) install
-	$(call TARGET_FOLLOWUP)
+		./bootstrap
+endef
+LUAPOSIX_PRE_CONFIGURE_HOOKS += LUAPOSIX_BOOTSTRAP
+
+$(D)/luaposix:
+	$(call make-package)

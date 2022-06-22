@@ -68,23 +68,37 @@ TARGET_CONFIGURE_OPTS = \
 	--sysconfdir=$(sysconfdir) \
 	$($(PKG)_CONF_OPTS)
 
-TARGET_CONFIGURE = \
-	if [ "$($(PKG)_AUTORECONF)" == "YES" ]; then \
-	  autoreconf -fi -I $(TARGET_SHARE_DIR)/aclocal; \
-	fi; \
-	test -f ./configure || ./autogen.sh && \
-	CONFIG_SITE=/dev/null \
-	$(TARGET_CONFIGURE_ENV) \
-	./configure \
-	$(TARGET_CONFIGURE_OPTS)
+define TARGET_CONFIGURE
+	@$(call MESSAGE,"Configuring")
+	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
+	$(call AUTORECONF_HOOK)
+	$(Q)( \
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+		test -f ./configure || ./autogen.sh && \
+		$(TARGET_CONFIGURE_ENV) ./configure $(TARGET_CONFIGURE_OPTS) \
+	)
+	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
+endef
 
 define make-package
 	$(call PREPARE)
+	$(call TARGET_CONFIGURE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(TARGET_CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(call TARGET_FOLLOWUP)
+endef
+
+# -----------------------------------------------------------------------------
+
+define AUTORECONF_HOOK
+	$(Q)( \
+	if [ "$($(PKG)_AUTORECONF)" == "YES" ]; then \
+		$(call MESSAGE,"Autoreconfiguring"); \
+		$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+			autoreconf -fi -I $(TARGET_SHARE_DIR)/aclocal; \
+	fi; \
+	)
 endef
 
 # -----------------------------------------------------------------------------
@@ -117,20 +131,23 @@ HOST_CONFIGURE_OPTS = \
 	--sysconfdir=$(HOST_DIR)/etc \
 	$($(PKG)_CONF_OPTS)
 
-HOST_CONFIGURE = \
-	if [ "$($(PKG)_AUTORECONF)" == "YES" ]; then \
-	  autoreconf -fi; \
-	fi; \
-	test -f ./configure || ./autogen.sh && \
-	CONFIG_SITE=/dev/null \
-	$(HOST_CONFIGURE_ENV) \
-	./configure \
-	$(HOST_CONFIGURE_OPTS)
+define HOST_CONFIGURE
+	@$(call MESSAGE,"Configuring")
+	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
+	$(call AUTORECONF_HOOK)
+	$(Q)( \
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+		test -f ./configure || ./autogen.sh && \
+		CONFIG_SITE=/dev/null \
+		$(HOST_CONFIGURE_ENV) ./configure $(HOST_CONFIGURE_OPTS); \
+	)
+	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
+endef
 
 define host-make-package
 	$(call PREPARE)
+	$(call HOST_CONFIGURE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(HOST_CONFIGURE); \
 		$(MAKE); \
 		$(MAKE) install
 	$(call HOST_FOLLOWUP)

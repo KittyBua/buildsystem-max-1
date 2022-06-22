@@ -12,8 +12,8 @@ HOST_E2FSPROGS_DEPENDS = bootstrap
 
 $(D)/host-e2fsprogs:
 	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \\
-		$(HOST_CONFIGURE); \
+	$(call HOST_CONFIGURE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(MAKE)
 	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/resize/resize2fs $(HOST_DIR)/bin/
 	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/misc/mke2fs $(HOST_DIR)/bin/

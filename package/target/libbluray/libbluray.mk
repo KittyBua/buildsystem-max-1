@@ -24,7 +24,7 @@ define LIBBLURAY_BOOTSTRAP
 	$(CHDIR)/$($(PKG)_DIR); \
 		./bootstrap
 endef
-LIBBLURAY_POST_PATCH_HOOKS += LIBBLURAY_BOOTSTRAP
+LIBBLURAY_PRE_CONFIGURE_HOOKS += LIBBLURAY_BOOTSTRAP
 
 $(D)/libbluray:
 	$(call make-package)

@@ -8,6 +8,7 @@ SAMBA_VERSION = 3.6.25
 SAMBA_DIR     = samba-$(SAMBA_VERSION)
 SAMBA_SOURCE  = samba-$(SAMBA_VERSION).tar.gz
 SAMBA_SITE    = https://ftp.samba.org/pub/samba/stable
+SAMBA_SUBDIR  = source3
 SAMBA_DEPENDS = bootstrap
 
 SAMBA_CONF_ENV = \
@@ -93,6 +94,12 @@ SAMBA_CONF_OPTS = \
 	--without-libtevent \
 	--without-libaddns
 
+define SAMBA_AUTOGEN_SH
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+		./autogen.sh
+endef
+SAMBA_PRE_CONFIGURE_HOOKS += SAMBA_AUTOGEN_SH
+
 define SAMBA_INSTALL_INIT_SYSV
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/samba.init $(TARGET_DIR)/etc/init.d/samba
 	$(UPDATE-RC.D) samba start 20 2 3 4 5 . stop 20 0 1 6 .
@@ -110,10 +117,8 @@ SAMBA_POST_INSTALL_TARGET_HOOKS += SAMBA_INSTALL_FILES
 
 $(D)/samba:
 	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		cd source3; \
-		./autogen.sh; \
-		$(TARGET_CONFIGURE); \
+	$(call TARGET_CONFIGURE)
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		$(MAKE); \
 		$(MAKE) installservers SBIN_PROGS="bin/samba_multicall" DESTDIR=$(TARGET_DIR) LOCALEDIR=$(REMOVE_localedir)
 	$(call TARGET_FOLLOWUP)

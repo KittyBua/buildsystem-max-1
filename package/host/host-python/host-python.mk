@@ -24,14 +24,15 @@ HOST_PYTHON_CONF_OPTS = \
 
 $(D)/host-python:
 	$(call PREPARE)
+	$(call HOST_CONFIGURE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(HOST_CONFIGURE); \
 		$(MAKE) python Parser/pgen; \
 		mv python ./hostpython; \
 		mv Parser/pgen ./hostpgen; \
 		cp ./hostpgen $(HOST_DIR)/bin/pgen; \
-		$(MAKE) distclean; \
-		$(HOST_CONFIGURE); \
+		$(MAKE) distclean
+	$(call HOST_CONFIGURE)
+	$(CHDIR)/$($(PKG)_DIR); \
 		$(MAKE); \
 		$(MAKE) install
 	$(call TARGET_FOLLOWUP)

@@ -33,8 +33,8 @@ DROPBEAR_POST_INSTALL_TARGET_HOOKS += DROPBEAR_INSTALL_FILES
 
 $(D)/dropbear:
 	$(call PREPARE)
+	$(call TARGET_CONFIGURE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(TARGET_CONFIGURE); \
 		$(MAKE) PROGRAMS="dropbear dbclient dropbearkey scp" SCPPROGRESS=1; \
 		$(MAKE) PROGRAMS="dropbear dbclient dropbearkey scp" install DESTDIR=$(TARGET_DIR)
 	$(call TARGET_FOLLOWUP)

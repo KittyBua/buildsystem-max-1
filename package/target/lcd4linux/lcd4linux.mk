@@ -24,11 +24,16 @@ define LCD4LINUX_INSTALL_FILES
 endef
 LCD4LINUX_POST_INSTALL_TARGET_HOOKS += LCD4LINUX_INSTALL_FILES
 
+define LCD4LINUX_BOOTSTRAP
+	$(CHDIR)/$($(PKG)_DIR); \
+		./bootstrap
+endef
+LCD4LINUX_PRE_CONFIGURE_HOOKS += LCD4LINUX_BOOTSTRAP
+
 $(D)/lcd4linux:
 	$(call PREPARE)
+	$(call TARGET_CONFIGURE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		./bootstrap; \
-		$(TARGET_CONFIGURE); \
 		$(MAKE) vcs_version; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	$(call TARGET_FOLLOWUP)
