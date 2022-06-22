@@ -1,0 +1,11 @@
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -20,8 +20,6 @@
+ ACLOCAL_AMFLAGS = -I m4
+ SUBDIRS = \
+ 	include \
+-	man-po \
+-	po \
+ 	testsuite
+ 
+ AM_CFLAGS = -Iproc

@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-PROCPS_NG_VERSION = 3.3.17
-PROCPS_NG_DIR     = procps-$(PROCPS_NG_VERSION)
+PROCPS_NG_VERSION = 4.0.0
+PROCPS_NG_DIR     = procps-ng-$(PROCPS_NG_VERSION)
 PROCPS_NG_SOURCE  = procps-ng-$(PROCPS_NG_VERSION).tar.xz
 PROCPS_NG_SITE    = http://sourceforge.net/projects/procps-ng/files/Production
 PROCPS_NG_DEPENDS = bootstrap ncurses
@@ -23,6 +23,9 @@ PROCPS_NG_CONF_OPTS = \
 	--enable-skill \
 	--disable-modern-top \
 	--without-systemd
+
+PROCPS_NG_CONF_OPTS += \
+	--enable-watch8bit
 
 PROCPS_NG_BIN = \
 	free pgrep pkill pmap pwdx slabtop skill snice tload top uptime vmstat w
