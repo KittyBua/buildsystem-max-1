@@ -21,8 +21,4 @@ endef
 OPENRESOLV_POST_PATCH_HOOKS += OPENRESOLV_CREATE_CONF_ENV_FILE
 
 $(D)/openresolv:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(call TARGET_FOLLOWUP)
+	$(call make-package)
