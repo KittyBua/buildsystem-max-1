@@ -27,4 +27,4 @@ endef
 LIBBDPLUS_POST_INSTALL_TARGET_HOOKS += LIBBDPLUS_INSTALL_FILES
 
 $(D)/libbdplus:
-	$(call autotools-package)
+	$(call make-package)
