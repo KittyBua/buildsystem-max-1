@@ -25,7 +25,4 @@ endef
 WLAN_QCOM_POST_INSTALL_TARGET_HOOKS += WLAN_QCOM_RUN_DEPMOD
 
 $(D)/wlan-qcom:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) $(KERNEL_MAKE_VARS)
-	$(call TARGET_FOLLOWUP)
+	$(call kernel-module)

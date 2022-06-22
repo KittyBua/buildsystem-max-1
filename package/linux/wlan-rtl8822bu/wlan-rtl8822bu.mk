@@ -21,7 +21,4 @@ endef
 WLAN_RTL8822BU_POST_INSTALL_TARGET_HOOKS += WLAN_RTL8822BU_RUN_DEPMOD
 
 $(D)/wlan-rtl8822bu:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) $(KERNEL_MAKE_VARS)
-	$(call TARGET_FOLLOWUP)
+	$(call kernel-module)
