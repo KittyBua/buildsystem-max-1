@@ -38,16 +38,23 @@ TARGET_CMAKE_OPTS = \
 	$(CMAKE_QUIET) \
 	$($(PKG)_CONF_OPTS)
 
-TARGET_CMAKE = \
-	rm -f CMakeCache.txt; \
-	mkdir -p build; \
-	cd build; \
-	$(TARGET_CMAKE_ENV) cmake .. $(TARGET_CMAKE_OPTS)
+define TARGET_CMAKE
+	@$(call MESSAGE,"Configuring")
+	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
+	$(Q)( \
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+		rm -f CMakeCache.txt; \
+		mkdir -p build; \
+		cd build; \
+		$(TARGET_CMAKE_ENV) cmake .. $(TARGET_CMAKE_OPTS); \
+	)
+	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
+endef
 
 define cmake-package
 	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(TARGET_CMAKE); \
+	$(call TARGET_CMAKE)
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/build; \
 		$(MAKE); \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
 	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake)
@@ -76,16 +83,23 @@ HOST_CMAKE_OPTS += \
 	$(CMAKE_QUIET) \
 	$($(PKG)_CONF_OPTS)
 
-HOST_CMAKE = \
-	rm -f CMakeCache.txt; \
-	mkdir -p build; \
-	cd build; \
-	$(HOST_CMAKE_ENV) cmake .. $(HOST_CMAKE_OPTS)
+define HOST_CMAKE
+	@$(call MESSAGE,"Configuring")
+	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
+	$(Q)( \
+	$(CHDIR)/$($(PKG)_DIR); \
+		rm -f CMakeCache.txt; \
+		mkdir -p build; \
+		cd build; \
+		$(HOST_CMAKE_ENV) cmake .. $(HOST_CMAKE_OPTS); \
+	)
+	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
+endef
 
 define host-cmake-package
 	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(HOST_CMAKE); \
+	$(call HOST_CMAKE)
+	$(CHDIR)/$($(PKG)_DIR)/build; \
 		$(MAKE); \
 		$(MAKE) install
 	$(call HOST_FOLLOWUP)
