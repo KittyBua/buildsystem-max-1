@@ -6,10 +6,10 @@
 
 #CMAKE_QUIET = -DCMAKE_RULE_MESSAGES=OFF -DCMAKE_INSTALL_MESSAGE=NEVER
 
-TARGET_CMAKE_OPTS = \
+TARGET_CMAKE_ENV = \
 	$($(PKG)_CONF_ENV)
 
-TARGET_CMAKE_OPTIONS = \
+TARGET_CMAKE_OPTS = \
 	--no-warn-unused-cli \
 	-DENABLE_STATIC=OFF \
 	-DBUILD_SHARED_LIBS=ON \
@@ -42,7 +42,7 @@ TARGET_CMAKE = \
 	rm -f CMakeCache.txt; \
 	mkdir -p build; \
 	cd build; \
-	$(TARGET_CMAKE_OPTS) cmake .. $(TARGET_CMAKE_OPTIONS)
+	$(TARGET_CMAKE_ENV) cmake .. $(TARGET_CMAKE_OPTS)
 
 define cmake-package
 	$(call PREPARE)
@@ -60,9 +60,7 @@ HOST_CMAKE_ENV = \
 	$($(PKG)_CONF_ENV)
 
 HOST_CMAKE_OPTS += \
-	--no-warn-unused-cli
-
-HOST_CMAKE_OPTS += \
+	--no-warn-unused-cli \
 	-DENABLE_STATIC=OFF \
 	-DBUILD_SHARED_LIBS=ON \
 	-DBUILD_DOC=OFF \
