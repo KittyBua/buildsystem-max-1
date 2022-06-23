@@ -13,7 +13,6 @@ ALSA_LIB_DEPENDS = bootstrap
 ALSA_LIB_AUTORECONF = YES
 
 ALSA_LIB_CONF_OPTS = \
-	--enable-silent-rules \
 	--with-alsa-devdir=/dev/snd/ \
 	--with-plugindir=/usr/lib/alsa \
 	--without-debug \
