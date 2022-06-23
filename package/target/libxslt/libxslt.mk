@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-LIBXSLT_VERSION = 1.1.34
+LIBXSLT_VERSION = 1.1.35
 LIBXSLT_DIR     = libxslt-$(LIBXSLT_VERSION)
-LIBXSLT_SOURCE  = libxslt-$(LIBXSLT_VERSION).tar.gz
-LIBXSLT_SITE    = ftp://xmlsoft.org/libxml2
+LIBXSLT_SOURCE  = libxslt-$(LIBXSLT_VERSION).tar.xz
+LIBXSLT_SITE    = https://download.gnome.org/sources/libxslt/1.1
+
 LIBXSLT_DEPENDS = bootstrap libxml2
 
 LIBXSLT_CONFIG_SCRIPTS = xslt-config
