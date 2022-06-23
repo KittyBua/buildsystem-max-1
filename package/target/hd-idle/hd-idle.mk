@@ -13,7 +13,7 @@ HD_IDLE_DEPENDS = bootstrap
 $(D)/hd-idle:
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(TARGET_CONFIGURE_EMV) \
+		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE); \
 		$(MAKE) install TARGET_DIR=$(TARGET_DIR)
 	$(call TARGET_FOLLOWUP)
