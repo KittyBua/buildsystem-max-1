@@ -12,4 +12,4 @@ PYTHON_INCREMENTAL_SITE    = https://files.pythonhosted.org/packages/source/i/in
 PYTHON_INCREMENTAL_DEPENDS = bootstrap python python-setuptools
 
 $(D)/python-incremental:
-	$(call python-package)
+	$(call target-python-package)

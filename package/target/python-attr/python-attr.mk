@@ -11,4 +11,4 @@ PYTHON_ATTR_SITE    = https://pypi.python.org/packages/source/a/attr
 PYTHON_ATTR_DEPENDS = bootstrap python python-setuptools
 
 $(D)/python-attr:
-	$(call python-package)
+	$(call target-python-package)

@@ -11,4 +11,4 @@ PYTHON_ZOPE_INTERFACE_SITE    = https://pypi.python.org/packages/source/z/zope.i
 PYTHON_ZOPE_INTERFACE_DEPENDS = bootstrap python python-setuptools
 
 $(D)/python-zope-interface:
-	$(call python-package)
+	$(call target-python-package)

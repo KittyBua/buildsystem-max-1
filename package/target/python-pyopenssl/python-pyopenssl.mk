@@ -11,4 +11,4 @@ PYTHON_PYOPENSSL_SITE    = https://pypi.python.org/packages/source/p/pyOpenSSL
 PYTHON_PYOPENSSL_DEPENDS = bootstrap python python-setuptools
 
 $(D)/python-pyopenssl:
-	$(call python-package)
+	$(call target-python-package)

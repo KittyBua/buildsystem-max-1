@@ -11,4 +11,4 @@ PYTHON_SETUPTOOLS_SITE    = https://pypi.python.org/packages/source/s/setuptools
 PYTHON_SETUPTOOLS_DEPENDS = bootstrap python
 
 $(D)/python-setuptools:
-	$(call python-package)
+	$(call target-python-package)
