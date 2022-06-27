@@ -1,13 +1,13 @@
 ################################################################################
 #
-# kernel module infrastructure for building Linux kernel modules
+# Kernel module infrastructure for building Linux kernel modules
 #
 ################################################################################
 
 KERNEL_MAKE_VARS = \
 	ARCH=$(KERNEL_ARCH) \
-	INSTALL_MOD_PATH=$(BUILD_DIR)/$(KERNEL_MODULES) \
 	CROSS_COMPILE=$(TARGET_CROSS) \
+	INSTALL_MOD_PATH=$(BUILD_DIR)/$(KERNEL_MODULES) \
 	WERROR=0 \
 	O=$(KERNEL_OBJ_DIR)
 
@@ -24,16 +24,23 @@ KERNEL_MAKE_VARS += \
 	KVER=$(KERNEL_VERSION) \
 	KERNEL_VERSIONSION=$(KERNEL_VERSION)
 
+define KERNEL_MODULE_BUILD
+	@$(call MESSAGE,"Building kernel module")
+	$(CHDIR)/$($(PKG)_DIR); \
+		$($(PKG)_MAKE_ENV) $(MAKE) $($(PKG)_MAKE_OPTS) $(KERNEL_MAKE_VARS)
+endef
+
 define kernel-module
 	$(call PREPARE)
-	@$(call MESSAGE,"Building kernel module(s)")
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) $(KERNEL_MAKE_VARS)
+	$(call KERNEL_MODULE_BUILD)
+	$(call LINUX_RUN_DEPMOD)
 	$(call TARGET_FOLLOWUP)
 endef
 
+# -----------------------------------------------------------------------------
+
 define LINUX_RUN_DEPMOD
-	@$(call MESSAGE,"Run depmod")
+	@$(call MESSAGE,"Running depmod")
 	if test -d $(TARGET_DIR)/lib/modules/$(KERNEL_VERSION) \
 		&& grep -q "CONFIG_MODULES=y" $(KERNEL_OBJ_DIR)/.config; then \
 		PATH=$(PATH):/sbin:/usr/sbin depmod -a -b $(TARGET_DIR) $(KERNEL_VERSION); \
