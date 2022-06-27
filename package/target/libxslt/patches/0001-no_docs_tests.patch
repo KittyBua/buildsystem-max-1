@@ -1,0 +1,16 @@
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -2,11 +2,9 @@
+ 	libxslt \
+ 	libexslt \
+ 	xsltproc \
+-	doc \
+-	$(PYTHON_SUBDIR) \
+-	tests
++	$(PYTHON_SUBDIR)
+ 
+-DIST_SUBDIRS = libxslt libexslt xsltproc python doc tests
++DIST_SUBDIRS = libxslt libexslt xsltproc python
+ 
+ confexecdir=$(libdir)
+ confexec_DATA = xsltConf.sh
