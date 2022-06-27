@@ -16,7 +16,7 @@ define WPA_SUPPLICANT_INSTALL_FILES
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/volatiles.99_wpa_supplicant $(TARGET_DIR)/etc/default/volatiles/99_wpa_supplicant
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/wpa_supplicant.conf $(TARGET_DIR)/etc/wpa_supplicant.conf
 endef
-WPA_SUPPLICANT_POST_INSTALL_TARGET_HOOKS += WPA_SUPPLICANT_INSTALL_FILES
+WPA_SUPPLICANT_POST_FOLLOWUP_HOOKS += WPA_SUPPLICANT_INSTALL_FILES
 
 $(D)/wpa-supplicant:
 	$(call PREPARE)

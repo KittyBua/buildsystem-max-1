@@ -29,10 +29,14 @@ DROPBEARMULTI_CONF_OPTS = \
 	--disable-pututxline
 
 define DROPBEARMULTI_INSTALL_INIT_SYSV
-	cd $(TARGET_BIN_DIR) && ln -sf /usr/bin/dropbearmulti dropbear
-	mkdir -p $(TARGET_DIR)/etc/dropbear
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/dropbear $(TARGET_DIR)/etc/init.d/
 endef
+
+define DROPBEARMULTI_INSTALL_FILES
+	cd $(TARGET_BIN_DIR) && ln -sf /usr/bin/dropbearmulti dropbear
+	mkdir -p $(TARGET_DIR)/etc/dropbear
+endef
+DROPBEARMULTI_POST_FOLLOWUP_HOOKS += DROPBEARMULTI_INSTALL_FILES
 
 $(D)/dropbearmulti:
 	$(call PREPARE)

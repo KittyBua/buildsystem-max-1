@@ -8,7 +8,7 @@
 define STARTUP
 	$(call DEPENDS)
 	@$(call MESSAGE,"Start-up build")
-	$(REMOVE)
+	$(call CLEANUP)
 endef
 
 # -----------------------------------------------------------------------------
@@ -21,10 +21,10 @@ endef
 # -----------------------------------------------------------------------------
 
 # clean up
-define REMOVE
+define CLEANUP
 	$(Q)( \
 	if [ -d $(PKG_BUILD_DIR) ]; then \
-		$(call MESSAGE,"Remove"); \
+		$(call MESSAGE,"Clean up"); \
 		cd $(BUILD_DIR) && rm -rf $($(PKG)_DIR); \
 	fi; \
 	)
@@ -226,9 +226,10 @@ define rewrite_config_script
 endef
 
 # rewrite config scripts automatically
-REWRITE_CONFIG_SCRIPTS = \
+define REWRITE_CONFIG_SCRIPTS
 	$(foreach config_script,$($(PKG)_CONFIG_SCRIPTS),\
 		$(call rewrite_config_script,$(config_script))$(sep))
+endef
 
 # -----------------------------------------------------------------------------
 
@@ -258,28 +259,27 @@ REWRITE_LIBTOOL = $(call rewrite_libtool,$(TARGET_LIB_DIR))
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 
-# Install to target dir
+# follow-up build
 define TARGET_FOLLOWUP
-	@$(call MESSAGE,"Installing to target")
-	$(foreach hook,$($(PKG)_PRE_INSTALL_TARGET_HOOKS),$(call $(hook))$(sep))
+	@$(call MESSAGE,"Follow-up build")
+	$(foreach hook,$($(PKG)_PRE_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
 	$(if $(BS_INIT_SYSTEMD),\
 		$($(PKG)_INSTALL_INIT_SYSTEMD))
 	$(if $(BS_INIT_SYSV),\
 		$($(PKG)_INSTALL_INIT_SYSV))
-	$(foreach hook,$($(PKG)_POST_INSTALL_TARGET_HOOKS),$(call $(hook))$(sep))
-	$(REWRITE_CONFIG_SCRIPTS)
+	$(foreach hook,$($(PKG)_POST_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
+	$(call REWRITE_CONFIG_SCRIPTS)
 	$(REWRITE_LIBTOOL)
-	$(REMOVE)
+	$(call CLEANUP)
 	$(foreach hook,$($(PKG)_CLEANUP_TARGET_HOOKS),$(call $(hook))$(sep))
 	$(TOUCH)
 endef
 
-# Install to host dir
 define HOST_FOLLOWUP
-	@$(call MESSAGE,"Installing to host directory")
-	$(foreach hook,$($(PKG)_PRE_INSTALL_HOOKS),$(call $(hook))$(sep))
-	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
-	$(REMOVE)
+	@$(call MESSAGE,"Follow-up build")
+	$(foreach hook,$($(PKG)_PRE_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
+	$(foreach hook,$($(PKG)_POST_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
+	$(call CLEANUP)
 	$(foreach hook,$($(PKG)_CLEANUP_HOOKS),$(call $(hook))$(sep))
 	$(TOUCH)
 endef

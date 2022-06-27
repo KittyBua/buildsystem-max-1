@@ -45,7 +45,7 @@ crosstool-ng:
 	test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/lib || ln -sf sysroot/lib $(CROSS_DIR)/$(GNU_TARGET_NAME)/
 	rm -f $(CROSS_DIR)/$(GNU_TARGET_NAME)/lib/libstdc++.so.6.0.*-gdb.py
 	rm -f $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot/lib/libstdc++.so.6.0.*-gdb.py
-	$(REMOVE)
+	$(call CLEANUP)
 endif
 
 # -----------------------------------------------------------------------------

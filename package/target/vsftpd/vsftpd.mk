@@ -27,7 +27,7 @@ define VSFTPD_INSTALL_FILES
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/vsftpd.conf $(TARGET_DIR)/etc/vsftpd.conf
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/volatiles.99_vsftpd $(TARGET_DIR)/etc/default/volatiles/99_vsftpd
 endef
-VSFTPD_POST_INSTALL_TARGET_HOOKS += VSFTPD_INSTALL_FILES
+VSFTPD_POST_FOLLOWUP_HOOKS += VSFTPD_INSTALL_FILES
 
 $(D)/vsftpd:
 	$(call PREPARE)

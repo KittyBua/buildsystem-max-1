@@ -50,7 +50,7 @@ define AUTOFS_INSTALL_FILES
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/autofs $(TARGET_DIR)/etc/default/autofs
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/volatiles.99_autofs $(TARGET_DIR)/etc/default/volatiles/99_autofs
 endef
-AUTOFS_POST_INSTALL_TARGET_HOOKS += AUTOFS_INSTALL_FILES
+AUTOFS_POST_FOLLOWUP_HOOKS += AUTOFS_INSTALL_FILES
 
 define AUTOFS_CLEANUP_TARGET
 	rm -f $(addprefix $(TARGET_DIR)/etc/,autofs_ldap_auth.conf)
