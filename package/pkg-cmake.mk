@@ -4,13 +4,16 @@
 #
 ################################################################################
 
-#CMAKE_QUIET = -DCMAKE_RULE_MESSAGES=OFF -DCMAKE_INSTALL_MESSAGE=NEVER
+CMAKE_QUIET = -DCMAKE_RULE_MESSAGES=OFF -DCMAKE_INSTALL_MESSAGE=NEVER
 
 TARGET_CMAKE_ENV = \
 	$($(PKG)_CONF_ENV)
 
 TARGET_CMAKE_OPTS = \
-	--no-warn-unused-cli \
+	--no-warn-unused-cli
+
+TARGET_CMAKE_OPTS += \
+	$(CMAKE_QUIET) \
 	-DENABLE_STATIC=OFF \
 	-DBUILD_SHARED_LIBS=ON \
 	-DBUILD_DOC=OFF \
@@ -34,8 +37,9 @@ TARGET_CMAKE_OPTS = \
 	-DCMAKE_C_FLAGS="$(TARGET_CFLAGS) -DNDEBUG" \
 	-DCMAKE_CXX_COMPILER="$(TARGET_CXX)" \
 	-DCMAKE_CXX_FLAGS="$(TARGET_CFLAGS) -DNDEBUG" \
-	-DCMAKE_STRIP="$(TARGET_STRIP)" \
-	$(CMAKE_QUIET) \
+	-DCMAKE_STRIP="$(TARGET_STRIP)"
+
+TARGET_CMAKE_OPTS += \
 	$($(PKG)_CONF_OPTS)
 
 define TARGET_CMAKE
@@ -54,20 +58,26 @@ endef
 define cmake-package
 	$(call PREPARE)
 	$(call TARGET_CMAKE)
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/build; \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
+	$(call TARGET_MAKE,/build)
+	$(call TARGET_MAKE_INSTALL,/build)
 	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake)
 	$(call TARGET_FOLLOWUP)
 endef
 
-# -----------------------------------------------------------------------------
+################################################################################
+#
+# Host CMake package infrastructure
+#
+################################################################################
 
 HOST_CMAKE_ENV = \
 	$($(PKG)_CONF_ENV)
 
 HOST_CMAKE_OPTS += \
-	--no-warn-unused-cli \
+	--no-warn-unused-cli
+
+HOST_CMAKE_OPTS += \
+	$(CMAKE_QUIET) \
 	-DENABLE_STATIC=OFF \
 	-DBUILD_SHARED_LIBS=ON \
 	-DBUILD_DOC=OFF \
@@ -79,15 +89,16 @@ HOST_CMAKE_OPTS += \
 	-DBUILD_TESTING=OFF \
 	-DCMAKE_COLOR_MAKEFILE=OFF \
 	-DCMAKE_INSTALL_PREFIX="$(HOST_DIR)" \
-	-DCMAKE_PREFIX_PATH="$(HOST_DIR)" \
-	$(CMAKE_QUIET) \
+	-DCMAKE_PREFIX_PATH="$(HOST_DIR)"
+
+HOST_CMAKE_OPTS += \
 	$($(PKG)_CONF_OPTS)
 
 define HOST_CMAKE
 	@$(call MESSAGE,"Configuring")
 	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 	$(Q)( \
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		rm -f CMakeCache.txt; \
 		mkdir -p build; \
 		cd build; \
@@ -99,8 +110,7 @@ endef
 define host-cmake-package
 	$(call PREPARE)
 	$(call HOST_CMAKE)
-	$(CHDIR)/$($(PKG)_DIR)/build; \
-		$(MAKE); \
-		$(MAKE) install
+	$(call HOST_MAKE,/build)
+	$(call HOST_MAKE_INSTALL,/build)
 	$(call HOST_FOLLOWUP)
 endef
