@@ -108,7 +108,7 @@ define UTIL_LINUX_INSTALL_FILES
 	$(INSTALL) -d $(TARGET_DIR)/etc/default/
 	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"' > $(TARGET_DIR)/etc/default/mountall
 endef
-UTIL_LINUX_POST_INSTALL_TARGET_HOOKS += UTIL_LINUX_INSTALL_FILES
+UTIL_LINUX_POST_INSTALL_HOOKS += UTIL_LINUX_INSTALL_FILES
 
 define UTIL_LINUX_CLEANUP_TARGET
 	rm -f $(addprefix $(TARGET_DIR)/bin/,findmnt)

@@ -51,7 +51,7 @@ AVAHI_CONF_OPTS = \
 define AVAHI_INSTALL_FILES
 	cp $(PKG_BUILD_DIR)/avahi-daemon/avahi-daemon $(TARGET_DIR)/etc/init.d
 endef
-AVAHI_POST_INSTALL_TARGET_HOOKS += AVAHI_INSTALL_FILES
+AVAHI_POST_INSTALL_HOOKS += AVAHI_INSTALL_FILES
 
 $(D)/avahi:
 	$(call make-package)

@@ -19,7 +19,7 @@ define OPKG_INSTALL_FILES
 	mkdir -p $(TARGET_DIR)/etc/opkg
 	ln -sf opkg $(TARGET_BIN_DIR)/opkg-cl
 endef
-OPKG_POST_INSTALL_TARGET_HOOKS += OPKG_INSTALL_FILES
+OPKG_POST_INSTALL_HOOKS += OPKG_INSTALL_FILES
 
 $(D)/opkg:
 	$(call make-package)

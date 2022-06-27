@@ -20,7 +20,7 @@ define HDDTEMP_INSTALL_FILES
 	$(INSTALL_DATA) -D $(PKG_FILES_DIR)/hddtemp.db $(TARGET_SHARE_DIR)/misc/hddtemp.db
 	ln -sf /usr/share/misc/hddtemp.db $(TARGET_DIR)/etc/hddtemp.db
 endef
-HDDTEMP_POST_INSTALL_TARGET_HOOKS += HDDTEMP_INSTALL_FILES
+HDDTEMP_POST_INSTALL_HOOKS += HDDTEMP_INSTALL_FILES
 
 $(D)/hddtemp:
 	$(call make-package)

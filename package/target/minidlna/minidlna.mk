@@ -22,7 +22,7 @@ define MINIDLNA_INSTALL_MINIDLNAD_CONF
 	$(SED) 's|^#user=.*|user=root|' $(TARGET_DIR)/etc/minidlna.conf
 	$(SED) 's|^#friendly_name=.*|friendly_name=$(BOXTYPE)-$(BOXMODEL):ReadyMedia|' $(TARGET_DIR)/etc/minidlna.conf
 endef
-MINIDLNA_POST_INSTALL_TARGET_HOOKS += MINIDLNA_INSTALL_MINIDLNAD_CONF
+MINIDLNA_POST_INSTALL_HOOKS += MINIDLNA_INSTALL_MINIDLNAD_CONF
 
 $(D)/minidlna:
 	$(call make-package)

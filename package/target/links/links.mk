@@ -57,7 +57,7 @@ define LINKS_INSTALL_FILES
 	$(INSTALL_DATA) -D $(PKG_FILES_DIR)/bookmarks.html  $(TARGET_DIR)/var/tuxbox/config/links/bookmarks.html
 	$(INSTALL_DATA) -D $(PKG_FILES_DIR)/tables.tar.gz  $(TARGET_DIR)/var/tuxbox/config/links/tables.tar.gz
 endef
-LINKS_POST_INSTALL_TARGET_HOOKS += LINKS_INSTALL_FILES
+LINKS_POST_INSTALL_HOOKS += LINKS_INSTALL_FILES
 
 $(D)/links:
 	$(call make-package)

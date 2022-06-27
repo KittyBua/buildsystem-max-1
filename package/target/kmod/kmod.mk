@@ -26,7 +26,7 @@ define KMOD_INSTALL_FILES
 		ln -sfv ../bin/kmod $(TARGET_BASE_SBIN_DIR)/$$target; \
 	done
 endef
-KMOD_POST_INSTALL_TARGET_HOOKS += KMOD_INSTALL_FILES
+KMOD_POST_INSTALL_HOOKS += KMOD_INSTALL_FILES
 
 $(D)/kmod:
 	$(call make-package)

@@ -38,7 +38,7 @@ endef
 define OPENSSH_INSTALL_FILES
 	$(SED) 's/^#PermitRootLogin prohibit-password/PermitRootLogin yes/' $(TARGET_DIR)/etc/ssh/sshd_config
 endef
-OPENSSH_POST_INSTALL_TARGET_HOOKS += OPENSSH_INSTALL_FILES
+OPENSSH_POST_INSTALL_HOOKS += OPENSSH_INSTALL_FILES
 
 $(D)/openssh:
 	$(call make-package)

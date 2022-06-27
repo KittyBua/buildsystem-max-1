@@ -4,6 +4,18 @@
 #
 ################################################################################
 
+define AUTORECONF_HOOK
+	$(Q)( \
+	if [ "$($(PKG)_AUTORECONF)" == "YES" ]; then \
+		$(call MESSAGE,"Autoreconfiguring"); \
+		$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+			autoreconf -fi -I $(TARGET_SHARE_DIR)/aclocal; \
+	fi; \
+	)
+endef
+
+# -----------------------------------------------------------------------------
+
 TARGET_MAKE_ENV = \
 	PATH=$(PATH)
 
@@ -40,32 +52,39 @@ TARGET_CONFIGURE_ENV = \
 	CPPFLAGS="$(TARGET_CPPFLAGS)" \
 	CFLAGS="$(TARGET_CFLAGS)" \
 	CXXFLAGS="$(TARGET_CXXFLAGS)" \
-	LDFLAGS="$(TARGET_LDFLAGS)" \
+	LDFLAGS="$(TARGET_LDFLAGS)"
+
+TARGET_CONFIGURE_ENV += \
 	PKG_CONFIG="$(PKG_CONFIG_HOST_BINARY)" \
 	PKG_CONFIG_PATH="$(TARGET_LIB_DIR)/pkgconfig" \
-	PKG_CONFIG_SYSROOT_DIR="$(TARGET_DIR)" \
+	PKG_CONFIG_SYSROOT_DIR="$(TARGET_DIR)"
+
+TARGET_CONFIGURE_ENV += \
 	$($(PKG)_CONF_ENV)
 
 TARGET_CONFIGURE_OPTS = \
 	--build=$(GNU_HOST_NAME) \
 	--host=$(GNU_TARGET_NAME) \
 	--target=$(GNU_TARGET_NAME) \
-	--program-prefix= \
-	--program-suffix= \
+	--program-prefix="" \
+	--program-suffix="" \
 	--prefix=$(prefix) \
 	--exec-prefix=$(exec_prefix) \
 	--bindir=$(bindir) \
 	--datadir=$(datadir) \
 	--includedir=$(includedir) \
-	--infodir=$(REMOVE_infodir) \
 	--libdir=$(libdir) \
 	--libexecdir=$(libexecdir) \
 	--localstatedir=$(localstatedir) \
-	--mandir=$(REMOVE_mandir) \
 	--oldincludedir=$(oldincludedir) \
 	--sbindir=$(sbindir) \
 	--sharedstatedir=$(sharedstatedir) \
 	--sysconfdir=$(sysconfdir) \
+	\
+	--mandir=$(REMOVE_mandir) \
+	--infodir=$(REMOVE_infodir)
+
+TARGET_CONFIGURE_OPTS += \
 	$($(PKG)_CONF_OPTS)
 
 define TARGET_CONFIGURE
@@ -75,33 +94,45 @@ define TARGET_CONFIGURE
 	$(Q)( \
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		test -f ./configure || ./autogen.sh && \
-		$(TARGET_CONFIGURE_ENV) ./configure $(TARGET_CONFIGURE_OPTS) \
+		CONFIG_SITE=/dev/null \
+		$(TARGET_CONFIGURE_ENV) ./configure $(TARGET_CONFIGURE_OPTS); \
 	)
 	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
+endef
+
+define TARGET_MAKE
+	@$(call MESSAGE,"Compiling")
+	$(foreach hook,$($(PKG)_PRE_COMPILE_HOOKS),$(call $(hook))$(sep))
+	$(Q)( \
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
+		$(MAKE); \
+	)
+	$(foreach hook,$($(PKG)_POST_COMPILE_HOOKS),$(call $(hook))$(sep))
+endef
+
+define TARGET_MAKE_INSTALL
+	@$(call MESSAGE,"Installing to target")
+	$(foreach hook,$($(PKG)_PRE_INSTALL_HOOKS),$(call $(hook))$(sep))
+	$(Q)( \
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
+		$(MAKE) install DESTDIR=$(TARGET_DIR); \
+	)
+	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
 endef
 
 define make-package
 	$(call PREPARE)
 	$(call TARGET_CONFIGURE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
+	$(call TARGET_MAKE)
+	$(call TARGET_MAKE_INSTALL)
 	$(call TARGET_FOLLOWUP)
 endef
 
-# -----------------------------------------------------------------------------
-
-define AUTORECONF_HOOK
-	$(Q)( \
-	if [ "$($(PKG)_AUTORECONF)" == "YES" ]; then \
-		$(call MESSAGE,"Autoreconfiguring"); \
-		$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
-			autoreconf -fi -I $(TARGET_SHARE_DIR)/aclocal; \
-	fi; \
-	)
-endef
-
-# -----------------------------------------------------------------------------
+################################################################################
+#
+# Host make package infrastructure
+#
+################################################################################
 
 HOST_MAKE_ENV = \
 	PATH=$(PATH) \
@@ -123,12 +154,16 @@ HOST_CONFIGURE_ENV = \
 	CPPFLAGS="$(HOST_CPPFLAGS)" \
 	CFLAGS="$(HOST_CFLAGS)" \
 	CXXFLAGS="$(HOST_CXXFLAGS)" \
-	LDFLAGS="$(HOST_LDFLAGS)" \
+	LDFLAGS="$(HOST_LDFLAGS)"
+
+HOST_CONFIGURE_ENV += \
 	$($(PKG)_CONF_ENV)
 
 HOST_CONFIGURE_OPTS = \
 	--prefix=$(HOST_DIR) \
-	--sysconfdir=$(HOST_DIR)/etc \
+	--sysconfdir=$(HOST_DIR)/etc
+
+HOST_CONFIGURE_OPTS += \
 	$($(PKG)_CONF_OPTS)
 
 define HOST_CONFIGURE
@@ -144,11 +179,30 @@ define HOST_CONFIGURE
 	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 endef
 
+define HOST_MAKE
+	@$(call MESSAGE,"Compiling")
+	$(foreach hook,$($(PKG)_PRE_COMPILE_HOOKS),$(call $(hook))$(sep))
+	$(Q)( \
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
+		$(MAKE); \
+	)
+	$(foreach hook,$($(PKG)_POST_COMPILE_HOOKS),$(call $(hook))$(sep))
+endef
+
+define HOST_MAKE_INSTALL
+	@$(call MESSAGE,"Installing to host")
+	$(foreach hook,$($(PKG)_PRE_INSTALL_HOOKS),$(call $(hook))$(sep))
+	$(Q)( \
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
+		$(MAKE) install; \
+	)
+	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
+endef
+
 define host-make-package
 	$(call PREPARE)
 	$(call HOST_CONFIGURE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE); \
-		$(MAKE) install
+	$(call HOST_MAKE)
+	$(call HOST_MAKE_INSTALL)
 	$(call HOST_FOLLOWUP)
 endef
