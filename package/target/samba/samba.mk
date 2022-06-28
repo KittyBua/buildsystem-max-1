@@ -8,8 +8,9 @@ SAMBA_VERSION = 3.6.25
 SAMBA_DIR     = samba-$(SAMBA_VERSION)
 SAMBA_SOURCE  = samba-$(SAMBA_VERSION).tar.gz
 SAMBA_SITE    = https://ftp.samba.org/pub/samba/stable
-SAMBA_SUBDIR  = source3
 SAMBA_DEPENDS = bootstrap
+
+SAMBA_SUBDIR = source3
 
 SAMBA_CONF_ENV = \
 	ac_cv_lib_attr_getxattr=no \
@@ -57,7 +58,7 @@ SAMBA_CONF_OPTS = \
 	--disable-dmalloc \
 	--with-configdir=/etc/samba \
 	--with-privatedir=/etc/samba/private \
-	--with-mandir=no \
+	--without-mandir \
 	--with-codepagedir=/etc/samba \
 	--with-piddir=/var/run \
 	--with-lockdir=/var/lock \
@@ -94,9 +95,12 @@ SAMBA_CONF_OPTS = \
 	--without-libtevent \
 	--without-libaddns
 
+SAMBA_AUTOCONF_PATCH = autoconf2.71.patch
+
 define SAMBA_AUTOGEN_SH
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		./autogen.sh
+	$(call APPLY_PATCHES,$(SAMBA_AUTOCONF_PATCH))
 endef
 SAMBA_PRE_CONFIGURE_HOOKS += SAMBA_AUTOGEN_SH
 
