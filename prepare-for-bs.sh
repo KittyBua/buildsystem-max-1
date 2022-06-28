@@ -139,11 +139,18 @@ elif [ "$UBUNTU" == 3 ]; then
 	DEBIAN_VERSION=`lsb_release -r | grep "Release" | cut -f2 | cut -d . -f1`
 fi
 
-if ([ "$UBUNTU" == 1 ] &&  [ "$UBUNTU_VERSION" -ge "16" ]) || \
+if ([ "$UBUNTU" == 1 ] && [ "$UBUNTU_VERSION" -ge "16" ]) || \
    ([ "$UBUNTU" == 2 ] && [ "$MINT_VERSION" -ge "18" ]) || \
    ([ "$UBUNTU" == 3 ] && [ "$DEBIAN_VERSION" -ge "10" ]); then
 	PACKAGES="$PACKAGES \
 	${UBUNTU:+libtool-bin} \
+	";
+fi
+
+if ([ "$UBUNTU" == 1 ] && [ "$UBUNTU_VERSION" -ge "22" ]) || \
+   ([ "$UBUNTU" == 2 ] && [ "$MINT_VERSION" -ge "21" ]); then
+	PACKAGES="$PACKAGES \
+	${UBUNTU:+gtk-doc-tools} \
 	";
 fi
 
