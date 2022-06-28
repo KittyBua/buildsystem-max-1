@@ -10,8 +10,6 @@ MINIDLNA_SOURCE  = minidlna-$(MINIDLNA_VERSION).tar.gz
 MINIDLNA_SITE    = https://sourceforge.net/projects/minidlna/files/minidlna/$(MINIDLNA_VERSION)
 MINIDLNA_DEPENDS = bootstrap zlib sqlite libexif libjpeg-turbo libid3tag libogg libvorbis flac ffmpeg
 
-MINIDLNA_AUTORECONF = YES
-
 MINIDLNA_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
 	--disable-static
