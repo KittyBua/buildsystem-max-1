@@ -16,4 +16,4 @@ endef
 JPEG_CLEANUP_TARGET_HOOKS += JPEG_CLEANUP_TARGET
 
 $(D)/jpeg:
-	$(call make-package)
+	$(call autotools-package)

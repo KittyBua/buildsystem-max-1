@@ -20,4 +20,4 @@ LIBMAD_CONF_OPTS = \
 	$(if $(filter $(TARGET_ARCH),arm mips),--enable-fpm=$(TARGET_ARCH),--enable-fpm=64bit)
 
 $(D)/libmad:
-	$(call make-package)
+	$(call autotools-package)

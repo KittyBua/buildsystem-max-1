@@ -15,4 +15,4 @@ HOST_QRENCODE_CONF_OPTS = \
 	png_CFLAGS="-I/usr/include/libpng"
 
 $(D)/host-qrencode:
-	$(call host-make-package)
+	$(call host-autotools-package)

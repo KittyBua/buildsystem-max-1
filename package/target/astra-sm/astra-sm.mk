@@ -25,4 +25,4 @@ endef
 ASTRA_SM_CLEANUP_TARGET_HOOKS += ASTRA_SM_CLEANUP_TARGET
 
 $(D)/astra-sm:
-	$(call make-package)
+	$(call autotools-package)

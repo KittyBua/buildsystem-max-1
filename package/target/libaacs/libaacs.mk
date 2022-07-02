@@ -33,4 +33,4 @@ endef
 LIBAACS_POST_INSTALL_HOOKS += LIBAACS_INSTALL_FILES
 
 $(D)/libaacs:
-	$(call make-package)
+	$(call autotools-package)

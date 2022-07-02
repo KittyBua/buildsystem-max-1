@@ -18,4 +18,4 @@ LIBDVDNAV_CONF_OPTS = \
 	--enable-shared
 
 $(D)/libdvdnav:
-	$(call make-package)
+	$(call autotools-package)

@@ -18,4 +18,4 @@ endef
 BASE_PASSWD_POST_INSTALL_HOOKS += BASE_PASSWD_INSTALL_FILES
 
 $(D)/base-passwd:
-	$(call make-package)
+	$(call autotools-package)

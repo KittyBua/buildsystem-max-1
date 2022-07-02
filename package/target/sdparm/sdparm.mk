@@ -19,4 +19,4 @@ endef
 SDPARM_CLEANUP_TARGET_HOOKS += SDPARM_CLEANUP_TARGET
 
 $(D)/sdparm:
-	$(call make-package)
+	$(call autotools-package)

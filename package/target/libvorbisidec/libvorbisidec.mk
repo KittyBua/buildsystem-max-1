@@ -18,4 +18,4 @@ endef
 LIBVORBISIDEC_POST_PATCH_HOOKS = LIBVORBISIDEC_PATCH_CONFIGURE
 
 $(D)/libvorbisidec:
-	$(call make-package)
+	$(call autotools-package)

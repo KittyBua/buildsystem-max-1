@@ -54,4 +54,4 @@ endef
 AVAHI_POST_INSTALL_HOOKS += AVAHI_INSTALL_FILES
 
 $(D)/avahi:
-	$(call make-package)
+	$(call autotools-package)

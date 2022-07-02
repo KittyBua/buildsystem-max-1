@@ -13,4 +13,4 @@ LIBEXIF_DEPENDS = bootstrap
 LIBEXIF_AUTORECONF = YES
 
 $(D)/libexif:
-	$(call make-package)
+	$(call autotools-package)

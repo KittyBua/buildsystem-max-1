@@ -11,4 +11,4 @@ LIBMODPLUG_SITE    = https://sourceforge.net/projects/modplug-xmms/files/libmodp
 LIBMODPLUG_DEPENDS = bootstrap
 
 $(D)/libmodplug:
-	$(call make-package)
+	$(call autotools-package)

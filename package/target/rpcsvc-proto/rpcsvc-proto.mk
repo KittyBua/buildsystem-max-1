@@ -13,4 +13,4 @@ RPCSVC_PROTO_DEPENDS = bootstrap
 RPCSVC_PROTO_AUTORECONF = YES
 
 $(D)/rpcsvc-proto:
-	$(call make-package)
+	$(call autotools-package)

@@ -51,4 +51,4 @@ endef
 E2FSPROGS_CLEANUP_TARGET_HOOKS += E2FSPROGS_CLEANUP_TARGET
 
 $(D)/e2fsprogs:
-	$(call make-package)
+	$(call autotools-package)

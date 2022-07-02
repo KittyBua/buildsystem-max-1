@@ -16,4 +16,4 @@ LIBID3TAG_CONF_OPTS = \
 	--enable-shared=yes
 
 $(D)/libid3tag:
-	$(call make-package)
+	$(call autotools-package)

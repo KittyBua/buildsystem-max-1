@@ -18,4 +18,4 @@ PCRE_CONF_OPTS = \
 	--enable-unicode-properties
 
 $(D)/pcre:
-	$(call make-package)
+	$(call autotools-package)

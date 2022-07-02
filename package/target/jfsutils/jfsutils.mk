@@ -22,4 +22,4 @@ endef
 JFSUTILS_CLEANUP_TARGET_HOOKS += JFSUTILS_CLEANUP_TARGET
 
 $(D)/jfsutils:
-	$(call make-package)
+	$(call autotools-package)

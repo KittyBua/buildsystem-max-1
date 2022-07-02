@@ -16,4 +16,4 @@ LIBOGG_CONF_OPTS = \
 	--disable-static
 
 $(D)/libogg:
-	$(call make-package)
+	$(call autotools-package)

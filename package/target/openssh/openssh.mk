@@ -41,4 +41,4 @@ endef
 OPENSSH_POST_INSTALL_HOOKS += OPENSSH_INSTALL_FILES
 
 $(D)/openssh:
-	$(call make-package)
+	$(call autotools-package)

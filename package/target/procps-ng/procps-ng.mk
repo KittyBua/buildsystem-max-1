@@ -39,4 +39,4 @@ endef
 PROCPS_NG_POST_INSTALL_HOOKS += PROCPS_NG_INSTALL_FILES
 
 $(D)/procps-ng:
-	$(call make-package)
+	$(call autotools-package)

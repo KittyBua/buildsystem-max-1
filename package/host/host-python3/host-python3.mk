@@ -33,4 +33,4 @@ HOST_PYTHON3_CONF_OPTS = \
 	--disable-ossaudiodev
 
 $(D)/host-python3:
-	$(call host-make-package)
+	$(call host-autotools-package)

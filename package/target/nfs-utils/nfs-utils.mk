@@ -51,4 +51,4 @@ endef
 NFS_UTILS_CLEANUP_TARGET_HOOKS += NFS_UTILS_CLEANUP_TARGET
 
 $(D)/nfs-utils:
-	$(call make-package)
+	$(call autotools-package)

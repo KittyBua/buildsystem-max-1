@@ -119,4 +119,4 @@ endef
 UTIL_LINUX_CLEANUP_TARGET_HOOKS += UTIL_LINUX_CLEANUP_TARGET
 
 $(D)/util-linux:
-	$(call make-package)
+	$(call autotools-package)

@@ -29,4 +29,4 @@ endef
 VALGRIND_CLEANUP_TARGET_HOOKS += VALGRIND_CLEANUP_TARGET
 
 $(D)/valgrind:
-	$(call make-package)
+	$(call autotools-package)

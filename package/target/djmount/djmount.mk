@@ -24,4 +24,4 @@ DJMOUNT_CONF_OPTS = \
 	--disable-debug
 
 $(D)/djmount:
-	$(call make-package)
+	$(call autotools-package)

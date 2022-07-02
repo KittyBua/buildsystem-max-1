@@ -32,4 +32,4 @@ endef
 LIBXSLT_CLEANUP_TARGET_HOOKS += LIBXSLT_CLEANUP_TARGET
 
 $(D)/libxslt:
-	$(call make-package)
+	$(call autotools-package)

@@ -19,4 +19,4 @@ endef
 HOST_PKGCONF_POST_INSTALL_HOOKS += HOST_PKGCONF_INSTALL_FILES
 
 $(D)/host-pkgconf:
-	$(call host-make-package)
+	$(call host-autotools-package)

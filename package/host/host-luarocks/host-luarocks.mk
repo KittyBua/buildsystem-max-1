@@ -29,4 +29,4 @@ endef
 HOST_LUAROCKS_POST_INSTALL_HOOKS += HOST_LUAROCKS_CREATE_CONFIG
 
 $(D)/host-luarocks:
-	$(call host-make-package)
+	$(call host-autotools-package)

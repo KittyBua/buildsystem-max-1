@@ -22,4 +22,4 @@ LIBARCHIVE_CONF_OPTS = \
 	--without-expat
 
 $(D)/libarchive:
-	$(call make-package)
+	$(call autotools-package)

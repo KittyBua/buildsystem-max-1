@@ -14,4 +14,4 @@ LIBNFSIDMAP_CONF_OPTS = \
 	ac_cv_func_malloc_0_nonnull=yes
 
 $(D)/libnfsidmap:
-	$(call make-package)
+	$(call autotools-package)

@@ -19,4 +19,4 @@ endef
 STRACE_CLEANUP_TARGET_HOOKS += STRACE_CLEANUP_TARGET
 
 $(D)/strace:
-	$(call make-package)
+	$(call autotools-package)

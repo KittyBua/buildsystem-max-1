@@ -18,4 +18,4 @@ NANO_CONF_OPTS = \
 	--enable-color
 
 $(D)/nano:
-	$(call make-package)
+	$(call autotools-package)

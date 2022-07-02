@@ -41,4 +41,4 @@ endef
 FREETYPE_CLEANUP_TARGET_HOOKS += FREETYPE_LINK_FREETYPE
 
 $(D)/freetype:
-	$(call make-package)
+	$(call autotools-package)

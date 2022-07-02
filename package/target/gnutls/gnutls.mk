@@ -31,4 +31,4 @@ endef
 GNUTLS_CLEANUP_TARGET_HOOKS += GNUTLS_CLEANUP_TARGET
 
 $(D)/gnutls:
-	$(call make-package)
+	$(call autotools-package)

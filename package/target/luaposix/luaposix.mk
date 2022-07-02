@@ -38,4 +38,4 @@ endef
 LUAPOSIX_PRE_CONFIGURE_HOOKS += LUAPOSIX_BOOTSTRAP
 
 $(D)/luaposix:
-	$(call make-package)
+	$(call autotools-package)

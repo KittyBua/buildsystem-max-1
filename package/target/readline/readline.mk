@@ -23,4 +23,4 @@ endef
 READLINE_POST_INSTALL_HOOKS += READLINE_INSTALL_FILES
 
 $(D)/readline:
-	$(call make-package)
+	$(call autotools-package)

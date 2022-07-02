@@ -21,4 +21,4 @@ endef
 SQLITE_CLEANUP_TARGET_HOOKS += SQLITE_CLEANUP_TARGET
 
 $(D)/sqlite:
-	$(call make-package)
+	$(call autotools-package)

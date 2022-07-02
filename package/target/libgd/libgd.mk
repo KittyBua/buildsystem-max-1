@@ -17,4 +17,4 @@ LIBGD_CONF_OPTS = \
 	--without-x
 
 $(D)/libgd:
-	$(call make-package)
+	$(call autotools-package)

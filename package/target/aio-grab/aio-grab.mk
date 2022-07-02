@@ -17,4 +17,4 @@ AIO_GRAB_CONF_OPTS = \
 	--enable-silent-rules
 
 $(D)/aio-grab:
-	$(call make-package)
+	$(call autotools-package)

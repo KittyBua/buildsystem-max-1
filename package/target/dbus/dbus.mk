@@ -38,4 +38,4 @@ endef
 DBUS_CLEANUP_TARGET_HOOKS += DBUS_CLEANUP_TARGET
 
 $(D)/dbus:
-	$(call make-package)
+	$(call autotools-package)

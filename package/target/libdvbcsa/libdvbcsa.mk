@@ -13,4 +13,4 @@ LIBDVBCSA_DEPENDS = bootstrap
 LIBDVBCSA_AUTORECONF = YES
 
 $(D)/libdvbcsa:
-	$(call make-package)
+	$(call autotools-package)

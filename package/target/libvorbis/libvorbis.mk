@@ -18,4 +18,4 @@ LIBVORBIS_CONF_OPTS = \
 	--disable-oggtest
 
 $(D)/libvorbis:
-	$(call make-package)
+	$(call autotools-package)

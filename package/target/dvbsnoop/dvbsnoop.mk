@@ -14,4 +14,4 @@ DVBSNOOP_CONF_OPTS = \
 	--enable-silent-rules
 
 $(D)/dvbsnoop:
-	$(call make-package)
+	$(call autotools-package)

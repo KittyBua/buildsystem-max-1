@@ -25,4 +25,4 @@ endef
 NTP_CLEANUP_TARGET_HOOKS += NTP_CLEANUP_TARGET
 
 $(D)/ntp:
-	$(call make-package)
+	$(call autotools-package)

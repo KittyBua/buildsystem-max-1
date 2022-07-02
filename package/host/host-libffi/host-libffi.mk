@@ -14,4 +14,4 @@ HOST_LIBFFI_CONF_OPTS = \
 	--disable-static
 
 $(D)/host-libffi:
-	$(call host-make-package)
+	$(call host-autotools-package)

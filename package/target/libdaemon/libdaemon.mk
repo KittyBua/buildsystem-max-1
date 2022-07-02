@@ -19,4 +19,4 @@ LIBDAEMON_CONF_OPTS = \
 	--disable-examples
 
 $(D)/libdaemon:
-	$(call make-package)
+	$(call autotools-package)

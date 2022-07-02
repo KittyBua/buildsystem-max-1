@@ -16,4 +16,4 @@ LIBPLIST_CONF_OPTS = \
 	--without-cython
 
 $(D)/libplist:
-	$(call make-package)
+	$(call autotools-package)

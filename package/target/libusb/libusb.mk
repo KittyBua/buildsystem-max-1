@@ -18,4 +18,4 @@ LIBUSB_CONF_OPTS = \
 	--disable-examples-build
 
 $(D)/libusb:
-	$(call make-package)
+	$(call autotools-package)

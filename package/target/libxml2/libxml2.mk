@@ -42,4 +42,4 @@ endef
 LIBXML2_CLEANUP_TARGET_HOOKS += LIBXML2_CLEANUP_TARGET
 
 $(D)/libxml2:
-	$(call make-package)
+	$(call autotools-package)

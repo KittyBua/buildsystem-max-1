@@ -19,4 +19,4 @@ LIBASS_CONF_OPTS = \
 	--disable-require-system-font-provider
 
 $(D)/libass:
-	$(call make-package)
+	$(call autotools-package)

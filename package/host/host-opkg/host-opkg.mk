@@ -19,4 +19,4 @@ HOST_OPKG_CONF_OPTS = \
 	--disable-gpg
 
 $(D)/host-opkg:
-	$(call host-make-package)
+	$(call host-autotools-package)

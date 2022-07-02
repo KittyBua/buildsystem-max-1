@@ -20,11 +20,11 @@ endef
 
 # -----------------------------------------------------------------------------
 
-# clean up
+# clean-up
 define CLEANUP
 	$(Q)( \
 	if [ -d $(PKG_BUILD_DIR) ]; then \
-		$(call MESSAGE,"Clean up"); \
+		$(call MESSAGE,"Clean-up"); \
 		cd $(BUILD_DIR) && rm -rf $($(PKG)_DIR); \
 	fi; \
 	)

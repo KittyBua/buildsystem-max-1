@@ -23,4 +23,4 @@ endef
 MINIDLNA_POST_INSTALL_HOOKS += MINIDLNA_INSTALL_MINIDLNAD_CONF
 
 $(D)/minidlna:
-	$(call make-package)
+	$(call autotools-package)

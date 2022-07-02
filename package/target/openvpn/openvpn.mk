@@ -35,4 +35,4 @@ define OPENVPN_INSTALL_INIT_SYSV
 endef
 
 $(D)/openvpn:
-	$(call make-package)
+	$(call autotools-package)

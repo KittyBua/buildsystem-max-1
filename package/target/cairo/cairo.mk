@@ -31,4 +31,4 @@ endef
 CAIRO_CLEANUP_TARGET_HOOKS += CAIRO_CLEANUP_TARGET
 
 $(D)/cairo:
-	$(call make-package)
+	$(call autotools-package)

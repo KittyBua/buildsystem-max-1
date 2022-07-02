@@ -23,4 +23,4 @@ endef
 LIBGCRYPT_CLEANUP_TARGET_HOOKS += LIBGCRYPT_CLEANUP_TARGET
 
 $(D)/libgcrypt:
-	$(call make-package)
+	$(call autotools-package)

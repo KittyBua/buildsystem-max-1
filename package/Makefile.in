@@ -172,6 +172,7 @@ VPATH = $(D)
 include package/environment-linux.mk
 include package/environment-target.mk
 include package/flashimage.mk
+include package/pkg-autotools.mk
 include package/pkg-generic.mk
 include $(sort $(wildcard package/*/*/*.mk))
 include package/cleantargets.mk

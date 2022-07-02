@@ -14,4 +14,4 @@ LIBDVDCSS_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir)
 
 $(D)/libdvdcss:
-	$(call make-package)
+	$(call autotools-package)

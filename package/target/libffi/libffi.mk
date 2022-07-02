@@ -17,4 +17,4 @@ LIBFFI_CONF_OPTS = \
 	--enable-builddir=libffi
 
 $(D)/libffi:
-	$(call make-package)
+	$(call autotools-package)

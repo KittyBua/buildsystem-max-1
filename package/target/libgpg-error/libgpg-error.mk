@@ -28,4 +28,4 @@ endef
 LIBGPG_ERROR_CLEANUP_TARGET_HOOKS += LIBGPG_ERROR_CLEANUP_TARGET
 
 $(D)/libgpg-error:
-	$(call make-package)
+	$(call autotools-package)

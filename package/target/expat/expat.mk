@@ -23,4 +23,4 @@ endef
 EXPAT_CLEANUP_TARGET_HOOKS += EXPAT_CLEANUP_TARGET
 
 $(D)/expat:
-	$(call make-package)
+	$(call autotools-package)

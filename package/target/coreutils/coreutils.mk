@@ -24,4 +24,4 @@ COREUTILS_CONF_OPTS = \
 	--without-selinux
 
 $(D)/coreutils:
-	$(call make-package)
+	$(call autotools-package)

@@ -15,4 +15,4 @@ CURLFTPFS_CONF_ENV = \
 	ac_cv_func_realloc_0_nonnull=yes
 
 $(D)/curlftpfs:
-	$(call make-package)
+	$(call autotools-package)

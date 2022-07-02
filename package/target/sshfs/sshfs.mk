@@ -11,4 +11,4 @@ SSHFS_SITE    = https://github.com/libfuse/sshfs/releases/download/sshfs-$(SSHFS
 SSHFS_DEPENDS = bootstrap glib2 libfuse
 
 $(D)/sshfs:
-	$(call make-package)
+	$(call autotools-package)

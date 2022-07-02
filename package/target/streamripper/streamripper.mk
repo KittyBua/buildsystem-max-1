@@ -26,4 +26,4 @@ endef
 STREAMRIPPER_POST_INSTALL_HOOKS += STREAMRIPPER_INSTALL_FILES
 
 $(D)/streamripper:
-	$(call make-package)
+	$(call autotools-package)

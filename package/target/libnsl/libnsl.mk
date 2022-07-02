@@ -19,4 +19,4 @@ endef
 LIBNSL_POST_INSTALL_HOOKS += LIBNSL_INSTALL_FILES
 
 $(D)/libnsl:
-	$(call make-package)
+	$(call autotools-package)

@@ -14,4 +14,4 @@ LZO_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir)
 
 $(D)/lzo:
-	$(call make-package)
+	$(call autotools-package)

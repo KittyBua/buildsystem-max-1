@@ -25,4 +25,4 @@ endef
 FONTCONFIG_CLEANUP_TARGET_HOOKS += FONTCONFIG_CLEANUP_TARGET
 
 $(D)/fontconfig:
-	$(call make-package)
+	$(call autotools-package)

@@ -30,4 +30,4 @@ endef
 MC_CLEANUP_TARGET_HOOKS += MC_CLEANUP_TARGET
 
 $(D)/mc:
-	$(call make-package)
+	$(call autotools-package)

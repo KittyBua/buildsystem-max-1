@@ -37,4 +37,4 @@ LIBCURL_CONF_OPTS = \
 	--enable-optimize
 
 $(D)/libcurl:
-	$(call make-package)
+	$(call autotools-package)

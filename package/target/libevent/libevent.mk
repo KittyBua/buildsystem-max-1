@@ -16,4 +16,4 @@ endef
 LIBEVENT_CLEANUP_TARGET_HOOKS += LIBEVENT_CLEANUP_TARGET
 
 $(D)/libevent:
-	$(call make-package)
+	$(call autotools-package)

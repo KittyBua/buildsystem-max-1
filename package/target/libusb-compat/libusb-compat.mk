@@ -18,4 +18,4 @@ LIBUSB_CONF_OPTS = \
 LIBUSB_COMPAT_CONFIG_SCRIPTS = libusb-config
 
 $(D)/libusb-compat:
-	$(call make-package)
+	$(call autotools-package)

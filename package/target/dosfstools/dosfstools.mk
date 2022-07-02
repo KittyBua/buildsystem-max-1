@@ -22,4 +22,4 @@ DOSFSTOOLS_CONF_OPTS = \
 	CFLAGS="$(DOSFSTOOLS_CFLAGS)"
 
 $(D)/dosfstools:
-	$(call make-package)
+	$(call autotools-package)

@@ -23,4 +23,4 @@ endef
 HDDTEMP_POST_INSTALL_HOOKS += HDDTEMP_INSTALL_FILES
 
 $(D)/hddtemp:
-	$(call make-package)
+	$(call autotools-package)

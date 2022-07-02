@@ -16,4 +16,4 @@ RARFS_CONF_OPTS = \
 	--includedir=/usr/include/fuse
 
 $(D)/rarfs:
-	$(call make-package)
+	$(call autotools-package)

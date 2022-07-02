@@ -27,4 +27,4 @@ WGET_CONF_OPTS = \
 	CFLAGS="$(WGET_CFLAGS)"
 
 $(D)/wget:
-	$(call make-package)
+	$(call autotools-package)

@@ -22,4 +22,4 @@ endef
 OPKG_POST_INSTALL_HOOKS += OPKG_INSTALL_FILES
 
 $(D)/opkg:
-	$(call make-package)
+	$(call autotools-package)

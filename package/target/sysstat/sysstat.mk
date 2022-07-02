@@ -21,4 +21,4 @@ SYSSTAT_CONF_OPTS = \
 	conf_dir="/etc/sysstat"
 
 $(D)/sysstat:
-	$(call make-package)
+	$(call autotools-package)

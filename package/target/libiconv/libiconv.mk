@@ -26,4 +26,4 @@ endef
 LIBICONV_CLEANUP_TARGET_HOOKS += LIBICONV_CLEANUP_TARGET
 
 $(D)/libiconv:
-	$(call make-package)
+	$(call autotools-package)

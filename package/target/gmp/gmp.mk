@@ -14,4 +14,4 @@ GMP_CONF_OPTS = \
 	--enable-silent-rules
 
 $(D)/gmp:
-	$(call make-package)
+	$(call autotools-package)

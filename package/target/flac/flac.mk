@@ -31,4 +31,4 @@ FLAC_CONF_OPTS = \
 	--disable-rpath
 
 $(D)/flac:
-	$(call make-package)
+	$(call autotools-package)

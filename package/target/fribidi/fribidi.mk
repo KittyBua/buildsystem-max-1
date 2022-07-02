@@ -22,4 +22,4 @@ endef
 FRIBIDI_CLEANUP_TARGET_HOOKS += FRIBIDI_CLEANUP_TARGET
 
 $(D)/fribidi:
-	$(call make-package)
+	$(call autotools-package)

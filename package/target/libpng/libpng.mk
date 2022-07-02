@@ -24,4 +24,4 @@ endef
 LIBPNG_CLEANUP_TARGET_HOOKS += LIBPNG_CLEANUP_TARGET
 
 $(D)/libpng:
-	$(call make-package)
+	$(call autotools-package)

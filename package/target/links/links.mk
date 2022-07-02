@@ -60,4 +60,4 @@ endef
 LINKS_POST_INSTALL_HOOKS += LINKS_INSTALL_FILES
 
 $(D)/links:
-	$(call make-package)
+	$(call autotools-package)

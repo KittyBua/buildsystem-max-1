@@ -15,4 +15,4 @@ LIBDVBSI_CONF_OPTS = \
 	--disable-static
 
 $(D)/libdvbsi:
-	$(call make-package)
+	$(call autotools-package)

@@ -11,4 +11,4 @@ LIBMNL_SITE    = http://netfilter.org/projects/libmnl/files
 LIBMNL_DEPENDS = bootstrap
 
 $(D)/libmnl:
-	$(call make-package)
+	$(call autotools-package)

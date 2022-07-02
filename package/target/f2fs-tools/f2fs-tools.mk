@@ -20,4 +20,4 @@ F2FS_TOOLS_CONF_OPTS = \
 	--without-selinux
 
 $(D)/f2fs-tools:
-	$(call make-package)
+	$(call autotools-package)

@@ -45,4 +45,4 @@ define ALSA_UTILS_CLEANUP_TARGET
 endef
 
 $(D)/alsa-utils:
-	$(call make-package)
+	$(call autotools-package)

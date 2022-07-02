@@ -22,4 +22,4 @@ LIBFUSE_CONF_OPTS = \
 	--enable-silent-rules
 
 $(D)/libfuse:
-	$(call make-package)
+	$(call autotools-package)

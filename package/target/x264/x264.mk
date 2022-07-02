@@ -26,4 +26,4 @@ X264_CONF_OPTS = \
 	--disable-opencl
 
 $(D)/x264:
-	$(call make-package)
+	$(call autotools-package)

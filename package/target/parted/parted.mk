@@ -22,4 +22,4 @@ PARTED_CONF_OPTS = \
 	--without-readline
 
 $(D)/parted:
-	$(call make-package)
+	$(call autotools-package)

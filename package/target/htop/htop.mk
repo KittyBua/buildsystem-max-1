@@ -28,4 +28,4 @@ endef
 HTOP_CLEANUP_TARGET_HOOKS += HTOP_CLEANUP_TARGET
 
 $(D)/htop:
-	$(call make-package)
+	$(call autotools-package)

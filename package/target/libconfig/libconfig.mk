@@ -14,4 +14,4 @@ LIBCONFIG_CONF_OPTS = \
 	--disable-static
 
 $(D)/libconfig:
-	$(call make-package)
+	$(call autotools-package)

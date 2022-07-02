@@ -29,4 +29,4 @@ endef
 KMOD_POST_INSTALL_HOOKS += KMOD_INSTALL_FILES
 
 $(D)/kmod:
-	$(call make-package)
+	$(call autotools-package)

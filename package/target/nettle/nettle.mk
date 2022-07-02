@@ -14,4 +14,4 @@ NETTLE_CONF_OPTS = \
 	--disable-documentation
 
 $(D)/nettle:
-	$(call make-package)
+	$(call autotools-package)

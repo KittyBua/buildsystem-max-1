@@ -31,4 +31,4 @@ endef
 LIBSIGC_CLEANUP_TARGET_HOOKS += LIBSIGC_CLEANUP_TARGET
 
 $(D)/libsigc:
-	$(call make-package)
+	$(call autotools-package)

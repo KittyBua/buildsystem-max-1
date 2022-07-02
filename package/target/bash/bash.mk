@@ -29,4 +29,4 @@ endef
 BASH_CLEANUP_TARGET_HOOKS += BASH_CLEANUP_TARGET
 
 $(D)/bash:
-	$(call make-package)
+	$(call autotools-package)

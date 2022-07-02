@@ -14,4 +14,4 @@ LIBNL_CONF_OPTS = \
 	--disable-cli
 
 $(D)/libnl:
-	$(call make-package)
+	$(call autotools-package)

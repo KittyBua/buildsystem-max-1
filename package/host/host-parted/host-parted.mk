@@ -17,4 +17,4 @@ HOST_PARTED_CONF_OPTS = \
 	--disable-device-mapper
 
 $(D)/host-parted:
-	$(call host-make-package)
+	$(call host-autotools-package)

@@ -31,4 +31,4 @@ endef
 RPCBIND_POST_INSTALL_HOOKS += RPCBIND_INSTALL_FILES
 
 $(D)/rpcbind:
-	$(call make-package)
+	$(call autotools-package)

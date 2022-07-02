@@ -20,4 +20,4 @@ LIBDVDREAD_CONF_OPTS = \
 	--with-libdvdcss
 
 $(D)/libdvdread:
-	$(call make-package)
+	$(call autotools-package)

@@ -16,4 +16,4 @@ LIBROXML_CONF_OPTS = \
 	--disable-roxml
 
 $(D)/libroxml:
-	$(call make-package)
+	$(call autotools-package)

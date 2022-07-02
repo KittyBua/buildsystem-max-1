@@ -19,4 +19,4 @@ LIBTIRPC_CONF_OPTS = \
 	--disable-gssapi
 
 $(D)/libtirpc:
-	$(call make-package)
+	$(call autotools-package)

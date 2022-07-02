@@ -30,4 +30,4 @@ endef
 NTFS_3G_CLEANUP_TARGET_HOOKS += NTFS_3G_CLEANUP_TARGET
 
 $(D)/ntfs-3g:
-	$(call make-package)
+	$(call autotools-package)

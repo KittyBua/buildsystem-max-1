@@ -36,4 +36,4 @@ endef
 ALSA_LIB_CLEANUP_TARGET_HOOKS += ALSA_LIB_CLEANUP_TARGET
 
 $(D)/alsa-lib:
-	$(call make-package)
+	$(call autotools-package)

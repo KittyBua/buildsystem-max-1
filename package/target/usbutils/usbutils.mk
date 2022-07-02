@@ -23,4 +23,4 @@ endef
 USBUTILS_CLEANUP_TARGET_HOOKS += USBUTILS_CLEANUP_TARGET
 
 $(D)/usbutils:
-	$(call make-package)
+	$(call autotools-package)

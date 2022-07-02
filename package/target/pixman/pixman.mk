@@ -20,4 +20,4 @@ PIXMAN_CONF_OPTS = \
 	--disable-docs
 
 $(D)/pixman:
-	$(call make-package)
+	$(call autotools-package)

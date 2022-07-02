@@ -16,4 +16,4 @@ endef
 IPROUTE2_CLEANUP_TARGET_HOOKS += IPROUTE2_CLEANUP_TARGET
 
 $(D)/iproute2:
-	$(call make-package)
+	$(call autotools-package)

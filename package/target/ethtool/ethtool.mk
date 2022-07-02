@@ -15,4 +15,4 @@ ETHTOOL_CONF_OPTS = \
 	--disable-netlink
 
 $(D)/ethtool:
-	$(call make-package)
+	$(call autotools-package)

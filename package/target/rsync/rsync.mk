@@ -21,4 +21,4 @@ RSYNC_CONF_OPTS = \
 	--disable-asm
 
 $(D)/rsync:
-	$(call make-package)
+	$(call autotools-package)

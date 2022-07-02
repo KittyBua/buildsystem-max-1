@@ -20,4 +20,4 @@ LIBUPNP_CONF_OPTS = \
 	--enable-reuseaddr
 
 $(D)/libupnp:
-	$(call make-package)
+	$(call autotools-package)

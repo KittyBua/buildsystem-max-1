@@ -14,4 +14,4 @@ HOST_LIBARCHIVE_CONF_OPTS = \
 	--without-xml2
 
 $(D)/host-libarchive:
-	$(call host-make-package)
+	$(call host-autotools-package)

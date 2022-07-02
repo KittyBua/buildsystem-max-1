@@ -27,4 +27,4 @@ endef
 LIBBLURAY_PRE_CONFIGURE_HOOKS += LIBBLURAY_BOOTSTRAP
 
 $(D)/libbluray:
-	$(call make-package)
+	$(call autotools-package)

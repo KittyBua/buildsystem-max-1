@@ -21,4 +21,4 @@ HARFBUZZ_CONF_OPTS = \
 	--without-icu
 
 $(D)/harfbuzz:
-	$(call make-package)
+	$(call autotools-package)

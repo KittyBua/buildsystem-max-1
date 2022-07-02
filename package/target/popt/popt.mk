@@ -21,4 +21,4 @@ POPT_CONF_OPTS = \
 	--disable-static
 
 $(D)/popt:
-	$(call make-package)
+	$(call autotools-package)
