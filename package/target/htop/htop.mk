@@ -22,10 +22,10 @@ HTOP_CONF_OPTS = \
 	--enable-unicode \
 	--disable-hwloc
 
-define HTOP_CLEANUP_TARGET
+define HTOP_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,applications icons pixmaps)
 endef
-HTOP_CLEANUP_TARGET_HOOKS += HTOP_CLEANUP_TARGET
+HTOP_TARGET_CLEANUP_HOOKS += HTOP_TARGET_CLEANUP
 
 $(D)/htop:
 	$(call autotools-package)

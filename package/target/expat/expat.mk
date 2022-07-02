@@ -17,10 +17,10 @@ EXPAT_CONF_OPTS = \
 	--without-xmlwf \
 	--without-docbook
 
-define EXPAT_CLEANUP_TARGET
+define EXPAT_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake)
 endef
-EXPAT_CLEANUP_TARGET_HOOKS += EXPAT_CLEANUP_TARGET
+EXPAT_TARGET_CLEANUP_HOOKS += EXPAT_TARGET_CLEANUP
 
 $(D)/expat:
 	$(call autotools-package)

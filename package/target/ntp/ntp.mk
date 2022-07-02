@@ -18,11 +18,11 @@ NTP_CONF_OPTS = \
 	--with-yielding-select=yes \
 	--without-ntpsnmpd
 
-define NTP_CLEANUP_TARGET
+define NTP_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,calc_tickadj ntp-keygen ntp-wait ntpd ntptime tickadj update-leap)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,ntp)
 endef
-NTP_CLEANUP_TARGET_HOOKS += NTP_CLEANUP_TARGET
+NTP_TARGET_CLEANUP_HOOKS += NTP_TARGET_CLEANUP
 
 $(D)/ntp:
 	$(call autotools-package)

@@ -22,10 +22,10 @@ LIBGPG_ERROR_CONF_OPTS = \
 	--disable-languages \
 	--disable-tests
 
-define LIBGPG_ERROR_CLEANUP_TARGET
+define LIBGPG_ERROR_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,gpg-error gpgrt-config yat2m)
 endef
-LIBGPG_ERROR_CLEANUP_TARGET_HOOKS += LIBGPG_ERROR_CLEANUP_TARGET
+LIBGPG_ERROR_TARGET_CLEANUP_HOOKS += LIBGPG_ERROR_TARGET_CLEANUP
 
 $(D)/libgpg-error:
 	$(call autotools-package)

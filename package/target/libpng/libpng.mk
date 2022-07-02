@@ -18,10 +18,10 @@ LIBPNG_CONF_OPTS = \
 	--disable-powerpc-vsx \
 	$(if $(filter $(BOXMODEL),hd5x hd6x vusolo4k vuduo4k vuduo4kse vuultimo4k vuzero4k vuuno4k vuuno4kse),--enable-arm-neon,--disable-arm-neon)
 
-define LIBPNG_CLEANUP_TARGET
+define LIBPNG_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,libpng-config)
 endef
-LIBPNG_CLEANUP_TARGET_HOOKS += LIBPNG_CLEANUP_TARGET
+LIBPNG_TARGET_CLEANUP_HOOKS += LIBPNG_TARGET_CLEANUP
 
 $(D)/libpng:
 	$(call autotools-package)

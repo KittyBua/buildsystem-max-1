@@ -13,10 +13,10 @@ STRACE_DEPENDS = bootstrap
 STRACE_CONF_OPTS = \
 	--enable-silent-rules
 
-define STRACE_CLEANUP_TARGET
+define STRACE_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,strace-graph strace-log-merge)
 endef
-STRACE_CLEANUP_TARGET_HOOKS += STRACE_CLEANUP_TARGET
+STRACE_TARGET_CLEANUP_HOOKS += STRACE_TARGET_CLEANUP
 
 $(D)/strace:
 	$(call autotools-package)

@@ -41,12 +41,12 @@ OPENSSL_CONF_OPTS += \
 	$(TARGET_CFLAGS) \
 	$(TARGET_LDFLAGS)
 
-define OPENSSL_CLEANUP_TARGET
+define OPENSSL_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_DIR)/etc/ssl/misc/,CA.pl tsget)
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,openssl c_rehash)
 	rm -rf $(addprefix $(TARGET_LIB_DIR)/,engines-1.1)
 endef
-OPENSSL_CLEANUP_TARGET_HOOKS += OPENSSL_CLEANUP_TARGET
+OPENSSL_TARGET_CLEANUP_HOOKS += OPENSSL_TARGET_CLEANUP
 
 $(D)/openssl:
 	$(call PREPARE)

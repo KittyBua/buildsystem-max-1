@@ -23,11 +23,11 @@ MC_CONF_OPTS = \
 	--without-gpm-mouse \
 	--without-x
 
-define MC_CLEANUP_TARGET
+define MC_TARGET_CLEANUP
 	rm -rf $(TARGET_SHARE_DIR)/mc/examples
 	find $(TARGET_SHARE_DIR)/mc/skins -type f ! -name default.ini | xargs --no-run-if-empty rm
 endef
-MC_CLEANUP_TARGET_HOOKS += MC_CLEANUP_TARGET
+MC_TARGET_CLEANUP_HOOKS += MC_TARGET_CLEANUP
 
 $(D)/mc:
 	$(call autotools-package)

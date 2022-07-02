@@ -22,11 +22,11 @@ GLIB2_CONF_OPTS = \
 	-Doss_fuzz=disabled \
 	-Dselinux=disabled
 
-define GLIB2_CLEANUP_TARGET
+define GLIB2_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,gettext gdb glib-2.0 locale)
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,gdbus-codegen glib-compile-schemas glib-compile-resources glib-genmarshal glib-gettextize gio-launch-desktop glib-mkenums gobject-query gtester gtester-report)
 endef
-GLIB2_CLEANUP_TARGET_HOOKS += GLIB2_CLEANUP_TARGET
+GLIB2_TARGET_CLEANUP_HOOKS += GLIB2_TARGET_CLEANUP
 
 $(D)/glib2:
 	$(call meson-package)

@@ -15,12 +15,12 @@ USBUTILS_AUTORECONF = YES
 USBUTILS_CONF_OPTS = \
 	--datadir=/usr/share/hwdata
 
-define USBUTILS_CLEANUP_TARGET
+define USBUTILS_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_BIN_DIR)/,lsusb.py usbhid-dump)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,pkgconfig)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/hwdata/,usb.ids.gz)
 endef
-USBUTILS_CLEANUP_TARGET_HOOKS += USBUTILS_CLEANUP_TARGET
+USBUTILS_TARGET_CLEANUP_HOOKS += USBUTILS_TARGET_CLEANUP
 
 $(D)/usbutils:
 	$(call autotools-package)

@@ -44,11 +44,11 @@ NFS_UTILS_POST_INSTALL_HOOKS += NFS_UTILS_INSTALL_FILES
 NFS_UTILS_CONF_OPTS += \
 	$(if $(filter $(BOXMODEL),vuduo),--disable-ipv6,--enable-ipv6)
 
-define NFS_UTILS_CLEANUP_TARGET
+define NFS_UTILS_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BASE_SBIN_DIR)/,mount.nfs4 umount.nfs umount.nfs4)
 	rm -f $(addprefix $(TARGET_SBIN_DIR)/,mountstats nfsiostat)
 endef
-NFS_UTILS_CLEANUP_TARGET_HOOKS += NFS_UTILS_CLEANUP_TARGET
+NFS_UTILS_TARGET_CLEANUP_HOOKS += NFS_UTILS_TARGET_CLEANUP
 
 $(D)/nfs-utils:
 	$(call autotools-package)

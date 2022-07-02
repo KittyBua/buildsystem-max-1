@@ -11,10 +11,10 @@ LUA_SOURCE     = lua-$(LUA_VERSION).tar.gz
 LUA_SITE       = https://www.lua.org/ftp
 LUA_DEPENDS    = bootstrap host-lua ncurses
 
-define LUA_CLEANUP_TARGET
+define LUA_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,luac)
 endef
-LUA_CLEANUP_TARGET_HOOKS += LUA_CLEANUP_TARGET
+LUA_TARGET_CLEANUP_HOOKS += LUA_TARGET_CLEANUP
 
 $(D)/lua:
 	$(call PREPARE)

@@ -20,10 +20,10 @@ LIBICONV_CONF_OPTS = \
 	--disable-shared \
 	--enable-relocatable
 
-define LIBICONV_CLEANUP_TARGET
+define LIBICONV_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_LIB_DIR)/,preloadable_libiconv.so)
 endef
-LIBICONV_CLEANUP_TARGET_HOOKS += LIBICONV_CLEANUP_TARGET
+LIBICONV_TARGET_CLEANUP_HOOKS += LIBICONV_TARGET_CLEANUP
 
 $(D)/libiconv:
 	$(call autotools-package)

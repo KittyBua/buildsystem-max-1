@@ -110,13 +110,13 @@ define UTIL_LINUX_INSTALL_FILES
 endef
 UTIL_LINUX_POST_INSTALL_HOOKS += UTIL_LINUX_INSTALL_FILES
 
-define UTIL_LINUX_CLEANUP_TARGET
+define UTIL_LINUX_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_DIR)/bin/,findmnt)
 	rm -f $(addprefix $(TARGET_BASE_SBIN_DIR)/,blkdiscard blkzone blockdev cfdisk chcpu ctrlaltdel fsfreeze fstrim mkfs mkswap swaplabel)
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,choom col colcrt colrm column fincore flock getopt ipcmk isosize linux32 linux64 look lscpu lsipc lslocks lsns mcookie namei prlimit renice rev script scriptlive scriptreplay setarch setsid uname26 uuidgen uuidparse whereis)
 	rm -f $(addprefix $(TARGET_SBIN_DIR)/,ldattach readprofile rtcwake)
 endef
-UTIL_LINUX_CLEANUP_TARGET_HOOKS += UTIL_LINUX_CLEANUP_TARGET
+UTIL_LINUX_TARGET_CLEANUP_HOOKS += UTIL_LINUX_TARGET_CLEANUP
 
 $(D)/util-linux:
 	$(call autotools-package)

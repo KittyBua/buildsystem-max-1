@@ -15,10 +15,10 @@ SQLITE_CONF_OPTS = \
 	--enable-threadsafe \
 	--disable-static-shell
 
-define SQLITE_CLEANUP_TARGET
+define SQLITE_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,sqlite3)
 endef
-SQLITE_CLEANUP_TARGET_HOOKS += SQLITE_CLEANUP_TARGET
+SQLITE_TARGET_CLEANUP_HOOKS += SQLITE_TARGET_CLEANUP
 
 $(D)/sqlite:
 	$(call autotools-package)

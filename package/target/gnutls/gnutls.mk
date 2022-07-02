@@ -25,10 +25,10 @@ GNUTLS_CONF_OPTS = \
 	--enable-local-libopts \
 	--enable-openssl-compatibility
 
-define GNUTLS_CLEANUP_TARGET
+define GNUTLS_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,psktool gnutls-cli-debug certtool srptool ocsptool gnutls-serv gnutls-cli)
 endef
-GNUTLS_CLEANUP_TARGET_HOOKS += GNUTLS_CLEANUP_TARGET
+GNUTLS_TARGET_CLEANUP_HOOKS += GNUTLS_TARGET_CLEANUP
 
 $(D)/gnutls:
 	$(call autotools-package)

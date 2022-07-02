@@ -38,7 +38,7 @@ define ALSA_UTILS_INSTALL_TARGET_FILES
 endef
 ALSA_UTILS_POST_INSTALL_HOOKS = ALSA_UTILS_INSTALL_TARGET_FILES
 
-define ALSA_UTILS_CLEANUP_TARGET
+define ALSA_UTILS_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/alsa/,init)
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,aserver axfer)
 	rm -f $(addprefix $(TARGET_SBIN_DIR)/,alsa-info.sh)

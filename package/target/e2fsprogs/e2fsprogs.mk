@@ -42,13 +42,13 @@ E2FSPROGS_CONF_OPTS = \
 	--with-root-prefix="" \
 	--with-crond-dir=no
 
-define E2FSPROGS_CLEANUP_TARGET
+define E2FSPROGS_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BASE_SBIN_DIR)/,badblocks dumpe2fs e2freefrag e2mmpstatus e2undo e4crypt filefrag logsave mklost+found)
 	rm -f $(addprefix $(TARGET_SBIN_DIR)/,mk_cmds uuidd)
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,chattr compile_et irqtop mk_cmds lsattr uuidgen)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,et ss)
 endef
-E2FSPROGS_CLEANUP_TARGET_HOOKS += E2FSPROGS_CLEANUP_TARGET
+E2FSPROGS_TARGET_CLEANUP_HOOKS += E2FSPROGS_TARGET_CLEANUP
 
 $(D)/e2fsprogs:
 	$(call autotools-package)

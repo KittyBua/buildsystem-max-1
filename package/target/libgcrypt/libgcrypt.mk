@@ -17,10 +17,10 @@ LIBGCRYPT_CONF_OPTS = \
 	--disable-static \
 	--disable-tests
 
-define LIBGCRYPT_CLEANUP_TARGET
+define LIBGCRYPT_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_bindir)/,dumpsexp hmac256 mpicalc)
 endef
-LIBGCRYPT_CLEANUP_TARGET_HOOKS += LIBGCRYPT_CLEANUP_TARGET
+LIBGCRYPT_TARGET_CLEANUP_HOOKS += LIBGCRYPT_TARGET_CLEANUP
 
 $(D)/libgcrypt:
 	$(call autotools-package)

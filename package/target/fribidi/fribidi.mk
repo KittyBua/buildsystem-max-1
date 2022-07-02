@@ -16,10 +16,10 @@ FRIBIDI_CONF_OPTS = \
 	--disable-debug \
 	--disable-deprecated
 
-define FRIBIDI_CLEANUP_TARGET
+define FRIBIDI_TARGET_CLEANUP
 	cd $(TARGET_DIR) && rm usr/bin/fribidi
 endef
-FRIBIDI_CLEANUP_TARGET_HOOKS += FRIBIDI_CLEANUP_TARGET
+FRIBIDI_TARGET_CLEANUP_HOOKS += FRIBIDI_TARGET_CLEANUP
 
 $(D)/fribidi:
 	$(call autotools-package)

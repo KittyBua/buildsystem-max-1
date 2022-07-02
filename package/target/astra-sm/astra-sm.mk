@@ -19,10 +19,10 @@ endif
 ASTRA_SM_CONF_OPTS = \
 	--without-lua
 
-define ASTRA_SM_CLEANUP_TARGET
+define ASTRA_SM_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,astra)
 endef
-ASTRA_SM_CLEANUP_TARGET_HOOKS += ASTRA_SM_CLEANUP_TARGET
+ASTRA_SM_TARGET_CLEANUP_HOOKS += ASTRA_SM_TARGET_CLEANUP
 
 $(D)/astra-sm:
 	$(call autotools-package)

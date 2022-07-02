@@ -22,11 +22,11 @@ BASH_CONF_OPTS = \
 	--datarootdir=$(REMOVE_datarootdir) \
 	--without-bash-malloc
 
-define BASH_CLEANUP_TARGET
+define BASH_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_LIB_DIR)/,bash)
 	rm -f $(addprefix $(TARGET_BASE_BIN_DIR)/,bashbug)
 endef
-BASH_CLEANUP_TARGET_HOOKS += BASH_CLEANUP_TARGET
+BASH_TARGET_CLEANUP_HOOKS += BASH_TARGET_CLEANUP
 
 $(D)/bash:
 	$(call autotools-package)

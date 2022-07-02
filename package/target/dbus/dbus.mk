@@ -31,11 +31,11 @@ DBUS_CONF_OPTS += \
 	--without-systemdsystemunitdir
 endif
 
-define DBUS_CLEANUP_TARGET
+define DBUS_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,dbus-cleanup-sockets dbus-daemon dbus-launch dbus-monitor)
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,xml)
 endef
-DBUS_CLEANUP_TARGET_HOOKS += DBUS_CLEANUP_TARGET
+DBUS_TARGET_CLEANUP_HOOKS += DBUS_TARGET_CLEANUP
 
 $(D)/dbus:
 	$(call autotools-package)

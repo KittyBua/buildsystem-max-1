@@ -10,10 +10,10 @@ LIBEVENT_SOURCE  = libevent-$(LIBEVENT_VERSION).tar.gz
 LIBEVENT_SITE    = https://github.com/libevent/libevent/releases/download/release-$(LIBEVENT_VERSION)
 LIBEVENT_DEPENDS = bootstrap
 
-define LIBEVENT_CLEANUP_TARGET
+define LIBEVENT_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,event_rpcgen.py)
 endef
-LIBEVENT_CLEANUP_TARGET_HOOKS += LIBEVENT_CLEANUP_TARGET
+LIBEVENT_TARGET_CLEANUP_HOOKS += LIBEVENT_TARGET_CLEANUP
 
 $(D)/libevent:
 	$(call autotools-package)

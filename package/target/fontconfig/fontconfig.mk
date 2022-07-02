@@ -19,10 +19,10 @@ FONTCONFIG_CONF_OPTS = \
 	--with-expat-lib=$(TARGET_LIB_DIR) \
 	--disable-docs
 
-define FONTCONFIG_CLEANUP_TARGET
+define FONTCONFIG_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,fontconfig gettext xml)
 endef
-FONTCONFIG_CLEANUP_TARGET_HOOKS += FONTCONFIG_CLEANUP_TARGET
+FONTCONFIG_TARGET_CLEANUP_HOOKS += FONTCONFIG_TARGET_CLEANUP
 
 $(D)/fontconfig:
 	$(call autotools-package)

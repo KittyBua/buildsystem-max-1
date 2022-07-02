@@ -23,12 +23,12 @@ CAIRO_CONF_OPTS = \
 	--disable-gl \
 	--enable-tee
 
-define CAIRO_CLEANUP_TARGET
+define CAIRO_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_BIN_DIR)/,cairo-sphinx)
 	rm -rf $(addprefix $(TARGET_LIB_DIR)/cairo/,cairo-fdr* cairo-sphinx*)
 	rm -rf $(addprefix $(TARGET_LIB_DIR)/cairo/.debug/,cairo-fdr* cairo-sphinx*)
 endef
-CAIRO_CLEANUP_TARGET_HOOKS += CAIRO_CLEANUP_TARGET
+CAIRO_TARGET_CLEANUP_HOOKS += CAIRO_TARGET_CLEANUP
 
 $(D)/cairo:
 	$(call autotools-package)

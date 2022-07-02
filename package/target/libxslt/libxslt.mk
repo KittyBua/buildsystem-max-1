@@ -26,10 +26,10 @@ LIBXSLT_CONF_OPTS = \
 	--without-debug \
 	--without-mem-debug
 
-define LIBXSLT_CLEANUP_TARGET
+define LIBXSLT_TARGET_CLEANUP
 	rm -rf  $(addprefix $(TARGET_LIB_DIR)/,cmake libxslt-plugins xsltConf.sh)
 endef
-LIBXSLT_CLEANUP_TARGET_HOOKS += LIBXSLT_CLEANUP_TARGET
+LIBXSLT_TARGET_CLEANUP_HOOKS += LIBXSLT_TARGET_CLEANUP
 
 $(D)/libxslt:
 	$(call autotools-package)

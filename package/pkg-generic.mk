@@ -271,7 +271,7 @@ define TARGET_FOLLOWUP
 	$(call REWRITE_CONFIG_SCRIPTS)
 	$(REWRITE_LIBTOOL)
 	$(call CLEANUP)
-	$(foreach hook,$($(PKG)_CLEANUP_TARGET_HOOKS),$(call $(hook))$(sep))
+	$(foreach hook,$($(PKG)_TARGET_CLEANUP_HOOKS),$(call $(hook))$(sep))
 	$(TOUCH)
 endef
 
