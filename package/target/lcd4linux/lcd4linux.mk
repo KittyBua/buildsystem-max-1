@@ -30,10 +30,11 @@ define LCD4LINUX_BOOTSTRAP
 endef
 LCD4LINUX_PRE_CONFIGURE_HOOKS += LCD4LINUX_BOOTSTRAP
 
-$(D)/lcd4linux:
-	$(call PREPARE)
-	$(call TARGET_CONFIGURE)
+define LCD4LINUX_MAKE_VCS_VERSION
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) vcs_version; \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(call TARGET_FOLLOWUP)
+		$(MAKE) vcs_version
+endef
+LCD4LINUX_PRE_COMPILE_HOOKS += LCD4LINUX_MAKE_VCS_VERSION
+
+$(D)/lcd4linux:
+	$(call autotools-package)
