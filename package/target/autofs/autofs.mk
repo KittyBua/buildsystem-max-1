@@ -8,7 +8,7 @@ AUTOFS_VERSION = 5.1.8
 AUTOFS_DIR     = autofs-$(AUTOFS_VERSION)
 AUTOFS_SOURCE  = autofs-$(AUTOFS_VERSION).tar.xz
 AUTOFS_SITE    = https://www.kernel.org/pub/linux/daemons/autofs/v5
-AUTOFS_DEPENDS = bootstrap libtirpc e2fsprogs openssl libxml2
+AUTOFS_DEPENDS = bootstrap libtirpc
 
 AUTOFS_AUTORECONF = YES
 
@@ -25,10 +25,11 @@ AUTOFS_CONF_ENV = \
 	ac_cv_linux_procfs=yes
 
 AUTOFS_CONF_OPTS = \
+	--datarootdir=$(REMOVE_datarootdir) \
 	--disable-mount-locking \
 	--enable-ignore-busy \
-	--with-openldap=no \
-	--with-sasl=no \
+	--without-openldap \
+	--without-sasl \
 	--with-path="$(PATH)" \
 	--with-hesiod=no \
 	--with-libtirpc \
@@ -36,6 +37,11 @@ AUTOFS_CONF_OPTS = \
 	--with-mapdir=/etc \
 	--with-fifodir=/var/run \
 	--with-flagdir=/var/run
+
+define AUTOFS_PATCH_RPC_SUBS_H
+	$(SED) "s|nfs/nfs.h|linux/nfs.h|" $(PKG_BUILD_DIR)/include/rpc_subs.h
+endef
+AUTOFS_POST_PATCH_HOOKS += AUTOFS_PATCH_RPC_SUBS_H
 
 define AUTOFS_INSTALL_INIT_SYSV
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/autofs.init $(TARGET_DIR)/etc/init.d/autofs
