@@ -126,9 +126,6 @@ HOST_CONFIGURE_ENV = \
 	CXXFLAGS="$(HOST_CXXFLAGS)" \
 	LDFLAGS="$(HOST_LDFLAGS)"
 
-HOST_CONFIGURE_ENV += \
-	$($(PKG)_CONF_ENV)
-
 HOST_CONFIGURE_OPTS = \
 	--prefix="$(HOST_DIR)" \
 	--sysconfdir="$(HOST_DIR)/etc" \
