@@ -9,12 +9,10 @@ LUAJSON_SOURCE  = json.lua
 LUAJSON_SITE    = https://github.com/swiboe/swiboe/raw/master/term_gui
 LUAJSON_DEPENDS = bootstrap lua
 
-define LUAJSON_INSTALL_FILES
+define LUAJSON_INSTALL
 	$(INSTALL_DATA) -D $(DL_DIR)/$(LUAJSON_SOURCE) $(TARGET_SHARE_DIR)/lua/$(LUA_ABIVERSION)/json.lua
 endef
-LUAJSON_POST_FOLLOWUP_HOOKS += LUAJSON_INSTALL_FILES
+LUAJSON_INDIVIDUAL_HOOKS += LUAJSON_INSTALL
 
 $(D)/luajson:
-	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call TARGET_FOLLOWUP)
+	$(call individual-package,$(PKG_NO_EXTRACT) $(PKG_NO_PATCHES))
