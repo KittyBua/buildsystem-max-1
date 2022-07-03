@@ -12,14 +12,29 @@ XUPNPD_DEPENDS = bootstrap lua openssl neutrino-plugins
 
 XUPNPD_CHECKOUT = 25d6d44
 
+XUPNPD_SUBDIR = src
+
+XUPNPD_MAKE_ENV = \
+	$(TARGET_CONFIGURE_ENV)
+
+XUPNPD_MAKE_OPTS = \
+	TARGET=$(GNU_TARGET_NAME) \
+	LUAFLAGS="$(TARGET_LDFLAGS) \
+	-I$(TARGET_includedir)" \
+	embedded
+
 define XUPNPD_INSTALL_INIT_SYSV
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/xupnpd.init $(TARGET_DIR)/etc/init.d/xupnpd
 	$(UPDATE-RC.D) xupnpd defaults 75 25
 endef
 
+define XUPNPD_TARGET_CLEANUP
+	rm $(TARGET_SHARE_DIR)/xupnpd/plugins/staff/xupnpd_18plus.lua
+endef
+XUPNPD_TARGET_CLEANUP_HOOKS += XUPNPD_TARGET_CLEANUP
+
 define XUPNPD_INSTALL_FILES
 	mkdir -p $(TARGET_SHARE_DIR)/xupnpd/{config,playlists}
-	rm $(TARGET_SHARE_DIR)/xupnpd/plugins/staff/xupnpd_18plus.lua
 	$(INSTALL_DATA) -D $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/scripts-lua/xupnpd/xupnpd_18plus.lua $(TARGET_SHARE_DIR)/xupnpd/plugins/
 	$(INSTALL_DATA) -D $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/scripts-lua/xupnpd/xupnpd_cczwei.lua $(TARGET_SHARE_DIR)/xupnpd/plugins/
 	$(INSTALL_DATA) -D $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/scripts-lua/xupnpd/xupnpd_neutrino.lua $(TARGET_SHARE_DIR)/xupnpd/plugins/
@@ -29,9 +44,4 @@ endef
 XUPNPD_POST_FOLLOWUP_HOOKS += XUPNPD_INSTALL_FILES
 
 $(D)/xupnpd:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
-		$(MAKE) -C src embedded TARGET=$(GNU_TARGET_NAME) PKG_CONFIG=$(PKG_CONFIG) LUAFLAGS="$(TARGET_LDFLAGS) -I$(TARGET_INCLUDE_DIR)"; \
-		$(MAKE) -C src install DESTDIR=$(TARGET_DIR)
-	$(call TARGET_FOLLOWUP)
+	$(call make-package)
