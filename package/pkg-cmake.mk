@@ -50,7 +50,9 @@ define TARGET_CMAKE
 		rm -f CMakeCache.txt; \
 		mkdir -p build; \
 		cd build; \
-		$(TARGET_CMAKE_ENV) cmake .. $(TARGET_CMAKE_OPTS); \
+		$(TARGET_CMAKE_ENV) $($(PKG)_CONF_ENV) \
+		cmake .. \
+			$(TARGET_CMAKE_OPTS) $($(PKG)_CONF_OPTS); \
 	)
 	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 endef
@@ -60,7 +62,6 @@ define cmake-package
 	$(call TARGET_CMAKE)
 	$(call TARGET_MAKE,/build)
 	$(call TARGET_MAKE_INSTALL,/build)
-	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake)
 	$(call TARGET_FOLLOWUP)
 endef
 
@@ -102,7 +103,9 @@ define HOST_CMAKE
 		rm -f CMakeCache.txt; \
 		mkdir -p build; \
 		cd build; \
-		$(HOST_CMAKE_ENV) cmake .. $(HOST_CMAKE_OPTS); \
+		$(HOST_CMAKE_ENV) $($(PKG)_CONF_ENV) \
+		cmake .. \
+			$(HOST_CMAKE_OPTS) $($(PKG)_CONF_OPTS); \
 	)
 	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 endef

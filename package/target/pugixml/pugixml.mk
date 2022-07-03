@@ -11,8 +11,7 @@ PUGIXML_SITE    = https://github.com/zeux/pugixml/releases/download/v$(PUGIXML_V
 PUGIXML_DEPENDS = bootstrap
 
 PUGIXML_CONF_OPTS = \
-	-DBUILD_DEFINES="PUGIXML_HAS_LONG_LONG" \
-	| tail -n +90
+	-DBUILD_DEFINES="PUGIXML_HAS_LONG_LONG"
 
 $(D)/pugixml:
 	$(call cmake-package)

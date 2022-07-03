@@ -13,8 +13,7 @@ LIBJPEG_TURBO_DEPENDS = bootstrap
 LIBJPEG_TURBO_CONF_OPTS = \
 	-DCMAKE_INSTALL_BINDIR="$(REMOVE_bindir)" \
 	-DWITH_SIMD=False \
-	-DWITH_JPEG8=80 \
-	| tail -n +90
+	-DWITH_JPEG8=80
 
 $(D)/libjpeg-turbo:
 	$(call cmake-package)
