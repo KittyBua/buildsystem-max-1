@@ -108,14 +108,14 @@ endef
 
 define HOST_NINJA_BUID
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
-		$(HOST_NINJA_BINARY) -C $(PKG_BUILD_DIR)/build \
-			$($(PKG)_NINJA_OPTS)
+		$(HOST_MAKE_ENV) $($(PKG)_NINJA_ENV) \
+			$(HOST_NINJA_BINARY) $($(PKG)_NINJA_OPTS) -C $(PKG_BUILD_DIR)/build
 endef
 
 define HOST_NINJA_INSTALL
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
-		$(HOST_NINJA_BINARY) -C $(PKG_BUILD_DIR)/build install \
-			$($(PKG)_NINJA_OPTS)
+		$(HOST_MAKE_ENV) $($(PKG)_NINJA_ENV) \
+			$(HOST_NINJA_BINARY) $($(PKG)_NINJA_OPTS) -C $(PKG_BUILD_DIR)/build install			
 endef
 
 define host-meson-package
