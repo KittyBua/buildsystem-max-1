@@ -26,7 +26,7 @@ define TARGET_MAKE_INSTALL
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(TARGET_MAKE_ENV) $($(PKG)_MAKE_ENV) \
 		$(MAKE) install DESTDIR=$(TARGET_DIR) \
-			$($(PKG)_MAKE_OPTS); \
+			$($(PKG)_INSTALL_OPTS); \
 	)
 	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
 endef
@@ -69,7 +69,7 @@ define HOST_MAKE_INSTALL
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(HOST_MAKE_ENV) $($(PKG)_MAKE_ENV) \
 		$(MAKE) install \
-			$($(PKG)_MAKE_OPTS); \
+			$($(PKG)_INSTALL_OPTS); \
 	)
 	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
 endef
