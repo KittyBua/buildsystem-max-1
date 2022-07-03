@@ -17,11 +17,13 @@ LIBCAP_POST_PATCH_HOOKS = LIBCAP_POST_PATCH
 
 LIBCAP_MAKE_FLAGS = \
 	BUILD_CC="$(HOSTCC)" \
-	BUILD_CFLAGS="$(HOST_CFLAGS)"
+	BUILD_CFLAGS="$(HOST_CFLAGS)" \
+	prefix=/usr \
+	lib=lib
 
 $(D)/libcap:
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(TARGET_CONFIGURE_ENV) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS) prefix=/usr lib=lib; \
-		$(TARGET_CONFIGURE_ENV) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS) prefix=/usr lib=lib DESTDIR=$(TARGET_DIR) install
+		$(TARGET_CONFIGURE_ENV) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS); \
+		$(TARGET_CONFIGURE_ENV) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS) DESTDIR=$(TARGET_DIR) install
 	$(call TARGET_FOLLOWUP)
