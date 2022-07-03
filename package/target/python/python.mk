@@ -69,6 +69,6 @@ $(D)/python:
 			all DESTDIR=$(TARGET_DIR) \
 			; \
 		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	ln -sf ../../libpython$(PYTHON_VERSION_MAJOR).so.1.0 $(TARGET_DIR)/$(PYTHON_BASE_DIR)/config/libpython$(basename $(PYTHON_VERSION)).so; \
+	ln -sf ../../libpython$(PYTHON_VERSION_MAJOR).so.1.0 $(TARGET_DIR)/$(PYTHON_LIB_DIR)/config/libpython$(basename $(PYTHON_VERSION)).so; \
 	ln -sf $(TARGET_DIR)/$(PYTHON_INCLUDE_DIR) $(TARGET_DIR)/usr/include/python
 	$(call TARGET_FOLLOWUP)
