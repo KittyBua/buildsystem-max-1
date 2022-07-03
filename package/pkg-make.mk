@@ -47,7 +47,8 @@ endef
 HOST_MAKE_ENV = \
 	PATH=$(PATH) \
 	PKG_CONFIG=/usr/bin/pkg-config \
-	PKG_CONFIG_LIBDIR="$(HOST_DIR)/lib/pkgconfig"
+	PKG_CONFIG_SYSROOT_DIR="/" \
+	PKG_CONFIG_LIBDIR="$(HOST_DIR)/lib/pkgconfig:$(HOST_DIR)/share/pkgconfig"
 
 define HOST_MAKE
 	@$(call MESSAGE,"Compiling")
