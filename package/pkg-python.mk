@@ -32,7 +32,7 @@ define TARGET_PYTHON_INSTALL
 endef
 
 define target-python-package
-	$(call PREPARE)
+	$(call PREPARE,$(1))
 	$(call TARGET_PYTHON_BUILD)
 	$(call TARGET_PYTHON_INSTALL)
 	$(call TARGET_FOLLOWUP)
@@ -67,7 +67,7 @@ define HOST_PYTHON3_INSTALL
 endef
 
 define host-python3-package
-	$(call PREPARE)
+	$(call PREPARE,$(1))
 	$(call HOST_PYTHON3_BUILD)
 	$(call HOST_PYTHON3_INSTALL)
 	$(call HOST_FOLLOWUP)

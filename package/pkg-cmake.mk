@@ -58,10 +58,10 @@ define TARGET_CMAKE
 endef
 
 define cmake-package
-	$(call PREPARE)
+	$(call PREPARE,$(1))
 	$(call TARGET_CMAKE)
-	$(call TARGET_MAKE,/build)
-	$(call TARGET_MAKE_INSTALL,/build)
+	$(if $(filter $(1),$(PKG_NO_BUILD)),,$(call TARGET_MAKE,/build))
+	$(if $(filter $(1),$(PKG_NO_INSTALL)),,$(call TARGET_MAKE_INSTALL,/build))
 	$(call TARGET_FOLLOWUP)
 endef
 
@@ -111,9 +111,9 @@ define HOST_CMAKE
 endef
 
 define host-cmake-package
-	$(call PREPARE)
+	$(call PREPARE,$(1))
 	$(call HOST_CMAKE)
-	$(call HOST_MAKE,/build)
-	$(call HOST_MAKE_INSTALL,/build)
+	$(if $(filter $(1),$(PKG_NO_BUILD)),,$(call HOST_MAKE,/build))
+	$(if $(filter $(1),$(PKG_NO_INSTALL)),,$(call HOST_MAKE_INSTALL,/build))
 	$(call HOST_FOLLOWUP)
 endef

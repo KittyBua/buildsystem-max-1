@@ -137,6 +137,12 @@ PACKAGE_DIR     = $(BASE_DIR)/package
 PKG_FILES_DIR   = $(BASE_DIR)/package/*/$(pkgname)/files
 PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(pkgname)/patches
 
+# PKG "control-flag" variables
+PKG_NO_EXTRACT  = pkg-no-extract
+PKG_NO_PATCHES  = pkg-no-patches
+PKG_NO_BUILD    = pkg-no-build
+PKG_NO_INSTALL  = pkg-no-install
+
 CD              = set -e; cd
 CD_BUILD_DIR    = $(CD) $(PKG_BUILD_DIR)
 CHDIR           = $(CD) $(BUILD_DIR)
@@ -171,16 +177,17 @@ VPATH = $(D)
 
 include package/environment-linux.mk
 include package/environment-target.mk
+include package/bootstrap.mk
+include package/cleantargets.mk
 include package/flashimage.mk
 include package/pkg-autotools.mk
+include package/pkg-cmake.mk
 include package/pkg-generic.mk
-include $(sort $(wildcard package/*/*/*.mk))
-include package/cleantargets.mk
-include package/bootstrap.mk
+include package/pkg-individual.mk
 include package/pkg-kernel-module.mk
 include package/pkg-make.mk
-include package/pkg-cmake.mk
 include package/pkg-meson.mk
 include package/pkg-python.mk
 include package/pkg-utils.mk
 include package/pkg-waf.mk
+include $(sort $(wildcard package/*/*/*.mk))

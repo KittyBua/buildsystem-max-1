@@ -203,8 +203,8 @@ endef
 define PREPARE
 	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(BUILD_DIR))
-	$(call APPLY_PATCHES,$(PKG_PATCHES_DIR),$($(PKG)_PATCH))
+	$(if $(filter $(1),$(PKG_NO_EXTRACT)),,$(call EXTRACT,$(BUILD_DIR)))
+	$(if $(filter $(1),$(PKG_NO_PATCHES)),,$(call APPLY_PATCHES,$(PKG_PATCHES_DIR),$($(PKG)_PATCH)))
 endef
 
 # -----------------------------------------------------------------------------
