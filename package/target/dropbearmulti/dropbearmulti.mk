@@ -28,13 +28,13 @@ DROPBEARMULTI_CONF_OPTS = \
 	--disable-pututline \
 	--disable-pututxline
 
-DROPBEAR_MAKE_OPTS = \
-	SCPPROGRESS=1 \
-	PROGRAMS="dropbear dbclient dropbearkey scp"
+DROPBEARMULTI_MAKE_OPTS = \
+	MULTI=1 \
+	PROGRAMS="dropbear dropbearkey scp"
 
-define DROPBEARMULTI_INSTALL_INIT_SYSV
-	$(INSTALL_EXEC) $(PKG_FILES_DIR)/dropbear $(TARGET_DIR)/etc/init.d/
-endef
+DROPBEARMULTI_INSTALL_OPTS = \
+	MULTI=1 \
+	PROGRAMS="dropbear dropbearkey scp"
 
 define DROPBEAR_CONFIGURE_LOCALOPTIONS
 	# Ensure that dropbear doesn't use crypt() when it's not available
@@ -47,6 +47,10 @@ define DROPBEAR_CONFIGURE_LOCALOPTIONS
 	echo '#define DEFAULT_PATH "/sbin:/bin:/usr/sbin:/usr/bin:/var/bin"' >> $(PKG_BUILD_DIR)/localoptions.h
 endef
 DROPBEAR_POST_CONFIGURE_HOOKS = DROPBEAR_CONFIGURE_LOCALOPTIONS
+
+define DROPBEARMULTI_INSTALL_INIT_SYSV
+	$(INSTALL_EXEC) $(PKG_FILES_DIR)/dropbear $(TARGET_DIR)/etc/init.d/
+endef
 
 define DROPBEARMULTI_INSTALL_FILES
 	cd $(TARGET_BIN_DIR) && ln -sf /usr/bin/dropbearmulti dropbear
