@@ -10,15 +10,16 @@ BZIP2_SOURCE  = bzip2-$(BZIP2_VERSION).tar.gz
 BZIP2_SITE    = https://sourceware.org/pub/bzip2
 BZIP2_DEPENDS = bootstrap
 
+BZIP2_MAKE_ENV = \
+	$(TARGET_CONFIGURE_ENV)
+
+BZIP2_MAKE_OPTS = \
+	PREFIX=$(TARGET_DIR)/usr
+
 define BZIP2_MAKEFILE_LIBBZ2_SO
 	mv $(PKG_BUILD_DIR)/Makefile-libbz2_so $(PKG_BUILD_DIR)/Makefile
 endef
 BZIP2_POST_PATCH_HOOKS += BZIP2_MAKEFILE_LIBBZ2_SO
 
 $(D)/bzip2:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
-		$(MAKE); \
-		$(MAKE) install PREFIX=$(TARGET_DIR)/usr
-	$(call TARGET_FOLLOWUP)
+	$(call make-package)
