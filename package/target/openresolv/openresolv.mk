@@ -21,4 +21,4 @@ endef
 OPENRESOLV_POST_PATCH_HOOKS += OPENRESOLV_CREATE_CONF_ENV_FILE
 
 $(D)/openresolv:
-	$(call autotools-package)
+	$(call make-package)
