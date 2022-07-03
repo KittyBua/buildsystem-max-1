@@ -28,6 +28,10 @@ DROPBEAR_MAKE_OPTS = \
 	SCPPROGRESS=1 \
 	PROGRAMS="dropbear dbclient dropbearkey scp"
 
+DROPBEAR_INSTALL_OPTS = \
+	SCPPROGRESS=1 \
+	PROGRAMS="dropbear dbclient dropbearkey scp"
+
 define DROPBEAR_CONFIGURE_LOCALOPTIONS
 	# Ensure that dropbear doesn't use crypt() when it's not available
 	echo '#if !HAVE_CRYPT'				>> $(PKG_BUILD_DIR)/localoptions.h
