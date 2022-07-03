@@ -32,9 +32,9 @@ define TARGET_MAKE_INSTALL
 endef
 
 define make-package
-	$(call PREPARE)
-	$(call TARGET_MAKE)
-	$(call TARGET_MAKE_INSTALL)
+	$(call PREPARE,$(1))
+	$(if $(filter $(1),$(PKG_NO_BUILD)),,$(call TARGET_MAKE))
+	$(if $(filter $(1),$(PKG_NO_INSTALL)),,$(call TARGET_MAKE_INSTALL))
 	$(call TARGET_FOLLOWUP)
 endef
 
@@ -75,8 +75,8 @@ define HOST_MAKE_INSTALL
 endef
 
 define host-make-package
-	$(call PREPARE)
-	$(call HOST_MAKE)
-	$(call HOST_MAKE_INSTALL)
+	$(call PREPARE,$(1))
+	$(if $(filter $(1),$(PKG_NO_BUILD)),,$(call HOST_MAKE))
+	$(if $(filter $(1),$(PKG_NO_INSTALL)),,$(call HOST_MAKE_INSTALL))
 	$(call HOST_FOLLOWUP)
 endef
