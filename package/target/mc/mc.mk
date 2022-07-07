@@ -5,9 +5,10 @@
 ################################################################################
 
 MC_VERSION = 4.8.28
-MC_DIR     = mc-$(MC_VERSION)
-MC_SOURCE  = mc-$(MC_VERSION).tar.xz
-MC_SITE    = ftp.midnight-commander.org
+MC_DIR = mc-$(MC_VERSION)
+MC_SOURCE = mc-$(MC_VERSION).tar.xz
+MC_SITE = ftp.midnight-commander.org
+
 MC_DEPENDS = bootstrap ncurses glib2
 
 MC_AUTORECONF = YES

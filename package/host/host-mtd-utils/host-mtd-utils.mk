@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-HOST_MTD_UTILS_VERSION = 1.5.2
-HOST_MTD_UTILS_DIR     = mtd-utils-$(HOST_MTD_UTILS_VERSION)
-HOST_MTD_UTILS_SOURCE  = mtd-utils-$(HOST_MTD_UTILS_VERSION).tar.bz2
-HOST_MTD_UTILS_SITE    = ftp://ftp.infradead.org/pub/mtd-utils
+HOST_MTD_UTILS_VERSION = $(MTD_UTILS_VERSION)
+HOST_MTD_UTILS_DIR = mtd-utils-$(HOST_MTD_UTILS_VERSION)
+HOST_MTD_UTILS_SOURCE = mtd-utils-$(HOST_MTD_UTILS_VERSION).tar.bz2
+HOST_MTD_UTILS_SITE = ftp://ftp.infradead.org/pub/mtd-utils
+
 HOST_MTD_UTILS_DEPENDS = bootstrap
 
 $(D)/host-mtd-utils:

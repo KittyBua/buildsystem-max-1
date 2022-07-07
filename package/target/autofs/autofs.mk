@@ -5,9 +5,10 @@
 ################################################################################
 
 AUTOFS_VERSION = 5.1.8
-AUTOFS_DIR     = autofs-$(AUTOFS_VERSION)
-AUTOFS_SOURCE  = autofs-$(AUTOFS_VERSION).tar.xz
-AUTOFS_SITE    = https://www.kernel.org/pub/linux/daemons/autofs/v5
+AUTOFS_DIR = autofs-$(AUTOFS_VERSION)
+AUTOFS_SOURCE = autofs-$(AUTOFS_VERSION).tar.xz
+AUTOFS_SITE = https://www.kernel.org/pub/linux/daemons/autofs/v5
+
 AUTOFS_DEPENDS = bootstrap libtirpc
 
 AUTOFS_AUTORECONF = YES

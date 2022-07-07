@@ -5,8 +5,9 @@
 ################################################################################
 
 LUAJSON_VERSION = 1.0
-LUAJSON_SOURCE  = json.lua
-LUAJSON_SITE    = https://github.com/swiboe/swiboe/raw/master/term_gui
+LUAJSON_SOURCE = json.lua
+LUAJSON_SITE = https://github.com/swiboe/swiboe/raw/master/term_gui
+
 LUAJSON_DEPENDS = bootstrap lua
 
 define LUAJSON_INSTALL

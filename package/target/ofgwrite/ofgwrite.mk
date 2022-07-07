@@ -5,9 +5,10 @@
 ################################################################################
 
 OFGWRITE_VERSION = git
-OFGWRITE_DIR     = ofgwrite-max.git
-OFGWRITE_SOURCE  = ofgwrite-max.git
-OFGWRITE_SITE    = $(MAX-GIT-GITHUB)
+OFGWRITE_DIR = ofgwrite-max.git
+OFGWRITE_SOURCE = ofgwrite-max.git
+OFGWRITE_SITE = $(MAX-GIT-GITHUB)
+
 OFGWRITE_DEPENDS = bootstrap
 
 OFGWRITE_MAKE_ENV = \

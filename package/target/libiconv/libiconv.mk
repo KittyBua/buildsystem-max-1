@@ -5,9 +5,10 @@
 ################################################################################
 
 LIBICONV_VERSION = 1.13.1
-LIBICONV_DIR     = libiconv-$(LIBICONV_VERSION)
-LIBICONV_SOURCE  = libiconv-$(LIBICONV_VERSION).tar.gz
-LIBICONV_SITE    = https://ftp.gnu.org/gnu/libiconv
+LIBICONV_DIR = libiconv-$(LIBICONV_VERSION)
+LIBICONV_SOURCE = libiconv-$(LIBICONV_VERSION).tar.gz
+LIBICONV_SITE = https://ftp.gnu.org/gnu/libiconv
+
 LIBICONV_DEPENDS = bootstrap
 
 LIBICONV_CONF_ENV = \

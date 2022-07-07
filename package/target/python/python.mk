@@ -5,9 +5,10 @@
 ################################################################################
 
 PYTHON_VERSION = 2.7.18
-PYTHON_DIR     = Python-$(PYTHON_VERSION)
-PYTHON_SOURCE  = Python-$(PYTHON_VERSION).tar.xz
-PYTHON_SITE    = https://www.python.org/ftp/python/$(PYTHON_VERSION)
+PYTHON_DIR = Python-$(PYTHON_VERSION)
+PYTHON_SOURCE = Python-$(PYTHON_VERSION).tar.xz
+PYTHON_SITE = https://www.python.org/ftp/python/$(PYTHON_VERSION)
+
 PYTHON_DEPENDS = bootstrap host-python ncurses zlib openssl libffi expat bzip2
 
 PYTHON_LIB_DIR     = usr/lib/python$(basename $(PYTHON_VERSION))

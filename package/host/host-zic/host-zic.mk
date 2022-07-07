@@ -5,9 +5,10 @@
 ################################################################################
 
 HOST_ZIC_VERSION = 2021b
-HOST_ZIC_DIR     = tzcode
-HOST_ZIC_SOURCE  = tzcode$(HOST_ZIC_VERSION).tar.gz
-HOST_ZIC_SITE    = https://www.iana.org/time-zones/repository/releases
+HOST_ZIC_DIR = tzcode
+HOST_ZIC_SOURCE = tzcode$(HOST_ZIC_VERSION).tar.gz
+HOST_ZIC_SITE = https://www.iana.org/time-zones/repository/releases
+
 HOST_ZIC_DEPENDS = bootstrap
 
 define HOST_ZIC_INSTALL_DIR

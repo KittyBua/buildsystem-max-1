@@ -5,9 +5,9 @@
 ################################################################################
 
 AVAHI_VERSION = 0.7
-AVAHI_DIR     = avahi-$(AVAHI_VERSION)
-AVAHI_SOURCE  = avahi-$(AVAHI_VERSION).tar.gz
-AVAHI_SITE    = https://github.com/lathiat/avahi/releases/download/v$(AVAHI_VERSION)
+AVAHI_DIR = avahi-$(AVAHI_VERSION)
+AVAHI_SOURCE = avahi-$(AVAHI_VERSION).tar.gz
+AVAHI_SITE = https://github.com/lathiat/avahi/releases/download/v$(AVAHI_VERSION)
 AVAHI_DEPENDS = bootstrap expat libdaemon dbus
 
 AVAHI_CONF_OPTS = \

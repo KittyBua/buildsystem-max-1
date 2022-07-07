@@ -5,9 +5,10 @@
 ################################################################################
 
 HOST_PYTHON_VERSION = 2.7.18
-HOST_PYTHON_DIR     = Python-$(HOST_PYTHON_VERSION)
-HOST_PYTHON_SOURCE  = Python-$(HOST_PYTHON_VERSION).tar.xz
-HOST_PYTHON_SITE    = https://www.python.org/ftp/python/$(HOST_PYTHON_VERSION)
+HOST_PYTHON_DIR = Python-$(HOST_PYTHON_VERSION)
+HOST_PYTHON_SOURCE = Python-$(HOST_PYTHON_VERSION).tar.xz
+HOST_PYTHON_SITE = https://www.python.org/ftp/python/$(HOST_PYTHON_VERSION)
+
 HOST_PYTHON_DEPENDS = bootstrap
 
 HOST_PYTHON_BINARY = $(HOST_DIR)/bin/python2

@@ -5,9 +5,10 @@
 ################################################################################
 
 X264_VERSION = git
-X264_DIR     = x264.git
-X264_SOURCE  = x264.git
-X264_SITE    = https://code.videolan.org/videolan
+X264_DIR = x264.git
+X264_SOURCE = x264.git
+X264_SITE = https://code.videolan.org/videolan
+
 X264_DEPENDS = bootstrap
 
 X264_CHECKOUT = 35417dcd

@@ -5,9 +5,9 @@
 ################################################################################
 
 DBUS_VERSION = 1.12.6
-DBUS_DIR     = dbus-$(DBUS_VERSION)
-DBUS_SOURCE  = dbus-$(DBUS_VERSION).tar.gz
-DBUS_SITE    = https://dbus.freedesktop.org/releases/dbus
+DBUS_DIR = dbus-$(DBUS_VERSION)
+DBUS_SOURCE = dbus-$(DBUS_VERSION).tar.gz
+DBUS_SITE = https://dbus.freedesktop.org/releases/dbus
 DBUS_DEPENDS = bootstrap expat
 
 DBUS_CONF_OPTS = \

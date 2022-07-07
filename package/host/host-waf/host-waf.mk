@@ -5,9 +5,10 @@
 ################################################################################
 
 HOST_WAF_VERSION = 2.0.22
-HOST_WAF_DIR     = waf-$(HOST_WAF_VERSION)
-HOST_WAF_SOURCE  = waf-$(HOST_WAF_VERSION)
-HOST_WAF_SITE    = https://waf.io
+HOST_WAF_DIR = waf-$(HOST_WAF_VERSION)
+HOST_WAF_SOURCE = waf-$(HOST_WAF_VERSION)
+HOST_WAF_SITE = https://waf.io
+
 HOST_WAF_DEPENDS = bootstrap host-python3
 
 HOST_WAF_BINARY = $(HOST_DIR)/bin/waf

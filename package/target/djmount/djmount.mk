@@ -5,9 +5,10 @@
 ################################################################################
 
 DJMOUNT_VERSION = 0.71
-DJMOUNT_DIR     = djmount-$(DJMOUNT_VERSION)
-DJMOUNT_SOURCE  = djmount-$(DJMOUNT_VERSION).tar.gz
-DJMOUNT_SITE    = https://sourceforge.net/projects/djmount/files/djmount/$(DJMOUNT_VERSION)
+DJMOUNT_DIR = djmount-$(DJMOUNT_VERSION)
+DJMOUNT_SOURCE = djmount-$(DJMOUNT_VERSION).tar.gz
+DJMOUNT_SITE = https://sourceforge.net/projects/djmount/files/djmount/$(DJMOUNT_VERSION)
+
 DJMOUNT_DEPENDS = bootstrap libupnp libfuse
 
 DJMOUNT_AUTORECONF = YES

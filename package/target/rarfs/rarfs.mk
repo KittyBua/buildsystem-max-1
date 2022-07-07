@@ -5,9 +5,10 @@
 ################################################################################
 
 RARFS_VERSION = 0.1.1
-RARFS_DIR     = rarfs-$(RARFS_VERSION)
-RARFS_SOURCE  = rarfs-$(RARFS_VERSION).tar.gz
-RARFS_SITE    = https://sourceforge.net/projects/rarfs/files/rarfs/$(RARFS_VERSION)
+RARFS_DIR = rarfs-$(RARFS_VERSION)
+RARFS_SOURCE = rarfs-$(RARFS_VERSION).tar.gz
+RARFS_SITE = https://sourceforge.net/projects/rarfs/files/rarfs/$(RARFS_VERSION)
+
 RARFS_DEPENDS = bootstrap libfuse
 
 RARFS_CONF_OPTS = \

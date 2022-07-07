@@ -5,9 +5,10 @@
 ################################################################################
 
 IOZONE_VERSION = 3_493
-IOZONE_DIR     = iozone$(IOZONE_VERSION)
-IOZONE_SOURCE  = iozone$(IOZONE_VERSION).tgz
-IOZONE_SITE    = http://www.iozone.org/src/current
+IOZONE_DIR = iozone$(IOZONE_VERSION)
+IOZONE_SOURCE = iozone$(IOZONE_VERSION).tgz
+IOZONE_SITE = http://www.iozone.org/src/current
+
 IOZONE_DEPENDS = bootstrap
 
 IOZONE_SUBDIR = src/current

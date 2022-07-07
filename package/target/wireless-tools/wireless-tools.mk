@@ -5,9 +5,10 @@
 ################################################################################
 
 WIRELESS_TOOLS_VERSION = 30
-WIRELESS_TOOLS_DIR     = wireless_tools.$(WIRELESS_TOOLS_VERSION)
-WIRELESS_TOOLS_SOURCE  = wireless_tools.$(WIRELESS_TOOLS_VERSION).pre9.tar.gz
-WIRELESS_TOOLS_SITE    = https://hewlettpackard.github.io/wireless-tools
+WIRELESS_TOOLS_DIR = wireless_tools.$(WIRELESS_TOOLS_VERSION)
+WIRELESS_TOOLS_SOURCE = wireless_tools.$(WIRELESS_TOOLS_VERSION).pre9.tar.gz
+WIRELESS_TOOLS_SITE = https://hewlettpackard.github.io/wireless-tools
+
 WIRELESS_TOOLS_DEPENDS = bootstrap
 
 $(D)/wireless-tools:

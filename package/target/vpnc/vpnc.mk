@@ -5,9 +5,10 @@
 ################################################################################
 
 VPNC_VERSION = 0.5.3r550-2jnpr1
-VPNC_DIR     = vpnc-$(VPNC_VERSION)
-VPNC_SOURCE  = vpnc-$(VPNC_VERSION).tar.gz
-VPNC_SITE    = $(call github,ndpgroup,vpnc,$(VPNC_VERSION))
+VPNC_DIR = vpnc-$(VPNC_VERSION)
+VPNC_SOURCE = vpnc-$(VPNC_VERSION).tar.gz
+VPNC_SITE = $(call github,ndpgroup,vpnc,$(VPNC_VERSION))
+
 VPNC_DEPENDS = bootstrap openssl libgcrypt libgpg-error
 
 $(D)/vpnc:

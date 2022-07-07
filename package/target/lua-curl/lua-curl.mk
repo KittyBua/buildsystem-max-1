@@ -5,9 +5,10 @@
 ################################################################################
 
 LUA_CURL_VERSION = git
-LUA_CURL_DIR     = lua-curlv3.git
-LUA_CURL_SOURCE  = lua-curlv3.git
-LUA_CURL_SITE    = https://github.com/Lua-cURL
+LUA_CURL_DIR = lua-curlv3.git
+LUA_CURL_SOURCE = lua-curlv3.git
+LUA_CURL_SITE = https://github.com/Lua-cURL
+
 LUA_CURL_DEPENDS = bootstrap libcurl lua
 
 LUA_CURL_MAKE_OPTS = \

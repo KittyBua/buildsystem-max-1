@@ -5,7 +5,8 @@
 ################################################################################
 
 HOST_CCACHE_VERSION = 2021-03-29
-HOST_CCACHE_DIR     = local
+HOST_CCACHE_DIR = local
+
 HOST_CCACHE_DEPENDS = directories
 
 HOST_CCACHE_BIN    = /usr/bin/ccache

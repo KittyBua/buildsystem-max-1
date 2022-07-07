@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-HOST_GLIB2_VERSION = 2.62.4
-HOST_GLIB2_DIR     = glib-$(HOST_GLIB2_VERSION)
-HOST_GLIB2_SOURCE  = glib-$(HOST_GLIB2_VERSION).tar.xz
-HOST_GLIB2_SITE    = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(HOST_GLIB2_VERSION))
+HOST_GLIB2_VERSION =$(GLIB2_VERSION)
+HOST_GLIB2_DIR = glib-$(HOST_GLIB2_VERSION)
+HOST_GLIB2_SOURCE = glib-$(HOST_GLIB2_VERSION).tar.xz
+HOST_GLIB2_SITE = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(HOST_GLIB2_VERSION))
+
 HOST_GLIB2_DEPENDS = bootstrap host-meson host-libffi
 
 HOST_GLIB2_CONF_OPTS = \

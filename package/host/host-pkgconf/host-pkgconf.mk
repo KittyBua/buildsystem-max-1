@@ -5,9 +5,10 @@
 ################################################################################
 
 HOST_PKGCONF_VERSION = 1.8.0
-HOST_PKGCONF_DIR     = pkgconf-$(HOST_PKGCONF_VERSION)
-HOST_PKGCONF_SOURCE  = pkgconf-$(HOST_PKGCONF_VERSION).tar.xz
-HOST_PKGCONF_SITE    = https://distfiles.dereferenced.org/pkgconf
+HOST_PKGCONF_DIR = pkgconf-$(HOST_PKGCONF_VERSION)
+HOST_PKGCONF_SOURCE = pkgconf-$(HOST_PKGCONF_VERSION).tar.xz
+HOST_PKGCONF_SITE = https://distfiles.dereferenced.org/pkgconf
+
 HOST_PKGCONF_DEPENDS = directories
 
 PKG_CONFIG_HOST_BINARY = $(HOST_DIR)/bin/pkg-config

@@ -5,9 +5,10 @@
 ################################################################################
 
 READLINE_VERSION = 8.1.2
-READLINE_DIR     = readline-$(READLINE_VERSION)
-READLINE_SOURCE  = readline-$(READLINE_VERSION).tar.gz
-READLINE_SITE    = https://ftp.gnu.org/gnu/readline
+READLINE_DIR = readline-$(READLINE_VERSION)
+READLINE_SOURCE = readline-$(READLINE_VERSION).tar.gz
+READLINE_SITE = https://ftp.gnu.org/gnu/readline
+
 READLINE_DEPENDS = bootstrap ncurses
 
 READLINE_CONF_OPTS = \

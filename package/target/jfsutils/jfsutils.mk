@@ -5,9 +5,10 @@
 ################################################################################
 
 JFSUTILS_VERSION = 1.1.15
-JFSUTILS_DIR     = jfsutils-$(JFSUTILS_VERSION)
-JFSUTILS_SOURCE  = jfsutils-$(JFSUTILS_VERSION).tar.gz
-JFSUTILS_SITE    = http://jfs.sourceforge.net/project/pub
+JFSUTILS_DIR = jfsutils-$(JFSUTILS_VERSION)
+JFSUTILS_SOURCE = jfsutils-$(JFSUTILS_VERSION).tar.gz
+JFSUTILS_SITE = http://jfs.sourceforge.net/project/pub
+
 JFSUTILS_DEPENDS = bootstrap e2fsprogs
 
 define JFSUTILS_POST_PATCH

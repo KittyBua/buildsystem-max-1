@@ -5,9 +5,10 @@
 ################################################################################
 
 SYSVINIT_VERSION = 3.04
-SYSVINIT_DIR     = sysvinit-$(SYSVINIT_VERSION)
-SYSVINIT_SOURCE  = sysvinit-$(SYSVINIT_VERSION).tar.xz
-SYSVINIT_SITE    = http://download.savannah.nongnu.org/releases/sysvinit
+SYSVINIT_DIR = sysvinit-$(SYSVINIT_VERSION)
+SYSVINIT_SOURCE = sysvinit-$(SYSVINIT_VERSION).tar.xz
+SYSVINIT_SITE = http://download.savannah.nongnu.org/releases/sysvinit
+
 SYSVINIT_DEPENDS = bootstrap
 
 define SYSVINIT_INSTALL_INIT_SYSV

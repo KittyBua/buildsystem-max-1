@@ -5,9 +5,10 @@
 ################################################################################
 
 CROSSTOOL_NG_VERSION = git
-CROSSTOOL_NG_DIR     = crosstool-ng.git
-CROSSTOOL_NG_SOURCE  = crosstool-ng.git
-CROSSTOOL_NG_SITE    = https://github.com/crosstool-ng
+CROSSTOOL_NG_DIR = crosstool-ng.git
+CROSSTOOL_NG_SOURCE = crosstool-ng.git
+CROSSTOOL_NG_SITE = https://github.com/crosstool-ng
+
 CROSSTOOL_NG_DEPENDS = directories kernel.do_prepare
 
 CROSSTOOL_NG_CONFIG = crosstool-ng-$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION)

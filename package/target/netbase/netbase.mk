@@ -5,9 +5,10 @@
 ################################################################################
 
 NETBASE_VERSION = 6.3
-NETBASE_DIR     = netbase-$(NETBASE_VERSION)
-NETBASE_SOURCE  = netbase_$(NETBASE_VERSION).tar.xz
-NETBASE_SITE    = https://ftp.debian.org/debian/pool/main/n/netbase
+NETBASE_DIR = netbase-$(NETBASE_VERSION)
+NETBASE_SOURCE = netbase_$(NETBASE_VERSION).tar.xz
+NETBASE_SITE = https://ftp.debian.org/debian/pool/main/n/netbase
+
 NETBASE_DEPENDS = bootstrap
 
 $(D)/netbase:

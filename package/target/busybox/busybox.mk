@@ -5,9 +5,10 @@
 ################################################################################
 
 BUSYBOX_VERSION = 1.35.0
-BUSYBOX_DIR     = busybox-$(BUSYBOX_VERSION)
-BUSYBOX_SOURCE  = busybox-$(BUSYBOX_VERSION).tar.bz2
-BUSYBOX_SITE    = https://www.busybox.net/downloads
+BUSYBOX_DIR = busybox-$(BUSYBOX_VERSION)
+BUSYBOX_SOURCE = busybox-$(BUSYBOX_VERSION).tar.bz2
+BUSYBOX_SITE = https://www.busybox.net/downloads
+
 BUSYBOX_DEPENDS = bootstrap libtirpc
 
 BUSYBOX_CFLAGS = \

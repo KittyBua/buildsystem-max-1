@@ -5,9 +5,10 @@
 ################################################################################
 
 LIBCAP_VERSION = 2.25
-LIBCAP_DIR     = libcap-$(LIBCAP_VERSION)
-LIBCAP_SOURCE  = libcap-$(LIBCAP_VERSION).tar.xz
-LIBCAP_SITE    = https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2
+LIBCAP_DIR = libcap-$(LIBCAP_VERSION)
+LIBCAP_SOURCE = libcap-$(LIBCAP_VERSION).tar.xz
+LIBCAP_SITE = https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2
+
 LIBCAP_DEPENDS = bootstrap
 
 define LIBCAP_POST_PATCH

@@ -5,9 +5,10 @@
 ################################################################################
 
 GRAPHLCD_BASE_VERSION = git
-GRAPHLCD_BASE_DIR     = graphlcd-base.git
-GRAPHLCD_BASE_SOURCE  = graphlcd-base.git
-GRAPHLCD_BASE_SITE    = https://projects.vdr-developer.org/git
+GRAPHLCD_BASE_DIR = graphlcd-base.git
+GRAPHLCD_BASE_SOURCE = graphlcd-base.git
+GRAPHLCD_BASE_SITE = https://projects.vdr-developer.org/git
+
 GRAPHLCD_BASE_DEPENDS = bootstrap freetype libiconv libusb
 
 ifeq ($(FLAVOUR),$(filter $(FLAVOUR),neutrino-ni))

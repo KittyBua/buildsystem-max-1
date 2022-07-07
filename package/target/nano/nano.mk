@@ -5,9 +5,9 @@
 ################################################################################
 
 NANO_VERSION = 2.2.6
-NANO_DIR     = nano-$(NANO_VERSION)
-NANO_SOURCE  = nano-$(NANO_VERSION).tar.gz
-NANO_SITE    = https://www.nano-editor.org/dist/v$(basename $(NANO_VERSION))
+NANO_DIR = nano-$(NANO_VERSION)
+NANO_SOURCE = nano-$(NANO_VERSION).tar.gz
+NANO_SITE = https://www.nano-editor.org/dist/v$(basename $(NANO_VERSION))
 
 NANO_DEPENDS = bootstrap ncurses
 

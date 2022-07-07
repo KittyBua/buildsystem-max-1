@@ -5,10 +5,11 @@
 ################################################################################
 
 LINKS_VERSION = 2.25
-LINKS_DIR     = links-$(LINKS_VERSION)
-LINKS_SOURCE  = links-$(LINKS_VERSION).tar.bz2
-LINKS_SITE    = http://links.twibright.com/download
-LINKS_DEPENDS = bootstrap freetype libpng libjpeg-turbo openssl
+LINKS_DIR = links-$(LINKS_VERSION)
+LINKS_SOURCE = links-$(LINKS_VERSION).tar.bz2
+LINKS_SITE = http://links.twibright.com/download
+
+LINKS_DEPENDS = bootstrap freetype libpng libjpeg-turbo openssl zlib
 
 LINKS_AUTORECONF = YES
 

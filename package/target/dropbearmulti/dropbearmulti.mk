@@ -5,9 +5,9 @@
 ################################################################################
 
 DROPBEARMULTI_VERSION = git
-DROPBEARMULTI_DIR     = dropbear.git
-DROPBEARMULTI_SOURCE  = dropbear.git
-DROPBEARMULTI_SITE    = https://github.com/mkj
+DROPBEARMULTI_DIR = dropbear.git
+DROPBEARMULTI_SOURCE = dropbear.git
+DROPBEARMULTI_SITE = https://github.com/mkj
 DROPBEARMULTI_DEPENDS = bootstrap
 
 DROPBEARMULTI_CHECKOUT = 846d38f

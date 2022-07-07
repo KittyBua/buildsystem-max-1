@@ -5,9 +5,10 @@
 ################################################################################
 
 LIBNSL_VERSION = 1.2.0
-LIBNSL_DIR     = libnsl-$(LIBNSL_VERSION)
-LIBNSL_SOURCE  = libnsl-$(LIBNSL_VERSION).tar.gz
-LIBNSL_SITE    = $(call github,thkukuk,libnsl,v$(LIBNSL_VERSION))
+LIBNSL_DIR = libnsl-$(LIBNSL_VERSION)
+LIBNSL_SOURCE = libnsl-$(LIBNSL_VERSION).tar.gz
+LIBNSL_SITE = $(call github,thkukuk,libnsl,v$(LIBNSL_VERSION))
+
 LIBNSL_DEPENDS = bootstrap libtirpc
 
 LIBNSL_AUTORECONF = YES

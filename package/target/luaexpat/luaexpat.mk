@@ -5,9 +5,10 @@
 ################################################################################
 
 LUAEXPAT_VERSION = 1.3.3
-LUAEXPAT_DIR     = luaexpat-$(LUAEXPAT_VERSION)
-LUAEXPAT_SOURCE  = luaexpat-$(LUAEXPAT_VERSION).tar.gz
-LUAEXPAT_SITE    = $(call github,tomasguisasola,luaexpat,v$(LUAEXPAT_VERSION))
+LUAEXPAT_DIR = luaexpat-$(LUAEXPAT_VERSION)
+LUAEXPAT_SOURCE = luaexpat-$(LUAEXPAT_VERSION).tar.gz
+LUAEXPAT_SITE = $(call github,tomasguisasola,luaexpat,v$(LUAEXPAT_VERSION))
+
 LUAEXPAT_DEPENDS = bootstrap lua expat
 
 define LUAEXPAT_POST_PATCH

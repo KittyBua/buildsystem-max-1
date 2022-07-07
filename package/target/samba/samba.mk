@@ -5,9 +5,10 @@
 ################################################################################
 
 SAMBA_VERSION = 3.6.25
-SAMBA_DIR     = samba-$(SAMBA_VERSION)
-SAMBA_SOURCE  = samba-$(SAMBA_VERSION).tar.gz
-SAMBA_SITE    = https://ftp.samba.org/pub/samba/stable
+SAMBA_DIR = samba-$(SAMBA_VERSION)
+SAMBA_SOURCE = samba-$(SAMBA_VERSION).tar.gz
+SAMBA_SITE = https://ftp.samba.org/pub/samba/stable
+
 SAMBA_DEPENDS = bootstrap
 
 SAMBA_SUBDIR = source3

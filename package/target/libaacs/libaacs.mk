@@ -5,9 +5,10 @@
 ################################################################################
 
 LIBAACS_VERSION = 0.11.1
-LIBAACS_DIR     = libaacs-$(LIBAACS_VERSION)
-LIBAACS_SOURCE  = libaacs-$(LIBAACS_VERSION).tar.bz2
-LIBAACS_SITE    = https://download.videolan.org/pub/videolan/libaacs/$(LIBAACS_VERSION)
+LIBAACS_DIR = libaacs-$(LIBAACS_VERSION)
+LIBAACS_SOURCE = libaacs-$(LIBAACS_VERSION).tar.bz2
+LIBAACS_SITE = https://download.videolan.org/pub/videolan/libaacs/$(LIBAACS_VERSION)
+
 LIBAACS_DEPENDS = bootstrap libgcrypt
 
 LIBAACS_CONF_OPTS = \

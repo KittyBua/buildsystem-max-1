@@ -5,9 +5,10 @@
 ################################################################################
 
 OPENTHREADS_VERSION = 3.2
-OPENTHREADS_DIR     = OpenThreads-$(OPENTHREADS_VERSION)
-OPENTHREADS_SOURCE  = OpenThreads-$(OPENTHREADS_VERSION).tar.gz
-OPENTHREADS_SITE    = https://sourceforge.net/projects/mxedeps/files
+OPENTHREADS_DIR = OpenThreads-$(OPENTHREADS_VERSION)
+OPENTHREADS_SOURCE = OpenThreads-$(OPENTHREADS_VERSION).tar.gz
+OPENTHREADS_SITE = https://sourceforge.net/projects/mxedeps/files
+
 OPENTHREADS_DEPENDS = bootstrap
 
 OPENTHREADS_CONF_OPTS = \

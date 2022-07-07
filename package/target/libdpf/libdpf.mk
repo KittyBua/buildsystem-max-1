@@ -5,9 +5,10 @@
 ##############################################################################
 
 LIBDPF_VERSION = git
-LIBDPF_DIR     = dpf-ax.git
-LIBDPF_SOURCE  = dpf-ax.git
-LIBDPF_SITE    = $(MAX-GIT-GITHUB)
+LIBDPF_DIR = dpf-ax.git
+LIBDPF_SOURCE = dpf-ax.git
+LIBDPF_SITE = $(MAX-GIT-GITHUB)
+
 LIBDPF_DEPENDS = bootstrap libusb-compat
 
 LIBDPF_MAKE_OPTS = \

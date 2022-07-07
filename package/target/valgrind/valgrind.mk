@@ -5,9 +5,10 @@
 ################################################################################
 
 VALGRIND_VERSION = 3.18.1
-VALGRIND_DIR     = valgrind-$(VALGRIND_VERSION)
-VALGRIND_SOURCE  = valgrind-$(VALGRIND_VERSION).tar.bz2
-VALGRIND_SITE    = ftp://sourceware.org/pub/valgrind
+VALGRIND_DIR = valgrind-$(VALGRIND_VERSION)
+VALGRIND_SOURCE = valgrind-$(VALGRIND_VERSION).tar.bz2
+VALGRIND_SITE = ftp://sourceware.org/pub/valgrind
+
 VALGRIND_DEPENDS = bootstrap
 
 VALGRIND_AUTORECONF = YES

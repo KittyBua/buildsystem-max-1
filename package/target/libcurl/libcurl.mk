@@ -5,9 +5,10 @@
 ################################################################################
 
 LIBCURL_VERSION = 7.83.1
-LIBCURL_DIR     = curl-$(LIBCURL_VERSION)
-LIBCURL_SOURCE  = curl-$(LIBCURL_VERSION).tar.bz2
-LIBCURL_SITE    = https://curl.haxx.se/download
+LIBCURL_DIR = curl-$(LIBCURL_VERSION)
+LIBCURL_SOURCE = curl-$(LIBCURL_VERSION).tar.bz2
+LIBCURL_SITE = https://curl.haxx.se/download
+
 LIBCURL_DEPENDS = bootstrap zlib openssl ca-bundle
 
 LIBCURL_CONFIG_SCRIPTS = curl-config

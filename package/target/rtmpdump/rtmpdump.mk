@@ -5,9 +5,10 @@
 ################################################################################
 
 RTMPDUMP_VERSION = git
-RTMPDUMP_DIR     = rtmpdump.git
-RTMPDUMP_SOURCE  = rtmpdump.git
-RTMPDUMP_SITE    = https://github.com/oe-alliance
+RTMPDUMP_DIR = rtmpdump.git
+RTMPDUMP_SOURCE = rtmpdump.git
+RTMPDUMP_SITE = https://github.com/oe-alliance
+
 RTMPDUMP_DEPENDS = bootstrap zlib openssl
 
 define RTMPDUMP_TARGET_CLEANUP

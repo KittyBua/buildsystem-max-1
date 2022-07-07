@@ -5,9 +5,10 @@
 ################################################################################
 
 TZDATA_VERSION = 2022a
-TZDATA_DIR     = timezone
-TZDATA_SOURCE  = tzdata$(TZDATA_VERSION).tar.gz
-TZDATA_SITE    = https://data.iana.org/time-zones/releases
+TZDATA_DIR = timezone
+TZDATA_SOURCE = tzdata$(TZDATA_VERSION).tar.gz
+TZDATA_SITE = https://data.iana.org/time-zones/releases
+
 TZDATA_DEPENDS = bootstrap host-zic
 
 TZDATA_ZONELIST = \

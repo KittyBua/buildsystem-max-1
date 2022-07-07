@@ -5,9 +5,10 @@
 ################################################################################
 
 OPENRESOLV_VERSION = 3.12.0
-OPENRESOLV_DIR     = openresolv-openresolv-$(OPENRESOLV_VERSION)
-OPENRESOLV_SOURCE  = openresolv-$(OPENRESOLV_VERSION).tar.gz
-OPENRESOLV_SITE    = https://github.com/rsmarples/openresolv/archive
+OPENRESOLV_DIR = openresolv-openresolv-$(OPENRESOLV_VERSION)
+OPENRESOLV_SOURCE = openresolv-$(OPENRESOLV_VERSION).tar.gz
+OPENRESOLV_SITE = https://github.com/rsmarples/openresolv/archive
+
 OPENRESOLV_DEPENDS = bootstrap
 
 define OPENRESOLV_CREATE_CONF_ENV_FILE

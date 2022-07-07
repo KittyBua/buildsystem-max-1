@@ -5,9 +5,9 @@
 ################################################################################
 
 BASE_PASSWD_VERSION = 3.5.29
-BASE_PASSWD_DIR     = base-passwd-$(BASE_PASSWD_VERSION)
-BASE_PASSWD_SOURCE  = base-passwd_$(BASE_PASSWD_VERSION).tar.gz
-BASE_PASSWD_SITE    = https://launchpad.net/debian/+archive/primary/+files
+BASE_PASSWD_DIR = base-passwd-$(BASE_PASSWD_VERSION)
+BASE_PASSWD_SOURCE = base-passwd_$(BASE_PASSWD_VERSION).tar.gz
+BASE_PASSWD_SITE = https://launchpad.net/debian/+archive/primary/+files
 
 BASE_PASSWD_DEPENDS = bootstrap
 

@@ -5,9 +5,10 @@
 ################################################################################
 
 PIXMAN_VERSION = 0.40.0
-PIXMAN_DIR     = pixman-$(PIXMAN_VERSION)
-PIXMAN_SOURCE  = pixman-$(PIXMAN_VERSION).tar.gz
-PIXMAN_SITE    = https://www.cairographics.org/releases
+PIXMAN_DIR = pixman-$(PIXMAN_VERSION)
+PIXMAN_SOURCE = pixman-$(PIXMAN_VERSION).tar.gz
+PIXMAN_SITE = https://www.cairographics.org/releases
+
 PIXMAN_DEPENDS = bootstrap zlib libpng
 
 PIXMAN_AUTORECONF = YES

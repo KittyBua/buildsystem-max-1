@@ -5,9 +5,10 @@
 ################################################################################
 
 NFS_UTILS_VERSION = 2.6.1
-NFS_UTILS_DIR     = nfs-utils-$(NFS_UTILS_VERSION)
-NFS_UTILS_SOURCE  = nfs-utils-$(NFS_UTILS_VERSION).tar.bz2
-NFS_UTILS_SITE    = https://sourceforge.net/projects/nfs/files/nfs-utils/$(NFS_UTILS_VERSION)
+NFS_UTILS_DIR = nfs-utils-$(NFS_UTILS_VERSION)
+NFS_UTILS_SOURCE = nfs-utils-$(NFS_UTILS_VERSION).tar.bz2
+NFS_UTILS_SITE = https://sourceforge.net/projects/nfs/files/nfs-utils/$(NFS_UTILS_VERSION)
+
 NFS_UTILS_DEPENDS = bootstrap libtirpc rpcbind e2fsprogs
 
 NFS_UTILS_AUTORECONF = YES

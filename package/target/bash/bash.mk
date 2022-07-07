@@ -5,9 +5,10 @@
 ################################################################################
 
 BASH_VERSION = 5.0
-BASH_DIR     = bash-$(BASH_VERSION)
-BASH_SOURCE  = bash-$(BASH_VERSION).tar.gz
-BASH_SITE    = http://ftp.gnu.org/gnu/bash
+BASH_DIR = bash-$(BASH_VERSION)
+BASH_SOURCE = bash-$(BASH_VERSION).tar.gz
+BASH_SITE = http://ftp.gnu.org/gnu/bash
+
 BASH_DEPENDS = bootstrap
 
 BASH_CONF_ENV += \

@@ -5,9 +5,10 @@
 ################################################################################
 
 LUAPOSIX_VERSION = 31
-LUAPOSIX_DIR     = luaposix-$(LUAPOSIX_VERSION)
-LUAPOSIX_SOURCE  = luaposix-$(LUAPOSIX_VERSION).tar.gz
-LUAPOSIX_SITE    = $(call github,luaposix,luaposix,v$(LUAPOSIX_VERSION))
+LUAPOSIX_DIR = luaposix-$(LUAPOSIX_VERSION)
+LUAPOSIX_SOURCE = luaposix-$(LUAPOSIX_VERSION).tar.gz
+LUAPOSIX_SITE = $(call github,luaposix,luaposix,v$(LUAPOSIX_VERSION))
+
 LUAPOSIX_DEPENDS = bootstrap host-lua lua luaexpat slingshot gnulib
 
 LUAPOSIX_AUTORECONF = YES

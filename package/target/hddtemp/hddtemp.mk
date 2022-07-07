@@ -5,9 +5,10 @@
 ################################################################################
 
 HDDTEMP_VERSION = 0.3-beta15
-HDDTEMP_DIR     = hddtemp-$(HDDTEMP_VERSION)
-HDDTEMP_SOURCE  = hddtemp-$(HDDTEMP_VERSION).tar.bz2
-HDDTEMP_SITE    = http://savannah.c3sl.ufpr.br/hddtemp
+HDDTEMP_DIR = hddtemp-$(HDDTEMP_VERSION)
+HDDTEMP_SOURCE = hddtemp-$(HDDTEMP_VERSION).tar.bz2
+HDDTEMP_SITE = http://savannah.c3sl.ufpr.br/hddtemp
+
 HDDTEMP_DEPENDS = bootstrap libiconv
 
 HDDTEMP_CONF_OPTS = \

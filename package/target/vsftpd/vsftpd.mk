@@ -5,9 +5,10 @@
 ################################################################################
 
 VSFTPD_VERSION = 3.0.5
-VSFTPD_DIR     = vsftpd-$(VSFTPD_VERSION)
-VSFTPD_SOURCE  = vsftpd-$(VSFTPD_VERSION).tar.gz
-VSFTPD_SITE    = https://security.appspot.com/downloads
+VSFTPD_DIR = vsftpd-$(VSFTPD_VERSION)
+VSFTPD_SOURCE = vsftpd-$(VSFTPD_VERSION).tar.gz
+VSFTPD_SITE = https://security.appspot.com/downloads
+
 VSFTPD_DEPENDS = bootstrap openssl
 
 define VSFTPD_POST_PATCH

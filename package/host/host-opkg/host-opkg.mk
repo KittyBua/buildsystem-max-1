@@ -5,9 +5,10 @@
 ################################################################################
 
 HOST_OPKG_VERSION = 0.3.3
-HOST_OPKG_DIR     = opkg-$(HOST_OPKG_VERSION)
-HOST_OPKG_SOURCE  = opkg-$(HOST_OPKG_VERSION).tar.gz
-HOST_OPKG_SITE    = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
+HOST_OPKG_DIR = opkg-$(HOST_OPKG_VERSION)
+HOST_OPKG_SOURCE = opkg-$(HOST_OPKG_VERSION).tar.gz
+HOST_OPKG_SITE = https://git.yoctoproject.org/cgit/cgit.cgi/opkg/snapshot
+
 HOST_OPKG_DEPENDS = bootstrap host-libarchive
 
 HOST_OPKG_ENV = \

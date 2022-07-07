@@ -5,9 +5,10 @@
 ################################################################################
 
 LIBSIGC_VERSION = 2.10.3
-LIBSIGC_DIR     = libsigc++-$(LIBSIGC_VERSION)
-LIBSIGC_SOURCE  = libsigc++-$(LIBSIGC_VERSION).tar.xz
-LIBSIGC_SITE    = https://download.gnome.org/sources/libsigc++/$(basename $(LIBSIGC_VERSION))
+LIBSIGC_DIR = libsigc++-$(LIBSIGC_VERSION)
+LIBSIGC_SOURCE = libsigc++-$(LIBSIGC_VERSION).tar.xz
+LIBSIGC_SITE = https://download.gnome.org/sources/libsigc++/$(basename $(LIBSIGC_VERSION))
+
 LIBSIGC_DEPENDS = bootstrap
 
 LIBSIGC_CONF_OPTS = \

@@ -5,9 +5,10 @@
 ################################################################################
 
 CA_BUNDLE_VERSION = 1.0
-CA_BUNDLE_DIR     = /etc/ssl/certs
-CA_BUNDLE_SOURCE  = cacert.pem
-CA_BUNDLE_SITE    = https://curl.se/ca
+CA_BUNDLE_DIR = /etc/ssl/certs
+CA_BUNDLE_SOURCE = cacert.pem
+CA_BUNDLE_SITE = https://curl.se/ca
+
 CA_BUNDLE_DEPENDS = bootstrap
 
 CA_BUNDLE_CRT = ca-certificates.crt

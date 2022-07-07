@@ -5,9 +5,10 @@
 ################################################################################
 
 DROPBEAR_VERSION = 2022.82
-DROPBEAR_DIR     = dropbear-$(DROPBEAR_VERSION)
-DROPBEAR_SOURCE  = dropbear-$(DROPBEAR_VERSION).tar.bz2
-DROPBEAR_SITE    = http://matt.ucc.asn.au/dropbear/releases
+DROPBEAR_DIR = dropbear-$(DROPBEAR_VERSION)
+DROPBEAR_SOURCE = dropbear-$(DROPBEAR_VERSION).tar.bz2
+DROPBEAR_SITE = http://matt.ucc.asn.au/dropbear/releases
+
 DROPBEAR_DEPENDS = bootstrap zlib
 
 define DROPBEAR_POST_PATCH

@@ -5,9 +5,9 @@
 ################################################################################
 
 SDPARM_VERSION = 1.12
-SDPARM_DIR     = sdparm-$(SDPARM_VERSION)
-SDPARM_SOURCE  = sdparm-$(SDPARM_VERSION).tgz
-SDPARM_SITE    = http://sg.danny.cz/sg/p
+SDPARM_DIR = sdparm-$(SDPARM_VERSION)
+SDPARM_SOURCE = sdparm-$(SDPARM_VERSION).tgz
+SDPARM_SITE = http://sg.danny.cz/sg/p
 SDPARM_DEPENDS = bootstrap
 
 SDPARM_CONF_OPTS = \

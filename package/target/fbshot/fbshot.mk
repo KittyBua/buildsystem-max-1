@@ -5,9 +5,10 @@
 ################################################################################
 
 FBSHOT_VERSION = 0.3
-FBSHOT_DIR     = fbshot-$(FBSHOT_VERSION)
-FBSHOT_SOURCE  = fbshot-$(FBSHOT_VERSION).tar.gz
-FBSHOT_SITE    = http://distro.ibiblio.org/amigolinux/download/Utils/fbshot
+FBSHOT_DIR = fbshot-$(FBSHOT_VERSION)
+FBSHOT_SOURCE = fbshot-$(FBSHOT_VERSION).tar.gz
+FBSHOT_SITE = http://distro.ibiblio.org/amigolinux/download/Utils/fbshot
+
 FBSHOT_DEPENDS = bootstrap libpng
 
 define FBSHOT_PATCH_MAKEFILE

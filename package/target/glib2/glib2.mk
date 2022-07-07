@@ -5,9 +5,10 @@
 ################################################################################
 
 GLIB2_VERSION = 2.62.4
-GLIB2_DIR     = glib-$(GLIB2_VERSION)
-GLIB2_SOURCE  = glib-$(GLIB2_VERSION).tar.xz
-GLIB2_SITE    = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(GLIB2_VERSION))
+GLIB2_DIR = glib-$(GLIB2_VERSION)
+GLIB2_SOURCE = glib-$(GLIB2_VERSION).tar.xz
+GLIB2_SITE = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(GLIB2_VERSION))
+
 GLIB2_DEPENDS = bootstrap host-glib2 libffi util-linux zlib libiconv
 
 GLIB2_CONF_OPTS = \

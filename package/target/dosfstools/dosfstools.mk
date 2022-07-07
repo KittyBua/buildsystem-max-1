@@ -5,9 +5,10 @@
 ################################################################################
 
 DOSFSTOOLS_VERSION = 4.2
-DOSFSTOOLS_DIR     = dosfstools-$(DOSFSTOOLS_VERSION)
-DOSFSTOOLS_SOURCE  = dosfstools-$(DOSFSTOOLS_VERSION).tar.gz
-DOSFSTOOLS_SITE    = https://github.com/dosfstools/dosfstools/releases/download/v$(DOSFSTOOLS_VERSION)
+DOSFSTOOLS_DIR = dosfstools-$(DOSFSTOOLS_VERSION)
+DOSFSTOOLS_SOURCE = dosfstools-$(DOSFSTOOLS_VERSION).tar.gz
+DOSFSTOOLS_SITE = https://github.com/dosfstools/dosfstools/releases/download/v$(DOSFSTOOLS_VERSION)
+
 DOSFSTOOLS_DEPENDS = bootstrap
 
 DOSFSTOOLS_AUTORECONF = YES

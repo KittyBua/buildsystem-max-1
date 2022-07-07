@@ -4,12 +4,13 @@
 #
 ################################################################################
 
-LUA_VERSION    = 5.2.4
+LUA_VERSION = 5.2.4
 LUA_ABIVERSION = $(basename $(LUA_VERSION))
-LUA_DIR        = lua-$(LUA_VERSION)
-LUA_SOURCE     = lua-$(LUA_VERSION).tar.gz
-LUA_SITE       = https://www.lua.org/ftp
-LUA_DEPENDS    = bootstrap host-lua ncurses
+LUA_DIR = lua-$(LUA_VERSION)
+LUA_SOURCE = lua-$(LUA_VERSION).tar.gz
+LUA_SITE = https://www.lua.org/ftp
+
+LUA_DEPENDS = bootstrap host-lua ncurses
 
 define LUA_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,luac)

@@ -5,9 +5,10 @@
 ################################################################################
 
 OPENSSH_VERSION = 9.0p1
-OPENSSH_DIR     = openssh-$(OPENSSH_VERSION)
-OPENSSH_SOURCE  = openssh-$(OPENSSH_VERSION).tar.gz
-OPENSSH_SITE    = https://artfiles.org/openbsd/OpenSSH/portable
+OPENSSH_DIR = openssh-$(OPENSSH_VERSION)
+OPENSSH_SOURCE = openssh-$(OPENSSH_VERSION).tar.gz
+OPENSSH_SITE = https://artfiles.org/openbsd/OpenSSH/portable
+
 OPENSSH_DEPENDS = bootstrap zlib openssl
 
 OPENSSH_AUTORECONF = YES

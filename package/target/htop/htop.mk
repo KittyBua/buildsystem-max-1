@@ -5,9 +5,9 @@
 ################################################################################
 
 HTOP_VERSION = 3.2.1
-HTOP_DIR     = htop-$(HTOP_VERSION)
-HTOP_SOURCE  = htop-$(HTOP_VERSION).tar.gz
-HTOP_SITE    = $(call github,htop-dev,htop,$(HTOP_VERSION))
+HTOP_DIR = htop-$(HTOP_VERSION)
+HTOP_SOURCE = htop-$(HTOP_VERSION).tar.gz
+HTOP_SITE = $(call github,htop-dev,htop,$(HTOP_VERSION))
 HTOP_DEPENDS = bootstrap ncurses libcap libnl
 
 HTOP_AUTORECONF = YES

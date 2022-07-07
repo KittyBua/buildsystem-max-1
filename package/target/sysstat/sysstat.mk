@@ -5,9 +5,10 @@
 ################################################################################
 
 SYSSTAT_VERSION = 12.5.1
-SYSSTAT_DIR     = sysstat-$(SYSSTAT_VERSION)
-SYSSTAT_SOURCE  = sysstat-$(SYSSTAT_VERSION).tar.xz
-SYSSTAT_SITE    = http://pagesperso-orange.fr/sebastien.godard
+SYSSTAT_DIR = sysstat-$(SYSSTAT_VERSION)
+SYSSTAT_SOURCE = sysstat-$(SYSSTAT_VERSION).tar.xz
+SYSSTAT_SITE = http://pagesperso-orange.fr/sebastien.godard
+
 SYSSTAT_DEPENDS = bootstrap
 
 SYSSTAT_CONF_OPTS = \

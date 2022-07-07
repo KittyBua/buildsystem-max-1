@@ -5,9 +5,10 @@
 ################################################################################
 
 X265_VERSION = git
-X265_DIR     = x265.git
-X265_SOURCE  = x265.git
-X265_SITE    = https://github.com/videolan
+X265_DIR = x265.git
+X265_SOURCE = x265.git
+X265_SITE = https://github.com/videolan
+
 X265_DEPENDS = bootstrap
 
 X265_SUBDIR  = source

@@ -5,9 +5,10 @@
 ################################################################################
 
 LUASOCKET_VERSION = git
-LUASOCKET_DIR     = luasocket.git
-LUASOCKET_SOURCE  = luasocket.git
-LUASOCKET_SITE    = https://github.com/diegonehab
+LUASOCKET_DIR = luasocket.git
+LUASOCKET_SOURCE = luasocket.git
+LUASOCKET_SITE = https://github.com/diegonehab
+
 LUASOCKET_DEPENDS = bootstrap lua
 
 define LUASOCKET_POST_PATCH

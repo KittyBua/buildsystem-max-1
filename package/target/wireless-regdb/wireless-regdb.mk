@@ -5,9 +5,10 @@
 ################################################################################
 
 WIRELESS_REGDB_VERSION = 2020.04.29
-WIRELESS_REGDB_DIR     = wireless-regdb-$(WIRELESS_REGDB_VERSION)
-WIRELESS_REGDB_SOURCE  = wireless-regdb-$(WIRELESS_REGDB_VERSION).tar.xz
-WIRELESS_REGDB_SITE    = https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb
+WIRELESS_REGDB_DIR = wireless-regdb-$(WIRELESS_REGDB_VERSION)
+WIRELESS_REGDB_SOURCE = wireless-regdb-$(WIRELESS_REGDB_VERSION).tar.xz
+WIRELESS_REGDB_SITE = https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb
+
 WIRELESS_REGDB_DEPENDS = bootstrap
 
 define WIRELESS_REGDB_INSTALL_FILES

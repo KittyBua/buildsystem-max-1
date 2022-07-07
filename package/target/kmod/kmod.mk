@@ -5,9 +5,10 @@
 ################################################################################
 
 KMOD_VERSION = 29
-KMOD_DIR     = kmod-$(KMOD_VERSION)
-KMOD_SOURCE  = kmod-$(KMOD_VERSION).tar.xz
-KMOD_SITE    = https://mirrors.edge.kernel.org/pub/linux/utils/kernel/kmod
+KMOD_DIR = kmod-$(KMOD_VERSION)
+KMOD_SOURCE = kmod-$(KMOD_VERSION).tar.xz
+KMOD_SITE = https://mirrors.edge.kernel.org/pub/linux/utils/kernel/kmod
+
 KMOD_DEPENDS = bootstrap zlib
 
 KMOD_AUTORECONF = YES
