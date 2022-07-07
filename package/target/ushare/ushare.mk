@@ -20,6 +20,15 @@ USHARE_CONF_OPTS = \
 	--disable-dlna \
 	--disable-nls
 
+USHARE_MAKE_ENV = \
+	$(TARGET_CONFIGURE_ENV) \
+	./configure $($(PKG)_CONF_OPTS); \
+
+define USHARE_LINK_CONFIG_H
+	ln -sf ../config.h $(PKG_BUILD_DIR)/src/
+endef
+USHARE_POST_PATCH_HOOKS += USHARE_LINK_CONFIG_H
+
 define USHARE_INSTALL_INIT_SYSV
 	$(INSTALL_EXEC) -D $(PKG_FILES_DIR)/ushare.init $(TARGET_DIR)/etc/init.d/ushare
 	$(UPDATE-RC.D) ushare defaults 75 25
@@ -32,11 +41,4 @@ endef
 USHARE_POST_FOLLOWUP_HOOKS += USHARE_INSTALL_FILES
 
 $(D)/ushare:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
-		./configure $($(PKG)_CONF_OPTS); \
-		ln -sf ../config.h src/; \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(call TARGET_FOLLOWUP)
+	$(call make-package)
