@@ -11,12 +11,15 @@ READLINE_SITE = https://ftp.gnu.org/gnu/readline
 
 READLINE_DEPENDS = bootstrap ncurses
 
+READLINE_CONF_ENV = \
+	bash_cv_func_sigsetjmp=yes \
+	bash_cv_wcwidth_broken=no
+
 READLINE_CONF_OPTS = \
 	--datadir=$(REMOVE_datarootdir) \
 	--docdir=$(REMOVE_docdir) \
-	--disable-install-examples \
-	bash_cv_func_sigsetjmp=yes \
-	bash_cv_wcwidth_broken=no
+	--disable-bracketed-paste-default \
+	--disable-install-examples
 
 define READLINE_INSTALL_FILES
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/inputrc $(TARGET_DIR)/etc/inputrc
