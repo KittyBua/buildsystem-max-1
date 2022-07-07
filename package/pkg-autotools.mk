@@ -10,7 +10,7 @@ define AUTORECONF_HOOK
 		$(call MESSAGE,"Autoreconfiguring"); \
 		$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 			$($(PKG)_AUTORECONF_ENV) \
-			autoreconf -fi -I $(TARGET_SHARE_DIR)/aclocal \
+			$($(PKG)_AUTORECONF_CMD) \
 				$($(PKG)_AUTORECONF_OPTS); \
 	fi; \
 	)
@@ -80,20 +80,24 @@ TARGET_CONFIGURE_OPTS = \
 	--mandir=$(REMOVE_mandir) \
 	--infodir=$(REMOVE_infodir)
 
+define TARGET_CONFIGURE_CMDS
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+		test -f ./$($(PKG)_CONFIGURE_CMD) || ./autogen.sh && \
+		CONFIG_SITE=/dev/null \
+		$(TARGET_CONFIGURE_ENV) $($(PKG)_CONF_ENV) \
+		./$($(PKG)_CONFIGURE_CMD) \
+			$(TARGET_CONFIGURE_OPTS) $($(PKG)_CONF_OPTS)
+endef
+
 define TARGET_CONFIGURE
 	@$(call MESSAGE,"Configuring")
 	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 	$(call AUTORECONF_HOOK)
-	$(Q)( \
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
-		test -f ./configure || ./autogen.sh && \
-		CONFIG_SITE=/dev/null \
-		$(TARGET_CONFIGURE_ENV) $($(PKG)_CONF_ENV) \
-		./configure \
-			$(TARGET_CONFIGURE_OPTS) $($(PKG)_CONF_OPTS); \
-	)
+	$(Q)$(call $(PKG)_CONFIGURE_CMDS)
 	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 endef
+
+# -----------------------------------------------------------------------------
 
 define autotools-package
 	$(call PREPARE,$(1))
@@ -142,20 +146,24 @@ HOST_CONFIGURE_OPTS = \
 	--with-fop=no \
 	--disable-nls
 
+define HOST_CONFIGURE_CMDS
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+		test -f ./$($(PKG)_CONFIGURE_CMD) || ./autogen.sh && \
+		CONFIG_SITE=/dev/null \
+		$(HOST_CONFIGURE_ENV) $($(PKG)_CONF_ENV) \
+		./$($(PKG)_CONFIGURE_CMD) \
+			$(HOST_CONFIGURE_OPTS) $($(PKG)_CONF_OPTS)
+endef
+
 define HOST_CONFIGURE
 	@$(call MESSAGE,"Configuring")
 	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 	$(call AUTORECONF_HOOK)
-	$(Q)( \
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
-		test -f ./configure || ./autogen.sh && \
-		CONFIG_SITE=/dev/null \
-		$(HOST_CONFIGURE_ENV) $($(PKG)_CONF_ENV) \
-		./configure \
-			$(HOST_CONFIGURE_OPTS) $($(PKG)_CONF_OPTS); \
-	)
+	$(Q)$(call $(PKG)_CONFIGURE_CMDS)
 	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 endef
+
+# -----------------------------------------------------------------------------
 
 define host-autotools-package
 	$(call PREPARE,$(1))
