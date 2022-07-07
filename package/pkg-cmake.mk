@@ -39,9 +39,6 @@ TARGET_CMAKE_OPTS += \
 	-DCMAKE_CXX_FLAGS="$(TARGET_CFLAGS) -DNDEBUG" \
 	-DCMAKE_STRIP="$(TARGET_STRIP)"
 
-TARGET_CMAKE_OPTS += \
-	$($(PKG)_CONF_OPTS)
-
 define TARGET_CMAKE
 	@$(call MESSAGE,"Configuring")
 	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
@@ -51,11 +48,13 @@ define TARGET_CMAKE
 		mkdir -p build; \
 		cd build; \
 		$(TARGET_CMAKE_ENV) $($(PKG)_CONF_ENV) \
-		cmake .. \
+		$($(PKG)_CMAKE) .. \
 			$(TARGET_CMAKE_OPTS) $($(PKG)_CONF_OPTS); \
 	)
 	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 endef
+
+# -----------------------------------------------------------------------------
 
 define cmake-package
 	$(call PREPARE,$(1))
@@ -92,9 +91,6 @@ HOST_CMAKE_OPTS += \
 	-DCMAKE_INSTALL_PREFIX="$(HOST_DIR)" \
 	-DCMAKE_PREFIX_PATH="$(HOST_DIR)"
 
-HOST_CMAKE_OPTS += \
-	$($(PKG)_CONF_OPTS)
-
 define HOST_CMAKE
 	@$(call MESSAGE,"Configuring")
 	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
@@ -104,11 +100,13 @@ define HOST_CMAKE
 		mkdir -p build; \
 		cd build; \
 		$(HOST_CMAKE_ENV) $($(PKG)_CONF_ENV) \
-		cmake .. \
+		$($(PKG)_CMAKE) .. \
 			$(HOST_CMAKE_OPTS) $($(PKG)_CONF_OPTS); \
 	)
 	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 endef
+
+# -----------------------------------------------------------------------------
 
 define host-cmake-package
 	$(call PREPARE,$(1))
