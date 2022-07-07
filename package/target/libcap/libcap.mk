@@ -11,20 +11,27 @@ LIBCAP_SITE = https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2
 
 LIBCAP_DEPENDS = bootstrap
 
+LIBCAP_SUBDIR = libcap
+
 define LIBCAP_POST_PATCH
 	$(SED) 's@^BUILD_GPERF@#\0@' $(PKG_BUILD_DIR)/Make.Rules
 endef
 LIBCAP_POST_PATCH_HOOKS = LIBCAP_POST_PATCH
 
-LIBCAP_MAKE_FLAGS = \
+LIBCAP_MAKE_ENV = \
+	$(TARGET_CONFIGURE_ENV)
+
+LIBCAP_MAKE_ARGS = \
+	BUILD_CC="$(HOSTCC)" \
+	BUILD_CFLAGS="$(HOST_CFLAGS)" \
+	prefix=/usr \
+	lib=lib
+
+LIBCAP_MAKE_INSTALL_OPTS = \
 	BUILD_CC="$(HOSTCC)" \
 	BUILD_CFLAGS="$(HOST_CFLAGS)" \
 	prefix=/usr \
 	lib=lib
 
 $(D)/libcap:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(TARGET_CONFIGURE_ENV) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS); \
-		$(TARGET_CONFIGURE_ENV) $(MAKE) -C libcap $(LIBCAP_MAKE_FLAGS) DESTDIR=$(TARGET_DIR) install
-	$(call TARGET_FOLLOWUP)
+	$(call make-package)
