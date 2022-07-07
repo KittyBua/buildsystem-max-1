@@ -105,6 +105,13 @@ define SAMBA_AUTOGEN_SH
 endef
 SAMBA_PRE_CONFIGURE_HOOKS += SAMBA_AUTOGEN_SH
 
+SAMBA_MAKE_INSTALL_ARGS = \
+	installservers
+
+SAMBA_MAKE_INSTALL_OPTS = \
+	SBIN_PROGS="bin/samba_multicall" \
+	LOCALEDIR=$(REMOVE_localedir)
+
 define SAMBA_INSTALL_INIT_SYSV
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/samba.init $(TARGET_DIR)/etc/init.d/samba
 	$(UPDATE-RC.D) samba start 20 2 3 4 5 . stop 20 0 1 6 .
@@ -120,10 +127,10 @@ define SAMBA_INSTALL_FILES
 endef
 SAMBA_POST_FOLLOWUP_HOOKS += SAMBA_INSTALL_FILES
 
+define SAMBA_TARGET_CLEANUP
+	rm -rf $(addprefix $(TARGET_BIN_DIR)/,testparm findsmb smbtar smbclient smbpasswd)
+endef
+SAMBA_TARGET_CLEANUP_HOOKS += SAMBA_TARGET_CLEANUP
+
 $(D)/samba:
-	$(call PREPARE)
-	$(call TARGET_CONFIGURE)
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
-		$(MAKE); \
-		$(MAKE) installservers SBIN_PROGS="bin/samba_multicall" DESTDIR=$(TARGET_DIR) LOCALEDIR=$(REMOVE_localedir)
-	$(call TARGET_FOLLOWUP)
+	$(call autotools-package)
