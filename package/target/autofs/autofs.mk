@@ -44,6 +44,13 @@ define AUTOFS_PATCH_RPC_SUBS_H
 endef
 AUTOFS_POST_PATCH_HOOKS += AUTOFS_PATCH_RPC_SUBS_H
 
+AUTOFS_MAKE_ARGS = \
+	SUBDIRS="lib daemon modules" \
+	DONTSTRIP=1
+
+AUTOFS_MAKE_INSTALL_ARGS = \
+	SUBDIRS="lib daemon modules"
+
 define AUTOFS_INSTALL_INIT_SYSV
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/autofs.init $(TARGET_DIR)/etc/init.d/autofs
 	$(UPDATE-RC.D) autofs defaults 17
@@ -65,9 +72,4 @@ endef
 AUTOFS_TARGET_CLEANUP_HOOKS += AUTOFS_TARGET_CLEANUP
 
 $(D)/autofs:
-	$(call PREPARE)
-	$(call TARGET_CONFIGURE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) SUBDIRS="lib daemon modules" DONTSTRIP=1; \
-		$(MAKE) SUBDIRS="lib daemon modules" install DESTDIR=$(TARGET_DIR)
-	$(call TARGET_FOLLOWUP)
+	$(call autotools-package)
