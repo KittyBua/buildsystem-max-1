@@ -11,8 +11,6 @@ WGET_SITE = https://ftp.gnu.org/gnu/wget
 
 WGET_DEPENDS = bootstrap openssl
 
-WGET_CFLAGS = $(TARGET_CFLAGS) -DOPENSSL_NO_ENGINE
-
 WGET_CONF_OPTS = \
 	--infodir=$(REMOVE_infodir) \
 	--with-ssl=openssl \
@@ -25,7 +23,7 @@ WGET_CONF_OPTS = \
 	--disable-iri \
 	--disable-pcre \
 	--without-libpsl \
-	CFLAGS="$(WGET_CFLAGS)"
+	CFLAGS="$(TARGET_CFLAGS) -DOPENSSL_NO_ENGINE"
 
 $(D)/wget:
 	$(call autotools-package)
