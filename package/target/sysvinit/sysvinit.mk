@@ -11,6 +11,16 @@ SYSVINIT_SITE = http://download.savannah.nongnu.org/releases/sysvinit
 
 SYSVINIT_DEPENDS = bootstrap
 
+SYSVINIT_MAKE_ENV = \
+	$(TARGET_CONFIGURE_ENV) \
+
+SYSVINIT_MAKE_OPTS = \
+	SULOGINLIBS=-lcrypt
+
+SYSVINIT_MAKE_INSTALL_OPTS = \
+	ROOT=$(TARGET_DIR) \
+	mandir=$(REMOVE_mandir)
+
 define SYSVINIT_INSTALL_INIT_SYSV
 #	$(INSTALL_EXEC) $(PKG_FILES_DIR)/bootlogd.init $(TARGET_DIR)/etc/init.d/bootlogd
 #	$(INSTALL_DATA) $(PKG_FILES_DIR)/volatiles.01_bootlogd $(TARGET_DIR)/etc/default/volatiles/01_bootlogd
@@ -37,9 +47,4 @@ endef
 SYSVINIT_TARGET_CLEANUP_HOOKS += SYSVINIT_TARGET_CLEANUP
 
 $(D)/sysvinit:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
-		$(MAKE) SULOGINLIBS=-lcrypt; \
-		$(MAKE) install ROOT=$(TARGET_DIR) mandir=$(REMOVE_mandir)
-	$(call TARGET_FOLLOWUP)
+	$(call make-package)
