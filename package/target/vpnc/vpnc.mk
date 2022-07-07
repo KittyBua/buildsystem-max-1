@@ -11,14 +11,13 @@ VPNC_SITE = $(call github,ndpgroup,vpnc,$(VPNC_VERSION))
 
 VPNC_DEPENDS = bootstrap openssl libgcrypt libgpg-error
 
+VPNC_MAKE_ENV = \
+	$(TARGET_CONFIGURE_ENV)
+
+VPNC_MAKE_INSTALL_OPTS = \
+	PREFIX=/usr \
+	MANDIR=$(REMOVE_mandir) \
+	DOCDIR=$(REMOVE_docdir)
+
 $(D)/vpnc:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
-		$(MAKE); \
-		$(MAKE) \
-			install DESTDIR=$(TARGET_DIR) \
-			PREFIX=/usr \
-			MANDIR=$(REMOVE_mandir) \
-			DOCDIR=$(REMOVE_docdir)
-	$(call TARGET_FOLLOWUP)
+	$(call make-package)
