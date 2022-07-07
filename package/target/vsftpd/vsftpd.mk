@@ -11,6 +11,10 @@ VSFTPD_SITE = https://security.appspot.com/downloads
 
 VSFTPD_DEPENDS = bootstrap openssl
 
+VSFTPD_MAKE_OPTS = \
+	$(TARGET_CONFIGURE_ENV) \
+	LIBS="-lcrypt -lcrypto -lssl"
+
 define VSFTPD_POST_PATCH
 	$(SED) 's/.*VSF_BUILD_PAM/#undef VSF_BUILD_PAM/' $(PKG_BUILD_DIR)/builddefs.h
 	$(SED) 's/.*VSF_BUILD_SSL/#define VSF_BUILD_SSL/' $(PKG_BUILD_DIR)/builddefs.h
@@ -31,9 +35,4 @@ endef
 VSFTPD_POST_FOLLOWUP_HOOKS += VSFTPD_INSTALL_FILES
 
 $(D)/vsftpd:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) clean; \
-		$(MAKE) $(TARGET_CONFIGURE_ENV) LIBS="-lcrypt -lcrypto -lssl"; \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(call TARGET_FOLLOWUP)
+	$(call make-package)
