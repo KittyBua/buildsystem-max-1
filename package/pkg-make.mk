@@ -13,7 +13,7 @@ define TARGET_MAKE
 	$(Q)( \
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(TARGET_MAKE_ENV) $($(PKG)_MAKE_ENV) \
-		$(MAKE) \
+		$($(PKG)_MAKE) $($(PKG)_MAKE_ARGS)\
 			$($(PKG)_MAKE_OPTS); \
 	)
 	$(foreach hook,$($(PKG)_POST_COMPILE_HOOKS),$(call $(hook))$(sep))
@@ -24,12 +24,14 @@ define TARGET_MAKE_INSTALL
 	$(foreach hook,$($(PKG)_PRE_INSTALL_HOOKS),$(call $(hook))$(sep))
 	$(Q)( \
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
-		$(TARGET_MAKE_ENV) $($(PKG)_MAKE_ENV) \
-		$(MAKE) install DESTDIR=$(TARGET_DIR) \
-			$($(PKG)_INSTALL_OPTS); \
+		$(TARGET_MAKE_ENV) $($(PKG)_MAKE_INSTALL_ENV) \
+		$($(PKG)_MAKE) $($(PKG)_MAKE_INSTALL_ARGS) DESTDIR=$(TARGET_DIR) \
+			$($(PKG)_MAKE_INSTALL_OPTS); \
 	)
 	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
 endef
+
+# -----------------------------------------------------------------------------
 
 define make-package
 	$(call PREPARE,$(1))
@@ -56,7 +58,7 @@ define HOST_MAKE
 	$(Q)( \
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(HOST_MAKE_ENV) $($(PKG)_MAKE_ENV) \
-		$(MAKE) \
+		$($(PKG)_MAKE) $($(PKG)_MAKE_ARGS)\
 			$($(PKG)_MAKE_OPTS); \
 	)
 	$(foreach hook,$($(PKG)_POST_COMPILE_HOOKS),$(call $(hook))$(sep))
@@ -67,12 +69,14 @@ define HOST_MAKE_INSTALL
 	$(foreach hook,$($(PKG)_PRE_INSTALL_HOOKS),$(call $(hook))$(sep))
 	$(Q)( \
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
-		$(HOST_MAKE_ENV) $($(PKG)_MAKE_ENV) \
-		$(MAKE) install \
-			$($(PKG)_INSTALL_OPTS); \
+		$(HOST_MAKE_ENV) $($(PKG)_MAKE_INSTALL_ENV) \
+		$($(PKG)_MAKE) $($(PKG)_MAKE_INSTALL_ARGS) \
+			$($(PKG)_MAKE_INSTALL_OPTS); \
 	)
 	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
 endef
+
+# -----------------------------------------------------------------------------
 
 define host-make-package
 	$(call PREPARE,$(1))
