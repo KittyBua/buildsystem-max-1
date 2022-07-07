@@ -94,9 +94,10 @@ neutrino-release-base:
 #
 # delete unnecessary files
 #
-	find $(RELEASE_DIR)/lib $(RELEASE_DIR)/usr/lib/ \
+	find $(RELEASE_DIR) \
 		\( -name '*.a' \
 		-o -name '*.la' \
+		-o -name '*.old' \
 		-o -name '*.orig' \
 		-o -name '*.-config' \
 		\) \
