@@ -12,8 +12,16 @@ HOST_MTD_UTILS_SITE = ftp://ftp.infradead.org/pub/mtd-utils
 HOST_MTD_UTILS_DEPENDS = bootstrap
 
 $(D)/host-mtd-utils:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) `pwd`/mkfs.jffs2 `pwd`/sumtool BUILDDIR=`pwd` WITHOUT_XATTR=1 DESTDIR=$(HOST_DIR); \
-		$(MAKE) install DESTDIR=$(HOST_DIR)/bin
-	$(call TARGET_FOLLOWUP)
+HOST_MTD_UTILS_CONF_ENV = \
+	ZLIB_CFLAGS=" " \
+	ZLIB_LIBS="-lz" \
+	UUID_CFLAGS=" " \
+	UUID_LIBS="-luuid"
+
+HOST_MTD_UTILS_CONF_OPTS = \
+	--without-ubifs \
+	--without-xattr \
+	--disable-tests
+
+$(D)/host-mtd-utils:
+	$(call host-autotools-package)
