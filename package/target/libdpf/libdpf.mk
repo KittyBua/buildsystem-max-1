@@ -12,6 +12,7 @@ LIBDPF_SITE = $(MAX-GIT-GITHUB)
 LIBDPF_DEPENDS = bootstrap libusb-compat
 
 LIBDPF_MAKE_OPTS = \
+	-C dpflib libdpf.a \
 	CC=$(TARGET_CC) PREFIX=$(TARGET_DIR)/usr
 
 define LIBDPF_INSTALL
@@ -23,7 +24,4 @@ endef
 LIBDPF_POST_FOLLOWUP_HOOKS += LIBDPF_INSTALL
 
 $(D)/libdpf:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		make -C dpflib libdpf.a $($(PKG)_MAKE_OPTS)
-	$(call TARGET_FOLLOWUP)
+	$(call make-package,$(PKG_NO_INSTALL))
