@@ -11,6 +11,20 @@ WPA_SUPPLICANT_SITE = https://w1.fi/releases
 
 WPA_SUPPLICANT_DEPENDS = bootstrap libnl openssl wireless-tools
 
+WPA_SUPPLICANT_SUBDIR = wpa_supplicant
+
+WPA_SUPPLICANT_MAKE_ENV = \
+	$(TARGET_CONFIGURE_ENV)
+
+WPA_SUPPLICANT_MAKE_INSTALL_OPTS = \
+	LIBDIR=$(libdir) \
+	BINDIR=$(sbindir)
+
+define WPA_SUPPLICANT_INSTALL_CONFIG
+	$(INSTALL_DATA) $(PKG_FILES_DIR)/wpa_supplicant.config $(PKG_BUILD_DIR)/wpa_supplicant/.config
+endef
+WPA_SUPPLICANT_POST_PATCH_HOOKS += WPA_SUPPLICANT_INSTALL_CONFIG
+
 define WPA_SUPPLICANT_INSTALL_FILES
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/post-wlan0.sh $(TARGET_DIR)/etc/network
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/pre-wlan0.sh $(TARGET_DIR)/etc/network
@@ -20,10 +34,4 @@ endef
 WPA_SUPPLICANT_POST_FOLLOWUP_HOOKS += WPA_SUPPLICANT_INSTALL_FILES
 
 $(D)/wpa-supplicant:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(INSTALL_DATA) $(PKG_FILES_DIR)/wpa_supplicant.config wpa_supplicant/.config; \
-		$(TARGET_CONFIGURE_ENV) \
-		$(MAKE) -C wpa_supplicant; \
-		$(MAKE) -C wpa_supplicant install LIBDIR=$(libdir) BINDIR=$(sbindir) DESTDIR=$(TARGET_DIR)
-	$(call TARGET_FOLLOWUP)
+	$(call make-package)
