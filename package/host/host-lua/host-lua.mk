@@ -14,9 +14,11 @@ HOST_LUA_DEPENDS = bootstrap
 
 HOST_LUA_BINARY = $(HOST_DIR)/bin/lua
 
+HOST_LUA_MAKE_ARGS = \
+	linux
+
+HOST_LUA_MAKE_INSTALL_OPTS = \
+	INSTALL_TOP=$(HOST_DIR)
+
 $(D)/host-lua:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) linux; \
-		$(MAKE) install INSTALL_TOP=$(HOST_DIR)
-	$(call TARGET_FOLLOWUP)
+	$(call host-make-package)
