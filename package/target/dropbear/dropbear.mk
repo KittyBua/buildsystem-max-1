@@ -29,7 +29,7 @@ DROPBEAR_MAKE_OPTS = \
 	SCPPROGRESS=1 \
 	PROGRAMS="dropbear dbclient dropbearkey scp"
 
-DROPBEAR_INSTALL_OPTS = \
+DROPBEAR_MAKE_INSTALL_OPTS = \
 	SCPPROGRESS=1 \
 	PROGRAMS="dropbear dbclient dropbearkey scp"
 
