@@ -24,16 +24,4 @@ HOST_PYTHON_CONF_OPTS = \
 	--with-threads
 
 $(D)/host-python:
-	$(call PREPARE)
-	$(call HOST_CONFIGURE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) python Parser/pgen; \
-		mv python ./hostpython; \
-		mv Parser/pgen ./hostpgen; \
-		cp ./hostpgen $(HOST_DIR)/bin/pgen; \
-		$(MAKE) distclean
-	$(call HOST_CONFIGURE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE); \
-		$(MAKE) install
-	$(call TARGET_FOLLOWUP)
+	$(call host-autotools-package)
