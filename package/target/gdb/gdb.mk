@@ -25,6 +25,12 @@ GDB_CONF_OPTS = \
 	--without-uiout \
 	--without-x
 
+GDB_MAKE_ARGS = \
+	 all-gdb
+
+GDB_MAKE_INSTALL_ARGS = \
+	install-gdb
+
 define GDB_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/gdb/,system-gdbinit)
 	find $(TARGET_SHARE_DIR)/gdb/syscalls -type f -not -name 'arm-linux.xml' -not -name 'gdb-syscalls.dtd' -print0 | xargs -0 rm --
@@ -32,9 +38,4 @@ endef
 GDB_TARGET_CLEANUP_HOOKS += GDB_TARGET_CLEANUP
 
 $(D)/gdb:
-	$(call PREPARE)
-	$(call TARGET_CONFIGURE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) all-gdb; \
-		$(MAKE) install-gdb DESTDIR=$(TARGET_DIR)
-	$(call TARGET_FOLLOWUP)
+	$(call autotools-package)
