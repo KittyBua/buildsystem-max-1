@@ -12,7 +12,8 @@ LIBNL_SITE = https://github.com/thom311/libnl/releases/download/libnl$(subst .,_
 LIBNL_DEPENDS = bootstrap
 
 LIBNL_CONF_OPTS = \
-	--disable-cli
+	--disable-cli \
+	--disable-unit-tests
 
 $(D)/libnl:
 	$(call autotools-package)
