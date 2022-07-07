@@ -42,6 +42,20 @@ OPENSSL_CONF_OPTS += \
 	$(TARGET_CFLAGS) \
 	$(TARGET_LDFLAGS)
 
+define OPENSSL_CONFIGURE_CMDS
+	$(CHDIR)/$($(PKG)_DIR); \
+		./Configure $($(PKG)_CONF_OPTS)
+endef
+
+define OPENSSL_MAKE_DEPEND
+	$(CHDIR)/$($(PKG)_DIR); \
+		$($(PKG)_MAKE) depend
+endef
+OPENSSL_PRE_COMPILE_HOOKS += OPENSSL_MAKE_DEPEND
+
+OPENSSL_MAKE_INSTALL_ARGS = \
+	install_sw install_ssldirs
+
 define OPENSSL_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_DIR)/etc/ssl/misc/,CA.pl tsget)
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,openssl c_rehash)
@@ -50,10 +64,4 @@ endef
 OPENSSL_TARGET_CLEANUP_HOOKS += OPENSSL_TARGET_CLEANUP
 
 $(D)/openssl:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		./Configure $($(PKG)_CONF_OPTS); \
-		$(MAKE) depend; \
-		$(MAKE); \
-		$(MAKE) install_sw install_ssldirs DESTDIR=$(TARGET_DIR)
-	$(call TARGET_FOLLOWUP)
+	$(call autotools-package)
