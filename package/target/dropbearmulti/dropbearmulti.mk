@@ -32,7 +32,7 @@ DROPBEARMULTI_MAKE_OPTS = \
 	MULTI=1 \
 	PROGRAMS="dropbear dropbearkey scp"
 
-DROPBEARMULTI_INSTALL_OPTS = \
+DROPBEARMULTI_MAKE_INSTALL_OPTS = \
 	MULTI=1 \
 	PROGRAMS="dropbear dropbearkey scp"
 
