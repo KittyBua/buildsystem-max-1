@@ -11,8 +11,8 @@ LUASOAP_SITE = https://github.com/downloads/tomasguisasola/luasoap
 
 LUASOAP_DEPENDS = bootstrap lua luasocket luaexpat
 
+LUASOAP_MAKE_OPTS = \
+	LUA_DIR=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVERSION)
+
 $(D)/luasoap:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) install LUA_DIR=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVERSION)
-	$(call TARGET_FOLLOWUP)
+	$(call make-package)
