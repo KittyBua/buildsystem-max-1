@@ -14,7 +14,7 @@ HDPARM_DEPENDS = bootstrap
 HDPARM_MAKE_ENV = \
 	$(TARGET_CONFIGURE_ENV)
 
-HDPARM_INSTALL_OPTS = \
+HDPARM_MAKE_INSTALL_OPTS = \
 	mandir=$(REMOVE_mandir)
 
 $(D)/hdparm:
