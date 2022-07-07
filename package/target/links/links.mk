@@ -14,16 +14,17 @@ LINKS_DEPENDS = bootstrap freetype libpng libjpeg-turbo openssl zlib
 LINKS_AUTORECONF = YES
 
 LINKS_CONF_OPTS = \
-	--with-libjpeg \
-	--without-libtiff \
-	--without-svgalib \
-	--without-lzma \
-	--with-fb \
-	--without-directfb \
-	--without-pmshell \
-	--without-atheos \
 	--enable-graphics \
+	--with-fb \
+	--with-libjpeg \
 	--with-ssl=$(TARGET_DIR)/usr \
+	--with-zlib  \
+	--without-atheos \
+	--without-directfb \
+	--without-libtiff \
+	--without-lzma \
+	--without-pmshell \
+	--without-svgalib \
 	--without-x
 
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd51 hd60 hd61 bre2ze4k))
@@ -44,7 +45,7 @@ define LINKS_PREPARE_INTL
 	$(CHDIR)/$($(PKG)_DIR)/intl; \
 		./gen-intl
 endef
-LINKS_POST_PATCH_HOOKS += LINKS_PREPARE_INTL
+LINKS_PRE_CONFIGURE_HOOKS += LINKS_PREPARE_INTL
 
 define LINKS_INSTALL_FILES
 	mkdir -p $(TARGET_SHARE_DIR)/tuxbox/neutrino/plugins $(TARGET_DIR)/var/tuxbox/config/links
