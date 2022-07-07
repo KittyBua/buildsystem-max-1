@@ -12,6 +12,4 @@ SLINGSHOT_SITE = $(call github,gvvaughan,slingshot,v$(SLINGSHOT_VERSION))
 SLINGSHOT_DEPENDS = bootstrap
 
 $(D)/slingshot:
-	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(TOUCH)
+	$(call individual-package,$(PKG_NO_EXTRACT) $(PKG_NO_PATCHES) $(PKG_NO_BUILD) $(PKG_NO_INSTALL))
