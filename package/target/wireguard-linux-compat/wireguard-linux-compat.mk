@@ -11,6 +11,15 @@ WIREGUARD_LINUX_COMPAT_SITE = https://git.zx2c4.com/wireguard-linux-compat/snaps
 
 WIREGUARD_LINUX_COMPAT_DEPENDS = bootstrap kernel libmnl
 
+WIREGUARD_LINUX_COMPAT_SUBDIR = src
+
+WIREGUARD_LINUX_COMPAT_MAKE_OPTS = \
+	$(KERNEL_MAKE_VARS)
+
+WIREGUARD_LINUX_COMPAT_MAKE_INSTALL_OPTS = \
+	$(KERNEL_MAKE_VARS) \
+	INSTALL_MOD_PATH=$(TARGET_DIR)
+
 define WIREGUARD_LINUX_COMPAT_INSTALL_FILES
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d
 	for i in wireguard; do \
@@ -21,8 +30,4 @@ endef
 WIREGUARD_LINUX_COMPAT_POST_FOLLOWUP_HOOKS += WIREGUARD_LINUX_COMPAT_INSTALL_FILES
 
 $(D)/wireguard-linux-compat:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) -C src $(KERNEL_MAKE_VARS); \
-		$(MAKE) -C src install $(KERNEL_MAKE_VARS) INSTALL_MOD_PATH=$(TARGET_DIR)
-	$(call TARGET_FOLLOWUP)
+	$(call make-package)
