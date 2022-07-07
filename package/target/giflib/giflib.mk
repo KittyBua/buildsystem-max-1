@@ -11,10 +11,15 @@ GIFLIB_SITE = https://downloads.sourceforge.net/project/giflib
 
 GIFLIB_DEPENDS = bootstrap
 
+GIFLIB_MAKE_ENV = \
+	$(TARGET_CONFIGURE_ENV)
+
+GIFLIB_MAKE_INSTALL_ARGS = \
+	install-include \
+	install-lib
+
+GIFLIB_MAKE_INSTALL_OPTS = \
+	PREFIX=$(prefix)
+
 $(D)/giflib:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
-		$(MAKE); \
-		$(MAKE) install-include install-lib DESTDIR=$(TARGET_DIR) PREFIX=$(prefix)
-	$(call TARGET_FOLLOWUP)
+	$(call make-package)
