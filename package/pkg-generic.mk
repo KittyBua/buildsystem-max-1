@@ -197,17 +197,16 @@ define APPLY_PATCHES
 endef
 
 # -----------------------------------------------------------------------------
-# ----------------------------------------------------------------------------
 
 # prepare for build
 define PREPARE
+	$(eval $(pkg-check-variables))
 	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(if $(filter $(1),$(PKG_NO_EXTRACT)),,$(call EXTRACT,$(BUILD_DIR)))
-	$(if $(filter $(1),$(PKG_NO_PATCHES)),,$(call APPLY_PATCHES,$(PKG_PATCHES_DIR),$($(PKG)_PATCH)))
+	$(if $(filter $(1),$(PKG_NO_PATCHES)),,$(call APPLY_PATCHES,$($(PKG)_PATCH_DIR),$($(PKG)_PATCH_CUSTOM)))
 endef
 
-# -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 
 # rewrite pkg-config files
