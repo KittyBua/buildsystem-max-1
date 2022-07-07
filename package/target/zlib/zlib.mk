@@ -10,16 +10,19 @@ ZLIB_SOURCE = zlib-$(ZLIB_VERSION).tar.xz
 ZLIB_SITE = https://sourceforge.net/projects/libpng/files/zlib/$(ZLIB_VERSION)
 ZLIB_DEPENDS = bootstrap
 
-ZLIB_MAKE_ENV = \
-	$(TARGET_CONFIGURE_ENV) \
-	mandir=$(REMOVE_mandir) \
-	./configure \
-	--prefix=/usr \
-	--shared \
-	--uname=Linux; \
-
 ZLIB_CONF_ENV = \
+	$(TARGET_CONFIGURE_ENV) \
 	mandir=$(REMOVE_mandir)
 
+ZLIB_CONF_OPTS = \
+	--prefix=$(prefix) \
+	--shared \
+	--uname=Linux
+
+define ZLIB_CONFIGURE_CMDS
+	$(CHDIR)/$($(PKG)_DIR); \
+		$($(PKG)_CONF_ENV) ./configure $($(PKG)_CONF_OPTS)
+endef
+
 $(D)/zlib:
-	$(call make-package)
+	$(call autotools-package)
