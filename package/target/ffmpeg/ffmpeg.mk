@@ -347,11 +347,10 @@ FFMPEG_CONF_OPTS += \
 	--extra-cflags="$(TARGET_CFLAGS) -I$(TARGET_INCLUDE_DIR)/libxml2" \
 	--extra-ldflags="$(TARGET_LDFLAGS) -lrt"
 
-$(D)/ffmpeg:
-	$(call PREPARE)
+define FFMPEG_CONFIGURE_CMDS
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
-		./configure $($(PKG)_CONF_OPTS); \
-		$(MAKE); \
-		$(MAKE) install DESTDIR=$(TARGET_DIR)
-	$(call TARGET_FOLLOWUP)
+		$($(PKG)_CONF_ENV) ./configure $($(PKG)_CONF_OPTS)
+endef
+
+$(D)/ffmpeg:
+	$(call autotools-package)
