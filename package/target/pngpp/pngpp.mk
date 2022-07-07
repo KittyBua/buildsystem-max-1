@@ -11,8 +11,11 @@ PNGPP_SITE = https://download.savannah.gnu.org/releases/pngpp
 
 PNGPP_DEPENDS = bootstrap libpng
 
+PNGPP_MAKE_INSTALL_ARGS = \
+	install-headers
+
+PNGPP_MAKE_INSTALL_OPTS = \
+	PREFIX=$(TARGET_DIR)/usr
+
 $(D)/pngpp:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) install-headers PREFIX=$(TARGET_DIR)/usr
-	$(call TARGET_FOLLOWUP)
+	$(call make-package,$(PKG_NO_BUILD))
