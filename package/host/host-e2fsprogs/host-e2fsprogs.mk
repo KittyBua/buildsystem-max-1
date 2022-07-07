@@ -4,27 +4,16 @@
 #
 ################################################################################
 
-HOST_E2FSPROGS_VERSION = 1.46.4
+HOST_E2FSPROGS_VERSION = $(E2FSPROGS_VERSION)
 HOST_E2FSPROGS_DIR = e2fsprogs-$(HOST_E2FSPROGS_VERSION)
 HOST_E2FSPROGS_SOURCE = e2fsprogs-$(HOST_E2FSPROGS_VERSION).tar.gz
 HOST_E2FSPROGS_SITE = https://sourceforge.net/projects/e2fsprogs/files/e2fsprogs/v$(HOST_E2FSPROGS_VERSION)
 
 HOST_E2FSPROGS_DEPENDS = bootstrap
 
+HOST_E2FSPROGS_CONF_OPTS = \
+	--enable-symlink-install \
+	--with-crond-dir=no
+
 $(D)/host-e2fsprogs:
-	$(call PREPARE)
-	$(call HOST_CONFIGURE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE)
-	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/resize/resize2fs $(HOST_DIR)/bin/
-	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/misc/mke2fs $(HOST_DIR)/bin/
-	ln -sf mke2fs $(HOST_DIR)/bin/mkfs.ext2
-	ln -sf mke2fs $(HOST_DIR)/bin/mkfs.ext3
-	ln -sf mke2fs $(HOST_DIR)/bin/mkfs.ext4
-	ln -sf mke2fs $(HOST_DIR)/bin/mkfs.ext4dev
-	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/e2fsck/e2fsck $(HOST_DIR)/bin/
-	ln -sf e2fsck $(HOST_DIR)/bin/fsck.ext2
-	ln -sf e2fsck $(HOST_DIR)/bin/fsck.ext3
-	ln -sf e2fsck $(HOST_DIR)/bin/fsck.ext4
-	ln -sf e2fsck $(HOST_DIR)/bin/fsck.ext4dev
-	$(call TARGET_FOLLOWUP)
+	$(call host-autotools-package)
