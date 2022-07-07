@@ -11,10 +11,12 @@ NETBASE_SITE = https://ftp.debian.org/debian/pool/main/n/netbase
 
 NETBASE_DEPENDS = bootstrap
 
+define NETBASE_INSTALL_FILES
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/rpc $(TARGET_DIR)/etc/rpc; \
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/protocols $(TARGET_DIR)/etc/protocols; \
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/etc/services $(TARGET_DIR)/etc/services
+endef
+NETBASE_INDIVIDUAL_HOOKS += NETBASE_INSTALL_FILES
+
 $(D)/netbase:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(INSTALL_DATA) etc/rpc $(TARGET_DIR)/etc/rpc; \
-		$(INSTALL_DATA) etc/protocols $(TARGET_DIR)/etc/protocols; \
-		$(INSTALL_DATA) etc/services $(TARGET_DIR)/etc/services
-	$(call TARGET_FOLLOWUP)
+	$(call individual-package)
