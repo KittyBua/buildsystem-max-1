@@ -24,16 +24,24 @@ NETSURF_CONF_OPTS = \
 	NETSURF_FB_FONT_SANS_SERIF=neutrino.ttf \
 	TARGET=framebuffer
 
-$(D)/netsurf:
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(TARGET_CONFIGURE_ENV) \
-		CFLAGS="$(TARGET_CFLAGS) -I$(BUILD_DIR)/netsurf-all-$(NETSURF_VERSION)/tmpusr/include" \
-		LDFLAGS="$(TARGET_LDFLAGS) -L$(BUILD_DIR)/netsurf-all-$(NETSURF_VERSION)/tmpusr/lib" \
-		$(MAKE) $($(PKG)_CONF_OPTS) build; \
-		$(MAKE) $($(PKG)_CONF_OPTS) install DESTDIR=$(TARGET_DIR)
+NETSURF_MAKE_ENV = \
+	$(TARGET_CONFIGURE_ENV) \
+	CFLAGS="$(TARGET_CFLAGS) -I$(BUILD_DIR)/netsurf-all-$(NETSURF_VERSION)/tmpusr/include" \
+	LDFLAGS="$(TARGET_LDFLAGS) -L$(BUILD_DIR)/netsurf-all-$(NETSURF_VERSION)/tmpusr/lib" 
+
+NETSURF_MAKE_OPTS = \
+	$($(PKG)_CONF_OPTS) build
+
+NETSURF_MAKE_INSTALL_OPTS = \
+	$($(PKG)_CONF_OPTS)
+
+define NETSURF_INSTALL_CONFIG
 	mv $(TARGET_BIN_DIR)/netsurf-fb $(SHARE_NEUTRINO_PLUGINS)/netsurf-fb.so
 	echo "name=Netsurf Web Browser"	 > $(SHARE_NEUTRINO_PLUGINS)/netsurf-fb.cfg
 	echo "desc=Web Browser"		>> $(SHARE_NEUTRINO_PLUGINS)/netsurf-fb.cfg
 	echo "type=2"			>> $(SHARE_NEUTRINO_PLUGINS)/netsurf-fb.cfg
-	$(call TARGET_FOLLOWUP)
+endef
+NETSURF_POST_FOLLOWUP_HOOKS += NETSURF_INSTALL_CONFIG
+
+$(D)/netsurf:
+	$(call make-package)
