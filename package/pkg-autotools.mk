@@ -56,6 +56,16 @@ TARGET_CONFIGURE_ENV += \
 	PKG_CONFIG_PATH="$(TARGET_LIB_DIR)/pkgconfig" \
 	PKG_CONFIG_SYSROOT_DIR="$(TARGET_DIR)"
 
+TARGET_CONFIGURE_ARGS = \
+	ac_cv_func_mmap_fixed_mapped=yes \
+	ac_cv_func_memcmp_working=yes \
+	ac_cv_have_decl_malloc=yes \
+	gl_cv_func_malloc_0_nonnull=yes \
+	ac_cv_func_malloc_0_nonnull=yes \
+	ac_cv_func_calloc_0_nonnull=yes \
+	ac_cv_func_realloc_0_nonnull=yes \
+	lt_cv_sys_lib_search_path_spec=""
+
 TARGET_CONFIGURE_OPTS = \
 	--build=$(GNU_HOST_NAME) \
 	--host=$(GNU_TARGET_NAME) \
@@ -82,6 +92,7 @@ define TARGET_CONFIGURE_CMDS
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		test -f ./$($(PKG)_CONFIGURE_CMD) || ./autogen.sh && \
 		CONFIG_SITE=/dev/null \
+		$(TARGET_CONFIGURE_ARGS) \
 		$(TARGET_CONFIGURE_ENV) $($(PKG)_CONF_ENV) \
 		./$($(PKG)_CONFIGURE_CMD) \
 			$(TARGET_CONFIGURE_OPTS) $($(PKG)_CONF_OPTS)
@@ -98,9 +109,10 @@ endef
 # -----------------------------------------------------------------------------
 
 define autotools-package
+	$(eval PKG_MODE = $(pkg-mode))
 	$(call PREPARE,$(1))
 	$(call TARGET_CONFIGURE)
-	$(if $(filter $(1),$(PKG_NO_BUILD)),,$(call TARGET_MAKE))
+	$(if $(filter $(1),$(PKG_NO_BUILD)),,$(call TARGET_MAKE_BUILD))
 	$(if $(filter $(1),$(PKG_NO_INSTALL)),,$(call TARGET_MAKE_INSTALL))
 	$(call TARGET_FOLLOWUP)
 endef
@@ -133,16 +145,7 @@ HOST_CONFIGURE_OPTS = \
 	--sysconfdir="$(HOST_DIR)/etc" \
 	--localstatedir="$(HOST_DIR)/var" \
 	--enable-shared \
-	--disable-static \
-	--disable-gtk-doc \
-	--disable-gtk-doc-html \
-	--disable-doc \
-	--disable-docs \
-	--disable-documentation \
-	--disable-debug \
-	--with-xmlto=no \
-	--with-fop=no \
-	--disable-nls
+	--disable-static
 
 define HOST_CONFIGURE_CMDS
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
@@ -156,7 +159,7 @@ endef
 define HOST_CONFIGURE
 	@$(call MESSAGE,"Configuring")
 	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
-	$(call AUTORECONF_HOOK)
+	$(Q)$(call AUTORECONF_HOOK)
 	$(Q)$(call $(PKG)_CONFIGURE_CMDS)
 	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 endef
@@ -164,9 +167,10 @@ endef
 # -----------------------------------------------------------------------------
 
 define host-autotools-package
+	$(eval PKG_MODE = $(pkg-mode))
 	$(call PREPARE,$(1))
 	$(call HOST_CONFIGURE)
-	$(if $(filter $(1),$(PKG_NO_BUILD)),,$(call HOST_MAKE))
+	$(if $(filter $(1),$(PKG_NO_BUILD)),,$(call HOST_MAKE_BUILD))
 	$(if $(filter $(1),$(PKG_NO_INSTALL)),,$(call HOST_MAKE_INSTALL))
 	$(call HOST_FOLLOWUP)
 endef
