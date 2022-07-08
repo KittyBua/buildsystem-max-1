@@ -88,7 +88,7 @@ TARGET_CONFIGURE_OPTS = \
 	--mandir=$(REMOVE_mandir) \
 	--infodir=$(REMOVE_infodir)
 
-define TARGET_CONFIGURE_CMDS
+define TARGET_CONFIGURE_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		test -f ./$($(PKG)_CONFIGURE_CMD) || ./autogen.sh && \
 		CONFIG_SITE=/dev/null \
@@ -147,7 +147,7 @@ HOST_CONFIGURE_OPTS = \
 	--enable-shared \
 	--disable-static
 
-define HOST_CONFIGURE_CMDS
+define HOST_CONFIGURE_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		test -f ./$($(PKG)_CONFIGURE_CMD) || ./autogen.sh && \
 		CONFIG_SITE=/dev/null \

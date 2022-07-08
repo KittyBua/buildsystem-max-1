@@ -7,7 +7,7 @@
 TARGET_MAKE_ENV = \
 	PATH=$(PATH)
 
-define TARGET_MAKE_BUILD_CMDS
+define TARGET_MAKE_BUILD_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(TARGET_MAKE_ENV) $($(PKG)_MAKE_ENV) \
 		$($(PKG)_MAKE) $($(PKG)_MAKE_ARGS)\
@@ -21,7 +21,7 @@ define TARGET_MAKE_BUILD
 	$(foreach hook,$($(PKG)_POST_BUILD_HOOKS),$(call $(hook))$(sep))
 endef
 
-define TARGET_MAKE_INSTALL_CMDS
+define TARGET_MAKE_INSTALL_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(TARGET_MAKE_ENV) $($(PKG)_MAKE_INSTALL_ENV) \
 		$($(PKG)_MAKE_INSTALL) $($(PKG)_MAKE_INSTALL_ARGS) DESTDIR=$(TARGET_DIR) \
@@ -57,7 +57,7 @@ HOST_MAKE_ENV = \
 	PKG_CONFIG_SYSROOT_DIR="/" \
 	PKG_CONFIG_LIBDIR="$(HOST_DIR)/lib/pkgconfig:$(HOST_DIR)/share/pkgconfig"
 
-define HOST_MAKE_BUILD_CMDS
+define HOST_MAKE_BUILD_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(HOST_MAKE_ENV) $($(PKG)_MAKE_ENV) \
 		$($(PKG)_MAKE) $($(PKG)_MAKE_ARGS)\
@@ -71,7 +71,7 @@ define HOST_MAKE_BUILD
 	$(foreach hook,$($(PKG)_POST_BUILD_HOOKS),$(call $(hook))$(sep))
 endef
 
-define HOST_MAKE_INSTALL_CMDS
+define HOST_MAKE_INSTALL_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(HOST_MAKE_ENV) $($(PKG)_MAKE_INSTALL_ENV) \
 		$($(PKG)_MAKE_INSTALL) $($(PKG)_MAKE_INSTALL_ARGS) \
