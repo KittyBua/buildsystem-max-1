@@ -34,7 +34,7 @@ define XUPNPD_TARGET_CLEANUP
 endef
 XUPNPD_TARGET_CLEANUP_HOOKS += XUPNPD_TARGET_CLEANUP
 
-define XUPNPD_INSTALL_FILES
+define XUPNPD_INSTALL_PLUGINS
 	mkdir -p $(TARGET_SHARE_DIR)/xupnpd/{config,playlists}
 	$(INSTALL_DATA) -D $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/scripts-lua/xupnpd/xupnpd_18plus.lua $(TARGET_SHARE_DIR)/xupnpd/plugins/
 	$(INSTALL_DATA) -D $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/scripts-lua/xupnpd/xupnpd_cczwei.lua $(TARGET_SHARE_DIR)/xupnpd/plugins/
@@ -42,7 +42,7 @@ define XUPNPD_INSTALL_FILES
 	$(INSTALL_DATA) -D $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/scripts-lua/xupnpd/xupnpd_vimeo.lua $(TARGET_SHARE_DIR)/xupnpd/plugins/
 	$(INSTALL_DATA) -D $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/scripts-lua/xupnpd/xupnpd_youtube.lua $(TARGET_SHARE_DIR)/xupnpd/plugins/
 endef
-XUPNPD_POST_FOLLOWUP_HOOKS += XUPNPD_INSTALL_FILES
+XUPNPD_POST_FOLLOWUP_HOOKS += XUPNPD_INSTALL_PLUGINS
 
 $(D)/xupnpd:
 	$(call generic-package)
