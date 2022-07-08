@@ -32,4 +32,4 @@ LUASOCKET_MAKE_INSTALL_OPTS = \
 	LUAPREFIX_linux=
 
 $(D)/luasocket:
-	$(call make-package)
+	$(call generic-package)

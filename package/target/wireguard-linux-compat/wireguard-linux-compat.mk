@@ -30,4 +30,4 @@ endef
 WIREGUARD_LINUX_COMPAT_POST_FOLLOWUP_HOOKS += WIREGUARD_LINUX_COMPAT_INSTALL_FILES
 
 $(D)/wireguard-linux-compat:
-	$(call make-package)
+	$(call generic-package)

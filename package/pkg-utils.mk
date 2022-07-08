@@ -99,7 +99,7 @@ endif
 # build commands
 # TODO: python, kernel
 ifndef $(PKG)_BUILD_CMDS
-  ifeq ($(PKG_MODE),$(filter $(PKG_MODE),AUTOTOOLS CMAKE GENERIC KCONFIG MAKE))
+  ifeq ($(PKG_MODE),$(filter $(PKG_MODE),AUTOTOOLS CMAKE GENERIC KCONFIG))
     ifeq ($(PKG_HOST_PACKAGE),YES)
       $(PKG)_BUILD_CMDS = $$(HOST_MAKE_BUILD_CMDS)
     else
@@ -133,7 +133,7 @@ endif
 # install commands
 # TODO: python, kernel
 ifndef $(PKG)_INSTALL_CMDS
-  ifeq ($(PKG_MODE),$(filter $(PKG_MODE),AUTOTOOLS CMAKE GENERIC KCONFIG MAKE))
+  ifeq ($(PKG_MODE),$(filter $(PKG_MODE),AUTOTOOLS CMAKE GENERIC KCONFIG))
     ifeq ($(PKG_HOST_PACKAGE),YES)
       $(PKG)_INSTALL_CMDS = $$(HOST_MAKE_INSTALL_CMDS)
     else

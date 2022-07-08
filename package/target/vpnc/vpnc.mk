@@ -20,4 +20,4 @@ VPNC_MAKE_INSTALL_OPTS = \
 	DOCDIR=$(REMOVE_docdir)
 
 $(D)/vpnc:
-	$(call make-package)
+	$(call generic-package)

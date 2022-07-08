@@ -34,4 +34,4 @@ endef
 WPA_SUPPLICANT_POST_FOLLOWUP_HOOKS += WPA_SUPPLICANT_INSTALL_FILES
 
 $(D)/wpa-supplicant:
-	$(call make-package)
+	$(call generic-package)

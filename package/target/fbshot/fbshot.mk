@@ -20,4 +20,4 @@ endef
 FBSHOT_POST_PATCH_HOOKS += FBSHOT_PATCH_MAKEFILE
 
 $(D)/fbshot:
-	$(call make-package)
+	$(call generic-package)

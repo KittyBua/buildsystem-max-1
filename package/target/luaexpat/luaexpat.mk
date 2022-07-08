@@ -26,4 +26,4 @@ LUAEXPAT_MAKE_OPTS = \
 	LUA_SYS_VER=$(LUA_ABIVERSION)
 
 $(D)/luaexpat:
-	$(call make-package)
+	$(call generic-package)

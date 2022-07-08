@@ -44,4 +44,4 @@ endef
 NETSURF_POST_FOLLOWUP_HOOKS += NETSURF_INSTALL_CONFIG
 
 $(D)/netsurf:
-	$(call make-package)
+	$(call generic-package)

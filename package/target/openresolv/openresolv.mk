@@ -22,4 +22,4 @@ endef
 OPENRESOLV_POST_PATCH_HOOKS += OPENRESOLV_CREATE_CONF_ENV_FILE
 
 $(D)/openresolv:
-	$(call make-package)
+	$(call generic-package)

@@ -22,4 +22,4 @@ LUA_CURL_MAKE_OPTS = \
 	CURL_LIBS="-L$(TARGET_LIB_DIR) -lcurl"
 
 $(D)/lua-curl:
-	$(call make-package)
+	$(call generic-package)

@@ -25,4 +25,4 @@ endef
 GPTFDISK_POST_FOLLOWUP_HOOKS += GPTFDISK_INSTALL_BINARY
 
 $(D)/gptfdisk:
-	$(call make-package,$(PKG_NO_INSTALL))
+	$(call generic-package,$(PKG_NO_INSTALL))

@@ -33,4 +33,4 @@ endef
 LUA_TARGET_CLEANUP_HOOKS += LUA_TARGET_CLEANUP
 
 $(D)/lua:
-	$(call make-package)
+	$(call generic-package)

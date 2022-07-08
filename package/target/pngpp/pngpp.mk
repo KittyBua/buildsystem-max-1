@@ -18,4 +18,4 @@ PNGPP_MAKE_INSTALL_OPTS = \
 	PREFIX=$(TARGET_DIR)/usr
 
 $(D)/pngpp:
-	$(call make-package,$(PKG_NO_BUILD))
+	$(call generic-package,$(PKG_NO_BUILD))

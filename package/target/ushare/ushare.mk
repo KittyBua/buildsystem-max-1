@@ -41,4 +41,4 @@ endef
 USHARE_POST_FOLLOWUP_HOOKS += USHARE_INSTALL_FILES
 
 $(D)/ushare:
-	$(call make-package)
+	$(call generic-package)

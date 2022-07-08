@@ -31,4 +31,4 @@ endef
 IOZONE_POST_FOLLOWUP_HOOKS += IOZONE_INSTALL_BINARY
 
 $(D)/iozone:
-	$(call make-package,$(PKG_NO_INSTALL))
+	$(call generic-package,$(PKG_NO_INSTALL))

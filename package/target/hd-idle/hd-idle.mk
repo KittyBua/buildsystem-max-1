@@ -15,4 +15,4 @@ HD_IDLE_MAKE_ENV = \
 	$(TARGET_CONFIGURE_ENV)
 
 $(D)/hd-idle:
-	$(call make-package)
+	$(call generic-package)

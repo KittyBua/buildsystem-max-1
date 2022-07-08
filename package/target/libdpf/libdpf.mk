@@ -24,4 +24,4 @@ endef
 LIBDPF_POST_FOLLOWUP_HOOKS += LIBDPF_INSTALL
 
 $(D)/libdpf:
-	$(call make-package,$(PKG_NO_INSTALL))
+	$(call generic-package,$(PKG_NO_INSTALL))

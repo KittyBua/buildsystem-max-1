@@ -45,4 +45,4 @@ endef
 XUPNPD_POST_FOLLOWUP_HOOKS += XUPNPD_INSTALL_FILES
 
 $(D)/xupnpd:
-	$(call make-package)
+	$(call generic-package)

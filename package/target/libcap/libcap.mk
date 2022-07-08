@@ -34,4 +34,4 @@ LIBCAP_MAKE_INSTALL_OPTS = \
 	lib=lib
 
 $(D)/libcap:
-	$(call make-package)
+	$(call generic-package)

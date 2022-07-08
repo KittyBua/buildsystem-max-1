@@ -26,4 +26,4 @@ endef
 RTMPDUMP_TARGET_CLEANUP_HOOKS += RTMPDUMP_TARGET_CLEANUP
 
 $(D)/rtmpdump:
-	$(call make-package)
+	$(call generic-package)

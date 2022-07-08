@@ -21,4 +21,4 @@ HOST_LUA_MAKE_INSTALL_OPTS = \
 	INSTALL_TOP=$(HOST_DIR)
 
 $(D)/host-lua:
-	$(call host-make-package)
+	$(call host-generic-package)

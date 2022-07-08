@@ -21,4 +21,4 @@ UDPXY_MAKE_INSTALL_OPTS = \
 	MANPAGE_DIR=$(TARGET_DIR)$(REMOVE_mandir)
 
 $(D)/udpxy:
-	$(call make-package)
+	$(call generic-package)

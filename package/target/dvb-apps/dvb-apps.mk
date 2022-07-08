@@ -32,4 +32,4 @@ DVB_APPS_MAKE_INSTALL_OPTS = \
 	$(DVB_APPS_MAKE_OPTS)
 
 $(D)/dvb-apps:
-	$(call make-package)
+	$(call generic-package)

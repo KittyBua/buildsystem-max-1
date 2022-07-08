@@ -41,4 +41,4 @@ endef
 WIREGUARD_POST_FOLLOWUP_HOOKS += WIREGUARD_INSTALL_FILES
 
 $(D)/wireguard:
-	$(call make-package)
+	$(call generic-package)

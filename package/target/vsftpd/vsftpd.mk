@@ -35,4 +35,4 @@ endef
 VSFTPD_POST_FOLLOWUP_HOOKS += VSFTPD_INSTALL_FILES
 
 $(D)/vsftpd:
-	$(call make-package)
+	$(call generic-package)

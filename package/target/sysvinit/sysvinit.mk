@@ -47,4 +47,4 @@ endef
 SYSVINIT_TARGET_CLEANUP_HOOKS += SYSVINIT_TARGET_CLEANUP
 
 $(D)/sysvinit:
-	$(call make-package)
+	$(call generic-package)

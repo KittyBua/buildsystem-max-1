@@ -23,4 +23,4 @@ endef
 BZIP2_POST_PATCH_HOOKS += BZIP2_MAKEFILE_LIBBZ2_SO
 
 $(D)/bzip2:
-	$(call make-package)
+	$(call generic-package)

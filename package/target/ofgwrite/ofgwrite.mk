@@ -22,4 +22,4 @@ endef
 OFGWRITE_POST_FOLLOWUP_HOOKS += OFGWRITE_INSTALL_BINARY
 
 $(D)/ofgwrite:
-	$(call make-package,$(PKG_NO_INSTALL))
+	$(call generic-package,$(PKG_NO_INSTALL))

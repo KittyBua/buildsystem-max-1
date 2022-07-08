@@ -20,4 +20,4 @@ WIRELESS_TOOLS_MAKE_INSTALL_OPTS = \
 	INSTALL_MAN=$(TARGET_DIR)$(REMOVE_mandir)
 
 $(D)/wireless-tools:
-	$(call make-package)
+	$(call generic-package)

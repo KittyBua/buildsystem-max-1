@@ -18,4 +18,4 @@ USB_MODESWITCH_MAKE_INSTALL_OPTS = \
 	MANDIR=$(TARGET_DIR)$(REMOVE_mandir)
 
 $(D)/usb-modeswitch:
-	$(call make-package)
+	$(call generic-package)

@@ -22,4 +22,4 @@ GIFLIB_MAKE_INSTALL_OPTS = \
 	PREFIX=$(prefix)
 
 $(D)/giflib:
-	$(call make-package)
+	$(call generic-package)
