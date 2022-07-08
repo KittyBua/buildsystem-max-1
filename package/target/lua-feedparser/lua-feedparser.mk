@@ -20,4 +20,4 @@ LUA_FEEDPARSER_MAKE_OPTS = \
 	LUA_DIR=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVERSION)
 
 $(D)/lua-feedparser:
-	$(call generic-package)
+	$(call generic-package,$(PKG_NO_BUILD))
