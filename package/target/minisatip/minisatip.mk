@@ -27,12 +27,11 @@ define MINISATIP_INSTALL_INIT_SYSV
 	$(UPDATE-RC.D) minisatip defaults 75 25
 endef
 
-define MINISATIP_INSTALL
+define MINISATIP_INSTALL_CMDS
 	$(INSTALL_EXEC) -D $(PKG_BUILD_DIR)/minisatip $(TARGET_BIN_DIR)
 	$(INSTALL) -d $(TARGET_SHARE_DIR)/minisatip
 	$(INSTALL_COPY) $(PKG_BUILD_DIR)/html $(TARGET_SHARE_DIR)/minisatip
 endef
-MINISATIP_POST_FOLLOWUP_HOOKS += MINISATIP_INSTALL
 
 $(D)/minisatip:
-	$(call autotools-package,$(PKG_NO_INSTALL))
+	$(call autotools-package)
