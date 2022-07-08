@@ -25,10 +25,9 @@ IOZONE_MAKE_ENV = \
 IOZONE_MAKE_OPTS = \
 	linux-arm
 
-define IOZONE_INSTALL_BINARY
+define IOZONE_INSTALL_CMDS
 	$(INSTALL_EXEC) $(PKG_BUILD_DIR)/src/current/iozone $(TARGET_BIN_DIR)
 endef
-IOZONE_POST_FOLLOWUP_HOOKS += IOZONE_INSTALL_BINARY
 
 $(D)/iozone:
-	$(call generic-package,$(PKG_NO_INSTALL))
+	$(call generic-package)
