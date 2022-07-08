@@ -45,11 +45,7 @@ endef
 
 # -----------------------------------------------------------------------------
 
-define TARGET_MESON_CONFIGURE
-	@$(call MESSAGE,"Configuring")
-	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
-	$(call MESON_CROSS_CONFIG_HOOK,$(PKG_BUILD_DIR)/build)
-	$(Q)( \
+define TARGET_MESON_CMDS
 	unset CC CXX CPP LD AR NM STRIP; \
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		$($(PKG)_CONF_ENV) \
@@ -59,26 +55,47 @@ define TARGET_MESON_CONFIGURE
 			-Db_pie=false \
 			-Dstrip=false \
 			$($(PKG)_CONF_OPTS) \
-			$(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/build; \
-	)
+			$(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/build
+endef
+
+define TARGET_MESON_CONFIGURE
+	@$(call MESSAGE,"Configuring")
+	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
+	$(Q)$(call MESON_CROSS_CONFIG_HOOK,$(PKG_BUILD_DIR)/build)
+	$(Q)$(call $(PKG)_CONFIGURE_CMDS)
 	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 endef
 
-define TARGET_NINJA_BUILD
+define _TARGET_NINJA_BUILD_CMDS
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		$(TARGET_MAKE_ENV) $($(PKG)_NINJA_ENV) \
-			$(HOST_NINJA_BINARY) $(NINJA_OPTS) $($(PKG)_NINJA_OPTS) -C $(PKG_BUILD_DIR)/build
+		$(HOST_NINJA_BINARY) $(NINJA_OPTS) $($(PKG)_NINJA_OPTS) -C $(PKG_BUILD_DIR)/build
+endef
+
+define TARGET_NINJA_BUILD
+	@$(call MESSAGE,"Building")
+	$(foreach hook,$($(PKG)_PRE_BUILD_HOOKS),$(call $(hook))$(sep))
+	$(Q)$(call $(PKG)_BUILD_CMDS)
+	$(foreach hook,$($(PKG)_POST_BUILD_HOOKS),$(call $(hook))$(sep))
+endef
+
+define _TARGET_NINJA_INSTALL_CMDS
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+		$(TARGET_MAKE_ENV) $($(PKG)_NINJA_ENV) DESTDIR=$(TARGET_DIR) \
+		$(HOST_NINJA_BINARY) $(NINJA_OPTS) -C $(PKG_BUILD_DIR)/build install
 endef
 
 define TARGET_NINJA_INSTALL
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
-		$(TARGET_MAKE_ENV) $($(PKG)_NINJA_ENV) DESTDIR=$(TARGET_DIR) \
-			$(HOST_NINJA_BINARY) $(NINJA_OPTS) $($(PKG)_NINJA_OPTS) -C $(PKG_BUILD_DIR)/build install
+	@$(call MESSAGE,"Installing")
+	$(foreach hook,$($(PKG)_PRE_INSTALL_HOOKS),$(call $(hook))$(sep))
+	$(Q)$(call $(PKG)_INSTALL_CMDS)
+	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
 endef
 
 # -----------------------------------------------------------------------------
 
 define meson-package
+	$(eval PKG_MODE = $(pkg-mode))
 	$(call PREPARE,$(1))
 	$(call TARGET_MESON_CONFIGURE)
 	$(call TARGET_NINJA_BUILD)
@@ -92,10 +109,7 @@ endef
 #
 ################################################################################
 
-define HOST_MESON_CONFIGURE
-	@$(call MESSAGE,"Configuring")
-	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
-	$(Q)( \
+define HOST_MESON_CMDS
 	unset CC CXX CPP LD AR NM STRIP; \
 	PKG_CONFIG=/usr/bin/pkg-config \
 	PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig \
@@ -105,29 +119,49 @@ define HOST_MESON_CONFIGURE
 			--prefix=$(HOST_DIR) \
 			--buildtype=release \
 			$($(PKG)_CONF_OPTS) \
-			$(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/build; \
-	)
+			$(PKG_BUILD_DIR) $(PKG_BUILD_DIR)/build
+endef
+
+define HOST_MESON_CONFIGURE
+	@$(call MESSAGE,"Configuring")
+	$(foreach hook,$($(PKG)_PRE_CONFIGURE_HOOKS),$(call $(hook))$(sep))
+	$(Q)$(call $(PKG)_CONFIGURE_CMDS)
 	$(foreach hook,$($(PKG)_POST_CONFIGURE_HOOKS),$(call $(hook))$(sep))
 endef
 
-define HOST_NINJA_BUID
+define _HOST_NINJA_BUILD_CMDS
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		$(HOST_MAKE_ENV) $($(PKG)_NINJA_ENV) \
-			$(HOST_NINJA_BINARY) $($(PKG)_NINJA_OPTS) -C $(PKG_BUILD_DIR)/build
+		$(HOST_NINJA_BINARY) $(NINJA_OPTS) $($(PKG)_NINJA_OPTS) -C $(PKG_BUILD_DIR)/build
+endef
+
+define HOST_NINJA_BUILD
+	@$(call MESSAGE,"Building")
+	$(foreach hook,$($(PKG)_PRE_BUILD_HOOKS),$(call $(hook))$(sep))
+	$(Q)$(call $(PKG)_BUILD_CMDS)
+	$(foreach hook,$($(PKG)_POST_BUILD_HOOKS),$(call $(hook))$(sep))
+endef
+
+define _HOST_NINJA_INSTALL_CMDS
+	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+		$(HOST_MAKE_ENV) $($(PKG)_NINJA_ENV) \
+		$(HOST_NINJA_BINARY) $(NINJA_OPTS) -C $(PKG_BUILD_DIR)/build install			
 endef
 
 define HOST_NINJA_INSTALL
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
-		$(HOST_MAKE_ENV) $($(PKG)_NINJA_ENV) \
-			$(HOST_NINJA_BINARY) $($(PKG)_NINJA_OPTS) -C $(PKG_BUILD_DIR)/build install			
+	@$(call MESSAGE,"Installing")
+	$(foreach hook,$($(PKG)_PRE_INSTALL_HOOKS),$(call $(hook))$(sep))
+	$(Q)$(call $(PKG)_INSTALL_CMDS)
+	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
 endef
 
 # -----------------------------------------------------------------------------
 
 define host-meson-package
+	$(eval PKG_MODE = $(pkg-mode))
 	$(call PREPARE,$(1))
 	$(call HOST_MESON_CONFIGURE)
-	$(call HOST_NINJA)
-	$(call HOST_NINJA_INSTALL)
+	$(if $(filter $(1),$(PKG_NO_BUILD)),,$(call HOST_NINJA_BUILD))
+	$(if $(filter $(1),$(PKG_NO_INSTALL)),,$(call HOST_NINJA_INSTALL))
 	$(call HOST_FOLLOWUP)
 endef
