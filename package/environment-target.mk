@@ -59,6 +59,7 @@ TARGET_INCLUDE_DIR     = $(TARGET_DIR)$(includedir)
 TARGET_LIBEXEC_DIR     = $(TARGET_DIR)$(libexecdir)
 TARGET_SHARE_DIR       = $(TARGET_DIR)$(datadir)
 
+TARGET_MODULES_DIR     = $(TARGET_DIR)/lib/modules/$(KERNEL_VERSION)
 TARGET_FIRMWARE_DIR    = $(TARGET_BASE_LIB_DIR)/firmware
 
 # -----------------------------------------------------------------------------
