@@ -15,13 +15,12 @@ LIBDPF_MAKE_OPTS = \
 	-C dpflib libdpf.a \
 	CC=$(TARGET_CC) PREFIX=$(TARGET_DIR)/usr
 
-define LIBDPF_INSTALL
+define LIBDPF_INSTALL_CMDS
 	$(INSTALL_DATA) -D $(PKG_BUILD_DIR)/dpflib/libdpf.a $(TARGET_LIB_DIR)/libdpf.a
 	$(INSTALL_DATA) -D $(PKG_BUILD_DIR)/dpflib/dpf.h $(TARGET_INCLUDE_DIR)/libdpf/libdpf.h
 	$(INSTALL_DATA) -D $(PKG_BUILD_DIR)/include/spiflash.h $(TARGET_INCLUDE_DIR)/libdpf/spiflash.h
 	$(INSTALL_DATA) -D $(PKG_BUILD_DIR)/include/usbuser.h $(TARGET_INCLUDE_DIR)/libdpf/usbuser.h
 endef
-LIBDPF_POST_FOLLOWUP_HOOKS += LIBDPF_INSTALL
 
 $(D)/libdpf:
-	$(call generic-package,$(PKG_NO_INSTALL))
+	$(call generic-package)
