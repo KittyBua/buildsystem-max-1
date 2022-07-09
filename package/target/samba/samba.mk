@@ -125,7 +125,7 @@ define SAMBA_INSTALL_FILES
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/smbpasswd $(TARGET_DIR)/etc/samba/private/smbpasswd
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/volatiles.03_samba $(TARGET_DIR)/etc/default/volatiles/03_samba
 endef
-SAMBA_POST_FOLLOWUP_HOOKS += SAMBA_INSTALL_FILES
+SAMBA_POST_INSTALL_HOOKS += SAMBA_INSTALL_FILES
 
 define SAMBA_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_BIN_DIR)/,testparm findsmb smbtar smbclient smbpasswd)
