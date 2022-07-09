@@ -23,5 +23,16 @@ HOST_PYTHON_CONF_OPTS = \
 	--without-cxx-main \
 	--with-threads
 
+define HOST_PYTHON_MAKE_HOSTPGEN
+	$(CHDIR)/$($(PKG)_DIR); \
+		$(MAKE) python Parser/pgen; \
+		mv python ./hostpython; \
+		mv Parser/pgen ./hostpgen; \
+		cp ./hostpgen $(HOST_DIR)/bin/pgen; \
+		$(MAKE) distclean
+	$(call HOST_CONFIGURE)
+endef
+HOST_PYTHON_PRE_BUILD_HOOKS += HOST_PYTHON_MAKE_HOSTPGEN
+
 $(D)/host-python:
 	$(call host-autotools-package)
