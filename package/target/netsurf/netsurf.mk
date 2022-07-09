@@ -41,7 +41,7 @@ define NETSURF_INSTALL_CONFIG
 	echo "desc=Web Browser"		>> $(SHARE_NEUTRINO_PLUGINS)/netsurf-fb.cfg
 	echo "type=2"			>> $(SHARE_NEUTRINO_PLUGINS)/netsurf-fb.cfg
 endef
-NETSURF_POST_FOLLOWUP_HOOKS += NETSURF_INSTALL_CONFIG
+NETSURF_POST_INSTALL_HOOKS += NETSURF_INSTALL_CONFIG
 
 $(D)/netsurf:
 	$(call generic-package)
