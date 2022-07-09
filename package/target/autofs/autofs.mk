@@ -26,7 +26,6 @@ AUTOFS_CONF_ENV = \
 	ac_cv_linux_procfs=yes
 
 AUTOFS_CONF_OPTS = \
-	--datarootdir=$(REMOVE_datarootdir) \
 	--disable-mount-locking \
 	--enable-ignore-busy \
 	--without-openldap \
@@ -44,13 +43,6 @@ define AUTOFS_PATCH_RPC_SUBS_H
 endef
 AUTOFS_POST_PATCH_HOOKS += AUTOFS_PATCH_RPC_SUBS_H
 
-AUTOFS_MAKE_ARGS = \
-	SUBDIRS="lib daemon modules" \
-	DONTSTRIP=1
-
-AUTOFS_MAKE_INSTALL_ARGS = \
-	SUBDIRS="lib daemon modules"
-
 define AUTOFS_INSTALL_INIT_SYSV
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/autofs.init $(TARGET_DIR)/etc/init.d/autofs
 	$(UPDATE-RC.D) autofs defaults 17
@@ -64,7 +56,7 @@ define AUTOFS_INSTALL_FILES
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/autofs $(TARGET_DIR)/etc/default/autofs
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/volatiles.99_autofs $(TARGET_DIR)/etc/default/volatiles/99_autofs
 endef
-AUTOFS_POST_FOLLOWUP_HOOKS += AUTOFS_INSTALL_FILES
+AUTOFS_POST_INSTALL_HOOKS += AUTOFS_INSTALL_FILES
 
 define AUTOFS_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_DIR)/etc/,autofs_ldap_auth.conf)
