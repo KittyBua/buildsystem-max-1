@@ -452,10 +452,6 @@ endef
 define TARGET_FOLLOWUP
 	@$(call MESSAGE,"Follow-up build")
 	$(foreach hook,$($(PKG)_PRE_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
-	$(if $(BS_INIT_SYSTEMD),\
-		$($(PKG)_INSTALL_INIT_SYSTEMD))
-	$(if $(BS_INIT_SYSV),\
-		$($(PKG)_INSTALL_INIT_SYSV))
 	$(foreach hook,$($(PKG)_POST_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
 	$(call REWRITE_CONFIG_SCRIPTS)
 	$(REWRITE_LIBTOOL)

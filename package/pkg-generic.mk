@@ -33,6 +33,10 @@ define TARGET_MAKE_INSTALL
 	$(foreach hook,$($(PKG)_PRE_INSTALL_HOOKS),$(call $(hook))$(sep))
 	$(Q)$(call $(PKG)_INSTALL_CMDS,$(1))
 	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
+	$(if $(BS_INIT_SYSTEMD),\
+		$($(PKG)_INSTALL_INIT_SYSTEMD))
+	$(if $(BS_INIT_SYSV),\
+		$($(PKG)_INSTALL_INIT_SYSV))
 endef
 
 # -----------------------------------------------------------------------------
