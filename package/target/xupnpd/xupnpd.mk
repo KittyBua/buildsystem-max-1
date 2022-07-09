@@ -42,7 +42,7 @@ define XUPNPD_INSTALL_PLUGINS
 	$(INSTALL_DATA) -D $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/scripts-lua/xupnpd/xupnpd_vimeo.lua $(TARGET_SHARE_DIR)/xupnpd/plugins/
 	$(INSTALL_DATA) -D $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/scripts-lua/xupnpd/xupnpd_youtube.lua $(TARGET_SHARE_DIR)/xupnpd/plugins/
 endef
-XUPNPD_POST_FOLLOWUP_HOOKS += XUPNPD_INSTALL_PLUGINS
+XUPNPD_POST_INSTALL_HOOKS += XUPNPD_INSTALL_PLUGINS
 
 $(D)/xupnpd:
 	$(call generic-package)
