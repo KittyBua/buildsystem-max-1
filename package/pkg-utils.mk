@@ -21,6 +21,11 @@ PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(pkgname)/patches
 # check for necessary $(PKG) variables
 define PKG_CHECK_VARIABLES
 
+# extract
+ifndef $(PKG)_EXTRACT_DIR
+  $(PKG)_EXTRACT_DIR =
+endif
+
 # patch
 ifndef $(PKG)_PATCH_DIR
   $(PKG)_PATCH_DIR = $$(PKG_PATCHES_DIR)
@@ -251,36 +256,41 @@ define EXTRACT
 	@$(call MESSAGE,"Extracting")
 	$(foreach hook,$($(PKG)_PRE_EXTRACT_HOOKS),$(call $(hook))$(sep))
 	$(Q)( \
+	EXTRACT_DIR=$(1); \
+	if [ "$($(PKG)_EXTRACT_DIR)" ]; then \
+		EXTRACT_DIR=$(1)/$($(PKG)_EXTRACT_DIR); \
+		$(INSTALL) -d $${EXTRACT_DIR}; \
+	fi; \
 	case $($(PKG)_SOURCE) in \
 	  *.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.xz | *.txz) \
-	    tar -xf ${DL_DIR}/$($(PKG)_SOURCE) -C $(1); \
+	    tar -xf $(DL_DIR)/$($(PKG)_SOURCE) -C $${EXTRACT_DIR}; \
 	    ;; \
 	  *.zip) \
-	    unzip -o -q ${DL_DIR}/$($(PKG)_SOURCE) -d $(1); \
+	    unzip -o -q $(DL_DIR)/$($(PKG)_SOURCE) -d $${EXTRACT_DIR}; \
 	    ;; \
 	  *.git) \
-	    cp -a -t $(1) $(DL_DIR)/$($(PKG)_SOURCE); \
+	    cp -a -t $${EXTRACT_DIR} $(DL_DIR)/$($(PKG)_SOURCE); \
 	    if test $($(PKG)_CHECKOUT); then \
 	      $(call MESSAGE,"git checkout $($(PKG)_CHECKOUT)"); \
-	      $(CD) $(1)/$($(PKG)_DIR); git checkout -q $($(PKG)_CHECKOUT); \
+	      $(CD) $${EXTRACT_DIR}/$($(PKG)_DIR); git checkout $($(PKG)_CHECKOUT); \
 	    fi; \
 	    ;; \
 	  *.hg | hg.*) \
-	    cp -a -t $(1) $(DL_DIR)/$($(PKG)_SOURCE); \
+	    cp -a -t $${EXTRACT_DIR} $(DL_DIR)/$($(PKG)_SOURCE); \
 	    if test $($(PKG)_CHECKOUT); then \
 	      $(call MESSAGE,"hg checkout $($(PKG)_CHECKOUT)"); \
-	      $(CD) $(1)/$($(PKG)_DIR); hg checkout $($(PKG)_CHECKOUT); \
+	      $(CD) $${EXTRACT_DIR}/$($(PKG)_DIR); hg checkout $($(PKG)_CHECKOUT); \
 	    fi; \
 	    ;; \
 	  *.svn | svn.*) \
-	    cp -a -t $(1) $(DL_DIR)/$($(PKG)_SOURCE); \
+	    cp -a -t $${EXTRACT_DIR} $(DL_DIR)/$($(PKG)_SOURCE); \
 	    if test $($(PKG)_CHECKOUT); then \
 	      $(call MESSAGE,"svn checkout $($(PKG)_CHECKOUT)"); \
-	      $(CD) $(1)/$($(PKG)_DIR); svn checkout $($(PKG)_CHECKOUT); \
+	      $(CD) $${EXTRACT_DIR}/$($(PKG)_DIR); svn checkout $($(PKG)_CHECKOUT); \
 	    fi; \
 	    ;; \
 	  *) \
-	    $(call MESSAGE,"Cannot extract $($(PKG)_SOURCE)"); \
+	    $(call WARNING,"Cannot extract $($(PKG)_SOURCE)"); \
 	    false ;; \
 	esac \
 	)
