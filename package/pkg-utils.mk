@@ -10,6 +10,7 @@ pkgname = $(subst -config,,$(subst -upgradeconfig,,$(basename $(@F))))
 pkg = $(call LOWERCASE,$(pkgname))
 PKG = $(call UPPERCASE,$(pkgname))
 
+PKG_PARENT = $(subst HOST_,,$(PKG))
 PKG_PACKAGE = $(if $(filter $(firstword $(subst -, ,$(pkg))),host),HOST,TARGET)
 
 PKG_BUILD_DIR = $(BUILD_DIR)/$($(PKG)_DIR)
@@ -20,6 +21,22 @@ PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(pkgname)/patches
 
 # check for necessary $(PKG) variables
 define PKG_CHECK_VARIABLES
+
+# auto-assign HOST_ variables
+ifeq ($(PKG_PACKAGE),HOST)
+  ifndef $(PKG)_VERSION
+    $(PKG)_VERSION = $$($(PKG_PARENT)_VERSION)
+  endif
+  ifndef $(PKG)_DIR
+    $(PKG)_DIR = $$($(PKG_PARENT)_DIR)
+  endif
+  ifndef $(PKG)_SOURCE
+    $(PKG)_SOURCE = $$($(PKG_PARENT)_SOURCE)
+  endif
+  ifndef $(PKG)_SITE
+    $(PKG)_SITE = $$($(PKG_PARENT)_SITE)
+  endif
+endif
 
 # extract
 ifndef $(PKG)_EXTRACT_DIR
