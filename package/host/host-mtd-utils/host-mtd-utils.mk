@@ -4,13 +4,6 @@
 #
 ################################################################################
 
-HOST_MTD_UTILS_VERSION = $(MTD_UTILS_VERSION)
-HOST_MTD_UTILS_DIR = mtd-utils-$(HOST_MTD_UTILS_VERSION)
-HOST_MTD_UTILS_SOURCE = mtd-utils-$(HOST_MTD_UTILS_VERSION).tar.bz2
-HOST_MTD_UTILS_SITE = ftp://ftp.infradead.org/pub/mtd-utils
-
-HOST_MTD_UTILS_DEPENDS = bootstrap
-
 $(D)/host-mtd-utils:
 HOST_MTD_UTILS_CONF_ENV = \
 	ZLIB_CFLAGS=" " \
@@ -23,5 +16,5 @@ HOST_MTD_UTILS_CONF_OPTS = \
 	--without-xattr \
 	--disable-tests
 
-$(D)/host-mtd-utils:
+$(D)/host-mtd-utils: | bootstrap
 	$(call host-autotools-package)

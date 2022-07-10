@@ -4,10 +4,8 @@
 #
 ################################################################################
 
-HOST_CCACHE_VERSION = 2021-03-29
-HOST_CCACHE_DIR = local
-
-HOST_CCACHE_DEPENDS = directories
+CCACHE_VERSION = 2021-03-29
+CCACHE_DIR = local
 
 HOST_CCACHE_BIN    = /usr/bin/ccache
 HOST_CCACHE_BINDIR = $(HOST_DIR)/bin
@@ -27,7 +25,7 @@ define TARGET_CCACHE_LINK
 	ln -sf $(HOST_CCACHE_BIN) $(HOST_CCACHE_BINDIR)/$(GNU_TARGET_NAME)-g++
 endef
 
-$(D)/host-ccache:
+$(D)/host-ccache: | directories
 	$(call STARTUP)
 	$(HOST_CCACHE_LINK)
 	$(TARGET_CCACHE_LINK)

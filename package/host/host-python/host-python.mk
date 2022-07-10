@@ -4,16 +4,9 @@
 #
 ################################################################################
 
-HOST_PYTHON_VERSION = 2.7.18
-HOST_PYTHON_DIR = Python-$(HOST_PYTHON_VERSION)
-HOST_PYTHON_SOURCE = Python-$(HOST_PYTHON_VERSION).tar.xz
-HOST_PYTHON_SITE = https://www.python.org/ftp/python/$(HOST_PYTHON_VERSION)
-
-HOST_PYTHON_DEPENDS = bootstrap
-
 HOST_PYTHON_BINARY = $(HOST_DIR)/bin/python2
 
-HOST_PYTHON_LIB_DIR     = lib/python$(basename $(HOST_PYTHON_VERSION))
+HOST_PYTHON_LIB_DIR = lib/python$(basename $(HOST_PYTHON_VERSION))
 HOST_PYTHON_INCLUDE_DIR = include/python$(basename $(HOST_PYTHON_VERSION))
 HOST_PYTHON_SITEPACKAGES_DIR = $(HOST_PYTHON_LIB_DIR)/site-packages
 
@@ -34,5 +27,5 @@ define HOST_PYTHON_MAKE_HOSTPGEN
 endef
 HOST_PYTHON_PRE_BUILD_HOOKS += HOST_PYTHON_MAKE_HOSTPGEN
 
-$(D)/host-python:
+$(D)/host-python: | bootstrap
 	$(call host-autotools-package)

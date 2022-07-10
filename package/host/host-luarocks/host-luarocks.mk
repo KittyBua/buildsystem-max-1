@@ -4,12 +4,12 @@
 #
 ################################################################################
 
-HOST_LUAROCKS_VERSION = 3.9.0
-HOST_LUAROCKS_DIR = luarocks-$(HOST_LUAROCKS_VERSION)
-HOST_LUAROCKS_SOURCE = luarocks-$(HOST_LUAROCKS_VERSION).tar.gz
-HOST_LUAROCKS_SITE = https://luarocks.github.io/luarocks/releases
+LUAROCKS_VERSION = 3.9.0
+LUAROCKS_DIR = luarocks-$(HOST_LUAROCKS_VERSION)
+LUAROCKS_SOURCE = luarocks-$(HOST_LUAROCKS_VERSION).tar.gz
+LUAROCKS_SITE = https://luarocks.github.io/luarocks/releases
 
-HOST_LUAROCKS_DEPENDS = bootstrap host-lua
+HOST_LUAROCKS_DEPENDS = host-lua
 
 LUAROCKS_CONFIG_DIR  = $(HOST_DIR)/etc
 HOST_LUAROCKS_CONFIG = $(LUAROCKS_CONFIG_DIR)/luarocks/config-$(LUA_ABIVERSION).lua
@@ -29,5 +29,5 @@ define HOST_LUAROCKS_CREATE_CONFIG
 endef
 HOST_LUAROCKS_POST_INSTALL_HOOKS += HOST_LUAROCKS_CREATE_CONFIG
 
-$(D)/host-luarocks:
+$(D)/host-luarocks: | bootstrap
 	$(call host-autotools-package)

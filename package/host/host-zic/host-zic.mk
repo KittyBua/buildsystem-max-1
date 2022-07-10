@@ -4,19 +4,17 @@
 #
 ################################################################################
 
-HOST_ZIC_VERSION = 2021b
-HOST_ZIC_DIR = tzcode
-HOST_ZIC_SOURCE = tzcode$(HOST_ZIC_VERSION).tar.gz
-HOST_ZIC_SITE = https://www.iana.org/time-zones/repository/releases
-
-HOST_ZIC_DEPENDS = bootstrap
+ZIC_VERSION = 2021b
+ZIC_DIR = tzcode
+ZIC_SOURCE = tzcode$(HOST_ZIC_VERSION).tar.gz
+ZIC_SITE = https://www.iana.org/time-zones/repository/releases
 
 define HOST_ZIC_INSTALL_DIR
 	$(MKDIR)/$($(PKG)_DIR)
 endef
 HOST_ZIC_PRE_EXTRACT_HOOKS += HOST_ZIC_INSTALL_DIR
 
-$(D)/host-zic:
+$(D)/host-zic: | bootstrap
 	$(call STARTUP)
 	$(call CLEANUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
