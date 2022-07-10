@@ -4,13 +4,12 @@
 #
 ################################################################################
 
-HD60_LIBGLES_DATE    = 20181201
+HD60_LIBGLES_DATE = 20181201
 HD60_LIBGLES_VERSION = $(HD60_LIBGLES_DATE)
-HD60_LIBGLES_SOURCE  = hd60-mali-$(HD60_LIBGLES_VERSION).zip
-HD60_LIBGLES_SITE    = http://downloads.mutant-digital.net/hd60
-HD60_LIBGLES_DEPENDS = bootstrap
+HD60_LIBGLES_SOURCE = hd60-mali-$(HD60_LIBGLES_VERSION).zip
+HD60_LIBGLES_SITE = http://downloads.mutant-digital.net/hd60
 
-$(D)/hd60-libgles:
+$(D)/hd60-libgles: | bootstrap
 	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(TARGET_LIB_DIR))

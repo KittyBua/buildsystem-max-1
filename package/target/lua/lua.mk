@@ -10,7 +10,7 @@ LUA_DIR = lua-$(LUA_VERSION)
 LUA_SOURCE = lua-$(LUA_VERSION).tar.gz
 LUA_SITE = https://www.lua.org/ftp
 
-LUA_DEPENDS = bootstrap host-lua ncurses
+LUA_DEPENDS = host-lua ncurses
 
 LUA_MAKE_ARGS = \
 	linux
@@ -32,5 +32,5 @@ define LUA_TARGET_CLEANUP
 endef
 LUA_TARGET_CLEANUP_HOOKS += LUA_TARGET_CLEANUP
 
-$(D)/lua:
+$(D)/lua: | bootstrap
 	$(call generic-package)

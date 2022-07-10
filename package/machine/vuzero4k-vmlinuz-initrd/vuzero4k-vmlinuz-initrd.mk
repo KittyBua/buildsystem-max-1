@@ -13,9 +13,8 @@ VUZERO4K_VMLINUZ_INITRD_SITE = http://code.vuplus.com/download/release/kernel
 endif
 VUZERO4K_VMLINUZ_INITRD_VERSION = $(VUZERO4K_VMLINUZ_INITRD_DATE)
 VUZERO4K_VMLINUZ_INITRD_SOURCE  = vmlinuz-initrd_vuzero4k_$(VUZERO4K_VMLINUZ_INITRD_VERSION).tar.gz
-VUZERO4K_VMLINUZ_INITRD_DEPENDS = bootstrap
 
-$(D)/vuzero4k-vmlinuz-initrd:
+$(D)/vuzero4k-vmlinuz-initrd: | bootstrap
 	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(BUILD_DIR))

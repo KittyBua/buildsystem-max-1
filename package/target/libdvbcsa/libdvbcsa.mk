@@ -9,9 +9,7 @@ LIBDVBCSA_DIR = libdvbcsa.git
 LIBDVBCSA_SOURCE = libdvbcsa.git
 LIBDVBCSA_SITE = https://code.videolan.org/videolan
 
-LIBDVBCSA_DEPENDS = bootstrap
-
 LIBDVBCSA_AUTORECONF = YES
 
-$(D)/libdvbcsa:
+$(D)/libdvbcsa: | bootstrap
 	$(call autotools-package)

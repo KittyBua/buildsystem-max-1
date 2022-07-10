@@ -9,7 +9,7 @@ LIBVORBISIDEC_DIR = libvorbisidec-$(LIBVORBISIDEC_VERSION)
 LIBVORBISIDEC_SOURCE = libvorbisidec_$(LIBVORBISIDEC_VERSION).orig.tar.gz
 LIBVORBISIDEC_SITE = https://ftp.de.debian.org/debian/pool/main/libv/libvorbisidec
 
-LIBVORBISIDEC_DEPENDS = bootstrap libogg
+LIBVORBISIDEC_DEPENDS = libogg
 
 LIBVORBISIDEC_AUTORECONF = YES
 
@@ -18,5 +18,5 @@ define LIBVORBISIDEC_PATCH_CONFIGURE
 endef
 LIBVORBISIDEC_POST_PATCH_HOOKS = LIBVORBISIDEC_PATCH_CONFIGURE
 
-$(D)/libvorbisidec:
+$(D)/libvorbisidec: | bootstrap
 	$(call autotools-package)

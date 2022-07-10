@@ -4,14 +4,13 @@
 #
 ################################################################################
 
-VUULTIMO4K_DRIVER_DATE    = 20190424
-VUULTIMO4K_DRIVER_REV     = r0
+VUULTIMO4K_DRIVER_DATE = 20190424
+VUULTIMO4K_DRIVER_REV = r0
 VUULTIMO4K_DRIVER_VERSION = 3.14.28-$(VUULTIMO4K_DRIVER_DATE).$(VUULTIMO4K_DRIVER_REV)
-VUULTIMO4K_DRIVER_SOURCE  = vuplus-dvb-proxy-vuultimo4k-$(VUULTIMO4K_DRIVER_VERSION).tar.gz
-VUULTIMO4K_DRIVER_SITE    = http://code.vuplus.com/download/release/vuplus-dvb-proxy
-VUULTIMO4K_DRIVER_DEPENDS = bootstrap
+VUULTIMO4K_DRIVER_SOURCE = vuplus-dvb-proxy-vuultimo4k-$(VUULTIMO4K_DRIVER_VERSION).tar.gz
+VUULTIMO4K_DRIVER_SITE = http://code.vuplus.com/download/release/vuplus-dvb-proxy
 
-$(D)/vuultimo4k-driver:
+$(D)/vuultimo4k-driver: | bootstrap
 	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

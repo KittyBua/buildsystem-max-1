@@ -9,7 +9,7 @@ HDDTEMP_DIR = hddtemp-$(HDDTEMP_VERSION)
 HDDTEMP_SOURCE = hddtemp-$(HDDTEMP_VERSION).tar.bz2
 HDDTEMP_SITE = http://savannah.c3sl.ufpr.br/hddtemp
 
-HDDTEMP_DEPENDS = bootstrap libiconv
+HDDTEMP_DEPENDS = libiconv
 
 HDDTEMP_CONF_OPTS = \
 	LIBS="-liconv" \
@@ -23,5 +23,5 @@ define HDDTEMP_INSTALL_FILES
 endef
 HDDTEMP_POST_INSTALL_HOOKS += HDDTEMP_INSTALL_FILES
 
-$(D)/hddtemp:
+$(D)/hddtemp: | bootstrap
 	$(call autotools-package)

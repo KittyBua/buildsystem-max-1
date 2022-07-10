@@ -4,13 +4,12 @@
 #
 ################################################################################
 
-OSMIO4KPLUS_DRIVER_DATE    = 20201013
+OSMIO4KPLUS_DRIVER_DATE = 20201013
 OSMIO4KPLUS_DRIVER_VERSION = 5.9.0-$(OSMIO4KPLUS_DRIVER_DATE)
-OSMIO4KPLUS_DRIVER_SOURCE  = osmio4kplus-drivers-$(OSMIO4KPLUS_DRIVER_VERSION).zip
-OSMIO4KPLUS_DRIVER_SITE    = http://source.mynonpublic.com/edision
-OSMIO4KPLUS_DRIVER_DEPENDS = bootstrap
+OSMIO4KPLUS_DRIVER_SOURCE = osmio4kplus-drivers-$(OSMIO4KPLUS_DRIVER_VERSION).zip
+OSMIO4KPLUS_DRIVER_SITE = http://source.mynonpublic.com/edision
 
-$(D)/osmio4kplus-driver:
+$(D)/osmio4kplus-driver: | bootstrap
 	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

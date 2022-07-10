@@ -9,7 +9,7 @@ RPCBIND_DIR = rpcbind-$(RPCBIND_VERSION)
 RPCBIND_SOURCE = rpcbind-$(RPCBIND_VERSION).tar.bz2
 RPCBIND_SITE = https://sourceforge.net/projects/rpcbind/files/rpcbind/$(RPCBIND_VERSION)
 
-RPCBIND_DEPENDS = bootstrap libtirpc
+RPCBIND_DEPENDS = libtirpc
 
 RPCBIND_AUTORECONF = YES
 
@@ -31,5 +31,5 @@ define RPCBIND_INSTALL_FILES
 endef
 RPCBIND_POST_INSTALL_HOOKS += RPCBIND_INSTALL_FILES
 
-$(D)/rpcbind:
+$(D)/rpcbind: | bootstrap
 	$(call autotools-package)

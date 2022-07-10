@@ -9,7 +9,7 @@ POPT_DIR = popt-$(POPT_VERSION)
 POPT_SOURCE = popt-$(POPT_VERSION).tar.gz
 POPT_SITE = http://ftp.rpm.org/popt/releases/popt-1.x
 
-POPT_DEPENDS = bootstrap libiconv
+POPT_DEPENDS = libiconv
 
 POPT_AUTORECONF = YES
 
@@ -21,5 +21,5 @@ POPT_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
 	--disable-static
 
-$(D)/popt:
+$(D)/popt: | bootstrap
 	$(call autotools-package)

@@ -9,8 +9,6 @@ CA_BUNDLE_DIR = /etc/ssl/certs
 CA_BUNDLE_SOURCE = cacert.pem
 CA_BUNDLE_SITE = https://curl.se/ca
 
-CA_BUNDLE_DEPENDS = bootstrap
-
 CA_BUNDLE_CRT = ca-certificates.crt
 
 define CA_BUNDLE_INSTALL_FILES
@@ -18,7 +16,7 @@ define CA_BUNDLE_INSTALL_FILES
 endef
 CA_BUNDLE_POST_FOLLOWUP_HOOKS += CA_BUNDLE_INSTALL_FILES
 
-$(D)/ca-bundle:
+$(D)/ca-bundle: | bootstrap
 	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(CD) $(DL_DIR); \

@@ -9,7 +9,7 @@ RTMPDUMP_DIR = rtmpdump.git
 RTMPDUMP_SOURCE = rtmpdump.git
 RTMPDUMP_SITE = https://github.com/oe-alliance
 
-RTMPDUMP_DEPENDS = bootstrap zlib openssl
+RTMPDUMP_DEPENDS = zlib openssl
 
 RTMPDUMP_MAKE_ENV = \
 	CROSS_COMPILE=$(TARGET_CROSS) \
@@ -25,5 +25,5 @@ define RTMPDUMP_TARGET_CLEANUP
 endef
 RTMPDUMP_TARGET_CLEANUP_HOOKS += RTMPDUMP_TARGET_CLEANUP
 
-$(D)/rtmpdump:
+$(D)/rtmpdump: | bootstrap
 	$(call generic-package)

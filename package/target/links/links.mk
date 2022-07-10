@@ -9,7 +9,7 @@ LINKS_DIR = links-$(LINKS_VERSION)
 LINKS_SOURCE = links-$(LINKS_VERSION).tar.bz2
 LINKS_SITE = http://links.twibright.com/download
 
-LINKS_DEPENDS = bootstrap freetype libpng libjpeg-turbo openssl zlib
+LINKS_DEPENDS = freetype libpng libjpeg-turbo openssl zlib
 
 LINKS_AUTORECONF = YES
 
@@ -61,5 +61,5 @@ define LINKS_INSTALL_FILES
 endef
 LINKS_POST_INSTALL_HOOKS += LINKS_INSTALL_FILES
 
-$(D)/links:
+$(D)/links: | bootstrap
 	$(call autotools-package)

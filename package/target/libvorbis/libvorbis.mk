@@ -9,7 +9,7 @@ LIBVORBIS_DIR = libvorbis-$(LIBVORBIS_VERSION)
 LIBVORBIS_SOURCE = libvorbis-$(LIBVORBIS_VERSION).tar.xz
 LIBVORBIS_SITE = https://ftp.osuosl.org/pub/xiph/releases/vorbis
 
-LIBVORBIS_DEPENDS = bootstrap libogg
+LIBVORBIS_DEPENDS = libogg
 
 LIBVORBIS_AUTORECONF = YES
 
@@ -18,5 +18,5 @@ LIBVORBIS_CONF_OPTS = \
 	--disable-examples \
 	--disable-oggtest
 
-$(D)/libvorbis:
+$(D)/libvorbis: | bootstrap
 	$(call autotools-package)

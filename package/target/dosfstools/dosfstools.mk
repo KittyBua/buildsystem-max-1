@@ -9,8 +9,6 @@ DOSFSTOOLS_DIR = dosfstools-$(DOSFSTOOLS_VERSION)
 DOSFSTOOLS_SOURCE = dosfstools-$(DOSFSTOOLS_VERSION).tar.gz
 DOSFSTOOLS_SITE = https://github.com/dosfstools/dosfstools/releases/download/v$(DOSFSTOOLS_VERSION)
 
-DOSFSTOOLS_DEPENDS = bootstrap
-
 DOSFSTOOLS_AUTORECONF = YES
 
 DOSFSTOOLS_CFLAGS = $(TARGET_CFLAGS) -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -fomit-frame-pointer
@@ -22,5 +20,5 @@ DOSFSTOOLS_CONF_OPTS = \
 	--enable-compat-symlinks \
 	CFLAGS="$(DOSFSTOOLS_CFLAGS)"
 
-$(D)/dosfstools:
+$(D)/dosfstools: | bootstrap
 	$(call autotools-package)

@@ -9,7 +9,7 @@ USHARE_DIR = ushare-uShare_v$(USHARE_VERSION)
 USHARE_SOURCE = uShare_v$(USHARE_VERSION).tar.gz
 USHARE_SITE = https://github.com/GeeXboX/ushare/archive
 
-USHARE_DEPENDS = bootstrap libupnp
+USHARE_DEPENDS = libupnp
 
 USHARE_CONF_OPTS = \
 	--prefix=/usr \
@@ -40,5 +40,5 @@ define USHARE_INSTALL_FILES
 endef
 USHARE_POST_INSTALL_HOOKS += USHARE_INSTALL_FILES
 
-$(D)/ushare:
+$(D)/ushare: | bootstrap
 	$(call generic-package)

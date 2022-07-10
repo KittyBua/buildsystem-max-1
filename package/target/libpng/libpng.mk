@@ -10,7 +10,7 @@ LIBPNG_DIR = libpng-$(LIBPNG_VERSION)
 LIBPNG_SOURCE = libpng-$(LIBPNG_VERSION).tar.xz
 LIBPNG_SITE = https://downloads.sourceforge.net/project/libpng/libpng$(LIBPNG_SERIES)/$(LIBPNG_VERSION)
 
-LIBPNG_DEPENDS = bootstrap zlib
+LIBPNG_DEPENDS = zlib
 
 LIBPNG_CONFIG_SCRIPTS = libpng$(LIBPNG_SERIES)-config
 
@@ -24,5 +24,5 @@ define LIBPNG_TARGET_CLEANUP
 endef
 LIBPNG_TARGET_CLEANUP_HOOKS += LIBPNG_TARGET_CLEANUP
 
-$(D)/libpng:
+$(D)/libpng: | bootstrap
 	$(call autotools-package)

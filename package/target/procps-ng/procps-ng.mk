@@ -8,7 +8,8 @@ PROCPS_NG_VERSION = 4.0.0
 PROCPS_NG_DIR = procps-ng-$(PROCPS_NG_VERSION)
 PROCPS_NG_SOURCE = procps-ng-$(PROCPS_NG_VERSION).tar.xz
 PROCPS_NG_SITE = http://sourceforge.net/projects/procps-ng/files/Production
-PROCPS_NG_DEPENDS = bootstrap ncurses
+
+PROCPS_NG_DEPENDS = ncurses
 
 PROCPS_NG_AUTORECONF = YES
 
@@ -38,5 +39,5 @@ define PROCPS_NG_INSTALL_FILES
 endef
 PROCPS_NG_POST_INSTALL_HOOKS += PROCPS_NG_INSTALL_FILES
 
-$(D)/procps-ng:
+$(D)/procps-ng: | bootstrap
 	$(call autotools-package)

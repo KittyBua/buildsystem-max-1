@@ -8,7 +8,8 @@ DBUS_VERSION = 1.12.6
 DBUS_DIR = dbus-$(DBUS_VERSION)
 DBUS_SOURCE = dbus-$(DBUS_VERSION).tar.gz
 DBUS_SITE = https://dbus.freedesktop.org/releases/dbus
-DBUS_DEPENDS = bootstrap expat
+
+DBUS_DEPENDS = expat
 
 DBUS_CONF_OPTS = \
 	CFLAGS="$(TARGET_CFLAGS) -Wno-cast-align" \
@@ -37,5 +38,5 @@ define DBUS_TARGET_CLEANUP
 endef
 DBUS_TARGET_CLEANUP_HOOKS += DBUS_TARGET_CLEANUP
 
-$(D)/dbus:
+$(D)/dbus: | bootstrap
 	$(call autotools-package)

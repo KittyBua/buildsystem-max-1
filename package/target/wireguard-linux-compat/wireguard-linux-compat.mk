@@ -9,7 +9,7 @@ WIREGUARD_LINUX_COMPAT_DIR = wireguard-linux-compat-$(WIREGUARD_LINUX_COMPAT_VER
 WIREGUARD_LINUX_COMPAT_SOURCE = wireguard-linux-compat-$(WIREGUARD_LINUX_COMPAT_VERSION).tar.xz
 WIREGUARD_LINUX_COMPAT_SITE = https://git.zx2c4.com/wireguard-linux-compat/snapshot
 
-WIREGUARD_LINUX_COMPAT_DEPENDS = bootstrap kernel libmnl
+WIREGUARD_LINUX_COMPAT_DEPENDS = kernel libmnl
 
 WIREGUARD_LINUX_COMPAT_SUBDIR = src
 
@@ -29,5 +29,5 @@ define WIREGUARD_LINUX_COMPAT_INSTALL_FILES
 endef
 WIREGUARD_LINUX_COMPAT_POST_INSTALL_HOOKS += WIREGUARD_LINUX_COMPAT_INSTALL_FILES
 
-$(D)/wireguard-linux-compat:
+$(D)/wireguard-linux-compat: | bootstrap
 	$(call generic-package)

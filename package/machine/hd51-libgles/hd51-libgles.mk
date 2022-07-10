@@ -4,13 +4,12 @@
 #
 ################################################################################
 
-HD51_LIBGLES_DATE    = 20191101
+HD51_LIBGLES_DATE = 20191101
 HD51_LIBGLES_VERSION = $(HD51_LIBGLES_DATE)
-HD51_LIBGLES_SOURCE  = hd51-v3ddriver-$(HD51_LIBGLES_VERSION).zip
-HD51_LIBGLES_SITE    = http://downloads.mutant-digital.net/v3ddriver
-HD51_LIBGLES_DEPENDS = bootstrap
+HD51_LIBGLES_SOURCE = hd51-v3ddriver-$(HD51_LIBGLES_VERSION).zip
+HD51_LIBGLES_SITE = http://downloads.mutant-digital.net/v3ddriver
 
-$(D)/hd51-libgles:
+$(D)/hd51-libgles: | bootstrap
 	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(TARGET_LIB_DIR))

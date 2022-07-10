@@ -9,9 +9,9 @@ PYTHON_DIR = Python-$(PYTHON_VERSION)
 PYTHON_SOURCE = Python-$(PYTHON_VERSION).tar.xz
 PYTHON_SITE = https://www.python.org/ftp/python/$(PYTHON_VERSION)
 
-PYTHON_DEPENDS = bootstrap host-python ncurses zlib openssl libffi expat bzip2
+PYTHON_DEPENDS = host-python ncurses zlib openssl libffi expat bzip2
 
-PYTHON_LIB_DIR     = usr/lib/python$(basename $(PYTHON_VERSION))
+PYTHON_LIB_DIR = usr/lib/python$(basename $(PYTHON_VERSION))
 PYTHON_INCLUDE_DIR = usr/include/python$(basename $(PYTHON_VERSION))
 PYTHON_SITEPACKAGES_DIR = $(PYTHON_LIB_DIR)/site-packages
 
@@ -71,5 +71,5 @@ define PYTHON_CREATE_SYMLINK
 endef
 PYTHON_POST_INSTALL_HOOKS += PYTHON_CREATE_SYMLINK
 
-$(D)/python:
+$(D)/python: | bootstrap
 	$(call autotools-package)

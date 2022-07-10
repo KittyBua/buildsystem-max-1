@@ -4,13 +4,12 @@
 #
 ################################################################################
 
-H7_DRIVER_DATE    = 20191123
+H7_DRIVER_DATE = 20191123
 H7_DRIVER_VERSION = 4.10.12-$(H7_DRIVER_DATE)
-H7_DRIVER_SOURCE  = h7-drivers-$(H7_DRIVER_VERSION).zip
-H7_DRIVER_SITE    = http://source.mynonpublic.com/zgemma
-H7_DRIVER_DEPENDS = bootstrap
+H7_DRIVER_SOURCE = h7-drivers-$(H7_DRIVER_VERSION).zip
+H7_DRIVER_SITE = http://source.mynonpublic.com/zgemma
 
-$(D)/h7-driver:
+$(D)/h7-driver: | bootstrap
 	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

@@ -17,7 +17,7 @@ OSCAM_DIR     = oscam-smod.git
 OSCAM_SOURCE  = oscam-smod.git
 OSCAM_SITE    = https://github.com/Schimmelreiter
 endif
-OSCAM_DEPENDS = bootstrap openssl libusb
+OSCAM_DEPENDS = openssl libusb
 
 OSCAM_CONF_OPTS = \
 	--disable all \
@@ -76,7 +76,7 @@ $(D)/oscam.do_compile:
 		CC_OPTS=" -Os -pipe "
 	@touch $@
 
-$(D)/oscam: oscam.do_prepare oscam.do_compile
+$(D)/oscam: | bootstrap oscam.do_prepare oscam.do_compile
 	rm -rf $(IMAGE_DIR)/$(OSCAM_FLAVOUR)
 	mkdir $(IMAGE_DIR)/$(OSCAM_FLAVOUR)
 	cp -pR $(PKG_BUILD_DIR)/$(OSCAM_FLAVOUR)* $(IMAGE_DIR)/$(OSCAM_FLAVOUR)/

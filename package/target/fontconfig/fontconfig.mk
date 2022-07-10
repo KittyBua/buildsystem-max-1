@@ -9,7 +9,7 @@ FONTCONFIG_DIR = fontconfig-$(FONTCONFIG_VERSION)
 FONTCONFIG_SOURCE = fontconfig-$(FONTCONFIG_VERSION).tar.xz
 FONTCONFIG_SITE = https://www.freedesktop.org/software/fontconfig/release
 
-FONTCONFIG_DEPENDS = bootstrap freetype expat
+FONTCONFIG_DEPENDS = freetype expat
 
 FONTCONFIG_CONF_OPTS = \
 	--bindir=$(REMOVE_bindir) \
@@ -25,5 +25,5 @@ define FONTCONFIG_TARGET_CLEANUP
 endef
 FONTCONFIG_TARGET_CLEANUP_HOOKS += FONTCONFIG_TARGET_CLEANUP
 
-$(D)/fontconfig:
+$(D)/fontconfig: | bootstrap
 	$(call autotools-package)

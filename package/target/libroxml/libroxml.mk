@@ -9,12 +9,10 @@ LIBROXML_DIR = libroxml-$(LIBROXML_VERSION)
 LIBROXML_SOURCE = libroxml-$(LIBROXML_VERSION).tar.gz
 LIBROXML_SITE = http://download.libroxml.net/pool/v3.x
 
-LIBROXML_DEPENDS = bootstrap
-
 LIBROXML_CONF_OPTS = \
 	--enable-shared \
 	--disable-static \
 	--disable-roxml
 
-$(D)/libroxml:
+$(D)/libroxml: | bootstrap
 	$(call autotools-package)

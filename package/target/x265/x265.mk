@@ -9,8 +9,6 @@ X265_DIR = x265.git
 X265_SOURCE = x265.git
 X265_SITE = https://github.com/videolan
 
-X265_DEPENDS = bootstrap
-
 X265_SUBDIR  = source
 
 X265_CONF_OPTS = \
@@ -18,5 +16,5 @@ X265_CONF_OPTS = \
 	-DENABLE_SHARED=ON \
 	-DENABLE_PIC=ON
 
-$(D)/x265:
+$(D)/x265: | bootstrap
 	$(call cmake-package)

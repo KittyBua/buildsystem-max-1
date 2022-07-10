@@ -9,7 +9,7 @@ AUTOFS_DIR = autofs-$(AUTOFS_VERSION)
 AUTOFS_SOURCE = autofs-$(AUTOFS_VERSION).tar.xz
 AUTOFS_SITE = https://www.kernel.org/pub/linux/daemons/autofs/v5
 
-AUTOFS_DEPENDS = bootstrap libtirpc
+AUTOFS_DEPENDS = libtirpc
 
 AUTOFS_AUTORECONF = YES
 
@@ -63,5 +63,5 @@ define AUTOFS_TARGET_CLEANUP
 endef
 AUTOFS_TARGET_CLEANUP_HOOKS += AUTOFS_TARGET_CLEANUP
 
-$(D)/autofs:
+$(D)/autofs: | bootstrap
 	$(call autotools-package)

@@ -4,13 +4,12 @@
 #
 ################################################################################
 
-HD51_DRIVER_DATE    = 20191120
+HD51_DRIVER_DATE = 20191120
 HD51_DRIVER_VERSION = 4.10.12-$(HD51_DRIVER_DATE)
-HD51_DRIVER_SOURCE  = hd51-drivers-$(HD51_DRIVER_VERSION).zip
-HD51_DRIVER_SITE    = http://source.mynonpublic.com/gfutures
-HD51_DRIVER_DEPENDS = bootstrap
+HD51_DRIVER_SOURCE = hd51-drivers-$(HD51_DRIVER_VERSION).zip
+HD51_DRIVER_SITE = http://source.mynonpublic.com/gfutures
 
-$(D)/hd51-driver:
+$(D)/hd51-driver: | bootstrap
 	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	mkdir -p $(TARGET_MODULES_DIR)/extra

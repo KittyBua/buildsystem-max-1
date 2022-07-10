@@ -9,8 +9,6 @@ SQLITE_DIR = sqlite-autoconf-$(SQLITE_VERSION)
 SQLITE_SOURCE = sqlite-autoconf-$(SQLITE_VERSION).tar.gz
 SQLITE_SITE = http://www.sqlite.org/2022
 
-SQLITE_DEPENDS = bootstrap
-
 SQLITE_CONF_OPTS = \
 	--enable-shared \
 	--enable-threadsafe \
@@ -21,5 +19,5 @@ define SQLITE_TARGET_CLEANUP
 endef
 SQLITE_TARGET_CLEANUP_HOOKS += SQLITE_TARGET_CLEANUP
 
-$(D)/sqlite:
+$(D)/sqlite: | bootstrap
 	$(call autotools-package)

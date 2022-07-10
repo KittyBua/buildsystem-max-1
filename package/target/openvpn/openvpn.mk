@@ -9,7 +9,7 @@ OPENVPN_DIR = openvpn-$(OPENVPN_VERSION)
 OPENVPN_SOURCE = openvpn-$(OPENVPN_VERSION).tar.xz
 OPENVPN_SITE = http://build.openvpn.net/downloads/releases
 
-OPENVPN_DEPENDS = bootstrap lzo openssl
+OPENVPN_DEPENDS = lzo openssl
 
 OPENVPN_CONF_ENV = \
 	NETSTAT="/bin/netstat" \
@@ -35,5 +35,5 @@ define OPENVPN_INSTALL_INIT_SYSV
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/openvpn $(TARGET_DIR)/etc/init.d/
 endef
 
-$(D)/openvpn:
+$(D)/openvpn: | bootstrap
 	$(call autotools-package)

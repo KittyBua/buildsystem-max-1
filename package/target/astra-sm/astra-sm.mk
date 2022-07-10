@@ -9,7 +9,7 @@ ASTRA_SM_DIR = astra-sm.git
 ASTRA_SM_SOURCE = astra-sm.git
 ASTRA_SM_SITE = https://gitlab.com/crazycat69
 
-ASTRA_SM_DEPENDS = bootstrap openssl
+ASTRA_SM_DEPENDS = openssl
 
 ASTRA_SM_AUTORECONF = YES
 
@@ -25,5 +25,5 @@ define ASTRA_SM_TARGET_CLEANUP
 endef
 ASTRA_SM_TARGET_CLEANUP_HOOKS += ASTRA_SM_TARGET_CLEANUP
 
-$(D)/astra-sm:
+$(D)/astra-sm: | bootstrap
 	$(call autotools-package)

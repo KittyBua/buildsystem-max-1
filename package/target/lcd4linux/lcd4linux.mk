@@ -9,7 +9,7 @@ LCD4LINUX_DIR = lcd4linux.git
 LCD4LINUX_SOURCE = lcd4linux.git
 LCD4LINUX_SITE = https://github.com/TangoCash
 
-LCD4LINUX_DEPENDS = bootstrap $(SHARE_NEUTRINO_LCD4LINUX) ncurses libusb-compat libgd libusb libdpf
+LCD4LINUX_DEPENDS = $(SHARE_NEUTRINO_LCD4LINUX) ncurses libusb-compat libgd libusb libdpf
 
 LCD4LINUX_CONF_OPTS = \
 	--with-drivers='DPF,SamsungSPF,VUPLUS4K,PNG' \
@@ -37,5 +37,5 @@ define LCD4LINUX_MAKE_VCS_VERSION
 endef
 LCD4LINUX_PRE_BUILD_HOOKS += LCD4LINUX_MAKE_VCS_VERSION
 
-$(D)/lcd4linux:
+$(D)/lcd4linux: | bootstrap
 	$(call autotools-package)

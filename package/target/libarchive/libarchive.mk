@@ -9,8 +9,6 @@ LIBARCHIVE_DIR = libarchive-$(LIBARCHIVE_VERSION)
 LIBARCHIVE_SOURCE = libarchive-$(LIBARCHIVE_VERSION).tar.gz
 LIBARCHIVE_SITE = https://www.libarchive.org/downloads
 
-LIBARCHIVE_DEPENDS = bootstrap
-
 LIBARCHIVE_CONF_OPTS = \
 	--enable-static=no \
 	--disable-bsdtar \
@@ -22,5 +20,5 @@ LIBARCHIVE_CONF_OPTS = \
 	--without-xml2 \
 	--without-expat
 
-$(D)/libarchive:
+$(D)/libarchive: | bootstrap
 	$(call autotools-package)

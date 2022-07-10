@@ -9,7 +9,7 @@ MC_DIR = mc-$(MC_VERSION)
 MC_SOURCE = mc-$(MC_VERSION).tar.xz
 MC_SITE = ftp.midnight-commander.org
 
-MC_DEPENDS = bootstrap ncurses glib2
+MC_DEPENDS = ncurses glib2
 
 MC_AUTORECONF = YES
 
@@ -30,5 +30,5 @@ define MC_TARGET_CLEANUP
 endef
 MC_TARGET_CLEANUP_HOOKS += MC_TARGET_CLEANUP
 
-$(D)/mc:
+$(D)/mc: | bootstrap
 	$(call autotools-package)

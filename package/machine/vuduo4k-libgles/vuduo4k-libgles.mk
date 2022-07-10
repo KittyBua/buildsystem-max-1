@@ -4,15 +4,14 @@
 #
 ################################################################################
 
-VUDUO4K_LIBGLES_DATE    = $(VUDUO4K_DRIVER_DATE)
-VUDUO4K_LIBGLES_REV     = r0
+VUDUO4K_LIBGLES_DATE = $(VUDUO4K_DRIVER_DATE)
+VUDUO4K_LIBGLES_REV = r0
 VUDUO4K_LIBGLES_VERSION = 18.1-$(VUDUO4K_LIBGLES_DATE).$(VUDUO4K_LIBGLES_REV)
-VUDUO4K_LIBGLES_DIR     = libgles-vuduo4k
-VUDUO4K_LIBGLES_SOURCE  = libgles-vuduo4k-$(VUDUO4K_LIBGLES_VERSION).tar.gz
-VUDUO4K_LIBGLES_SITE    = http://code.vuplus.com/download/release/libgles
-VUDUO4K_LIBGLES_DEPENDS = bootstrap
+VUDUO4K_LIBGLES_DIR = libgles-vuduo4k
+VUDUO4K_LIBGLES_SOURCE = libgles-vuduo4k-$(VUDUO4K_LIBGLES_VERSION).tar.gz
+VUDUO4K_LIBGLES_SITE = http://code.vuplus.com/download/release/libgles
 
-$(D)/vuduo4k-libgles:
+$(D)/vuduo4k-libgles: | bootstrap
 	$(call PREPARE)
 	$(INSTALL_EXEC) $(BUILD_DIR)/libgles-vuduo4k/lib/* $(TARGET_LIB_DIR)
 	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libEGL.so

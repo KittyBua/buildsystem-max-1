@@ -4,13 +4,12 @@
 #
 ################################################################################
 
-H7_LIBGLES_DATE    = 20191110
+H7_LIBGLES_DATE = 20191110
 H7_LIBGLES_VERSION = $(H7_LIBGLES_DATE)
-H7_LIBGLES_SOURCE  = h7-v3ddriver-$(H7_LIBGLES_VERSION).zip
-H7_LIBGLES_SITE    = http://source.mynonpublic.com/zgemma
-H7_LIBGLES_DEPENDS = bootstrap
+H7_LIBGLES_SOURCE = h7-v3ddriver-$(H7_LIBGLES_VERSION).zip
+H7_LIBGLES_SITE = http://source.mynonpublic.com/zgemma
 
-$(D)/h7-libgles:
+$(D)/h7-libgles: | bootstrap
 	$(call STARTUP)
 	$(call DOWNLOAD,$($(PKG)_SOURCE))
 	$(call EXTRACT,$(TARGET_LIB_DIR))

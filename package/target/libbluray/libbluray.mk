@@ -9,7 +9,7 @@ LIBBLURAY_DIR = libbluray-$(LIBBLURAY_VERSION)
 LIBBLURAY_SOURCE = libbluray-$(LIBBLURAY_VERSION).tar.bz2
 LIBBLURAY_SITE = http://download.videolan.org/pub/videolan/libbluray/$(LIBBLURAY_VERSION)
 
-LIBBLURAY_DEPENDS = bootstrap freetype
+LIBBLURAY_DEPENDS = freetype
 
 LIBBLURAY_CONF_OPTS = \
 	--enable-shared \
@@ -27,5 +27,5 @@ define LIBBLURAY_BOOTSTRAP
 endef
 LIBBLURAY_PRE_CONFIGURE_HOOKS += LIBBLURAY_BOOTSTRAP
 
-$(D)/libbluray:
+$(D)/libbluray: | bootstrap
 	$(call autotools-package)

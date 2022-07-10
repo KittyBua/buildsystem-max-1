@@ -5,9 +5,9 @@
 ################################################################################
 
 NEUTRINO_VERSION = git
-NEUTRINO_DIR     = $(NEUTRINO).git
-NEUTRINO_SOURCE  = $(NEUTRINO).git
-NEUTRINO_SITE    = $(GIT_SITE)
+NEUTRINO_DIR = $(NEUTRINO).git
+NEUTRINO_SOURCE = $(NEUTRINO).git
+NEUTRINO_SITE = $(GIT_SITE)
 
 FLAVOUR ?= neutrino-max
 ifeq ($(FLAVOUR),neutrino-ddt)

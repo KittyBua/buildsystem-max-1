@@ -9,7 +9,7 @@ LIBDPF_DIR = dpf-ax.git
 LIBDPF_SOURCE = dpf-ax.git
 LIBDPF_SITE = $(MAX-GIT-GITHUB)
 
-LIBDPF_DEPENDS = bootstrap libusb-compat
+LIBDPF_DEPENDS = libusb-compat
 
 LIBDPF_MAKE_OPTS = \
 	-C dpflib libdpf.a \
@@ -22,5 +22,5 @@ define LIBDPF_INSTALL_CMDS
 	$(INSTALL_DATA) -D $(PKG_BUILD_DIR)/include/usbuser.h $(TARGET_INCLUDE_DIR)/libdpf/usbuser.h
 endef
 
-$(D)/libdpf:
+$(D)/libdpf: | bootstrap
 	$(call generic-package)

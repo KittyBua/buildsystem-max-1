@@ -5,12 +5,11 @@
 ################################################################################
 
 OSMIO4K_LIBGLES_VERSION = 2.0
-OSMIO4K_LIBGLES_DIR     = edision-libv3d-$(OSMIO4K_LIBGLES_VERSION)
-OSMIO4K_LIBGLES_SOURCE  = edision-libv3d-$(OSMIO4K_LIBGLES_VERSION).tar.xz
-OSMIO4K_LIBGLES_SITE    = http://source.mynonpublic.com/edision
-OSMIO4K_LIBGLES_DEPENDS = bootstrap
+OSMIO4K_LIBGLES_DIR = edision-libv3d-$(OSMIO4K_LIBGLES_VERSION)
+OSMIO4K_LIBGLES_SOURCE = edision-libv3d-$(OSMIO4K_LIBGLES_VERSION).tar.xz
+OSMIO4K_LIBGLES_SITE = http://source.mynonpublic.com/edision
 
-$(D)/osmio4k-libgles:
+$(D)/osmio4k-libgles: | bootstrap
 	$(call PREPARE)
 	cp -a $(PKG_BUILD_DIR)/lib/* $(TARGET_LIB_DIR)
 	ln -sf libv3ddriver.so.$(OSMIO4K_LIBGLES_VERSION) $(TARGET_LIB_DIR)/libEGL.so

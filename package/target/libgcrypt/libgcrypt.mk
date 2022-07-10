@@ -9,7 +9,7 @@ LIBGCRYPT_DIR = libgcrypt-$(LIBGCRYPT_VERSION)
 LIBGCRYPT_SOURCE = libgcrypt-$(LIBGCRYPT_VERSION).tar.bz2
 LIBGCRYPT_SITE = https://gnupg.org/ftp/gcrypt/libgcrypt
 
-LIBGCRYPT_DEPENDS = bootstrap libgpg-error
+LIBGCRYPT_DEPENDS = libgpg-error
 
 LIBGCRYPT_CONFIG_SCRIPTS = libgcrypt-config
 
@@ -23,5 +23,5 @@ define LIBGCRYPT_TARGET_CLEANUP
 endef
 LIBGCRYPT_TARGET_CLEANUP_HOOKS += LIBGCRYPT_TARGET_CLEANUP
 
-$(D)/libgcrypt:
+$(D)/libgcrypt: | bootstrap
 	$(call autotools-package)

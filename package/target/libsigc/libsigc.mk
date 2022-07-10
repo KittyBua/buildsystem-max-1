@@ -9,8 +9,6 @@ LIBSIGC_DIR = libsigc++-$(LIBSIGC_VERSION)
 LIBSIGC_SOURCE = libsigc++-$(LIBSIGC_VERSION).tar.xz
 LIBSIGC_SITE = https://download.gnome.org/sources/libsigc++/$(basename $(LIBSIGC_VERSION))
 
-LIBSIGC_DEPENDS = bootstrap
-
 LIBSIGC_CONF_OPTS = \
 	--enable-shared \
 	--disable-benchmark \
@@ -31,5 +29,5 @@ define LIBSIGC_TARGET_CLEANUP
 endef
 LIBSIGC_TARGET_CLEANUP_HOOKS += LIBSIGC_TARGET_CLEANUP
 
-$(D)/libsigc:
+$(D)/libsigc: | bootstrap
 	$(call autotools-package)

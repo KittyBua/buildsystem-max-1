@@ -9,8 +9,6 @@ BZIP2_DIR = bzip2-$(BZIP2_VERSION)
 BZIP2_SOURCE = bzip2-$(BZIP2_VERSION).tar.gz
 BZIP2_SITE = https://sourceware.org/pub/bzip2
 
-BZIP2_DEPENDS = bootstrap
-
 BZIP2_MAKE_ENV = \
 	$(TARGET_CONFIGURE_ENV)
 
@@ -22,5 +20,5 @@ define BZIP2_MAKEFILE_LIBBZ2_SO
 endef
 BZIP2_POST_PATCH_HOOKS += BZIP2_MAKEFILE_LIBBZ2_SO
 
-$(D)/bzip2:
+$(D)/bzip2: | bootstrap
 	$(call generic-package)

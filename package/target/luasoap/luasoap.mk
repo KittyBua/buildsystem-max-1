@@ -9,10 +9,10 @@ LUASOAP_DIR = luasoap-$(LUASOAP_VERSION)
 LUASOAP_SOURCE = luasoap-$(LUASOAP_VERSION).tar.gz
 LUASOAP_SITE = https://github.com/downloads/tomasguisasola/luasoap
 
-LUASOAP_DEPENDS = bootstrap lua luasocket luaexpat
+LUASOAP_DEPENDS = lua luasocket luaexpat
 
 LUASOAP_MAKE_OPTS = \
 	LUA_DIR=$(TARGET_SHARE_DIR)/lua/$(LUA_ABIVERSION)
 
-$(D)/luasoap:
+$(D)/luasoap: | bootstrap
 	$(call generic-package)

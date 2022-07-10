@@ -9,8 +9,6 @@ VALGRIND_DIR = valgrind-$(VALGRIND_VERSION)
 VALGRIND_SOURCE = valgrind-$(VALGRIND_VERSION).tar.bz2
 VALGRIND_SITE = ftp://sourceware.org/pub/valgrind
 
-VALGRIND_DEPENDS = bootstrap
-
 VALGRIND_AUTORECONF = YES
 
 define VALGRIND_POST_PATCH
@@ -29,5 +27,5 @@ define VALGRIND_TARGET_CLEANUP
 endef
 VALGRIND_TARGET_CLEANUP_HOOKS += VALGRIND_TARGET_CLEANUP
 
-$(D)/valgrind:
+$(D)/valgrind: | bootstrap
 	$(call autotools-package)

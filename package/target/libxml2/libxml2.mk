@@ -9,7 +9,7 @@ LIBXML2_DIR = libxml2-$(LIBXML2_VERSION)
 LIBXML2_SOURCE = libxml2-$(LIBXML2_VERSION).tar.xz
 LIBXML2_SITE = https://download.gnome.org/sources/libxml2/2.9
 
-LIBXML2_DEPENDS = bootstrap zlib
+LIBXML2_DEPENDS = zlib
 
 LIBXML2_CONFIG_SCRIPTS = xml2-config
 
@@ -42,5 +42,5 @@ define LIBXML2_TARGET_CLEANUP
 endef
 LIBXML2_TARGET_CLEANUP_HOOKS += LIBXML2_TARGET_CLEANUP
 
-$(D)/libxml2:
+$(D)/libxml2: | bootstrap
 	$(call autotools-package)

@@ -9,8 +9,6 @@ RSYNC_DIR = rsync-$(RSYNC_VERSION)
 RSYNC_SOURCE = rsync-$(RSYNC_VERSION).tar.gz
 RSYNC_SITE = https://download.samba.org/pub/rsync/src
 
-RSYNC_DEPENDS = bootstrap
-
 RSYNC_CONF_OPTS = \
 	--with-included-zlib=no \
 	--with-included-popt=no \
@@ -21,5 +19,5 @@ RSYNC_CONF_OPTS = \
 	--disable-lz4 \
 	--disable-asm
 
-$(D)/rsync:
+$(D)/rsync: | bootstrap
 	$(call autotools-package)

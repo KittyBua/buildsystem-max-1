@@ -9,7 +9,7 @@ OPENSSH_DIR = openssh-$(OPENSSH_VERSION)
 OPENSSH_SOURCE = openssh-$(OPENSSH_VERSION).tar.gz
 OPENSSH_SITE = https://artfiles.org/openbsd/OpenSSH/portable
 
-OPENSSH_DEPENDS = bootstrap zlib openssl
+OPENSSH_DEPENDS = zlib openssl
 
 OPENSSH_AUTORECONF = YES
 
@@ -41,5 +41,5 @@ define OPENSSH_INSTALL_FILES
 endef
 OPENSSH_POST_INSTALL_HOOKS += OPENSSH_INSTALL_FILES
 
-$(D)/openssh:
+$(D)/openssh: | bootstrap
 	$(call autotools-package)

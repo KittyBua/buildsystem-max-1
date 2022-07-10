@@ -9,7 +9,7 @@ JFSUTILS_DIR = jfsutils-$(JFSUTILS_VERSION)
 JFSUTILS_SOURCE = jfsutils-$(JFSUTILS_VERSION).tar.gz
 JFSUTILS_SITE = http://jfs.sourceforge.net/project/pub
 
-JFSUTILS_DEPENDS = bootstrap e2fsprogs
+JFSUTILS_DEPENDS = e2fsprogs
 
 define JFSUTILS_POST_PATCH
 	$(SED) '/unistd.h/a#include <sys/types.h>' $(PKG_BUILD_DIR)/fscklog/extract.c
@@ -22,5 +22,5 @@ define JFSUTILS_TARGET_CLEANUP
 endef
 JFSUTILS_TARGET_CLEANUP_HOOKS += JFSUTILS_TARGET_CLEANUP
 
-$(D)/jfsutils:
+$(D)/jfsutils: | bootstrap
 	$(call autotools-package)

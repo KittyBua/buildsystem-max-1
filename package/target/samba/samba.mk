@@ -9,8 +9,6 @@ SAMBA_DIR = samba-$(SAMBA_VERSION)
 SAMBA_SOURCE = samba-$(SAMBA_VERSION).tar.gz
 SAMBA_SITE = https://ftp.samba.org/pub/samba/stable
 
-SAMBA_DEPENDS = bootstrap
-
 SAMBA_SUBDIR = source3
 
 SAMBA_CONF_ENV = \
@@ -132,5 +130,5 @@ define SAMBA_TARGET_CLEANUP
 endef
 SAMBA_TARGET_CLEANUP_HOOKS += SAMBA_TARGET_CLEANUP
 
-$(D)/samba:
+$(D)/samba: | bootstrap
 	$(call autotools-package)

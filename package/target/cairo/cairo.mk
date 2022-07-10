@@ -9,7 +9,7 @@ CAIRO_DIR = cairo-$(CAIRO_VERSION)
 CAIRO_SOURCE = cairo-$(CAIRO_VERSION).tar.xz
 CAIRO_SITE = https://www.cairographics.org/releases
 
-CAIRO_DEPENDS = bootstrap glib2 zlib libpng freetype pixman
+CAIRO_DEPENDS = glib2 zlib libpng freetype pixman
 
 CAIRO_CONF_ENV = \
 	ax_cv_c_float_words_bigendian="no"
@@ -31,5 +31,5 @@ define CAIRO_TARGET_CLEANUP
 endef
 CAIRO_TARGET_CLEANUP_HOOKS += CAIRO_TARGET_CLEANUP
 
-$(D)/cairo:
+$(D)/cairo: | bootstrap
 	$(call autotools-package)

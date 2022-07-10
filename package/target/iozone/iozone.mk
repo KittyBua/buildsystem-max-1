@@ -9,8 +9,6 @@ IOZONE_DIR = iozone$(IOZONE_VERSION)
 IOZONE_SOURCE = iozone$(IOZONE_VERSION).tgz
 IOZONE_SITE = http://www.iozone.org/src/current
 
-IOZONE_DEPENDS = bootstrap
-
 IOZONE_SUBDIR = src/current
 
 define IOZONE_PATCH_MAKEFILE
@@ -29,5 +27,5 @@ define IOZONE_INSTALL_CMDS
 	$(INSTALL_EXEC) $(PKG_BUILD_DIR)/src/current/iozone $(TARGET_BIN_DIR)
 endef
 
-$(D)/iozone:
+$(D)/iozone: | bootstrap
 	$(call generic-package)

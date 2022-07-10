@@ -5,13 +5,14 @@
 ################################################################################
 
 NEUTRINO_IPTVPLAYER_VERSION = git
-NEUTRINO_IPTVPLAYER_DIR     = iptvplayer.git
-NEUTRINO_IPTVPLAYER_SOURCE  = iptvplayer.git
-NEUTRINO_IPTVPLAYER_SITE    = https://github.com/TangoCash
+NEUTRINO_IPTVPLAYER_DIR = iptvplayer.git
+NEUTRINO_IPTVPLAYER_SOURCE = iptvplayer.git
+NEUTRINO_IPTVPLAYER_SITE = https://github.com/TangoCash
+
 NEUTRINO_IPTVPLAYER_DEPENDS = rtmpdump python-twisted $(SHARE_NEUTRINO_PLUGINS)
 
 $(D)/neutrino-iptvplayer-nightly \
-$(D)/neutrino-iptvplayer:
+$(D)/neutrino-iptvplayer: | bootstrap
 	$(call PREPARE)
 	@if [ "$@" = "$(D)/neutrino-iptvplayer-nightly" ]; then \
 		$(BUILD_DIR)/iptvplayer/SyncWithGitLab.sh $(BUILD_DIR)/iptvplayer; \

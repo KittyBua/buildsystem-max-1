@@ -9,8 +9,6 @@ FLAC_DIR = flac-$(FLAC_VERSION)
 FLAC_SOURCE = flac-$(FLAC_VERSION).tar.xz
 FLAC_SITE = https://ftp.osuosl.org/pub/xiph/releases/flac
 
-FLAC_DEPENDS = bootstrap
-
 FLAC_AUTORECONF = YES
 
 FLAC_CONF_OPTS = \
@@ -31,5 +29,5 @@ FLAC_CONF_OPTS = \
 	--disable-examples \
 	--disable-rpath
 
-$(D)/flac:
+$(D)/flac: | bootstrap
 	$(call autotools-package)

@@ -9,7 +9,7 @@ READLINE_DIR = readline-$(READLINE_VERSION)
 READLINE_SOURCE = readline-$(READLINE_VERSION).tar.gz
 READLINE_SITE = https://ftp.gnu.org/gnu/readline
 
-READLINE_DEPENDS = bootstrap ncurses
+READLINE_DEPENDS = ncurses
 
 READLINE_CONF_ENV = \
 	bash_cv_func_sigsetjmp=yes \
@@ -26,5 +26,5 @@ define READLINE_INSTALL_FILES
 endef
 READLINE_POST_INSTALL_HOOKS += READLINE_INSTALL_FILES
 
-$(D)/readline:
+$(D)/readline: | bootstrap
 	$(call autotools-package)

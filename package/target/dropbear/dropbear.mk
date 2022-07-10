@@ -9,7 +9,7 @@ DROPBEAR_DIR = dropbear-$(DROPBEAR_VERSION)
 DROPBEAR_SOURCE = dropbear-$(DROPBEAR_VERSION).tar.bz2
 DROPBEAR_SITE = http://matt.ucc.asn.au/dropbear/releases
 
-DROPBEAR_DEPENDS = bootstrap zlib
+DROPBEAR_DEPENDS = zlib
 
 define DROPBEAR_POST_PATCH
 	$(SED) 's|^\(#define DROPBEAR_SMALL_CODE\).*|\1 0|' $(PKG_BUILD_DIR)/default_options.h
@@ -55,5 +55,5 @@ define DROPBEAR_INSTALL_FILES
 endef
 DROPBEAR_POST_INSTALL_HOOKS += DROPBEAR_INSTALL_FILES
 
-$(D)/dropbear:
+$(D)/dropbear: | bootstrap
 	$(call autotools-package)

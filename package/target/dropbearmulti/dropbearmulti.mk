@@ -8,7 +8,6 @@ DROPBEARMULTI_VERSION = git
 DROPBEARMULTI_DIR = dropbear.git
 DROPBEARMULTI_SOURCE = dropbear.git
 DROPBEARMULTI_SITE = https://github.com/mkj
-DROPBEARMULTI_DEPENDS = bootstrap
 
 DROPBEARMULTI_CHECKOUT = 846d38f
 
@@ -59,5 +58,5 @@ define DROPBEARMULTI_INSTALL_FILES
 endef
 DROPBEARMULTI_POST_INSTALL_HOOKS += DROPBEARMULTI_INSTALL_FILES
 
-$(D)/dropbearmulti:
+$(D)/dropbearmulti: | bootstrap
 	$(call autotools-package)

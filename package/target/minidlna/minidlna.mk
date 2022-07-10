@@ -9,7 +9,7 @@ MINIDLNA_DIR = minidlna-$(MINIDLNA_VERSION)
 MINIDLNA_SOURCE = minidlna-$(MINIDLNA_VERSION).tar.gz
 MINIDLNA_SITE = https://sourceforge.net/projects/minidlna/files/minidlna/$(MINIDLNA_VERSION)
 
-MINIDLNA_DEPENDS = bootstrap zlib sqlite libexif libjpeg-turbo libid3tag libogg libvorbis flac ffmpeg
+MINIDLNA_DEPENDS = zlib sqlite libexif libjpeg-turbo libid3tag libogg libvorbis flac ffmpeg
 
 MINIDLNA_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
@@ -23,5 +23,5 @@ define MINIDLNA_INSTALL_MINIDLNAD_CONF
 endef
 MINIDLNA_POST_INSTALL_HOOKS += MINIDLNA_INSTALL_MINIDLNAD_CONF
 
-$(D)/minidlna:
+$(D)/minidlna: | bootstrap
 	$(call autotools-package)

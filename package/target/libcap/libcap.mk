@@ -9,8 +9,6 @@ LIBCAP_DIR = libcap-$(LIBCAP_VERSION)
 LIBCAP_SOURCE = libcap-$(LIBCAP_VERSION).tar.xz
 LIBCAP_SITE = https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2
 
-LIBCAP_DEPENDS = bootstrap
-
 LIBCAP_SUBDIR = libcap
 
 define LIBCAP_POST_PATCH
@@ -33,5 +31,5 @@ LIBCAP_MAKE_INSTALL_OPTS = \
 	prefix=/usr \
 	lib=lib
 
-$(D)/libcap:
+$(D)/libcap: | bootstrap
 	$(call generic-package)

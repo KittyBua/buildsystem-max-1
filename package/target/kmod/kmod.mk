@@ -9,7 +9,7 @@ KMOD_DIR = kmod-$(KMOD_VERSION)
 KMOD_SOURCE = kmod-$(KMOD_VERSION).tar.xz
 KMOD_SITE = https://mirrors.edge.kernel.org/pub/linux/utils/kernel/kmod
 
-KMOD_DEPENDS = bootstrap zlib
+KMOD_DEPENDS = zlib
 
 KMOD_AUTORECONF = YES
 
@@ -29,5 +29,5 @@ define KMOD_INSTALL_FILES
 endef
 KMOD_POST_INSTALL_HOOKS += KMOD_INSTALL_FILES
 
-$(D)/kmod:
+$(D)/kmod: | bootstrap
 	$(call autotools-package)

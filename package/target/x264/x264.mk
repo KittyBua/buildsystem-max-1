@@ -9,8 +9,6 @@ X264_DIR = x264.git
 X264_SOURCE = x264.git
 X264_SITE = https://code.videolan.org/videolan
 
-X264_DEPENDS = bootstrap
-
 X264_CHECKOUT = 35417dcd
 
 X264_CONF_ENV = \
@@ -26,5 +24,5 @@ X264_CONF_OPTS = \
 	--disable-ffms \
 	--disable-opencl
 
-$(D)/x264:
+$(D)/x264: | bootstrap
 	$(call autotools-package)

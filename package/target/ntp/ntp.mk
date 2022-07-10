@@ -9,8 +9,6 @@ NTP_DIR = ntp-$(NTP_VERSION)
 NTP_SOURCE = ntp-$(NTP_VERSION).tar.gz
 NTP_SITE = https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-$(basename $(NTP_VERSION))
 
-NTP_DEPENDS = bootstrap
-
 NTP_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
 	--disable-debugging \
@@ -25,5 +23,5 @@ define NTP_TARGET_CLEANUP
 endef
 NTP_TARGET_CLEANUP_HOOKS += NTP_TARGET_CLEANUP
 
-$(D)/ntp:
+$(D)/ntp: | bootstrap
 	$(call autotools-package)

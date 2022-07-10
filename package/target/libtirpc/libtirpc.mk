@@ -9,8 +9,6 @@ LIBTIRPC_DIR = libtirpc-$(LIBTIRPC_VERSION)
 LIBTIRPC_SOURCE = libtirpc-$(LIBTIRPC_VERSION).tar.bz2
 LIBTIRPC_SITE = https://sourceforge.net/projects/libtirpc/files/libtirpc/$(LIBTIRPC_VERSION)
 
-LIBTIRPC_DEPENDS = bootstrap
-
 LIBTIRPC_AUTORECONF = YES
 
 LIBTIRPC_CONF_ENV = \
@@ -19,5 +17,5 @@ LIBTIRPC_CONF_ENV = \
 LIBTIRPC_CONF_OPTS = \
 	--disable-gssapi
 
-$(D)/libtirpc:
+$(D)/libtirpc: | bootstrap
 	$(call autotools-package)

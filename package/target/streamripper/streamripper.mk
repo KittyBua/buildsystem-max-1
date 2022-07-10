@@ -9,7 +9,7 @@ STREAMRIPPER_DIR = ni-streamripper.git
 STREAMRIPPER_SOURCE = ni-streamripper.git
 STREAMRIPPER_SITE = https://github.com/neutrino-images
 
-STREAMRIPPER_DEPENDS = bootstrap libvorbisidec libmad glib2
+STREAMRIPPER_DEPENDS = libvorbisidec libmad glib2
 
 STREAMRIPPER_AUTORECONF = YES
 
@@ -26,5 +26,5 @@ define STREAMRIPPER_INSTALL_FILES
 endef
 STREAMRIPPER_POST_INSTALL_HOOKS += STREAMRIPPER_INSTALL_FILES
 
-$(D)/streamripper:
+$(D)/streamripper: | bootstrap
 	$(call autotools-package)

@@ -9,7 +9,7 @@ PARTED_DIR = parted-$(PARTED_VERSION)
 PARTED_SOURCE = parted-$(PARTED_VERSION).tar.xz
 PARTED_SITE = https://ftp.gnu.org/gnu/parted
 
-PARTED_DEPENDS = bootstrap e2fsprogs libiconv
+PARTED_DEPENDS = e2fsprogs libiconv
 
 PARTED_AUTORECONF = YES
 
@@ -22,5 +22,5 @@ PARTED_CONF_OPTS = \
 	--disable-device-mapper \
 	--without-readline
 
-$(D)/parted:
+$(D)/parted: | bootstrap
 	$(call autotools-package)

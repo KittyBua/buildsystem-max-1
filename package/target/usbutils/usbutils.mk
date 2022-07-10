@@ -9,7 +9,7 @@ USBUTILS_DIR = usbutils-$(USBUTILS_VERSION)
 USBUTILS_SOURCE = usbutils-$(USBUTILS_VERSION).tar.xz
 USBUTILS_SITE = https://www.kernel.org/pub/linux/utils/usb/usbutils
 
-USBUTILS_DEPENDS = bootstrap libusb
+USBUTILS_DEPENDS = libusb
 
 USBUTILS_AUTORECONF = YES
 
@@ -23,5 +23,5 @@ define USBUTILS_TARGET_CLEANUP
 endef
 USBUTILS_TARGET_CLEANUP_HOOKS += USBUTILS_TARGET_CLEANUP
 
-$(D)/usbutils:
+$(D)/usbutils: | bootstrap
 	$(call autotools-package)

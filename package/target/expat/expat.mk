@@ -9,8 +9,6 @@ EXPAT_DIR = expat-$(EXPAT_VERSION)
 EXPAT_SOURCE = expat-$(EXPAT_VERSION).tar.xz
 EXPAT_SITE = https://github.com/libexpat/libexpat/releases/download/R_$(subst .,_,$(EXPAT_VERSION))
 
-EXPAT_DEPENDS = bootstrap
-
 EXPAT_AUTORECONF = YES
 
 EXPAT_CONF_OPTS = \
@@ -23,5 +21,5 @@ define EXPAT_TARGET_CLEANUP
 endef
 EXPAT_TARGET_CLEANUP_HOOKS += EXPAT_TARGET_CLEANUP
 
-$(D)/expat:
+$(D)/expat: | bootstrap
 	$(call autotools-package)

@@ -9,8 +9,6 @@ BASH_DIR = bash-$(BASH_VERSION)
 BASH_SOURCE = bash-$(BASH_VERSION).tar.gz
 BASH_SITE = http://ftp.gnu.org/gnu/bash
 
-BASH_DEPENDS = bootstrap
-
 BASH_CONF_ENV += \
 	bash_cv_getcwd_malloc=yes \
 	bash_cv_job_control_missing=present \
@@ -29,5 +27,5 @@ define BASH_TARGET_CLEANUP
 endef
 BASH_TARGET_CLEANUP_HOOKS += BASH_TARGET_CLEANUP
 
-$(D)/bash:
+$(D)/bash: | bootstrap
 	$(call autotools-package)

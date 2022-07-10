@@ -9,12 +9,12 @@ LIBPLIST_DIR = libplist-$(LIBPLIST_VERSION)
 LIBPLIST_SOURCE = libplist-$(LIBPLIST_VERSION).tar.gz
 LIBPLIST_SITE = $(call github,libimobiledevice,libplist,$(LIBPLIST_VERSION))
 
-LIBPLIST_DEPENDS = bootstrap libxml2
+LIBPLIST_DEPENDS = libxml2
 
 LIBPLIST_AUTORECONF = YES
 
 LIBPLIST_CONF_OPTS = \
 	--without-cython
 
-$(D)/libplist:
+$(D)/libplist: | bootstrap
 	$(call autotools-package)

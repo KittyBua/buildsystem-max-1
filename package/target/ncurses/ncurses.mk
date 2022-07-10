@@ -8,7 +8,6 @@ NCURSES_VERSION = 6.1
 NCURSES_DIR = ncurses-$(NCURSES_VERSION)
 NCURSES_SOURCE = ncurses-$(NCURSES_VERSION).tar.gz
 NCURSES_SITE = https://ftp.gnu.org/pub/gnu/ncurses
-NCURSES_DEPENDS = bootstrap
 
 NCURSES_CONF_OPTS = \
 	--enable-pc-files \
@@ -67,5 +66,5 @@ NCURSES_MAKE_ARGS = \
 NCURSES_MAKE_INSTALL_ARGS = \
 	install.libs
 
-$(D)/ncurses:
+$(D)/ncurses: | bootstrap
 	$(call autotools-package)

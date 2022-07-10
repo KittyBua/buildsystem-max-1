@@ -9,7 +9,7 @@ WIREGUARD_DIR = WireGuard-$(WIREGUARD_VERSION)
 WIREGUARD_SOURCE = WireGuard-$(WIREGUARD_VERSION).tar.xz
 WIREGUARD_SITE = https://git.zx2c4.com/WireGuard/snapshot
 
-WIREGUARD_DEPENDS = bootstrap kernel libmnl openresolv
+WIREGUARD_DEPENDS = kernel libmnl openresolv
 
 WIREGUARD_SUBDIR = src
 
@@ -40,5 +40,5 @@ define WIREGUARD_INSTALL_FILES
 endef
 WIREGUARD_POST_FOLLOWUP_HOOKS += WIREGUARD_INSTALL_FILES
 
-$(D)/wireguard:
+$(D)/wireguard: | bootstrap
 	$(call generic-package)

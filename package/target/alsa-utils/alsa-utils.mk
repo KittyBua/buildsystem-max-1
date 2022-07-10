@@ -9,7 +9,7 @@ ALSA_UTILS_DIR = alsa-utils-$(ALSA_UTILS_VERSION)
 ALSA_UTILS_SOURCE = alsa-utils-$(ALSA_UTILS_VERSION).tar.bz2
 ALSA_UTILS_SITE = https://www.alsa-project.org/files/pub/utils
 
-ALSA_UTILS_DEPENDS = bootstrap ncurses alsa-lib
+ALSA_UTILS_DEPENDS = ncurses alsa-lib
 
 ALSA_UTILS_AUTORECONF = YES
 
@@ -45,5 +45,5 @@ define ALSA_UTILS_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_SBIN_DIR)/,alsa-info.sh)
 endef
 
-$(D)/alsa-utils:
+$(D)/alsa-utils: | bootstrap
 	$(call autotools-package)

@@ -9,8 +9,6 @@ SMARTMONTOOLS_DIR = smartmontools-$(SMARTMONTOOLS_VERSION)
 SMARTMONTOOLS_SOURCE = smartmontools-$(SMARTMONTOOLS_VERSION).tar.gz
 SMARTMONTOOLS_SITE = https://sourceforge.net/projects/smartmontools/files/smartmontools/$(SMARTMONTOOLS_VERSION)
 
-SMARTMONTOOLS_DEPENDS = bootstrap
-
 SMARTMONTOOLS_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
 	--with-drivedbdir=no \
@@ -26,5 +24,5 @@ define SMARTMONTOOLS_TARGET_CLEANUP
 endef
 SMARTMONTOOLS_TARGET_CLEANUP_HOOKS += SMARTMONTOOLS_TARGET_CLEANUP
 
-$(D)/smartmontools:
+$(D)/smartmontools: | bootstrap
 	$(call autotools-package)

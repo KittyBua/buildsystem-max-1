@@ -9,7 +9,7 @@ GPTFDISK_DIR = gptfdisk-$(GPTFDISK_VERSION)
 GPTFDISK_SOURCE = gptfdisk-$(GPTFDISK_VERSION).tar.gz
 GPTFDISK_SITE = https://sourceforge.net/projects/gptfdisk/files/gptfdisk/$(GPTFDISK_VERSION)
 
-GPTFDISK_DEPENDS = bootstrap e2fsprogs ncurses popt
+GPTFDISK_DEPENDS = e2fsprogs ncurses popt
 
 GPTFDISK_SBINARIES = sgdisk
 
@@ -23,5 +23,5 @@ define GPTFDISK_INSTALL_CMDS
 	$(INSTALL_EXEC) $(PKG_BUILD_DIR)/sgdisk $(TARGET_SBIN_DIR)/sgdisk
 endef
 
-$(D)/gptfdisk:
+$(D)/gptfdisk: | bootstrap
 	$(call generic-package)

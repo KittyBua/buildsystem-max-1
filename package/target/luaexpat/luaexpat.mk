@@ -9,7 +9,7 @@ LUAEXPAT_DIR = luaexpat-$(LUAEXPAT_VERSION)
 LUAEXPAT_SOURCE = luaexpat-$(LUAEXPAT_VERSION).tar.gz
 LUAEXPAT_SITE = $(call github,tomasguisasola,luaexpat,v$(LUAEXPAT_VERSION))
 
-LUAEXPAT_DEPENDS = bootstrap lua expat
+LUAEXPAT_DEPENDS = lua expat
 
 define LUAEXPAT_POST_MAKEFILE
 	$(SED) 's|^EXPAT_INC=.*|EXPAT_INC= $(TARGET_INCLUDE_DIR)|' $(PKG_BUILD_DIR)/makefile
@@ -25,5 +25,5 @@ LUAEXPAT_MAKE_OPTS = \
 	PREFIX=$(TARGET_DIR)/usr \
 	LUA_SYS_VER=$(LUA_ABIVERSION)
 
-$(D)/luaexpat:
+$(D)/luaexpat: | bootstrap
 	$(call generic-package)

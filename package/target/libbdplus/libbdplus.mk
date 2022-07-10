@@ -9,7 +9,7 @@ LIBBDPLUS_DIR = libbdplus-$(LIBBDPLUS_VERSION)
 LIBBDPLUS_SOURCE = libbdplus-$(LIBBDPLUS_VERSION).tar.bz2
 LIBBDPLUS_SITE = https://download.videolan.org/pub/videolan/libbdplus/$(LIBBDPLUS_VERSION)
 
-LIBBDPLUS_DEPENDS = bootstrap libaacs
+LIBBDPLUS_DEPENDS = libaacs
 
 LIBBDPLUS_CONF_OPTS = \
 	--enable-shared \
@@ -27,5 +27,5 @@ define LIBBDPLUS_INSTALL_FILES
 endef
 LIBBDPLUS_POST_INSTALL_HOOKS += LIBBDPLUS_INSTALL_FILES
 
-$(D)/libbdplus:
+$(D)/libbdplus: | bootstrap
 	$(call autotools-package)

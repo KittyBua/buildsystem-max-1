@@ -9,7 +9,7 @@ LUASOCKET_DIR = luasocket.git
 LUASOCKET_SOURCE = luasocket.git
 LUASOCKET_SITE = https://github.com/diegonehab
 
-LUASOCKET_DEPENDS = bootstrap lua
+LUASOCKET_DEPENDS = lua
 
 define LUASOCKET_POST_PATCH
 	$(SED) "s@LD_linux=gcc@LD_LINUX=$(TARGET_CC)@; \
@@ -31,5 +31,5 @@ LUASOCKET_MAKE_INSTALL_OPTS = \
 	LDIR_linux=usr/share/lua/$(LUA_ABIVERSION) \
 	LUAPREFIX_linux=
 
-$(D)/luasocket:
+$(D)/luasocket: | bootstrap
 	$(call generic-package)

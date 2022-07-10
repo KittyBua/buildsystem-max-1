@@ -9,7 +9,7 @@ MINISATIP_DIR = minisatip.git
 MINISATIP_SOURCE = minisatip.git
 MINISATIP_SITE = https://github.com/catalinii
 
-MINISATIP_DEPENDS = bootstrap libdvbcsa openssl
+MINISATIP_DEPENDS = libdvbcsa openssl
 
 MINISATIP_CONF_ENV = \
 	CFLAGS+=" -ldl"
@@ -33,5 +33,5 @@ define MINISATIP_INSTALL_CMDS
 	$(INSTALL_COPY) $(PKG_BUILD_DIR)/html $(TARGET_SHARE_DIR)/minisatip
 endef
 
-$(D)/minisatip:
+$(D)/minisatip: | bootstrap
 	$(call autotools-package)

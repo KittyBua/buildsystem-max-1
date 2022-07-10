@@ -9,7 +9,7 @@ OPENJPEG_DIR = openjpeg-$(OPENJPEG_VERSION)
 OPENJPEG_SOURCE = openjpeg-$(OPENJPEG_VERSION).tar.gz
 OPENJPEG_SITE = $(call github,uclouvain,openjpeg,v$(OPENJPEG_VERSION))
 
-OPENJPEG_DEPENDS = bootstrap zlib libpng
+OPENJPEG_DEPENDS = zlib libpng
 
-$(D)/openjpeg:
+$(D)/openjpeg: | bootstrap
 	$(call cmake-package)

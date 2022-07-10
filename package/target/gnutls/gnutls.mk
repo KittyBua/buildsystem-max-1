@@ -9,7 +9,7 @@ GNUTLS_DIR = gnutls-$(GNUTLS_VERSION)
 GNUTLS_SOURCE = gnutls-$(GNUTLS_VERSION).tar.xz
 GNUTLS_SITE = https://www.gnupg.org/ftp/gcrypt/gnutls/v$(basename $(GNUTLS_VERSION))
 
-GNUTLS_DEPENDS = bootstrap ca-bundle nettle
+GNUTLS_DEPENDS = ca-bundle nettle
 
 GNUTLS_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
@@ -31,5 +31,5 @@ define GNUTLS_TARGET_CLEANUP
 endef
 GNUTLS_TARGET_CLEANUP_HOOKS += GNUTLS_TARGET_CLEANUP
 
-$(D)/gnutls:
+$(D)/gnutls: | bootstrap
 	$(call autotools-package)

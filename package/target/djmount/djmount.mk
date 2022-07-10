@@ -9,7 +9,7 @@ DJMOUNT_DIR = djmount-$(DJMOUNT_VERSION)
 DJMOUNT_SOURCE = djmount-$(DJMOUNT_VERSION).tar.gz
 DJMOUNT_SITE = https://sourceforge.net/projects/djmount/files/djmount/$(DJMOUNT_VERSION)
 
-DJMOUNT_DEPENDS = bootstrap libupnp libfuse
+DJMOUNT_DEPENDS = libupnp libfuse
 
 DJMOUNT_AUTORECONF = YES
 
@@ -24,5 +24,5 @@ DJMOUNT_CONF_OPTS = \
 	--with-libupnp-prefix=$(TARGET_DIR)/usr \
 	--disable-debug
 
-$(D)/djmount:
+$(D)/djmount: | bootstrap
 	$(call autotools-package)

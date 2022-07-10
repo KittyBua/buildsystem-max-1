@@ -9,7 +9,7 @@ DVB_APPS_DIR = dvb-apps.git
 DVB_APPS_SOURCE = dvb-apps.git
 DVB_APPS_SITE = https://github.com/openpli-arm
 
-DVB_APPS_DEPENDS = bootstrap libiconv
+DVB_APPS_DEPENDS = libiconv
 
 define DVB_APPS_POST_PATCH
 	$(SED) '/$$(MAKE) -C util $$@/d' $(PKG_BUILD_DIR)/Makefile
@@ -31,5 +31,5 @@ DVB_APPS_MAKE_OPTS = \
 DVB_APPS_MAKE_INSTALL_OPTS = \
 	$(DVB_APPS_MAKE_OPTS)
 
-$(D)/dvb-apps:
+$(D)/dvb-apps: | bootstrap
 	$(call generic-package)

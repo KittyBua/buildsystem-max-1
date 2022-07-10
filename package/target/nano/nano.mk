@@ -9,7 +9,7 @@ NANO_DIR = nano-$(NANO_VERSION)
 NANO_SOURCE = nano-$(NANO_VERSION).tar.gz
 NANO_SITE = https://www.nano-editor.org/dist/v$(basename $(NANO_VERSION))
 
-NANO_DEPENDS = bootstrap ncurses
+NANO_DEPENDS = ncurses
 
 NANO_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
@@ -17,5 +17,5 @@ NANO_CONF_OPTS = \
 	--enable-tiny \
 	--enable-color
 
-$(D)/nano:
+$(D)/nano: | bootstrap
 	$(call autotools-package)

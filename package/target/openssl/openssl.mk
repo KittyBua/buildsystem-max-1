@@ -9,8 +9,6 @@ OPENSSL_DIR = openssl-$(OPENSSL_VERSION)
 OPENSSL_SOURCE = openssl-$(OPENSSL_VERSION).tar.gz
 OPENSSL_SITE = https://www.openssl.org/source
 
-OPENSSL_DEPENDS = bootstrap
-
 ifeq ($(TARGET_ARCH),arm)
 OPENSSL_TARGET_ARCH = linux-armv4
 else ifeq ($(TARGET_ARCH),aarch64)
@@ -63,5 +61,5 @@ define OPENSSL_TARGET_CLEANUP
 endef
 OPENSSL_TARGET_CLEANUP_HOOKS += OPENSSL_TARGET_CLEANUP
 
-$(D)/openssl:
+$(D)/openssl: | bootstrap
 	$(call autotools-package)

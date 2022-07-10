@@ -9,8 +9,6 @@ ALSA_LIB_DIR = alsa-lib-$(ALSA_LIB_VERSION)
 ALSA_LIB_SOURCE = alsa-lib-$(ALSA_LIB_VERSION).tar.bz2
 ALSA_LIB_SITE = https://www.alsa-project.org/files/pub/lib
 
-ALSA_LIB_DEPENDS = bootstrap
-
 ALSA_LIB_AUTORECONF = YES
 
 ALSA_LIB_CONF_OPTS = \
@@ -36,5 +34,5 @@ define ALSA_LIB_TARGET_CLEANUP
 endef
 ALSA_LIB_TARGET_CLEANUP_HOOKS += ALSA_LIB_TARGET_CLEANUP
 
-$(D)/alsa-lib:
+$(D)/alsa-lib: | bootstrap
 	$(call autotools-package)

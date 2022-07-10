@@ -9,7 +9,5 @@ LIBMODPLUG_DIR = libmodplug-$(LIBMODPLUG_VERSION)
 LIBMODPLUG_SOURCE = libmodplug-$(LIBMODPLUG_VERSION).tar.gz
 LIBMODPLUG_SITE = https://sourceforge.net/projects/modplug-xmms/files/libmodplug/$(LIBMODPLUG_VERSION)
 
-LIBMODPLUG_DEPENDS = bootstrap
-
-$(D)/libmodplug:
+$(D)/libmodplug: | bootstrap
 	$(call autotools-package)

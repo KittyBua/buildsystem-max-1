@@ -9,8 +9,6 @@ SYSVINIT_DIR = sysvinit-$(SYSVINIT_VERSION)
 SYSVINIT_SOURCE = sysvinit-$(SYSVINIT_VERSION).tar.xz
 SYSVINIT_SITE = http://download.savannah.nongnu.org/releases/sysvinit
 
-SYSVINIT_DEPENDS = bootstrap
-
 SYSVINIT_MAKE_ENV = \
 	$(TARGET_CONFIGURE_ENV) \
 
@@ -46,5 +44,5 @@ define SYSVINIT_TARGET_CLEANUP
 endef
 SYSVINIT_TARGET_CLEANUP_HOOKS += SYSVINIT_TARGET_CLEANUP
 
-$(D)/sysvinit:
+$(D)/sysvinit: | bootstrap
 	$(call generic-package)

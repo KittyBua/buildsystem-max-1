@@ -9,7 +9,7 @@ GRAPHLCD_BASE_DIR = graphlcd-base-$(GRAPHLCD_BASE_VERSION)
 GRAPHLCD_BASE_SOURCE = graphlcd-base-$(GRAPHLCD_BASE_VERSION).tar.bz2
 GRAPHLCD_BASE_SITE = https://vdr-projects.e-tobi.net/git/graphlcd-base/snapshot/
 
-GRAPHLCD_BASE_DEPENDS = bootstrap freetype libiconv libusb
+GRAPHLCD_BASE_DEPENDS = freetype libiconv libusb
 
 ifeq ($(FLAVOUR),$(filter $(FLAVOUR),neutrino-ni))
 GRAPHLCD_BASE_PATCH += 0004-material-colors.patch-custom
@@ -28,7 +28,7 @@ GRAPHLCD_BASE_CONF_OPTS = \
 	PREFIX=/usr \
 	DESTDIR=$(TARGET_DIR)
 
-$(D)/graphlcd-base:
+$(D)/graphlcd-base: | bootstrap
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
 		$(MAKE) $($(PKG)_CONF_OPTS) -C glcdgraphics; \

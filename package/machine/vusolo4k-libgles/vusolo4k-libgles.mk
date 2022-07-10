@@ -4,15 +4,14 @@
 #
 ################################################################################
 
-VUSOLO4K_LIBGLES_DATE    = $(VUSOLO4K_DRIVER_DATE)
-VUSOLO4K_LIBGLES_REV     = r0
+VUSOLO4K_LIBGLES_DATE = $(VUSOLO4K_DRIVER_DATE)
+VUSOLO4K_LIBGLES_REV = r0
 VUSOLO4K_LIBGLES_VERSION = 17.1-$(VUSOLO4K_LIBGLES_DATE).$(VUSOLO4K_LIBGLES_REV)
-VUSOLO4K_LIBGLES_DIR     = libgles-vusolo4k
-VUSOLO4K_LIBGLES_SOURCE  = libgles-vusolo4k-$(VUSOLO4K_LIBGLES_VERSION).tar.gz
-VUSOLO4K_LIBGLES_SITE    = http://code.vuplus.com/download/release/libgles
-VUSOLO4K_LIBGLES_DEPENDS = bootstrap
+VUSOLO4K_LIBGLES_DIR = libgles-vusolo4k
+VUSOLO4K_LIBGLES_SOURCE = libgles-vusolo4k-$(VUSOLO4K_LIBGLES_VERSION).tar.gz
+VUSOLO4K_LIBGLES_SITE = http://code.vuplus.com/download/release/libgles
 
-$(D)/vusolo4k-libgles:
+$(D)/vusolo4k-libgles: | bootstrap
 	$(call PREPARE)
 	$(INSTALL_EXEC) $(BUILD_DIR)/libgles-vusolo4k/lib/* $(TARGET_LIB_DIR)
 	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libEGL.so

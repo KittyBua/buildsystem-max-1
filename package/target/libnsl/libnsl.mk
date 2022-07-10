@@ -9,7 +9,7 @@ LIBNSL_DIR = libnsl-$(LIBNSL_VERSION)
 LIBNSL_SOURCE = libnsl-$(LIBNSL_VERSION).tar.gz
 LIBNSL_SITE = $(call github,thkukuk,libnsl,v$(LIBNSL_VERSION))
 
-LIBNSL_DEPENDS = bootstrap libtirpc
+LIBNSL_DEPENDS = libtirpc
 
 LIBNSL_AUTORECONF = YES
 
@@ -19,5 +19,5 @@ define LIBNSL_INSTALL_FILES
 endef
 LIBNSL_POST_INSTALL_HOOKS += LIBNSL_INSTALL_FILES
 
-$(D)/libnsl:
+$(D)/libnsl: | bootstrap
 	$(call autotools-package)

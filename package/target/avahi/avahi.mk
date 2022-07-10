@@ -8,7 +8,7 @@ AVAHI_VERSION = 0.7
 AVAHI_DIR = avahi-$(AVAHI_VERSION)
 AVAHI_SOURCE = avahi-$(AVAHI_VERSION).tar.gz
 AVAHI_SITE = https://github.com/lathiat/avahi/releases/download/v$(AVAHI_VERSION)
-AVAHI_DEPENDS = bootstrap expat libdaemon dbus
+AVAHI_DEPENDS = expat libdaemon dbus
 
 AVAHI_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
@@ -53,5 +53,5 @@ define AVAHI_INSTALL_FILES
 endef
 AVAHI_POST_INSTALL_HOOKS += AVAHI_INSTALL_FILES
 
-$(D)/avahi:
+$(D)/avahi: | bootstrap
 	$(call autotools-package)

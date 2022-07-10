@@ -9,7 +9,7 @@ LIBAACS_DIR = libaacs-$(LIBAACS_VERSION)
 LIBAACS_SOURCE = libaacs-$(LIBAACS_VERSION).tar.bz2
 LIBAACS_SITE = https://download.videolan.org/pub/videolan/libaacs/$(LIBAACS_VERSION)
 
-LIBAACS_DEPENDS = bootstrap libgcrypt
+LIBAACS_DEPENDS = libgcrypt
 
 LIBAACS_CONF_OPTS = \
 	--disable-werror \
@@ -33,5 +33,5 @@ define LIBAACS_INSTALL_FILES
 endef
 LIBAACS_POST_INSTALL_HOOKS += LIBAACS_INSTALL_FILES
 
-$(D)/libaacs:
+$(D)/libaacs: | bootstrap
 	$(call autotools-package)

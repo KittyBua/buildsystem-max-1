@@ -6,14 +6,15 @@
 
 NEUTRINO_PLUGINS_VERSION = git
 ifeq ($(FLAVOUR),neutrino-test-max)
-NEUTRINO_PLUGINS_DIR     = neutrino-plugins-test-max.git
-NEUTRINO_PLUGINS_SOURCE  = neutrino-plugins-test-max.git
+NEUTRINO_PLUGINS_DIR = neutrino-plugins-test-max.git
+NEUTRINO_PLUGINS_SOURCE = neutrino-plugins-test-max.git
 else
-NEUTRINO_PLUGINS_DIR     = neutrino-plugins-max.git
-NEUTRINO_PLUGINS_SOURCE  = neutrino-plugins-max.git
+NEUTRINO_PLUGINS_DIR = neutrino-plugins-max.git
+NEUTRINO_PLUGINS_SOURCE = neutrino-plugins-max.git
 endif
-NEUTRINO_PLUGINS_SITE    = $(MAX-GIT-GITHUB)
-NEUTRINO_PLUGINS_DEPENDS = bootstrap ffmpeg libcurl libpng libjpeg-turbo giflib freetype
+NEUTRINO_PLUGINS_SITE = $(MAX-GIT-GITHUB)
+
+NEUTRINO_PLUGINS_DEPENDS = ffmpeg libcurl libpng libjpeg-turbo giflib freetype
 
 ifeq ($(BOXMODEL),generic)
 NEUTRINO_PLUGINS_CONF_OPTS = \
@@ -141,7 +142,7 @@ else
 endif
 	@touch $@
 
-$(D)/neutrino-plugins: neutrino-plugins.do_prepare neutrino-plugins.do_compile
+$(D)/neutrino-plugins: | bootstrap neutrino-plugins.do_prepare neutrino-plugins.do_compile
 	mkdir -p $(SHARE_NEUTRINO_ICONS)
 ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) install

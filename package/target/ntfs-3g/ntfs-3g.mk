@@ -9,7 +9,7 @@ NTFS_3G_DIR = ntfs-3g_ntfsprogs-$(NTFS_3G_VERSION)
 NTFS_3G_SOURCE = ntfs-3g_ntfsprogs-$(NTFS_3G_VERSION).tgz
 NTFS_3G_SITE = https://tuxera.com/opensource
 
-NTFS_3G_DEPENDS = bootstrap libfuse
+NTFS_3G_DEPENDS = libfuse
 
 NTFS_3G_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
@@ -30,5 +30,5 @@ define NTFS_3G_TARGET_CLEANUP
 endef
 NTFS_3G_TARGET_CLEANUP_HOOKS += NTFS_3G_TARGET_CLEANUP
 
-$(D)/ntfs-3g:
+$(D)/ntfs-3g: | bootstrap
 	$(call autotools-package)

@@ -9,8 +9,6 @@ LIBICONV_DIR = libiconv-$(LIBICONV_VERSION)
 LIBICONV_SOURCE = libiconv-$(LIBICONV_VERSION).tar.gz
 LIBICONV_SITE = https://ftp.gnu.org/gnu/libiconv
 
-LIBICONV_DEPENDS = bootstrap
-
 LIBICONV_CONF_ENV = \
 	CPPFLAGS="$(TARGET_CPPFLAGS) -fPIC"
 
@@ -26,5 +24,5 @@ define LIBICONV_TARGET_CLEANUP
 endef
 LIBICONV_TARGET_CLEANUP_HOOKS += LIBICONV_TARGET_CLEANUP
 
-$(D)/libiconv:
+$(D)/libiconv: | bootstrap
 	$(call autotools-package)

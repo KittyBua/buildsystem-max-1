@@ -9,7 +9,7 @@ LIBCURL_DIR = curl-$(LIBCURL_VERSION)
 LIBCURL_SOURCE = curl-$(LIBCURL_VERSION).tar.bz2
 LIBCURL_SITE = https://curl.haxx.se/download
 
-LIBCURL_DEPENDS = bootstrap zlib openssl ca-bundle
+LIBCURL_DEPENDS = zlib openssl ca-bundle
 
 LIBCURL_CONFIG_SCRIPTS = curl-config
 
@@ -37,5 +37,5 @@ LIBCURL_CONF_OPTS = \
 	--with-ssl=$(TARGET_DIR)/usr \
 	--enable-optimize
 
-$(D)/libcurl:
+$(D)/libcurl: | bootstrap
 	$(call autotools-package)

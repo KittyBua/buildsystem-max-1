@@ -9,7 +9,7 @@ BUSYBOX_DIR = busybox-$(BUSYBOX_VERSION)
 BUSYBOX_SOURCE = busybox-$(BUSYBOX_VERSION).tar.bz2
 BUSYBOX_SITE = https://www.busybox.net/downloads
 
-BUSYBOX_DEPENDS = bootstrap libtirpc
+BUSYBOX_DEPENDS = libtirpc
 
 BUSYBOX_CFLAGS = \
 	$(TARGET_CFLAGS)
@@ -41,7 +41,7 @@ BUSYBOX_MAKE_OPTS = \
 	CROSS_COMPILE="$(TARGET_CROSS)" \
 	CONFIG_PREFIX="$(TARGET_DIR)"
 
-$(D)/busybox:
+$(D)/busybox: | bootstrap
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/busybox.config .config; \
@@ -80,7 +80,7 @@ $(D)/busybox:
 	fi
 	$(call TARGET_FOLLOWUP)
 
-busybox-config: bootstrap
+busybox-config: | bootstrap
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
 		$(INSTALL_DATA) $(subst -config,,$(PKG_FILES_DIR))/busybox.config .config; \

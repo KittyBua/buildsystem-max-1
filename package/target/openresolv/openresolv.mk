@@ -9,8 +9,6 @@ OPENRESOLV_DIR = openresolv-openresolv-$(OPENRESOLV_VERSION)
 OPENRESOLV_SOURCE = openresolv-$(OPENRESOLV_VERSION).tar.gz
 OPENRESOLV_SITE = https://github.com/rsmarples/openresolv/archive
 
-OPENRESOLV_DEPENDS = bootstrap
-
 define OPENRESOLV_CREATE_CONF_ENV_FILE
 	echo "SYSCONFDIR=/etc"             > $(PKG_BUILD_DIR)/config.mk
 	echo "SBINDIR=/sbin"              >> $(PKG_BUILD_DIR)/config.mk
@@ -21,5 +19,5 @@ define OPENRESOLV_CREATE_CONF_ENV_FILE
 endef
 OPENRESOLV_POST_PATCH_HOOKS += OPENRESOLV_CREATE_CONF_ENV_FILE
 
-$(D)/openresolv:
+$(D)/openresolv: | bootstrap
 	$(call generic-package)

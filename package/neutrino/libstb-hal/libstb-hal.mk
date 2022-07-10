@@ -5,10 +5,11 @@
 ################################################################################
 
 LIBSTB_HAL_VERSION = git
-LIBSTB_HAL_DIR     = $(LIBSTB_HAL).git
-LIBSTB_HAL_SOURCE  = $(LIBSTB_HAL).git
-LIBSTB_HAL_SITE    = $(GIT_SITE)
-LIBSTB_HAL_DEPENDS = bootstrap ffmpeg openthreads
+LIBSTB_HAL_DIR = $(LIBSTB_HAL).git
+LIBSTB_HAL_SOURCE = $(LIBSTB_HAL).git
+LIBSTB_HAL_SITE = $(GIT_SITE)
+
+LIBSTB_HAL_DEPENDS = ffmpeg openthreads
 
 ifeq ($(BOXMODEL),generic)
 LIBSTB_HAL_CONF_OPTS = \
@@ -81,7 +82,7 @@ else
 endif
 	@touch $@
 
-$(D)/libstb-hal: $(LIBSTB_HAL_DEPENDS) libstb-hal.do_prepare libstb-hal.do_compile
+$(D)/libstb-hal: | bootstrap $(LIBSTB_HAL_DEPENDS) libstb-hal.do_prepare libstb-hal.do_compile
 ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install
 else

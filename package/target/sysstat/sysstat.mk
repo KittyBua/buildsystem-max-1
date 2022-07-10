@@ -9,8 +9,6 @@ SYSSTAT_DIR = sysstat-$(SYSSTAT_VERSION)
 SYSSTAT_SOURCE = sysstat-$(SYSSTAT_VERSION).tar.xz
 SYSSTAT_SITE = http://pagesperso-orange.fr/sebastien.godard
 
-SYSSTAT_DEPENDS = bootstrap
-
 SYSSTAT_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
 	--disable-documentation \
@@ -21,5 +19,5 @@ SYSSTAT_CONF_OPTS = \
 	sa_dir="/var/log/sysstat" \
 	conf_dir="/etc/sysstat"
 
-$(D)/sysstat:
+$(D)/sysstat: | bootstrap
 	$(call autotools-package)

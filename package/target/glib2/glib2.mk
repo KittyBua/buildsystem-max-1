@@ -9,7 +9,7 @@ GLIB2_DIR = glib-$(GLIB2_VERSION)
 GLIB2_SOURCE = glib-$(GLIB2_VERSION).tar.xz
 GLIB2_SITE = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(GLIB2_VERSION))
 
-GLIB2_DEPENDS = bootstrap host-glib2 libffi util-linux zlib libiconv
+GLIB2_DEPENDS = host-glib2 libffi util-linux zlib libiconv
 
 GLIB2_CONF_OPTS = \
 	-Dman=false \
@@ -29,5 +29,5 @@ define GLIB2_TARGET_CLEANUP
 endef
 GLIB2_TARGET_CLEANUP_HOOKS += GLIB2_TARGET_CLEANUP
 
-$(D)/glib2:
+$(D)/glib2: | bootstrap
 	$(call meson-package)

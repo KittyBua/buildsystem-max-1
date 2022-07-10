@@ -9,7 +9,7 @@ VSFTPD_DIR = vsftpd-$(VSFTPD_VERSION)
 VSFTPD_SOURCE = vsftpd-$(VSFTPD_VERSION).tar.gz
 VSFTPD_SITE = https://security.appspot.com/downloads
 
-VSFTPD_DEPENDS = bootstrap openssl
+VSFTPD_DEPENDS = openssl
 
 VSFTPD_MAKE_OPTS = \
 	$(TARGET_CONFIGURE_ENV) \
@@ -34,5 +34,5 @@ define VSFTPD_INSTALL_FILES
 endef
 VSFTPD_POST_INSTALL_HOOKS += VSFTPD_INSTALL_FILES
 
-$(D)/vsftpd:
+$(D)/vsftpd: | bootstrap
 	$(call generic-package)
