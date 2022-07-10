@@ -6,15 +6,15 @@
 ################################################################################
 
 pkgname = $(subst -config,,$(subst -upgradeconfig,,$(basename $(@F))))
+
 pkg = $(call LOWERCASE,$(pkgname))
 PKG = $(call UPPERCASE,$(pkgname))
+
+PKG_PACKAGE = $(if $(filter $(firstword $(subst -, ,$(pkg))),host),HOST,TARGET)
 
 PKG_BUILD_DIR = $(BUILD_DIR)/$($(PKG)_DIR)
 PKG_FILES_DIR = $(BASE_DIR)/package/*/$(pkgname)/files
 PKG_PATCHES_DIR = $(BASE_DIR)/package/*/$(pkgname)/patches
-
-PKG_HOST_PACKAGE = $(if $(filter $(firstword $(subst -, ,$(pkg))),host),YES,NO)
-PKG_TARGET_PACKAGE = $(if $(filter $(PKG_HOST_PACKAGE),NO),YES,NO)
 
 # -----------------------------------------------------------------------------
 
@@ -62,19 +62,19 @@ endif
 # configure commands
 ifndef $(PKG)_CONFIGURE_CMDS
   ifeq ($(PKG_MODE),CMAKE)
-    ifeq ($(PKG_HOST_PACKAGE),YES)
+    ifeq ($(PKG_PACKAGE),HOST)
       $(PKG)_CONFIGURE_CMDS = $$(HOST_CMAKE_CMDS_DEFAULT)
     else
       $(PKG)_CONFIGURE_CMDS = $$(TARGET_CMAKE_CMDS_DEFAULT)
     endif
   else ifeq ($(PKG_MODE),MESON)
-    ifeq ($(PKG_HOST_PACKAGE),YES)
+    ifeq ($(PKG_PACKAGE),HOST)
       $(PKG)_CONFIGURE_CMDS = $$(HOST_MESON_CMDS_DEFAULT)
     else
       $(PKG)_CONFIGURE_CMDS = $$(TARGET_MESON_CMDS_DEFAULT)
     endif
   else
-    ifeq ($(PKG_HOST_PACKAGE),YES)
+    ifeq ($(PKG_PACKAGE),HOST)
       $(PKG)_CONFIGURE_CMDS = $$(HOST_CONFIGURE_CMDS_DEFAULT)
     else
       $(PKG)_CONFIGURE_CMDS = $$(TARGET_CONFIGURE_CMDS_DEFAULT)
@@ -100,13 +100,13 @@ endif
 # TODO: python
 ifndef $(PKG)_BUILD_CMDS
   ifeq ($(PKG_MODE),$(filter $(PKG_MODE),AUTOTOOLS CMAKE GENERIC KCONFIG))
-    ifeq ($(PKG_HOST_PACKAGE),YES)
+    ifeq ($(PKG_PACKAGE),HOST)
       $(PKG)_BUILD_CMDS = $$(HOST_MAKE_BUILD_CMDS_DEFAULT)
     else
       $(PKG)_BUILD_CMDS = $$(TARGET_MAKE_BUILD_CMDS_DEFAULT)
     endif
   else ifeq ($(PKG_MODE),MESON)
-    ifeq ($(PKG_HOST_PACKAGE),YES)
+    ifeq ($(PKG_PACKAGE),HOST)
       $(PKG)_BUILD_CMDS = $$(HOST_NINJA_BUILD_CMDS_DEFAULT)
     else
       $(PKG)_BUILD_CMDS = $$(TARGET_NINJA_BUILD_CMDS_DEFAULT)
@@ -136,13 +136,13 @@ endif
 # TODO: python, kernel
 ifndef $(PKG)_INSTALL_CMDS
   ifeq ($(PKG_MODE),$(filter $(PKG_MODE),AUTOTOOLS CMAKE GENERIC KCONFIG))
-    ifeq ($(PKG_HOST_PACKAGE),YES)
+    ifeq ($(PKG_PACKAGE),HOST)
       $(PKG)_INSTALL_CMDS = $$(HOST_MAKE_INSTALL_CMDS_DEFAULT)
     else
       $(PKG)_INSTALL_CMDS = $$(TARGET_MAKE_INSTALL_CMDS_DEFAULT)
     endif
   else ifeq ($(PKG_MODE),MESON)
-    ifeq ($(PKG_HOST_PACKAGE),YES)
+    ifeq ($(PKG_PACKAGE),HOST)
       $(PKG)_INSTALL_CMDS = $$(HOST_NINJA_INSTALL_CMDS_DEFAULT)
     else
       $(PKG)_INSTALL_CMDS = $$(TARGET_NINJA_INSTALL_CMDS_DEFAULT)
