@@ -21,19 +21,16 @@ ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuu
 GRAPHLCD_BASE_PATCH += 0005-add-vuplus-driver.patch-custom
 endif
 
-GRAPHLCD_BASE_CONF_OPTS = \
-	$(TARGET_CONFIGURE_ENV) \
-	CXXFLAGS+="-fPIC" \
-	TARGET=$(TARGET_CROSS) \
-	PREFIX=/usr \
-	DESTDIR=$(TARGET_DIR)
+GRAPHLCD_BASE_MAKE_ENV = \
+	$(TARGET_CONFIGURE_ENV)
+
+GRAPHLCD_BASE_MAKE_INSTALL_OPTS = \
+	PREFIX=$(prefix)
+
+define GRAPHLCD_BASE_TARGET_CLEANUP
+	rm -f $(TARGET_DIR)/etc/udev/rules.d/99-graphlcd-base.rules
+endef
+GRAPHLCD_BASE_TARGET_CLEANUP_HOOKS += GRAPHLCD_BASE_TARGET_CLEANUP
 
 $(D)/graphlcd-base: | bootstrap
-	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
-		$(MAKE) $($(PKG)_CONF_OPTS) -C glcdgraphics; \
-		$(MAKE) $($(PKG)_CONF_OPTS) -C glcddrivers; \
-		$(MAKE) $($(PKG)_CONF_OPTS) -C glcdgraphics install; \
-		$(MAKE) $($(PKG)_CONF_OPTS) -C glcddrivers install; \
-		$(INSTALL_DATA) -D graphlcd.conf $(TARGET_DIR)/etc/graphlcd.conf
-	$(call TARGET_FOLLOWUP)
+	$(call generic-package)
