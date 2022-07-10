@@ -442,7 +442,7 @@ endef
 
 define TOUCH
 	@$(call MESSAGE,"Building completed")
-	@touch $@
+	@touch $(D)/$(notdir $@)
 	@echo ""
 endef
 
