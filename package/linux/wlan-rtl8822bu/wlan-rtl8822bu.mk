@@ -11,10 +11,9 @@ WLAN_RTL8822BU_SITE = http://source.mynonpublic.com
 
 WLAN_RTL8822BU_DEPENDS = kernel
 
-define WLAN_RTL8822BU_INSTALL_BINARY
+define WLAN_RTL8822BU_INSTALL_CMDS
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/88x2bu.ko $(TARGET_MODULES_DIR)/kernel/drivers/net/wireless/88x2bu.ko
 endef
-WLAN_RTL8822BU_POST_BUILD_HOOKS += WLAN_RTL8822BU_INSTALL_BINARY
 
 $(D)/wlan-rtl8822bu: | bootstrap
 	$(call kernel-module)
