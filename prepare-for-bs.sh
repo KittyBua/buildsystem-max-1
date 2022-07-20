@@ -31,9 +31,9 @@ fi
 
 # Not detected by lsb_release, try release files
 if [ -z "$FEDORA$GENTOO$SUSE$UBUNTU" ]; then
-	if   [ -f /etc/redhat-release ]; then FEDORA=1; INSTALL="yum install -y"; 
-	elif [ -f /etc/fedora-release ]; then FEDORA=1; INSTALL="yum install -y"; 
-	elif [ -f /etc/centos-release ]; then FEDORA=1; INSTALL="yum install -y"; 
+	if   [ -f /etc/redhat-release ]; then FEDORA=1; INSTALL="yum install -y";
+	elif [ -f /etc/fedora-release ]; then FEDORA=1; INSTALL="yum install -y";
+	elif [ -f /etc/centos-release ]; then FEDORA=1; INSTALL="yum install -y";
 	elif [ -f /etc/SuSE-release   ]; then SUSE=1  ; INSTALL="zypper install -n";
 	elif [ -f /etc/debian_version ]; then UBUNTU=3; INSTALL="apt-get install -y";
 	elif [ -f /etc/gentoo-release ]; then GENTOO=1; INSTALL="emerge -uN"
@@ -43,12 +43,12 @@ fi
 # still not detected, display error and let the user manually install
 if [ -z "$FEDORA$GENTOO$SUSE$UBUNTU" ]; then
 	echo
-	echo "Cannot determine which OS distribution you use," 
-	echo "or your distribution is not (yet) supported." 
+	echo "Cannot determine which OS distribution you use,"
+	echo "or your distribution is not (yet) supported."
 	echo "Please report this fact in the proper forum(s)"
 	echo
 	echo "Try installing the following packages: "
-	# determine probable distribution, based on package system, 
+	# determine probable distribution, based on package system,
 	# Suse should be last because the others may also have rpm installed.
 	{ `which apt-get > /dev/null 2>&1` && UBUNTU=1; } || \
 	{ `which yum     > /dev/null 2>&1` && FEDORA=1; } || \
@@ -132,7 +132,11 @@ PACKAGES="\
 ";
 
 if [ "$UBUNTU" == 1 ]; then
-	UBUNTU_VERSION=`lsb_release -r | grep "Release" | cut -f2 | cut -d . -f1`
+	if `which lsb_release > /dev/null 2>&1`; then 
+		UBUNTU_VERSION=`lsb_release -r | grep "Release" | cut -f2 | cut -d . -f1`
+	else
+		UBUNTU_VERSION=`grep VERSION_ID= /etc/os-release | sed 's/VERSION_ID="\([0-9]*\).*/\1/g'`
+	fi
 elif [ "$UBUNTU" == 2 ]; then
 	MINT_VERSION=`lsb_release -r | grep "Release" | cut -f2 | cut -d . -f1`
 elif [ "$UBUNTU" == 3 ]; then
