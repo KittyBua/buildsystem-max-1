@@ -149,7 +149,7 @@ ifndef $(PKG)_MAKE_INSTALL_ENV
 endif
 ifndef $(PKG)_MAKE_INSTALL_ARGS
   ifeq ($(PKG_MODE),KERNEL)
-    $(PKG)_MAKE_INSTALL_ARGS = install
+    $(PKG)_MAKE_INSTALL_ARGS = modules_install
   else
     $(PKG)_MAKE_INSTALL_ARGS = install
   endif
