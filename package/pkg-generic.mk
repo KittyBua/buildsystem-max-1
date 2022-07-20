@@ -69,7 +69,7 @@ define HOST_MAKE_BUILD_CMDS_DEFAULT
 endef
 
 define HOST_MAKE_BUILD
-	@$(call MESSAGE,"Compiling")
+	@$(call MESSAGE,"Building")
 	$(foreach hook,$($(PKG)_PRE_BUILD_HOOKS),$(call $(hook))$(sep))
 	$(Q)$(call $(PKG)_BUILD_CMDS,$(1))
 	$(foreach hook,$($(PKG)_POST_BUILD_HOOKS),$(call $(hook))$(sep))
