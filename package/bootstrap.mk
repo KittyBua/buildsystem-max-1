@@ -124,7 +124,7 @@ $(D)/bootstrap: $(BOOTSTRAP)
 #
 ################################################################################
 
-IMAGE_DEPENDS  =
+IMAGE_DEPENDS  = bootstrap
 IMAGE_DEPENDS += ncurses
 IMAGE_DEPENDS += bash
 IMAGE_DEPENDS += procps-ng
@@ -171,7 +171,8 @@ $(D)/image-deps: $(IMAGE_DEPENDS)
 #
 ################################################################################
 
-MACHINE_DEPENDS  = kernel
+MACHINE_DEPENDS  = bootstrap
+MACHINE_DEPENDS += kernel
 MACHINE_DEPENDS += kernel-modules-clean
 MACHINE_DEPENDS += $(BOXMODEL)-driver
 ifneq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 hd60 hd61 vuduo))
