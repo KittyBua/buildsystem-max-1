@@ -12,4 +12,4 @@ PYTHON_CONSTANTLY_SITE = https://files.pythonhosted.org/packages/source/c/consta
 PYTHON_CONSTANTLY_DEPENDS = python python-setuptools
 
 $(D)/python-constantly: | bootstrap
-	$(call target-python-package)
+	$(call python-package)

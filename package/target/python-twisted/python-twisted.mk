@@ -12,4 +12,4 @@ PYTHON_TWISTED_SITE = https://pypi.python.org/packages/source/T/Twisted
 PYTHON_TWISTED_DEPENDS = python python-setuptools python-zope-interface python-constantly python-incremental python-pyopenssl python-service-identity
 
 $(D)/python-twisted: | bootstrap
-	$(call target-python-package)
+	$(call python-package)

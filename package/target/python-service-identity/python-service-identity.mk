@@ -12,4 +12,4 @@ PYTHON_SERVICE_IDENTITY_SITE = https://pypi.python.org/packages/source/s/service
 PYTHON_SERVICE_IDENTITY_DEPENDS = python python-setuptools python-attr python-attrs python-pyasn1
 
 $(D)/python-service-identity: | bootstrap
-	$(call target-python-package)
+	$(call python-package)
