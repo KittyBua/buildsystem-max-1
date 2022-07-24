@@ -11,5 +11,10 @@ OPENJPEG_SITE = $(call github,uclouvain,openjpeg,v$(OPENJPEG_VERSION))
 
 OPENJPEG_DEPENDS = zlib libpng
 
+define OPENJPEG_TARGET_CLEANUP
+	rm -rf $(addprefix $(TARGET_LIB_DIR)/,openjpeg-$(basename $(OPENJPEG_VERSION)))
+endef
+OPENJPEG_TARGET_CLEANUP_HOOKS += OPENJPEG_TARGET_CLEANUP
+
 $(D)/openjpeg: | bootstrap
 	$(call cmake-package)
