@@ -5,8 +5,8 @@
 ################################################################################
 
 QRENCODE_VERSION = 4.1.1
-QRENCODE_DIR = qrencode-$(HOST_QRENCODE_VERSION)
-QRENCODE_SOURCE = qrencode-$(HOST_QRENCODE_VERSION).tar.gz
+QRENCODE_DIR = qrencode-$(QRENCODE_VERSION)
+QRENCODE_SOURCE = qrencode-$(QRENCODE_VERSION).tar.gz
 QRENCODE_SITE = https://fukuchi.org/works/qrencode
 
 HOST_QRENCODE_CONF_OPTS = \

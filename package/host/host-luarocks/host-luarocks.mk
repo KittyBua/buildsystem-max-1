@@ -5,8 +5,8 @@
 ################################################################################
 
 LUAROCKS_VERSION = 3.9.0
-LUAROCKS_DIR = luarocks-$(HOST_LUAROCKS_VERSION)
-LUAROCKS_SOURCE = luarocks-$(HOST_LUAROCKS_VERSION).tar.gz
+LUAROCKS_DIR = luarocks-$(LUAROCKS_VERSION)
+LUAROCKS_SOURCE = luarocks-$(LUAROCKS_VERSION).tar.gz
 LUAROCKS_SITE = https://luarocks.github.io/luarocks/releases
 
 HOST_LUAROCKS_DEPENDS = host-lua
