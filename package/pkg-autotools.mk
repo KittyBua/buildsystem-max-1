@@ -142,10 +142,7 @@ HOST_CONFIGURE_ENV = \
 
 HOST_CONFIGURE_OPTS = \
 	--prefix="$(HOST_DIR)" \
-	--sysconfdir="$(HOST_DIR)/etc" \
-	--localstatedir="$(HOST_DIR)/var" \
-	--enable-shared \
-	--disable-static
+	--sysconfdir="$(HOST_DIR)/etc"
 
 define HOST_CONFIGURE_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
