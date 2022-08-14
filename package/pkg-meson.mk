@@ -142,10 +142,10 @@ define HOST_NINJA_BUILD
 	$(foreach hook,$($(PKG)_POST_BUILD_HOOKS),$(call $(hook))$(sep))
 endef
 
-define _HOST_NINJA_INSTALL_CMDS
+define HOST_NINJA_INSTALL_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		$(HOST_MAKE_ENV) $($(PKG)_NINJA_ENV) \
-		$(HOST_NINJA_BINARY) $(NINJA_OPTS) -C $(PKG_BUILD_DIR)/build install			
+		$(HOST_NINJA_BINARY) $(NINJA_OPTS) -C $(PKG_BUILD_DIR)/build install
 endef
 
 define HOST_NINJA_INSTALL
