@@ -6,6 +6,9 @@
 
 CMAKE_QUIET = -DCMAKE_RULE_MESSAGES=OFF -DCMAKE_INSTALL_MESSAGE=NEVER
 
+TARGET_CMAKE_ENV = \
+	$(TARGET_MAKE_ENV)
+
 TARGET_CMAKE_OPTS = \
 	--no-warn-unused-cli
 
@@ -32,8 +35,18 @@ TARGET_CMAKE_OPTS += \
 	-DCMAKE_INCLUDE_PATH="$(TARGET_INCLUDE_DIR)" \
 	-DCMAKE_C_COMPILER="$(TARGET_CC)" \
 	-DCMAKE_C_FLAGS="$(TARGET_CFLAGS) -DNDEBUG" \
+	-DCMAKE_CPP_COMPILER="$(TARGET_CPP)" \
+	-DCMAKE_CPP_FLAGS="$(TARGET_CFLAGS) -DNDEBUG" \
 	-DCMAKE_CXX_COMPILER="$(TARGET_CXX)" \
 	-DCMAKE_CXX_FLAGS="$(TARGET_CFLAGS) -DNDEBUG" \
+	-DCMAKE_LINKER="$(TARGET_LD)" \
+	-DCMAKE_AR="$(TARGET_AR)" \
+	-DCMAKE_AS="$(TARGET_AS)" \
+	-DCMAKE_NM="$(TARGET_NM)" \
+	-DCMAKE_OBJCOPY="$(TARGET_OBJCOPY)" \
+	-DCMAKE_OBJDUMP="$(TARGET_OBJDUMP)" \
+	-DCMAKE_RANLIB="$(TARGET_RANLIB)" \
+	-DCMAKE_READELF="$(TARGET_READELF)" \
 	-DCMAKE_STRIP="$(TARGET_STRIP)"
 
 define TARGET_CMAKE_CMDS_DEFAULT
@@ -41,7 +54,7 @@ define TARGET_CMAKE_CMDS_DEFAULT
 		rm -f CMakeCache.txt; \
 		mkdir -p build; \
 		cd build; \
-		$(TARGET_MAKE_ENV) $($(PKG)_CONF_ENV) \
+		$(TARGET_CMAKE_ENV) $($(PKG)_CONF_ENV) \
 		$($(PKG)_CMAKE) .. \
 			$(TARGET_CMAKE_OPTS) $($(PKG)_CONF_OPTS)
 endef
@@ -70,6 +83,9 @@ endef
 #
 ################################################################################
 
+HOST_CMAKE_ENV = \
+	$(HOST_MAKE_ENV)
+
 HOST_CMAKE_OPTS += \
 	--no-warn-unused-cli
 
@@ -93,7 +109,7 @@ define HOST_CMAKE_CMDS_DEFAULT
 		rm -f CMakeCache.txt; \
 		mkdir -p build; \
 		cd build; \
-		$(HOST_MAKE_ENV) $($(PKG)_CONF_ENV) \
+		$(HOST_CMAKE_ENV) $($(PKG)_CONF_ENV) \
 		$($(PKG)_CMAKE) .. \
 			$(HOST_CMAKE_OPTS) $($(PKG)_CONF_OPTS)
 endef
