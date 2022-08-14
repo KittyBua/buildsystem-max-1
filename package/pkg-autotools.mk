@@ -70,8 +70,10 @@ TARGET_CONFIGURE_OPTS = \
 	--build=$(GNU_HOST_NAME) \
 	--host=$(GNU_TARGET_NAME) \
 	--target=$(GNU_TARGET_NAME) \
+	\
 	--program-prefix="" \
 	--program-suffix="" \
+	\
 	--prefix=$(prefix) \
 	--exec-prefix=$(exec_prefix) \
 	--bindir=$(bindir) \
@@ -141,8 +143,8 @@ HOST_CONFIGURE_ENV = \
 	LDFLAGS="$(HOST_LDFLAGS)"
 
 HOST_CONFIGURE_OPTS = \
-	--prefix="$(HOST_DIR)" \
-	--sysconfdir="$(HOST_DIR)/etc"
+	--prefix=$(HOST_DIR) \
+	--sysconfdir=$(HOST_DIR)/etc
 
 define HOST_CONFIGURE_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
