@@ -3,7 +3,6 @@
 #
 /build_cross
 /build_host
-/build_source
 /build_tmp
 /own-files
 /own-patches

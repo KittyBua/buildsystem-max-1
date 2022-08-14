@@ -64,7 +64,6 @@ $(D)/directories:
 	mkdir -p $(DL_DIR)
 	mkdir -p $(BUILD_DIR)
 	mkdir -p $(IMAGE_DIR)
-	mkdir -p $(SOURCE_DIR)
 	mkdir -p $(HOST_DIR)/{bin,lib,share}
 	mkdir -p $(TARGET_DIR)/{bin,etc,lib,sbin,usr,var}
 	mkdir -p $(TARGET_DIR)/etc/{default,init.d,network,ssl,udev}

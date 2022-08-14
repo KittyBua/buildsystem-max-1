@@ -19,7 +19,7 @@ clean: depsclean
 	@-rm -rf $(TARGET_DIR)
 	@-rm -rf $(DEPS_DIR)/kernel
 	@-rm -rf $(DEPS_DIR)/*.do_compile
-	@-rm -rf $(DEPS_DIR)/*.config.status
+	@-rm -rf $(DEPS_DIR)/*.do_configure
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 distclean:
@@ -28,7 +28,6 @@ distclean:
 	@-rm -rf $(BASE_DIR)/release
 	@-rm -rf $(TARGET_DIR)
 	@-rm -rf $(BUILD_DIR)
-	@-rm -rf $(SOURCE_DIR)
 	@-rm -rf $(DEPS_DIR)
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 

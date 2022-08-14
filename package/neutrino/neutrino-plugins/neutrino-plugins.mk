@@ -114,27 +114,25 @@ endef
 
 # -----------------------------------------------------------------------------
 
-NEUTRINO_PLUGINS_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)
+NEUTRINO_PLUGINS_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)-obj
 
 $(D)/neutrino-plugins.do_prepare:
-	$(call STARTUP)
-	rm -rf $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(SOURCE_DIR))
-	$(call APPLY_PATCHES_S,$(PKG_PATCHES_DIR),$($(PKG)_PATCH))
-	@touch $@
+	$(call PREPARE)
+	@touch $(D)/$(notdir $@)
 
-$(D)/neutrino-plugins.config.status:
+$(D)/neutrino-plugins.do_configure:
+	@$(call MESSAGE,"Configuring")
 	rm -rf $(NEUTRINO_PLUGINS_OBJ_DIR)
 	mkdir -p $(NEUTRINO_PLUGINS_OBJ_DIR)
-	$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/autogen.sh
+	$(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)/autogen.sh
 	cd $(NEUTRINO_PLUGINS_OBJ_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
-		$(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR)/configure \
+		$(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)/configure \
 			$(NEUTRINO_PLUGINS_CONF_OPTS)
 	@touch $@
 
-$(D)/neutrino-plugins.do_compile: neutrino-plugins.config.status
+$(D)/neutrino-plugins.do_compile: neutrino-plugins.do_configure
+	@$(call MESSAGE,"Building")
 ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)
 else
@@ -143,6 +141,7 @@ endif
 	@touch $@
 
 $(D)/neutrino-plugins: | bootstrap neutrino-plugins.do_prepare neutrino-plugins.do_compile
+	@$(call MESSAGE,"Installing to target")
 	mkdir -p $(SHARE_NEUTRINO_ICONS)
 ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) install
@@ -165,14 +164,14 @@ endif
 neutrino-plugins-clean:
 	@printf "$(TERM_YELLOW)===> clean $(subst -clean,,$@) .. $(TERM_NORMAL)"
 	@rm -f $(D)/neutrino-plugins
-	@rm -f $(D)/neutrino-plugins.config.status
+	@rm -f $(D)/neutrino-plugins.do_configure
 	@rm -f $(D)/neutrino-plugins.do_compile
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 neutrino-plugins-distclean:
 	@printf "$(TERM_YELLOW)===> distclean $(subst -distclean,,$@) .. $(TERM_NORMAL)"
 	@rm -f $(D)/neutrino-plugins
-	@rm -f $(D)/neutrino-plugins.config.status
+	@rm -f $(D)/neutrino-plugins.do_configure
 	@rm -f $(D)/neutrino-plugins.do_compile
 	@rm -f $(D)/neutrino-plugins.do_prepare
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
@@ -191,6 +190,6 @@ endif
 # make neutrino-plugin-<subdir>; e.g. make neutrino-plugin-tuxwetter
 NEUTRINO_PLUGINS_SUBDIR_DEPENDS = bootstrap libcurl libpng libjpeg-turbo giflib freetype
 
-neutrino-plugin-%: $(NEUTRINO_PLUGINS_SUBDIR_DEPENDS) neutrino-plugins.do_prepare neutrino-plugins.config.status
+neutrino-plugin-%: $(NEUTRINO_PLUGINS_SUBDIR_DEPENDS) neutrino-plugins.do_prepare neutrino-plugins.do_configure
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)/$(subst neutrino-plugin-,,$(@))
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)/$(subst neutrino-plugin-,,$(@)) install DESTDIR=$(TARGET_DIR)

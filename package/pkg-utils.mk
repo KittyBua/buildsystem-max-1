@@ -5,7 +5,7 @@
 #
 ################################################################################
 
-pkgname = $(subst -config,,$(subst -upgradeconfig,,$(basename $(@F))))
+pkgname = $(subst -config,,$(subst -upgradeconfig,,$(subst .do_compile,,$(subst .do_configure,,$(subst .do_prepare,,$(basename $(@F)))))))
 
 pkg = $(call LOWERCASE,$(pkgname))
 PKG = $(call UPPERCASE,$(pkgname))
@@ -230,12 +230,11 @@ PKG_NO_INSTALL = pkg-no-install
 
 # clean-up
 define CLEANUP
-	$(Q)( \
 	if [ -d "$(PKG_BUILD_DIR)" ]; then \
-		$(call MESSAGE,"Clean-up"); \
-		cd $(BUILD_DIR) && rm -rf $($(PKG)_DIR); \
-	fi; \
-	)
+	  $(call MESSAGE,"Clean-up"); \
+	  $(CD) $(BUILD_DIR); \
+	    rm -rf $($(PKG)_DIR); \
+	fi
 endef
 
 # -----------------------------------------------------------------------------
@@ -244,7 +243,7 @@ endef
 define STARTUP
 	$(call DEPENDS)
 	@$(call MESSAGE,"Start-up build")
-	$(call CLEANUP)
+	$(Q)$(call CLEANUP)
 endef
 
 # -----------------------------------------------------------------------------
@@ -270,16 +269,16 @@ define DOWNLOAD
 	$(foreach hook,$($(PKG)_PRE_DOWNLOAD_HOOKS),$(call $(hook))$(sep))
 	$(Q)( \
 	if [ "$($(PKG)_VERSION)" == "git" ]; then \
-	  $(call MESSAGE,"Downloading") ; \
+	  $(call MESSAGE,"Downloading"); \
 	  $(GET_GIT_SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
 	elif [ "$($(PKG)_VERSION)" == "hg" ]; then \
-	  $(call MESSAGE,"Downloading") ; \
+	  $(call MESSAGE,"Downloading"); \
 	  $(GET_HG_SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
 	elif [ "$($(PKG)_VERSION)" == "svn" ]; then \
-	  $(call MESSAGE,"Downloading") ; \
+	  $(call MESSAGE,"Downloading"); \
 	  $(GET_SVN_SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
 	elif [ ! -f $(DL_DIR)/$($(PKG)_SOURCE) ]; then \
-	  $(call MESSAGE,"Downloading") ; \
+	  $(call MESSAGE,"Downloading"); \
 	  $(WGET_DOWNLOAD) $(DL_DIR) $($(PKG)_SITE)/$(1); \
 	fi; \
 	)
@@ -295,8 +294,8 @@ define EXTRACT
 	$(Q)( \
 	EXTRACT_DIR=$(1); \
 	if [ "$($(PKG)_EXTRACT_DIR)" ]; then \
-		EXTRACT_DIR=$(1)/$($(PKG)_EXTRACT_DIR); \
-		$(INSTALL) -d $${EXTRACT_DIR}; \
+	  EXTRACT_DIR=$(1)/$($(PKG)_EXTRACT_DIR); \
+	  $(INSTALL) -d $${EXTRACT_DIR}; \
 	fi; \
 	case $($(PKG)_SOURCE) in \
 	  *.tar | *.tar.bz2 | *.tbz | *.tar.gz | *.tgz | *.tar.xz | *.txz) \
@@ -345,38 +344,6 @@ PATCHES = \
 	*.patch-$(BOXMODEL) \
 	*.patch-$(FLAVOUR)
 
-# for SOURCE_DIR
-define APPLY_PATCHES_S
-	@$(call MESSAGE,"Patching")
-	$(foreach hook,$($(PKG)_PRE_PATCH_HOOKS),$(call $(hook))$(sep))
-	$(Q)( \
-	$(CD) $(SOURCE_DIR)/$($(PKG)_DIR); \
-	for i in $(1) $(2); do \
-	  if [ "$$i" == "$(PKG_PATCHES_DIR)" -a ! -d $$i ]; then \
-	    continue; \
-	  fi; \
-	  if [ -d $$i ]; then \
-	    for p in $(addprefix $$i/,$(PATCHES)); do \
-	      if [ -e $$p ]; then \
-	        echo -e "$(TERM_YELLOW)Applying$(TERM_NORMAL) $${p##*/}"; \
-	        patch -p1 -i $$p; \
-	      fi; \
-	    done; \
-	  else \
-	    if [ $${i:0:1} == "/" ]; then \
-	      echo -e "$(TERM_YELLOW)Applying$(TERM_NORMAL) $${i##*/}"; \
-	      patch -p1 -i $$i; \
-	    else \
-	      echo -e "$(TERM_YELLOW)Applying$(TERM_NORMAL) $${i##*//}"; \
-	      patch -p1 -i $(PKG_PATCHES_DIR)/$$i; \
-	    fi; \
-	  fi; \
-	done; \
-	)
-	$(foreach hook,$($(PKG)_POST_PATCH_HOOKS),$(call $(hook))$(sep))
-endef
-
-# for BUILD_DIR
 define APPLY_PATCHES
 	@$(call MESSAGE,"Patching")
 	$(foreach hook,$($(PKG)_PRE_PATCH_HOOKS),$(call $(hook))$(sep))
@@ -430,9 +397,9 @@ endef
 # -----------------------------------------------------------------------------
 
 # rewrite libtool libraries
-REWRITE_LIBTOOL_RULES = \
-	"s,^libdir=.*,libdir='$(1)',; \
-	 s,\(^dependency_libs='\| \|-L\|^dependency_libs='\)/usr/lib,\ $(1),g"
+REWRITE_LIBTOOL_RULES = "\
+	s,^libdir=.*,libdir='$(1)',; \
+	s,\(^dependency_libs='\| \|-L\|^dependency_libs='\)/usr/lib,\ $(1),g"
 
 REWRITE_LIBTOOL_TAG = rewritten=1
 
@@ -450,28 +417,28 @@ define rewrite_libtool
 endef
 
 # rewrite libtool libraries automatically
-REWRITE_LIBTOOL = $(call rewrite_libtool,$(TARGET_LIB_DIR))
+define REWRITE_LIBTOOL
+	$(foreach libdir,$(TARGET_LIB_DIR),$(call rewrite_libtool,$(libdir))$(sep))
+endef
 
 # -----------------------------------------------------------------------------
 
 # rewrite pkg-config files
-REWRITE_CONFIG_RULES = \
-	"s,^prefix=.*,prefix='$(TARGET_DIR)/usr',; \
-	 s,^exec_prefix=.*,exec_prefix='$(TARGET_DIR)/usr',; \
-	 s,^libdir=.*,libdir='$(TARGET_LIB_DIR)',; \
-	 s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
+REWRITE_CONFIG_RULES = "\
+	s,^prefix=.*,prefix='$(TARGET_DIR)/usr',; \
+	s,^exec_prefix=.*,exec_prefix='$(TARGET_DIR)/usr',; \
+	s,^libdir=.*,libdir='$(TARGET_LIB_DIR)',; \
+	s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
 
 define rewrite_config_script
-	$(Q)( \
-	mv $(TARGET_DIR)/$(bindir)/$(1) $(HOST_DIR)/bin; \
-	$(call MESSAGE,"Rewriting $(1)"); \
-	$(SED) $(REWRITE_CONFIG_RULES) $(HOST_DIR)/bin/$(1); \
-	)
+	mv $(TARGET_DIR)/$(bindir)/$(1) $(HOST_DIR)/bin
+	$(Q)$(call MESSAGE,"Rewriting $(1)")
+	$(SED) $(REWRITE_CONFIG_RULES) $(HOST_DIR)/bin/$(1)
 endef
 
 # rewrite config scripts automatically
 define REWRITE_CONFIG_SCRIPTS
-	$(foreach config_script,$($(PKG)_CONFIG_SCRIPTS),\
+	$(foreach config_script,$($(PKG)_CONFIG_SCRIPTS),
 		$(call rewrite_config_script,$(config_script))$(sep))
 endef
 
@@ -490,12 +457,11 @@ define HOST_FOLLOWUP
 	@$(call MESSAGE,"Follow-up build")
 	$(foreach hook,$($(PKG)_PRE_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
 	$(foreach hook,$($(PKG)_POST_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
-	$(call CLEANUP)
+	$(Q)$(call CLEANUP)
 	$(foreach hook,$($(PKG)_CLEANUP_HOOKS),$(call $(hook))$(sep))
 	$(TOUCH)
 endef
 
-# follow-up build
 define TARGET_FOLLOWUP
 	@$(call MESSAGE,"Follow-up build")
 	$(foreach hook,$($(PKG)_PRE_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
@@ -504,9 +470,9 @@ define TARGET_FOLLOWUP
 		$($(PKG)_INSTALL_INIT_SYSTEMD))
 	$(if $(BS_INIT_SYSV),\
 		$($(PKG)_INSTALL_INIT_SYSV))
-	$(call REWRITE_CONFIG_SCRIPTS)
-	$(REWRITE_LIBTOOL)
-	$(call CLEANUP)
+	$(Q)$(call REWRITE_CONFIG_SCRIPTS)
+	$(Q)$(call REWRITE_LIBTOOL)
+	$(Q)$(call CLEANUP)
 	$(foreach hook,$($(PKG)_TARGET_CLEANUP_HOOKS),$(call $(hook))$(sep))
 	$(TOUCH)
 endef

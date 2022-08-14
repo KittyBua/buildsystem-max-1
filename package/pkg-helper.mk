@@ -7,9 +7,9 @@
 # BS Revision
 BS_REV=$(shell cd $(BASE_DIR); git log | grep "^commit" | wc -l)
 # Neutrino mp Revision
-NMP_REV=$(shell cd $(SOURCE_DIR)/$(NEUTRINO_DIR); git log | grep "^commit" | wc -l)
+NMP_REV=$(shell cd $(BUILD_DIR)/$(NEUTRINO_DIR); git log | grep "^commit" | wc -l)
 # libstb-hal Revision
-HAL_REV=$(shell cd $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); git log | grep "^commit" | wc -l)
+HAL_REV=$(shell cd $(BUILD_DIR)/$(LIBSTB_HAL_DIR); git log | grep "^commit" | wc -l)
 
 # -----------------------------------------------------------------------------
 
@@ -31,17 +31,17 @@ patch:
 
 neutrino-patch:
 	@printf "$(TERM_YELLOW)---> create $(NEUTRINO)-$(DATE).patch ... $(TERM_NORMAL)"
-	$(shell cd $(SOURCE_DIR)/$(NEUTRINO_DIR) && git diff > $(BUILD_DIR)/$(NEUTRINO)-$(DATE).patch)
+	$(shell cd $(BUILD_DIR)/$(NEUTRINO_DIR) && git diff > $(BUILD_DIR)/$(NEUTRINO)-$(DATE).patch)
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 libstb-hal-patch:
 	@printf "$(TERM_YELLOW)---> create $(LIBSTB_HAL)-$(DATE).patch ... $(TERM_NORMAL)"
-	$(shell cd $(SOURCE_DIR)/$(LIBSTB_HAL_DIR) && git diff > $(BUILD_DIR)/$(LIBSTB_HAL)-$(DATE).patch)
+	$(shell cd $(BUILD_DIR)/$(LIBSTB_HAL_DIR) && git diff > $(BUILD_DIR)/$(LIBSTB_HAL)-$(DATE).patch)
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 neutrino-plugins-patch:
 	@printf "$(TERM_YELLOW)---> create $(NEUTRINO_PLUGINS_DIR)-$(DATE).patch ... $(TERM_NORMAL)"
-	$(shell cd $(SOURCE_DIR)/$(NEUTRINO_PLUGINS_DIR) && git diff > $(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)-$(DATE).patch)
+	$(shell cd $(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR) && git diff > $(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)-$(DATE).patch)
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 # -----------------------------------------------------------------------------
@@ -51,7 +51,7 @@ TUXBOX_CUSTOMIZE = [ -x support/scripts/$(notdir $@)-local.sh ] && \
 	$(RELEASE_DIR) \
 	$(TARGET_DIR) \
 	$(BASE_DIR) \
-	$(SOURCE_DIR) \
+	$(BUILD_DIR) \
 	$(IMAGE_DIR) \
 	$(BOXMODEL) \
 	$(FLAVOUR) \

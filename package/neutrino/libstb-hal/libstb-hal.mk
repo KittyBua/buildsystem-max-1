@@ -54,27 +54,25 @@ LIBSTB_HAL_CONF_OPTS += \
 
 # -----------------------------------------------------------------------------
 
-LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)
+LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)-obj
 
 $(D)/libstb-hal.do_prepare:
-	$(call STARTUP)
-	rm -rf $(SOURCE_DIR)/$(LIBSTB_HAL_DIR)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(SOURCE_DIR))
-	$(call APPLY_PATCHES_S,$(PKG_PATCHES_DIR),$($(PKG)_PATCH))
-	@touch $@
+	$(call PREPARE)
+	@touch $(D)/$(notdir $@)
 
-$(D)/libstb-hal.config.status:
+$(D)/libstb-hal.do_configure:
+	@$(call MESSAGE,"Configuring")
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
 	mkdir -p $(LIBSTB_HAL_OBJ_DIR)
-	$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh
+	$(BUILD_DIR)/$(LIBSTB_HAL_DIR)/autogen.sh
 	$(CD) $(LIBSTB_HAL_OBJ_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
-		$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/configure \
+		$(BUILD_DIR)/$(LIBSTB_HAL_DIR)/configure \
 			$(LIBSTB_HAL_CONF_OPTS)
-	@touch $@
+	@touch $(D)/$(notdir $@)
 
-$(D)/libstb-hal.do_compile: libstb-hal.config.status
+$(D)/libstb-hal.do_compile: libstb-hal.do_configure
+	@$(call MESSAGE,"Building")
 ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR)
 else
@@ -83,6 +81,7 @@ endif
 	@touch $@
 
 $(D)/libstb-hal: | bootstrap $(LIBSTB_HAL_DEPENDS) libstb-hal.do_prepare libstb-hal.do_compile
+	@$(call MESSAGE,"Installing to target")
 ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install
 else
@@ -94,14 +93,14 @@ endif
 libstb-hal-clean:
 	@printf "$(TERM_YELLOW)===> clean $(subst -clean,,$@) .. $(TERM_NORMAL)"
 	@rm -f $(D)/libstb-hal
-	@rm -f $(D)/libstb-hal.config.status
+	@rm -f $(D)/libstb-hal.do_configure
 	@rm -f $(D)/libstb-hal.do_compile
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 libstb-hal-distclean:
 	@printf "$(TERM_YELLOW)===> distclean $(subst -distclean,,$@) .. $(TERM_NORMAL)"
 	@rm -f $(D)/libstb-hal
-	@rm -f $(D)/libstb-hal.config.status
+	@rm -f $(D)/libstb-hal.do_configure
 	@rm -f $(D)/libstb-hal.do_compile
 	@rm -f $(D)/libstb-hal.do_prepare
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"

@@ -145,7 +145,7 @@ NEUTRINO_CONF_OPTS += \
 	--with-tremor \
 	--with-boxtype=$(BOXTYPE) \
 	--with-boxmodel=$(BOXMODEL) \
-	--with-stb-hal-includes=$(SOURCE_DIR)/$(LIBSTB_HAL_DIR)/include \
+	--with-stb-hal-includes=$(BUILD_DIR)/$(LIBSTB_HAL_DIR)/include \
 	--with-stb-hal-build=$(LIBSTB_HAL_OBJ_DIR) \
 	\
 	CFLAGS="$(NEUTRINO_CFLAGS)" \
@@ -236,28 +236,26 @@ NEUTRINO_DEPENDS += libstb-hal
 
 # -----------------------------------------------------------------------------
 
-NEUTRINO_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_DIR)
+NEUTRINO_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_DIR)-obj
 
 $(D)/neutrino.do_prepare:
-	$(call STARTUP)
-	rm -rf $(SOURCE_DIR)/$(NEUTRINO_DIR)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
-	$(call EXTRACT,$(SOURCE_DIR))
-	$(call APPLY_PATCHES_S,$(PKG_PATCHES_DIR),$($(PKG)_PATCH))
-	@touch $@
+	$(call PREPARE)
+	@touch $(D)/$(notdir $@)
 
-$(D)/neutrino.config.status:
+$(D)/neutrino.do_configure:
+	@$(call MESSAGE,"Configuring")
 	rm -rf $(NEUTRINO_OBJ_DIR)
 	mkdir -p $(NEUTRINO_OBJ_DIR)
-	$(SOURCE_DIR)/$(NEUTRINO_DIR)/autogen.sh
+	$(BUILD_DIR)/$(NEUTRINO_DIR)/autogen.sh
 	$(CD) $(NEUTRINO_OBJ_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
-		$(SOURCE_DIR)/$(NEUTRINO_DIR)/configure \
+		$(BUILD_DIR)/$(NEUTRINO_DIR)/configure \
 			$(NEUTRINO_CONF_OPTS)
-		$(if $(findstring VCS,$(NEUTRINO_CFLAGS)),+make $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h)
-	@touch $@
+		$(if $(findstring VCS,$(NEUTRINO_CFLAGS)),+make $(BUILD_DIR)/$(NEUTRINO_DIR)/src/gui/version.h)
+	@touch $(D)/$(notdir $@)
 
-$(D)/neutrino.do_compile: neutrino.config.status
+$(D)/neutrino.do_compile: neutrino.do_configure
+	@$(call MESSAGE,"Building")
 ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR)
 else
@@ -266,6 +264,7 @@ endif
 	@touch $@
 
 $(D)/neutrino: $(NEUTRINO_DEPENDS) neutrino.do_prepare neutrino.do_compile
+	@$(call MESSAGE,"Installing to target")
 ifeq ($(BOXMODEL),generic)
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install
 	mkdir -p $(TARGET_DIR)/tmp
@@ -326,16 +325,16 @@ neutrino-pc-clean \
 neutrino-clean:
 	@printf "$(TERM_YELLOW)===> clean $(subst -clean,,$@) .. $(TERM_NORMAL)"
 	@rm -f $(D)/neutrino
-	@rm -f $(D)/neutrino.config.status
+	@rm -f $(D)/neutrino.do_configure
 	@rm -f $(D)/neutrino.do_compile
-	@rm -f $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
+	@rm -f $(BUILD_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 neutrino-pc-distclean \
 neutrino-distclean:
 	@printf "$(TERM_YELLOW)===> distclean $(subst -distclean,,$@) .. $(TERM_NORMAL)"
 	@rm -f $(D)/neutrino
-	@rm -f $(D)/neutrino.config.status
+	@rm -f $(D)/neutrino.do_configure
 	@rm -f $(D)/neutrino.do_compile
 	@rm -f $(D)/neutrino.do_prepare
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
@@ -350,13 +349,13 @@ endif
 
 # -----------------------------------------------------------------------------
 
-$(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h:
+$(BUILD_DIR)/$(NEUTRINO_DIR)/src/gui/version.h:
 	@rm -f $@
-	@if test -d $(SOURCE_DIR)/$(LIBSTB_HAL_DIR); then \
+	@if test -d $(BUILD_DIR)/$(LIBSTB_HAL_DIR); then \
 		echo '#define VCS "BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"' > $@; \
 	fi
 
 # -----------------------------------------------------------------------------
 
 PHONY += $(TARGET_DIR)/.version
-PHONY += $(SOURCE_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
+PHONY += $(BUILD_DIR)/$(NEUTRINO_DIR)/src/gui/version.h
