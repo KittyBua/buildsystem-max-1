@@ -11,8 +11,6 @@ AUTOFS_SITE = https://www.kernel.org/pub/linux/daemons/autofs/v5
 
 AUTOFS_DEPENDS = libtirpc
 
-AUTOFS_AUTORECONF = YES
-
 AUTOFS_CONF_ENV = \
 	ac_cv_path_RANLIB=$(TARGET_RANLIB) \
 	ac_cv_path_E2FSCK=/sbin/fsck \
