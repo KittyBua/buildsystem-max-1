@@ -16,8 +16,6 @@ CROSSTOOL_NG_BACKUP = $(DL_DIR)/$(CROSSTOOL_NG_CONFIG)-kernel-$(KERNEL_VERSION)-
 
 CROSSTOOL_NG_CHECKOUT = 7feb97f1
 
-# -----------------------------------------------------------------------------
-
 ifeq ($(wildcard $(CROSS_DIR)/build.log.bz2),)
 CROSSTOOL = crosstool
 crosstool:
@@ -31,7 +29,7 @@ crosstool-ng:
 	$(call PREPARE)
 	unset CONFIG_SITE LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE; \
 	ulimit -n 2048; \
-	$(HOST_CCACHE_LINK); \
+	$(call HOST_CCACHE_LINK); \
 	$(CHDIR)/$($(PKG)_DIR); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/$(CROSSTOOL_NG_CONFIG).config .config; \
 		$(SED) "s|^CT_PARALLEL_JOBS=.*|CT_PARALLEL_JOBS=$(PARALLEL_JOBS)|" .config; \
@@ -46,7 +44,7 @@ crosstool-ng:
 	test -e $(CROSS_DIR)/$(GNU_TARGET_NAME)/lib || ln -sf sysroot/lib $(CROSS_DIR)/$(GNU_TARGET_NAME)/
 	rm -f $(CROSS_DIR)/$(GNU_TARGET_NAME)/lib/libstdc++.so.6.0.*-gdb.py
 	rm -f $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot/lib/libstdc++.so.6.0.*-gdb.py
-	$(call CLEANUP)
+	$(Q)$(call CLEANUP)
 endif
 
 # -----------------------------------------------------------------------------
