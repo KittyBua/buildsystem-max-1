@@ -46,7 +46,7 @@ endef
 define WAF_BUILD
 	@$(call MESSAGE,"Building")
 	$(foreach hook,$($(PKG)_PRE_BUILD_HOOKS),$(call $(hook))$(sep))
-	$(Q)$(call WAF_BUILD_CMDS_DEFAULT)
+	$(Q)$(call $(PKG)_BUILD_CMDS)
 	$(foreach hook,$($(PKG)_POST_BUILD_HOOKS),$(call $(hook))$(sep))
 endef
 
@@ -61,14 +61,15 @@ endef
 define WAF_INSTALL
 	@$(call MESSAGE,"Installing")
 	$(foreach hook,$($(PKG)_PRE_INSTALL_HOOKS),$(call $(hook))$(sep))
-	$(Q)$(call WAF_INSTALL_CMDS_DEFAULT)
+	$(Q)$(call $(PKG)_INSTALL_CMDS)
 	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
 endef
 
 define waf-package
+	$(eval PKG_MODE = $(pkg-mode))
 	$(call PREPARE,$(1))
 	$(call WAF_CONFIGURE)
-	$(call WAF_BUILD)
-	$(call WAF_INSTALL)
+	$(if $(filter $(1),$(PKG_NO_BUILD)),,$(call WAF_BUILD))
+	$(if $(filter $(1),$(PKG_NO_INSTALL)),,$(call WAF_INSTALL))
 	$(call HOST_FOLLOWUP)
 endef

@@ -142,6 +142,8 @@ ifndef $(PKG)_BUILD_CMDS
     endif
   else ifeq ($(PKG_MODE),KERNEL)
     $(PKG)_BUILD_CMDS = $$(KERNEL_MODULE_BUILD_CMDS_DEFAULT)
+  else ifeq ($(PKG_MODE),WAF)
+    $(PKG)_BUILD_CMDS = $$(WAF_BUILD_CMDS_DEFAULT)
   else
     $(PKG)_BUILD_CMDS = echo "$(PKG_NO_BUILD)"
   endif
@@ -189,6 +191,8 @@ ifndef $(PKG)_INSTALL_CMDS
     endif
   else ifeq ($(PKG_MODE),KERNEL)
     $(PKG)_INSTALL_CMDS = $$(KERNEL_MODULE_INSTALL_CMDS_DEFAULT)
+  else ifeq ($(PKG_MODE),WAF)
+    $(PKG)_INSTALL_CMDS = $$(WAF_INSTALL_CMDS_DEFAULT)
   else
     $(PKG)_INSTALL_CMDS = echo "$(PKG_NO_INSTALL)"
   endif
