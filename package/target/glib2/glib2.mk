@@ -21,7 +21,10 @@ GLIB2_CONF_OPTS = \
 	-Dgio_module_dir=/usr/lib/gio/modules \
 	-Dinstalled_tests=false \
 	-Doss_fuzz=disabled \
-	-Dselinux=disabled
+	-Dselinux=disabled \
+	-Dxattr=true \
+	-Db_lto=true \
+	-Ddefault_library=both
 
 define GLIB2_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,gettext gdb glib-2.0 locale)
