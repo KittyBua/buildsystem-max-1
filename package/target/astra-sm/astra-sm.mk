@@ -13,7 +13,7 @@ ASTRA_SM_DEPENDS = openssl
 
 ASTRA_SM_AUTORECONF = YES
 
-ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),11.3.0 12.1.0))
+ifeq ($(GCC_VERSION),$(filter $(GCC_VERSION),11.3.0 12.2.0))
 ASTRA_SM_PATCH += 0002-replace-sys-siglist.patch-gcc
 endif
 
