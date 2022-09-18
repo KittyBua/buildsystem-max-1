@@ -23,6 +23,7 @@ PROCPS_NG_CONF_OPTS = \
 	--sbindir=$(base_sbindir) \
 	--enable-skill \
 	--disable-modern-top \
+	--disable-numa \
 	--without-systemd
 
 PROCPS_NG_CONF_OPTS += \
