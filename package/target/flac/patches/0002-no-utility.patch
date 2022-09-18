@@ -1,11 +1,8 @@
 --- a/src/Makefile.am
 +++ b/src/Makefile.am
-@@ -27,10 +27,7 @@ endif
- SUBDIRS = \
- 	libFLAC \
+@@ -33,7 +33,6 @@
  	share \
--	flac \
--	metaflac \
+ 	$(PROGRAMS_DIRS) \
  	$(XMMS_DIRS) \
 -	utils \
  	$(CPPLIBS_DIRS)

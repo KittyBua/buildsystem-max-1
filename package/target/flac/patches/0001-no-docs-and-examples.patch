@@ -4,16 +4,16 @@
  
  ACLOCAL_AMFLAGS = -I m4
  
--SUBDIRS = doc include m4 man src test build microbench oss-fuzz
-+SUBDIRS = include m4 src build oss-fuzz
+-SUBDIRS = doc include m4 man src test microbench oss-fuzz
++SUBDIRS = include m4 src oss-fuzz
  
  if EXAMPLES
  SUBDIRS += examples
 --- a/src/Makefile.am
 +++ b/src/Makefile.am
-@@ -30,11 +30,6 @@ SUBDIRS = \
- 	flac \
- 	metaflac \
+@@ -33,11 +33,6 @@
+ 	share \
+ 	$(PROGRAMS_DIRS) \
  	$(XMMS_DIRS) \
 -	test_grabbag \
 -	test_libs_common \
