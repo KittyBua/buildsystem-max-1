@@ -31,16 +31,10 @@ MAKE1 := $(HOSTMAKE) -j1
 override MAKE = $(HOSTMAKE) \
 	$(if $(findstring j,$(filter-out --%,$(MAKEFLAGS))),,-j$(PARALLEL_JOBS))
 
-ifeq ($(GCC_VERSION),6.5.0)
-CROSSTOOL_GCC_VERSION = gcc-6.5.0
-else ifeq ($(GCC_VERSION),8.5.0)
-CROSSTOOL_GCC_VERSION = gcc-8.5.0
-else ifeq ($(GCC_VERSION),11.3.0)
-CROSSTOOL_GCC_VERSION = gcc-11.3.0
-else ifeq ($(GCC_VERSION),12.1.0)
-CROSSTOOL_GCC_VERSION = gcc-12.1.0
-else ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXMODEL),generic)
 CROSSTOOL_GCC_VERSION = gcc-$(shell gcc -dumpfullversion)
+else
+CROSSTOOL_GCC_VERSION = gcc-$(GCC_VERSION)
 endif
 
 ifeq ($(TARGET_ARCH),arm)
