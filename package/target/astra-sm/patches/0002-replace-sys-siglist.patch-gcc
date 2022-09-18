@@ -1,5 +1,5 @@
---- a/src/core/child.c
-+++ b/src/core/child.c
+--- a/src/astra/core/child.c
++++ b/src/astra/core/child.c
 @@ -468,7 +468,7 @@ void asc_child_close(asc_child_t *child)
              {
                  const int signum = WTERMSIG(status);
@@ -9,8 +9,8 @@
  
                  status = 128 + signum;
              }
---- a/src/core/spawn.c
-+++ b/src/core/spawn.c
+--- a/src/astra/core/spawn.c
++++ b/src/astra/core/spawn.c
 @@ -150,8 +150,8 @@ static
  void perror_s(const char *s)
  {
