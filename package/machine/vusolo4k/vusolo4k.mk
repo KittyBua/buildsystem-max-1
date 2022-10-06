@@ -74,7 +74,7 @@ $(D)/vusolo4k-platform-util: | bootstrap
 ################################################################################
 
 ifeq ($(VU_MULTIBOOT),multi)
-VUSOLO4K_VMLINUZ_INITRD_DATE = 20190911
+VUSOLO4K_VMLINUZ_INITRD_DATE = 20221006
 VUSOLO4K_VMLINUZ_INITRD_SITE = https://bitbucket.org/max_10/vmlinuz-initrd-vusolo4k/downloads
 else
 VUSOLO4K_VMLINUZ_INITRD_DATE = 20170209
