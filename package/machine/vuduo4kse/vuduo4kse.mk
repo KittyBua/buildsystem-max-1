@@ -74,7 +74,7 @@ $(D)/vuduo4kse-platform-util: | bootstrap
 ################################################################################
 
 ifeq ($(VU_MULTIBOOT),multi)
-VUDUO4KSE_VMLINUZ_INITRD_DATE = 20201010
+VUDUO4KSE_VMLINUZ_INITRD_DATE = 20221006
 VUDUO4KSE_VMLINUZ_INITRD_SITE = https://bitbucket.org/max_10/vmlinuz-initrd-vuduo4kse/downloads
 else
 VUDUO4KSE_VMLINUZ_INITRD_DATE = 20200326
