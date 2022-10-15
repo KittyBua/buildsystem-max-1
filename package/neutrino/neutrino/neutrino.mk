@@ -40,10 +40,10 @@ NEUTRINO             = neutrino-redblue
 LIBSTB_HAL           = libstb-hal-redblue
 NEUTRINO_CHECKOUT   ?= master
 LIBSTB_HAL_CHECKOUT ?= master
-else ifeq ($(FLAVOUR),neutrino-test-max)
+else ifeq ($(FLAVOUR),neutrino-max-test)
 GIT_SITE            ?= $(MAX-GIT-GITHUB)
-NEUTRINO             = neutrino-test-max
-LIBSTB_HAL           = libstb-hal-test-max
+NEUTRINO             = neutrino-max-test
+LIBSTB_HAL           = libstb-hal-max-test
 NEUTRINO_CHECKOUT   ?= master
 LIBSTB_HAL_CHECKOUT ?= master
 endif
@@ -296,7 +296,7 @@ endif
 	( \
 		echo "PRETTY_NAME=$(FLAVOUR) BS-rev$(BS_REV) HAL-rev$(HAL_REV) NMP-rev$(NMP_REV)"; \
 	) > $(TARGET_LIB_DIR)/os-release
-ifeq ($(FLAVOUR),$(filter $(FLAVOUR),neutrino-max neutrino-ni neutrino-test-max neutrino-redblue))
+ifeq ($(FLAVOUR),$(filter $(FLAVOUR),neutrino-max neutrino-max-test neutrino-ni neutrino-redblue))
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/start_neutrino1 $(TARGET_DIR)/etc/init.d/start_neutrino
 else
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/start_neutrino2 $(TARGET_DIR)/etc/init.d/start_neutrino

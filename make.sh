@@ -99,7 +99,7 @@ echo "BOXMODEL=$BOXMODEL" >> .config
 
 if [ $BOXMODEL == 'generic' ]; then
 
-echo "FLAVOUR=neutrino-test-max" >> .config
+echo "FLAVOUR=neutrino-max-test" >> .config
 
 case $2 in
 	[1-2]) REPLY=$2;;
@@ -139,9 +139,8 @@ case $2 in
 		echo "   3)  neutrino-ni    "
 		echo "   4)  neutrino-tangos"
 		echo "   5)  neutrino-redblue"
-		echo "   6)  neutrino-test-max"
-		read -p "Select Image to build (1-6)? [6] "
-		REPLY="${REPLY:-6}";;
+		read -p "Select Image to build (1-5)? [2] "
+		REPLY="${REPLY:-2}";;
 esac
 
 case "$REPLY" in
@@ -150,8 +149,8 @@ case "$REPLY" in
 	3) FLAVOUR="neutrino-ni";;
 	4) FLAVOUR="neutrino-tangos";;
 	5) FLAVOUR="neutrino-redblue";;
-	6) FLAVOUR="neutrino-test-max";;
-	*) FLAVOUR="neutrino-test-max";;
+	6) FLAVOUR="neutrino-max-test";;
+	*) FLAVOUR="neutrino-max";;
 esac
 echo "FLAVOUR=$FLAVOUR" >> .config
 
