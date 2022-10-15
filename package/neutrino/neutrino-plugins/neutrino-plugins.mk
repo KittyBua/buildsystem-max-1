@@ -5,9 +5,9 @@
 ################################################################################
 
 NEUTRINO_PLUGINS_VERSION = git
-ifeq ($(FLAVOUR),neutrino-test-max)
-NEUTRINO_PLUGINS_DIR = neutrino-plugins-test-max.git
-NEUTRINO_PLUGINS_SOURCE = neutrino-plugins-test-max.git
+ifeq ($(FLAVOUR),neutrino-max-test)
+NEUTRINO_PLUGINS_DIR = neutrino-plugins-max-test.git
+NEUTRINO_PLUGINS_SOURCE = neutrino-plugins-max-test.git
 else
 NEUTRINO_PLUGINS_DIR = neutrino-plugins-max.git
 NEUTRINO_PLUGINS_SOURCE = neutrino-plugins-max.git
