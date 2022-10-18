@@ -99,7 +99,7 @@ echo "BOXMODEL=$BOXMODEL" >> .config
 
 if [ $BOXMODEL == 'generic' ]; then
 
-echo "FLAVOUR=neutrino-max-test" >> .config
+echo "FLAVOUR=neutrino-max" >> .config
 
 case $2 in
 	[1-2]) REPLY=$2;;
