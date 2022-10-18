@@ -232,7 +232,9 @@ NEUTRINO_DEPENDS += neutrino-channellogos
 NEUTRINO_DEPENDS += neutrino-mediathek
 NEUTRINO_DEPENDS += neutrino-plugins
 NEUTRINO_DEPENDS += xupnpd
+ifeq ($(NEUTRINO_CHECKOUT),evo)
 NEUTRINO_DEPENDS += libstb-hal
+endif
 
 # -----------------------------------------------------------------------------
 
@@ -353,6 +355,8 @@ $(BUILD_DIR)/$(NEUTRINO_DIR)/src/gui/version.h:
 	@rm -f $@
 	@if test -d $(BUILD_DIR)/$(LIBSTB_HAL_DIR); then \
 		echo '#define VCS "BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"' > $@; \
+	else \
+		echo '#define VCS "BS-rev$(BS_REV)_NMP-rev$(NMP_REV)"' > $@; \
 	fi
 
 # -----------------------------------------------------------------------------
