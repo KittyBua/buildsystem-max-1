@@ -46,6 +46,10 @@ NEUTRINO             = neutrino-max-test
 LIBSTB_HAL           = libstb-hal-max-test
 NEUTRINO_CHECKOUT   ?= master
 LIBSTB_HAL_CHECKOUT ?= master
+else ifeq ($(FLAVOUR),neutrino-max-evo)
+GIT_SITE            ?= $(MAX-GIT-GITHUB)
+NEUTRINO             = neutrino-max-test
+NEUTRINO_CHECKOUT   ?= evo
 endif
 
 NEUTRINO_DEPENDS  = bootstrap
@@ -232,8 +236,16 @@ NEUTRINO_DEPENDS += neutrino-channellogos
 NEUTRINO_DEPENDS += neutrino-mediathek
 NEUTRINO_DEPENDS += neutrino-plugins
 NEUTRINO_DEPENDS += xupnpd
-ifeq ($(NEUTRINO_CHECKOUT),evo)
+ifneq ($(FLAVOUR), neutrino-max-evo)
 NEUTRINO_DEPENDS += libstb-hal
+else
+NEUTRINO_CONF_OPTS += \
+	--enable-flv2mpeg4
+endif
+
+ifeq ($(CI_ENABLED), 1)
+NEUTRINO_CONF_OPTS += \
+	--enable-ci
 endif
 
 # -----------------------------------------------------------------------------
