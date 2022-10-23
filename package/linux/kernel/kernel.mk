@@ -18,14 +18,14 @@ $(D)/kernel.do_compile: kernel.do_prepare
 	$(MKDIR)/$(KERNEL_OBJ)
 	$(MKDIR)/$(KERNEL_MODULES)
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/$(KERNEL_CONFIG) $(KERNEL_OBJ_DIR)/.config
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 hd60 hd61 h7))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k e4hdultra hd51 hd60 hd61 h7))
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/initramfs-subdirboot.cpio.gz $(KERNEL_OBJ_DIR)
 endif
 	$(CHDIR)/$($(PKG)_DIR); \
 		$(MAKE) $(LINUX_KERNEL_MAKE_VARS) oldconfig; \
 		$(MAKE) $(LINUX_KERNEL_MAKE_VARS) modules $(KERNEL_DTB) $(KERNEL_IMAGE_TYPE); \
 		$(MAKE) $(LINUX_KERNEL_MAKE_VARS) modules_install
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 h7))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k e4hdultra hd51 h7))
 	cat $(KERNEL_OUTPUT) $(KERNEL_INPUT_DTB) > $(KERNEL_OUTPUT_DTB)
 endif
 	@touch $@

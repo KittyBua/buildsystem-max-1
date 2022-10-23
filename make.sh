@@ -45,7 +45,7 @@ echo "                            |___/                        "
 ##############################################
 
 case $1 in
-	[1-9] | 1[0-9] | 2[0-9] | 3[0-9] | 4[0-9] | 9[0-9]) REPLY=$1;;
+	[1-9] | 1[0-9] | 2[0-9] | 3[0-9] | 4[0-9] | 5[0-9] | 9[0-9]) REPLY=$1;;
 	*)
 		echo "Target receivers:"
 		echo "-----------------------------------"
@@ -64,6 +64,7 @@ case $1 in
 		echo "  30)  Edision OS mio 4K"
 		echo "  31)  Edision OS mio+ 4K"
 		echo "  40)  AirDigital Zgemma H7C/H7S"
+		echo "  50)  AXAS E4HD 4K Ultra"
 		echo "-----------------------------------"
 		echo "  99)  Neutrino PC"
 		echo "-----------------------------------"
@@ -88,6 +89,7 @@ case "$REPLY" in
 	30) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="osmio4k";;
 	31) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="osmio4kplus";;
 	40) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="h7";;
+	50) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="e4hdultra";;
 	99) TARGET_ARCH="$(shell which arch > /dev/null 2>&1 && arch || uname -m)";BOXTYPE="generic";BOXMODEL="generic";;
 	 *) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd51";;
 esac

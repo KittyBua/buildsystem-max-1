@@ -174,7 +174,7 @@ MACHINE_DEPENDS  = bootstrap
 MACHINE_DEPENDS += kernel
 MACHINE_DEPENDS += kernel-modules-clean
 MACHINE_DEPENDS += $(BOXMODEL)-driver
-ifneq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 hd60 hd61 vuduo))
+ifneq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k e4hdultra h7 hd51 hd60 hd61 vuduo))
 MACHINE_DEPENDS += $(BOXMODEL)-libgles
 endif
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
