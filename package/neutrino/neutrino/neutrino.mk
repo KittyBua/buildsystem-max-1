@@ -318,18 +318,21 @@ endif
 	$(TOUCH)
 
 neutrino-pc: neutrino
+	export LD_LIBRARY_PATH=$(TARGET_LIB_DIR):/usr/lib/$(TARGET_ARCH)-linux-gnu:$(LD_LIBRARY_PATH); \
 	export LUA_CPATH_5_2=";;$(TARGET_LIB_DIR)/lua/5.2/?.so"; \
 	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(SHARE_NEUTRINO_PLUGINS)/rss_addon/?.lua"; \
 	export SIMULATE_FE=1; \
 	$(TARGET_BIN_DIR)/neutrino || true
 
 neutrino-pc-gdb: neutrino
+	export LD_LIBRARY_PATH=$(TARGET_LIB_DIR):/usr/lib/$(TARGET_ARCH)-linux-gnu:$(LD_LIBRARY_PATH); \
 	export LUA_CPATH_5_2=";;$(TARGET_LIB_DIR)/lua/5.2/?.so"; \
 	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(SHARE_NEUTRINO_PLUGINS)/rss_addon/?.lua"; \
 	export SIMULATE_FE=1; \
 	gdb -ex run $(TARGET_BIN_DIR)/neutrino || true
 
 neutrino-pc-valgrind: neutrino
+	export LD_LIBRARY_PATH=$(TARGET_LIB_DIR):/usr/lib/$(TARGET_ARCH)-linux-gnu:$(LD_LIBRARY_PATH); \
 	export LUA_CPATH_5_2=";;$(TARGET_LIB_DIR)/lua/5.2/?.so"; \
 	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(SHARE_NEUTRINO_PLUGINS)/rss_addon/?.lua"; \
 	export SIMULATE_FE=1; \
