@@ -76,9 +76,13 @@ HD5X_BOOT_IMAGE = boot.img
 HD5X_IMAGE_LINK = $(HD5X_IMAGE_NAME).ext4
 HD5X_IMAGE_ROOTFS_SIZE = 294912
 
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd51 bre2ze4k))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51))
 IMAGE_SUBDIR = $(BOXMODEL)
-else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),h7))
+endif
+ifeq ($(BOXMODEL),e4hdultra)
+IMAGE_SUBDIR = e4hd
+endif
+ifeq ($(BOXMODEL),h7)
 IMAGE_SUBDIR = zgemma/$(BOXMODEL)
 endif
 
@@ -148,19 +152,19 @@ ifeq ($(LAYOUT),multi)
 	parted -s $(EMMC_IMAGE) unit KiB mkpart storage ext4 $(STORAGE_PARTITION_OFFSET_NL) 100%
 	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) bs=$(BLOCK_SIZE) count=$(shell expr $(BOOT_PARTITION_SIZE) \* $(BLOCK_SECTOR))
 	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE)
-	ifeq ($(BOXMODEL), e4hdultra)
-		echo "boot emmcflash0.linuxkernel  'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p3 rootsubdir=linuxrootfs1 kernel=/dev/mmcblk0p2 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(FLASH_BUILD_TMP)/STARTUP
-		echo "boot emmcflash0.linuxkernel  'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p3 rootsubdir=linuxrootfs1 kernel=/dev/mmcblk0p2 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(FLASH_BUILD_TMP)/STARTUP_1
-		echo "boot emmcflash0.linuxkernel2 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p8 rootsubdir=linuxrootfs2 kernel=/dev/mmcblk0p4 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(FLASH_BUILD_TMP)/STARTUP_2
-		echo "boot emmcflash0.linuxkernel3 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p8 rootsubdir=linuxrootfs3 kernel=/dev/mmcblk0p5 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(FLASH_BUILD_TMP)/STARTUP_3
-		echo "boot emmcflash0.linuxkernel4 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p8 rootsubdir=linuxrootfs4 kernel=/dev/mmcblk0p6 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(FLASH_BUILD_TMP)/STARTUP_4
-	else
-		echo "boot emmcflash0.linuxkernel  'root=/dev/mmcblk0p3 rootsubdir=linuxrootfs1 kernel=/dev/mmcblk0p2 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP
-		echo "boot emmcflash0.linuxkernel  'root=/dev/mmcblk0p3 rootsubdir=linuxrootfs1 kernel=/dev/mmcblk0p2 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_1
-		echo "boot emmcflash0.linuxkernel2 'root=/dev/mmcblk0p8 rootsubdir=linuxrootfs2 kernel=/dev/mmcblk0p4 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_2
-		echo "boot emmcflash0.linuxkernel3 'root=/dev/mmcblk0p8 rootsubdir=linuxrootfs3 kernel=/dev/mmcblk0p5 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_3
-		echo "boot emmcflash0.linuxkernel4 'root=/dev/mmcblk0p8 rootsubdir=linuxrootfs4 kernel=/dev/mmcblk0p6 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_4
-	endif
+ifeq ($(BOXMODEL), e4hdultra)
+	echo "boot emmcflash0.linuxkernel  'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p3 rootsubdir=linuxrootfs1 kernel=/dev/mmcblk0p2 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP
+	echo "boot emmcflash0.linuxkernel  'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p3 rootsubdir=linuxrootfs1 kernel=/dev/mmcblk0p2 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_1
+	echo "boot emmcflash0.linuxkernel2 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p8 rootsubdir=linuxrootfs2 kernel=/dev/mmcblk0p4 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_2
+	echo "boot emmcflash0.linuxkernel3 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p8 rootsubdir=linuxrootfs3 kernel=/dev/mmcblk0p5 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_3
+	echo "boot emmcflash0.linuxkernel4 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p8 rootsubdir=linuxrootfs4 kernel=/dev/mmcblk0p6 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_4
+else
+	echo "boot emmcflash0.linuxkernel  'root=/dev/mmcblk0p3 rootsubdir=linuxrootfs1 kernel=/dev/mmcblk0p2 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP
+	echo "boot emmcflash0.linuxkernel  'root=/dev/mmcblk0p3 rootsubdir=linuxrootfs1 kernel=/dev/mmcblk0p2 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_1
+	echo "boot emmcflash0.linuxkernel2 'root=/dev/mmcblk0p8 rootsubdir=linuxrootfs2 kernel=/dev/mmcblk0p4 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_2
+	echo "boot emmcflash0.linuxkernel3 'root=/dev/mmcblk0p8 rootsubdir=linuxrootfs3 kernel=/dev/mmcblk0p5 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_3
+	echo "boot emmcflash0.linuxkernel4 'root=/dev/mmcblk0p8 rootsubdir=linuxrootfs4 kernel=/dev/mmcblk0p6 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_4
+endif
 else
 	parted -s $(EMMC_IMAGE) unit KiB mkpart kernel1 $(KERNEL_PARTITION_OFFSET) $(shell expr $(KERNEL_PARTITION_OFFSET) \+ $(KERNEL_PARTITION_SIZE))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart rootfs1 ext4 $(ROOTFS_PARTITION_OFFSET) $(shell expr $(ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_SINGLE_SIZE))
@@ -174,19 +178,19 @@ else
 	parted -s $(EMMC_IMAGE) unit KiB mkpart storage ext4 $(STORAGE_PARTITION_OFFSET) $(shell expr $(EMMC_IMAGE_SIZE) \- 1024)
 	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) bs=$(BLOCK_SIZE) count=$(shell expr $(BOOT_PARTITION_SIZE) \* $(BLOCK_SECTOR))
 	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE)
-	ifeq ($(BOXMODEL), e4hdultra)
-		echo "boot emmcflash0.kernel1 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p3 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP
-		echo "boot emmcflash0.kernel1 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p3 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_1
-		echo "boot emmcflash0.kernel2 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p5 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_2
-		echo "boot emmcflash0.kernel3 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p7 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_3
-		echo "boot emmcflash0.kernel4 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p9 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_4
-	else
-		echo "boot emmcflash0.kernel1 'root=/dev/mmcblk0p3 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP
-		echo "boot emmcflash0.kernel1 'root=/dev/mmcblk0p3 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_1
-		echo "boot emmcflash0.kernel2 'root=/dev/mmcblk0p5 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_2
-		echo "boot emmcflash0.kernel3 'root=/dev/mmcblk0p7 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_3
-		echo "boot emmcflash0.kernel4 'root=/dev/mmcblk0p9 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_4
-	endif
+ifeq ($(BOXMODEL), e4hdultra)
+	echo "boot emmcflash0.kernel1 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p3 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP
+	echo "boot emmcflash0.kernel1 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p3 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_1
+	echo "boot emmcflash0.kernel2 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p5 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_2
+	echo "boot emmcflash0.kernel3 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p7 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_3
+	echo "boot emmcflash0.kernel4 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p9 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_4
+else
+	echo "boot emmcflash0.kernel1 'root=/dev/mmcblk0p3 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP
+	echo "boot emmcflash0.kernel1 'root=/dev/mmcblk0p3 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_1
+	echo "boot emmcflash0.kernel2 'root=/dev/mmcblk0p5 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_2
+	echo "boot emmcflash0.kernel3 'root=/dev/mmcblk0p7 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_3
+	echo "boot emmcflash0.kernel4 'root=/dev/mmcblk0p9 rw rootwait $(BOXMODEL)_4.boxmode=1'" > $(IMAGE_BUILD_DIR)/STARTUP_4
+endif
 endif
 	mcopy -i $(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP ::
 	mcopy -i $(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) -v $(IMAGE_BUILD_DIR)/STARTUP_1 ::
