@@ -80,7 +80,7 @@ endif
 	$(UPDATE-RC.D) checkroot.sh start 06 S .
 	$(UPDATE-RC.D) devpts.sh start 06 S .
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),e4hdultra))
-	$(UPDATE-RC.D) initfb-for-lcd.sh 06 S .
+	$(UPDATE-RC.D) initfb-for-lcd.sh start 06 S .
 endif
 	$(UPDATE-RC.D) modload.sh start 06 S .
 	$(UPDATE-RC.D) hostname.sh start 39 S .
