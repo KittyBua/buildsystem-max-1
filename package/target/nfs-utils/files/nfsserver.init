@@ -41,12 +41,12 @@ test "$NFS_SERVERS" != "" && test "$NFS_SERVERS" -gt 0 && test "$NFS_SERVERS" -l
 start_mountd(){
 	echo -n 'starting mountd: '
 	start-stop-daemon --start --exec "$NFS_MOUNTD" -- "$@"
-	echo 'done.'
+	echo done
 }
 stop_mountd(){
 	echo -n 'stopping mountd: '
 	start-stop-daemon --stop --quiet --exec "$NFS_MOUNTD"
-	echo 'done.'
+	echo done
 }
 #
 #nfsd
@@ -64,7 +64,7 @@ start_nfsd(){
 
 	echo -n "starting $1 nfsd kernel threads: "
 	start-stop-daemon --start --exec "$NFS_NFSD" -- "$@"
-	echo 'done.'
+	echo done
 }
 delay_nfsd(){
 	for delay in 0 1 2 3 4 5 6 7 8 9 
@@ -91,9 +91,9 @@ stop_nfsd(){
 		delay_nfsd
 	}
 	then
-		echo 'done.'
+		echo done
 	else
-		echo 'failed.'
+		echo failed
 	fi
 }
 
@@ -107,7 +107,7 @@ stop_nfsd(){
 #FIXME: need to create the /var/lib/nfs/... directories
 case "$1" in
 	start)
-		exportfs -r
+		test -r /etc/exports && exportfs -r
 		start_nfsd "$NFS_SERVERS"
 		start_mountd
 		test -r /etc/exports && exportfs -a;;

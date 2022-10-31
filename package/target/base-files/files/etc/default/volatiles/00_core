@@ -24,6 +24,7 @@
 d root root 0755 /var/volatile/cache none
 d root root 1777 /var/volatile/lock none
 d root root 0755 /var/volatile/log none
+l root root 0755 /var/log /var/volatile/log
 d root root 0755 /var/volatile/run none
 d root root 1777 /var/volatile/tmp none
 l root root 0755 /var/cache /var/volatile/cache
