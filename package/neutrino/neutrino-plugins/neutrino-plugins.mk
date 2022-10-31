@@ -59,6 +59,7 @@ NEUTRINO_PLUGINS_CONF_OPTS += \
 	LDFLAGS="$(TARGET_LDFLAGS)"
 
 NEUTRINO_PLUGINS_CONF_OPTS += \
+	--disable-ard_mediathek \
 	--disable-add-locale \
 	--disable-coolitsclimax \
 	--disable-emmrd \
