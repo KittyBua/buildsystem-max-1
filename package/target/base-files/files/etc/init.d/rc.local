@@ -15,28 +15,28 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 
 do_start() {
 	if [ -x /etc/rc.local ]; then
-	        echo -n "Running local boot scripts (/etc/rc.local)"
+		echo -n "Running local boot scripts (/etc/rc.local)"
 		/etc/rc.local
 		ES=$?
-                [ $ES = 0 ] && echo "." || echo "error"
+		[ $ES = 0 ] && echo "." || echo "error"
 		return $ES
 	fi
 }
 
 case "$1" in
-    start)
-	do_start
-        ;;
-    restart|reload|force-reload)
-        echo "Error: argument '$1' not supported" >&2
-        exit 3
-        ;;
-    stop|status)
-        # No-op
-        exit 0
-        ;;
-    *)
-        echo "Usage: $0 start|stop" >&2
-        exit 3
-        ;;
+	start)
+		do_start
+	;;
+	restart|reload|force-reload)
+		echo "Error: argument '$1' not supported" >&2
+		exit 3
+	;;
+	stop|status)
+		# No-op
+		exit 0
+	;;
+	*)
+		echo "Usage: $0 start|stop" >&2
+		exit 3
+	;;
 esac
