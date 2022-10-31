@@ -24,9 +24,6 @@ endif
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/halt $(TARGET_DIR)/etc/init.d/halt
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/hostname.sh $(TARGET_DIR)/etc/init.d/hostname.sh
 #	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/hotplug.sh $(TARGET_DIR)/etc/init.d/hotplug.sh
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),e4hdultra))
-	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/initfb-for-lcd.sh $(TARGET_DIR)/etc/init.d/initfb-for-lcd.sh
-endif
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/modload.sh $(TARGET_DIR)/etc/init.d/modload.sh
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/modutils.sh $(TARGET_DIR)/etc/init.d/modutils.sh
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/mountall.sh $(TARGET_DIR)/etc/init.d/mountall.sh
@@ -79,9 +76,6 @@ endif
 	$(UPDATE-RC.D) alignment.sh start 06 S .
 	$(UPDATE-RC.D) checkroot.sh start 06 S .
 	$(UPDATE-RC.D) devpts.sh start 06 S .
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),e4hdultra))
-	$(UPDATE-RC.D) initfb-for-lcd.sh 06 S .
-endif
 	$(UPDATE-RC.D) modload.sh start 06 S .
 	$(UPDATE-RC.D) hostname.sh start 39 S .
 	$(UPDATE-RC.D) bootmisc.sh start 55 S .
