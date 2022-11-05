@@ -142,7 +142,7 @@ $(D)/neutrino-plugins.do_configure:
 		$(TARGET_CONFIGURE_ENV) \
 		$(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)/configure \
 			$(NEUTRINO_PLUGINS_CONF_OPTS)
-	@touch $@
+	@touch $(D)/$(notdir $@)
 
 $(D)/neutrino-plugins.do_compile: neutrino-plugins.do_configure
 	@$(call MESSAGE,"Building")
@@ -151,7 +151,7 @@ ifeq ($(BOXMODEL),generic)
 else
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) DESTDIR=$(TARGET_DIR)
 endif
-	@touch $@
+	@touch $(D)/$(notdir $@)
 
 $(D)/neutrino-plugins: | bootstrap neutrino-plugins.do_prepare neutrino-plugins.do_compile
 	@$(call MESSAGE,"Installing to target")

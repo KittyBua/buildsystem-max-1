@@ -78,7 +78,7 @@ ifeq ($(BOXMODEL),generic)
 else
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) DESTDIR=$(TARGET_DIR)
 endif
-	@touch $@
+	@touch $(D)/$(notdir $@)
 
 $(D)/libstb-hal: | bootstrap $(LIBSTB_HAL_DEPENDS) libstb-hal.do_prepare libstb-hal.do_compile
 	@$(call MESSAGE,"Installing to target")
