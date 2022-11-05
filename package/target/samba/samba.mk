@@ -94,7 +94,9 @@ SAMBA_CONF_OPTS = \
 	--without-libtevent \
 	--without-libaddns
 
+ifeq ($(AUTOCONF_NEW),1)
 SAMBA_AUTOCONF_PATCH = autoconf2.71.patch
+endif
 
 define SAMBA_AUTOGEN_SH
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
