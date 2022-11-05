@@ -115,7 +115,7 @@ endif
 BOOTSTRAP += host-pkgconf
 
 $(D)/bootstrap: $(BOOTSTRAP)
-	@touch $@
+	@touch $(D)/$(notdir $@)
 
 ################################################################################
 #
@@ -162,7 +162,7 @@ IMAGE_DEPENDS += harfbuzz
 endif
 
 $(D)/image-deps: $(IMAGE_DEPENDS)
-	@touch $@
+	@touch $(D)/$(notdir $@)
 
 ################################################################################
 #
@@ -191,4 +191,4 @@ endif
 
 $(D)/machine-deps: $(MACHINE_DEPENDS)
 	$(LINUX_RUN_DEPMOD)
-	@touch $@
+	@touch $(D)/$(notdir $@)

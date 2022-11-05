@@ -275,7 +275,7 @@ ifeq ($(BOXMODEL),generic)
 else
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) DESTDIR=$(TARGET_DIR)
 endif
-	@touch $@
+	@touch $(D)/$(notdir $@)
 
 $(D)/neutrino: $(NEUTRINO_DEPENDS) neutrino.do_prepare neutrino.do_compile
 	@$(call MESSAGE,"Installing to target")

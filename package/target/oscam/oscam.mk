@@ -64,7 +64,7 @@ $(D)/oscam.do_prepare:
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
 		$(SHELL) ./config.sh $($(PKG)_CONF_OPTS)
-	@touch $@
+	@touch $(D)/$(notdir $@)
 
 $(D)/oscam.do_compile:
 	$(CHDIR)/$($(PKG)_DIR); \
@@ -74,7 +74,7 @@ $(D)/oscam.do_compile:
 		CONF_DIR=/var/keys \
 		EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		CC_OPTS=" -Os -pipe "
-	@touch $@
+	@touch $(D)/$(notdir $@)
 
 $(D)/oscam: | bootstrap oscam.do_prepare oscam.do_compile
 	rm -rf $(IMAGE_DIR)/$(OSCAM_FLAVOUR)

@@ -132,4 +132,4 @@ ifneq ($(OPTIMIZATIONS),$(filter $(OPTIMIZATIONS),debug normal))
 endif
 	$(TUXBOX_CUSTOMIZE)
 	@$(call MESSAGE,"for $(BOXMODEL) successfully completed.")
-	@touch $@
+	@touch $(D)/$(notdir $@)

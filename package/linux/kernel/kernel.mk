@@ -10,7 +10,7 @@ LINUX_KERNEL_MAKE_VARS = \
 
 $(D)/kernel.do_prepare:
 	$(call PREPARE)
-	@touch $@
+	@touch $(D)/$(notdir $@)
 
 $(D)/kernel.do_compile: kernel.do_prepare
 	rm -rf $(BUILD_DIR)/$(KERNEL_OBJ)
@@ -28,7 +28,7 @@ endif
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k e4hdultra hd51 h7))
 	cat $(KERNEL_OUTPUT) $(KERNEL_INPUT_DTB) > $(KERNEL_OUTPUT_DTB)
 endif
-	@touch $@
+	@touch $(D)/$(notdir $@)
 
 $(D)/kernel: bootstrap kernel.do_compile
 	mkdir -p $(TARGET_MODULES_DIR)
