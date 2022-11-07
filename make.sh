@@ -48,8 +48,9 @@ case $1 in
 	[1-9] | 1[0-9] | 2[0-9] | 3[0-9] | 4[0-9] | 5[0-9] | 9[0-9]) REPLY=$1;;
 	*)
 		echo "Target receivers:"
-		echo "-----------------------------------"
-		echo "   1)  VU+ Duo"
+		echo ""
+		echo "   1)  Neutrino PC"
+		echo ""
 		echo "   2)  VU+ Duo 4K"
 		echo "   3)  VU+ Solo 4k"
 		echo "   4)  VU+ Ultimo 4K"
@@ -57,24 +58,24 @@ case $1 in
 		echo "   6)  VU+ Uno 4K SE"
 		echo "   7)  VU+ Zero 4K"
 		echo "   8)  VU+ Duo 4K SE"
+		echo ""
 		echo "  11)  WWIO BRE2ZE 4K"
 		echo "  21)  AX/Mut@nt HD51"
 		echo "  22)  AX/Mut@nt HD60"
 		echo "  23)  AX/Mut@nt HD61"
+		echo ""
 		echo "  30)  Edision OS mio 4K"
 		echo "  31)  Edision OS mio+ 4K"
+		echo ""
 		echo "  40)  AirDigital Zgemma H7C/H7S"
 		echo "  50)  AXAS E4HD 4K Ultra"
-		echo "-----------------------------------"
-		echo "  99)  Neutrino PC"
-		echo "-----------------------------------"
 		echo ""
 		read -p "Select target? [21] "
 		REPLY="${REPLY:-21}";;
 esac
 
 case "$REPLY" in
-	 1) TARGET_ARCH="mips";BOXTYPE="mipsbox";BOXMODEL="vuduo";;
+	 1) TARGET_ARCH="$(shell which arch > /dev/null 2>&1 && arch || uname -m)";BOXTYPE="generic";BOXMODEL="generic";;
 	 2) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuduo4k";;
 	 3) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vusolo4k";;
 	 4) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuultimo4k";;
@@ -90,7 +91,6 @@ case "$REPLY" in
 	31) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="osmio4kplus";;
 	40) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="h7";;
 	50) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="e4hdultra";;
-	99) TARGET_ARCH="$(shell which arch > /dev/null 2>&1 && arch || uname -m)";BOXTYPE="generic";BOXMODEL="generic";;
 	 *) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd51";;
 esac
 echo "TARGET_ARCH=$TARGET_ARCH" > .config

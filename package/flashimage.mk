@@ -17,8 +17,6 @@ ifeq ($(VU_MULTIBOOT),1)
 else
 	$(MAKE) flash-image-vu-rootfs
 endif
-else ifeq ($(BOXMODEL),vuduo)
-	$(MAKE) flash-image-vuduo
 else
 	@$(call WARNING,"unsupported box model $(BOXMODEL)")
 endif
@@ -67,7 +65,7 @@ ITYPE ?= multi_usb
 
 ################################################################################
 #
-# armbox bre2ze4k/hd51/h7
+# armbox bre2ze4k/e4hdultra/hd51/h7
 #
 ################################################################################
 
@@ -555,37 +553,5 @@ flash-image-vu-online:
 	echo "$(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE)" > $(IMAGE_BUILD_DIR)/$(VU_PREFIX)/imageversion
 	$(CD) $(IMAGE_BUILD_DIR)/$(VU_PREFIX); \
 		tar -cvzf $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE).tgz rootfs.tar.bz2 kernel_auto.bin imageversion
-	# cleanup
-	rm -rf $(IMAGE_BUILD_DIR)
-
-################################################################################
-#
-# mipsbox vuduo
-#
-################################################################################
-
-VUDUO_PREFIX = vuplus/duo
-
-flash-image-vuduo: host-mtd-utils
-	# Create final USB-image
-	rm -rf $(IMAGE_BUILD_DIR) || true
-	mkdir -p $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)
-	touch $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/reboot.update
-	gzip -9c < "$(KERNEL_OBJ_DIR)/vmlinux" > "$(KERNEL_OBJ_DIR)/kernel_cfe_auto.bin"
-	cp $(KERNEL_OBJ_DIR)/kernel_cfe_auto.bin $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)
-	mkfs.ubifs -r $(RELEASE_DIR) -o $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/root_cfe_auto.ubi -m 2048 -e 126976 -c 4096 -F
-	echo '[ubifs]' > $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/ubinize.cfg
-	echo 'mode=ubi' >> $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/ubinize.cfg
-	echo 'image=$(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/root_cfe_auto.ubi' >> $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/ubinize.cfg
-	echo 'vol_id=0' >> $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/ubinize.cfg
-	echo 'vol_type=dynamic' >> $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/ubinize.cfg
-	echo 'vol_name=rootfs' >> $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/ubinize.cfg
-	echo 'vol_flags=autoresize' >> $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/ubinize.cfg
-	ubinize -o $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/root_cfe_auto.jffs2 -m 2048 -p 128KiB $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/ubinize.cfg
-	rm -f $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/root_cfe_auto.ubi
-	rm -f $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/ubinize.cfg
-	echo "$(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE)" > $(IMAGE_BUILD_DIR)/$(VUDUO_PREFIX)/imageversion
-	$(CD) $(IMAGE_BUILD_DIR); \
-		zip -r $(IMAGE_DIR)/$(BOXMODEL)_$(FLAVOUR)_$(ITYPE)_$(DATE).zip $(VUDUO_PREFIX)*
 	# cleanup
 	rm -rf $(IMAGE_BUILD_DIR)
