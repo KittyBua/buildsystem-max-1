@@ -225,9 +225,6 @@ endif
 ifeq ($(BOXTYPE),armbox)
 NEUTRINO_CONF_OPTS += --disable-arm-acc
 endif
-ifeq ($(BOXTYPE),mipsbox)
-NEUTRINO_CONF_OPTS += --disable-mips-acc
-endif
 NEUTRINO_CONF_OPTS += $(LOCAL_NEUTRINO_BUILD_OPTIONS)
 
 NEUTRINO_DEPENDS += $(LOCAL_NEUTRINO_DEPENDS)

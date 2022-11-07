@@ -79,13 +79,7 @@ endif
 #
 ################################################################################
 
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
-
-ifeq ($(BOXMODEL),vuduo)
-KERNEL_VERSION = 3.9.6
-MTD_BLACK      = $(empty)
-MTD_BOOTFS     = $(empty)
-endif
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),vuduo4k vuduo4kse))
 KERNEL_VERSION        = 4.1.45-1.17
@@ -119,13 +113,8 @@ MTD_BOOTFS            = mmcblk0p4
 endif
 endif
 
-ifeq ($(BOXMODEL),vuduo)
-KERNEL_IMAGE_TYPE = vmlinux
-KERNEL_SOURCE     = stblinux-$(KERNEL_VERSION).tar.bz2
-else
 KERNEL_IMAGE_TYPE = zImage
 KERNEL_SOURCE     = stblinux-${KERNEL_SOURCE_VERSION}.tar.bz2
-endif
 
 KERNEL_DTB  = $(empty)
 KERNEL_SITE = http://code.vuplus.com/download/release/kernel

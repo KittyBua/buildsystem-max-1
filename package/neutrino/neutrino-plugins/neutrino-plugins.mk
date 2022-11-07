@@ -82,7 +82,7 @@ NEUTRINO_PLUGINS_CONF_OPTS += \
 	--disable-corona-info
 endif
 
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),generic vuduo vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),generic vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 NEUTRINO_PLUGINS_CONF_OPTS += \
 	--disable-rcu_switcher
 endif
