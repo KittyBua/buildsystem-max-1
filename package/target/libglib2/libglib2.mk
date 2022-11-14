@@ -1,17 +1,17 @@
 ################################################################################
 #
-# glib2
+# libglib2
 #
 ################################################################################
 
-GLIB2_VERSION = 2.62.4
-GLIB2_DIR = glib-$(GLIB2_VERSION)
-GLIB2_SOURCE = glib-$(GLIB2_VERSION).tar.xz
-GLIB2_SITE = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(GLIB2_VERSION))
+LIBGLIB2_VERSION = 2.62.4
+LIBGLIB2_DIR = glib-$(LIBGLIB2_VERSION)
+LIBGLIB2_SOURCE = glib-$(LIBGLIB2_VERSION).tar.xz
+LIBGLIB2_SITE = https://ftp.gnome.org/pub/gnome/sources/glib/$(basename $(LIBGLIB2_VERSION))
 
-GLIB2_DEPENDS = host-glib2 libffi util-linux zlib libiconv
+LIBGLIB2_DEPENDS = host-libglib2 libffi util-linux zlib libiconv
 
-GLIB2_CONF_OPTS = \
+LIBGLIB2_CONF_OPTS = \
 	-Dman=false \
 	-Ddtrace=false \
 	-Dsystemtap=false \
@@ -26,11 +26,11 @@ GLIB2_CONF_OPTS = \
 	-Db_lto=true \
 	-Ddefault_library=both
 
-define GLIB2_TARGET_CLEANUP
+define LIBGLIB2_TARGET_CLEANUP
 	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,gettext gdb glib-2.0 locale)
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,gdbus-codegen glib-compile-schemas glib-compile-resources glib-genmarshal glib-gettextize gio-launch-desktop glib-mkenums gobject-query gtester gtester-report)
 endef
-GLIB2_TARGET_CLEANUP_HOOKS += GLIB2_TARGET_CLEANUP
+LIBGLIB2_TARGET_CLEANUP_HOOKS += LIBGLIB2_TARGET_CLEANUP
 
-$(D)/glib2: | bootstrap
+$(D)/libglib2: | bootstrap
 	$(call meson-package)

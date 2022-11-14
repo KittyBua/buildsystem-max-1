@@ -1,12 +1,12 @@
 ################################################################################
 #
-# host-glib2
+# host-libglib2
 #
 ################################################################################
 
-HOST_GLIB2_DEPENDS = host-meson host-libffi
+HOST_LIBGLIB2_DEPENDS = host-meson host-libffi
 
-HOST_GLIB2_CONF_OPTS = \
+HOST_LIBGLIB2_CONF_OPTS = \
 	-Ddtrace=false \
 	-Dfam=false \
 	-Dselinux=disabled \
@@ -16,5 +16,5 @@ HOST_GLIB2_CONF_OPTS = \
 	-Dinstalled_tests=false \
 	-Doss_fuzz=disabled
 
-$(D)/host-glib2: | bootstrap
+$(D)/host-libglib2: | bootstrap
 	$(call host-meson-package)
