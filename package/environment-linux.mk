@@ -122,7 +122,7 @@ KERNEL_DIR  = linux
 
 endif
 
-ifeq ($(VU_MULTIBOOT),multi)
+ifeq ($(VU_MULTIBOOT),1)
 KERNEL_CONFIG = $(BOXMODEL)_defconfig_multi
 else
 KERNEL_CONFIG = $(BOXMODEL)_defconfig
