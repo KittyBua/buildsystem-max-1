@@ -237,18 +237,24 @@ case $6 in
 esac
 
 case "$REPLY" in
-	1)  LAYOUT="single";;
-	2)  LAYOUT="multi";;
-	*)  LAYOUT="multi";;
+	1)  IMAGE_LAYOUT="single";;
+	2)  IMAGE_LAYOUT="subdirboot";;
+	*)  IMAGE_LAYOUT="subdirboot";;
 esac
-echo "LAYOUT=$LAYOUT" >> .config
+echo "IMAGE_LAYOUT=$IMAGE_LAYOUT" >> .config
 
 fi
 
 if [ $BOXMODEL == 'hd60' -o \
      $BOXMODEL == 'hd61' \
     ]; then
-echo "LAYOUT=multi" >> .config
+echo "IMAGE_LAYOUT=subdirboot" >> .config
+fi
+
+if [ $BOXMODEL == 'e4hdultra' -o \
+     $BOXMODEL == 'protek4k' \
+    ]; then
+echo "IMAGE_LAYOUT=single" >> .config
 fi
 
 if [ $BOXMODEL == 'vuduo4k' -o \
@@ -269,9 +275,9 @@ if [ $BOXMODEL == 'vuduo4k' -o \
 	esac
 
 	case "$REPLY" in
-	1)  VU_MULTIBOOT="single";;
-	2)  VU_MULTIBOOT="multi";;
-	*)  VU_MULTIBOOT="multi";;
+	1)  VU_MULTIBOOT="0";;
+	2)  VU_MULTIBOOT="1";;
+	*)  VU_MULTIBOOT="1";;
 	esac
 	echo "VU_MULTIBOOT=$VU_MULTIBOOT" >> .config
 fi

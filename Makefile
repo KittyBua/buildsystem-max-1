@@ -198,11 +198,15 @@ printenv:
 	@echo "OPTIMIZATION      : $(OPTIMIZATIONS)"
 	@echo -e "FLAVOUR           : $(TERM_YELLOW)$(FLAVOUR)$(TERM_NORMAL)"
 	@echo "EXTERNAL_LCD      : $(EXTERNAL_LCD)"
-ifeq ($(LAYOUT),multi)
-	@echo -e "IMAGE TYPE        : $(TERM_YELLOW)1 single + multirootfs$(TERM_NORMAL)"
+ifeq ($(IMAGE_LAYOUT),subdirboot)
+	@echo -e "IMAGE_LAYOUT      : $(TERM_YELLOW)1 single + multirootfs$(TERM_NORMAL)"
+else
+	@echo -e "IMAGE_LAYOUT      : $(TERM_YELLOW)4 single$(TERM_NORMAL)"
 endif
-ifeq ($(VU_MULTIBOOT),multi)
-	@echo -e "IMAGE TYPE        : $(TERM_YELLOW)multirootfs$(TERM_NORMAL)"
+ifeq ($(VU_MULTIBOOT),1)
+	@echo -e "IMAGE_LAYOUT      : $(TERM_YELLOW)4 single$(TERM_NORMAL)"
+else
+	@echo -e "IMAGE_LAYOUT      : $(TERM_YELLOW)1 single$(TERM_NORMAL)"
 endif
 	$(call draw_line);
 	@echo -e "LOCAL_N_PLUGIN_BUILD_OPTIONS : $(TERM_GREEN)$(LOCAL_N_PLUGIN_BUILD_OPTIONS)$(TERM_NORMAL)"

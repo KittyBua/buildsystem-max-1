@@ -67,7 +67,7 @@ $(D)/vuzero4k-platform-util: | bootstrap
 #
 ################################################################################
 
-ifeq ($(VU_MULTIBOOT),multi)
+ifeq ($(VU_MULTIBOOT),1)
 VUZERO4K_VMLINUZ_INITRD_DATE = 20221006
 VUZERO4K_VMLINUZ_INITRD_SITE = https://bitbucket.org/max_10/vmlinuz-initrd-vuzero4k/downloads
 else

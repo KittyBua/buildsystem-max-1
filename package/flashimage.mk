@@ -129,7 +129,7 @@ flash-image-hd5x-multi-disk:
 	mkdir -p $(IMAGE_BUILD_DIR)/$(IMAGE_SUBDIR)
 	# Create a sparse image block
 	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(HD5X_IMAGE_LINK) seek=$(shell expr $(HD5X_IMAGE_ROOTFS_SIZE) \* $(BLOCK_SECTOR)) count=0 bs=$(BLOCK_SIZE)
-ifeq ($(LAYOUT),multi)
+ifeq ($(IMAGE_LAYOUT),subdirboot)
 	mkfs.ext4 -F $(IMAGE_BUILD_DIR)/$(HD5X_IMAGE_LINK) -d $(RELEASE_DIR)/..
 else
 	mkfs.ext4 -F $(IMAGE_BUILD_DIR)/$(HD5X_IMAGE_LINK) -d $(RELEASE_DIR)
@@ -139,7 +139,7 @@ endif
 	dd if=/dev/zero of=$(EMMC_IMAGE) bs=$(BLOCK_SIZE) count=0 seek=$(shell expr $(EMMC_IMAGE_SIZE) \* $(BLOCK_SECTOR))
 	parted -s $(EMMC_IMAGE) mklabel gpt
 	parted -s $(EMMC_IMAGE) unit KiB mkpart boot fat16 $(IMAGE_ROOTFS_ALIGNMENT) $(shell expr $(IMAGE_ROOTFS_ALIGNMENT) \+ $(BOOT_PARTITION_SIZE))
-ifeq ($(LAYOUT),multi)
+ifeq ($(IMAGE_LAYOUT),subdirboot)
 	parted -s $(EMMC_IMAGE) unit KiB mkpart linuxkernel $(KERNEL_PARTITION_OFFSET) $(shell expr $(KERNEL_PARTITION_OFFSET) \+ $(KERNEL_PARTITION_SIZE))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart linuxrootfs ext4 $(ROOTFS_PARTITION_OFFSET) $(shell expr $(ROOTFS_PARTITION_OFFSET) \+ $(ROOTFS_PARTITION_MULTI_SIZE))
 	parted -s $(EMMC_IMAGE) unit KiB mkpart linuxkernel2 $(SECOND_KERNEL_PARTITION_OFFSET_NL) $(shell expr $(SECOND_KERNEL_PARTITION_OFFSET_NL) \+ $(KERNEL_PARTITION_SIZE))
@@ -150,7 +150,7 @@ ifeq ($(LAYOUT),multi)
 	parted -s $(EMMC_IMAGE) unit KiB mkpart storage ext4 $(STORAGE_PARTITION_OFFSET_NL) 100%
 	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) bs=$(BLOCK_SIZE) count=$(shell expr $(BOOT_PARTITION_SIZE) \* $(BLOCK_SECTOR))
 	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE)
-ifeq ($(BOXMODEL), e4hdultra)
+ifeq ($(BOXMODEL),e4hdultra)
 	echo "boot emmcflash0.linuxkernel  'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p3 rootsubdir=linuxrootfs1 kernel=/dev/mmcblk0p2 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP
 	echo "boot emmcflash0.linuxkernel  'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p3 rootsubdir=linuxrootfs1 kernel=/dev/mmcblk0p2 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_1
 	echo "boot emmcflash0.linuxkernel2 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p8 rootsubdir=linuxrootfs2 kernel=/dev/mmcblk0p4 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_2
@@ -176,7 +176,7 @@ else
 	parted -s $(EMMC_IMAGE) unit KiB mkpart storage ext4 $(STORAGE_PARTITION_OFFSET) $(shell expr $(EMMC_IMAGE_SIZE) \- 1024)
 	dd if=/dev/zero of=$(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) bs=$(BLOCK_SIZE) count=$(shell expr $(BOOT_PARTITION_SIZE) \* $(BLOCK_SECTOR))
 	mkfs.msdos -S 512 $(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE)
-ifeq ($(BOXMODEL), e4hdultra)
+ifeq ($(BOXMODEL),e4hdultra)
 	echo "boot emmcflash0.kernel1 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p3 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP
 	echo "boot emmcflash0.kernel1 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p3 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_1
 	echo "boot emmcflash0.kernel2 'brcm_cma=504M@264M brcm_cma=192M@768M brcm_cma=1024M@2048M root=/dev/mmcblk0p5 rw rootwait $(BOXMODEL)_4.boxmode=5'" > $(IMAGE_BUILD_DIR)/STARTUP_2
@@ -198,7 +198,7 @@ endif
 	parted -s $(EMMC_IMAGE) unit KiB print
 	dd conv=notrunc if=$(IMAGE_BUILD_DIR)/$(HD5X_BOOT_IMAGE) of=$(EMMC_IMAGE) bs=$(BLOCK_SIZE) seek=$(shell expr $(IMAGE_ROOTFS_ALIGNMENT) \* $(BLOCK_SECTOR))
 	dd conv=notrunc if=$(KERNEL_OUTPUT_DTB) of=$(EMMC_IMAGE) bs=$(BLOCK_SIZE) seek=$(shell expr $(KERNEL_PARTITION_OFFSET) \* $(BLOCK_SECTOR))
-ifeq ($(LAYOUT),multi)
+ifeq ($(IMAGE_LAYOUT),subdirboot)
 	resize2fs $(IMAGE_BUILD_DIR)/$(HD5X_IMAGE_LINK) $(ROOTFS_PARTITION_MULTI_SIZE)k
 else
 	resize2fs $(IMAGE_BUILD_DIR)/$(HD5X_IMAGE_LINK) $(ROOTFS_PARTITION_SINGLE_SIZE)k
