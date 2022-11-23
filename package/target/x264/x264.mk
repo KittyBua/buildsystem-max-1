@@ -18,6 +18,7 @@ X264_CONF_OPTS = \
 	--enable-shared \
 	--enable-static \
 	--enable-pic \
+	--disable-asm \
 	--disable-avs \
 	--disable-lavf \
 	--disable-swscale \
