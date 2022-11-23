@@ -11,10 +11,10 @@
  SUBDIRS += examples
 --- a/src/Makefile.am
 +++ b/src/Makefile.am
-@@ -33,11 +33,6 @@
+@@ -28,11 +28,6 @@
+ 	libFLAC \
  	share \
  	$(PROGRAMS_DIRS) \
- 	$(XMMS_DIRS) \
 -	test_grabbag \
 -	test_libs_common \
 -	test_libFLAC \

@@ -1,10 +1,11 @@
 --- a/src/Makefile.am
 +++ b/src/Makefile.am
-@@ -33,7 +33,6 @@
+@@ -28,7 +28,6 @@
+ 	libFLAC \
  	share \
  	$(PROGRAMS_DIRS) \
- 	$(XMMS_DIRS) \
 -	utils \
  	$(CPPLIBS_DIRS)
  
  EXTRA_DIST = \
+
