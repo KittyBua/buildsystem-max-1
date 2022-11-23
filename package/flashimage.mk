@@ -5,7 +5,7 @@
 ################################################################################
 
 flashimage: bootstrap machine-deps image-deps neutrino neutrino-release
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k e4hdultra hd51 h7))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 e4hdultra protek4k))
 	$(MAKE) flash-image-hd5x-multi-disk flash-image-hd5x-multi-rootfs
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
 	$(MAKE) flash-image-hd6x-multi-disk
@@ -26,7 +26,7 @@ endif
 # -----------------------------------------------------------------------------
 
 ofgimage: bootstrap machine-deps image-deps neutrino neutrino-release
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k e4hdultra hd51 h7))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 e4hdultra protek4k))
 	$(MAKE) ITYPE=ofg flash-image-hd5x-multi-rootfs
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
 	$(MAKE) ITYPE=ofg flash-image-hd6x-multi-rootfs
@@ -44,7 +44,7 @@ endif
 
 oi \
 online-image: bootstrap machine-deps image-deps neutrino neutrino-release
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k e4hdultra hd51 h7))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 e4hdultra protek4k))
 	$(MAKE) ITYPE=online flash-image-hd5x-online
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
 	$(MAKE) ITYPE=online flash-image-hd6x-online
@@ -65,7 +65,7 @@ ITYPE ?= multi_usb
 
 ################################################################################
 #
-# armbox bre2ze4k/e4hdultra/hd51/h7
+# armbox bre2ze4k/h7/hd51/e4hdultra/protek4k
 #
 ################################################################################
 
@@ -74,21 +74,18 @@ HD5X_BOOT_IMAGE = boot.img
 HD5X_IMAGE_LINK = $(HD5X_IMAGE_NAME).ext4
 HD5X_IMAGE_ROOTFS_SIZE = 294912
 
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 e4hdultra protek4k))
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),e4hdultra))
-HD5X_DRIVER = e4hd
-else
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 protek4k))
 HD5X_DRIVER = $(BOXMODEL)
-endif
-endif
-
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51))
 IMAGE_SUBDIR = $(BOXMODEL)
 endif
+
 ifeq ($(BOXMODEL),e4hdultra)
+HD5X_DRIVER = e4hd
 IMAGE_SUBDIR = e4hd
 endif
+
 ifeq ($(BOXMODEL),h7)
+HD5X_DRIVER = $(BOXMODEL)
 IMAGE_SUBDIR = zgemma/$(BOXMODEL)
 endif
 

@@ -45,30 +45,30 @@ echo "                            |___/                        "
 ##############################################
 
 case $1 in
-	[1-9] | 1[0-9] | 2[0-9] | 3[0-9] | 4[0-9] | 5[0-9] | 9[0-9]) REPLY=$1;;
+	[1-9] | 1[0-9] | 2[0-9] | 3[0-9]) REPLY=$1;;
 	*)
 		echo "Target receivers:"
 		echo ""
 		echo "   1)  Neutrino PC"
 		echo ""
-		echo "   2)  VU+ Duo 4K"
-		echo "   3)  VU+ Solo 4k"
-		echo "   4)  VU+ Ultimo 4K"
-		echo "   5)  VU+ Uno 4K"
-		echo "   6)  VU+ Uno 4K SE"
-		echo "   7)  VU+ Zero 4K"
-		echo "   8)  VU+ Duo 4K SE"
+		echo "  10)  VU+ Duo 4K"
+		echo "  11)  VU+ Solo 4k"
+		echo "  12)  VU+ Ultimo 4K"
+		echo "  13)  VU+ Uno 4K"
+		echo "  14)  VU+ Uno 4K SE"
+		echo "  15)  VU+ Zero 4K"
+		echo "  16)  VU+ Duo 4K SE"
 		echo ""
-		echo "  11)  WWIO BRE2ZE 4K"
+		echo "  20)  WWIO BRE2ZE 4K"
 		echo "  21)  AX/Mut@nt HD51"
 		echo "  22)  AX/Mut@nt HD60"
 		echo "  23)  AX/Mut@nt HD61"
+		echo "  23)  AirDigital Zgemma H7C/H7S"
+		echo "  25)  AXAS E4HD 4K Ultra"
+		echo "  26)  Protek 4k"
 		echo ""
 		echo "  30)  Edision OS mio 4K"
 		echo "  31)  Edision OS mio+ 4K"
-		echo ""
-		echo "  40)  AirDigital Zgemma H7C/H7S"
-		echo "  50)  AXAS E4HD 4K Ultra"
 		echo ""
 		read -p "Select target? [21] "
 		REPLY="${REPLY:-21}";;
@@ -76,21 +76,22 @@ esac
 
 case "$REPLY" in
 	 1) TARGET_ARCH="$(shell which arch > /dev/null 2>&1 && arch || uname -m)";BOXTYPE="generic";BOXMODEL="generic";;
-	 2) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuduo4k";;
-	 3) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vusolo4k";;
-	 4) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuultimo4k";;
-	 5) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuuno4k";;
-	 6) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuuno4kse";;
-	 7) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuzero4k";;
-	 8) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuduo4kse";;
-	11) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="bre2ze4k";;
+	10) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuduo4k";;
+	11) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vusolo4k";;
+	12) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuultimo4k";;
+	13) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuuno4k";;
+	14) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuuno4kse";;
+	15) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuzero4k";;
+	16) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuduo4kse";;
+	20) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="bre2ze4k";;
 	21) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd51";;
 	22) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd60";;
 	23) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd61";;
+	24) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="h7";;
+	25) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="e4hdultra";;
+	26) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="protek4k";;
 	30) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="osmio4k";;
 	31) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="osmio4kplus";;
-	40) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="h7";;
-	50) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="e4hdultra";;
 	 *) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="hd51";;
 esac
 echo "TARGET_ARCH=$TARGET_ARCH" > .config

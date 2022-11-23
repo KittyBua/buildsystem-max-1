@@ -27,7 +27,7 @@ LINKS_CONF_OPTS = \
 	--without-svgalib \
 	--without-x
 
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd51 hd60 hd61 bre2ze4k))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 e4hdultra protek4k hd60 hd61))
 define LINKS_PATCH_RCINPUT_C
 	$(SED) 's|"/dev/input/event0"|"/dev/input/event1"|' $(PKG_BUILD_DIR)/rcinput.c
 endef
