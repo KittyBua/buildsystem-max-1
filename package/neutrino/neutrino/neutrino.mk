@@ -97,6 +97,7 @@ endif
 NEUTRINO_CFLAGS += $(LOCAL_NEUTRINO_CFLAGS)
 
 NEUTRINO_CPPFLAGS  = -I$(TARGET_DIR)/usr/include
+NEUTRINO_CPPFLAGS += -I$(KERNEL_HEADERS_DIR)/include
 NEUTRINO_CPPFLAGS += -ffunction-sections -fdata-sections
 
 # -----------------------------------------------------------------------------

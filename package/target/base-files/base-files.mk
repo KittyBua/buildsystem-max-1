@@ -32,10 +32,10 @@ endif
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/suspend.sh $(TARGET_DIR)/etc/init.d/suspend
 endif
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k e4hdultra hd51 hd60 hd61 osmio4k osmio4kplus h7))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 e4hdultra protek4k hd60 hd61 osmio4k osmio4kplus))
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/partitions-by-name $(TARGET_DIR)/etc/init.d/partitions-by-name
 endif
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k e4hdultra hd51 hd60 hd61 h7))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 e4hdultra protek4k hd60 hd61))
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/resizerootfs $(TARGET_DIR)/etc/init.d/resizerootfs
 else ifeq ($(BOXMODEL),$(filter $(BOXMODEL),osmio4k osmio4kplus))
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/resizerootfs_mio $(TARGET_DIR)/etc/init.d/resizerootfs
@@ -95,11 +95,11 @@ endif
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),hd60 hd61))
 	$(UPDATE-RC.D) suspend start 89 0 .
 endif
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k e4hdultra hd51 hd60 hd61 osmio4k osmio4kplus h7))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 e4hdultra protek4k hd60 hd61 osmio4k osmio4kplus))
 	$(UPDATE-RC.D) resizerootfs start 7 S .
 	$(UPDATE-RC.D) partitions-by-name start 04 S .
 endif
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 h7))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51))
 	$(UPDATE-RC.D) createswap start 98 3 .
 endif
 	#
