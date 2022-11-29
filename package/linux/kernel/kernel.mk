@@ -18,14 +18,14 @@ $(D)/kernel.do_compile: kernel.do_prepare
 	$(MKDIR)/$(KERNEL_OBJ)
 	$(MKDIR)/$(KERNEL_MODULES)
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/$(KERNEL_CONFIG) $(KERNEL_OBJ_DIR)/.config
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k e4hdultra hd51 hd60 hd61 h7))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 e4hdultra protek4k hd60 hd61))
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/initramfs-subdirboot.cpio.gz $(KERNEL_OBJ_DIR)
 endif
 	$(MAKE) -C $(LINUX_DIR) $(LINUX_KERNEL_MAKE_VARS) oldconfig
 	$(MAKE) -C $(LINUX_DIR) $(LINUX_KERNEL_MAKE_VARS) modules $(KERNEL_DTB) $(KERNEL_IMAGE_TYPE)
 	$(MAKE) -C $(LINUX_DIR) $(LINUX_KERNEL_MAKE_VARS) modules_install
 	$(MAKE) -C $(LINUX_DIR) $(LINUX_KERNEL_MAKE_VARS) headers_install INSTALL_HDR_PATH=$(KERNEL_HEADERS_DIR)
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k e4hdultra hd51 h7))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 e4hdultra protek4k))
 	cat $(KERNEL_OUTPUT) $(KERNEL_INPUT_DTB) > $(KERNEL_OUTPUT_DTB)
 endif
 	@touch $(D)/$(notdir $@)
