@@ -133,13 +133,15 @@ NEUTRINO_CONF_OPTS = \
 	--with-targetprefix=$(prefix)
 endif
 
+NEUTRINO_NO_PIP = generic
+
 NEUTRINO_CONF_OPTS += \
 	--host=$(GNU_TARGET_NAME) \
 	--build=$(GNU_HOST_NAME) \
 	--enable-maintainer-mode \
 	--enable-silent-rules \
 	\
-	$(if $(filter $(BOXMODEL),generic),,--enable-pip) \
+	$(if $(filter $(BOXMODEL),$(NEUTRINO_NO_PIP)),,--enable-pip) \
 	--enable-freesatepg \
 	--enable-fribidi \
 	--enable-giflib \
