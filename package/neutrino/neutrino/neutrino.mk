@@ -226,7 +226,7 @@ NEUTRINO_DEPENDS += flac
 endif
 
 ifeq ($(BOXTYPE),armbox)
-NEUTRINO_CONF_OPTS += --disable-arm-acc
+#NEUTRINO_CONF_OPTS += --disable-arm-acc
 endif
 NEUTRINO_CONF_OPTS += $(LOCAL_NEUTRINO_BUILD_OPTIONS)
 
