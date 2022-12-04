@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-OPENVPN_VERSION = 2.5.7
+OPENVPN_VERSION = 2.5.8
 OPENVPN_DIR = openvpn-$(OPENVPN_VERSION)
 OPENVPN_SOURCE = openvpn-$(OPENVPN_VERSION).tar.xz
 OPENVPN_SITE = http://build.openvpn.net/downloads/releases
@@ -32,7 +32,8 @@ OPENVPN_CONF_OPTS = \
 
 define OPENVPN_INSTALL_INIT_SYSV
 	mkdir -p $(TARGET_DIR)/etc/openvpn
-	$(INSTALL_EXEC) $(PKG_FILES_DIR)/openvpn $(TARGET_DIR)/etc/init.d/
+	$(INSTALL_EXEC) $(PKG_FILES_DIR)/openvpn $(TARGET_DIR)/etc/init.d/openvpn
+	$(UPDATE-RC.D) openvpn start 10 2 3 4 5 . stop 70 0 1 6 .
 endef
 
 $(D)/openvpn: | bootstrap
