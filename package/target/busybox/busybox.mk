@@ -65,8 +65,8 @@ $(D)/busybox: | bootstrap
 	fi
 	@if grep -q "CONFIG_SYSLOGD=y" $(BUILD_DIR)/$(BUSYBOX_DIR)/.config; then \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/syslog-startup.conf $(TARGET_DIR)/etc/syslog-startup.conf; \
-		$(INSTALL_EXEC) $(PKG_FILES_DIR)/syslog.busybox $(TARGET_DIR)/etc/init.d/syslog.busybox; \
-		$(UPDATE-RC.D) syslog.busybox start 20 2 3 4 5 . stop 20 0 1 6 .; \
+		$(INSTALL_EXEC) $(PKG_FILES_DIR)/syslog.busybox $(TARGET_DIR)/etc/init.d/syslog; \
+		$(UPDATE-RC.D) syslog start 20 2 3 4 5 . stop 20 0 1 6 .; \
 	fi
 	@if grep -q "CONFIG_FEATURE_TELNETD_STANDALONE=y" $(BUILD_DIR)/$(BUSYBOX_DIR)/.config; then \
 		$(INSTALL_EXEC) $(PKG_FILES_DIR)/telnetd.busybox $(TARGET_DIR)/etc/init.d/telnetd.busybox; \

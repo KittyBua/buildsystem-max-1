@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-BASE_FILES_VERSION = 2020-05-25
+BASE_FILES_VERSION = 2022-12-01
 
 $(D)/base-files: | directories
 	$(call STARTUP)
@@ -16,14 +16,14 @@ $(D)/base-files: | directories
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/camd_datefix $(TARGET_DIR)/etc/init.d/camd_datefix
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/checkroot.sh $(TARGET_DIR)/etc/init.d/checkroot.sh
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k hd51 h7))
-	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/createswap.sh $(TARGET_DIR)/etc/init.d/createswap
+	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/createswap.sh $(TARGET_DIR)/etc/init.d/createswap.sh
 endif
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/devpts.sh $(TARGET_DIR)/etc/init.d/devpts.sh
 	$(INSTALL_DATA) $(PKG_FILES_DIR)/etc/init.d/functions $(TARGET_DIR)/etc/init.d/functions
 	pushd $(TARGET_DIR)/etc/init.d && ln -sf functions globals
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/halt $(TARGET_DIR)/etc/init.d/halt
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/hostname.sh $(TARGET_DIR)/etc/init.d/hostname.sh
-#	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/hotplug.sh $(TARGET_DIR)/etc/init.d/hotplug.sh
+	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/hotplug.sh $(TARGET_DIR)/etc/init.d/hotplug.sh
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/modload.sh $(TARGET_DIR)/etc/init.d/modload.sh
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/modutils.sh $(TARGET_DIR)/etc/init.d/modutils.sh
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/etc/init.d/mountall.sh $(TARGET_DIR)/etc/init.d/mountall.sh
@@ -72,11 +72,12 @@ endif
 	$(UPDATE-RC.D) banner.sh start 02 S .
 	$(UPDATE-RC.D) sysfs.sh start 02 S .
 	$(UPDATE-RC.D) mountall.sh start 03 S .
-	$(UPDATE-RC.D) modutils.sh start 05 S .
+	$(UPDATE-RC.D) modutils.sh start 04 S .
+	$(UPDATE-RC.D) modload.sh start 05 S .
+	$(UPDATE-RC.D) checkroot.sh start 05 S .
 	$(UPDATE-RC.D) alignment.sh start 06 S .
-	$(UPDATE-RC.D) checkroot.sh start 06 S .
 	$(UPDATE-RC.D) devpts.sh start 06 S .
-	$(UPDATE-RC.D) modload.sh start 06 S .
+	$(UPDATE-RC.D) hotplug.sh start 06 S .
 	$(UPDATE-RC.D) hostname.sh start 39 S .
 	$(UPDATE-RC.D) bootmisc.sh start 55 S .
 	$(UPDATE-RC.D) sendsigs start 20 0 6 .
@@ -100,7 +101,7 @@ ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 e4hdultra protek4k hd60 
 	$(UPDATE-RC.D) partitions-by-name start 04 S .
 endif
 ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51))
-	$(UPDATE-RC.D) createswap start 98 3 .
+	$(UPDATE-RC.D) createswap.sh start 98 3 .
 endif
 	#
 	#
