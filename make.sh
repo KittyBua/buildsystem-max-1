@@ -63,7 +63,7 @@ case $1 in
 		echo "  21)  AX/Mut@nt HD51"
 		echo "  22)  AX/Mut@nt HD60"
 		echo "  23)  AX/Mut@nt HD61"
-		echo "  23)  AirDigital Zgemma H7C/H7S"
+		echo "  24)  AirDigital Zgemma H7C/H7S"
 		echo "  25)  AXAS E4HD 4K Ultra"
 		echo "  26)  Protek 4k"
 		echo ""
