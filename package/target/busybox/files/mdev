@@ -1,43 +1,25 @@
 #!/bin/sh
-#
-# Run the mdev daemon
-#
 
-DAEMON="mdev"
-PIDFILE="/var/run/$DAEMON.pid"
+if ! grep -q devtmpfs /proc/mounts; then
+	if grep -q devtmpfs /proc/filesystems; then
+		mount -t devtmpfs devtmpfs /dev
+	else
+		mount -t tmpfs tmpfs /dev  -o size=64k,mode=0755
+		rm /dev/null
+		mknod /dev/null c 1 3
+		mkdir /dev/pts /dev/shm
+		mount -t devpts devpts /dev/pts
+	fi
+fi
 
+echo > /dev/mdev.seq
 
-start() {
-  echo -n "Starting $DAEMON... "
-  start-stop-daemon -S -b -m -p $PIDFILE -x /sbin/mdev -- -df
-  [ $? -eq 0 ] && echo "OK" || echo "ERROR"
+echo "/sbin/mdev" >/proc/sys/kernel/hotplug
 
-  # coldplug modules
-  find /sys/ -name modalias -print0 | \
-    xargs -0 sort -u | \
-    tr '\n' '\0' | \
-    xargs -0 modprobe -abq
-}
+touch /dev/.udev
 
-stop() {
-  echo -n "Stopping $DAEMON... "
-  start-stop-daemon -K -p $PIDFILE
-  [ $? -eq 0 ] && echo "OK" || echo "ERROR"
-}
+[ -d "/sys/kernel" ] || mount sysfs /sys -t sysfs
 
-restart() {
-  stop
-  start
-}
+[ -L "/dev/fd" ] || ln -sf /proc/self/fd /dev/fd
 
-case "$1" in
-  start|stop|restart)
-  "$1"
-  ;;
-  *)
-  echo "Usage: $0 {start|stop|restart}"
-  exit 1
-esac
-
-exit $?
-
+mdev -s
