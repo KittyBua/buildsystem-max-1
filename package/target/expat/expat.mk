@@ -18,10 +18,5 @@ EXPAT_CONF_OPTS = \
 	--without-tests \
 	--without-xmlwf
 
-define EXPAT_TARGET_CLEANUP
-	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake)
-endef
-EXPAT_TARGET_CLEANUP_HOOKS += EXPAT_TARGET_CLEANUP
-
 $(D)/expat: | bootstrap
 	$(call autotools-package)

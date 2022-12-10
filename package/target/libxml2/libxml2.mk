@@ -19,6 +19,7 @@ LIBXML2_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
 	--enable-shared \
 	--disable-static \
+	--without-iconv \
 	--without-python \
 	--without-debug \
 	--without-c14n \
@@ -38,7 +39,7 @@ LIBXML2_POST_INSTALL_HOOKS += LIBXML2_INSTALL_FILES
 
 define LIBXML2_TARGET_CLEANUP
 	rm -f $(addprefix $(TARGET_BIN_DIR)/,xmlcatalog xmllint)
-	rm -rf $(addprefix $(TARGET_LIB_DIR)/,cmake xml2Conf.sh)
+	rm -rf $(addprefix $(TARGET_LIB_DIR)/,xml2Conf.sh)
 endef
 LIBXML2_TARGET_CLEANUP_HOOKS += LIBXML2_TARGET_CLEANUP
 
