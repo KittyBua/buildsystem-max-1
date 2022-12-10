@@ -102,7 +102,7 @@ neutrino-release-base:
 		-o -name '*.-config' \
 		\) \
 		-print0 | xargs --no-run-if-empty -0 rm -f
-	rm -rf $(RELEASE_DIR)/usr/lib/{gconv,gio,glib-2.0,libxslt-plugins,pkgconfig,sigc++-2.0}
+	rm -rf $(RELEASE_DIR)/usr/lib/{cmake,gconv,gio,glib-2.0,libxslt-plugins,pkgconfig,sigc++-2.0}
 	rm -rf $(RELEASE_DIR)/usr/share/aclocal
 	rm -f $(RELEASE_DIR)/lib/libstdc++.*-gdb.py
 	rm -f $(RELEASE_DIR)/lib/libthread_db*
