@@ -15,10 +15,11 @@ KMOD_AUTORECONF = YES
 
 KMOD_CONF_OPTS = \
 	--bindir=$(base_bindir) \
-	--disable-static \
-	--enable-shared \
+	--disable-debug \
+	--disable-logging \
 	--disable-manpages \
-	--with-zlib
+	--without-openssl \
+	--without-xz
 
 define KMOD_INSTALL_FILES
 	mkdir -p $(TARGET_DIR)/lib/{depmod.d,modprobe.d}
