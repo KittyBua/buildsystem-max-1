@@ -1,16 +1,14 @@
---- a/Makefile.am
-+++ b/Makefile.am
-@@ -2,11 +2,9 @@
- 	libxslt \
- 	libexslt \
- 	xsltproc \
--	doc \
--	$(PYTHON_SUBDIR) \
--	tests
-+	$(PYTHON_SUBDIR)
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -409,11 +409,6 @@
+ 	install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libxslt.py DESTINATION ${LIBXSLT_PYTHON_INSTALL_DIR} COMPONENT runtime)
+ endif()
  
--DIST_SUBDIRS = libxslt libexslt xsltproc python doc tests
-+DIST_SUBDIRS = libxslt libexslt xsltproc python
- 
- confexecdir=$(libdir)
- confexec_DATA = xsltConf.sh
+-install(FILES libexslt/libexslt.3 DESTINATION ${CMAKE_INSTALL_MANDIR}/man3 COMPONENT documentation)
+-install(FILES libxslt/libxslt.3 DESTINATION ${CMAKE_INSTALL_MANDIR}/man3 COMPONENT documentation)
+-install(FILES doc/xsltproc.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1 COMPONENT documentation)
+-install(DIRECTORY doc/ DESTINATION ${CMAKE_INSTALL_DATADIR}/doc/libxslt COMPONENT documentation PATTERN Makefile.* EXCLUDE)
+-
+ if(LIBXSLT_WITH_CRYPTO AND NOT WIN32)
+ 	install(FILES FindGcrypt.cmake DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/libxslt-${PROJECT_VERSION} COMPONENT development)
+ endif()
