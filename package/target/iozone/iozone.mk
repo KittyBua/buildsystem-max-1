@@ -12,8 +12,8 @@ IOZONE_SITE = http://www.iozone.org/src/current
 IOZONE_SUBDIR = src/current
 
 define IOZONE_PATCH_MAKEFILE
-	$(SED) "s/= gcc/= $(TARGET_CC)/" $(PKG_BUILD_DIR)/src/current/makefile
-	$(SED) "s/= cc/= $(TARGET_CC)/" $(PKG_BUILD_DIR)/src/current/makefile
+	$(SED) "s|= gcc|= $(TARGET_CC)|" $(PKG_BUILD_DIR)/src/current/makefile
+	$(SED) "s|= cc|= $(TARGET_CC)|" $(PKG_BUILD_DIR)/src/current/makefile
 endef
 IOZONE_POST_PATCH_HOOKS += IOZONE_PATCH_MAKEFILE
 
