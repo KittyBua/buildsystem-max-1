@@ -40,7 +40,7 @@ endif
 ifeq ($(TARGET_ARCH),arm)
 GNU_TARGET_NAME = arm-cortex-linux-gnueabihf
 TARGET_CPU      = armv7ve
-TARGET_ABI      = -mtune=cortex-a15 -mfloat-abi=hard -mfpu=neon-vfpv4 -march=armv7ve
+TARGET_ABI      = -mtune=cortex-a15 -mfloat-abi=hard -mfpu=neon-vfpv4 -march=$(TARGET_CPU)
 TARGET_ENDIAN   = little
 else ifeq ($(TARGET_ARCH),aarch64)
 GNU_TARGET_NAME = aarch64-unknown-linux-gnu
@@ -78,6 +78,7 @@ TARGET_CFLAGS   = $(TARGET_OPTIMIZATION) $(TARGET_ABI) $(TARGET_EXTRA_CFLAGS) -I
 TARGET_CPPFLAGS = $(TARGET_CFLAGS)
 TARGET_CXXFLAGS = $(TARGET_CFLAGS)
 TARGET_LDFLAGS = \
+	$(TARGET_EXTRA_LDFLAGS) \
 	-L$(TARGET_DIR)/usr/lib \
 	-L$(TARGET_DIR)/lib \
 	-Wl,--enable-new-dtags \
