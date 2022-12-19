@@ -126,7 +126,7 @@ QUIET := $(if $(findstring s,$(filter-out --%,$(MAKEFLAGS))),-q)
 
 include package/Makefile.in
 
-PATH := $(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
+PATH := $(HOST_DIR)/bin:$(PATH)
 
 # for local extensions, e.g. special plugins or similar...
 -include Makefile.local
