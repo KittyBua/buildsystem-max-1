@@ -1,0 +1,23 @@
+--- a/src/xupnpd_m3u.lua
++++ b/src/xupnpd_m3u.lua
+@@ -83,6 +83,8 @@
+     playlist_data.objid='0'
+     playlist_data.size=0
+     playlist_data.elements={}
++
++    collectgarbage()
+ 
+     local plist=clone_table(playlist)
+ 
+--- a/src/xupnpd_main.lua
++++ b/src/xupnpd_main.lua
+@@ -2,6 +2,9 @@
+ -- clark15b@gmail.com
+ -- https://tsdemuxer.googlecode.com/svn/trunk/xupnpd
+ 
++-- fix memleak by changing collectgarbage() interval from 200 (default) to 50
++collectgarbage('setpause', 50)
++
+ http.sendurl_buffer_size(32768,1);
+ 
+ if cfg.daemon==true then core.detach() end
