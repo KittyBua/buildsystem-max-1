@@ -1,0 +1,47 @@
+--- a/src/ui/xupnpd_ui.lua
++++ b/src/ui/xupnpd_ui.lua
+@@ -24,7 +24,7 @@
+         end
+     end
+     http.send('</table>')
+-    http.send('<br/><a class="btn btn-info" href="/ui">Back</a>')
++    http.send('<br/><a class="btn btn-info" href="/ui/">Back</a>')
+ end
+ 
+ function ui_download(name)
+@@ -85,7 +85,7 @@
+     http.send('<input type=file name=m3ufile><br /><br />')
+     http.send('<input class="btn btn-primary" type=submit value=Send>')
+     http.send('</form><hr/>')
+-    http.send('<br/><a class="btn btn-primary" href="/ui/reload">Reload</a> <a class="btn btn-primary" href="/ui/reload_feeds?return_url=/ui/playlists">Reload feeds</a> <a class="btn btn-info" href="/ui">Back</a>')
++    http.send('<br/><a class="btn btn-primary" href="/ui/reload">Reload</a> <a class="btn btn-primary" href="/ui/reload_feeds?return_url=/ui/playlists">Reload feeds</a> <a class="btn btn-info" href="/ui/">Back</a>')
+ end
+ 
+ function ui_feeds()
+@@ -119,7 +119,7 @@
+     http.send('<br/><input class="btn btn-primary" type=submit value=Add> <a class="btn btn-info" href="/ui/fhelp" target="_blank">Help</a>')
+     http.send('</form><hr/>')
+ 
+-    http.send('<br/><a class="btn btn-primary" href="/ui/save_feeds">Save</a> <a class="btn btn-primary" href="/ui/reload_feeds?return_url=/ui/feeds">Reload feeds</a> <a class="btn btn-info" href="/ui">Back</a>')
++    http.send('<br/><a class="btn btn-primary" href="/ui/save_feeds">Save</a> <a class="btn btn-primary" href="/ui/reload_feeds?return_url=/ui/feeds">Reload feeds</a> <a class="btn btn-info" href="/ui/">Back</a>')
+ end
+ 
+ function ui_fhelp()
+@@ -427,7 +427,7 @@
+ 
+     http.send('</table>')
+ 
+-    http.send('<br/><a class="btn btn-primary" href="/ui/status">Refresh</a> <a class="btn btn-info" href="/ui">Back</a>')
++    http.send('<br/><a class="btn btn-primary" href="/ui/status">Refresh</a> <a class="btn btn-info" href="/ui/">Back</a>')
+ end
+ 
+ function ui_kill()
+@@ -533,7 +533,7 @@
+ end
+ 
+ function ui_restart()
+-    if core.restart(cfg.pid_file,"./xupnpd") then http.send('<h3>Attempt to restart...</h3>') else http.send('<h3>Unable to restart.</h3>') end
++    if core.restart(cfg.pid_file,"/usr/bin/xupnpd") then http.send('<h3>Attempt to restart...</h3>') else http.send('<h3>Unable to restart.</h3>') end
+ 
+     http.send('<br/><form method=get action="/ui"><input class="btn btn-primary" type=submit value=OK></form>')
+ 
