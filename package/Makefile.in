@@ -38,9 +38,9 @@ CROSSTOOL_GCC_VERSION = gcc-$(GCC_VERSION)
 endif
 
 ifeq ($(TARGET_ARCH),arm)
-GNU_TARGET_NAME = arm-cortex-linux-gnueabihf
+GNU_TARGET_NAME = arm-cortex_a15-linux-gnueabihf
 TARGET_CPU      = armv7ve
-TARGET_ABI      = -mtune=cortex-a15 -mfloat-abi=hard -mfpu=neon-vfpv4 -march=$(TARGET_CPU)
+TARGET_ABI      = -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a15
 TARGET_ENDIAN   = little
 else ifeq ($(TARGET_ARCH),aarch64)
 GNU_TARGET_NAME = aarch64-unknown-linux-gnu
