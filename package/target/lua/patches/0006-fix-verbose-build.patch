@@ -11,7 +11,7 @@
  
  # How to install. If your install program does not support "-p", then
  # you may have to run ranlib on the installed liblua.a.
-@@ -45,8 +45,8 @@
+@@ -46,8 +46,8 @@
  TO_MAN= lua.1 luac.1
  
  # Lua version and release.
