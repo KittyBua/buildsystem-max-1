@@ -1,0 +1,10 @@
+--- a/source/x265.pc.in
++++ b/source/x265.pc.in
+@@ -6,6 +6,6 @@
+ Name: @CMAKE_PROJECT_NAME@
+ Description: H.265/HEVC video encoder
+ Version: @X265_LATEST_TAG@
+-Libs: -L${libdir} -lx265
++Libs: -L${libdir} -lx265 -ldl -lpthread
+ Libs.private: @PRIVATE_LIBS@
+ Cflags: -I${includedir}

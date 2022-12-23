@@ -4,10 +4,10 @@
 #
 ################################################################################
 
-X265_VERSION = git
-X265_DIR = x265.git
-X265_SOURCE = x265.git
-X265_SITE = https://github.com/videolan
+X265_VERSION = 3.5
+X265_DIR = x265_$(X265_VERSION)
+X265_SOURCE = x265_$(X265_VERSION).tar.gz
+X265_SITE = https://bitbucket.org/multicoreware/x265_git/downloads
 
 X265_SUBDIR  = source
 
