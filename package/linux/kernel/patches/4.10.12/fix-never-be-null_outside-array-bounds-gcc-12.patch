@@ -1,6 +1,6 @@
 --- a/include/linux/mmzone.h
 +++ b/include/linux/mmzone.h
-@@ -1133,9 +1133,16 @@ extern struct mem_section mem_section[NR_SECTION_ROOTS][SECTIONS_PER_ROOT];
+@@ -1123,9 +1123,16 @@ extern struct mem_section mem_section[NR_SECTION_ROOTS][SECTIONS_PER_ROOT];
  
  static inline struct mem_section *__nr_to_section(unsigned long nr)
  {
@@ -22,7 +22,7 @@
 
 --- a/arch/mips/kernel/traps.c
 +++ b/arch/mips/kernel/traps.c
-@@ -423,7 +423,7 @@ static const struct exception_table_entry *search_dbe_tables(unsigned long addr)
+@@ -425,7 +425,7 @@ static const struct exception_table_entry *search_dbe_tables(unsigned long addr)
  {
  	const struct exception_table_entry *e;
  
