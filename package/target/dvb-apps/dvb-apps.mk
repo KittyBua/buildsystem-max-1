@@ -9,7 +9,7 @@ DVB_APPS_DIR = dvb-apps.git
 DVB_APPS_SOURCE = dvb-apps.git
 DVB_APPS_SITE = https://github.com/openpli-arm
 
-DVB_APPS_DEPENDS = libiconv
+DVB_APPS_DEPENDS = kernel.do_compile libiconv
 
 define DVB_APPS_POST_PATCH
 	$(SED) '/$$(MAKE) -C util $$@/d' $(PKG_BUILD_DIR)/Makefile
