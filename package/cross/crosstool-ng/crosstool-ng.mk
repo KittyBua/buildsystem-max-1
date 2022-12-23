@@ -93,7 +93,8 @@ crosstool-restore: $(CROSSTOOL_NG_BACKUP)
 	tar xzvf $(CROSSTOOL_NG_BACKUP) -C $(CROSS_DIR)
 
 crosstool-renew:
-	ccache -cCz
 	make distclean
+	rm -rf $(CCACHE_DIR)
 	rm -rf $(CROSS_DIR)
+	rm -f  $(CROSSTOOL_NG_BACKUP)
 	make crosstool
