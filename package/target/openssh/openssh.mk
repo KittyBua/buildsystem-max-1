@@ -29,6 +29,8 @@ OPENSSH_CONF_OPTS = \
 	--disable-utmpx \
 	--disable-wtmp \
 	--disable-wtmpx \
+	--without-bsd-auth \
+	--without-kerberos5 \
 	--disable-pututline \
 	--disable-pututxline
 
