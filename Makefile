@@ -126,7 +126,7 @@ QUIET := $(if $(findstring s,$(filter-out --%,$(MAKEFLAGS))),-q)
 
 include package/Makefile.in
 
-PATH := $(HOST_DIR)/bin:$(PATH)
+BS_PATH = $(HOST_DIR)/bin:$(PATH)
 
 # for local extensions, e.g. special plugins or similar...
 -include Makefile.local
@@ -177,7 +177,7 @@ printenv:
 	@clear
 	$(call draw_line);
 	@echo "Build Environment Variables:"
-	@echo "PATH              : `type -p fmt>/dev/null&&echo $(PATH)|sed 's/:/ /g' |fmt -65|sed 's/ /:/g; 2,$$s/^/                  : /;'||echo $(PATH)`"
+	@echo "BS_PATH           : `type -p fmt>/dev/null&&echo $(BS_PATH)|sed 's/:/ /g' |fmt -65|sed 's/ /:/g; 2,$$s/^/                  : /;'||echo $(BS_PATH)`"
 	@echo "ARCHIVE_DIR       : $(DL_DIR)"
 	@echo "BASE_DIR          : $(BASE_DIR)"
 	@echo "CROSS_DIR         : $(CROSS_DIR)"
