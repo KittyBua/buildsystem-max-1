@@ -49,6 +49,7 @@ toolcheck: bashcheck $(TOOLCHECK) preqs
 preqs:
 	@mkdir -p $(OWN_FILES)/neutrino-hd
 	@mkdir -p $(OWN_FILES)/neutrino-hd.$(BOXMODEL)
+	@mkdir -p $(OWN_PATCHES)
 
 ################################################################################
 #

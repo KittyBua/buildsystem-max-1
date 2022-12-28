@@ -128,9 +128,10 @@ D               = $(DEPS_DIR)
 TARGET_DIR      = $(BASE_DIR)/root
 IMAGE_DIR       = $(BASE_DIR)/release_image
 OWN_FILES      ?= $(BASE_DIR)/own-files
+OWN_PATCHES    ?= $(BASE_DIR)/own-patches
 CROSS_DIR       = $(BASE_DIR)/build_cross/$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION)-kernel-$(KERNEL_VERSION)
-HOST_DIR        = $(BASE_DIR)/build_host
 CROSS_ROOT_DIR  = $(CROSS_DIR)/$(GNU_TARGET_NAME)/sysroot
+HOST_DIR        = $(BASE_DIR)/build_host
 
 DATE            = $(shell date '+%Y-%m-%d_%H.%M')
 MAINTAINER     ?= $(shell whoami)

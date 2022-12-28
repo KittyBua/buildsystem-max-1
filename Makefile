@@ -183,6 +183,7 @@ printenv:
 	@echo "CROSS_DIR         : $(CROSS_DIR)"
 	@echo "RELEASE_DIR       : $(RELEASE_DIR)"
 	@echo "RELEASE_IMAGE_DIR : $(IMAGE_DIR)"
+	@echo "OWN_PATCHES       : $(OWN_PATCHES)"
 	@echo "HOST_DIR          : $(HOST_DIR)"
 	@echo "TARGET_DIR        : $(TARGET_DIR)"
 	@echo "LINUX_DIR         : $(LINUX_DIR)"
@@ -202,11 +203,6 @@ ifeq ($(IMAGE_LAYOUT),subdirboot)
 	@echo -e "IMAGE_LAYOUT      : $(TERM_YELLOW)1 single + multirootfs$(TERM_NORMAL)"
 else
 	@echo -e "IMAGE_LAYOUT      : $(TERM_YELLOW)4 single$(TERM_NORMAL)"
-endif
-ifeq ($(VU_MULTIBOOT),1)
-	@echo -e "IMAGE_LAYOUT      : $(TERM_YELLOW)4 single$(TERM_NORMAL)"
-else
-	@echo -e "IMAGE_LAYOUT      : $(TERM_YELLOW)1 single$(TERM_NORMAL)"
 endif
 	$(call draw_line);
 	@echo -e "LOCAL_N_PLUGIN_BUILD_OPTIONS : $(TERM_GREEN)$(LOCAL_N_PLUGIN_BUILD_OPTIONS)$(TERM_NORMAL)"
