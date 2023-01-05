@@ -88,9 +88,9 @@ Index: busybox-1.23.2/scripts/Makefile.build
  # 	foo.o: $(foo-objs)
 Index: busybox-1.23.2/scripts/Makefile.lib
 ===================================================================
---- busybox-1.23.2.orig/scripts/Makefile.lib
-+++ busybox-1.23.2/scripts/Makefile.lib
-@@ -121,7 +121,8 @@ cpp_flags      = -Wp,-MD,$(depfile) $(NO
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -122,7 +122,8 @@
  # yet ld_flags is fed to ld.
  #ld_flags       = $(LDFLAGS) $(EXTRA_LDFLAGS)
  # Remove the -Wl, prefix from linker options normally passed through gcc
@@ -100,7 +100,7 @@ Index: busybox-1.23.2/scripts/Makefile.lib
  
  
  # Finds the multi-part object the current object will be linked into
-@@ -151,10 +152,8 @@ $(obj)/%:: $(src)/%_shipped
+@@ -152,10 +153,8 @@
  # Linking
  # ---------------------------------------------------------------------------
  
