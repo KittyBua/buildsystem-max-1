@@ -15,15 +15,18 @@ diff --git a/util/dvbdate/dvbdate.c b/util/dvbdate/dvbdate.c
 index f0df437..492ed79 100644
 --- a/util/dvbdate/dvbdate.c
 +++ b/util/dvbdate/dvbdate.c
-@@ -309,7 +309,10 @@ int atsc_scan_date(time_t *rx_time, unsigned int to)
+@@ -309,7 +309,14 @@
   */
  int set_time(time_t * new_time)
  {
--	if (stime(new_time)) {
-+	struct timespec ts;
-+	ts.tv_sec = &new_time;
-+	ts.tv_nsec = 0;
-+	if (clock_settime(CLOCK_REALTIME, &ts)) {
++#if __GLIBC__ > 2 || (__GLIBC__ == 2  && __GLIBC_MINOR__ >= 31)
++	struct timespec s = {0};
++	s.tv_sec = new_time;
++
++	if (clock_settime(CLOCK_REALTIME, &s)) {
++#else
+ 	if (stime(new_time)) {
++#endif
  		perror("Unable to set time");
  		return -1;
  	}
