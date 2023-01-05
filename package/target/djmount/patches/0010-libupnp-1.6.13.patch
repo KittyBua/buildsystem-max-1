@@ -1,13 +1,16 @@
-#
-# Description: Transition from libupnp3 to libupnp6
-# Bug-Debian: http://bugs.debian.org/656832
-# Author: Nick Leverton <nick@leverton.org>
-# Last-Update: 2012-02-22
-#
-Index: djmount/djmount/upnp_util.h
-===================================================================
---- djmount.orig/djmount/upnp_util.h	2012-02-22 03:34:37.459476269 +0100
-+++ djmount/djmount/upnp_util.h	2012-02-22 03:48:14.184514680 +0100
+--- a/djmount/file_buffer.c
++++ b/djmount/file_buffer.c
+@@ -212,7 +212,7 @@ FileBuffer_Read (FileBuffer* file, char* buffer,
+ 		 * to return the exact number of bytes requested.
+ 		 */
+ 		do {
+-			unsigned int read_size = size - n;
++			size_t read_size = size - n;
+ 			if (n > 0) {
+ 				Log_Printf (LOG_DEBUG, 
+ 					    "UpnpReadHttpGet loop ! url '%s' "
+--- a/djmount/upnp_util.h
++++ b/djmount/upnp_util.h
 @@ -28,6 +28,7 @@
  
  

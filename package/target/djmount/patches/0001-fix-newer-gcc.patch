@@ -11,3 +11,14 @@ index f5dc1c9..70c7993 100644
  get_content_type( IN const char *filename,
                    OUT DOMString * content_type )
  {
+--- a/djmount/upnp_util.c
++++ b/djmount/upnp_util.c
+@@ -27,6 +27,8 @@
+ #ifdef HAVE_CONFIG_H
+ #	include <config.h>
+ #endif
++
++#include <string.h>
+ 
+ #include "upnp_util.h"
+ #include "log.h"
