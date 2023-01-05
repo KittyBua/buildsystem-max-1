@@ -82,7 +82,7 @@ endef
 define HOST_PYTHON3_INSTALL_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		$(HOST_PYTHON3_ENV) \
-		$(HOST_PYTHON3_BINARY) ./setup.py $(HOST_PYTHON3_OPTS) install  --prefix=$(HOST_DIR)
+		$(HOST_PYTHON3_BINARY) ./setup.py $(HOST_PYTHON3_OPTS) install --prefix=$(HOST_DIR)
 endef
 
 define HOST_PYTHON3_INSTALL
