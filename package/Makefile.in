@@ -88,7 +88,11 @@ TARGET_LDFLAGS = \
 	-Wl,-rpath,$(TARGET_DIR)/lib \
 	-Wl,-O1
 
+ifneq ($(BOXMODEL),generic)
 TARGET_CROSS = $(CROSS_DIR)/bin/$(GNU_TARGET_NAME)-
+else
+TARGET_CROSS = $(GNU_TARGET_NAME)-
+endif
 
 # Define TARGET_xx variables for all common binutils/gcc
 TARGET_AR       = $(TARGET_CROSS)gcc-ar
