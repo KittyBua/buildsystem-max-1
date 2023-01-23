@@ -48,7 +48,7 @@ endef
 define TARGET_MESON_CMDS_DEFAULT
 	unset CC CXX CPP LD AR NM STRIP; \
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
-		PATH=$(BS_PATH) \
+		PATH=$(PATH) \
 		$($(PKG)_CONF_ENV) \
 		$(HOST_MESON_BINARY) \
 			--buildtype=release \
@@ -115,7 +115,7 @@ define HOST_MESON_CMDS_DEFAULT
 	PKG_CONFIG=/usr/bin/pkg-config \
 	PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig \
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
-		PATH=$(BS_PATH) \
+		PATH=$(PATH) \
 		$($(PKG)_CONF_ENV) \
 		$(HOST_MESON_BINARY) \
 			--prefix=$(HOST_DIR) \
