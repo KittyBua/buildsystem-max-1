@@ -105,9 +105,9 @@ NEUTRINO_CPPFLAGS += -ffunction-sections -fdata-sections
 ifeq ($(BOXMODEL),generic)
 NEUTRINO_CONF_OPTS = \
 	--prefix=$(TARGET_DIR)/usr \
+	--sysconfdir=$(TARGET_DIR)/etc \
 	--with-target=native \
-	--with-targetprefix=$(TARGET_DIR)/usr \
-	--with-generic-root-prefix=$(TARGET_DIR) \
+	--with-targetroot=$(TARGET_DIR) \
 	\
 	--with-configdir=$(TARGET_DIR)/var/tuxbox/config \
 	--with-datadir_var=$(TARGET_DIR)/var/tuxbox \
@@ -147,7 +147,6 @@ NEUTRINO_CONF_OPTS += \
 	--enable-giflib \
 	--enable-lua \
 	--enable-pugixml \
-	--enable-reschange \
 	\
 	--with-tremor \
 	--with-boxtype=$(BOXTYPE) \
@@ -225,9 +224,6 @@ NEUTRINO_CONF_OPTS += --enable-flac
 NEUTRINO_DEPENDS += flac
 endif
 
-ifeq ($(BOXTYPE),armbox)
-#NEUTRINO_CONF_OPTS += --disable-arm-acc
-endif
 NEUTRINO_CONF_OPTS += $(LOCAL_NEUTRINO_BUILD_OPTIONS)
 
 NEUTRINO_DEPENDS += $(LOCAL_NEUTRINO_DEPENDS)
@@ -317,29 +313,28 @@ else
 endif
 	$(TOUCH)
 
-neutrino-pc: neutrino
+# -----------------------------------------------------------------------------
+
+EXPORT_NEUTRINO_PC := \
 	export PATH=$(TARGET_DIR)/usr/bin:$(PATH); \
 	export LD_LIBRARY_PATH=$(TARGET_LIB_DIR):/usr/lib/$(TARGET_ARCH)-linux-gnu:$(LD_LIBRARY_PATH); \
 	export LUA_CPATH_5_2=";;$(TARGET_LIB_DIR)/lua/5.2/?.so"; \
 	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(SHARE_NEUTRINO_PLUGINS)/rss_addon/?.lua"; \
-	export SIMULATE_FE=1; \
+	export SIMULATE_FE=1
+
+neutrino-pc: neutrino
+	$(EXPORT_NEUTRINO_PC); \
 	$(TARGET_BIN_DIR)/neutrino || true
 
 neutrino-pc-gdb: neutrino
-	export PATH=$(TARGET_DIR)/usr/bin:$(PATH); \
-	export LD_LIBRARY_PATH=$(TARGET_LIB_DIR):/usr/lib/$(TARGET_ARCH)-linux-gnu:$(LD_LIBRARY_PATH); \
-	export LUA_CPATH_5_2=";;$(TARGET_LIB_DIR)/lua/5.2/?.so"; \
-	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(SHARE_NEUTRINO_PLUGINS)/rss_addon/?.lua"; \
-	export SIMULATE_FE=1; \
+	$(EXPORT_NEUTRINO_PC); \
 	gdb -ex run $(TARGET_BIN_DIR)/neutrino || true
 
 neutrino-pc-valgrind: neutrino
-	export PATH=$(TARGET_DIR)/usr/bin:$(PATH); \
-	export LD_LIBRARY_PATH=$(TARGET_LIB_DIR):/usr/lib/$(TARGET_ARCH)-linux-gnu:$(LD_LIBRARY_PATH); \
-	export LUA_CPATH_5_2=";;$(TARGET_LIB_DIR)/lua/5.2/?.so"; \
-	export LUA_PATH_5_2=";;$(TARGET_SHARE_DIR)/lua/5.2/?.lua;$(SHARE_NEUTRINO_PLUGINS)/rss_addon/?.lua"; \
-	export SIMULATE_FE=1; \
+	$(EXPORT_NEUTRINO_PC); \
 	valgrind --leak-check=full --log-file="$(BUILD_TMP)/valgrind.log" -v $(TARGET_BIN_DIR)/neutrino || true
+
+# -----------------------------------------------------------------------------
 
 neutrino-pc-clean \
 neutrino-clean:
