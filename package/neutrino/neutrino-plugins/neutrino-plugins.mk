@@ -21,6 +21,7 @@ NEUTRINO_PLUGINS_CONF_OPTS = \
 	--prefix=$(TARGET_DIR)/usr \
 	--sysconfdir=$(TARGET_DIR)/etc \
 	--with-target=native \
+	--with-targetroot=$(TARGET_DIR) \
 	\
 	--with-configdir=$(TARGET_DIR)/var/tuxbox/config \
 	--with-datadir_var=$(TARGET_DIR)/var/tuxbox \
@@ -138,7 +139,7 @@ $(D)/neutrino-plugins.do_configure:
 	rm -rf $(NEUTRINO_PLUGINS_OBJ_DIR)
 	mkdir -p $(NEUTRINO_PLUGINS_OBJ_DIR)
 	$(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)/autogen.sh
-	cd $(NEUTRINO_PLUGINS_OBJ_DIR); \
+	$(CD) $(NEUTRINO_PLUGINS_OBJ_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
 		$(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)/configure \
 			$(NEUTRINO_PLUGINS_CONF_OPTS)
@@ -201,8 +202,7 @@ endif
 
 # To build single plugins from neutrino-plugins repository call
 # make neutrino-plugin-<subdir>; e.g. make neutrino-plugin-tuxwetter
-NEUTRINO_PLUGINS_SUBDIR_DEPENDS = bootstrap libcurl libpng libjpeg-turbo giflib freetype
 
-neutrino-plugin-%: $(NEUTRINO_PLUGINS_SUBDIR_DEPENDS) neutrino-plugins.do_prepare neutrino-plugins.do_configure
+neutrino-plugin-%: $(NEUTRINO_PLUGINS_DEPENDS) neutrino-plugins.do_prepare neutrino-plugins.do_configure
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)/$(subst neutrino-plugin-,,$(@))
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)/$(subst neutrino-plugin-,,$(@)) install DESTDIR=$(TARGET_DIR)
