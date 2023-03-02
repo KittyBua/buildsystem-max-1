@@ -49,7 +49,8 @@ case $1 in
 	*)
 		echo "Target receivers:"
 		echo ""
-		echo "   1)  Neutrino PC"
+		echo "   1)  Neutrino PC generic"
+		echo "   2)  Neutrino PC raspi"
 		echo ""
 		echo "  10)  VU+ Duo 4K"
 		echo "  11)  VU+ Solo 4k"
@@ -76,6 +77,7 @@ esac
 
 case "$REPLY" in
 	 1) TARGET_ARCH="$(shell which arch > /dev/null 2>&1 && arch || uname -m)";BOXTYPE="generic";BOXMODEL="generic";;
+	 2) TARGET_ARCH="$(shell which arch > /dev/null 2>&1 && arch || uname -m)";BOXTYPE="generic";BOXMODEL="raspi";;
 	10) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuduo4k";;
 	11) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vusolo4k";;
 	12) TARGET_ARCH="arm";BOXTYPE="armbox";BOXMODEL="vuultimo4k";;
@@ -100,10 +102,11 @@ echo "BOXMODEL=$BOXMODEL" >> .config
 
 ##############################################
 
-if [ $BOXMODEL == 'generic' ]; then
+if [ $BOXTYPE == 'generic' ]; then
 
 echo "FLAVOUR=neutrino-max" >> .config
 
+if [ $BOXMODEL == 'generic' ]; then
 case $2 in
 	[1-2]) REPLY=$2;;
 	*)	echo -e "\nMedia Framework:"
@@ -119,6 +122,7 @@ case "$REPLY" in
 	*)  MEDIAFW="mpv-player";;
 esac
 echo "MEDIAFW=$MEDIAFW" >> .config
+fi
 
 ##############################################
 

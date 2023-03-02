@@ -16,7 +16,7 @@ NEUTRINO_PLUGINS_SITE = $(MAX-GIT-GITHUB)
 
 NEUTRINO_PLUGINS_DEPENDS = ffmpeg libcurl libpng libjpeg-turbo giflib freetype
 
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 NEUTRINO_PLUGINS_CONF_OPTS = \
 	--prefix=$(TARGET_DIR)/usr \
 	--sysconfdir=$(TARGET_DIR)/etc \
@@ -72,7 +72,7 @@ NEUTRINO_PLUGINS_CONF_OPTS += \
 	--disable-stbup \
 	--enable-wortraten
 
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 NEUTRINO_PLUGINS_CONF_OPTS += \
 	--disable-fritzcallmonitor \
 	--disable-fritzinfomonitor \
@@ -83,7 +83,7 @@ NEUTRINO_PLUGINS_CONF_OPTS += \
 	--disable-corona-info
 endif
 
-ifeq ($(BOXMODEL),$(filter $(BOXMODEL),generic vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
+ifeq ($(BOXMODEL),$(filter $(BOXMODEL),generic raspi vuduo4k vuduo4kse vusolo4k vuultimo4k vuuno4k vuuno4kse vuzero4k))
 NEUTRINO_PLUGINS_CONF_OPTS += \
 	--disable-rcu_switcher
 endif
@@ -147,7 +147,7 @@ $(D)/neutrino-plugins.do_configure:
 
 $(D)/neutrino-plugins.do_compile: neutrino-plugins.do_configure
 	@$(call MESSAGE,"Building")
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)
 else
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) DESTDIR=$(TARGET_DIR)
@@ -157,7 +157,7 @@ endif
 $(D)/neutrino-plugins: | bootstrap neutrino-plugins.do_prepare neutrino-plugins.do_compile
 	@$(call MESSAGE,"Installing to target")
 	mkdir -p $(SHARE_NEUTRINO_ICONS)
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR) install
 	find $(SHARE_NEUTRINO_PLUGINS)/ $(SHARE_NEUTRINO_WEBTV)/ $(VAR_NEUTRINO_CONFIG)/ \
 		\( -name '*.conf' \
@@ -192,7 +192,7 @@ neutrino-plugins-distclean:
 
 neutrino-plugins-uninstall:
 	$(NEUTRINO_PLUGINS_RUNLEVEL_UNINSTALL)
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 	-make -C $(NEUTRINO_PLUGINS_OBJ_DIR) uninstall
 else
 	-make -C $(NEUTRINO_PLUGINS_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)

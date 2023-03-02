@@ -105,12 +105,12 @@ $(D)/cross-libs: directories $(CROSSTOOL)
 ################################################################################
 
 BOOTSTRAP  =
-ifneq ($(BOXMODEL),generic)
+ifneq ($(BOXTYPE),generic)
 BOOTSTRAP += $(CROSSTOOL)
 endif
 BOOTSTRAP += directories
 BOOTSTRAP += host-ccache
-ifneq ($(BOXMODEL),generic)
+ifneq ($(BOXTYPE),generic)
 BOOTSTRAP += cross-libs
 endif
 BOOTSTRAP += host-pkgconf

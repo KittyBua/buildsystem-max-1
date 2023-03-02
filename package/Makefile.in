@@ -31,7 +31,7 @@ MAKE1 := $(HOSTMAKE) -j1
 override MAKE = $(HOSTMAKE) \
 	$(if $(findstring j,$(filter-out --%,$(MAKEFLAGS))),,-j$(PARALLEL_JOBS))
 
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 CROSSTOOL_GCC_VERSION = gcc-$(shell gcc -dumpfullversion)
 else
 CROSSTOOL_GCC_VERSION = gcc-$(GCC_VERSION)

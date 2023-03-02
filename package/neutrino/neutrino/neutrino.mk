@@ -102,7 +102,7 @@ NEUTRINO_CPPFLAGS += -ffunction-sections -fdata-sections
 
 # -----------------------------------------------------------------------------
 
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 NEUTRINO_CONF_OPTS = \
 	--prefix=$(TARGET_DIR)/usr \
 	--sysconfdir=$(TARGET_DIR)/etc \
@@ -266,7 +266,7 @@ $(D)/neutrino.do_configure:
 
 $(D)/neutrino.do_compile: neutrino.do_configure
 	@$(call MESSAGE,"Building")
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR)
 else
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) DESTDIR=$(TARGET_DIR)
@@ -275,7 +275,7 @@ endif
 
 $(D)/neutrino: $(NEUTRINO_DEPENDS) neutrino.do_prepare neutrino.do_compile
 	@$(call MESSAGE,"Installing to target")
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR) install
 	mkdir -p $(TARGET_DIR)/tmp
 	mkdir -p $(TARGET_DIR)/media/hdd
@@ -298,7 +298,7 @@ endif
 		echo "git=BS-rev$(BS_REV)_HAL-rev$(HAL_REV)_NMP-rev$(NMP_REV)"; \
 		echo "imagedir=$(BOXMODEL)" \
 	) > $(TARGET_DIR)/etc/image-version
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 	ln -sf $(TARGET_DIR)/etc/image-version $(TARGET_DIR)/.version
 else
 	ln -sf /etc/image-version $(TARGET_DIR)/.version
@@ -355,7 +355,7 @@ neutrino-distclean:
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 neutrino-uninstall: neutrino-clean
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 	-make -C $(NEUTRINO_OBJ_DIR) uninstall
 	rm -f $(addprefix $(TARGET_DIR)/var/tuxbox/config/,EPGscan.conf moviebrowser.conf neutrino.conf scan.conf timerd.conf)
 else

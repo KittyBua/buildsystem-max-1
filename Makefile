@@ -126,7 +126,11 @@ QUIET := $(if $(findstring s,$(filter-out --%,$(MAKEFLAGS))),-q)
 
 include package/Makefile.in
 
+ifneq ($(BOXTYPE),generic)
 PATH := $(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
+else
+PATH := $(HOST_DIR)/bin:$(PATH)
+endif
 
 # for local extensions, e.g. special plugins or similar...
 -include Makefile.local
@@ -180,7 +184,9 @@ printenv:
 	@echo "BS_PATH           : `type -p fmt>/dev/null&&echo $(PATH)|sed 's/:/ /g' |fmt -65|sed 's/ /:/g; 2,$$s/^/                  : /;'||echo $(PATH)`"
 	@echo "ARCHIVE_DIR       : $(DL_DIR)"
 	@echo "BASE_DIR          : $(BASE_DIR)"
+ifneq ($(BOXTYPE),generic)
 	@echo "CROSS_DIR         : $(CROSS_DIR)"
+endif
 	@echo "RELEASE_DIR       : $(RELEASE_DIR)"
 	@echo "RELEASE_IMAGE_DIR : $(IMAGE_DIR)"
 	@echo "OWN_PATCHES       : $(OWN_PATCHES)"
