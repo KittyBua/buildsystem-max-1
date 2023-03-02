@@ -11,7 +11,7 @@ LIBSTB_HAL_SITE = $(GIT_SITE)
 
 LIBSTB_HAL_DEPENDS = ffmpeg openthreads
 
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 LIBSTB_HAL_CONF_OPTS = \
 	--prefix=$(TARGET_DIR)/usr \
 	--with-target=native \
@@ -73,7 +73,7 @@ $(D)/libstb-hal.do_configure:
 
 $(D)/libstb-hal.do_compile: libstb-hal.do_configure
 	@$(call MESSAGE,"Building")
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR)
 else
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) DESTDIR=$(TARGET_DIR)
@@ -82,7 +82,7 @@ endif
 
 $(D)/libstb-hal: | bootstrap $(LIBSTB_HAL_DEPENDS) libstb-hal.do_prepare libstb-hal.do_compile
 	@$(call MESSAGE,"Installing to target")
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install
 else
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR) install DESTDIR=$(TARGET_DIR)
@@ -106,7 +106,7 @@ libstb-hal-distclean:
 	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 
 libstb-hal-uninstall:
-ifeq ($(BOXMODEL),generic)
+ifeq ($(BOXTYPE),generic)
 	-make -C $(LIBSTB_HAL_OBJ_DIR) uninstall
 else
 	-make -C $(LIBSTB_HAL_OBJ_DIR) uninstall DESTDIR=$(TARGET_DIR)
