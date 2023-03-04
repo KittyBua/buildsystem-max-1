@@ -9,7 +9,7 @@ FFMPEG_DIR = ffmpeg-$(FFMPEG_VERSION)
 FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VERSION).tar.xz
 FFMPEG_SITE = http://www.ffmpeg.org/releases
 
-FFMPEG_DEPENDS = openssl zlib bzip2 freetype rtmpdump libass libxml2
+FFMPEG_DEPENDS = openssl zlib bzip2 freetype libvorbis libass rtmpdump libxml2 x264
 
 FFMPEG_CONF_OPTS = \
 	--disable-ffplay \
@@ -49,6 +49,7 @@ FFMPEG_CONF_OPTS = \
 	--disable-muxers \
 	--enable-muxer=adts \
 	--enable-muxer=apng \
+	--enable-muxer=asf \
 	--enable-muxer=flac \
 	--enable-muxer=h261 \
 	--enable-muxer=h263 \
@@ -65,6 +66,10 @@ FFMPEG_CONF_OPTS = \
 	--enable-muxer=mpeg2video \
 	--enable-muxer=mpegts \
 	--enable-muxer=ogg \
+	--enable-muxer=rawvideo \
+	--enable-muxer=webm \
+	--enable-muxer=webm_chunk \
+	--enable-muxer=webm_dash_manifest \
 	\
 	--disable-parsers \
 	--enable-parser=aac \
@@ -89,19 +94,21 @@ FFMPEG_CONF_OPTS = \
 	\
 	--disable-encoders \
 	--enable-encoder=aac \
-	--enable-encoder=ac3 \
+	--enable-encoder=eac3 \
 	--enable-encoder=h261 \
 	--enable-encoder=h263 \
 	--enable-encoder=h263p \
 	--enable-encoder=jpeg2000 \
 	--enable-encoder=jpegls \
 	--enable-encoder=ljpeg \
+	--enable-encoder=libvorbis \
 	--enable-encoder=mjpeg \
 	--enable-encoder=mpeg1video \
 	--enable-encoder=mpeg2video \
 	--enable-encoder=mpeg4 \
 	--enable-encoder=png \
 	--enable-encoder=rawvideo \
+	--enable-encoder=wmav2 \
 	\
 	--disable-decoders \
 	--enable-decoder=aac \
@@ -139,6 +146,7 @@ FFMPEG_CONF_OPTS = \
 	--enable-decoder=evrc \
 	--enable-decoder=flac \
 	--enable-decoder=flv \
+	--enable-decoder=vorbis \
 	--enable-decoder=g723_1 \
 	--enable-decoder=g729 \
 	--enable-decoder=gif \
@@ -237,6 +245,7 @@ FFMPEG_CONF_OPTS = \
 	--enable-demuxer=avi \
 	--enable-demuxer=dash \
 	--enable-demuxer=dts \
+	--enable-demuxer=eac3 \
 	--enable-demuxer=ffmetadata \
 	--enable-demuxer=flac \
 	--enable-demuxer=flv \
@@ -278,16 +287,22 @@ FFMPEG_CONF_OPTS = \
 	--enable-filter=overlay \
 	--enable-filter=scale \
 	\
+	--enable-libx264 \
+	--enable-encoder=libx264 \
+	--enable-gpl \
+	\
 	--enable-bsfs \
 	--enable-bzlib \
 	--enable-libass \
 	--enable-libfreetype \
 	--enable-librtmp \
 	--enable-libxml2 \
+	--enable-libvorbis \
 	--enable-network \
 	--enable-nonfree \
 	--enable-openssl \
 	--enable-zlib \
+	--disable-iconv \
 	\
 	--disable-xlib \
 	--disable-libxcb \
@@ -295,13 +310,13 @@ FFMPEG_CONF_OPTS = \
 	--disable-libxcb-xfixes \
 	--disable-libxcb-shape \
 	\
+	--disable-debug \
+	--disable-runtime-cpudetect \
 	--enable-pic \
 	--enable-pthreads \
 	--enable-small \
 	--enable-stripping \
 	--enable-swresample \
-	--disable-debug \
-	--disable-runtime-cpudetect \
 	--enable-hardcoded-tables
 
 ifeq ($(TARGET_ARCH), arm)
@@ -345,11 +360,11 @@ FFMPEG_CONF_OPTS += \
 	--enable-shared \
 	--pkg-config="$(PKG_CONFIG)" \
 	--extra-cflags="$(TARGET_CFLAGS) -I$(TARGET_INCLUDE_DIR)/libxml2" \
-	--extra-ldflags="$(TARGET_LDFLAGS) -lrt"
+	--extra-ldflags="$(TARGET_LDFLAGS) -lrt "
 
 define FFMPEG_CONFIGURE_CMDS
 	$(CHDIR)/$($(PKG)_DIR); \
-		$($(PKG)_CONF_ENV) ./configure $($(PKG)_CONF_OPTS)
+		$(TARGET_CONFIGURE_ENV) $($(PKG)_CONF_ENV) ./configure $($(PKG)_CONF_OPTS)
 endef
 
 $(D)/ffmpeg: | bootstrap
