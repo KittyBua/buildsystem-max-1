@@ -133,7 +133,7 @@ NEUTRINO_CONF_OPTS = \
 	--with-targetprefix=$(prefix)
 endif
 
-NEUTRINO_NO_PIP = generic
+NEUTRINO_NO_PIP = generic raspi
 
 NEUTRINO_CONF_OPTS += \
 	--host=$(GNU_TARGET_NAME) \
