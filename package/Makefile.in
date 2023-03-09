@@ -52,8 +52,8 @@ GNU_TARGET_NAME = mipsel-unknown-linux-gnu
 TARGET_CPU      = mips32
 TARGET_ABI      = -march=$(TARGET_CPU) -mtune=mips32
 TARGET_ENDIAN   = little
-else ifeq ($(TARGET_ARCH),x86_64)
-GNU_TARGET_NAME = x86_64-linux-gnu
+else ifeq ($(TARGET_ARCH),$(filter $(TARGET_ARCH),x86_64 i686))
+GNU_TARGET_NAME = $(TARGET_ARCH)-linux-gnu
 TARGET_CPU      = generic
 TARGET_ABI      =
 TARGET_ENDIAN   =
