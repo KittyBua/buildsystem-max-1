@@ -55,7 +55,6 @@ UTIL_LINUX_CONF_OPTS = \
 	--disable-mountpoint \
 	--disable-newgrp \
 	--disable-nls \
-	--disable-nologin \
 	--disable-nsenter \
 	--disable-partx \
 	--disable-pg \
