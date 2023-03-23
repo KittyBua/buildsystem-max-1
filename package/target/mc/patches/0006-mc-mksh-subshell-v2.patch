@@ -54,7 +54,7 @@
      case SHELL_TCSH:
      case SHELL_FISH:
          execl (mc_global.shell->path, mc_global.shell->path, (char *) NULL);
-@@ -1091,6 +1097,10 @@ init_subshell_precmd (char *precmd, size
+@@ -1092,6 +1098,10 @@ init_subshell_precmd (char *precmd, size
                      "PS1='\\u@\\h:\\w\\$ '\n", command_buffer_pipe[WRITE],
                      command_buffer_pipe[WRITE], subshell_pipe[WRITE]);
          break;

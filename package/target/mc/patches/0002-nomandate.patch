@@ -17,6 +17,5 @@ Index: mc-4.8.23/doc/man/date-of-man-include.am
 -	-e "s/%DATE_OF_MAN_PAGE%/$${MAN_DATE}/g" \
 +	-e "s/%DATE_OF_MAN_PAGE%//g" \
  	-e "s/%MAN_VERSION%/@MAN_VERSION@/g" \
- 	-e "s{%prefix%{@prefix@{g" \
  	-e "s{%sysconfdir%{@sysconfdir@{g" \
-
+ 	-e "s{%libexecdir%{@libexecdir@{g" \
