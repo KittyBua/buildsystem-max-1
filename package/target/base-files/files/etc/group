@@ -38,6 +38,7 @@ staff:*:50:
 games:*:60:
 shutdown:*:70:
 users:*:100:
+sshd:*:992:
 rpcuser:*:993:
 rpc:*:994:
 messagebus:*:995:
