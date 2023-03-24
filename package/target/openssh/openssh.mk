@@ -25,6 +25,7 @@ OPENSSH_CONF_OPTS = \
 	--without-bsd-auth \
 	--without-kerberos5 \
 	--without-sandbox \
+	--without-pam \
 	--disable-strip \
 	--disable-lastlog \
 	--disable-utmp \
@@ -43,6 +44,7 @@ endef
 
 define OPENSSH_INSTALL_FILES
 	$(SED) 's/^#PermitRootLogin prohibit-password/PermitRootLogin yes/' $(TARGET_DIR)/etc/ssh/sshd_config
+	$(SED) 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' $(TARGET_DIR)/etc/ssh/sshd_config
 endef
 OPENSSH_POST_INSTALL_HOOKS += OPENSSH_INSTALL_FILES
 
