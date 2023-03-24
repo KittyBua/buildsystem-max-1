@@ -215,6 +215,7 @@ endif
 	@echo -e "LOCAL_NEUTRINO_BUILD_OPTIONS : $(TERM_GREEN)$(LOCAL_NEUTRINO_BUILD_OPTIONS)$(TERM_NORMAL)"
 	@echo -e "LOCAL_NEUTRINO_CFLAGS        : $(TERM_GREEN)$(LOCAL_NEUTRINO_CFLAGS)$(TERM_NORMAL)"
 	@echo -e "LOCAL_NEUTRINO_DEPENDS       : $(TERM_GREEN)$(LOCAL_NEUTRINO_DEPENDS)$(TERM_NORMAL)"
+	@echo -e "LOCAL_IMAGE_DEPENDS          : $(TERM_GREEN)$(LOCAL_IMAGE_DEPENDS)$(TERM_NORMAL)"
 	$(call draw_line);
 	@echo ""
 	@echo "'make help' lists useful targets."
