@@ -52,6 +52,9 @@ LIBSTB_HAL_CONF_OPTS += \
 	$(if $(findstring gstreamer,$(GST_CFLAGS)),--enable-gstreamer) \
 	--enable-flv2mpeg4
 
+LIBSTB_HAL_CONF_OPTS += \
+	$(USER_LIBSTB_HAL_CONF_OPTS)
+
 # -----------------------------------------------------------------------------
 
 LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)-obj
