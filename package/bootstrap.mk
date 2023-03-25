@@ -161,7 +161,9 @@ IMAGE_DEPENDS += mc
 ifeq ($(BOXMODEL),hd60)
 IMAGE_DEPENDS += harfbuzz
 endif
-IMAGE_DEPENDS += $(LOCAL_IMAGE_DEPENDS)
+
+IMAGE_DEPENDS += \
+	$(USER_IMAGE_DEPENDS)
 
 $(D)/image-deps: $(IMAGE_DEPENDS)
 	@touch $(D)/$(notdir $@)
