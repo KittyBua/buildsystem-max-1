@@ -4,9 +4,9 @@
 #
 ################################################################################
 
-XZ_VERSION = 5.2.10
+XZ_VERSION = 5.2.11
 XZ_DIR = xz-$(XZ_VERSION)
-XZ_SOURCE = xz-$(XZ_VERSION).tar.xz
+XZ_SOURCE = xz-$(XZ_VERSION).tar.gz
 XZ_SITE = https://tukaani.org/xz
 
 XZ_CONF_OPTS = \
