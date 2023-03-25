@@ -60,14 +60,14 @@ preqs:
 DIRECTORIES_VERSION = 2020-05-25
 
 $(D)/directories:
-	$(call STARTUP)
+	@$(call MESSAGE,"Start-up build")
 	mkdir -p $(D)
 	mkdir -p $(DL_DIR)
 	mkdir -p $(BUILD_DIR)
 	mkdir -p $(IMAGE_DIR)
 	mkdir -p $(HOST_DIR)/{bin,lib,share}
 	mkdir -p $(TARGET_DIR)/{bin,etc,lib,sbin,usr,var}
-	mkdir -p $(TARGET_DIR)/etc/{default,init.d,network,ssl,udev}
+	mkdir -p $(TARGET_DIR)/etc/{default,init.d,network,profile.d,ssl,udev}
 	mkdir -p $(TARGET_DIR)/etc/default/volatiles
 	mkdir -p $(TARGET_DIR)/etc/network/if-{post-down,pre-up,up,down}.d
 	mkdir -p $(TARGET_DIR)/lib/firmware
@@ -87,7 +87,7 @@ $(D)/directories:
 CROSS_LIBS_VERSION = 2021-03-25
 
 $(D)/cross-libs: directories $(CROSSTOOL)
-	$(call STARTUP)
+	@$(call MESSAGE,"Start-up build")
 	if test -e $(CROSS_ROOT_DIR)/lib; then \
 		cp -a $(CROSS_ROOT_DIR)/lib/*so* $(TARGET_DIR)/lib; \
 		cd $(TARGET_LIB_DIR); ln -sf ../../lib/libgcc_s.so.1 libgcc_s.so.1; \
