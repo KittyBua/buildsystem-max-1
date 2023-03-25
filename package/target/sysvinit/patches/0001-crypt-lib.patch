@@ -18,8 +18,8 @@ diff --git a/src/Makefile b/src/Makefile
 index 5b1a5a2..b686394 100644
 --- a/src/Makefile
 +++ b/src/Makefile
-@@ -90,15 +90,8 @@ else
- endif
+@@ -95,15 +95,8 @@
+ ROOT	?= $(DESTDIR)
  
  # Additional libs for GNU libc.
 -ifneq ($(wildcard $(ROOT)/usr/lib*/libcrypt.*),)
