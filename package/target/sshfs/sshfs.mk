@@ -4,12 +4,12 @@
 #
 ################################################################################
 
-SSHFS_VERSION = 2.9
+SSHFS_VERSION = 3.7.3
 SSHFS_DIR = sshfs-$(SSHFS_VERSION)
-SSHFS_SOURCE = sshfs-$(SSHFS_VERSION).tar.gz
+SSHFS_SOURCE = sshfs-$(SSHFS_VERSION).tar.xz
 SSHFS_SITE = https://github.com/libfuse/sshfs/releases/download/sshfs-$(SSHFS_VERSION)
 
-SSHFS_DEPENDS = libglib2 libfuse
+SSHFS_DEPENDS = libglib2 libfuse3 openssh
 
 $(D)/sshfs: | bootstrap
-	$(call autotools-package)
+	$(call meson-package)
