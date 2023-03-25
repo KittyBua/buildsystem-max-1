@@ -13,7 +13,7 @@ diff --git a/src/Makefile b/src/Makefile
 index 1b368dc..5b1a5a2 100644
 --- a/src/Makefile
 +++ b/src/Makefile
-@@ -77,7 +77,14 @@ else
+@@ -80,7 +80,14 @@
    INSTALL_DATA	= install -m 644
  endif
  INSTALL_DIR	= install -m 755 -d
@@ -29,7 +29,7 @@ index 1b368dc..5b1a5a2 100644
  
  ifeq ($(WITH_SELINUX),yes)
    SELINUX_DEF	=  -DWITH_SELINUX
-@@ -184,43 +191,43 @@
+@@ -189,31 +196,31 @@
  distclean:	clobber
  
  install:	all
@@ -55,7 +55,7 @@ index 1b368dc..5b1a5a2 100644
 -		ln -sf halt $(ROOT)/sbin/reboot
 -		ln -sf halt $(ROOT)/sbin/poweroff
 -		ln -sf init $(ROOT)/sbin/telinit
--		ln -sf /sbin/killall5 $(ROOT)/bin/pidof
+-		ln -sf ../sbin/killall5 $(ROOT)/bin/pidof
 -		if [ ! -f $(ROOT)/usr/bin/lastb ]; then \
 -			ln -sf last $(ROOT)/usr/bin/lastb; \
 +		ln -sf halt $(ROOT)$(base_sbindir)/reboot
@@ -67,31 +67,11 @@ index 1b368dc..5b1a5a2 100644
  		fi
 -		$(INSTALL_DIR) $(ROOT)/usr/include/
 -		$(INSTALL_DATA) initreq.h $(ROOT)/usr/include/
--		$(INSTALL_DIR) $(ROOT)$(MANDIR)/man1/
--		$(INSTALL_DIR) $(ROOT)$(MANDIR)/man5/
--		$(INSTALL_DIR) $(ROOT)$(MANDIR)/man8/
 +		$(INSTALL_DIR) $(ROOT)$(includedir)/
 +		$(INSTALL_DATA) initreq.h $(ROOT)$(includedir)/
-+		$(INSTALL_DIR) $(ROOT)$(mandir)/man1/
-+		$(INSTALL_DIR) $(ROOT)$(mandir)/man5/
-+		$(INSTALL_DIR) $(ROOT)$(mandir)/man8/
- 		for man in $(MAN1); do \
--			$(INSTALL_DATA) ../man/$$man $(ROOT)$(MANDIR)/man1/; \
--			sed -i "1{ $(MANDB); }" $(ROOT)$(MANDIR)/man1/$$man ; \
-+			$(INSTALL_DATA) ../man/$$man $(ROOT)$(mandir)/man1/; \
-+			sed -i "1{ $(MANDB); }" $(ROOT)$(mandir)/man1/$$man ; \
- 		done
- 		for man in $(MAN5); do \
--			$(INSTALL_DATA) ../man/$$man $(ROOT)$(MANDIR)/man5/; \
--			sed -i "1{ $(MANDB); }" $(ROOT)$(MANDIR)/man5/$$man ; \
-+			$(INSTALL_DATA) ../man/$$man $(ROOT)$(mandir)/man5/; \
-+			sed -i "1{ $(MANDB); }" $(ROOT)$(mandir)/man5/$$man ; \
- 		done
- 		for man in $(MAN8); do \
--			$(INSTALL_DATA) ../man/$$man $(ROOT)$(MANDIR)/man8/; \
--			sed -i "1{ $(MANDB); }" $(ROOT)$(MANDIR)/man8/$$man ; \
-+			$(INSTALL_DATA) ../man/$$man $(ROOT)$(mandir)/man8/; \
-+			sed -i "1{ $(MANDB); }" $(ROOT)$(mandir)/man8/$$man ; \
- 		done
- ifeq ($(ROOT),)
- 		#
+ 		for man in $(MANPAGES) ; do \
+-		    targetdir=$(ROOT)$(MANDIR)/$$(dirname $$man)/man$${man##*.}; \
++		    targetdir=$(ROOT)$(mandir)/$$(dirname $$man)/man$${man##*.}; \
+ 		    $(INSTALL_DIR) $$targetdir; \
+ 		    $(INSTALL_DATA) ../man/$$man $$targetdir/$$(basename $$man); \
+ 		    sed -i "1{ $(MANDB); }" $$targetdir/$$(basename $$man); \
