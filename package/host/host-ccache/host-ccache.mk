@@ -26,7 +26,7 @@ define TARGET_CCACHE_LINK
 endef
 
 $(D)/host-ccache: | directories
-	$(call STARTUP)
+	@$(call MESSAGE,"Start-up build")
 	$(call HOST_CCACHE_LINK)
 	$(call TARGET_CCACHE_LINK)
 	$(TOUCH)
