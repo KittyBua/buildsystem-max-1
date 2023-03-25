@@ -4,9 +4,9 @@
 #
 ################################################################################
 
-OPENVPN_VERSION = 2.5.8
+OPENVPN_VERSION = 2.6.0
 OPENVPN_DIR = openvpn-$(OPENVPN_VERSION)
-OPENVPN_SOURCE = openvpn-$(OPENVPN_VERSION).tar.xz
+OPENVPN_SOURCE = openvpn-$(OPENVPN_VERSION).tar.gz
 OPENVPN_SITE = http://build.openvpn.net/downloads/releases
 
 OPENVPN_DEPENDS = lzo openssl
