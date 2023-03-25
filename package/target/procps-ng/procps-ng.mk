@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-PROCPS_NG_VERSION = 4.0.0
+PROCPS_NG_VERSION = 4.0.3
 PROCPS_NG_DIR = procps-ng-$(PROCPS_NG_VERSION)
 PROCPS_NG_SOURCE = procps-ng-$(PROCPS_NG_VERSION).tar.xz
 PROCPS_NG_SITE = http://sourceforge.net/projects/procps-ng/files/Production
