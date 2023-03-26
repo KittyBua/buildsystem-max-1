@@ -19,7 +19,7 @@ LIBGCRYPT_CONF_OPTS = \
 	--disable-tests
 
 define LIBGCRYPT_TARGET_CLEANUP
-	rm -rf $(addprefix $(TARGET_bindir)/,dumpsexp hmac256 mpicalc)
+	rm -rf $(addprefix $(TARGET_BIN_DIR)/,dumpsexp hmac256 mpicalc)
 endef
 LIBGCRYPT_TARGET_CLEANUP_HOOKS += LIBGCRYPT_TARGET_CLEANUP
 
