@@ -435,8 +435,8 @@ REWRITE_CONFIG_RULES = "\
 	s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
 
 define rewrite_config_script
-	mv $(TARGET_DIR)/$(bindir)/$(1) $(HOST_DIR)/bin
 	$(Q)$(call MESSAGE,"Rewriting $(1)")
+	mv $(TARGET_DIR)/$(bindir)/$(1) $(HOST_DIR)/bin
 	$(SED) $(REWRITE_CONFIG_RULES) $(HOST_DIR)/bin/$(1)
 endef
 
