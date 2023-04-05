@@ -11,20 +11,28 @@ LIBGPG_ERROR_SITE = https://www.gnupg.org/ftp/gcrypt/libgpg-error
 
 LIBGPG_ERROR_AUTORECONF = YES
 
-LIBGPG_ERROR_CONFIG_SCRIPTS = gpg-error-config
+LIBGPG_ERROR_CONFIG_SCRIPTS = gpgrt-config
 
 LIBGPG_ERROR_CONF_OPTS = \
 	--localedir=$(REMOVE_localedir) \
-	--enable-install-gpg-error-config \
 	--enable-shared \
-	--enable-static \
 	--disable-doc \
 	--disable-languages \
+	--disable-static \
 	--disable-tests
 
+# fix build for libgcrypt 1.10.1
+LIBGPG_ERROR_CONFIG_SCRIPTS += gpg-error-config
+LIBGPG_ERROR_CONF_OPTS = \
+	--enable-install-gpg-error-config \
+
+define LIBGPG_ERROR_LINKING_HEADER
+	ln -sf lock-obj-pub.arm-unknown-linux-gnueabi.h $(PKG_BUILD_DIR)/src/syscfg/lock-obj-pub.$(GNU_TARGET_NAME).h
+endef
+LIBGPG_ERROR_POST_EXTRACT_HOOKS += LIBGPG_ERROR_LINKING_HEADER
+
 define LIBGPG_ERROR_TARGET_CLEANUP
-	rm -f $(addprefix $(TARGET_BIN_DIR)/,gpg-error gpgrt-config yat2m)
-	rm -rf $(addprefix $(TARGET_SHARE_DIR)/,common-lisp libgpg-error)
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,gpg-error)
 endef
 LIBGPG_ERROR_TARGET_CLEANUP_HOOKS += LIBGPG_ERROR_TARGET_CLEANUP
 
