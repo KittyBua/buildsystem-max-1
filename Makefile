@@ -126,14 +126,16 @@ QUIET := $(if $(findstring s,$(filter-out --%,$(MAKEFLAGS))),-q)
 
 include package/Makefile.in
 
+# for local extensions, e.g. special plugins or similar...
+-include Makefile.local
+
+# -----------------------------------------------------------------------------
+
 ifneq ($(BOXTYPE),generic)
 PATH := $(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
 else
 PATH := $(HOST_DIR)/bin:$(PATH)
 endif
-
-# for local extensions, e.g. special plugins or similar...
--include Makefile.local
 
 # -----------------------------------------------------------------------------
 
