@@ -4,10 +4,10 @@
 #
 ################################################################################
 
-OPENRESOLV_VERSION = 3.12.0
-OPENRESOLV_DIR = openresolv-openresolv-$(OPENRESOLV_VERSION)
-OPENRESOLV_SOURCE = openresolv-$(OPENRESOLV_VERSION).tar.gz
-OPENRESOLV_SITE = https://github.com/rsmarples/openresolv/archive
+OPENRESOLV_VERSION = 3.13.1
+OPENRESOLV_DIR = openresolv-$(OPENRESOLV_VERSION)
+OPENRESOLV_SOURCE = openresolv-$(OPENRESOLV_VERSION).tar.xz
+OPENRESOLV_SITE = https://github.com/NetworkConfiguration/openresolv/releases/download/v$(OPENRESOLV_VERSION)
 
 define OPENRESOLV_CREATE_CONF_ENV_FILE
 	echo "SYSCONFDIR=/etc"             > $(PKG_BUILD_DIR)/config.mk
