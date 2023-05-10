@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-LCD4LINUX_VERSION = git
+LCD4LINUX_VERSION = master
 LCD4LINUX_DIR = lcd4linux.git
 LCD4LINUX_SOURCE = lcd4linux.git
 LCD4LINUX_SITE = https://github.com/TangoCash
+LCD4LINUX_SITE_METHOD = git
 
 LCD4LINUX_DEPENDS = $(SHARE_NEUTRINO_LCD4LINUX) ncurses libusb-compat libgd libusb libdpf
 

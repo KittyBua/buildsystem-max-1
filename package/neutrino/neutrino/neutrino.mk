@@ -4,52 +4,40 @@
 #
 ################################################################################
 
-NEUTRINO_VERSION = git
+NEUTRINO_VERSION ?= master
 NEUTRINO_DIR = $(NEUTRINO).git
 NEUTRINO_SOURCE = $(NEUTRINO).git
 NEUTRINO_SITE = $(GIT_SITE)
+NEUTRINO_SITE_METHOD = git
 
 FLAVOUR ?= neutrino-max
 ifeq ($(FLAVOUR),neutrino-ddt)
 GIT_SITE            ?= https://github.com/Duckbox-Developers
 NEUTRINO             = neutrino-ddt
 LIBSTB_HAL           = libstb-hal-ddt
-NEUTRINO_CHECKOUT   ?= master
-LIBSTB_HAL_CHECKOUT ?= master
 else ifeq ($(FLAVOUR),neutrino-max)
 GIT_SITE            ?= $(MAX-GIT-GITHUB)
 NEUTRINO             = neutrino-max
 LIBSTB_HAL           = libstb-hal-max
-NEUTRINO_CHECKOUT   ?= master
-LIBSTB_HAL_CHECKOUT ?= master
 else ifeq ($(FLAVOUR),neutrino-ni)
 GIT_SITE            ?= https://github.com/neutrino-images
 NEUTRINO             = ni-neutrino
 LIBSTB_HAL           = ni-libstb-hal
-NEUTRINO_CHECKOUT   ?= master
-LIBSTB_HAL_CHECKOUT ?= master
 else ifeq ($(FLAVOUR),neutrino-tangos)
 GIT_SITE            ?= https://github.com/TangoCash
 NEUTRINO             = neutrino-tangos
 LIBSTB_HAL           = libstb-hal-tangos
-NEUTRINO_CHECKOUT   ?= master
-LIBSTB_HAL_CHECKOUT ?= master
 else ifeq ($(FLAVOUR),neutrino-redblue)
 GIT_SITE            ?= https://github.com/redblue-pkt
 NEUTRINO             = neutrino-redblue
 LIBSTB_HAL           = libstb-hal-redblue
-NEUTRINO_CHECKOUT   ?= master
-LIBSTB_HAL_CHECKOUT ?= master
 else ifeq ($(FLAVOUR),neutrino-max-test)
 GIT_SITE            ?= $(MAX-GIT-GITHUB)
 NEUTRINO             = neutrino-max-test
 LIBSTB_HAL           = libstb-hal-max-test
-NEUTRINO_CHECKOUT   ?= master
-LIBSTB_HAL_CHECKOUT ?= master
 else ifeq ($(FLAVOUR),neutrino-max-evo)
 GIT_SITE            ?= $(MAX-GIT-GITHUB)
-NEUTRINO             = neutrino-max-test
-NEUTRINO_CHECKOUT   ?= evo
+NEUTRINO             = neutrino-max-evo
 endif
 
 NEUTRINO_DEPENDS  = bootstrap

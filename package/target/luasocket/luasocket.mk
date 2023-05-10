@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-LUASOCKET_VERSION = git
+LUASOCKET_VERSION = master
 LUASOCKET_DIR = luasocket.git
 LUASOCKET_SOURCE = luasocket.git
 LUASOCKET_SITE = https://github.com/diegonehab
+LUASOCKET_SITE_METHOD = git
 
 LUASOCKET_DEPENDS = lua
 

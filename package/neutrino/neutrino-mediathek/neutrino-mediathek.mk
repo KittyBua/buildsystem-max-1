@@ -4,10 +4,12 @@
 #
 ################################################################################
 
-NEUTRINO_MEDIATHEK_VERSION = git
+NEUTRINO_MEDIATHEK_VERSION = master
 NEUTRINO_MEDIATHEK_DIR = mediathek.git
 NEUTRINO_MEDIATHEK_SOURCE = mediathek.git
 NEUTRINO_MEDIATHEK_SITE = https://github.com/neutrino-mediathek
+NEUTRINO_MEDIATHEK_SITE_METHOD = git
+
 NEUTRINO_MEDIATHEK_DEPENDS = $(SHARE_NEUTRINO_PLUGINS)
 
 $(D)/neutrino-mediathek: | bootstrap

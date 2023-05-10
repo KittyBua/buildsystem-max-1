@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-RTMPDUMP_VERSION = git
+RTMPDUMP_VERSION = master
 RTMPDUMP_DIR = rtmpdump.git
 RTMPDUMP_SOURCE = rtmpdump.git
 RTMPDUMP_SITE = https://github.com/oe-alliance
+RTMPDUMP_SITE_METHOD = git
 
 RTMPDUMP_DEPENDS = zlib openssl
 

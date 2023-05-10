@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-AIO_GRAB_VERSION = git
+AIO_GRAB_VERSION = master
 AIO_GRAB_DIR = aio-grab.git
 AIO_GRAB_SOURCE = aio-grab.git
 AIO_GRAB_SITE = https://github.com/oe-alliance
+AIO_GRAB_SITE_METHOD = git
 
 AIO_GRAB_DEPENDS = zlib libpng libjpeg-turbo
 

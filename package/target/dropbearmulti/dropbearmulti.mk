@@ -4,12 +4,11 @@
 #
 ################################################################################
 
-DROPBEARMULTI_VERSION = git
+DROPBEARMULTI_VERSION = 2cdc7d6
 DROPBEARMULTI_DIR = dropbear.git
 DROPBEARMULTI_SOURCE = dropbear.git
 DROPBEARMULTI_SITE = https://github.com/mkj
-
-DROPBEARMULTI_CHECKOUT = 2cdc7d6
+DROPBEARMULTI_SITE_METHOD = git
 
 DROPBEARMULTI_AUTORECONF = YES
 

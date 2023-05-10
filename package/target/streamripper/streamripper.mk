@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-STREAMRIPPER_VERSION = git
+STREAMRIPPER_VERSION = master
 STREAMRIPPER_DIR = ni-streamripper.git
 STREAMRIPPER_SOURCE = ni-streamripper.git
 STREAMRIPPER_SITE = https://github.com/neutrino-images
+STREAMRIPPER_SITE_METHOD = git
 
 STREAMRIPPER_DEPENDS = libvorbisidec libmad libglib2
 

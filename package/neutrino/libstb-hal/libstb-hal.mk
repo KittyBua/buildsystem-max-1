@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-LIBSTB_HAL_VERSION = git
+LIBSTB_HAL_VERSION ?= master
 LIBSTB_HAL_DIR = $(LIBSTB_HAL).git
 LIBSTB_HAL_SOURCE = $(LIBSTB_HAL).git
 LIBSTB_HAL_SITE = $(GIT_SITE)
+LIBSTB_HAL_SITE_METHOD = git
 
 LIBSTB_HAL_DEPENDS = ffmpeg openthreads
 

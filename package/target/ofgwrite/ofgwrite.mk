@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-OFGWRITE_VERSION = git
+OFGWRITE_VERSION = master
 OFGWRITE_DIR = ofgwrite-max.git
 OFGWRITE_SOURCE = ofgwrite-max.git
 OFGWRITE_SITE = $(MAX-GIT-GITHUB)
+OFGWRITE_SITE_METHOD = git
 
 OFGWRITE_MAKE_ENV = \
 	$(TARGET_CONFIGURE_ENV)

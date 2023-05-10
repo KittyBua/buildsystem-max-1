@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-DVB_APPS_VERSION = git
+DVB_APPS_VERSION = master
 DVB_APPS_DIR = dvb-apps.git
 DVB_APPS_SOURCE = dvb-apps.git
 DVB_APPS_SITE = https://github.com/tbsdtv
+DVB_APPS_SITE_METHOD = git
 
 DVB_APPS_DEPENDS = kernel.do_compile libiconv
 
