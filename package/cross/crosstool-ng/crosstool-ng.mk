@@ -4,17 +4,16 @@
 #
 ################################################################################
 
-CROSSTOOL_NG_VERSION = git
+CROSSTOOL_NG_VERSION = 9433647
 CROSSTOOL_NG_DIR = crosstool-ng.git
 CROSSTOOL_NG_SOURCE = crosstool-ng.git
 CROSSTOOL_NG_SITE = https://github.com/crosstool-ng
+CROSSTOOL_NG_SITE_METHOD = git
 
 CROSSTOOL_NG_DEPENDS = directories kernel.do_prepare
 
 CROSSTOOL_NG_CONFIG = $(PKG_FILES_DIR)/crosstool-ng-$(TARGET_ARCH)-$(CROSSTOOL_GCC_VERSION).config
 CROSSTOOL_NG_BUILD_CONFIG = $(PKG_BUILD_DIR)/.config
-
-CROSSTOOL_NG_CHECKOUT = 9433647
 
 CROSSTOOL_NG_UNSET = \
 	CONFIG_SITE \

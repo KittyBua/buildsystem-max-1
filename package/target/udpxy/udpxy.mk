@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-UDPXY_VERSION = git
+UDPXY_VERSION = master
 UDPXY_DIR = udpxy.git
 UDPXY_SOURCE = udpxy.git
 UDPXY_SITE = https://github.com/pcherenkov
+UDPXY_SITE_METHOD = git
 
 UDPXY_SUBDIR = chipmunk
 

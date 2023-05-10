@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-MINISATIP_VERSION = git
+MINISATIP_VERSION = master
 MINISATIP_DIR = minisatip.git
 MINISATIP_SOURCE = minisatip.git
 MINISATIP_SITE = https://github.com/catalinii
+MINISATIP_SITE_METHOD = git
 
 MINISATIP_DEPENDS = libdvbcsa openssl
 

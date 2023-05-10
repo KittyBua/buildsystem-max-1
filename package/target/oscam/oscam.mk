@@ -6,17 +6,18 @@
 
 OSCAM_FLAVOUR ?= oscam-smod
 
+OSCAM_VERSION ?= master
 ifeq ($(OSCAM_FLAVOUR),oscam)
-OSCAM_VERSION = git
 OSCAM_DIR     = oscam.git
 OSCAM_SOURCE  = oscam.git
 OSCAM_SITE    = https://repo.or.cz
 else ifeq ($(OSCAM_FLAVOUR),oscam-smod)
-OSCAM_VERSION = git
 OSCAM_DIR     = oscam-smod.git
 OSCAM_SOURCE  = oscam-smod.git
 OSCAM_SITE    = https://github.com/Schimmelreiter
 endif
+OSCAM_SITE_METHOD = git
+
 OSCAM_DEPENDS = openssl libusb
 
 OSCAM_CONF_OPTS = \

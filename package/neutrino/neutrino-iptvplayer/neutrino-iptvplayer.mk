@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-NEUTRINO_IPTVPLAYER_VERSION = git
+NEUTRINO_IPTVPLAYER_VERSION = master
 NEUTRINO_IPTVPLAYER_DIR = iptvplayer.git
 NEUTRINO_IPTVPLAYER_SOURCE = iptvplayer.git
 NEUTRINO_IPTVPLAYER_SITE = https://github.com/TangoCash
+NEUTRINO_IPTVPLAYER_SITE_METHOD = git
 
 NEUTRINO_IPTVPLAYER_DEPENDS = rtmpdump python-twisted $(SHARE_NEUTRINO_PLUGINS)
 

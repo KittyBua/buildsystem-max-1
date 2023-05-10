@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-NEUTRINO_CHANNELLOGOS_VERSION = git
+NEUTRINO_CHANNELLOGOS_VERSION = master
 NEUTRINO_CHANNELLOGOS_DIR = ni-logo-stuff.git
 NEUTRINO_CHANNELLOGOS_SOURCE = ni-logo-stuff.git
 NEUTRINO_CHANNELLOGOS_SITE = https://github.com/neutrino-images
+NEUTRINO_CHANNELLOGOS_SITE_METHOD = git
 
 NEUTRINO_CHANNELLOGOS_DEPENDS = $(SHARE_NEUTRINO_ICONS) $(SHARE_NEUTRINO_PLUGINS)
 

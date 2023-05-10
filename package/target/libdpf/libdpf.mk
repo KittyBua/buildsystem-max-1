@@ -4,10 +4,11 @@
 #
 ##############################################################################
 
-LIBDPF_VERSION = git
+LIBDPF_VERSION = dreamlayers
 LIBDPF_DIR = dpf-ax.git
 LIBDPF_SOURCE = dpf-ax.git
 LIBDPF_SITE = $(MAX-GIT-GITHUB)
+LIBDPF_SITE_METHOD = git
 
 LIBDPF_DEPENDS = libusb-compat
 

@@ -272,13 +272,13 @@ GET_SVN_SOURCE = support/scripts/get-svn-source.sh
 define DOWNLOAD
 	$(foreach hook,$($(PKG)_PRE_DOWNLOAD_HOOKS),$(call $(hook))$(sep))
 	$(Q)( \
-	if [ "$($(PKG)_VERSION)" == "git" ]; then \
+	if [ "$($(PKG)_SITE_METHOD)" == "git" ]; then \
 	  $(call MESSAGE,"Downloading"); \
 	  $(GET_GIT_SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
-	elif [ "$($(PKG)_VERSION)" == "hg" ]; then \
+	elif [ "$($(PKG)_SITE_METHOD)" == "hg" ]; then \
 	  $(call MESSAGE,"Downloading"); \
 	  $(GET_HG_SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
-	elif [ "$($(PKG)_VERSION)" == "svn" ]; then \
+	elif [ "$($(PKG)_SITE_METHOD)" == "svn" ]; then \
 	  $(call MESSAGE,"Downloading"); \
 	  $(GET_SVN_SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
 	elif [ ! -f $(DL_DIR)/$($(PKG)_SOURCE) ]; then \
@@ -292,7 +292,7 @@ endef
 # -----------------------------------------------------------------------------
 
 # unpack archives into given directory
-define EXTRACT
+define EXTRACT # (directory)
 	@$(call MESSAGE,"Extracting")
 	$(foreach hook,$($(PKG)_PRE_EXTRACT_HOOKS),$(call $(hook))$(sep))
 	$(Q)( \
@@ -308,25 +308,25 @@ define EXTRACT
 	  *.zip) \
 	    unzip -o -q $(DL_DIR)/$($(PKG)_SOURCE) -d $${EXTRACT_DIR}; \
 	    ;; \
-	  *.git) \
+	  *.git | git.*) \
 	    cp -a -t $${EXTRACT_DIR} $(DL_DIR)/$($(PKG)_SOURCE); \
-	    if test $($(PKG)_CHECKOUT); then \
-	      $(call MESSAGE,"git checkout $($(PKG)_CHECKOUT)"); \
-	      $(CD) $${EXTRACT_DIR}/$($(PKG)_DIR); git checkout $($(PKG)_CHECKOUT); \
+	    if test $($(PKG)_SITE_METHOD); then \
+	      $(call MESSAGE,"git checkout $($(PKG)_VERSION)"); \
+	      $(CD) $${EXTRACT_DIR}/$($(PKG)_DIR); git checkout $($(PKG)_VERSION); \
 	    fi; \
 	    ;; \
 	  *.hg | hg.*) \
 	    cp -a -t $${EXTRACT_DIR} $(DL_DIR)/$($(PKG)_SOURCE); \
-	    if test $($(PKG)_CHECKOUT); then \
-	      $(call MESSAGE,"hg checkout $($(PKG)_CHECKOUT)"); \
-	      $(CD) $${EXTRACT_DIR}/$($(PKG)_DIR); hg checkout $($(PKG)_CHECKOUT); \
+	    if test $($(PKG)_SITE_METHOD); then \
+	      $(call MESSAGE,"hg checkout $($(PKG)_VERSION)"); \
+	      $(CD) $${EXTRACT_DIR}/$($(PKG)_DIR); hg checkout $($(PKG)_VERSION); \
 	    fi; \
 	    ;; \
 	  *.svn | svn.*) \
 	    cp -a -t $${EXTRACT_DIR} $(DL_DIR)/$($(PKG)_SOURCE); \
-	    if test $($(PKG)_CHECKOUT); then \
-	      $(call MESSAGE,"svn checkout $($(PKG)_CHECKOUT)"); \
-	      $(CD) $${EXTRACT_DIR}/$($(PKG)_DIR); svn checkout $($(PKG)_CHECKOUT); \
+	    if test $($(PKG)_SITE_METHOD); then \
+	      $(call MESSAGE,"svn checkout $($(PKG)_VERSION)"); \
+	      $(CD) $${EXTRACT_DIR}/$($(PKG)_DIR); svn checkout $($(PKG)_VERSION); \
 	    fi; \
 	    ;; \
 	  *) \
@@ -339,7 +339,6 @@ endef
 
 # -----------------------------------------------------------------------------
 
-# apply single patches or patch sets
 PATCHES = \
 	*.patch \
 	*.patch-$(TARGET_CPU) \
@@ -348,7 +347,8 @@ PATCHES = \
 	*.patch-$(BOXMODEL) \
 	*.patch-$(FLAVOUR)
 
-define APPLY_PATCHES
+# apply single patches or patch sets
+define APPLY_PATCHES # (patches or directory)
 	@$(call MESSAGE,"Patching")
 	$(foreach hook,$($(PKG)_PRE_PATCH_HOOKS),$(call $(hook))$(sep))
 	$(Q)( \

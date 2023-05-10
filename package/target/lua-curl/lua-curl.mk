@@ -4,10 +4,11 @@
 #
 ################################################################################
 
-LUA_CURL_VERSION = git
+LUA_CURL_VERSION = master
 LUA_CURL_DIR = lua-curlv3.git
 LUA_CURL_SOURCE = lua-curlv3.git
 LUA_CURL_SITE = https://github.com/Lua-cURL
+LUA_CURL_SITE_METHOD = git
 
 LUA_CURL_DEPENDS = libcurl lua
 
