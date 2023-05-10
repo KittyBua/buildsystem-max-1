@@ -80,7 +80,7 @@ crosstool-ng-config: directories
 	$(call PREPARE)
 	unset CONFIG_SITE; \
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(INSTALL_DATA) $(subst -config,,$(PKG_FILES_DIR))/$(CROSSTOOL_NG_CONFIG) $(CROSSTOOL_NG_BUILD_CONFIG); \
+		$(INSTALL_DATA) $(subst -config,,$(CROSSTOOL_NG_CONFIG)) $(CROSSTOOL_NG_BUILD_CONFIG); \
 		./bootstrap; \
 		./configure --enable-local; \
 		make; \
@@ -93,7 +93,7 @@ crosstool-ng-upgradeconfig: directories
 	$(call PREPARE)
 	unset CONFIG_SITE; \
 	$(CHDIR)/$($(PKG)_DIR); \
-		$(INSTALL_DATA) $(subst -upgradeconfig,,$(PKG_FILES_DIR))/$(CROSSTOOL_NG_CONFIG) $(CROSSTOOL_NG_BUILD_CONFIG); \
+		$(INSTALL_DATA) $(subst -upgradeconfig,,$(CROSSTOOL_NG_CONFIG) $(CROSSTOOL_NG_BUILD_CONFIG); \
 		./bootstrap; \
 		./configure --enable-local; \
 		make; \
