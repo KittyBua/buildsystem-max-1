@@ -141,9 +141,9 @@ else
 case $2 in
 	[1-6]) REPLY=$2;;
 	*)	echo -e "\nWhich Neutrino variant do you want to build?:"
-		echo "   1)  neutrino-ddt   "
-		echo "   2)  neutrino-max   "
-		echo "   3)  neutrino-ni    "
+		echo "   1)  neutrino-ddt"
+		echo "   2)  neutrino-max"
+		echo "   3)  neutrino-ni"
 		echo "   4)  neutrino-tangos"
 		echo "   5)  neutrino-redblue"
 		read -p "Select Image to build (1-5)? [2] "
@@ -164,13 +164,14 @@ echo "FLAVOUR=$FLAVOUR" >> .config
 ##############################################
 
 case $3 in
-	[1-4]) REPLY=$3;;
+	[1-5]) REPLY=$3;;
 	*)	echo -e "\nToolchain gcc version:"
 		echo "   1) GCC version 6.5.0"
 		echo "   2) GCC version 8.5.0"
 		echo "   3) GCC version 11.3.0"
-		echo "   4) GCC version 12.2.0"
-		read -p "Select toolchain gcc version (1-4)? [2] "
+		echo "   4) GCC version 12.3.0"
+		echo "   5) GCC version 13.1.0"
+		read -p "Select toolchain gcc version (1-5)? [2] "
 		REPLY="${REPLY:-2}";;
 esac
 
@@ -178,7 +179,8 @@ case "$REPLY" in
 	1) GCC_VERSION="6.5.0";;
 	2) GCC_VERSION="8.5.0";;
 	3) GCC_VERSION="11.3.0";;
-	4) GCC_VERSION="12.2.0";;
+	4) GCC_VERSION="12.3.0";;
+	5) GCC_VERSION="13.1.0";;
 	*) GCC_VERSION="8.5.0";;
 esac
 echo "GCC_VERSION=$GCC_VERSION" >> .config

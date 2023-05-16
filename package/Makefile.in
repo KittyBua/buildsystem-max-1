@@ -40,7 +40,7 @@ endif
 ifeq ($(TARGET_ARCH),arm)
 GNU_TARGET_NAME = arm-cortex_a15-linux-gnueabihf
 TARGET_CPU      = armv7ve
-TARGET_ABI      = -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a15
+TARGET_ABI      = -march=$(TARGET_CPU) -mtune=cortex-a15 -mfpu=neon-vfpv4 -mfloat-abi=hard
 TARGET_ENDIAN   = little
 else ifeq ($(TARGET_ARCH),aarch64)
 GNU_TARGET_NAME = aarch64-unknown-linux-gnu
