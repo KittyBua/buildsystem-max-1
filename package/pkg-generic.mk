@@ -4,9 +4,6 @@
 #
 ################################################################################
 
-TARGET_MAKE_ENV = \
-	PATH=$(PATH)
-
 define TARGET_MAKE_BUILD_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(TARGET_MAKE_ENV) $($(PKG)_MAKE_ENV) \
@@ -50,12 +47,6 @@ endef
 # Host make package infrastructure
 #
 ################################################################################
-
-HOST_MAKE_ENV = \
-	PATH=$(PATH) \
-	PKG_CONFIG=/usr/bin/pkg-config \
-	PKG_CONFIG_SYSROOT_DIR="/" \
-	PKG_CONFIG_LIBDIR="$(HOST_DIR)/lib/pkgconfig:$(HOST_DIR)/share/pkgconfig"
 
 define HOST_MAKE_BUILD_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
