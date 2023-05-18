@@ -359,7 +359,6 @@ PATCHES = \
 
 # apply single patches or patch sets
 define APPLY_PATCHES # (patches or directory)
-	@$(call MESSAGE,"Patching")
 	$(foreach hook,$($(PKG)_PRE_PATCH_HOOKS),$(call $(hook))$(sep))
 	$(Q)( \
 	$(CHDIR)/$($(PKG)_DIR); \
@@ -368,6 +367,7 @@ define APPLY_PATCHES # (patches or directory)
 	    continue; \
 	  fi; \
 	  if [ -d $$i ]; then \
+	    $(call MESSAGE,"Patching"); \
 	    if [ -d $$i/$($(PKG)_VERSION) ]; then \
 	      for p in $(addprefix $$i/,$($(PKG)_VERSION)/$(PATCHES)); do \
 	        if [ -e $$p ]; then \
@@ -384,6 +384,7 @@ define APPLY_PATCHES # (patches or directory)
 	      done; \
 	    fi; \
 	  else \
+	    $(call MESSAGE,"Patching"); \
 	    if [ $${i:0:1} == "/" ]; then \
 	      echo -e "$(TERM_YELLOW)Applying$(TERM_NORMAL) $${i##*/}"; \
 	      patch -p1 -i $$i; \
@@ -418,13 +419,13 @@ REWRITE_LIBTOOL_RULES = "\
 REWRITE_LIBTOOL_TAG = rewritten=1
 
 define rewrite_libtool
-	@$(call MESSAGE,"Fixing libtool files")
 	$(Q)( \
 	for la in $$(find $(1) -name "*.la" -type f); do \
 	  if ! grep -q "$(REWRITE_LIBTOOL_TAG)" $${la}; then \
-	    echo -e "$(TERM_YELLOW)Rewriting $${la#$(1)/}$(TERM_NORMAL)"; \
+	    printf "$(TERM_YELLOW)Rewriting $${la#$(1)/} .. $(TERM_NORMAL)"; \
 	    $(SED) $(REWRITE_LIBTOOL_RULES) $${la}; \
 	    echo -e "\n# Adapted to buildsystem\n$(REWRITE_LIBTOOL_TAG)" >> $${la}; \
+	    printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"; \
 	  fi; \
 	done; \
 	)
@@ -445,9 +446,10 @@ REWRITE_CONFIG_RULES = "\
 	s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
 
 define rewrite_config_script
-	$(Q)$(call MESSAGE,"Rewriting $(1)")
-	mv $(TARGET_DIR)/$(bindir)/$(1) $(HOST_DIR)/bin
-	$(SED) $(REWRITE_CONFIG_RULES) $(HOST_DIR)/bin/$(1)
+	@printf "$(TERM_YELLOW)Rewriting $(1) .. $(TERM_NORMAL)"
+	$(Q)mv $(TARGET_DIR)/$(bindir)/$(1) $(HOST_DIR)/bin
+	$(Q)$(SED) $(REWRITE_CONFIG_RULES) $(HOST_DIR)/bin/$(1)
+	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 endef
 
 # rewrite config scripts automatically
