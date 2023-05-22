@@ -1,6 +1,8 @@
+diff --git a/config/configure.in.in b/config/configure.in.in
+index 91093c2d..c67fd35f 100644
 --- a/config/configure.in.in
 +++ b/config/configure.in.in
-@@ -36,14 +36,14 @@
+@@ -36,14 +36,14 @@ config CONFIGURE_has_libtool_2_4_or_newer
  config CONFIGURE_has_libtoolize_2_4_or_newer
      @KCONFIG_libtoolize_2_4_or_newer@
  
@@ -21,6 +23,8 @@
  
  config CONFIGURE_has_gnu_m4_1_4_12_or_newer
      @KCONFIG_gnu_m4_1_4_12_or_newer@
+diff --git a/configure.ac b/configure.ac
+index 4a33c9ac..37a41c7c 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -1,7 +1,7 @@
@@ -32,7 +36,24 @@
  
  AC_INIT(
      [crosstool-NG],
-@@ -226,25 +226,25 @@
+@@ -93,7 +93,15 @@ AC_PROG_CC
+ AM_PROG_CC_C_O
+ AC_PROG_CXX
+ AC_PROG_CPP
+-AC_PROG_LEX([noyywrap])
++dnl autoconf 2.69 AC_PROG_LEX has no parameters
++dnl autoconf 2.70 AC_PROG_LEX prints a deprecation warning without params
++m4_if(m4_version_compare(m4_defn([AC_AUTOCONF_VERSION]), [2.70]), [-1], [dnl
++  dnl autoconf < 2.70
++  AC_PROG_LEX
++], [
++  dnl autoconf >= 2.70
++  AC_PROG_LEX([noyywrap])
++])
+ AX_PROG_BISON
+ AS_IF([test -z "$CC" -o -z "$CXX"],
+       [AC_MSG_ERROR([no suitable compiler found])])
+@@ -226,25 +234,25 @@ CTNG_PROG_VERSION_REQ_ANY([LIBTOOLIZE],
      [libtoolize_2_4_or_newer])
  
  CTNG_PROG_VERSION([AUTOCONF],
