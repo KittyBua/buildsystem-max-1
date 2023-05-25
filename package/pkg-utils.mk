@@ -422,10 +422,9 @@ define rewrite_libtool
 	$(Q)( \
 	for la in $$(find $(1) -name "*.la" -type f); do \
 	  if ! grep -q "$(REWRITE_LIBTOOL_TAG)" $${la}; then \
-	    printf "$(TERM_YELLOW)Rewriting $${la#$(1)/} .. $(TERM_NORMAL)"; \
+	    echo "Rewriting $${la#$(1)/}"; \
 	    $(SED) $(REWRITE_LIBTOOL_RULES) $${la}; \
 	    echo -e "\n# Adapted to buildsystem\n$(REWRITE_LIBTOOL_TAG)" >> $${la}; \
-	    printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"; \
 	  fi; \
 	done; \
 	)
@@ -446,10 +445,9 @@ REWRITE_CONFIG_RULES = "\
 	s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
 
 define rewrite_config_script
-	@printf "$(TERM_YELLOW)Rewriting $(1) .. $(TERM_NORMAL)"
+	@echo "Rewriting $(1)"
 	$(Q)mv $(TARGET_DIR)/$(bindir)/$(1) $(HOST_DIR)/bin
 	$(Q)$(SED) $(REWRITE_CONFIG_RULES) $(HOST_DIR)/bin/$(1)
-	@printf "$(TERM_YELLOW)done\n$(TERM_NORMAL)"
 endef
 
 # rewrite config scripts automatically
