@@ -13,9 +13,11 @@ E2FSPROGS_DEPENDS = util-linux
 
 E2FSPROGS_AUTORECONF = YES
 
+E2FSPROGS_CONF_ENV = \
+	ac_cv_path_LDCONFIG=true
+
 E2FSPROGS_CONF_OPTS = \
 	LIBS="-luuid -lblkid" \
-	ac_cv_path_LDCONFIG=true \
 	--sbindir=$(base_sbindir) \
 	--disable-backtrace \
 	--disable-blkid-debug \
