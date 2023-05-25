@@ -39,15 +39,12 @@ UTIL_LINUX_CONF_OPTS = \
 	--disable-line \
 	--disable-logger \
 	--disable-login \
-	--disable-losetup \
 	--disable-login-chown-vcs \
 	--disable-login-stat-mail \
+	--disable-losetup \
 	--disable-lsirq \
 	--disable-lslogins \
 	--disable-lsmem \
-	--disable-makeinstall-chown \
-	--disable-makeinstall-setuid \
-	--disable-makeinstall-chown \
 	--disable-mesg \
 	--disable-minix \
 	--disable-more \
@@ -84,11 +81,14 @@ UTIL_LINUX_CONF_OPTS = \
 	--disable-write \
 	--disable-zramctl \
 	\
-	--enable-libblkid \
+	--disable-makeinstall-chown \
+	--disable-makeinstall-setuid \
+	\
 	--enable-libfdisk \
-	--enable-libmount \
 	--enable-libsmartcols \
 	--enable-libuuid \
+	--enable-libblkid \
+	--enable-libmount \
 	\
 	--without-audit \
 	--without-cap-ng \
