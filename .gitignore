@@ -4,8 +4,8 @@
 /build_cross
 /build_host
 /build_tmp
-/own-files
-/own-patches
+/own_files
+/own_patches
 /package/extras
 /release
 /release_image
