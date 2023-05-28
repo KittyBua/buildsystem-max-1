@@ -60,11 +60,11 @@ LIBSTB_HAL_CONF_OPTS += \
 
 LIBSTB_HAL_OBJ_DIR = $(BUILD_DIR)/$(LIBSTB_HAL_DIR)-obj
 
-$(D)/libstb-hal.do_prepare:
+libstb-hal.do_prepare:
 	$(call PREPARE)
 	@touch $(D)/$(notdir $@)
 
-$(D)/libstb-hal.do_configure:
+libstb-hal.do_configure:
 	@$(call MESSAGE,"Configuring")
 	rm -rf $(LIBSTB_HAL_OBJ_DIR)
 	mkdir -p $(LIBSTB_HAL_OBJ_DIR)
@@ -75,7 +75,7 @@ $(D)/libstb-hal.do_configure:
 			$(LIBSTB_HAL_CONF_OPTS)
 	@touch $(D)/$(notdir $@)
 
-$(D)/libstb-hal.do_compile: libstb-hal.do_configure
+libstb-hal.do_compile: libstb-hal.do_configure
 	@$(call MESSAGE,"Building")
 ifeq ($(BOXTYPE),generic)
 	$(MAKE) -C $(LIBSTB_HAL_OBJ_DIR)

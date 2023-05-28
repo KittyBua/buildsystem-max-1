@@ -8,11 +8,11 @@ LINUX_KERNEL_MAKE_VARS = \
 	$(KERNEL_MAKE_VARS) \
 	INSTALL_MOD_PATH=$(BUILD_DIR)/$(KERNEL_MODULES)
 
-$(D)/kernel.do_prepare:
+kernel.do_prepare:
 	$(call PREPARE)
 	@touch $(D)/$(notdir $@)
 
-$(D)/kernel.do_compile: kernel.do_prepare
+kernel.do_compile: kernel.do_prepare
 	rm -rf $(BUILD_DIR)/$(KERNEL_OBJ)
 	rm -rf $(BUILD_DIR)/$(KERNEL_MODULES)
 	$(MKDIR)/$(KERNEL_OBJ)

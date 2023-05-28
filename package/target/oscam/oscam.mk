@@ -61,13 +61,13 @@ OSCAM_CONF_OPTS = \
 	CARDREADER_SMARGO \
 	CARDREADER_SC8IN1
 
-$(D)/oscam.do_prepare:
+oscam.do_prepare:
 	$(call PREPARE)
 	$(CHDIR)/$($(PKG)_DIR); \
 		$(SHELL) ./config.sh $($(PKG)_CONF_OPTS)
 	@touch $(D)/$(notdir $@)
 
-$(D)/oscam.do_compile:
+oscam.do_compile:
 	$(CHDIR)/$($(PKG)_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) CROSS=$(TARGET_CROSS) OSCAM_BIN=$(OSCAM_FLAVOUR) USE_LIBCRYPTO=1 USE_LIBUSB=1 \

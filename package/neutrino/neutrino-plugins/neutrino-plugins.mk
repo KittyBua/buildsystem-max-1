@@ -131,11 +131,11 @@ endef
 
 NEUTRINO_PLUGINS_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_PLUGINS_DIR)-obj
 
-$(D)/neutrino-plugins.do_prepare:
+neutrino-plugins.do_prepare:
 	$(call PREPARE)
 	@touch $(D)/$(notdir $@)
 
-$(D)/neutrino-plugins.do_configure:
+neutrino-plugins.do_configure:
 	@$(call MESSAGE,"Configuring")
 	rm -rf $(NEUTRINO_PLUGINS_OBJ_DIR)
 	mkdir -p $(NEUTRINO_PLUGINS_OBJ_DIR)
@@ -146,7 +146,7 @@ $(D)/neutrino-plugins.do_configure:
 			$(NEUTRINO_PLUGINS_CONF_OPTS)
 	@touch $(D)/$(notdir $@)
 
-$(D)/neutrino-plugins.do_compile: neutrino-plugins.do_configure
+neutrino-plugins.do_compile: neutrino-plugins.do_configure
 	@$(call MESSAGE,"Building")
 ifeq ($(BOXTYPE),generic)
 	$(MAKE) -C $(NEUTRINO_PLUGINS_OBJ_DIR)
