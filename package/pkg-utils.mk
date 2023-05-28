@@ -140,7 +140,7 @@ ifndef $(PKG)_BUILD_CMDS
     ifeq ($(PKG_PACKAGE),TARGET)
       $(PKG)_BUILD_CMDS = $$(PYTHON_BUILD_CMDS_DEFAULT)
     endif
-  else ifeq ($(PKG_MODE),KERNEL)
+  else ifeq ($(PKG_MODE),KERNEL_MODULE)
     $(PKG)_BUILD_CMDS = $$(KERNEL_MODULE_BUILD_CMDS_DEFAULT)
   else ifeq ($(PKG_MODE),WAF)
     $(PKG)_BUILD_CMDS = $$(WAF_BUILD_CMDS_DEFAULT)
@@ -157,7 +157,7 @@ ifndef $(PKG)_MAKE_INSTALL_ENV
   $(PKG)_MAKE_INSTALL_ENV = $$($(PKG)_MAKE_ENV)
 endif
 ifndef $(PKG)_MAKE_INSTALL_ARGS
-  ifeq ($(PKG_MODE),KERNEL)
+  ifeq ($(PKG_MODE),KERNEL_MODULE)
     $(PKG)_MAKE_INSTALL_ARGS = modules_install
   else
     $(PKG)_MAKE_INSTALL_ARGS = install
@@ -189,7 +189,7 @@ ifndef $(PKG)_INSTALL_CMDS
     ifeq ($(PKG_PACKAGE),TARGET)
       $(PKG)_INSTALL_CMDS = $$(PYTHON_INSTALL_CMDS_DEFAULT)
     endif
-  else ifeq ($(PKG_MODE),KERNEL)
+  else ifeq ($(PKG_MODE),KERNEL_MODULE)
     $(PKG)_INSTALL_CMDS = $$(KERNEL_MODULE_INSTALL_CMDS_DEFAULT)
   else ifeq ($(PKG_MODE),WAF)
     $(PKG)_INSTALL_CMDS = $$(WAF_INSTALL_CMDS_DEFAULT)
@@ -220,7 +220,7 @@ pkg-check-variables = $(call PKG_CHECK_VARIABLES)
 
 # -----------------------------------------------------------------------------
 
-pkg-mode = $(call UPPERCASE,$(firstword $(subst -, ,$(subst host-,,$(0)))))
+pkg-mode = $(call UPPERCASE,$(subst -package,,$(subst host-,,$(0))))
 
 # -----------------------------------------------------------------------------
 
