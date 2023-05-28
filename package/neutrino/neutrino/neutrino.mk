@@ -238,11 +238,11 @@ endif
 
 NEUTRINO_OBJ_DIR = $(BUILD_DIR)/$(NEUTRINO_DIR)-obj
 
-$(D)/neutrino.do_prepare:
+neutrino.do_prepare:
 	$(call PREPARE)
 	@touch $(D)/$(notdir $@)
 
-$(D)/neutrino.do_configure:
+neutrino.do_configure:
 	@$(call MESSAGE,"Configuring")
 	rm -rf $(NEUTRINO_OBJ_DIR)
 	mkdir -p $(NEUTRINO_OBJ_DIR)
@@ -254,7 +254,7 @@ $(D)/neutrino.do_configure:
 		$(if $(findstring VCS,$(NEUTRINO_CFLAGS)),+make $(BUILD_DIR)/$(NEUTRINO_DIR)/src/gui/version.h)
 	@touch $(D)/$(notdir $@)
 
-$(D)/neutrino.do_compile: neutrino.do_configure
+neutrino.do_compile: neutrino.do_configure
 	@$(call MESSAGE,"Building")
 ifeq ($(BOXTYPE),generic)
 	$(MAKE) -C $(NEUTRINO_OBJ_DIR)
