@@ -19,10 +19,10 @@ BUSYBOX_LDFLAGS = \
 
 # Link against libtirpc if available so that we can leverage its RPC
 # support for NFS mounting with BusyBox
-BUSYBOX_CFLAGS += "`$(PKG_CONFIG) --cflags libtirpc`"
+BUSYBOX_CFLAGS += "`$(PKG_CONFIG_HOST_BINARY) --cflags libtirpc`"
 # Don't use LDFLAGS for -ltirpc, because LDFLAGS is used for
 # the non-final link of modules as well.
-BUSYBOX_CFLAGS_busybox += "`$(PKG_CONFIG) --libs libtirpc`"
+BUSYBOX_CFLAGS_busybox += "`$(PKG_CONFIG_HOST_BINARY) --libs libtirpc`"
 
 # Allows the build system to tweak CFLAGS
 BUSYBOX_MAKE_ENV = \

@@ -358,7 +358,7 @@ FFMPEG_CONF_OPTS += \
 	--disable-stripping \
 	--disable-static \
 	--enable-shared \
-	--pkg-config="$(PKG_CONFIG)" \
+	--pkg-config="$(PKG_CONFIG_HOST_BINARY)" \
 	--extra-cflags="$(TARGET_CFLAGS) -I$(TARGET_INCLUDE_DIR)/libxml2" \
 	--extra-ldflags="$(TARGET_LDFLAGS) -lrt "
 
