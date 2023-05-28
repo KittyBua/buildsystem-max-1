@@ -14,7 +14,7 @@ RPCBIND_DEPENDS = libtirpc
 RPCBIND_AUTORECONF = YES
 
 RPCBIND_CONF_OPTS = \
-	CFLAGS="$(TARGET_CFLAGS) `$(PKG_CONFIG) --cflags libtirpc`" \
+	CFLAGS="$(TARGET_CFLAGS) `$(PKG_CONFIG_HOST_BINARY) --cflags libtirpc`" \
 	--bindir=$(sbindir) \
 	--enable-silent-rules \
 	--with-rpcuser=root \

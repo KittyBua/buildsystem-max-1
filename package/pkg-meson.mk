@@ -21,7 +21,7 @@ define MESON_CROSS_CONFIG_HOOK
 		echo "ar = '$(TARGET_AR)'"; \
 		echo "strip = '$(TARGET_STRIP)'"; \
 		echo "nm = '$(TARGET_NM)'"; \
-		echo "pkgconfig = '$(PKG_CONFIG)'"; \
+		echo "pkgconfig = '$(PKG_CONFIG_HOST_BINARY)'"; \
 		echo ""; \
 		echo "[built-in options]"; \
 		echo "c_args = '$(TARGET_CFLAGS)'"; \
