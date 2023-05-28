@@ -371,14 +371,14 @@ define APPLY_PATCHES # (patches or directory)
 	    if [ -d $$i/$($(PKG)_VERSION) ]; then \
 	      for p in $(addprefix $$i/,$($(PKG)_VERSION)/$(PATCHES)); do \
 	        if [ -e $$p ]; then \
-	          echo -e "$(TERM_YELLOW)Applying$(TERM_NORMAL) $${p##*/}"; \
+	          echo -e "Applying $${p##*/}"; \
 	          patch -p1 -i $$p; \
 	        fi; \
 	      done; \
 	    else \
 	      for p in $(addprefix $$i/,$(PATCHES)); do \
 	        if [ -e $$p ]; then \
-	          echo -e "$(TERM_YELLOW)Applying$(TERM_NORMAL) $${p##*/}"; \
+	          echo -e "Applying $${p##*/}"; \
 	          patch -p1 -i $$p; \
 	        fi; \
 	      done; \
@@ -386,10 +386,10 @@ define APPLY_PATCHES # (patches or directory)
 	  else \
 	    $(call MESSAGE,"Patching"); \
 	    if [ $${i:0:1} == "/" ]; then \
-	      echo -e "$(TERM_YELLOW)Applying$(TERM_NORMAL) $${i##*/}"; \
+	      echo -e "Applying $${i##*/}"; \
 	      patch -p1 -i $$i; \
 	    else \
-	      echo -e "$(TERM_YELLOW)Applying$(TERM_NORMAL) $${i##*/}"; \
+	      echo -e "$Applying $${i##*/}"; \
 	      patch -p1 -i $(PKG_PATCHES_DIR)/$$i; \
 	    fi; \
 	  fi; \
@@ -422,7 +422,7 @@ define rewrite_libtool
 	$(Q)( \
 	for la in $$(find $(1) -name "*.la" -type f); do \
 	  if ! grep -q "$(REWRITE_LIBTOOL_TAG)" $${la}; then \
-	    echo "Rewriting $${la#$(1)/}"; \
+	    echo -e "Rewriting $${la#$(1)/}"; \
 	    $(SED) $(REWRITE_LIBTOOL_RULES) $${la}; \
 	    echo -e "\n# Adapted to buildsystem\n$(REWRITE_LIBTOOL_TAG)" >> $${la}; \
 	  fi; \
@@ -445,7 +445,7 @@ REWRITE_CONFIG_RULES = "\
 	s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
 
 define rewrite_config_script
-	@echo "Rewriting $(1)"
+	@echo -e "Rewriting $(1)"
 	$(Q)mv $(TARGET_DIR)/$(bindir)/$(1) $(HOST_DIR)/bin
 	$(Q)$(SED) $(REWRITE_CONFIG_RULES) $(HOST_DIR)/bin/$(1)
 endef
