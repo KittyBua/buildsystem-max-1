@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-CROSSTOOL_NG_VERSION = a8cef57
+CROSSTOOL_NG_VERSION = d855363
 CROSSTOOL_NG_DIR = crosstool-ng.git
 CROSSTOOL_NG_SOURCE = crosstool-ng.git
 CROSSTOOL_NG_SITE = https://github.com/crosstool-ng
@@ -58,6 +58,7 @@ crosstool-ng:
 	unset $($(PKG)_UNSET); \
 	$(call HOST_CCACHE_LINK); \
 	$(CHDIR)/$($(PKG)_DIR); \
+		ulimit -S -n 4096; \
 		export $($(PKG)_EXPORT); \
 		./bootstrap; \
 		./configure --enable-local; \
