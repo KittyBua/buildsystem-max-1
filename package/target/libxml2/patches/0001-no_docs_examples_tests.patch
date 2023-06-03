@@ -1,32 +1,20 @@
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -2,9 +2,9 @@
+@@ -2,7 +2,7 @@
  
  ACLOCAL_AMFLAGS = -I m4
  
--SUBDIRS = include . doc example fuzz xstc $(PYTHON_SUBDIR)
--
+-SUBDIRS = include . doc example xstc
++SUBDIRS = include . xstc
+ if WITH_PYTHON
+ SUBDIRS += python
+ endif
+@@ -10,7 +10,7 @@
+ SUBDIRS += fuzz
+ endif
+ 
 -DIST_SUBDIRS = include . doc example fuzz python xstc
-+SUBDIRS = include . fuzz xstc $(PYTHON_SUBDIR)
-+
 +DIST_SUBDIRS = include . fuzz python xstc
  
- AM_CPPFLAGS = -I$(top_builddir)/include -I$(srcdir)/include
+ AM_CPPFLAGS = -I$(top_builddir)/include -I$(srcdir)/include -DSYSCONFDIR='"$(sysconfdir)"'
  
-@@ -1273,16 +1273,6 @@
- #
- EXAMPLES_DIR=$(docdir)/examples
- 
--install-data-local: 
--	$(MKDIR_P) $(DESTDIR)$(docdir)
--	-$(INSTALL) -m 0644 $(srcdir)/Copyright $(DESTDIR)$(docdir)
--	$(MKDIR_P) $(DESTDIR)$(EXAMPLES_DIR)
--	-$(INSTALL) -m 0644 $(srcdir)/xmllint.c $(DESTDIR)$(EXAMPLES_DIR)
--	-$(INSTALL) -m 0644 $(srcdir)/testSAX.c $(DESTDIR)$(EXAMPLES_DIR)
--	-$(INSTALL) -m 0644 $(srcdir)/testHTML.c $(DESTDIR)$(EXAMPLES_DIR)
--	-$(INSTALL) -m 0644 $(srcdir)/testXPath.c $(DESTDIR)$(EXAMPLES_DIR)
--	@echo "If the documentation is installed, please also look at html/examples for more." > $(DESTDIR)$(EXAMPLES_DIR)/README
--
- uninstall-local:
- 	rm -f $(DESTDIR)$(EXAMPLES_DIR)/README
- 	rm -f $(DESTDIR)$(EXAMPLES_DIR)/testXPath.c
