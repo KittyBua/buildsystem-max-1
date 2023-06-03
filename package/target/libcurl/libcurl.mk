@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-LIBCURL_VERSION = 8.1.1
+LIBCURL_VERSION = 8.1.2
 LIBCURL_DIR = curl-$(LIBCURL_VERSION)
 LIBCURL_SOURCE = curl-$(LIBCURL_VERSION).tar.bz2
 LIBCURL_SITE = https://curl.haxx.se/download
@@ -27,7 +27,6 @@ LIBCURL_CONF_OPTS = \
 	--disable-smtp \
 	--enable-shared \
 	--disable-verbose \
-	--without-libidn \
 	--without-libidn2 \
 	--without-winidn \
 	--without-libpsl \
