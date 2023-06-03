@@ -58,7 +58,7 @@ HD61_LIBGLES_HEADER_SITE = https://github.com/HD-Digital/meta-gfutures/raw/relea
 
 $(D)/hd61-libgles-header: | bootstrap
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)
 	$(call EXTRACT,$(TARGET_INCLUDE_DIR))
 	$(call TARGET_FOLLOWUP)
 
@@ -76,7 +76,7 @@ HD61_LIBS_SITE = http://downloads.mutant-digital.net/hd61
 
 $(D)/hd61-libs: | bootstrap
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)
 	$(call EXTRACT,$(BUILD_DIR)/hiplay)
 	mkdir -p $(TARGET_LIB_DIR)/hisilicon
 	$(INSTALL_EXEC) $(BUILD_DIR)/hiplay/hisilicon/* $(TARGET_LIB_DIR)/hisilicon
