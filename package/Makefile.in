@@ -230,7 +230,6 @@ CHDIR           = $(CD) $(BUILD_DIR)
 MKDIR           = mkdir -p $(BUILD_DIR)
 CPDIR           = cp -a -t $(BUILD_DIR) $(DL_DIR)
 
-PKG_CONFIG        = $(HOST_DIR)/bin/$(GNU_TARGET_NAME)-pkg-config
 PKG_CONFIG_PATH   = $(TARGET_LIB_DIR)/pkgconfig
 PKG_CONFIG_LIBDIR = $(TARGET_LIB_DIR)/pkgconfig
 
