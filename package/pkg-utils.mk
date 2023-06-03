@@ -225,6 +225,7 @@ pkg-mode = $(call UPPERCASE,$(subst -package,,$(subst host-,,$(0))))
 # -----------------------------------------------------------------------------
 
 # PKG "control-flag" variables
+PKG_NO_DOWNLOAD = pkg-no-download
 PKG_NO_EXTRACT = pkg-no-extract
 PKG_NO_PATCHES = pkg-no-patches
 PKG_NO_BUILD = pkg-no-build
@@ -404,7 +405,7 @@ endef
 define PREPARE
 	$(eval $(pkg-check-variables))
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(if $(filter $(1),$(PKG_NO_DOWNLOAD)),,$(call DOWNLOAD,$($(PKG)_SITE),$($(PKG)_SOURCE)))
 	$(if $(filter $(1),$(PKG_NO_EXTRACT)),,$(call EXTRACT,$(BUILD_DIR)))
 	$(if $(filter $(1),$(PKG_NO_PATCHES)),,$(call APPLY_PATCHES,$($(PKG)_PATCH_DIR),$($(PKG)_PATCH_CUSTOM)))
 endef
