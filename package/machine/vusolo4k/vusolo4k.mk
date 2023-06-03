@@ -12,7 +12,7 @@ VUSOLO4K_DRIVER_SITE = http://code.vuplus.com/download/release/vuplus-dvb-proxy
 
 $(D)/vusolo4k-driver: | bootstrap
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)
 	mkdir -p $(TARGET_MODULES_DIR)/extra
 	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	$(call TARGET_FOLLOWUP)
@@ -79,6 +79,6 @@ VUSOLO4K_VMLINUZ_INITRD_SOURCE  = vmlinuz-initrd_vusolo4k_$(VUSOLO4K_VMLINUZ_INI
 
 $(D)/vusolo4k-vmlinuz-initrd: | bootstrap
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)
 	$(call EXTRACT,$(BUILD_DIR))
 	$(call TARGET_FOLLOWUP)

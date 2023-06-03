@@ -12,7 +12,7 @@ VUUNO4KSE_DRIVER_SITE = http://code.vuplus.com/download/release/vuplus-dvb-proxy
 
 $(D)/vuuno4kse-driver: | bootstrap
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)
 	mkdir -p $(TARGET_MODULES_DIR)/extra
 	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	$(call TARGET_FOLLOWUP)
@@ -79,6 +79,6 @@ VUUNO4KSE_VMLINUZ_INITRD_SOURCE  = vmlinuz-initrd_vuuno4kse_$(VUUNO4KSE_VMLINUZ_
 
 $(D)/vuuno4kse-vmlinuz-initrd: | bootstrap
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)
 	$(call EXTRACT,$(BUILD_DIR))
 	$(call TARGET_FOLLOWUP)
