@@ -32,7 +32,7 @@ LIBCURL_CONF_OPTS = \
 	--without-winidn \
 	--without-libpsl \
 	--without-zstd \
-	--with-ca-bundle=$(CA_BUNDLE_DIR)/$(CA_BUNDLE_CRT) \
+	--with-ca-bundle=$(CA_BUNDLE_CERTS_DIR)/$(CA_BUNDLE_CERT) \
 	--with-random=/dev/urandom \
 	--with-ssl=$(TARGET_DIR)/usr \
 	--enable-optimize

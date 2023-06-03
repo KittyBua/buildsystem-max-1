@@ -17,7 +17,7 @@ GNUTLS_CONF_OPTS = \
 	--with-included-libtasn1 \
 	--with-libpthread-prefix=$(TARGET_DIR)/usr \
 	--with-included-unistring \
-	--with-default-trust-store-dir=$(CA_BUNDLE_DIR)/$(CA_BUNDLE_CRT) \
+	--with-default-trust-store-dir=$(CA_BUNDLE_CERTS_DIR)/$(CA_BUNDLE_CERT) \
 	--without-p11-kit \
 	--without-idn \
 	--without-tpm \
