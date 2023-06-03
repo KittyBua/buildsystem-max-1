@@ -11,7 +11,7 @@ HD51_DRIVER_SITE = http://source.mynonpublic.com/gfutures
 
 $(D)/hd51-driver: | bootstrap
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)
 	mkdir -p $(TARGET_MODULES_DIR)/extra
 	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	mkdir -p ${TARGET_DIR}/etc/modules-load.d
@@ -33,7 +33,7 @@ HD51_LIBGLES_SITE = http://downloads.mutant-digital.net/v3ddriver
 
 $(D)/hd51-libgles: | bootstrap
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)
 	$(call EXTRACT,$(TARGET_LIB_DIR))
 	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libEGL.so
 	ln -sf libv3ddriver.so $(TARGET_LIB_DIR)/libGLESv2.so

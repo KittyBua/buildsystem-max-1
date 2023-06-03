@@ -10,4 +10,4 @@ GNULIB_SOURCE = gnulib-$(GNULIB_VERSION)-stable.tar.gz
 GNULIB_SITE = http://erislabs.net/ianb/projects/gnulib
 
 $(D)/gnulib: | bootstrap
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)

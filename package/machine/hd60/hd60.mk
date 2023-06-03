@@ -11,7 +11,7 @@ HD60_DRIVER_SITE = http://source.mynonpublic.com/gfutures
 
 $(D)/hd60-driver: | bootstrap
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)
 	mkdir -p $(TARGET_MODULES_DIR)/extra
 	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	rm -f $(TARGET_MODULES_DIR)/extra/hi_play.ko
@@ -36,7 +36,7 @@ HD60_LIBGLES_SITE = http://downloads.mutant-digital.net/hd60
 
 $(D)/hd60-libgles: | bootstrap
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)
 	$(call EXTRACT,$(TARGET_LIB_DIR))
 	(cd $(TARGET_LIB_DIR) && ln -sf libMali.so libmali.so)
 	(cd $(TARGET_LIB_DIR) && ln -sf libMali.so libEGL.so.1.4 && ln -sf libEGL.so.1.4 libEGL.so.1 && ln -sf libEGL.so.1 libEGL.so)
@@ -58,7 +58,7 @@ HD60_LIBGLES_HEADER_SITE = https://github.com/HD-Digital/meta-gfutures/raw/relea
 
 $(D)/hd60-libgles-header: | bootstrap
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)
 	$(call EXTRACT,$(TARGET_INCLUDE_DIR))
 	$(call TARGET_FOLLOWUP)
 
@@ -76,7 +76,7 @@ HD60_LIBS_SITE = http://downloads.mutant-digital.net/hd60
 
 $(D)/hd60-libs: | bootstrap
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)
 	$(call EXTRACT,$(BUILD_DIR)/hiplay)
 	mkdir -p $(TARGET_LIB_DIR)/hisilicon
 	$(INSTALL_EXEC) $(BUILD_DIR)/hiplay/hisilicon/* $(TARGET_LIB_DIR)/hisilicon

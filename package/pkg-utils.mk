@@ -262,44 +262,50 @@ endef
 
 # download archives into download directory
 GET_ARCHIVE = wget --no-check-certificate -q --show-progress --progress=bar:force -t3 -T60 -c -P
+
 GET_GIT_SOURCE = support/scripts/get-git-source.sh
-GET_HG_SOURCE  = support/scripts/get-hg-source.sh
+GET_HG_SOURCE = support/scripts/get-hg-source.sh
 GET_SVN_SOURCE = support/scripts/get-svn-source.sh
 
 # github(user,package,version): returns site of GitHub repository
 github = https://github.com/$(1)/$(2)/archive/$(3)
 
-define DOWNLOAD
+define DOWNLOAD # (site,source)
 	$(foreach hook,$($(PKG)_PRE_DOWNLOAD_HOOKS),$(call $(hook))$(sep))
 	$(Q)( \
+	DOWNLOAD_SITE=$(1); \
+	DOWNLOAD_SOURCE=$(2); \
 	case "$($(PKG)_SITE_METHOD)" in \
 	  git) \
 	    $(call MESSAGE,"Downloading"); \
-	    $(GET_GIT_SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
+	    $(GET_GIT_SOURCE) $${DOWNLOAD_SITE}/$${DOWNLOAD_SOURCE} $(DL_DIR)/$${DOWNLOAD_SOURCE}; \
 	  ;; \
 	  hg) \
 	    $(call MESSAGE,"Downloading"); \
-	    $(GET_HG_SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
+	    $(GET_HG_SOURCE) $${DOWNLOAD_SITE}/$${DOWNLOAD_SOURCE} $(DL_DIR)/$${DOWNLOAD_SOURCE}; \
 	  ;; \
 	  svn) \
 	    $(call MESSAGE,"Downloading"); \
-	    $(GET_SVN_SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) $(DL_DIR)/$($(PKG)_SOURCE); \
+	    $(GET_SVN_SOURCE) $${DOWNLOAD_SITE}/$${DOWNLOAD_SOURCE} $(DL_DIR)/$${DOWNLOAD_SOURCE}; \
 	  ;; \
 	  curl) \
 	    $(call MESSAGE,"Downloading"); \
 	    $(CD) $(DL_DIR); \
-	      curl --remote-name --time-cond $($(PKG)_SOURCE) $($(PKG)_SITE)/$($(PKG)_SOURCE) || true; \
+	      curl --remote-name --time-cond $${DOWNLOAD_SOURCE} $${DOWNLOAD_SITE}/$${DOWNLOAD_SOURCE} || true; \
 	  ;; \
 	  *) \
-	    if [ ! -f $(DL_DIR)/$(1) ]; then \
+	    if [ ! -f $(DL_DIR)/$${DOWNLOAD_SOURCE} ]; then \
 	      $(call MESSAGE,"Downloading"); \
-	      $(GET_ARCHIVE) $(DL_DIR) $($(PKG)_SITE)/$(1); \
+	      $(GET_ARCHIVE) $(DL_DIR) $${DOWNLOAD_SITE}/$${DOWNLOAD_SOURCE}; \
 	    fi; \
 	  ;; \
 	esac \
 	)
 	$(foreach hook,$($(PKG)_POST_DOWNLOAD_HOOKS),$(call $(hook))$(sep))
 endef
+
+# just a wrapper for niceness
+DOWNLOAD-PACKAGE = $(call DOWNLOAD,$($(PKG)_SITE),$($(PKG)_SOURCE))
 
 # -----------------------------------------------------------------------------
 
@@ -402,7 +408,7 @@ endef
 # -----------------------------------------------------------------------------
 
 # prepare for build
-define PREPARE
+define PREPARE # (control-flag(s))
 	$(eval $(pkg-check-variables))
 	$(call STARTUP)
 	$(if $(filter $(1),$(PKG_NO_DOWNLOAD)),,$(call DOWNLOAD,$($(PKG)_SITE),$($(PKG)_SOURCE)))

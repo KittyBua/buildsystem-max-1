@@ -11,7 +11,7 @@ HD61_DRIVER_SITE = http://source.mynonpublic.com/gfutures
 
 $(D)/hd61-driver: | bootstrap
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)
 	mkdir -p $(TARGET_MODULES_DIR)/extra
 	$(call EXTRACT,$(TARGET_MODULES_DIR)/extra)
 	rm -f $(TARGET_MODULES_DIR)/extra/hi_play.ko
@@ -36,7 +36,7 @@ HD61_LIBGLES_SITE = http://downloads.mutant-digital.net/hd61
 
 $(D)/hd61-libgles: | bootstrap
 	$(call STARTUP)
-	$(call DOWNLOAD,$($(PKG)_SOURCE))
+	$(call DOWNLOAD-PACKAGE)
 	$(call EXTRACT,$(TARGET_LIB_DIR))
 	(cd $(TARGET_LIB_DIR) && ln -sf libMali.so libmali.so)
 	(cd $(TARGET_LIB_DIR) && ln -sf libMali.so libEGL.so.1.4 && ln -sf libEGL.so.1.4 libEGL.so.1 && ln -sf libEGL.so.1 libEGL.so)
