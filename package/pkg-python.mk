@@ -4,15 +4,15 @@
 #
 ################################################################################
 
-PYTHON_OPTS = \
-	$(if $(VERBOSE),,-q)
-
 TARGET_PYTHON_ENV = \
 	CC="$(TARGET_CC)" \
 	CFLAGS="$(TARGET_CFLAGS)" \
 	LDFLAGS="$(TARGET_LDFLAGS)" \
 	LDSHARED="$(TARGET_CC) -shared" \
 	PYTHONPATH=$(TARGET_DIR)/$(PYTHON_SITEPACKAGES_DIR)
+
+PYTHON_OPTS = \
+	$(if $(VERBOSE),,-q)
 
 define PYTHON_BUILD_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
@@ -56,15 +56,15 @@ endef
 #
 ################################################################################
 
-HOST_PYTHON3_OPTS = \
-	$(if $(VERBOSE),,-q)
-
 HOST_PYTHON3_ENV = \
 	CC="$(HOSTCC)" \
 	CFLAGS="$(HOST_CFLAGS)" \
 	LDFLAGS="$(HOST_LDFLAGS)" \
 	LDSHARED="$(HOSTCC) -shared" \
 	PYTHONPATH=$(HOST_DIR)/$(HOST_PYTHON3_SITEPACKAGES_DIR)
+
+HOST_PYTHON3_OPTS = \
+	$(if $(VERBOSE),,-q)
 
 define HOST_PYTHON3_BUILD_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
