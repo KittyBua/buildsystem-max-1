@@ -112,7 +112,7 @@ endef
 
 define HOST_MESON_CMDS_DEFAULT
 	unset CC CXX CPP LD AR NM STRIP; \
-	PKG_CONFIG=/usr/bin/pkg-config \
+	export PKG_CONFIG=/usr/bin/pkg-config; \
 	PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig \
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		PATH=$(PATH) \
