@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-PKGCONF_VERSION = 1.8.0
+PKGCONF_VERSION = 1.9.5
 PKGCONF_DIR = pkgconf-$(PKGCONF_VERSION)
 PKGCONF_SOURCE = pkgconf-$(PKGCONF_VERSION).tar.xz
 PKGCONF_SITE = https://distfiles.dereferenced.org/pkgconf
