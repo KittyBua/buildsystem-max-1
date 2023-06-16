@@ -4,8 +4,14 @@
 #
 ################################################################################
 
-NINJA_OPTS \
-	= $(if $(VERBOSE),-v)
+#
+# Pass PYTHONNOUSERSITE environment variable when invoking Meson or Ninja, so
+# $(HOST_DIR)/bin/python3 will not look for Meson modules in
+# $HOME/.local/lib/python3.x/site-packages
+#
+MESON = PYTHONNOUSERSITE=y $(HOST_DIR)/bin/meson
+NINJA = PYTHONNOUSERSITE=y $(HOST_DIR)/bin/ninja
+NINJA_OPTS = $(if $(VERBOSE),-v)
 
 define MESON_CROSS_CONFIG_HOOK
 	mkdir -p $(1)
@@ -50,7 +56,7 @@ define TARGET_MESON_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		PATH=$(PATH) \
 		$($(PKG)_CONF_ENV) \
-		$(HOST_MESON_BINARY) \
+		$(MESON) \
 			--buildtype=release \
 			--cross-file=$(PKG_BUILD_DIR)/build/meson-cross.config \
 			-Db_pie=false \
@@ -70,7 +76,7 @@ endef
 define TARGET_NINJA_BUILD_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		$(TARGET_MAKE_ENV) $($(PKG)_NINJA_ENV) \
-		$(HOST_NINJA_BINARY) $(NINJA_OPTS) $($(PKG)_NINJA_OPTS) -C $(PKG_BUILD_DIR)/build
+		$(NINJA) $(NINJA_OPTS) $($(PKG)_NINJA_OPTS) -C $(PKG_BUILD_DIR)/build
 endef
 
 define TARGET_NINJA_BUILD
@@ -83,7 +89,7 @@ endef
 define TARGET_NINJA_INSTALL_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		$(TARGET_MAKE_ENV) $($(PKG)_NINJA_ENV) DESTDIR=$(TARGET_DIR) \
-		$(HOST_NINJA_BINARY) $(NINJA_OPTS) -C $(PKG_BUILD_DIR)/build install
+		$(NINJA) $(NINJA_OPTS) -C $(PKG_BUILD_DIR)/build install
 endef
 
 define TARGET_NINJA_INSTALL
@@ -112,12 +118,11 @@ endef
 
 define HOST_MESON_CMDS_DEFAULT
 	unset CC CXX CPP LD AR NM STRIP; \
-	export PKG_CONFIG=/usr/bin/pkg-config; \
-	PKG_CONFIG_PATH=$(HOST_DIR)/lib/pkgconfig \
+	$(HOST_CONFIGURE_ENV) \
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		PATH=$(PATH) \
 		$($(PKG)_CONF_ENV) \
-		$(HOST_MESON_BINARY) \
+		$(MESON) \
 			--prefix=$(HOST_DIR) \
 			--buildtype=release \
 			$($(PKG)_CONF_OPTS) \
@@ -134,7 +139,7 @@ endef
 define HOST_NINJA_BUILD_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		$(HOST_MAKE_ENV) $($(PKG)_NINJA_ENV) \
-		$(HOST_NINJA_BINARY) $(NINJA_OPTS) $($(PKG)_NINJA_OPTS) -C $(PKG_BUILD_DIR)/build
+		$(NINJA) $(NINJA_OPTS) $($(PKG)_NINJA_OPTS) -C $(PKG_BUILD_DIR)/build
 endef
 
 define HOST_NINJA_BUILD
@@ -147,7 +152,7 @@ endef
 define HOST_NINJA_INSTALL_CMDS_DEFAULT
 	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
 		$(HOST_MAKE_ENV) $($(PKG)_NINJA_ENV) \
-		$(HOST_NINJA_BINARY) $(NINJA_OPTS) -C $(PKG_BUILD_DIR)/build install
+		$(NINJA) $(NINJA_OPTS) -C $(PKG_BUILD_DIR)/build install
 endef
 
 define HOST_NINJA_INSTALL
