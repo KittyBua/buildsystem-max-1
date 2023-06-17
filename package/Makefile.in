@@ -227,7 +227,6 @@ DATE            = $(shell date '+%Y-%m-%d_%H.%M')
 MAINTAINER     ?= $(shell whoami)
 
 CD              = set -e; cd
-CD_BUILD_DIR    = $(CD) $(PKG_BUILD_DIR)
 CHDIR           = $(CD) $(BUILD_DIR)
 MKDIR           = mkdir -p $(BUILD_DIR)
 CPDIR           = cp -a -t $(BUILD_DIR) $(DL_DIR)
