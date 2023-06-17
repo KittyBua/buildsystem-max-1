@@ -228,6 +228,7 @@ pkg-mode = $(call UPPERCASE,$(subst -package,,$(subst host-,,$(0))))
 PKG_NO_DOWNLOAD = pkg-no-download
 PKG_NO_EXTRACT = pkg-no-extract
 PKG_NO_PATCHES = pkg-no-patches
+PKG_NO_CONFIGURE = pkg-no-configure
 PKG_NO_BUILD = pkg-no-build
 PKG_NO_INSTALL = pkg-no-install
 
@@ -425,7 +426,7 @@ REWRITE_LIBTOOL_RULES = "\
 
 REWRITE_LIBTOOL_TAG = rewritten=1
 
-define rewrite_libtool
+define rewrite_libtool # (libdir)
 	$(Q)( \
 	for la in $$(find $(1) -name "*.la" -type f); do \
 	  if ! grep -q "$(REWRITE_LIBTOOL_TAG)" $${la}; then \
@@ -451,7 +452,7 @@ REWRITE_CONFIG_RULES = "\
 	s,^libdir=.*,libdir='$(TARGET_LIB_DIR)',; \
 	s,^includedir=.*,includedir='$(TARGET_INCLUDE_DIR)',"
 
-define rewrite_config_script
+define rewrite_config_script # (config-script)
 	@echo -e "Rewriting $(1)"
 	$(Q)mv $(TARGET_DIR)/$(bindir)/$(1) $(HOST_DIR)/bin
 	$(Q)$(SED) $(REWRITE_CONFIG_RULES) $(HOST_DIR)/bin/$(1)
