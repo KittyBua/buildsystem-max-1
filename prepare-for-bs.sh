@@ -152,7 +152,8 @@ if ([ "$UBUNTU" == 1 ] && [ "$UBUNTU_VERSION" -ge "16" ]) || \
 fi
 
 if ([ "$UBUNTU" == 1 ] && [ "$UBUNTU_VERSION" -ge "22" ]) || \
-   ([ "$UBUNTU" == 2 ] && [ "$MINT_VERSION" -ge "21" ]); then
+   ([ "$UBUNTU" == 2 ] && [ "$MINT_VERSION" -ge "21" ]) || \
+   ([ "$UBUNTU" == 3 ] && [ "$DEBIAN_VERSION" -ge "12" ]); then
 	PACKAGES="$PACKAGES \
 	${UBUNTU:+gtk-doc-tools} \
 	";
