@@ -134,7 +134,7 @@ include package/Makefile.in
 # -----------------------------------------------------------------------------
 
 ifneq ($(BOXTYPE),generic)
-PATH := $(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH)
+PATH := $(HOST_DIR)/bin:$(CROSS_DIR)/bin:$(PATH):/usr/sbin
 else
 PATH := $(HOST_DIR)/bin:$(PATH)
 endif
