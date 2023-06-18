@@ -167,8 +167,8 @@ TARGET_CONFIGURE_ENV += \
 	PKG_CONFIG_SYSROOT_DIR="$(TARGET_DIR)"
 
 HOST_MAKE_ENV = \
-	export PKG_CONFIG=/usr/bin/pkg-config; \
 	PATH=$(PATH) \
+	PKG_CONFIG=/usr/bin/pkg-config \
 	PKG_CONFIG_SYSROOT_DIR="/" \
 	PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 \
 	PKG_CONFIG_ALLOW_SYSTEM_LIBS=1 \
@@ -274,5 +274,6 @@ include package/pkg-kernel-module.mk
 include package/pkg-meson.mk
 include package/pkg-python.mk
 include package/pkg-utils.mk
+include package/pkg-virtual.mk
 include package/pkg-waf.mk
 include package/pkg-helper.mk
