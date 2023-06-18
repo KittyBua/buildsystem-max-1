@@ -43,7 +43,7 @@ BUSYBOX_MAKE_OPTS = \
 
 $(D)/busybox: | bootstrap
 	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD) $(PKG_BUILD_DIR); \
 		$(INSTALL_DATA) $(PKG_FILES_DIR)/busybox.config .config; \
 		$(SED) 's#^CONFIG_PREFIX.*#CONFIG_PREFIX="$(TARGET_DIR)"#' .config; \
 		$(BUSYBOX_MAKE_ENV) $(MAKE) $(BUSYBOX_MAKE_OPTS) busybox; \
@@ -82,6 +82,6 @@ $(D)/busybox: | bootstrap
 
 busybox-config: | bootstrap
 	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD) $(PKG_BUILD_DIR); \
 		$(INSTALL_DATA) $(subst -config,,$(PKG_FILES_DIR))/busybox.config .config; \
 		make menuconfig

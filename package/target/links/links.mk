@@ -42,7 +42,7 @@ define LINKS_PREPARE_INTL
 	$(SED) 's|^T_SAVE_HTML_OPTIONS,.*|T_SAVE_HTML_OPTIONS, "HTML-Optionen speichern",|' $(PKG_BUILD_DIR)/intl/german.lng
 	echo "english" > $(PKG_BUILD_DIR)/intl/index.txt
 	echo "german" >> $(PKG_BUILD_DIR)/intl/index.txt
-	$(CHDIR)/$($(PKG)_DIR)/intl; \
+	$(CD) $(PKG_BUILD_DIR)/intl; \
 		./gen-intl
 endef
 LINKS_PRE_CONFIGURE_HOOKS += LINKS_PREPARE_INTL

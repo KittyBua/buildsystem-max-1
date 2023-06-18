@@ -22,7 +22,7 @@ LIBBLURAY_CONF_OPTS = \
 	--without-fontconfig
 
 define LIBBLURAY_BOOTSTRAP
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD) $(PKG_BUILD_DIR); \
 		./bootstrap
 endef
 LIBBLURAY_PRE_CONFIGURE_HOOKS += LIBBLURAY_BOOTSTRAP

@@ -29,7 +29,7 @@ endef
 FREETYPE_POST_PATCH_HOOKS += FREETYPE_PATCH_MODULES_CFG
 
 define FREETYPE_EXECUTE_AUTOTOOLS
-	$(CHDIR)/$($(PKG)_DIR)/builds/unix; \
+	$(CD) $(PKG_BUILD_DIR)/builds/unix; \
 		libtoolize --force --copy; \
 		aclocal -I .; \
 		autoconf

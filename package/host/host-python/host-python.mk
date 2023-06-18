@@ -17,7 +17,7 @@ HOST_PYTHON_CONF_OPTS = \
 	--with-threads
 
 define HOST_PYTHON_MAKE_HOSTPGEN
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD) $(PKG_BUILD_DIR); \
 		$(MAKE) python Parser/pgen; \
 		mv python ./hostpython; \
 		mv Parser/pgen ./hostpgen; \

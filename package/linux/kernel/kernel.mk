@@ -56,7 +56,7 @@ kernel-distclean:
 # -----------------------------------------------------------------------------
 
 kernel-config: bootstrap kernel.do_compile
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD) $(PKG_BUILD_DIR); \
 		make $(KERNEL_MAKE_VARS) menuconfig
 	@echo ""
 	@echo -e "You have to edit $(KERNEL_CONFIG) $(TERM_YELLOW)m a n u a l l y$(TERM_NORMAL) to make changes permanent !!!"
