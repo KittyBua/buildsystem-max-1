@@ -40,7 +40,7 @@ PYTHON_CONF_OPTS = \
 	--with-wctype-functions
 
 define PYTHON_EXECUTE_AUTOTOOLS
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD) $(PKG_BUILD_DIR); \
 		CONFIG_SITE= \
 		autoreconf -vfi Modules/_ctypes/libffi; \
 		autoconf

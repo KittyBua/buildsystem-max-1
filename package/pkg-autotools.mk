@@ -7,7 +7,7 @@
 define AUTORECONF_HOOK
 	if [ "$($(PKG)_AUTORECONF)" == "YES" ]; then \
 		$(call MESSAGE,"Autoreconfiguring"); \
-		$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+		$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 			$($(PKG)_AUTORECONF_ENV) \
 			$($(PKG)_AUTORECONF_CMD) \
 				$($(PKG)_AUTORECONF_OPTS); \
@@ -17,7 +17,7 @@ endef
 # -----------------------------------------------------------------------------
 
 define TARGET_CONFIGURE_CMDS_DEFAULT
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR) && rm -rf config.cache && \
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR) && rm -rf config.cache && \
 	test -f ./$($(PKG)_CONFIGURE_CMD) || ./autogen.sh && \
 	$(TARGET_CONFIGURE_ARGS) \
 	$(TARGET_CONFIGURE_ENV) \
@@ -76,7 +76,7 @@ endef
 ################################################################################
 
 define HOST_CONFIGURE_CMDS_DEFAULT
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR) && rm -rf config.cache && \
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR) && rm -rf config.cache && \
 	test -f ./$($(PKG)_CONFIGURE_CMD) || ./autogen.sh && \
 	$(HOST_CONFIGURE_ENV) \
 	$($(PKG)_CONF_ENV) \

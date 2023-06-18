@@ -63,12 +63,12 @@ OSCAM_CONF_OPTS = \
 
 oscam.do_prepare:
 	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD) $(PKG_BUILD_DIR); \
 		$(SHELL) ./config.sh $($(PKG)_CONF_OPTS)
 	@touch $(D)/$(notdir $@)
 
 oscam.do_compile:
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD) $(PKG_BUILD_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
 		$(MAKE) CROSS=$(TARGET_CROSS) OSCAM_BIN=$(OSCAM_FLAVOUR) USE_LIBCRYPTO=1 USE_LIBUSB=1 \
 		PLUS_TARGET="-rezap" \

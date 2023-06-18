@@ -5,7 +5,7 @@
 ################################################################################
 
 define TARGET_MAKE_BUILD_CMDS_DEFAULT
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(TARGET_MAKE_ENV) $($(PKG)_MAKE_ENV) \
 		$($(PKG)_MAKE) $($(PKG)_MAKE_ARGS)\
 			$($(PKG)_MAKE_OPTS)
@@ -19,7 +19,7 @@ define TARGET_MAKE_BUILD
 endef
 
 define TARGET_MAKE_INSTALL_CMDS_DEFAULT
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(TARGET_MAKE_ENV) $($(PKG)_MAKE_INSTALL_ENV) \
 		$($(PKG)_MAKE_INSTALL) $($(PKG)_MAKE_INSTALL_ARGS) DESTDIR=$(TARGET_DIR) \
 			$($(PKG)_MAKE_INSTALL_OPTS)
@@ -49,7 +49,7 @@ endef
 ################################################################################
 
 define HOST_MAKE_BUILD_CMDS_DEFAULT
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(HOST_MAKE_ENV) $($(PKG)_MAKE_ENV) \
 		$($(PKG)_MAKE) $($(PKG)_MAKE_ARGS)\
 			$($(PKG)_MAKE_OPTS)
@@ -63,7 +63,7 @@ define HOST_MAKE_BUILD
 endef
 
 define HOST_MAKE_INSTALL_CMDS_DEFAULT
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR)/$(1); \
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR)/$(1); \
 		$(HOST_MAKE_ENV) $($(PKG)_MAKE_INSTALL_ENV) \
 		$($(PKG)_MAKE_INSTALL) $($(PKG)_MAKE_INSTALL_ARGS) \
 			$($(PKG)_MAKE_INSTALL_OPTS)

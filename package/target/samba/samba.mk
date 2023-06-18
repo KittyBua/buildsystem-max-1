@@ -99,7 +99,7 @@ SAMBA_AUTOCONF_PATCH = autoconf2.71.patch
 endif
 
 define SAMBA_AUTOGEN_SH
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		./autogen.sh
 	$(call APPLY_PATCHES,$(SAMBA_AUTOCONF_PATCH))
 endef

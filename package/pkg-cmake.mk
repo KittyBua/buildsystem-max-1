@@ -51,7 +51,7 @@ TARGET_CMAKE_OPTS += \
 	-DCMAKE_CXX_FLAGS="$(TARGET_CFLAGS) -DNDEBUG"
 
 define TARGET_CMAKE_CMDS_DEFAULT
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		rm -f CMakeCache.txt; \
 		mkdir -p build; \
 		cd build; \
@@ -114,7 +114,7 @@ HOST_CMAKE_OPTS += \
 	-DCMAKE_PREFIX_PATH="$(HOST_DIR)"
 
 define HOST_CMAKE_CMDS_DEFAULT
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		rm -f CMakeCache.txt; \
 		mkdir -p build; \
 		cd build; \

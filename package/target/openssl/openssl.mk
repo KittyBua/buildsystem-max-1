@@ -41,12 +41,12 @@ OPENSSL_CONF_OPTS += \
 	$(TARGET_LDFLAGS)
 
 define OPENSSL_CONFIGURE_CMDS
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD) $(PKG_BUILD_DIR); \
 		./Configure $($(PKG)_CONF_OPTS)
 endef
 
 define OPENSSL_MAKE_DEPEND
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD) $(PKG_BUILD_DIR); \
 		$($(PKG)_MAKE) depend
 endef
 OPENSSL_PRE_BUILD_HOOKS += OPENSSL_MAKE_DEPEND

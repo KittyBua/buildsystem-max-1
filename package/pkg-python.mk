@@ -15,7 +15,7 @@ PYTHON_OPTS = \
 	$(if $(VERBOSE),,-q)
 
 define PYTHON_BUILD_CMDS_DEFAULT
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		$(TARGET_PYTHON_ENV) \
 		CPPFLAGS="$(TARGET_CPPFLAGS) -I$(TARGET_DIR)/$(PYTHON_INCLUDE_DIR)" \
 		$(HOST_PYTHON_BINARY) ./setup.py $(PYTHON_OPTS) build --executable=/usr/bin/python
@@ -29,7 +29,7 @@ define PYTHON_BUILD
 endef
 
 define PYTHON_INSTALL_CMDS_DEFAULT
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		$(TARGET_PYTHON_ENV) \
 		CPPFLAGS="$(TARGET_CPPFLAGS) -I$(TARGET_DIR)/$(PYTHON_INCLUDE_DIR)" \
 		$(HOST_PYTHON_BINARY) ./setup.py $(PYTHON_OPTS) install --root=$(TARGET_DIR) --prefix=/usr
@@ -67,7 +67,7 @@ HOST_PYTHON3_OPTS = \
 	$(if $(VERBOSE),,-q)
 
 define HOST_PYTHON3_BUILD_CMDS_DEFAULT
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		$(HOST_PYTHON3_ENV) \
 		$(HOST_PYTHON3_BINARY) ./setup.py $(HOST_PYTHON3_OPTS) build
 endef
@@ -80,7 +80,7 @@ define HOST_PYTHON3_BUILD
 endef
 
 define HOST_PYTHON3_INSTALL_CMDS_DEFAULT
-	$(CHDIR)/$($(PKG)_DIR)/$($(PKG)_SUBDIR); \
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		$(HOST_PYTHON3_ENV) \
 		$(HOST_PYTHON3_BINARY) ./setup.py $(HOST_PYTHON3_OPTS) install --prefix=$(HOST_DIR)
 endef

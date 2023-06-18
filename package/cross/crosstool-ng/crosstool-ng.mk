@@ -57,7 +57,7 @@ crosstool-ng:
 	$(call PREPARE)
 	unset $($(PKG)_UNSET); \
 	$(call HOST_CCACHE_LINK); \
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD) $(PKG_BUILD_DIR); \
 		ulimit -S -n 4096; \
 		export $($(PKG)_EXPORT); \
 		./bootstrap; \
@@ -80,7 +80,7 @@ crosstool-config:
 crosstool-ng-config: directories
 	$(call PREPARE)
 	unset CONFIG_SITE; \
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD) $(PKG_BUILD_DIR); \
 		$(INSTALL_DATA) $(subst -config,,$(CROSSTOOL_NG_CONFIG)) $(CROSSTOOL_NG_BUILD_CONFIG); \
 		./bootstrap; \
 		./configure --enable-local; \
@@ -93,7 +93,7 @@ crosstool-upgradeconfig:
 crosstool-ng-upgradeconfig: directories
 	$(call PREPARE)
 	unset CONFIG_SITE; \
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD) $(PKG_BUILD_DIR); \
 		$(INSTALL_DATA) $(subst -upgradeconfig,,$(CROSSTOOL_NG_CONFIG) $(CROSSTOOL_NG_BUILD_CONFIG); \
 		./bootstrap; \
 		./configure --enable-local; \

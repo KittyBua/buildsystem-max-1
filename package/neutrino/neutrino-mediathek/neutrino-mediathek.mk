@@ -14,7 +14,7 @@ NEUTRINO_MEDIATHEK_DEPENDS = $(SHARE_NEUTRINO_PLUGINS)
 
 $(D)/neutrino-mediathek: | bootstrap
 	$(call PREPARE)
-	$(CHDIR)/$($(PKG)_DIR); \
+	$(CD) $(PKG_BUILD_DIR); \
 		cp -a plugins/* $(SHARE_NEUTRINO_PLUGINS); \
 		cp -a share $(TARGET_DIR)/usr/
 	$(call TARGET_FOLLOWUP)
