@@ -74,31 +74,22 @@ endif
 #
 ################################################################################
 
-crosstool-config:
-	@make crosstool-ng-config
-
-crosstool-ng-config: directories
-	$(call PREPARE)
-	unset CONFIG_SITE; \
-	$(CD) $(PKG_BUILD_DIR); \
-		$(INSTALL_DATA) $(subst -config,,$(CROSSTOOL_NG_CONFIG)) $(CROSSTOOL_NG_BUILD_CONFIG); \
-		./bootstrap; \
-		./configure --enable-local; \
-		make; \
-		./ct-ng menuconfig
+crosstool-menuconfig:
+	@make crosstool-ng.menuconfig
 
 crosstool-upgradeconfig:
-	@make crosstool-ng-upgradeconfig
+	@make crosstool-ng.upgradeconfig
 
-crosstool-ng-upgradeconfig: directories
+crosstool-ng.menuconfig \
+crosstool-ng.upgradeconfig: directories
 	$(call PREPARE)
 	unset CONFIG_SITE; \
 	$(CD) $(PKG_BUILD_DIR); \
-		$(INSTALL_DATA) $(subst -upgradeconfig,,$(CROSSTOOL_NG_CONFIG) $(CROSSTOOL_NG_BUILD_CONFIG); \
+		$(INSTALL_DATA) $(CROSSTOOL_NG_CONFIG) $(CROSSTOOL_NG_BUILD_CONFIG); \
 		./bootstrap; \
 		./configure --enable-local; \
 		make; \
-		./ct-ng upgradeconfig
+		./ct-ng $(subst crosstool-ng.,,$(@))
 
 ################################################################################
 #
