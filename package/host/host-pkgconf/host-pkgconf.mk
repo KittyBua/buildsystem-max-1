@@ -7,7 +7,7 @@
 PKGCONF_VERSION = 1.9.5
 PKGCONF_DIR = pkgconf-$(PKGCONF_VERSION)
 PKGCONF_SOURCE = pkgconf-$(PKGCONF_VERSION).tar.xz
-PKGCONF_SITE = https://distfiles.dereferenced.org/pkgconf
+PKGCONF_SITE = https://distfiles..ariadne.space/pkgconf
 
 PKG_CONFIG_HOST_BINARY = $(HOST_DIR)/bin/pkg-config
 
