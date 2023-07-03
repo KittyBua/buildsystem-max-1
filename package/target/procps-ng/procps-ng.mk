@@ -29,6 +29,9 @@ PROCPS_NG_CONF_OPTS = \
 PROCPS_NG_CONF_OPTS += \
 	--enable-watch8bit
 
+PROCPS_NG_CONF_OPTS += \
+	CPPFLAGS=-DOFF_XTRAWIDE
+
 PROCPS_NG_BIN = \
 	free pgrep pkill pmap pwdx slabtop skill snice tload top uptime vmstat w
 
