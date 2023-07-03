@@ -9,7 +9,7 @@ FFMPEG_DIR = ffmpeg-$(FFMPEG_VERSION)
 FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VERSION).tar.xz
 FFMPEG_SITE = http://www.ffmpeg.org/releases
 
-FFMPEG_DEPENDS = openssl zlib bzip2 freetype libvorbis libass rtmpdump libxml2 x264
+FFMPEG_DEPENDS = openssl zlib bzip2 freetype rtmpdump libass libxml2
 
 FFMPEG_CONF_OPTS = \
 	--disable-ffplay \
