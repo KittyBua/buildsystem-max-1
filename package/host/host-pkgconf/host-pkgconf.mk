@@ -11,11 +11,16 @@ PKGCONF_SITE = https://distfiles.dereferenced.org/pkgconf
 
 PKG_CONFIG_HOST_BINARY = $(HOST_DIR)/bin/pkg-config
 
-define HOST_PKGCONF_INSTALL_FILES
-	$(INSTALL_EXEC) $(PKG_FILES_DIR)/pkgconf-config $(HOST_DIR)/bin/pkg-config
+define PKGCONF_LINK_PKGCONFIG
 	ln -sf pkg-config $(HOST_DIR)/bin/$(GNU_TARGET_NAME)-pkg-config
 endef
-HOST_PKGCONF_POST_INSTALL_HOOKS += HOST_PKGCONF_INSTALL_FILES
+HOST_PKGCONF_POST_INSTALL_HOOKS += PKGCONF_LINK_PKGCONFIG
+
+define HOST_PKGCONF_INSTALL_WRAPPER
+	$(INSTALL_EXEC) $(PKG_FILES_DIR)/pkg-config.in \
+		$(HOST_DIR)/bin/pkg-config
+endef
+HOST_PKGCONF_POST_INSTALL_HOOKS += HOST_PKGCONF_INSTALL_WRAPPER
 
 $(D)/host-pkgconf: | directories
 	$(call host-autotools-package)
