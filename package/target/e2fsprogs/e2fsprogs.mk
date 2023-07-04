@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-E2FSPROGS_VERSION = 1.46.5
+E2FSPROGS_VERSION = 1.47.0
 E2FSPROGS_DIR = e2fsprogs-$(E2FSPROGS_VERSION)
 E2FSPROGS_SOURCE = e2fsprogs-$(E2FSPROGS_VERSION).tar.gz
 E2FSPROGS_SITE = https://sourceforge.net/projects/e2fsprogs/files/e2fsprogs/v$(E2FSPROGS_VERSION)
