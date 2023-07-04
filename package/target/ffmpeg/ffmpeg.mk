@@ -9,7 +9,7 @@ FFMPEG_DIR = ffmpeg-$(FFMPEG_VERSION)
 FFMPEG_SOURCE = ffmpeg-$(FFMPEG_VERSION).tar.xz
 FFMPEG_SITE = http://www.ffmpeg.org/releases
 
-FFMPEG_DEPENDS = openssl zlib bzip2 freetype rtmpdump libass libxml2
+FFMPEG_DEPENDS = openssl zlib bzip2 freetype libvorbis rtmpdump libass libxml2
 
 FFMPEG_CONF_OPTS = \
 	--disable-ffplay \
@@ -287,10 +287,6 @@ FFMPEG_CONF_OPTS = \
 	--enable-filter=overlay \
 	--enable-filter=scale \
 	\
-	--enable-libx264 \
-	--enable-encoder=libx264 \
-	--enable-gpl \
-	\
 	--enable-bsfs \
 	--enable-bzlib \
 	--enable-libass \
@@ -319,7 +315,7 @@ FFMPEG_CONF_OPTS = \
 	--enable-swresample \
 	--enable-hardcoded-tables
 
-ifeq ($(TARGET_ARCH), arm)
+ifeq ($(TARGET_ARCH),arm)
 FFMPEG_CONF_OPTS += \
 	--enable-armv6 \
 	--enable-armv6t2 \
@@ -327,13 +323,13 @@ FFMPEG_CONF_OPTS += \
 	--enable-vfp \
 	--cpu=cortex-a15
 endif
-ifeq ($(TARGET_ARCH), aarch64)
+ifeq ($(TARGET_ARCH),aarch64)
 FFMPEG_CONF_OPTS += \
 	--enable-armv8 \
 	--enable-vfp \
 	--enable-neon
 endif
-ifeq ($(TARGET_ARCH), mips)
+ifeq ($(TARGET_ARCH),mips)
 FFMPEG_CONF_OPTS += \
 	--disable-mips32r5 \
 	--disable-mipsdsp \
