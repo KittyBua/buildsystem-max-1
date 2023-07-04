@@ -9,6 +9,8 @@ PKGCONF_DIR = pkgconf-$(PKGCONF_VERSION)
 PKGCONF_SOURCE = pkgconf-$(PKGCONF_VERSION).tar.xz
 PKGCONF_SITE = https://distfiles..ariadne.space/pkgconf
 
+HOST_PKGCONF_AUTORECONF = YES
+
 PKG_CONFIG_HOST_BINARY = $(HOST_DIR)/bin/pkg-config
 
 define PKGCONF_LINK_PKGCONFIG
