@@ -7,7 +7,7 @@
 PKGCONF_VERSION = 1.9.5
 PKGCONF_DIR = pkgconf-$(PKGCONF_VERSION)
 PKGCONF_SOURCE = pkgconf-$(PKGCONF_VERSION).tar.xz
-PKGCONF_SITE = https://distfiles..ariadne.space/pkgconf
+PKGCONF_SITE = https://distfiles.ariadne.space/pkgconf
 
 HOST_PKGCONF_AUTORECONF = YES
 
