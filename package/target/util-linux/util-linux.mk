@@ -4,11 +4,11 @@
 #
 ################################################################################
 
-UTIL_LINUX_VERSION = 2.38
+UTIL_LINUX_VERSION = 2.39.1
 UTIL_LINUX_DIR = util-linux-$(UTIL_LINUX_VERSION)
 UTIL_LINUX_SOURCE = util-linux-$(UTIL_LINUX_VERSION).tar.xz
-UTIL_LINUX_SITE = https://www.kernel.org/pub/linux/utils/util-linux/v$(UTIL_LINUX_VERSION)
-#UTIL_LINUX_SITE = https://www.kernel.org/pub/linux/utils/util-linux/v$(basename $(UTIL_LINUX_VERSION))
+#UTIL_LINUX_SITE = https://www.kernel.org/pub/linux/utils/util-linux/v$(UTIL_LINUX_VERSION)
+UTIL_LINUX_SITE = https://www.kernel.org/pub/linux/utils/util-linux/v$(basename $(UTIL_LINUX_VERSION))
 
 UTIL_LINUX_DEPENDS = ncurses zlib
 
@@ -111,9 +111,9 @@ endef
 UTIL_LINUX_POST_INSTALL_HOOKS += UTIL_LINUX_INSTALL_FILES
 
 define UTIL_LINUX_TARGET_CLEANUP
-	rm -f $(addprefix $(TARGET_DIR)/bin/,findmnt)
+	rm -f $(addprefix $(TARGET_DIR)/bin/,findmnt lsfd pipesz)
 	rm -f $(addprefix $(TARGET_BASE_SBIN_DIR)/,blkdiscard blkzone blockdev cfdisk chcpu ctrlaltdel fsfreeze fstrim mkfs mkswap swaplabel)
-	rm -f $(addprefix $(TARGET_BIN_DIR)/,choom col colcrt colrm column fincore flock getopt ipcmk isosize linux32 linux64 look lscpu lsipc lslocks lsns mcookie namei prlimit renice rev script scriptlive scriptreplay setarch setsid uname26 uuidgen uuidparse whereis)
+	rm -f $(addprefix $(TARGET_BIN_DIR)/,choom col colcrt colrm column fadvise fincore flock getopt ipcmk irqtop isosize linux32 linux64 look lscpu lsipc lslocks lsns mcookie namei prlimit renice rev script scriptlive scriptreplay setarch setsid uname26 uuidgen uuidparse whereis)
 	rm -f $(addprefix $(TARGET_SBIN_DIR)/,ldattach readprofile rtcwake)
 endef
 UTIL_LINUX_TARGET_CLEANUP_HOOKS += UTIL_LINUX_TARGET_CLEANUP
