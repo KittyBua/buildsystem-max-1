@@ -80,7 +80,7 @@ oscam.do_compile:
 $(D)/oscam: | bootstrap oscam.do_prepare oscam.do_compile
 	rm -rf $(IMAGE_DIR)/$(OSCAM_FLAVOUR)
 	mkdir $(IMAGE_DIR)/$(OSCAM_FLAVOUR)
-	cp -pR $(PKG_BUILD_DIR)/Distribution/* $(IMAGE_DIR)/$(OSCAM_FLAVOUR)/
+	cp -pR $(PKG_BUILD_DIR)/Distribution/oscam* $(IMAGE_DIR)/$(OSCAM_FLAVOUR)/
 	$(call TARGET_FOLLOWUP)
 
 oscam-clean:
