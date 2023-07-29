@@ -247,7 +247,7 @@ endef
 
 # start-up build
 define STARTUP
-	$(call DEPENDS)
+	$(if $($(PKG)_DEPENDS),$(call DEPENDS))
 	@$(call MESSAGE,"Start-up build")
 	$(Q)$(call CLEANUP)
 endef
@@ -256,7 +256,7 @@ endef
 
 # resolve dependencies
 define DEPENDS
-	@make $($(PKG)_DEPENDS)
+	@+make $($(PKG)_DEPENDS)
 endef
 
 # -----------------------------------------------------------------------------
