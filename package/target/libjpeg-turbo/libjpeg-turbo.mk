@@ -11,6 +11,7 @@ LIBJPEG_TURBO_SITE = https://sourceforge.net/projects/libjpeg-turbo/files/$(LIBJ
 
 LIBJPEG_TURBO_CONF_OPTS = \
 	-DCMAKE_INSTALL_BINDIR="$(REMOVE_bindir)" \
+	-DCMAKE_SKIP_INSTALL_RPATH=ON \
 	-DWITH_SIMD=False \
 	-DWITH_JPEG8=80
 
