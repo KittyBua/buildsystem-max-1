@@ -56,7 +56,7 @@ crosstool:
 crosstool-ng:
 	$(call PREPARE)
 	unset $($(PKG)_UNSET); \
-	$(call HOST_CCACHE_LINK); \
+	$(call HOST_CCACHE_LINKS); \
 	$(CD) $(PKG_BUILD_DIR); \
 		ulimit -S -n 4096; \
 		export $($(PKG)_EXPORT); \
