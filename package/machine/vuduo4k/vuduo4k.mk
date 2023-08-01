@@ -51,7 +51,6 @@ VUDUO4K_PLATFORM_UTIL_DIR = platform-util-vuduo4k
 VUDUO4K_PLATFORM_UTIL_SOURCE = platform-util-vuduo4k-$(VUDUO4K_PLATFORM_UTIL_VERSION).tar.gz
 VUDUO4K_PLATFORM_UTIL_SITE = http://code.vuplus.com/download/release/platform-util
 
-
 define VUDUO4K_PLATFORM_UTIL_INSTALL_INIT_SYSV
 	$(INSTALL_EXEC) $(PKG_FILES_DIR)/vuplus-platform-util $(TARGET_DIR)/etc/init.d/vuplus-platform-util
 	$(UPDATE-RC.D) vuplus-platform-util start 65 S . stop 90 0 .
@@ -70,7 +69,7 @@ $(D)/vuduo4k-platform-util: | bootstrap
 ################################################################################
 
 ifeq ($(VU_MULTIBOOT),1)
-VUDUO4K_VMLINUZ_INITRD_DATE = 20221006
+VUDUO4K_VMLINUZ_INITRD_DATE = 20230801
 VUDUO4K_VMLINUZ_INITRD_SITE = https://bitbucket.org/max_10/vmlinuz-initrd-vuduo4k/downloads
 else
 VUDUO4K_VMLINUZ_INITRD_DATE = 20181030

@@ -68,7 +68,7 @@ $(D)/vuuno4k-platform-util: | bootstrap
 ################################################################################
 
 ifeq ($(VU_MULTIBOOT),1)
-VUUNO4K_VMLINUZ_INITRD_DATE = 20221006
+VUUNO4K_VMLINUZ_INITRD_DATE = 20230801
 VUUNO4K_VMLINUZ_INITRD_SITE = https://bitbucket.org/max_10/vmlinuz-initrd-vuuno4k/downloads
 else
 VUUNO4K_VMLINUZ_INITRD_DATE = 20170209
