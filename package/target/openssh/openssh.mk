@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-OPENSSH_VERSION = 9.3p2
+OPENSSH_VERSION = 9.4p1
 OPENSSH_DIR = openssh-$(OPENSSH_VERSION)
 OPENSSH_SOURCE = openssh-$(OPENSSH_VERSION).tar.gz
 OPENSSH_SITE = https://artfiles.org/openbsd/OpenSSH/portable
@@ -20,7 +20,7 @@ OPENSSH_CONF_OPTS = \
 	LOGIN_PROGRAM=$(base_bindir)/login \
 	--sysconfdir=/etc/ssh \
 	--with-privsep-path=/var/run/sshd \
-	--with-cppflags="-pipe -Os -I$(TARGET_INCLUDE_DIR)" \
+	--with-cppflags="$(TARGET_OPTIMIZATION)  -I$(TARGET_INCLUDE_DIR)" \
 	--with-ldflags="-L$(TARGET_LIB_DIR)" \
 	--without-bsd-auth \
 	--without-kerberos5 \
