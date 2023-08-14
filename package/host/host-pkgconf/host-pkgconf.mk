@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-PKGCONF_VERSION = 1.9.5
+PKGCONF_VERSION = 2.0.1
 PKGCONF_DIR = pkgconf-$(PKGCONF_VERSION)
 PKGCONF_SOURCE = pkgconf-$(PKGCONF_VERSION).tar.xz
 PKGCONF_SITE = https://distfiles.ariadne.space/pkgconf
