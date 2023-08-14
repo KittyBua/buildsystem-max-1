@@ -70,7 +70,7 @@ oscam.do_prepare:
 oscam.do_compile:
 	$(CD) $(PKG_BUILD_DIR); \
 		$(TARGET_CONFIGURE_ENV) \
-		$(MAKE) CROSS=$(TARGET_CROSS) USE_LIBCRYPTO=1 USE_LIBUSB=1 \
+		$(MAKE) CROSS=$(TARGET_CROSS) OSCAM_BIN=$(OSCAM_FLAVOUR) USE_LIBCRYPTO=1 USE_LIBUSB=1 \
 		PLUS_TARGET="-rezap" \
 		CONF_DIR=/var/keys \
 		EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
@@ -80,7 +80,7 @@ oscam.do_compile:
 $(D)/oscam: | bootstrap oscam.do_prepare oscam.do_compile
 	rm -rf $(IMAGE_DIR)/$(OSCAM_FLAVOUR)
 	mkdir $(IMAGE_DIR)/$(OSCAM_FLAVOUR)
-	cp -pR $(PKG_BUILD_DIR)/Distribution/oscam* $(IMAGE_DIR)/$(OSCAM_FLAVOUR)/
+	cp -pR $(PKG_BUILD_DIR)/$(OSCAM_FLAVOUR) $(IMAGE_DIR)/$(OSCAM_FLAVOUR)/
 	$(call TARGET_FOLLOWUP)
 
 oscam-clean:
