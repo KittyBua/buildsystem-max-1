@@ -376,21 +376,16 @@ define APPLY_PATCHES # (patches or directory)
 	  fi; \
 	  if [ -d $$i ]; then \
 	    $(call MESSAGE,"Patching"); \
+	    v=; \
 	    if [ -d $$i/$($(PKG)_VERSION) ]; then \
-	      for p in $(addprefix $$i/,$($(PKG)_VERSION)/$(PATCHES)); do \
-	        if [ -e $$p ]; then \
-	          echo -e "Applying $${p##*/}"; \
-	          patch -p1 -i $$p; \
-	        fi; \
-	      done; \
-	    else \
-	      for p in $(addprefix $$i/,$(PATCHES)); do \
-	        if [ -e $$p ]; then \
-	          echo -e "Applying $${p##*/}"; \
-	          patch -p1 -i $$p; \
-	        fi; \
-	      done; \
+	      v="$($(PKG)_VERSION)/"; \
 	    fi; \
+	    for p in $(addprefix $$i/$$v,$(PATCHES)); do \
+	      if [ -e $$p ]; then \
+	        echo -e "Applying $${p##*/}"; \
+	        patch -p1 -i $$p; \
+	      fi; \
+	    done; \
 	  else \
 	    $(call MESSAGE,"Patching"); \
 	    if [ $${i:0:1} == "/" ]; then \
