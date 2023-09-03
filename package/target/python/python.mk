@@ -66,7 +66,7 @@ PYTHON_MAKE_OPTS = \
 	all DESTDIR=$(TARGET_DIR)
 
 define PYTHON_CREATE_SYMLINK
-	ln -sf ../../libpython$(PYTHON_VERSION_MAJOR).so.1.0 $(TARGET_DIR)/$(PYTHON_LIB_DIR)/config/libpython$(basename $(PYTHON_VERSION)).so
+	ln -sf ../../libpython$(basename $(PYTHON_VERSION)).so.1.0 $(TARGET_DIR)/$(PYTHON_LIB_DIR)/config/libpython$(basename $(PYTHON_VERSION)).so
 	ln -sf $(TARGET_DIR)/$(PYTHON_INCLUDE_DIR) $(TARGET_DIR)/usr/include/python
 endef
 PYTHON_POST_INSTALL_HOOKS += PYTHON_CREATE_SYMLINK
