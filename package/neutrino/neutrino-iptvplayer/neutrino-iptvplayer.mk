@@ -5,8 +5,8 @@
 ################################################################################
 
 NEUTRINO_IPTVPLAYER_VERSION = master
-NEUTRINO_IPTVPLAYER_DIR = iptvplayer.git
-NEUTRINO_IPTVPLAYER_SOURCE = iptvplayer.git
+NEUTRINO_IPTVPLAYER_DIR = crossplatform_iptvplayer.git
+NEUTRINO_IPTVPLAYER_SOURCE = crossplatform_iptvplayer.git
 NEUTRINO_IPTVPLAYER_SITE = https://github.com/TangoCash
 NEUTRINO_IPTVPLAYER_SITE_METHOD = git
 
