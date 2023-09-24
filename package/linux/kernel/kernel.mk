@@ -30,7 +30,7 @@ ifeq ($(BOXMODEL),$(filter $(BOXMODEL),bre2ze4k h7 hd51 e4hdultra protek4k))
 endif
 	@touch $(D)/$(notdir $@)
 
-$(D)/kernel: bootstrap kernel.do_compile
+$(D)/kernel: bootstrap host-kmod kernel.do_compile
 	mkdir -p $(TARGET_MODULES_DIR)
 	cp -a $(KERNEL_MODULES_DIR)/kernel $(TARGET_MODULES_DIR)
 	cp -a $(KERNEL_MODULES_DIR)/modules.builtin $(TARGET_MODULES_DIR)
