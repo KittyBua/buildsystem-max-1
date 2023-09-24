@@ -4,10 +4,10 @@
 #
 ################################################################################
 
-SYSSTAT_VERSION = 12.6.2
+SYSSTAT_VERSION = 12.7.4
 SYSSTAT_DIR = sysstat-$(SYSSTAT_VERSION)
 SYSSTAT_SOURCE = sysstat-$(SYSSTAT_VERSION).tar.xz
-SYSSTAT_SITE = http://pagesperso-orange.fr/sebastien.godard
+SYSSTAT_SITE = https://sysstat.github.io/sysstat-packages
 
 SYSSTAT_CONF_OPTS = \
 	--docdir=$(REMOVE_docdir) \
