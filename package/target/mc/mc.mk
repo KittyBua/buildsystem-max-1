@@ -17,7 +17,6 @@ MC_CONF_ENV = \
 	CFLAGS+=' -DNCURSES_WIDECHAR=0'
 
 MC_CONF_OPTS = \
-	--with-homedir=/var/tuxbox/config/mc \
 	--enable-charset \
 	--disable-nls \
 	--with-screen=ncurses \
