@@ -11,31 +11,31 @@ TARGET_PYTHON_ENV = \
 	LDSHARED="$(TARGET_CC) -shared" \
 	PYTHONPATH=$(TARGET_DIR)/$(PYTHON_SITE_PACKAGES_DIR)
 
-PYTHON_OPTS = \
+TARGET_PYTHON_OPTS = \
 	$(if $(VERBOSE),,-q)
 
-define PYTHON_BUILD_CMDS_DEFAULT
+define TARGET_PYTHON_BUILD_CMDS_DEFAULT
 	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		$(TARGET_PYTHON_ENV) \
 		CPPFLAGS="$(TARGET_CPPFLAGS) -I$(TARGET_DIR)/$(PYTHON_INCLUDE_DIR)" \
-		$(HOST_PYTHON_BINARY) ./setup.py $(PYTHON_OPTS) build --executable=/usr/bin/python
+		$(HOST_PYTHON_BINARY) ./setup.py $(TARGET_PYTHON_OPTS) build --executable=/usr/bin/python
 endef
 
-define PYTHON_BUILD
+define TARGET_PYTHON_BUILD
 	@$(call MESSAGE,"Building")
 	$(foreach hook,$($(PKG)_PRE_BUILD_HOOKS),$(call $(hook))$(sep))
 	$(Q)$(call $(PKG)_BUILD_CMDS)
 	$(foreach hook,$($(PKG)_POST_BUILD_HOOKS),$(call $(hook))$(sep))
 endef
 
-define PYTHON_INSTALL_CMDS_DEFAULT
+define TARGET_PYTHON_INSTALL_CMDS_DEFAULT
 	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
 		$(TARGET_PYTHON_ENV) \
 		CPPFLAGS="$(TARGET_CPPFLAGS) -I$(TARGET_DIR)/$(PYTHON_INCLUDE_DIR)" \
-		$(HOST_PYTHON_BINARY) ./setup.py $(PYTHON_OPTS) install --root=$(TARGET_DIR) --prefix=/usr
+		$(HOST_PYTHON_BINARY) ./setup.py $(TARGET_PYTHON_OPTS) install --root=$(TARGET_DIR) --prefix=/usr
 endef
 
-define PYTHON_INSTALL
+define TARGET_PYTHON_INSTALL
 	@$(call MESSAGE,"Installing")
 	$(foreach hook,$($(PKG)_PRE_INSTALL_HOOKS),$(call $(hook))$(sep))
 	$(Q)$(call $(PKG)_INSTALL_CMDS)
@@ -45,8 +45,8 @@ endef
 define python-package
 	$(eval PKG_MODE = $(pkg-mode))
 	$(call PREPARE,$(1))
-	$(if $(filter $(1),$(PKG_NO_BUILD)),,$(call PYTHON_BUILD))
-	$(if $(filter $(1),$(PKG_NO_INSTALL)),,$(call PYTHON_INSTALL))
+	$(if $(filter $(1),$(PKG_NO_BUILD)),,$(call TARGET_PYTHON_BUILD))
+	$(if $(filter $(1),$(PKG_NO_INSTALL)),,$(call TARGET_PYTHON_INSTALL))
 	$(call TARGET_FOLLOWUP)
 endef
 
@@ -55,6 +55,52 @@ endef
 # Python3 package infrastructure
 #
 ################################################################################
+
+TARGET_PYTHON3_ENV = \
+	CC="$(TARGET_CC)" \
+	CFLAGS="$(TARGET_CFLAGS)" \
+	LDFLAGS="$(TARGET_LDFLAGS)" \
+	LDSHARED="$(TARGET_CC) -shared" \
+	PYTHONPATH=$(TARGET_DIR)/$(PYTHON3_SITE_PACKAGES_DIR)
+
+TARGET_PYTHON3_OPTS = \
+	$(if $(VERBOSE),,-q)
+
+define TARGET_PYTHON3_BUILD_CMDS_DEFAULT
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
+		$(TARGET_PYTHON3_ENV) \
+		CPPFLAGS="$(TARGET_CPPFLAGS) -I$(TARGET_DIR)/$(PYTHON3_INCLUDE_DIR)" \
+		$(HOST_PYTHON3_BINARY) ./setup.py $(TARGET_PYTHON3_OPTS) build --executable=/usr/bin/python
+endef
+
+define TARGET_PYTHON3_BUILD
+	@$(call MESSAGE,"Building")
+	$(foreach hook,$($(PKG)_PRE_BUILD_HOOKS),$(call $(hook))$(sep))
+	$(Q)$(call $(PKG)_BUILD_CMDS)
+	$(foreach hook,$($(PKG)_POST_BUILD_HOOKS),$(call $(hook))$(sep))
+endef
+
+define TARGET_PYTHON3_INSTALL_CMDS_DEFAULT
+	$(CD) $(PKG_BUILD_DIR)/$($(PKG)_SUBDIR); \
+		$(TARGET_PYTHON3_ENV) \
+		CPPFLAGS="$(TARGET_CPPFLAGS) -I$(TARGET_DIR)/$(PYTHON3_INCLUDE_DIR)" \
+		$(HOST_PYTHON3_BINARY) ./setup.py $(TARGET_PYTHON3_OPTS) install --root=$(TARGET_DIR) --prefix=/usr
+endef
+
+define TARGET_PYTHON3_INSTALL
+	@$(call MESSAGE,"Installing")
+	$(foreach hook,$($(PKG)_PRE_INSTALL_HOOKS),$(call $(hook))$(sep))
+	$(Q)$(call $(PKG)_INSTALL_CMDS)
+	$(foreach hook,$($(PKG)_POST_INSTALL_HOOKS),$(call $(hook))$(sep))
+endef
+
+define python3-package
+	$(eval PKG_MODE = $(pkg-mode))
+	$(call PREPARE,$(1))
+	$(if $(filter $(1),$(PKG_NO_BUILD)),,$(call TARGET_PYTHON3_BUILD))
+	$(if $(filter $(1),$(PKG_NO_INSTALL)),,$(call TARGET_PYTHON3_INSTALL))
+	$(call TARGET_FOLLOWUP)
+endef
 
 HOST_PYTHON3_ENV = \
 	CC="$(HOSTCC)" \
