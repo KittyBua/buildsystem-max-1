@@ -17,10 +17,10 @@ python-iptv-install:
 	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/{lib-old,lib-tk,multiprocessing,plat-linux2,pydoc_data,sqlite3,unittest,wsgiref}
 	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/lib-dynload/{_codecs_*.so,_curses*.so,_csv.so,_multi*.so}
 	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/lib-dynload/{audioop.so,cmath.so,future_builtins.so,mmap.so,strop.so}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_SITEPACKAGES_DIR)/setuptools
-	rm -rf $(RELEASE_DIR)/$(PYTHON_SITEPACKAGES_DIR)/twisted/{application,conch,cred,enterprise,flow,lore,mail,names,news,pair,persisted}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_SITEPACKAGES_DIR)/twisted/{plugins,positioning,runner,scripts,spread,tap,_threads,trial,web,words}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_SITEPACKAGES_DIR)/twisted/python/_pydoctortemplates
+	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/setuptools
+	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/{application,conch,cred,enterprise,flow,lore,mail,names,news,pair,persisted}
+	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/{plugins,positioning,runner,scripts,spread,tap,_threads,trial,web,words}
+	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/python/_pydoctortemplates
 	find $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/ $(RELEASE_DIR)/usr/share/E2emulator/ \
 		\( -name '*.a' \
 		-o -name '*.c' \

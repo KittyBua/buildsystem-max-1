@@ -13,7 +13,7 @@ PYTHON_DEPENDS = host-python ncurses zlib openssl libffi expat bzip2
 
 PYTHON_LIB_DIR = usr/lib/python$(basename $(PYTHON_VERSION))
 PYTHON_INCLUDE_DIR = usr/include/python$(basename $(PYTHON_VERSION))
-PYTHON_SITEPACKAGES_DIR = $(PYTHON_LIB_DIR)/site-packages
+PYTHON_SITE_PACKAGES_DIR = $(PYTHON_LIB_DIR)/site-packages
 
 PYTHON_CONF_ENV = \
 	ac_sys_system=Linux \
