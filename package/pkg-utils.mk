@@ -139,14 +139,10 @@ ifndef $(PKG)_BUILD_CMDS
     else
       $(PKG)_BUILD_CMDS = $$(TARGET_NINJA_BUILD_CMDS_DEFAULT)
     endif
-  else ifeq ($(PKG_MODE),PYTHON3)
-    ifeq ($(PKG_PACKAGE),HOST)
-      $(PKG)_BUILD_CMDS = $$(HOST_PYTHON3_BUILD_CMDS_DEFAULT)
-    else
-      $(PKG)_BUILD_CMDS = $$(TARGET_PYTHON3_BUILD_CMDS_DEFAULT)
-    endif
   else ifeq ($(PKG_MODE),PYTHON)
-    ifeq ($(PKG_PACKAGE),TARGET)
+    ifeq ($(PKG_PACKAGE),HOST)
+      $(PKG)_BUILD_CMDS = $$(HOST_PYTHON_BUILD_CMDS_DEFAULT)
+    else
       $(PKG)_BUILD_CMDS = $$(TARGET_PYTHON_BUILD_CMDS_DEFAULT)
     endif
   else ifeq ($(PKG_MODE),KERNEL_MODULE)
@@ -195,14 +191,10 @@ ifndef $(PKG)_INSTALL_CMDS
     else
       $(PKG)_INSTALL_CMDS = $$(TARGET_NINJA_INSTALL_CMDS_DEFAULT)
     endif
-  else ifeq ($(PKG_MODE),PYTHON3)
-    ifeq ($(PKG_PACKAGE),HOST)
-      $(PKG)_INSTALL_CMDS = $$(HOST_PYTHON3_INSTALL_CMDS_DEFAULT)
-    else
-      $(PKG)_INSTALL_CMDS = $$(TARGET_PYTHON3_INSTALL_CMDS_DEFAULT)
-    endif
   else ifeq ($(PKG_MODE),PYTHON)
-    ifeq ($(PKG_PACKAGE),TARGET)
+    ifeq ($(PKG_PACKAGE),HOST)
+      $(PKG)_INSTALL_CMDS = $$(HOST_PYTHON_INSTALL_CMDS_DEFAULT)
+    else
       $(PKG)_INSTALL_CMDS = $$(TARGET_PYTHON_INSTALL_CMDS_DEFAULT)
     endif
   else ifeq ($(PKG_MODE),KERNEL_MODULE)
@@ -228,6 +220,27 @@ ifeq ($(PKG_MODE),KCONFIG)
     $(PKG)_KCONFIG_FILE = .config
   endif
   $(PKG)_KCONFIG_DOTCONFIG = $$($(PKG)_KCONFIG_FILE)
+endif
+
+# auto-assign some dependencies
+ifndef $(PKG)_DEPENDS
+  $(PKG)_DEPENDS =
+endif
+ifeq ($(PKG_MODE),MESON)
+  $(PKG)_DEPENDS += host-meson
+endif
+ifeq ($(PKG_MODE),PYTHON)
+  ifeq ($(PKG_PACKAGE),HOST)
+    $(PKG)_DEPENDS += host-python3
+    $(PKG)_DEPENDS += $$(if $$(filter $$(pkg),host-python-setuptools),,host-python-setuptools)
+  else
+    $(PKG)_DEPENDS += python3
+    $(PKG)_DEPENDS += $$(if $$(filter $$(pkg),python-setuptools),,python-setuptools)
+  endif
+endif
+ifeq ($(PKG_MODE),WAF)
+  $(PKG)_DEPENDS += host-python3
+  $(PKG)_DEPENDS += host-waf
 endif
 
 endef # PKG_CHECK_VARIABLES
