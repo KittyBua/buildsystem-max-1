@@ -95,6 +95,8 @@ ifndef $(PKG)_CONFIGURE_CMDS
     else
       $(PKG)_CONFIGURE_CMDS = $$(TARGET_MESON_CMDS_DEFAULT)
     endif
+  else ifeq ($(PKG_MODE),WAF)
+    $(PKG)_CONFIGURE_CMDS = $$(WAF_CONFIGURE_CMDS_DEFAULT)
   else
     ifeq ($(PKG_PACKAGE),HOST)
       $(PKG)_CONFIGURE_CMDS = $$(HOST_CONFIGURE_CMDS_DEFAULT)
@@ -116,6 +118,11 @@ ifndef $(PKG)_MAKE_ARGS
 endif
 ifndef $(PKG)_MAKE_OPTS
   $(PKG)_MAKE_OPTS =
+endif
+
+# waf
+ifndef $(PKG)_BUILD_OPTS
+  $(PKG)_BUILD_OPTS =
 endif
 
 # build commands
@@ -145,7 +152,7 @@ ifndef $(PKG)_BUILD_CMDS
   else ifeq ($(PKG_MODE),KERNEL_MODULE)
     $(PKG)_BUILD_CMDS = $$(KERNEL_MODULE_BUILD_CMDS_DEFAULT)
   else ifeq ($(PKG_MODE),WAF)
-    $(PKG)_BUILD_CMDS = $$(TARGET_WAF_BUILD_CMDS_DEFAULT)
+    $(PKG)_BUILD_CMDS = $$(WAF_BUILD_CMDS_DEFAULT)
   else
     $(PKG)_BUILD_CMDS = echo "$(PKG_NO_BUILD)"
   endif
@@ -167,6 +174,11 @@ ifndef $(PKG)_MAKE_INSTALL_ARGS
 endif
 ifndef $(PKG)_MAKE_INSTALL_OPTS
   $(PKG)_MAKE_INSTALL_OPTS = $$($(PKG)_MAKE_OPTS)
+endif
+
+# waf
+ifndef $(PKG)_INSTALL_OPTS
+  $(PKG)_INSTALL_OPTS =
 endif
 
 # install commands
@@ -196,7 +208,7 @@ ifndef $(PKG)_INSTALL_CMDS
   else ifeq ($(PKG_MODE),KERNEL_MODULE)
     $(PKG)_INSTALL_CMDS = $$(KERNEL_MODULE_INSTALL_CMDS_DEFAULT)
   else ifeq ($(PKG_MODE),WAF)
-    $(PKG)_INSTALL_CMDS = $$(TARGET_WAF_INSTALL_CMDS_DEFAULT)
+    $(PKG)_INSTALL_CMDS = $$(WAF_INSTALL_CMDS_DEFAULT)
   else
     $(PKG)_INSTALL_CMDS = echo "$(PKG_NO_INSTALL)"
   endif
