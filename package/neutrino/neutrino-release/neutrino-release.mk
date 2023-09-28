@@ -8,27 +8,26 @@
 # python-iptv-install
 #
 python-iptv-install:
-	mkdir -p $(RELEASE_DIR)/$(PYTHON_INCLUDE_DIR)
-	cp $(TARGET_DIR)/$(PYTHON_INCLUDE_DIR)/pyconfig.h $(RELEASE_DIR)/$(PYTHON_INCLUDE_DIR)
+	mkdir -p $(RELEASE_DIR)/$(PYTHON3_INCLUDE_DIR)
+	cp $(TARGET_DIR)/$(PYTHON3_INCLUDE_DIR)/pyconfig.h $(RELEASE_DIR)/$(PYTHON3_INCLUDE_DIR)
 	cp -af $(TARGET_SHARE_DIR)/E2emulator $(RELEASE_DIR)/usr/share/
 	ln -sf /usr/share/E2emulator/Plugins/Extensions/IPTVPlayer/cmdlineIPTV.sh $(RELEASE_DIR)/usr/bin/cmdlineIPTV
 	rm -f $(RELEASE_DIR)/usr/bin/{cftp,ckeygen,easy_install*,mailmail,pyhtmlizer,tkconch,trial,twist,twistd}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/{bsddb,compiler,curses,distutils,email,ensurepip,hotshot,idlelib,lib2to3}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/{lib-old,lib-tk,multiprocessing,plat-linux2,pydoc_data,sqlite3,unittest,wsgiref}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/lib-dynload/{_codecs_*.so,_curses*.so,_csv.so,_multi*.so}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/lib-dynload/{audioop.so,cmath.so,future_builtins.so,mmap.so,strop.so}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/setuptools
-	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/{application,conch,cred,enterprise,flow,lore,mail,names,news,pair,persisted}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/{plugins,positioning,runner,scripts,spread,tap,_threads,trial,web,words}
-	rm -rf $(RELEASE_DIR)/$(PYTHON_SITE_PACKAGES_DIR)/twisted/python/_pydoctortemplates
-	find $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/ $(RELEASE_DIR)/usr/share/E2emulator/ \
+	rm -rf $(RELEASE_DIR)/$(PYTHON3_LIB_DIR)/{bsddb,compiler,curses,distutils,email,ensurepip,hotshot,idlelib,lib2to3}
+	rm -rf $(RELEASE_DIR)/$(PYTHON3_LIB_DIR)/{lib-old,lib-tk,multiprocessing,plat-linux2,pydoc_data,sqlite3,unittest,wsgiref}
+	rm -rf $(RELEASE_DIR)/$(PYTHON3_LIB_DIR)/lib-dynload/{_codecs_*.so,_curses*.so,_csv.so,_multi*.so}
+	rm -rf $(RELEASE_DIR)/$(PYTHON3_LIB_DIR)/lib-dynload/{audioop.so,cmath.so,future_builtins.so,mmap.so,strop.so}
+	rm -rf $(RELEASE_DIR)/$(PYTHON3_SITE_PACKAGES_DIR)/setuptools
+	rm -rf $(RELEASE_DIR)/$(PYTHON3_SITE_PACKAGES_DIR)/twisted/{application,conch,cred,enterprise,flow,lore,mail,names,news,pair,persisted}
+	rm -rf $(RELEASE_DIR)/$(PYTHON3_SITE_PACKAGES_DIR)/twisted/{plugins,positioning,runner,scripts,spread,tap,_threads,trial,web,words}
+	rm -rf $(RELEASE_DIR)/$(PYTHON3_SITE_PACKAGES_DIR)/twisted/python/_pydoctortemplates
+	find $(RELEASE_DIR)/$(PYTHON3_LIB_DIR)/ $(RELEASE_DIR)/usr/share/E2emulator/ \
 		\( -name '*.a' \
 		-o -name '*.c' \
 		-o -name '*.doc' \
 		-o -name '*.egg-info' \
 		-o -name '*.la' \
 		-o -name '*.o' \
-		-o -name '*.pyc' \
 		-o -name '*.pyx' \
 		-o -name '*.txt' \
 		-o -name 'test' \
@@ -36,7 +35,7 @@ python-iptv-install:
 		\) \
 		-print0 | xargs --no-run-if-empty -0 rm -rf
 ifeq ($(OPTIMIZATIONS), size)
-	find $(RELEASE_DIR)/$(PYTHON_LIB_DIR)/ -name '*.py' -exec rm -f {} \;
+	find $(RELEASE_DIR)/$(PYTHON3_LIB_DIR)/ -name '*.py' -exec rm -f {} \;
 	find $(RELEASE_DIR)/usr/share/E2emulator/ -name '*.py' -exec rm -f {} \;
 endif
 
