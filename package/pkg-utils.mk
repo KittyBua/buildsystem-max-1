@@ -511,6 +511,7 @@ endef
 define HOST_FOLLOWUP
 	@$(call MESSAGE,"Follow-up build")
 	$(foreach hook,$($(PKG)_PRE_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
+	$(foreach hook,$($(PKG)_HOST_FINALIZE_HOOKS),$(call $(hook))$(sep))
 	$(foreach hook,$($(PKG)_POST_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
 	$(Q)$(call CLEANUP)
 	$(foreach hook,$($(PKG)_CLEANUP_HOOKS),$(call $(hook))$(sep))
@@ -520,6 +521,7 @@ endef
 define TARGET_FOLLOWUP
 	@$(call MESSAGE,"Follow-up build")
 	$(foreach hook,$($(PKG)_PRE_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
+	$(foreach hook,$($(PKG)_TARGET_FINALIZE_HOOKS),$(call $(hook))$(sep))
 	$(foreach hook,$($(PKG)_POST_FOLLOWUP_HOOKS),$(call $(hook))$(sep))
 	$(if $(BS_INIT_SYSTEMD),\
 		$($(PKG)_INSTALL_INIT_SYSTEMD))

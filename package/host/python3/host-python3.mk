@@ -27,5 +27,11 @@ HOST_PYTHON3_CONF_OPTS = \
 	--disable-uuid \
 	--disable-ossaudiodev
 
+define HOST_PYTHON3_INSTALL_SYMLINK
+	ln -sf python3 $(HOST_DIR)/bin/python
+	ln -sf python3-config $(HOST_DIR)/bin/python-config
+endef
+HOST_PYTHON3_HOST_FINALIZE_HOOKS += HOST_PYTHON3_INSTALL_SYMLINK
+
 $(D)/host-python3: | bootstrap
 	$(call host-autotools-package)
